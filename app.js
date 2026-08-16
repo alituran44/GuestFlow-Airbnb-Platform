@@ -830,7 +830,8 @@ function renderCommissionAggregator() {
 
 function triggerInstantFeeSweep() {
   const summary = calculateCommissionSummary();
-  showToast(`Auto-Swept ${formatPrice(summary.totalPlatformFees)} in platform commissions directly to GuestFlow Master Account!`);
+  showToast(`Auto-Swept ${formatPrice(summary.totalPlatformFees)} in platform commissions directly to HostifyOS Master Account!`);
+
 }
 
 function downloadCommissionStatement() {

@@ -1,4 +1,5 @@
-// GuestFlow Progressive Web App (PWA) Service Worker
+// HostifyOS Progressive Web App (PWA) Service Worker
+
 const CACHE_NAME = 'guestflow-v1';
 const ASSETS_TO_CACHE = [
   './index.html',
