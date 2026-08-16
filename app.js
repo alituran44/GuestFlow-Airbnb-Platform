@@ -10,10 +10,159 @@ const currencyRates = {
   EUR: { symbol: '€', rate: 0.92 },
   GBP: { symbol: '£', rate: 0.79 },
   CAD: { symbol: 'CA$', rate: 1.35 },
-  AUD: { symbol: 'A$', rate: 1.52 }
+  AUD: { symbol: 'A$', rate: 1.52 },
+  JPY: { symbol: '¥', rate: 155.0 },
+  TRY: { symbol: '₺', rate: 33.0 }
 };
 
+let currentLanguage = 'EN';
+
+const languageCurrencyMap = {
+  EN: 'USD',
+  ES: 'EUR',
+  FR: 'EUR',
+  DE: 'EUR',
+  IT: 'EUR',
+  PT: 'EUR',
+  JA: 'JPY',
+  TR: 'TRY'
+};
+
+const i18nDict = {
+  EN: {
+    heroTitle: "The Modern Hosting OS for Airbnb & Vacation Rentals",
+    heroSub: "Turn your property guidebook into a 24/7 digital concierge. Eliminate guest calls, automate Wi-Fi & door PINs, and generate +$420/mo in upsells.",
+    startTrial: "Start 14-Day Free Trial",
+    viewDemo: "View Live Demo",
+    navHome: "Home & Funnel",
+    navGuest: "Guest View (PWA)",
+    navHost: "Host Portal",
+    navAdmin: "Super Admin",
+    toastLang: "Language updated to English (USD)"
+  },
+  ES: {
+    heroTitle: "El sistema operativo moderno para anfitriones de Airbnb",
+    heroSub: "Convierte tu guía de alojamiento en un conserje digital 24/7. Elimina llamadas de huéspedes, automatiza Wi-Fi y genera +420€/mes.",
+    startTrial: "Comenzar prueba gratis de 14 días",
+    viewDemo: "Ver demostración en vivo",
+    navHome: "Inicio y Embudo",
+    navGuest: "Vista Huésped (PWA)",
+    navHost: "Portal Anfitrión",
+    navAdmin: "Super Admin",
+    toastLang: "Idioma actualizado a Español (EUR)"
+  },
+  FR: {
+    heroTitle: "Le système d'exploitation moderne pour hôtes Airbnb",
+    heroSub: "Transformez votre livret d'accueil en conciergerie numérique 24/7. Éliminez les appels, automatisez le Wi-Fi et générez +420€/mois.",
+    startTrial: "Démarrer l'essai gratuit de 14 jours",
+    viewDemo: "Voir la démo en direct",
+    navHome: "Accueil & Entonnoir",
+    navGuest: "Vue Invité (PWA)",
+    navHost: "Portail Hôte",
+    navAdmin: "Super Admin",
+    toastLang: "Langue mise à jour en Français (EUR)"
+  },
+  DE: {
+    heroTitle: "Das moderne Betriebssystem für Airbnb-Gastgeber",
+    heroSub: "Verwandeln Sie Ihren Gästeführer in einen digitalen Concierge 24/7. Automatisch WLAN & PIN-Codes bereitstellen und +420€/Monat verdienen.",
+    startTrial: "14 Tage kostenlos testen",
+    viewDemo: "Live-Demo ansehen",
+    navHome: "Startseite & Funnel",
+    navGuest: "Gast-Ansicht (PWA)",
+    navHost: "Gastgeber-Portal",
+    navAdmin: "Super Admin",
+    toastLang: "Sprache geändert zu Deutsch (EUR)"
+  },
+  IT: {
+    heroTitle: "Il sistema operativo moderno per host di Airbnb",
+    heroSub: "Trasforma la tua guida per gli ospiti in un concierge digitale 24/7. Elimina le chiamate, automatizza il Wi-Fi e guadagna +420€/mese.",
+    startTrial: "Inizia la prova gratuita di 14 giorni",
+    viewDemo: "Guarda la demo dal vivo",
+    navHome: "Home e Funnel",
+    navGuest: "Vista Ospite (PWA)",
+    navHost: "Portale Host",
+    navAdmin: "Super Admin",
+    toastLang: "Lingua aggiornata in Italiano (EUR)"
+  },
+  PT: {
+    heroTitle: "O sistema operacional moderno para anfitriões da Airbnb",
+    heroSub: "Transforme o seu guia em um concierge digital 24/7. Elimine chamadas, automatize o Wi-Fi e gere +420€/mês em vendas extras.",
+    startTrial: "Iniciar teste gratuito de 14 dias",
+    viewDemo: "Ver demonstração ao vivo",
+    navHome: "Início & Funil",
+    navGuest: "Vista Hóspede (PWA)",
+    navHost: "Portal Anfitrião",
+    navAdmin: "Super Admin",
+    toastLang: "Idioma atualizado para Português (EUR)"
+  },
+  JA: {
+    heroTitle: "AirbnbホストのためのモダンホスピタリティOS",
+    heroSub: "デジタルガイドブックを24時間年中無休のコンシェルジュに。Wi-FiとドアPINを自動化し、月額+$420の追加収益を達成。",
+    startTrial: "14日間無料トライアルを開始",
+    viewDemo: "ライブデモを見る",
+    navHome: "ホーム＆ファネル",
+    navGuest: "ゲストビュー (PWA)",
+    navHost: "ホストポータル",
+    navAdmin: "スーパー管理者",
+    toastLang: "言語を日本語に更新しました (JPY)"
+  },
+  TR: {
+    heroTitle: "Airbnb ve Tatil Evleri İçin Modern Ev Sahibi İşletim Sistemi",
+    heroSub: "Dijital rehberinizi 7/24 canlı bir konsiyerje dönüştürün. Gece aramalarını bitirin, Wi-Fi ve kapı PIN kodlarını otomatikleştirelim.",
+    startTrial: "14 Günlük Ücretsiz Denemeyi Başlat",
+    viewDemo: "Canlı Demoyu İncele",
+    navHome: "Ana Sayfa & Funnel",
+    navGuest: "Misafir Görünümü (PWA)",
+    navHost: "Ev Sahibi Portalı",
+    navAdmin: "Süper Admin",
+    toastLang: "Dil Türkçe olarak güncellendi (TRY)"
+  }
+};
+
+function changeLanguage(langKey) {
+  if (!i18nDict[langKey]) return;
+  currentLanguage = langKey;
+  
+  // Auto-switch currency based on country/language
+  const targetCurrency = languageCurrencyMap[langKey] || 'USD';
+  changeCurrency(targetCurrency);
+  
+  // Sync currency dropdown value
+  const currSelect = document.getElementById('currency-select');
+  if (currSelect) currSelect.value = targetCurrency;
+
+  const t = i18nDict[langKey];
+  
+  const heroTitle = document.querySelector('.hero-content h1');
+  if (heroTitle) heroTitle.innerText = t.heroTitle;
+  
+  const heroSub = document.querySelector('.hero-content p');
+  if (heroSub) heroSub.innerText = t.heroSub;
+  
+  const btnStartTrial = document.querySelector('.btn-hero-primary span');
+  if (btnStartTrial) btnStartTrial.innerText = t.startTrial;
+
+  const btnViewDemo = document.querySelector('.btn-hero-secondary span');
+  if (btnViewDemo) btnViewDemo.innerText = t.viewDemo;
+
+  const navHomeSpan = document.querySelector('#btn-view-landing span');
+  if (navHomeSpan) navHomeSpan.innerText = t.navHome;
+
+  const navGuestSpan = document.querySelector('#btn-view-guest span');
+  if (navGuestSpan) navGuestSpan.innerText = t.navGuest;
+
+  const navHostSpan = document.querySelector('#btn-view-host span');
+  if (navHostSpan) navHostSpan.innerText = t.navHost;
+
+  const navAdminSpan = document.querySelector('#btn-view-admin span');
+  if (navAdminSpan) navAdminSpan.innerText = t.navAdmin;
+
+  showToast(t.toastLang);
+  lucide.createIcons();
+}
+
 let billingCycle = 'annual';
+
 
 // CURRENT AUTHENTICATED SESSION ROLE: 'visitor' | 'host' | 'admin'
 let currentUserRole = 'visitor';
