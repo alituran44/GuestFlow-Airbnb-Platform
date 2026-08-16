@@ -816,17 +816,22 @@ function switchHostTab(tabName, btnElement) {
   const allContents = document.querySelectorAll('.h-tab-content');
   allContents.forEach(c => {
     c.classList.remove('active');
-    c.style.display = 'none';
+    c.setAttribute('style', 'display: none !important;');
   });
 
   const targetContent = document.getElementById(`h-tab-${tabName}`);
   if (targetContent) {
     targetContent.classList.add('active');
-    targetContent.style.display = 'block';
+    targetContent.setAttribute('style', 'display: block !important;');
   }
 
-  if (btnElement) {
-    btnElement.classList.add('active');
+  let activeBtn = btnElement;
+  if (activeBtn && !activeBtn.classList.contains('h-tab')) {
+    activeBtn = activeBtn.closest('.h-tab');
+  }
+
+  if (activeBtn) {
+    activeBtn.classList.add('active');
   } else {
     allTabs.forEach(btn => {
       const onclickAttr = btn.getAttribute('onclick') || '';
@@ -836,8 +841,10 @@ function switchHostTab(tabName, btnElement) {
     });
   }
 
+  showToast(`Host Tab: ${tabName.toUpperCase()}`);
   lucide.createIcons();
 }
+
 
 
 // GUEST TAB SWITCHER (FAIL-SAFE FIXED)
