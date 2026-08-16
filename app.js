@@ -350,6 +350,9 @@ document.addEventListener('DOMContentLoaded', () => {
   updateRoiCalculator(3);
   updateTopNavAuthUI();
   
+  // Fetch live real-time daily currency exchange rates from API
+  fetchLiveExchangeRates();
+
   // Register PWA Service Worker
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js')
@@ -361,6 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
   switchView('landing');
   lucide.createIcons();
 });
+
 
 // PWA INSTALLATION ENGINE
 let deferredPwaPrompt = null;
@@ -1494,10 +1498,31 @@ function submitNewProperty() {
   showToast(`Property "${title}" successfully added!`);
 }
 
+// FETCH LIVE DAILY FOREIGN EXCHANGE RATES FROM OPEN EXCHANGE RATES API
+async function fetchLiveExchangeRates() {
+  try {
+    const response = await fetch('https://open.er-api.com/v6/latest/USD');
+    if (!response.ok) return;
+    const data = await response.json();
+    if (data && data.rates) {
+      for (const curr in currencyRates) {
+        if (data.rates[curr]) {
+          currencyRates[curr].rate = data.rates[curr];
+        }
+      }
+      console.log('✅ Live daily exchange rates updated successfully:', currencyRates);
+      updateCurrencyDisplays();
+    }
+  } catch (err) {
+    console.warn('⚠️ Using fallback daily exchange rates:', err);
+  }
+}
+
 function changeCurrency(newCurrency) {
   currentCurrency = newCurrency;
   updateCurrencyDisplays();
 }
+
 
 function formatPrice(amountUSD) {
   const info = currencyRates[currentCurrency] || currencyRates.USD;
