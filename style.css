@@ -208,10 +208,19 @@ button, select, input {
   font-family: var(--font-heading);
   font-size: 22px;
   font-weight: 800;
-  color: var(--text-primary);
+  background: linear-gradient(135deg, #10B981 0%, #3B82F6 55%, #6366F1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  letter-spacing: -0.02em;
 }
 
-body.theme-light .brand-name,
+body.theme-light .brand-name {
+  background: linear-gradient(135deg, #059669 0%, #2563EB 55%, #4F46E5 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
 body.theme-light .landing-footer span,
 body.theme-light .landing-footer p,
 body.theme-light .landing-footer a {
@@ -222,6 +231,7 @@ body.theme-light .landing-footer {
   background: #FFFFFF !important;
   border-color: rgba(0, 0, 0, 0.08) !important;
 }
+
 
 .text-accent {
   color: var(--accent-emerald);
