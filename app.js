@@ -1756,9 +1756,21 @@ function contactHostWhatsApp() {
   window.open(`https://wa.me/${prop.whatsapp}?text=Hi%20Host,%20I%20have%20a%20question%20regarding%20my%20stay%20at%20${encodeURIComponent(prop.title)}.`, '_blank');
 }
 
-function closeModal(modalId) {
-  document.getElementById(modalId).classList.remove('active');
+function openModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.classList.add('active');
+    lucide.createIcons();
+  }
 }
+
+function closeModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.classList.remove('active');
+  }
+}
+
 
 function showToast(msg) {
   const toast = document.getElementById('toast-notification');
