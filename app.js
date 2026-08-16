@@ -448,6 +448,25 @@ function toggleTheme() {
   lucide.createIcons();
 }
 
+function switchMobileTab(tabName, btnEl) {
+  const navItems = document.querySelectorAll('.h-mob-nav-item');
+  navItems.forEach(item => item.classList.remove('active'));
+  if (btnEl) btnEl.classList.add('active');
+
+  const tabs = document.querySelectorAll('.mob-tab-content');
+  tabs.forEach(t => t.style.display = 'none');
+
+  const target = document.getElementById(`mob-tab-${tabName}`);
+  if (target) {
+    target.style.display = 'block';
+  }
+
+  const titles = { home: 'Home Dashboard', orders: 'Orders Log', tunnels: 'Messaging Tunnels', guidebook: 'Guest Guidebook (2nd Photo)' };
+  showToast(`Mobile Phone Screen: ${titles[tabName] || tabName}`);
+  lucide.createIcons();
+}
+
+
 // SALES FUNNEL QUIZ & ACCORDION HANDLERS
 let quizAnswers = {};
 

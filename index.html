@@ -981,91 +981,243 @@
               </button>
             </div>
 
-            <!-- Mobile Active Property Quick Switcher -->
-            <div class="h-mob-prop-card">
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-                <span class="badge-tag">Selected Listing</span>
-                <button class="btn-icon-copy" onclick="copyGuestLink()" title="Copy Link"><i data-lucide="share-2"></i></button>
-              </div>
-              <h3 id="mob-host-prop-title">Malibu Beachfront Villa & Suite</h3>
-              <div class="h-mob-meta-grid">
-                <div><span>Wi-Fi:</span><strong id="mob-wifi-display">MalibuVilla_5G</strong></div>
-                <div><span>Door PIN:</span><strong id="mob-pin-display">4821</strong></div>
-              </div>
-            </div>
-
-            <!-- Mobile App Quick Actions Bar -->
-            <div class="h-mob-actions-grid">
-              <button class="h-mob-action-btn" onclick="openCreateTunnelModal()">
-                <i data-lucide="zap" class="text-emerald"></i>
-                <span>+ Tunnel</span>
-              </button>
-              <button class="h-mob-action-btn" onclick="openAddVideoModal()">
-                <i data-lucide="video" class="text-indigo"></i>
-                <span>+ Video</span>
-              </button>
-              <button class="h-mob-action-btn" onclick="switchHostTab('qr')">
-                <i data-lucide="printer" class="text-amber"></i>
-                <span>QR Stand</span>
-              </button>
-            </div>
-
-            <!-- Mobile App Real-Time Revenue Card -->
-            <div class="h-mob-revenue-card">
-              <div>
-                <span>Monthly Upsell Revenue</span>
-                <strong id="mob-revenue-val">$1,480.00</strong>
-              </div>
-              <span class="badge-pill">0% Comm</span>
-            </div>
-
-            <!-- Mobile App Recent Orders Feed -->
-            <div class="h-mob-section">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                <h4 style="margin:0; font-size:14px;"><i data-lucide="shopping-bag" class="text-accent"></i> Recent Guest Orders</h4>
-                <span class="badge-tag">Real-Time</span>
-              </div>
-
-              <div class="h-mob-orders-list" id="mob-orders-list">
-                <div class="mob-order-item">
-                  <div>
-                    <strong>Alexander Wright</strong>
-                    <p style="font-size:11px; color:var(--text-muted);">VIP Airport Shuttle ($75.00)</p>
-                  </div>
-                  <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">+$71.25 Net</span>
+            <!-- TAB 1: MOBILE HOME DASHBOARD -->
+            <div id="mob-tab-home" class="mob-tab-content">
+              <!-- Mobile Active Property Quick Switcher -->
+              <div class="h-mob-prop-card">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span class="badge-tag">Selected Listing</span>
+                  <button class="btn-icon-copy" onclick="copyGuestLink()" title="Copy Link"><i data-lucide="share-2"></i></button>
                 </div>
-                <div class="mob-order-item">
-                  <div>
-                    <strong>Sophia Martinez</strong>
-                    <p style="font-size:11px; color:var(--text-muted);">Late Check-out 2:00 PM ($45.00)</p>
-                  </div>
-                  <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">+$42.75 Net</span>
+                <h3 id="mob-host-prop-title">Malibu Beachfront Villa & Suite</h3>
+                <div class="h-mob-meta-grid">
+                  <div><span>Wi-Fi:</span><strong id="mob-wifi-display">MalibuVilla_5G</strong></div>
+                  <div><span>Door PIN:</span><strong id="mob-pin-display">4821</strong></div>
                 </div>
+              </div>
+
+              <!-- Mobile App Quick Actions Bar -->
+              <div class="h-mob-actions-grid">
+                <button class="h-mob-action-btn" onclick="openCreateTunnelModal()">
+                  <i data-lucide="zap" class="text-emerald"></i>
+                  <span>+ Tunnel</span>
+                </button>
+                <button class="h-mob-action-btn" onclick="openAddVideoModal()">
+                  <i data-lucide="video" class="text-indigo"></i>
+                  <span>+ Video</span>
+                </button>
+                <button class="h-mob-action-btn" onclick="switchHostTab('qr')">
+                  <i data-lucide="printer" class="text-amber"></i>
+                  <span>QR Stand</span>
+                </button>
+              </div>
+
+              <!-- Mobile App Real-Time Revenue Card -->
+              <div class="h-mob-revenue-card">
+                <div>
+                  <span>Monthly Upsell Revenue</span>
+                  <strong id="mob-revenue-val">$1,480.00</strong>
+                </div>
+                <span class="badge-pill">0% Comm</span>
+              </div>
+
+              <!-- Mobile App Recent Orders Feed -->
+              <div class="h-mob-section">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                  <h4 style="margin:0; font-size:14px;"><i data-lucide="shopping-bag" class="text-accent"></i> Recent Guest Orders</h4>
+                  <span class="badge-tag">Real-Time</span>
+                </div>
+
+                <div class="h-mob-orders-list" id="mob-orders-list">
+                  <div class="mob-order-item">
+                    <div>
+                      <strong>Alexander Wright</strong>
+                      <p style="font-size:11px; color:var(--text-muted);">VIP Airport Shuttle ($75.00)</p>
+                    </div>
+                    <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">+$71.25 Net</span>
+                  </div>
+                  <div class="mob-order-item">
+                    <div>
+                      <strong>Sophia Martinez</strong>
+                      <p style="font-size:11px; color:var(--text-muted);">Late Check-out 2:00 PM ($45.00)</p>
+                    </div>
+                    <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">+$42.75 Net</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 2: MOBILE ORDERS FEED VIEW -->
+            <div id="mob-tab-orders" class="mob-tab-content" style="display:none;">
+              <div style="padding:10px 0;">
+                <h4 style="margin:0 0 12px; font-size:15px; display:flex; align-items:center; gap:6px;">
+                  <i data-lucide="shopping-bag" class="text-emerald"></i> Guest Orders Log
+                </h4>
+                <div class="h-mob-orders-list">
+                  <div class="mob-order-item">
+                    <div>
+                      <strong>Alexander Wright</strong>
+                      <p style="font-size:11px; color:var(--text-muted);">VIP Airport Shuttle ($75.00)</p>
+                      <span style="font-size:10px; color:var(--text-secondary);">Aug 18, 2026 • Card Checkout</span>
+                    </div>
+                    <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">+$71.25</span>
+                  </div>
+                  <div class="mob-order-item">
+                    <div>
+                      <strong>Sophia Martinez</strong>
+                      <p style="font-size:11px; color:var(--text-muted);">Late Check-out 2:00 PM ($45.00)</p>
+                      <span style="font-size:10px; color:var(--text-secondary);">Aug 19, 2026 • Host Stripe Link</span>
+                    </div>
+                    <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">+$42.75</span>
+                  </div>
+                  <div class="mob-order-item">
+                    <div>
+                      <strong>Marcus Vance</strong>
+                      <p style="font-size:11px; color:var(--text-muted);">Beach Towel Rental ($15.00)</p>
+                      <span style="font-size:10px; color:var(--text-secondary);">Aug 17, 2026 • Room Charge</span>
+                    </div>
+                    <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">+$14.25</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 3: MOBILE MESSAGING TUNNELS VIEW -->
+            <div id="mob-tab-tunnels" class="mob-tab-content" style="display:none;">
+              <div style="padding:10px 0;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                  <h4 style="margin:0; font-size:15px; display:flex; align-items:center; gap:6px;">
+                    <i data-lucide="zap" class="text-emerald"></i> Messaging Tunnels
+                  </h4>
+                  <button class="btn-primary-sm" onclick="openCreateTunnelModal()">+ New</button>
+                </div>
+                <div class="h-mob-orders-list">
+                  <div class="mob-order-item">
+                    <div>
+                      <strong>Pre-Arrival WhatsApp Guide</strong>
+                      <p style="font-size:11px; color:var(--text-muted);">Trigger: 24h Before Check-in</p>
+                    </div>
+                    <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">● ACTIVE</span>
+                  </div>
+                  <div class="mob-order-item">
+                    <div>
+                      <strong>Smart Lock PIN Delivery SMS</strong>
+                      <p style="font-size:11px; color:var(--text-muted);">Trigger: Day of Check-in (3:00 PM)</p>
+                    </div>
+                    <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">● ACTIVE</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 4: MOBILE GUEST GUIDEBOOK (THE 2ND PHOTO INTERFACE!) -->
+            <div id="mob-tab-guidebook" class="mob-tab-content" style="display:none; margin:-12px -12px 0;">
+              <!-- 2ND PHOTO HERO CARD -->
+              <div class="hero-card" style="height:170px; border-radius:12px 12px 0 0;">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span class="welcome-pill">WELCOME TO YOUR STAY</span>
+                    <span class="badge-tag" style="background:rgba(59,130,246,0.3); color:#60A5FA;">AIRBNB</span>
+                  </div>
+                  <h1 style="font-size:17px; margin-bottom:2px;">Malibu Beachfront Villa & Suite</h1>
+                  <p style="font-size:11px; margin-bottom:8px;"><i data-lucide="map-pin"></i> 22804 Pacific Coast Hwy, Malibu, CA</p>
+                  <div class="stay-meta-bar" style="padding:4px 8px; font-size:10px;">
+                    <div class="meta-item"><i data-lucide="calendar"></i> <span>Check-in: 3:00 PM</span></div>
+                    <div class="meta-item"><i data-lucide="clock"></i> <span>Check-out: 11:00 AM</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2ND PHOTO QUICK CARDS (WI-FI & DOOR PIN) -->
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:10px;">
+                <div class="action-card wifi-card" onclick="copyWifi()" style="padding:10px; cursor:pointer;">
+                  <div style="display:flex; align-items:center; justify-content:space-between;">
+                    <i data-lucide="wifi" style="color:var(--accent-emerald);"></i>
+                    <i data-lucide="copy" style="width:14px; height:14px; color:var(--text-muted);"></i>
+                  </div>
+                  <div style="margin-top:6px;">
+                    <span style="font-size:9px; text-transform:uppercase; color:var(--text-muted); display:block;">INSTANT WI-FI</span>
+                    <strong style="font-size:11px; color:#fff;">MalibuVilla_5G</strong>
+                  </div>
+                </div>
+
+                <div class="action-card pin-card" onclick="togglePinReveal()" style="padding:10px; cursor:pointer;">
+                  <div style="display:flex; align-items:center; justify-content:space-between;">
+                    <i data-lucide="key" style="color:var(--accent-amber);"></i>
+                    <i data-lucide="eye" style="width:14px; height:14px; color:var(--text-muted);"></i>
+                  </div>
+                  <div style="margin-top:6px;">
+                    <span style="font-size:9px; text-transform:uppercase; color:var(--text-muted); display:block;">DOOR ACCESS CODE</span>
+                    <strong style="font-size:11px; color:#fff;" id="mob-pin-code-reveal">••••-21</strong>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2ND PHOTO SUB TABS -->
+              <div style="display:flex; gap:6px; padding:0 10px 10px;">
+                <button class="g-tab active" style="flex:1; padding:6px 4px; font-size:10px;"><i data-lucide="book-open"></i> House Manual</button>
+                <button class="g-tab" style="flex:1; padding:6px 4px; font-size:10px;" onclick="switchMobileTab('home', null)"><i data-lucide="sparkles"></i> Store</button>
+                <button class="g-tab" style="flex:1; padding:6px 4px; font-size:10px;"><i data-lucide="map"></i> AI Local Guide</button>
+              </div>
+
+              <!-- 2ND PHOTO APPLIANCE VIDEO MANUALS -->
+              <div style="padding:0 10px 10px;">
+                <h4 style="font-size:12px; margin-bottom:8px; display:flex; align-items:center; gap:4px; color:#fff;">
+                  <i data-lucide="video" style="color:var(--accent-emerald);"></i> Appliance Video Guides
+                </h4>
+                <div style="background:var(--bg-obsidian); border:1px solid var(--border-subtle); border-radius:8px; overflow:hidden; display:flex; gap:10px; padding:8px; cursor:pointer;" onclick="openVideoModal('Nest AC & Thermostat', 'https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?auto=format&fit=crop&w=600&q=80')">
+                  <div style="position:relative; width:60px; height:45px; border-radius:6px; overflow:hidden; flex-shrink:0;">
+                    <img src="https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?auto=format&fit=crop&w=600&q=80" style="width:100%; height:100%; object-fit:cover;">
+                    <i data-lucide="play-circle" style="position:absolute; inset:0; margin:auto; width:20px; height:20px; color:var(--accent-emerald);"></i>
+                  </div>
+                  <div>
+                    <strong style="font-size:11px; color:#fff; display:block;">Nest AC & Thermostat</strong>
+                    <span style="font-size:10px; color:var(--text-muted);">0:45 min guide</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2ND PHOTO HOUSE RULES & WHATSAPP BUTTON -->
+              <div style="padding:0 10px 10px;">
+                <h4 style="font-size:12px; margin-bottom:8px; display:flex; align-items:center; gap:4px; color:#fff;">
+                  <i data-lucide="shield-check" style="color:var(--accent-emerald);"></i> House Rules & Guidelines
+                </h4>
+                <div style="background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:8px; padding:8px; margin-bottom:8px;">
+                  <strong style="font-size:11px; color:#fff;">🔊 Quiet Hours</strong>
+                  <p style="font-size:10px; color:var(--text-secondary); margin:2px 0 0;">10:00 PM – 8:00 AM out of respect for neighbors.</p>
+                </div>
+                <button class="btn-whatsapp-host" onclick="contactHostWhatsApp()" style="width:100%; padding:10px; font-size:12px; margin-bottom:6px;">
+                  <i data-lucide="message-square"></i>
+                  <span>Need help? Message Host on WhatsApp</span>
+                </button>
+                <p style="text-align:center; font-size:9px; color:var(--text-muted); margin:0;">Powered by <strong>HostifyOS.com</strong></p>
               </div>
             </div>
 
             <!-- Mobile App Bottom Navigation Bar -->
             <div class="h-mob-nav-bar">
-              <button class="h-mob-nav-item active" onclick="showToast('Home Dashboard active')">
+              <button class="h-mob-nav-item active" onclick="switchMobileTab('home', this)">
                 <i data-lucide="home"></i>
                 <span>Home</span>
               </button>
-              <button class="h-mob-nav-item" onclick="switchHostTab('orders')">
+              <button class="h-mob-nav-item" onclick="switchMobileTab('orders', this)">
                 <i data-lucide="shopping-bag"></i>
                 <span>Orders</span>
               </button>
-              <button class="h-mob-nav-item" onclick="switchHostTab('tunnels')">
+              <button class="h-mob-nav-item" onclick="switchMobileTab('tunnels', this)">
                 <i data-lucide="zap"></i>
                 <span>Tunnels</span>
               </button>
-              <button class="h-mob-nav-item" onclick="switchHostTab('properties')">
-                <i data-lucide="building"></i>
-                <span>Listings</span>
+              <button class="h-mob-nav-item" onclick="switchMobileTab('guidebook', this)">
+                <i data-lucide="smartphone"></i>
+                <span>Listings / Guidebook</span>
               </button>
             </div>
 
           </div>
         </div>
+
 
         <!-- Host Header Banner -->
         <div class="host-header" id="host-desktop-header">
