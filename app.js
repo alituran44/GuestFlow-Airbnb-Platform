@@ -1,5 +1,5 @@
 /* ==========================================================================
-   GuestFlow - Global Digital Guest Guidebook & Ancillary Revenue Engine
+   HostifyOS - Global Digital Guest Guidebook & Ancillary Revenue Engine
    Role-Based Authentication Session Engine & Multi-User Isolation
    ========================================================================= */
 
@@ -185,7 +185,7 @@ let hostAuth = {
 // SUPER ADMIN AUTH STATE
 let adminAuth = {
   isLoggedIn: false,
-  email: 'admin@guestflow.app',
+  email: 'admin@hostifyos.com',
   name: 'Master Platform Admin',
   role: 'Super Admin'
 };
@@ -646,7 +646,7 @@ function handleUserLogin(role) {
   if (role === 'admin') {
     const email = document.getElementById('input-admin-email').value;
     adminAuth.isLoggedIn = true;
-    adminAuth.email = email || 'admin@guestflow.app';
+    adminAuth.email = email || 'admin@hostifyos.com';
     currentUserRole = 'admin';
 
     updateTopNavAuthUI();
@@ -1346,7 +1346,7 @@ function loadActivePropertyData() {
   const standTitle = document.getElementById('stand-prop-title');
   const standQrImg = document.querySelector('#qr-stand-preview img');
   if (standTitle) standTitle.textContent = prop.title;
-  if (standQrImg) standQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://guestflow.app/g/${prop.slug}`;
+  if (standQrImg) standQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://hostifyos.com/g/${prop.slug}`;
 
   cart = [];
   updateCartBadge();
@@ -1483,7 +1483,7 @@ function renderPropertiesListTable() {
       <td><strong style="color:var(--accent-emerald);">${formatPrice(p.revenueUSD)}</strong></td>
       <td>
         <span class="link-copy" onclick="copyGuestLink('${p.slug}')">
-          <i data-lucide="link"></i> guestflow.app/g/${p.slug}
+          <i data-lucide="link"></i> hostifyos.com/g/${p.slug}
         </span>
       </td>
       <td>
@@ -1500,7 +1500,7 @@ function renderPropertiesListTable() {
 function copyGuestLink(slug) {
   const prop = getActiveProperty();
   const targetSlug = slug || prop.slug;
-  const url = `https://guestflow.app/g/${targetSlug}`;
+  const url = `https://hostifyos.com/g/${targetSlug}`;
   navigator.clipboard.writeText(url);
   showToast(`Copied Guest Guidebook Link: ${url}`);
 }
