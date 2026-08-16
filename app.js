@@ -30,10 +30,19 @@ const languageCurrencyMap = {
 
 const i18nDict = {
   EN: {
-    heroTitle: "The Modern Hosting OS for Airbnb & Vacation Rentals",
-    heroSub: "Turn your property guidebook into a 24/7 digital concierge. Eliminate guest calls, automate Wi-Fi & door PINs, and generate +$420/mo in upsells.",
+    heroBadge: "Automated Short-Term Rental Revenue Engine",
+    heroTitle: "Turn Every Guest Stay Into +$400+/mo Extra Income Per Property",
+    heroSub: "Eliminate repetitive guest messages about Wi-Fi & AC. Offer 1-tap digital guidebooks, time-gated door access, custom payment links, and automated messaging tunnels.",
+    btnCalcHero: "Calculate Your Extra Revenue (10-Sec Quiz)",
+    viewDemo: "Interactive Guest Demo",
+    statHosts: "Active Superhosts",
+    statRate: "Guest Open Rate",
+    statProc: "Upsells Processed",
+    statSat: "Host Satisfaction",
+    quizBadge: "Step 1 of 2: 10-Second Revenue Audit",
+    quizTitle: "Check How Much Extra Income Your Property Can Generate",
+    quizSub: "Answer 3 quick questions to calculate your personalized upsell potential.",
     startTrial: "Start 14-Day Free Trial",
-    viewDemo: "View Live Demo",
     navHome: "Home",
     navGuest: "Guest View (PWA)",
     navHost: "Host Portal",
@@ -41,10 +50,19 @@ const i18nDict = {
     toastLang: "Language updated to English (USD)"
   },
   ES: {
-    heroTitle: "El sistema operativo moderno para anfitriones de Airbnb",
-    heroSub: "Convierte tu guía de alojamiento en un conserje digital 24/7. Elimina llamadas de huéspedes, automatiza Wi-Fi y genera +420€/mes.",
+    heroBadge: "Motor de ingresos automatizado para alquileres vacacionales",
+    heroTitle: "Convierte cada estancia de huésped en +400€/mes extra por propiedad",
+    heroSub: "Elimina los mensajes repetitivos sobre Wi-Fi y aire acondicionado. Ofrece guías digitales con 1 toque, códigos de puerta y enlaces de pago.",
+    btnCalcHero: "Calcula tus ingresos extra (Test de 10 seg)",
+    viewDemo: "Demo interactiva del huésped",
+    statHosts: "Superanfitriones activos",
+    statRate: "Tasa de apertura",
+    statProc: "Ventas procesadas",
+    statSat: "Satisfacción del anfitrión",
+    quizBadge: "Paso 1 de 2: Auditoría de ingresos de 10 segundos",
+    quizTitle: "Calcula cuántos ingresos adicionales puede generar tu propiedad",
+    quizSub: "Responde 3 preguntas rápidas para calcular tu potencial de ventas.",
     startTrial: "Comenzar prueba gratis de 14 días",
-    viewDemo: "Ver demostración en vivo",
     navHome: "Inicio",
     navGuest: "Vista Huésped (PWA)",
     navHost: "Portal Anfitrión",
@@ -52,10 +70,19 @@ const i18nDict = {
     toastLang: "Idioma actualizado a Español (EUR)"
   },
   FR: {
-    heroTitle: "Le système d'exploitation moderne pour hôtes Airbnb",
-    heroSub: "Transformez votre livret d'accueil en conciergerie numérique 24/7. Éliminez les appels, automatisez le Wi-Fi et générez +420€/mois.",
+    heroBadge: "Moteur de revenus automatisé pour locations saisonnières",
+    heroTitle: "Transformez chaque séjour en +400€/mois de revenus supplémentaires par logement",
+    heroSub: "Éliminez les messages répétitifs sur le Wi-Fi et la climatisation. Offrez des livrets d'accueil numériques 1-clic et des codes d'accès portes.",
+    btnCalcHero: "Calculez vos revenus supplémentaires (Quiz 10s)",
+    viewDemo: "Démo invité interactive",
+    statHosts: "Superhôtes actifs",
+    statRate: "Taux d'ouverture",
+    statProc: "Ventes traitées",
+    statSat: "Satisfaction hôte",
+    quizBadge: "Étape 1 sur 2 : Audit de revenus en 10 secondes",
+    quizTitle: "Découvrez le potentiel de revenus supplémentaires de votre logement",
+    quizSub: "Répondez à 3 questions rapides pour calculer votre potentiel.",
     startTrial: "Démarrer l'essai gratuit de 14 jours",
-    viewDemo: "Voir la démo en direct",
     navHome: "Accueil",
     navGuest: "Vue Invité (PWA)",
     navHost: "Portail Hôte",
@@ -63,10 +90,19 @@ const i18nDict = {
     toastLang: "Langue mise à jour en Français (EUR)"
   },
   DE: {
-    heroTitle: "Das moderne Betriebssystem für Airbnb-Gastgeber",
-    heroSub: "Verwandeln Sie Ihren Gästeführer in einen digitalen Concierge 24/7. Automatisch WLAN & PIN-Codes bereitstellen und +420€/Monat verdienen.",
+    heroBadge: "Automatisiertes Einnahmen-System für Ferienunterkünfte",
+    heroTitle: "Verwandeln Sie jeden Aufenthalt in +400€/Monat Zusatzeinnahmen pro Objekt",
+    heroSub: "Schluss mit ständigen Fragen zu WLAN und Klimaanlage. Bieten Sie 1-Klick digitale Gästeführer, zeitgesteuerte Tür-PINs und Zahlungs-Links.",
+    btnCalcHero: "Zusatzeinnahmen berechnen (10-Sek-Quiz)",
+    viewDemo: "Interaktive Gast-Demo",
+    statHosts: "Aktive Superhosts",
+    statRate: "Gast-Öffnungsrate",
+    statProc: "Verarbeitete Verkäufe",
+    statSat: "Gastgeber-Zufriedenheit",
+    quizBadge: "Schritt 1 von 2: 10-Sekunden Einnahmen-Check",
+    quizTitle: "Berechnen Sie, wie viel Zusatzeinkommen Ihre Unterkunft generiert",
+    quizSub: "Beantworten Sie 3 kurze Fragen, um Ihr Potenzial zu berechnen.",
     startTrial: "14 Tage kostenlos testen",
-    viewDemo: "Live-Demo ansehen",
     navHome: "Startseite",
     navGuest: "Gast-Ansicht (PWA)",
     navHost: "Gastgeber-Portal",
@@ -74,10 +110,19 @@ const i18nDict = {
     toastLang: "Sprache geändert zu Deutsch (EUR)"
   },
   IT: {
-    heroTitle: "Il sistema operativo moderno per host di Airbnb",
-    heroSub: "Trasforma la tua guida per gli ospiti in un concierge digitale 24/7. Elimina le chiamate, automatizza il Wi-Fi e guadagna +420€/mese.",
+    heroBadge: "Motore di entrate automatizzato per case vacanze",
+    heroTitle: "Trasforma ogni soggiorno in +400€/mese di entrate extra per immobile",
+    heroSub: "Elimina i messaggi ripetitivi su Wi-Fi e aria condizionata. Offri guide digitali in 1-click, codici porta temporizzati e link di pagamento.",
+    btnCalcHero: "Calcola le tue entrate extra (Test di 10 sec)",
+    viewDemo: "Demo interattiva ospite",
+    statHosts: "Superhost attivi",
+    statRate: "Tasso di apertura",
+    statProc: "Vendite elaborate",
+    statSat: "Soddisfazione host",
+    quizBadge: "Passo 1 di 2: Audit delle entrate in 10 secondi",
+    quizTitle: "Scopri quante entrate extra può generare la tua struttura",
+    quizSub: "Rispondi a 3 brevi domande per calcolare il tuo potenziale.",
     startTrial: "Inizia la prova gratuita di 14 giorni",
-    viewDemo: "Guarda la demo dal vivo",
     navHome: "Home",
     navGuest: "Vista Ospite (PWA)",
     navHost: "Portale Host",
@@ -85,10 +130,19 @@ const i18nDict = {
     toastLang: "Lingua aggiornata in Italiano (EUR)"
   },
   PT: {
-    heroTitle: "O sistema operacional moderno para anfitriões da Airbnb",
-    heroSub: "Transforme o seu guia em um concierge digital 24/7. Elimine chamadas, automatize o Wi-Fi e gere +420€/mês em vendas extras.",
+    heroBadge: "Motor de receita automatizado para aluguel por temporada",
+    heroTitle: "Transforme cada estadia em +400€/mês de renda extra por propriedade",
+    heroSub: "Elimine mensagens repetitivas sobre Wi-Fi e ar-condicionado. Ofereça guias digitais em 1 toque, códigos de porta e links de pagamento.",
+    btnCalcHero: "Calcule sua renda extra (Quiz de 10 seg)",
+    viewDemo: "Demonstração interativa do hóspede",
+    statHosts: "Superhosts ativos",
+    statRate: "Taxa de abertura",
+    statProc: "Vendas processadas",
+    statSat: "Satisfação do anfitrião",
+    quizBadge: "Passo 1 de 2: Auditoria de receita em 10 segundos",
+    quizTitle: "Descubra quanta renda extra sua propriedade pode gerar",
+    quizSub: "Responda a 3 perguntas rápidas para calcular seu potencial.",
     startTrial: "Iniciar teste gratuito de 14 dias",
-    viewDemo: "Ver demonstração ao vivo",
     navHome: "Início",
     navGuest: "Vista Hóspede (PWA)",
     navHost: "Portal Anfitrião",
@@ -96,10 +150,19 @@ const i18nDict = {
     toastLang: "Idioma atualizado para Português (EUR)"
   },
   JA: {
-    heroTitle: "AirbnbホストのためのモダンホスピタリティOS",
-    heroSub: "デジタルガイドブックを24時間年中無休のコンシェルジュに。Wi-FiとドアPINを自動化し、月額+$420の追加収益を達成。",
+    heroBadge: "民泊＆バケーションレンタル自動収益エンジン",
+    heroTitle: "すべての宿泊を物件あたり月額+$400以上の追加収入に変える",
+    heroSub: "Wi-Fiやエアコンに関する繰り返しの質問をゼロに。ワンタップのデジタルガイドブック、時限式ドアPIN、決済リンクを提供。",
+    btnCalcHero: "追加収益を計算する (10秒診断)",
+    viewDemo: "インタラクティブゲストデモを見る",
+    statHosts: "アクティブなスーパーホスト",
+    statRate: "ゲスト閲覧率",
+    statProc: "処理済み追加売上",
+    statSat: "ホスト満足度",
+    quizBadge: "ステップ 1 / 2: 10秒間の収益診断",
+    quizTitle: "あなたの物件がどれだけの追加収入を生み出せるか確認する",
+    quizSub: "3つの簡単な質問に答えて、パーソナライズされた売上ポテンシャルを計算。",
     startTrial: "14日間無料トライアルを開始",
-    viewDemo: "ライブデモを見る",
     navHome: "ホーム",
     navGuest: "ゲストビュー (PWA)",
     navHost: "ホストポータル",
@@ -107,10 +170,19 @@ const i18nDict = {
     toastLang: "言語を日本語に更新しました (JPY)"
   },
   TR: {
-    heroTitle: "Airbnb ve Tatil Evleri İçin Modern Ev Sahibi İşletim Sistemi",
-    heroSub: "Dijital rehberinizi 7/24 canlı bir konsiyerje dönüştürün. Gece aramalarını bitirin, Wi-Fi ve kapı PIN kodlarını otomatikleştirelim.",
+    heroBadge: "Airbnb ve Kiralık Evler İçin Otomatik Ek Gelir Motoru",
+    heroTitle: "Her Misafir Konaklamasını Mülk Başına +$400+/ay Ek Gelire Dönüştürün",
+    heroSub: "Wi-Fi ve Klima sorularına son verin. 1-tıkla dijital rehber, zaman ayarlı kapı PIN şifreleri, özel ödeme linkleri ve otomatik mesaj tünelleri sunun.",
+    btnCalcHero: "Ek Gelir Potansiyelini Hesapla (10 Saniyelik Test)",
+    viewDemo: "Canlı Misafir Demosunu İncele",
+    statHosts: "Aktive Süper Ev Sahibi",
+    statRate: "Misafir Rehber Açılma Oranı",
+    statProc: "İşlenen Toplam Ek Satış",
+    statSat: "Ev Sahibi Memnuniyeti",
+    quizBadge: "Adım 1 / 2: 10 Saniyelik Gelir Hesaplama",
+    quizTitle: "Mülkünüzün Ne Kadar Ek Gelir Üretebileceğini Hesaplayın",
+    quizSub: "Kişiselleştirilmiş ek satış potansiyelinizi hesaplamak için 3 hızlı soruyu yanıtlayın.",
     startTrial: "14 Günlük Ücretsiz Denemeyi Başlat",
-    viewDemo: "Canlı Demoyu İncele",
     navHome: "Ana Sayfa",
     navGuest: "Misafir Görünümü (PWA)",
     navHost: "Ev Sahibi Portalı",
@@ -124,43 +196,44 @@ function changeLanguage(langKey) {
   if (!i18nDict[langKey]) return;
   currentLanguage = langKey;
   
-  // Auto-switch currency based on country/language
   const targetCurrency = languageCurrencyMap[langKey] || 'USD';
   changeCurrency(targetCurrency);
   
-  // Sync currency dropdown value
   const currSelect = document.getElementById('currency-select');
   if (currSelect) currSelect.value = targetCurrency;
 
   const t = i18nDict[langKey];
   
-  const heroTitle = document.querySelector('.hero-content h1');
-  if (heroTitle) heroTitle.innerText = t.heroTitle;
-  
-  const heroSub = document.querySelector('.hero-content p');
-  if (heroSub) heroSub.innerText = t.heroSub;
-  
-  const btnStartTrial = document.querySelector('.btn-hero-primary span');
-  if (btnStartTrial) btnStartTrial.innerText = t.startTrial;
-
-  const btnViewDemo = document.querySelector('.btn-hero-secondary span');
-  if (btnViewDemo) btnViewDemo.innerText = t.viewDemo;
+  // Translate all elements with data-i18n attribute
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) {
+      // Preserve internal icons if present
+      const icon = el.querySelector('i');
+      if (icon) {
+        el.innerHTML = `${icon.outerHTML} ${t[key]}`;
+      } else {
+        el.innerText = t[key];
+      }
+    }
+  });
 
   const navHomeSpan = document.querySelector('#btn-view-landing span');
-  if (navHomeSpan) navHomeSpan.innerText = t.navHome;
+  if (navHomeSpan && t.navHome) navHomeSpan.innerText = t.navHome;
 
   const navGuestSpan = document.querySelector('#btn-view-guest span');
-  if (navGuestSpan) navGuestSpan.innerText = t.navGuest;
+  if (navGuestSpan && t.navGuest) navGuestSpan.innerText = t.navGuest;
 
   const navHostSpan = document.querySelector('#btn-view-host span');
-  if (navHostSpan) navHostSpan.innerText = t.navHost;
+  if (navHostSpan && t.navHost) navHostSpan.innerText = t.navHost;
 
   const navAdminSpan = document.querySelector('#btn-view-admin span');
-  if (navAdminSpan) navAdminSpan.innerText = t.navAdmin;
+  if (navAdminSpan && t.navAdmin) navAdminSpan.innerText = t.navAdmin;
 
   showToast(t.toastLang);
   lucide.createIcons();
 }
+
 
 let billingCycle = 'annual';
 
