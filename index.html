@@ -1,0 +1,2013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GuestFlow | Host Operations OS & High-Converting Sales Funnel</title>
+  <!-- Google Fonts: Outfit for display headers, Inter for crisp UI text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <!-- PWA & Mobile App Support -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#10B981">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="GuestFlow">
+  <link rel="apple-touch-icon" href="https://api.qrserver.com/v1/create-qr-code/?size=192x192&data=GuestFlowApp">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-obsidian text-slate">
+
+
+  <!-- Top Global Navigation Bar -->
+  <header class="top-nav">
+    <div class="nav-container">
+      
+      <!-- Brand Logo -->
+      <div class="brand" onclick="switchView('landing')" style="cursor:pointer;">
+        <div class="logo-icon">
+          <i data-lucide="compass"></i>
+        </div>
+        <span class="brand-name">Guest<span class="text-accent">Flow</span></span>
+      </div>
+
+      <!-- Context-Aware Dynamic Center Navigation -->
+      <nav class="center-nav-links" id="center-nav-menu">
+        <button id="btn-view-landing" class="nav-link active" onclick="switchView('landing')">
+          <i data-lucide="sparkles"></i>
+          <span>Home & Funnel</span>
+        </button>
+        <button id="btn-view-guest" class="nav-link" onclick="switchView('guest')">
+          <i data-lucide="smartphone"></i>
+          <span>Guest View (PWA)</span>
+        </button>
+        <button id="btn-view-host" class="nav-link" onclick="switchView('host')" style="display:none;">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Host Portal</span>
+        </button>
+        <button id="btn-view-admin" class="nav-link" onclick="switchView('admin')" style="display:none;">
+          <i data-lucide="shield"></i>
+          <span>Super Admin</span>
+        </button>
+      </nav>
+
+
+      <!-- Right Controls: Active Property, Theme Switcher, Currency & Account -->
+      <div class="nav-right">
+        
+        <!-- Active Property Selector Dropdown -->
+        <div class="property-nav-selector" id="nav-property-container" style="display:none;">
+          <i data-lucide="home"></i>
+          <select id="property-select-nav" onchange="changeActiveProperty(this.value)">
+            <!-- Populated by JS -->
+          </select>
+        </div>
+
+        <!-- Light / Dark Mode Theme Switcher -->
+        <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Light / Dark Mode">
+          <i data-lucide="sun" id="theme-icon"></i>
+        </button>
+
+        <!-- Install PWA App Button -->
+        <button class="theme-toggle-btn" onclick="openPwaInstallModal()" title="Install Mobile App on Phone">
+          <i data-lucide="download-cloud"></i>
+        </button>
+
+
+        <div class="currency-selector">
+          <i data-lucide="globe"></i>
+          <select id="currency-select" onchange="changeCurrency(this.value)">
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="CAD">CAD ($)</option>
+            <option value="AUD">AUD ($)</option>
+          </select>
+        </div>
+
+        <div id="user-nav-status">
+          <button class="btn-primary-sm" onclick="openLoginModal('host')">
+            <i data-lucide="log-in"></i>
+            <span>Login / Access</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="app-main">
+
+    <!-- ========================================== -->
+    <!-- 0. HIGH-CONVERTING B2B SALES FUNNEL LANDING -->
+    <!-- ========================================== -->
+    <section id="view-landing" class="view-section active">
+
+      
+      <!-- FUNNEL STEP 1: HERO ATTENTION & VSL DEMO HOOK -->
+      <div class="landing-hero">
+        <span class="hero-badge"><i data-lucide="sparkles" class="text-accent"></i> Automated Short-Term Rental Revenue Engine</span>
+        <h1 class="hero-title">Turn Every Guest Stay Into <span class="text-gradient">+$400+/mo Extra Income</span> Per Property</h1>
+        <p class="hero-sub">Eliminate repetitive guest messages about Wi-Fi & AC. Offer 1-tap digital guidebooks, time-gated door access, custom payment links, and automated messaging tunnels.</p>
+        
+        <div class="hero-cta-group">
+          <button class="btn-hero-primary" onclick="scrollToFunnelSection('funnel-quiz-section')">
+            <i data-lucide="zap"></i>
+            <span>Calculate Your Extra Revenue (10-Sec Quiz)</span>
+          </button>
+          <button class="btn-hero-secondary" onclick="switchView('guest')">
+            <i data-lucide="smartphone"></i>
+            <span>Interactive Guest Demo</span>
+          </button>
+        </div>
+
+        <!-- Social Proof Trust Strip -->
+        <div class="hero-stats-strip">
+          <div class="h-stat-item">
+            <strong>3,420+</strong>
+            <span>Active Superhosts</span>
+          </div>
+          <div class="h-stat-divider"></div>
+          <div class="h-stat-item">
+            <strong>98.4%</strong>
+            <span>Guest Open Rate</span>
+          </div>
+          <div class="h-stat-divider"></div>
+          <div class="h-stat-item">
+            <strong>$1.4M+</strong>
+            <span>Upsells Processed</span>
+          </div>
+          <div class="h-stat-divider"></div>
+          <div class="h-stat-item">
+            <strong>4.9 ★★★★★</strong>
+            <span>Host Satisfaction</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FUNNEL STEP 2: INTERACTIVE REVENUE AUDIT QUIZ (HIGH CONVERSION HOOK) -->
+      <div class="landing-section" id="funnel-quiz-section">
+        <div class="funnel-quiz-card">
+          <div class="quiz-header">
+            <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">Step 1 of 2: 10-Second Revenue Audit</span>
+            <h2>Check How Much Extra Income Your Property Can Generate</h2>
+            <p>Answer 3 quick questions to calculate your personalized upsell potential.</p>
+          </div>
+
+          <div id="quiz-questions-box" class="quiz-body">
+            
+            <div class="quiz-step active" id="quiz-step-1">
+              <h4>Q1: How many short-term rental listings or rooms do you manage?</h4>
+              <div class="quiz-options-grid">
+                <button class="quiz-opt-btn" onclick="answerQuiz(1, '1-2 Properties')">🏠 1 - 2 Properties</button>
+                <button class="quiz-opt-btn" onclick="answerQuiz(1, '3-8 Properties')">🏢 3 - 8 Properties</button>
+                <button class="quiz-opt-btn" onclick="answerQuiz(1, '9+ Properties')">🏰 9+ Properties / Boutique Hotel</button>
+              </div>
+            </div>
+
+            <div class="quiz-step" id="quiz-step-2" style="display:none;">
+              <h4>Q2: What is your main booking platform channel?</h4>
+              <div class="quiz-options-grid">
+                <button class="quiz-opt-btn" onclick="answerQuiz(2, 'Airbnb')">Airbnb Superhost</button>
+                <button class="quiz-opt-btn" onclick="answerQuiz(2, 'Vrbo / Booking')">Vrbo & Booking.com</button>
+                <button class="quiz-opt-btn" onclick="answerQuiz(2, 'Direct Web')">Direct Booking Website</button>
+              </div>
+            </div>
+
+            <div class="quiz-step" id="quiz-step-3" style="display:none;">
+              <h4>Q3: Do you currently offer paid guest services (shuttles, late check-out, cleaning)?</h4>
+              <div class="quiz-options-grid">
+                <button class="quiz-opt-btn" onclick="answerQuiz(3, 'Yes')">Yes, manually via messages</button>
+                <button class="quiz-opt-btn" onclick="answerQuiz(3, 'No')">No, missing out on extra income</button>
+              </div>
+            </div>
+
+            <!-- Quiz Result Box -->
+            <div class="quiz-result-box" id="quiz-result-box" style="display:none;">
+              <div class="q-result-badge"><i data-lucide="check-circle-2" class="text-emerald"></i> Audit Completed</div>
+              <h3>🎉 Your Portfolio Qualifies for an Estimated <span class="text-gradient" id="quiz-result-amt">+$1,260.00 / month</span> in Extra Revenue!</h3>
+              <p>You qualify for a <strong>14-Day Free Trial ($0 charged today)</strong> with 0% platform commission on your first 30 days.</p>
+              
+              <button class="btn-hero-primary" onclick="openLemonSqueezyCheckout('Pro Host Plan', '$14.00 / mo')">
+                <i data-lucide="shield-check"></i>
+                <span>Claim Your 14-Day Free Trial ($0 Today)</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- FUNNEL STEP 3: DETAILED INTERACTIVE PRODUCT SHOWCASE TABS -->
+      <div class="landing-section">
+        <div class="section-center-head">
+          <span class="badge-tag">Interactive Feature Showcase</span>
+          <h2>See How GuestFlow Automates Every Step of the Stay</h2>
+          <p>Click through the 4 core pillars of our hospitality operating system.</p>
+        </div>
+
+        <div class="feature-showcase-container">
+          <div class="showcase-tabs">
+            <button class="s-tab active" onclick="switchShowcaseTab('wifi', this)">
+              <i data-lucide="wifi"></i> 1-Tap Wi-Fi & Door PIN
+            </button>
+            <button class="s-tab" onclick="switchShowcaseTab('videos', this)">
+              <i data-lucide="video"></i> Appliance Video Manuals
+            </button>
+            <button class="s-tab" onclick="switchShowcaseTab('tunnels', this)">
+              <i data-lucide="zap"></i> Automated Messaging Tunnels
+            </button>
+            <button class="s-tab" onclick="switchShowcaseTab('payouts', this)">
+              <i data-lucide="credit-card"></i> Custom Pay Links & Split
+            </button>
+          </div>
+
+          <div class="showcase-content-box">
+            <div id="showcase-wifi" class="showcase-panel active">
+              <div class="s-panel-grid">
+                <div>
+                  <span class="badge-tag">Zero Guest Calls</span>
+                  <h3>Instant 1-Tap Wi-Fi Copy & Time-Gated Door PIN</h3>
+                  <p>Guests tap once on their phone screen to automatically copy the Wi-Fi password. Door lockbox PIN codes are time-gated so guests only see code 2 hours before check-in time.</p>
+                  <ul class="s-check-list">
+                    <li><i data-lucide="check" class="text-emerald"></i> Eliminates 80% of repetitive check-in questions</li>
+                    <li><i data-lucide="check" class="text-emerald"></i> Auto-expires door PIN code at 11:00 AM check-out</li>
+                  </ul>
+                </div>
+                <div class="s-panel-preview">
+                  <div class="action-card wifi-card" style="margin:0;">
+                    <div class="card-icon"><i data-lucide="wifi"></i></div>
+                    <div class="card-body">
+                      <span class="card-label">Instant Wi-Fi</span>
+                      <span class="card-val">MalibuVilla_5G</span>
+                    </div>
+                    <button class="btn-icon-copy"><i data-lucide="copy"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="showcase-videos" class="showcase-panel">
+              <div class="s-panel-grid">
+                <div>
+                  <span class="badge-tag">Visual Manuals</span>
+                  <h3>30-Second Appliance Video Guides</h3>
+                  <p>Upload short video guides showing guests how to operate Nest thermostats, Nespresso coffee machines, TV remotes, and pool heaters.</p>
+                  <ul class="s-check-list">
+                    <li><i data-lucide="check" class="text-emerald"></i> No more broken appliances or wrong AC settings</li>
+                    <li><i data-lucide="check" class="text-emerald"></i> High resolution mobile video player with subtitles</li>
+                  </ul>
+                </div>
+                <div class="s-panel-preview">
+                  <div class="video-card" style="width:100%;">
+                    <div class="thumb-container">
+                      <img src="https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?auto=format&fit=crop&w=600&q=80" alt="Guide">
+                      <div class="play-overlay"><i data-lucide="play-circle"></i></div>
+                    </div>
+                    <div class="v-info">
+                      <h4>Nest Thermostat & AC Guide</h4>
+                      <span>0:45 min video</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="showcase-tunnels" class="showcase-panel">
+              <div class="s-panel-grid">
+                <div>
+                  <span class="badge-tag">Automated Upsells</span>
+                  <h3>Automated WhatsApp & SMS Guest Tunnels</h3>
+                  <p>Set time-triggered automated messages. For example, send a WhatsApp message 24 hours before check-out offering a 2:00 PM Late Check-out for $45.</p>
+                  <ul class="s-check-list">
+                    <li><i data-lucide="check" class="text-emerald"></i> 32.4% average conversion rate on guest upsells</li>
+                    <li><i data-lucide="check" class="text-emerald"></i> Supports WhatsApp, SMS, and PWA Push</li>
+                  </ul>
+                </div>
+                <div class="s-panel-preview">
+                  <div class="tunnel-card" style="margin:0;">
+                    <div class="tunnel-header">
+                      <h4>Pre-Arrival Airport Transfer</h4>
+                      <span class="badge-tag">WhatsApp & SMS</span>
+                    </div>
+                    <div class="tunnel-metrics-bar">
+                      <div class="m-sub-box"><span>Sent</span><strong>142</strong></div>
+                      <div class="m-sub-box"><span>Converted</span><strong class="text-emerald">48 (33.8%)</strong></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="showcase-payouts" class="showcase-panel">
+              <div class="s-panel-grid">
+                <div>
+                  <span class="badge-tag">Direct Bank Payouts</span>
+                  <h3>Host Custom Payment Links & Take-Rate Split</h3>
+                  <p>Paste your custom payment link (Stripe, Revolut, PayPal). Platform commission is automatically calculated and routed while net host payout deposits to your bank.</p>
+                  <ul class="s-check-list">
+                    <li><i data-lucide="check" class="text-emerald"></i> 0% platform commission on Pro Host Tier</li>
+                    <li><i data-lucide="check" class="text-emerald"></i> Direct payout bank account deposits</li>
+                  </ul>
+                </div>
+                <div class="s-panel-preview">
+                  <div class="c-metric-card highlight-emerald" style="margin:0;">
+                    <span>Net Host Payout Deposited</span>
+                    <strong class="text-emerald">$456.00</strong>
+                    <span class="c-sub">Direct Bank Deposit</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- FUNNEL STEP 4: REAL HOST CASE STUDIES & TESTIMONIALS -->
+      <div class="landing-section">
+        <div class="section-center-head">
+          <span class="badge-tag">Real Host Case Studies</span>
+          <h2>Hear From Superhosts Scaling With GuestFlow</h2>
+          <p>Join over 3,400+ short-term rental managers worldwide.</p>
+        </div>
+
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="t-user-head">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Sarah Miller">
+              <div>
+                <h4>Sarah Miller</h4>
+                <span>Malibu Beachfront Villa (3 Units)</span>
+              </div>
+            </div>
+            <p>"GuestFlow generated $1,480 in upsells in my first 30 days alone from airport shuttles and late check-outs. Best tool in my tech stack!"</p>
+            <div class="t-rating">★★★★★ <span class="t-revenue">+$1,480/mo extra</span></div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="t-user-head">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Marcus Vance">
+              <div>
+                <h4>Marcus Vance</h4>
+                <span>Miami Sunset Penthouse (8 Units)</span>
+              </div>
+            </div>
+            <p>"Zero 2 AM calls asking for the Wi-Fi password or how to turn on the pool heater. The 30-second video manuals saved my sanity."</p>
+            <div class="t-rating">★★★★★ <span class="t-revenue">Saved 42 hrs/mo</span></div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="t-user-head">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80" alt="Elena Rostova">
+              <div>
+                <h4>Elena Rostova</h4>
+                <span>Santorini Luxury Suites (18 Units)</span>
+              </div>
+            </div>
+            <p>"We use custom Stripe payment links and the Pro Host tier. Keeping 100% of our upsell revenue with zero commission is incredible."</p>
+            <div class="t-rating">★★★★★ <span class="t-revenue">18 Suites Active</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FUNNEL STEP 5: PROBLEM AGITATION MATRIX (BEFORE VS AFTER GUESTFLOW) -->
+      <div class="landing-section">
+        <div class="section-center-head">
+          <span class="badge-tag">The STR Host Transformation</span>
+          <h2>Why 3,400+ Hosts Switched to GuestFlow</h2>
+          <p>Stop wasting 15+ hours a week answering the same Wi-Fi and TV remote questions.</p>
+        </div>
+
+        <div class="agitation-grid">
+          <div class="agit-card before">
+            <div class="agit-header">
+              <i data-lucide="x-circle" class="text-red"></i>
+              <h3>Old Way (Without GuestFlow)</h3>
+            </div>
+            <ul class="agit-list">
+              <li>❌ Answering late-night messages: "What's the Wi-Fi password?"</li>
+              <li>❌ Guest confusion over thermostat, coffee machine & hot tub buttons.</li>
+              <li>❌ $0 extra revenue from airport shuttles or late check-outs.</li>
+              <li>❌ Endless back-and-forth bank details for extra payments.</li>
+            </ul>
+          </div>
+
+          <div class="agit-card after">
+            <div class="agit-header">
+              <i data-lucide="check-circle-2" class="text-emerald"></i>
+              <h3>New Way (With GuestFlow Funnel)</h3>
+            </div>
+            <ul class="agit-list">
+              <li>✅ 1-Tap instant Wi-Fi copy & time-gated door lockbox PIN.</li>
+              <li>✅ Short 30-sec video manuals for every home appliance.</li>
+              <li>✅ <strong>+$420/mo extra income</strong> per listing from 1-click upsells.</li>
+              <li>✅ Host custom payment link & automatic 0% commission payout.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- FUNNEL STEP 6: INTERACTIVE ROI CALCULATOR -->
+      <div class="landing-section">
+        <div class="roi-calc-wrapper">
+          <div class="calc-header">
+            <h3><i data-lucide="calculator" class="text-accent"></i> Real-Time Revenue & Time Savings Calculator</h3>
+            <p>Slide the bar to select your property portfolio size.</p>
+          </div>
+          
+          <div class="calc-slider-box">
+            <div class="slider-label-row">
+              <span>Properties Portfolio Size:</span>
+              <strong id="calc-prop-count">3 Properties</strong>
+            </div>
+            <input type="range" min="1" max="25" value="3" class="roi-slider" oninput="updateRoiCalculator(this.value)">
+          </div>
+
+          <div class="calc-results-grid">
+            <div class="calc-res-card">
+              <span class="res-label">Est. Extra Monthly Upsell Revenue</span>
+              <strong class="res-val text-emerald" id="calc-revenue-val">$1,260.00</strong>
+              <span class="res-sub">From Shuttles, Late Check-out & Cleaning</span>
+            </div>
+            <div class="calc-res-card">
+              <span class="res-label">Host Messaging Hours Saved</span>
+              <strong class="res-val text-indigo" id="calc-time-saved">42 Hours / mo</strong>
+              <span class="res-sub">No more repeating Wi-Fi & AC questions</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FUNNEL STEP 7: TRANSPARENT SAAS PRICING TIERS -->
+      <div class="landing-section" id="pricing-section">
+        <div class="section-center-head">
+          <span class="badge-tag">Transparent SaaS Pricing</span>
+          <h2>Select Your 14-Day Free Trial Plan</h2>
+          <p>Register today ($0 charged). Cancel anytime before Day 14 with 1-click.</p>
+
+          <div class="billing-toggle-box">
+            <button id="btn-bill-annual" class="b-toggle active" onclick="toggleBillingCycle('annual')">
+              Annual Billing <span class="badge-save">Save 20%</span>
+            </button>
+            <button id="btn-bill-monthly" class="b-toggle" onclick="toggleBillingCycle('monthly')">
+              Monthly Billing
+            </button>
+          </div>
+        </div>
+
+        <div class="pricing-cards-grid">
+          
+          <div class="pricing-card">
+            <div class="p-card-header">
+              <span class="p-tier-name">Starter Host</span>
+              <p class="p-tier-desc">Perfect for single property hosts starting out.</p>
+              <div class="p-price-box">
+                <span class="p-price">$0</span>
+                <span class="p-period">/ month forever</span>
+              </div>
+            </div>
+            <ul class="p-features-list">
+              <li><i data-lucide="check" class="text-emerald"></i> <strong>1 Property Listing</strong></li>
+              <li><i data-lucide="check" class="text-emerald"></i> Unlimited Digital Guidebook Views</li>
+              <li><i data-lucide="check" class="text-emerald"></i> 1-Tap Wi-Fi & Time-Gated Door PIN</li>
+              <li><i data-lucide="check" class="text-emerald"></i> Host Custom Payment Link Support</li>
+              <li><i data-lucide="check" class="text-emerald"></i> Auto Take-Rate Split Engine</li>
+              <li class="fee-note"><i data-lucide="info"></i> 5% auto platform commission on guest upsells</li>
+            </ul>
+            <button class="btn-tier-action secondary" onclick="selectPricingTier('Starter')">Start Free Plan</button>
+          </div>
+
+          <div class="pricing-card popular">
+            <div class="popular-ribbon">14-DAY FREE TRIAL</div>
+            <div class="p-card-header">
+              <span class="p-tier-name text-emerald">Pro Host</span>
+              <p class="p-tier-desc">For growing hosts & multi-listing managers.</p>
+              <div class="p-price-box">
+                <span class="p-price" id="price-pro-val">$14.00</span>
+                <span class="p-period">/ property / month</span>
+              </div>
+            </div>
+            <ul class="p-features-list">
+              <li><i data-lucide="check" class="text-emerald"></i> <strong>Up to 15 Properties</strong></li>
+              <li><i data-lucide="check" class="text-emerald"></i> <strong>0% Platform Commission (Keep 100%)</strong></li>
+              <li><i data-lucide="check" class="text-emerald"></i> <strong>Host Custom Payment Links Allowed</strong></li>
+              <li><i data-lucide="check" class="text-emerald"></i> Automated Guest Tunnels (WhatsApp & SMS)</li>
+              <li><i data-lucide="check" class="text-emerald"></i> Global Merchant Invoicing</li>
+              <li><i data-lucide="check" class="text-emerald"></i> Printable Room Stand PDF Generator</li>
+            </ul>
+            <button class="btn-tier-action primary" onclick="selectPricingTier('Pro Host')">Start 14-Day Free Trial ($0 Today)</button>
+          </div>
+
+          <div class="pricing-card">
+            <div class="p-card-header">
+              <span class="p-tier-name text-indigo">Enterprise & Hotel</span>
+              <p class="p-tier-desc">For boutique hotels, resorts & large property teams.</p>
+              <div class="p-price-box">
+                <span class="p-price" id="price-ent-val">$29.00</span>
+                <span class="p-period">/ property / month</span>
+              </div>
+            </div>
+            <ul class="p-features-list">
+              <li><i data-lucide="check" class="text-emerald"></i> <strong>15+ Properties & Boutique Hotels</strong></li>
+              <li><i data-lucide="check" class="text-emerald"></i> <strong>0% Commission on Upsells</strong></li>
+              <li><i data-lucide="check" class="text-emerald"></i> <strong>White-Label Domain (yourhotel.guestflow.app)</strong></li>
+              <li><i data-lucide="check" class="text-emerald"></i> Dedicated Merchant Account</li>
+              <li><i data-lucide="check" class="text-emerald"></i> 24/7 Priority VIP Phone Support</li>
+            </ul>
+            <button class="btn-tier-action secondary" onclick="selectPricingTier('Enterprise')">Start Enterprise Trial</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- FUNNEL STEP 8: FREQUENTLY ASKED QUESTIONS (OBJECTION HANDLING) -->
+      <div class="landing-section">
+        <div class="section-center-head">
+          <span class="badge-tag">FAQ</span>
+          <h2>Frequently Asked Questions</h2>
+          <p>Everything you need to know about GuestFlow guidebooks & billing.</p>
+        </div>
+
+        <div class="faq-accordion-wrapper">
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">
+              <h4>Do my guests need to download an app?</h4>
+              <i data-lucide="chevron-down" class="faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+              <p>No! GuestFlow works as an instant Web App (PWA). Guests simply scan your printed QR stand or click your link to view Wi-Fi and services instantly on any smartphone browser.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">
+              <h4>Can I use my own custom payment link?</h4>
+              <i data-lucide="chevron-down" class="faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Yes! Hosts can paste their custom payment URL (Stripe, Revolut, PayPal, Lemon Squeezy, etc.) so guest payments go directly into your account.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">
+              <h4>How does the 14-Day Free Trial work?</h4>
+              <i data-lucide="chevron-down" class="faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+              <p>When you sign up, $0 is charged today. You get 14 full days to test GuestFlow with your properties. If you decide to cancel anytime before Day 14, your card will never be charged.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">
+              <h4>How do guests access the guidebook in their room?</h4>
+              <i data-lucide="chevron-down" class="faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Guests can scan the printable A5 room stand QR code placed in your villa or apartment, or click the automatic WhatsApp/SMS welcome link sent before check-in.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">
+              <h4>How does the platform commission split work?</h4>
+              <i data-lucide="chevron-down" class="faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+              <p>On the Starter tier ($0/mo), guest upsell sales incur a 5% platform fee automatically deducted during payout. On Pro Host ($14/mo) and Enterprise tiers, you pay 0% platform commission and keep 100% of guest sales.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">
+              <h4>Can I connect multiple listings from Airbnb, Vrbo & Booking.com?</h4>
+              <i data-lucide="chevron-down" class="faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Yes! GuestFlow supports multi-channel property portfolios. You can import listings in seconds using our AI Listing Importer and manage all properties from a single dashboard.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">
+              <h4>How do time-gated door lockbox PIN codes work?</h4>
+              <i data-lucide="chevron-down" class="faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Door access PIN codes are automatically time-gated. Guests can only reveal their check-in PIN starting 2 hours before official check-in time, and access automatically expires at check-out time.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">
+              <h4>What payment methods can my guests use to buy upsells?</h4>
+              <i data-lucide="chevron-down" class="faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Guests can pay via Credit/Debit Cards, Apple Pay, Google Pay, or through your custom host gateway URL (Stripe, Revolut, PayPal, etc.).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- FUNNEL STEP 9: FINAL HIGH-CONVERTING CLOSING CTA -->
+      <div class="landing-bottom-cta">
+        <h2>Ready to Automate Your STR Operations & Boost Revenue?</h2>
+        <p>Join over 3,400+ hosts scaling their guest experience today.</p>
+        <button class="btn-hero-primary" onclick="openLemonSqueezyCheckout('Pro Host Plan', '$14.00 / mo')">
+          <i data-lucide="shield-check"></i>
+          <span>Start Your 14-Day Free Trial ($0 Today)</span>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 1. GUEST MOBILE VIEW (PWA SIMULATION)     -->
+    <!-- ========================================== -->
+    <section id="view-guest" class="view-section">
+      <div class="guest-wrapper">
+
+        <div class="mobile-frame">
+          <div class="mobile-notch"></div>
+          
+          <div class="hero-card" id="hero-card-bg">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span class="welcome-pill">Welcome to your stay</span>
+                <span class="badge-tag" id="prop-platform-badge">Airbnb</span>
+              </div>
+              <h1 id="prop-title">Malibu Beachfront Villa & Suite</h1>
+              <p id="prop-address"><i data-lucide="map-pin"></i> 22804 Pacific Coast Hwy, Malibu, CA</p>
+
+              <div class="stay-meta-bar">
+                <div class="meta-item">
+                  <i data-lucide="calendar"></i>
+                  <span>Check-in: 3:00 PM</span>
+                </div>
+                <div class="meta-item">
+                  <i data-lucide="clock"></i>
+                  <span>Check-out: 11:00 AM</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="quick-actions-grid">
+            <div class="action-card wifi-card" onclick="copyWifi()">
+              <div class="card-icon">
+                <i data-lucide="wifi"></i>
+              </div>
+              <div class="card-body">
+                <span class="card-label">Instant Wi-Fi</span>
+                <span class="card-val" id="wifi-name">MalibuVilla_5G</span>
+              </div>
+              <button class="btn-icon-copy" title="Copy Password">
+                <i data-lucide="copy"></i>
+              </button>
+            </div>
+
+            <div class="action-card lock-card">
+              <div class="card-icon amber">
+                <i data-lucide="key-round"></i>
+              </div>
+              <div class="card-body">
+                <span class="card-label">Door Access Code</span>
+                <span class="card-val" id="door-pin-display">••••-8921</span>
+              </div>
+              <button class="btn-reveal" onclick="togglePinReveal()">
+                <i data-lucide="eye" id="pin-eye-icon"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="guest-tabs">
+            <button class="g-tab active" onclick="switchGuestTab('guide', this)">
+              <i data-lucide="book-open"></i> House Manual
+            </button>
+            <button class="g-tab" onclick="switchGuestTab('upsell', this)">
+              <i data-lucide="sparkles"></i> Concierge & Store
+              <span class="badge-count" id="cart-count-badge" style="display:none;">0</span>
+            </button>
+            <button class="g-tab" onclick="switchGuestTab('local', this)">
+              <i data-lucide="map"></i> AI Local Guide
+            </button>
+          </div>
+
+          <div id="g-tab-guide" class="g-tab-content active">
+            <div class="section-block">
+              <h3 class="section-title"><i data-lucide="video"></i> Appliance Video Guides</h3>
+              <div class="video-guides-scroll" id="video-guides-scroll">
+                <!-- Dynamically Rendered -->
+              </div>
+            </div>
+
+            <div class="section-block">
+              <h3 class="section-title"><i data-lucide="shield-alert"></i> House Rules & Guidelines</h3>
+              <div class="rules-list">
+                <div class="rule-item">
+                  <i data-lucide="volume-2" class="rule-icon"></i>
+                  <div>
+                    <strong>Quiet Hours</strong>
+                    <p>10:00 PM – 8:00 AM out of respect for neighbors.</p>
+                  </div>
+                </div>
+                <div class="rule-item">
+                  <i data-lucide="trash-2" class="rule-icon"></i>
+                  <div>
+                    <strong>Trash & Recycling</strong>
+                    <p>Bins are located on the side walkway. Black for general waste, Blue for recyclables.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="g-tab-upsell" class="g-tab-content">
+            <div class="section-block">
+              <div class="store-header">
+                <div>
+                  <h3 class="section-title"><i data-lucide="sparkles"></i> Guest Services & Upsells</h3>
+                  <p class="section-sub">Book extra services instantly for your stay.</p>
+                </div>
+                <button class="btn-cart-trigger" onclick="openCheckoutModal()">
+                  <i data-lucide="shopping-bag"></i>
+                  <span id="cart-badge-text">0 items</span>
+                </button>
+              </div>
+
+              <div class="services-grid" id="services-catalog">
+                <!-- Dynamically Populated by JS -->
+              </div>
+            </div>
+          </div>
+
+          <div id="g-tab-local" class="g-tab-content">
+            <div class="section-block">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <h3 class="section-title"><i data-lucide="wand-2" class="text-accent"></i> AI Auto-Discovered Places</h3>
+                <span class="badge-tag">AI Geo-Scraped</span>
+              </div>
+              <div class="local-category-chips">
+                <button class="chip active" onclick="filterLocal('all')">All</button>
+                <button class="chip" onclick="filterLocal('food')">Coffee & Dining</button>
+                <button class="chip" onclick="filterLocal('beach')">Beaches & Nature</button>
+                <button class="chip" onclick="filterLocal('groceries')">Supermarkets</button>
+              </div>
+
+              <div class="local-spots-list" id="local-spots-container">
+                <!-- Dynamically Populated by JS -->
+              </div>
+            </div>
+          </div>
+
+          <div class="guest-footer">
+            <button class="btn-whatsapp-host" onclick="contactHostWhatsApp()">
+              <i data-lucide="message-square"></i>
+              <span>Need help? Message Host on WhatsApp</span>
+            </button>
+            <p class="powered-by">Powered by <strong>GuestFlow Global</strong></p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 2. HOST DASHBOARD VIEW (EV SAHİBİ PANELİ) -->
+    <!-- ========================================== -->
+    <section id="view-host" class="view-section">
+
+
+      <!-- A. UNAUTHENTICATED HOST LOGIN GATE -->
+      <div id="host-login-view" style="display:none;">
+        <div class="auth-card-container">
+          <div class="auth-card">
+            <div class="auth-role-switcher">
+              <button class="auth-role-btn active" onclick="switchAuthRole('host')"><i data-lucide="user"></i> Host Login</button>
+              <button class="auth-role-btn" onclick="switchAuthRole('admin')"><i data-lucide="shield"></i> Super Admin</button>
+            </div>
+
+            <div class="auth-icon-box">
+              <i data-lucide="home" class="icon-lg text-emerald"></i>
+            </div>
+            <h2>Host Account Portal</h2>
+            <p>Log in to manage your property guidebooks, custom payment links & guest orders.</p>
+            
+            <form onsubmit="event.preventDefault(); handleUserLogin('host');">
+              <div class="form-group">
+                <label>Host Email Address</label>
+                <input type="email" id="input-host-email" placeholder="sarah@malibuvillas.com" value="sarah@malibuvillas.com" required>
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" placeholder="••••••••" value="password123" required>
+              </div>
+
+              <button type="submit" class="btn-primary-lg">Log In to Host Portal</button>
+            </form>
+
+            <div class="auth-divider"><span>or start trial</span></div>
+
+            <button class="btn-secondary-lg" onclick="openLemonSqueezyCheckout('Pro Host Plan', '$14.00 / mo')">
+              <i data-lucide="shield-check"></i>
+              <span>Start 14-Day Free Trial ($0 Charged Today)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- B. LOCKED SYSTEM OVERLAY (EXPIRATION GATE) -->
+      <div id="host-locked-overlay" class="locked-overlay-container" style="display:none;">
+        <div class="locked-card">
+          <div class="locked-icon-box">
+            <i data-lucide="lock-keyhole" class="icon-xl text-amber"></i>
+          </div>
+          <h2>Host Subscription Paused</h2>
+          <p>Your 14-day trial period has ended or your subscription was cancelled. Your guest guidebooks are currently locked.</p>
+          
+          <div class="locked-reason-box">
+            <div class="info-row">
+              <span>Selected Plan:</span>
+              <strong>Pro Host ($14.00 / property / mo)</strong>
+            </div>
+            <div class="info-row">
+              <span>Merchant Account:</span>
+              <span class="badge-tag">Direct Host Gateway</span>
+            </div>
+          </div>
+
+          <button class="btn-primary-lg" onclick="unlockSystemNow()">
+            <i data-lucide="shield-check"></i>
+            <span>Reactivate Subscription ($14.00)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- C. ACTIVE HOST DASHBOARD CONTENT -->
+      <div id="host-dashboard-content" class="host-container">
+
+        <!-- LIVE TRIAL & SUBSCRIPTION STATUS CONTROL BAR -->
+        <div class="trial-status-bar active-trial" id="trial-status-banner">
+          <div class="t-banner-left">
+            <div class="t-badge-icon"><i data-lucide="shield-check"></i></div>
+            <div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <h4 style="margin:0; font-size:14px;">14-Day Free Trial Active</h4>
+                <span class="badge-tag" id="trial-days-badge" style="background:rgba(16,185,129,0.2); color:var(--accent-emerald);">14 Days Remaining</span>
+              </div>
+              <p id="trial-card-text" style="font-size:11px; margin:2px 0 0; color:var(--text-muted);">
+                Card on file: •••• •••• •••• 4242 (Visa) - Auto-charge $14.00 on Aug 30, 2026.
+              </p>
+            </div>
+          </div>
+          <div class="t-banner-right">
+            <button class="btn-cancel-sub" onclick="cancelSubscription()">
+              <i data-lucide="x-circle"></i> Cancel Subscription
+            </button>
+            <button class="btn-test-expiry" onclick="simulateTrialExpiry()">
+              <i data-lucide="clock"></i> Simulate Day 14 Charge
+            </button>
+            <button class="btn-test-lock" onclick="lockSystemNow()">
+              <i data-lucide="lock"></i> Lock System
+            </button>
+          </div>
+        </div>
+
+        <!-- HOST DEVICE VIEW MODE SWITCHER TOGGLE BAR (DESKTOP VS MOBILE APP) -->
+        <div class="host-mode-toggle-bar">
+          <div class="h-mode-label">
+            <i data-lucide="smartphone" class="text-accent"></i>
+            <span>Host Application View Mode:</span>
+          </div>
+          <div class="h-mode-buttons">
+            <button id="btn-host-mode-desktop" class="h-mode-btn active" onclick="toggleHostDeviceMode('desktop')">
+              <i data-lucide="monitor"></i> Desktop Portal
+            </button>
+            <button id="btn-host-mode-mobile" class="h-mode-btn" onclick="toggleHostDeviceMode('mobile')">
+              <i data-lucide="smartphone"></i> Mobile Phone App
+            </button>
+          </div>
+        </div>
+
+        <!-- HOST MOBILE PHONE APP SIMULATION FRAME -->
+        <div id="host-mobile-app-wrapper" class="host-mobile-frame-container" style="display:none;">
+          <div class="host-mobile-frame">
+            <div class="mobile-notch"></div>
+            
+            <!-- Mobile App Top Header -->
+            <div class="h-mob-header">
+              <div class="h-mob-user">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Host Avatar">
+                <div>
+                  <h4>Sarah Miller</h4>
+                  <span class="badge-tag">Pro Host Active</span>
+                </div>
+              </div>
+              <button class="h-mob-notif-btn" onclick="showToast('🔔 2 New Guest Orders Received!')">
+                <i data-lucide="bell"></i>
+                <span class="badge-count">2</span>
+              </button>
+            </div>
+
+            <!-- Mobile Active Property Quick Switcher -->
+            <div class="h-mob-prop-card">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span class="badge-tag">Selected Listing</span>
+                <button class="btn-icon-copy" onclick="copyGuestLink()" title="Copy Link"><i data-lucide="share-2"></i></button>
+              </div>
+              <h3 id="mob-host-prop-title">Malibu Beachfront Villa & Suite</h3>
+              <div class="h-mob-meta-grid">
+                <div><span>Wi-Fi:</span><strong id="mob-wifi-display">MalibuVilla_5G</strong></div>
+                <div><span>Door PIN:</span><strong id="mob-pin-display">4821</strong></div>
+              </div>
+            </div>
+
+            <!-- Mobile App Quick Actions Bar -->
+            <div class="h-mob-actions-grid">
+              <button class="h-mob-action-btn" onclick="openCreateTunnelModal()">
+                <i data-lucide="zap" class="text-emerald"></i>
+                <span>+ Tunnel</span>
+              </button>
+              <button class="h-mob-action-btn" onclick="openAddVideoModal()">
+                <i data-lucide="video" class="text-indigo"></i>
+                <span>+ Video</span>
+              </button>
+              <button class="h-mob-action-btn" onclick="switchHostTab('qr')">
+                <i data-lucide="printer" class="text-amber"></i>
+                <span>QR Stand</span>
+              </button>
+            </div>
+
+            <!-- Mobile App Real-Time Revenue Card -->
+            <div class="h-mob-revenue-card">
+              <div>
+                <span>Monthly Upsell Revenue</span>
+                <strong id="mob-revenue-val">$1,480.00</strong>
+              </div>
+              <span class="badge-pill">0% Comm</span>
+            </div>
+
+            <!-- Mobile App Recent Orders Feed -->
+            <div class="h-mob-section">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                <h4 style="margin:0; font-size:14px;"><i data-lucide="shopping-bag" class="text-accent"></i> Recent Guest Orders</h4>
+                <span class="badge-tag">Real-Time</span>
+              </div>
+
+              <div class="h-mob-orders-list" id="mob-orders-list">
+                <div class="mob-order-item">
+                  <div>
+                    <strong>Alexander Wright</strong>
+                    <p style="font-size:11px; color:var(--text-muted);">VIP Airport Shuttle ($75.00)</p>
+                  </div>
+                  <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">+$71.25 Net</span>
+                </div>
+                <div class="mob-order-item">
+                  <div>
+                    <strong>Sophia Martinez</strong>
+                    <p style="font-size:11px; color:var(--text-muted);">Late Check-out 2:00 PM ($45.00)</p>
+                  </div>
+                  <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">+$42.75 Net</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mobile App Bottom Navigation Bar -->
+            <div class="h-mob-nav-bar">
+              <button class="h-mob-nav-item active" onclick="showToast('Home Dashboard active')">
+                <i data-lucide="home"></i>
+                <span>Home</span>
+              </button>
+              <button class="h-mob-nav-item" onclick="switchHostTab('orders')">
+                <i data-lucide="shopping-bag"></i>
+                <span>Orders</span>
+              </button>
+              <button class="h-mob-nav-item" onclick="switchHostTab('tunnels')">
+                <i data-lucide="zap"></i>
+                <span>Tunnels</span>
+              </button>
+              <button class="h-mob-nav-item" onclick="switchHostTab('properties')">
+                <i data-lucide="building"></i>
+                <span>Listings</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Host Header Banner -->
+        <div class="host-header" id="host-desktop-header">
+          <div>
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:4px;">
+              <h1 class="host-title">Host Operating Dashboard</h1>
+              <span class="badge-tag">Pro Host Active</span>
+            </div>
+            <p class="host-sub">Manage your properties, custom payment links, automated guest tunnels & commission payouts.</p>
+          </div>
+
+          <div class="host-header-actions">
+            <button class="btn-primary" onclick="openCreateTunnelModal()">
+              <i data-lucide="zap"></i>
+              <span>+ Create Guest Tunnel</span>
+            </button>
+            <button class="btn-secondary" onclick="openAddPropertyModal()">
+              <i data-lucide="plus-circle"></i>
+              <span>Add Property</span>
+            </button>
+            <button class="btn-secondary" onclick="triggerAiImportModal()">
+              <i data-lucide="wand-2"></i>
+              <span>AI Importer</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- HOST QUICK PROPERTY OVERVIEW CONTROL BAR -->
+        <div class="host-quick-overview-bar">
+          <div class="h-overview-info">
+            <span class="badge-tag">Active Property</span>
+            <h2 id="host-prop-title">Malibu Beachfront Villa & Suite</h2>
+            <p><i data-lucide="wifi"></i> Wi-Fi: <strong id="host-wifi-display">MalibuVilla_5G (MalibuPass2026!)</strong> <button class="btn-edit-inline" onclick="openEditWifiModal()"><i data-lucide="edit-3"></i> Edit</button></p>
+            <p><i data-lucide="key"></i> Door PIN: <strong id="host-pin-display">4821</strong> <button class="btn-edit-inline" onclick="openEditPinModal()"><i data-lucide="edit-3"></i> Edit</button></p>
+          </div>
+          <div class="h-overview-actions">
+            <button class="btn-secondary-sm" onclick="copyGuestLink()">
+              <i data-lucide="copy"></i> Copy Guest Link
+            </button>
+            <button class="btn-secondary-sm" onclick="switchHostTab('qr', this)">
+              <i data-lucide="printer"></i> Room Stand PDF
+            </button>
+            <button class="btn-primary-sm" onclick="openAddVideoModal()">
+              <i data-lucide="video"></i> + Add Video Manual
+            </button>
+          </div>
+        </div>
+
+        <!-- Metrics Overview Grid -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="m-icon icon-emerald"><i data-lucide="dollar-sign"></i></div>
+            <div class="m-data">
+              <span class="m-label">Property Upsell Revenue</span>
+              <span class="m-val" id="metric-revenue">$1,480.00</span>
+              <span class="m-trend positive"><i data-lucide="trending-up"></i> Active Portfolio</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="m-icon icon-amber"><i data-lucide="percent"></i></div>
+            <div class="m-data">
+              <span class="m-label">Platform Fees Collected</span>
+              <span class="m-val style-amber" id="metric-platform-fees">$24.00</span>
+              <span class="m-sub">Auto platform commission</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="m-icon icon-indigo"><i data-lucide="zap"></i></div>
+            <div class="m-data">
+              <span class="m-label">Tunnel Conversion Rate</span>
+              <span class="m-val text-emerald">32.4% avg</span>
+              <span class="m-sub">Automated messaging pipelines</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="m-icon icon-blue"><i data-lucide="shield-check"></i></div>
+            <div class="m-data">
+              <span class="m-label">Host Subscription Plan</span>
+              <span class="m-val text-emerald"><i data-lucide="check-circle-2"></i> Active</span>
+              <span class="m-sub">Starter Tier (5% Comm)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Host Tabs Navigation -->
+        <div class="host-tabs">
+          <button class="h-tab active" onclick="switchHostTab('orders', this)"><i data-lucide="shopping-bag"></i> Incoming Guest Orders</button>
+          <button class="h-tab" onclick="switchHostTab('tunnels', this)"><i data-lucide="zap"></i> Automated Guest Tunnels</button>
+          <button class="h-tab" onclick="switchHostTab('properties', this)"><i data-lucide="building"></i> My Properties Portfolio</button>
+          <button class="h-tab" onclick="switchHostTab('services', this)"><i data-lucide="layers"></i> Active Property Services</button>
+          <button class="h-tab" onclick="switchHostTab('payouts', this)"><i data-lucide="globe"></i> Payment Gateways & Take-Rate</button>
+          <button class="h-tab" onclick="switchHostTab('qr', this)"><i data-lucide="printer"></i> Printable Stand QR Generator</button>
+        </div>
+
+        <!-- HOST TAB 0: INCOMING GUEST ORDERS TRACKER -->
+        <div id="h-tab-orders" class="h-tab-content active">
+          <div class="panel-card">
+            <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <h3>Real-Time Guest Orders & Upsell Purchases</h3>
+                <p>Track instant payments, custom host payout splits, and platform take-rate fees.</p>
+              </div>
+              <span class="badge-tag">Auto Payout Split</span>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Guest Name & Property</th>
+                    <th>Purchased Service</th>
+                    <th>Price & Payout Split</th>
+                    <th>Order Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="host-orders-table">
+                  <!-- Dynamically Rendered -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- HOST TAB 1: AUTOMATED GUEST TUNNELS -->
+        <div id="h-tab-tunnels" class="h-tab-content">
+          <div class="panel-card">
+            <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <h3>Automated Guest Tunnels (Trigger Funnels)</h3>
+                <p>Set time-based automated messaging triggers via WhatsApp, SMS, and PWA to convert guest upsells effortlessly.</p>
+              </div>
+              <button class="btn-primary-sm" onclick="openCreateTunnelModal()">
+                <i data-lucide="zap"></i> + Create Guest Tunnel
+              </button>
+            </div>
+            <div class="tunnels-grid" id="tunnels-grid-container">
+              <!-- Dynamically Rendered -->
+            </div>
+          </div>
+        </div>
+
+        <!-- HOST TAB 2: MULTI-PROPERTY PORTFOLIO -->
+        <div id="h-tab-properties" class="h-tab-content">
+          <div class="panel-card">
+            <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <h3>All Listed Properties across Channels</h3>
+                <p>Universal support for Airbnb, Vrbo, Booking.com & Direct Booking sites.</p>
+              </div>
+              <button class="btn-primary-sm" onclick="triggerAiImportModal()">
+                <i data-lucide="wand-2"></i> Import with AI
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Property Title & Address</th>
+                    <th>Channel Platform</th>
+                    <th>AI Local Spots</th>
+                    <th>Upsell Revenue</th>
+                    <th>Guest Web Link</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="host-properties-table">
+                  <!-- Dynamically Rendered -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- HOST TAB 3: SERVICES MANAGER -->
+        <div id="h-tab-services" class="h-tab-content">
+          <div class="panel-card">
+            <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <h3>Active Ancillary Services & Upsells</h3>
+                <p>Services offered to guests for the currently selected property.</p>
+              </div>
+              <button class="btn-primary-sm" onclick="openAddUpsellModal()">
+                <i data-lucide="plus"></i> Add Service
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Service Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Fulfillment</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="host-services-table">
+                  <!-- Dynamically Rendered -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- HOST TAB 4: CUSTOM PAYMENT LINKS & TAKE-RATE ENGINE -->
+        <div id="h-tab-payouts" class="h-tab-content">
+          <div class="panel-card">
+            
+            <!-- PLATFORM COMMISSION AGGREGATOR BANNER -->
+            <div class="commission-aggregator-card">
+              <div class="comm-header">
+                <div>
+                  <h3><i data-lucide="pie-chart" class="text-emerald"></i> Platform Commission & Payout Aggregator</h3>
+                  <p>Real-time breakdown of gross guest sales, net host payouts, and auto-swept platform fees.</p>
+                </div>
+                <div class="comm-header-actions">
+                  <button class="btn-primary-sm" onclick="triggerInstantFeeSweep()">
+                    <i data-lucide="refresh-cw"></i> Auto-Sweep Platform Fees
+                  </button>
+                  <button class="btn-secondary-sm" onclick="downloadCommissionStatement()">
+                    <i data-lucide="file-text"></i> Commission Statement
+                  </button>
+                </div>
+              </div>
+
+              <div class="comm-metrics-grid">
+                <div class="c-metric-card">
+                  <span>Total Gross Guest Sales</span>
+                  <strong id="comm-gross-sales">$480.00</strong>
+                  <span class="c-sub">Total Upsell Transactions</span>
+                </div>
+                <div class="c-metric-card highlight-emerald">
+                  <span>Net Host Payout Deposited</span>
+                  <strong id="comm-net-payout" class="text-emerald">$456.00</strong>
+                  <span class="c-sub">Direct Bank Deposit</span>
+                </div>
+                <div class="c-metric-card highlight-amber">
+                  <span>GuestFlow Platform Commission</span>
+                  <strong id="comm-platform-fees" class="style-amber">$24.00</strong>
+                  <span class="c-sub">Auto Deducted (Rate: <span id="comm-current-rate">5.0%</span>)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="payment-settings-grid" style="margin-top:20px;">
+              <div class="settings-card">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <h4><i data-lucide="link"></i> Active Host Custom Payment Link</h4>
+                  <button class="btn-edit-inline" onclick="openEditCustomPayLinkModal()"><i data-lucide="edit-3"></i> Edit Link</button>
+                </div>
+                <p class="text-muted">Your custom checkout gateway URL for direct guest payments.</p>
+                <div class="info-row">
+                  <span>Custom Pay Gateway:</span>
+                  <strong id="host-custom-link-display" style="word-break:break-all; color:var(--accent-indigo);">https://buy.stripe.com/malibu_villa_direct</strong>
+                </div>
+                <div class="info-row">
+                  <span>Payout Bank Account:</span>
+                  <strong id="host-bank-display">Chase Bank (****4821 - USD)</strong>
+                </div>
+              </div>
+
+              <div class="settings-card">
+                <h4><i data-lucide="percent"></i> Automatic Take-Rate & Commission Split</h4>
+                <p class="text-muted">Platform fee automatically deducted and routed to GuestFlow platform account.</p>
+                <div class="info-row">
+                  <span>Host Subscription Tier:</span>
+                  <strong>Starter Tier (5% Commission)</strong>
+                </div>
+                <div class="info-row">
+                  <span>Automatic Platform Split:</span>
+                  <span class="badge-pill">95% Host Payout / 5% Platform Fee</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- HOST TAB 5: PRINTABLE STAND GENERATOR -->
+        <div id="h-tab-qr" class="h-tab-content">
+          <div class="panel-card">
+            <div class="qr-gen-wrapper">
+              <div class="qr-preview-box" id="qr-stand-preview">
+                <div class="stand-card">
+                  <div class="stand-header">
+                    <h2>Welcome to</h2>
+                    <h1 id="stand-prop-title">Malibu Beachfront Villa</h1>
+                  </div>
+                  <div class="stand-qr-frame">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://guestflow.app/g/malibu-villa" alt="QR Code">
+                  </div>
+                  <p class="stand-instruction">Scan with your smartphone camera for instant Wi-Fi, house manual & concierge services.</p>
+                  <div class="stand-footer">
+                    <span>Powered by GuestFlow.app</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="qr-controls">
+                <h3>Printable Room Card Setup</h3>
+                <p class="text-muted">Place this printed stand frame on the coffee table or kitchen island for effortless guest onboarding.</p>
+                
+                <div class="form-group">
+                  <label>Display Name</label>
+                  <input type="text" id="input-stand-title" value="Malibu Beachfront Villa" oninput="updateStandTitle(this.value)">
+                </div>
+
+                <div class="form-group">
+                  <label>Stand Theme Style</label>
+                  <select onchange="updateStandTheme(this.value)">
+                    <option value="obsidian">Modern Obsidian Dark</option>
+                    <option value="light">Luxury Minimalist Light</option>
+                    <option value="gold">Resort Gold Accent</option>
+                  </select>
+                </div>
+
+                <button class="btn-primary-lg" onclick="printQrStand()">
+                  <i data-lucide="printer"></i>
+                  <span>Download / Print PDF Stand (A5 Size)</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 3. PLATFORM SUPER ADMIN DASHBOARD VIEW     -->
+    <!-- ========================================== -->
+    <section id="view-admin" class="view-section">
+
+      <!-- UNAUTHENTICATED ADMIN LOGIN GATE -->
+      <div id="admin-login-view" style="display:none;">
+        <div class="auth-card-container">
+          <div class="auth-card">
+            <div class="auth-role-switcher">
+              <button class="auth-role-btn" onclick="switchAuthRole('host')"><i data-lucide="user"></i> Host Login</button>
+              <button class="auth-role-btn active" onclick="switchAuthRole('admin')"><i data-lucide="shield"></i> Super Admin</button>
+            </div>
+
+            <div class="auth-icon-box" style="background:rgba(245,158,11,0.15); border-color:rgba(245,158,11,0.3);">
+              <i data-lucide="shield-alert" class="icon-lg style-amber"></i>
+            </div>
+            <h2>Platform Super Admin Login</h2>
+            <p>Master administration console for managing host accounts, platform commissions & global SaaS MRR.</p>
+            
+            <form onsubmit="event.preventDefault(); handleUserLogin('admin');">
+              <div class="form-group">
+                <label>Super Admin Email</label>
+                <input type="email" id="input-admin-email" value="admin@guestflow.app" required>
+              </div>
+              <div class="form-group">
+                <label>Admin Security Key</label>
+                <input type="password" value="admin-secret-2026" required>
+              </div>
+
+              <button type="submit" class="btn-primary-lg" style="background:linear-gradient(135deg, var(--accent-amber), #D97706);">
+                <i data-lucide="key-round"></i> Authenticate as Super Admin
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACTIVE ADMIN CONSOLE CONTENT -->
+      <div id="admin-dashboard-content" class="host-container" style="display:block;">
+        
+        <div class="host-header">
+          <div>
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:4px;">
+              <h1 class="host-title"><i data-lucide="shield-check" class="text-accent"></i> Platform Master Admin Console</h1>
+              <span class="badge-tag" style="background:rgba(245,158,11,0.15); color:var(--accent-amber);">Super Admin Active</span>
+            </div>
+            <p class="host-sub">Global governance of all host accounts, platform commission sweeps, SaaS MRR, and system auto-locks.</p>
+          </div>
+          <div class="host-header-actions">
+            <button class="btn-primary-sm" onclick="triggerGlobalFeeSweep()">
+              <i data-lucide="refresh-cw"></i> Sweep All Platform Fees
+            </button>
+            <button class="btn-secondary-sm" onclick="downloadAdminMasterReport()">
+              <i data-lucide="download"></i> Export Global Report (CSV)
+            </button>
+          </div>
+        </div>
+
+        <!-- GLOBAL ADMIN METRICS GRID -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="m-icon icon-emerald"><i data-lucide="trending-up"></i></div>
+            <div class="m-data">
+              <span class="m-label">Global Monthly SaaS MRR</span>
+              <span class="m-val text-emerald">$19,880.00</span>
+              <span class="m-sub">1,420 Active Host Subscriptions</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="m-icon icon-amber"><i data-lucide="pie-chart"></i></div>
+            <div class="m-data">
+              <span class="m-label">Total Platform Commissions</span>
+              <span class="m-val style-amber" id="admin-metric-comm">$4,820.00</span>
+              <span class="m-sub">5% Auto Take-Rate Swept</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="m-icon icon-indigo"><i data-lucide="building"></i></div>
+            <div class="m-data">
+              <span class="m-label">Total Properties Managed</span>
+              <span class="m-val text-indigo">3,892 Units</span>
+              <span class="m-sub">Airbnb, Vrbo & Direct Hotels</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="m-icon icon-blue"><i data-lucide="activity"></i></div>
+            <div class="m-data">
+              <span class="m-label">Platform Health & API Uptime</span>
+              <span class="m-val text-emerald">99.98%</span>
+              <span class="m-sub">All Systems Operational</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ALL HOST ACCOUNTS GOVERNANCE TABLE -->
+        <div class="panel-card" style="margin-top:24px;">
+          <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <h3>All Registered Host Accounts & SaaS Subscriptions</h3>
+              <p>Monitor host trial periods, SaaS billing tiers, commission rates, and access controls.</p>
+            </div>
+            <span class="badge-tag">Master Control</span>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Host Email & Name</th>
+                  <th>Properties</th>
+                  <th>SaaS Plan Tier</th>
+                  <th>Subscription Status</th>
+                  <th>Commission Rate</th>
+                  <th>Total Guest Upsells</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-hosts-table">
+                <!-- Dynamically Rendered by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- SUPER ADMIN MERCHANT PAYMENT & SAAS TIER SALES INTEGRATION PANEL -->
+        <div class="panel-card" style="margin-top:24px;">
+          <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <h3><i data-lucide="credit-card" class="text-emerald"></i> SaaS Tier Sales & White-Label Merchant Integration</h3>
+              <p>Configure automated merchant checkout gateways, monitor package sales revenue, and manage SaaS subscription tiers.</p>
+            </div>
+            <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">White-Label Active</span>
+          </div>
+
+          <div class="metrics-grid" style="margin-top:16px;">
+            <div class="metric-card">
+              <div class="m-icon icon-emerald"><i data-lucide="shield-check"></i></div>
+              <div class="m-data">
+                <span class="m-label">Starter Tier Sales ($0/mo)</span>
+                <span class="m-val">420 Hosts</span>
+                <span class="m-sub">5% Auto Take-Rate</span>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="m-icon icon-indigo"><i data-lucide="zap"></i></div>
+              <div class="m-data">
+                <span class="m-label">Pro Host Sales ($14/mo)</span>
+                <span class="m-val text-emerald">$12,460.00 / mo</span>
+                <span class="m-sub">890 Active Subscriptions</span>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="m-icon icon-amber"><i data-lucide="crown"></i></div>
+              <div class="m-data">
+                <span class="m-label">Enterprise Sales ($29/mo)</span>
+                <span class="m-val style-amber">$3,190.00 / mo</span>
+                <span class="m-sub">110 Boutique Hotels</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="payment-settings-grid" style="margin-top:20px;">
+            <div class="settings-card">
+              <h4><i data-lucide="shield-check"></i> White-Label Merchant Checkout Status</h4>
+              <p class="text-muted">Instant SaaS tier subscription checkout with tax compliance & invoicing engine.</p>
+              <div class="info-row">
+                <span>Gateway Status:</span>
+                <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">● 256-Bit SSL Encrypted (Active)</span>
+              </div>
+              <div class="info-row">
+                <span>Auto Tax & VAT Invoicing:</span>
+                <strong>Global Compliance Enabled (135+ Countries)</strong>
+              </div>
+            </div>
+
+            <div class="settings-card">
+              <h4><i data-lucide="shopping-bag"></i> Quick Package Checkout Actions</h4>
+              <p class="text-muted">Test package sales checkout modal or assign custom SaaS tier directly to any host.</p>
+              <div style="display:flex; gap:10px; margin-top:14px; flex-wrap:wrap;">
+                <button class="btn-primary-sm" onclick="openLemonSqueezyCheckout('Pro Host Plan', '$14.00 / mo')">
+                  <i data-lucide="credit-card"></i> Test Pro Host Checkout ($14)
+                </button>
+                <button class="btn-secondary-sm" onclick="openLemonSqueezyCheckout('Enterprise Plan', '$29.00 / mo')">
+                  <i data-lucide="crown"></i> Test Enterprise Checkout ($29)
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- GLOBAL PLATFORM SETTINGS & COMMISSION CONTROL PANEL -->
+        <div class="payment-settings-grid" style="margin-top:24px;">
+          <div class="settings-card">
+            <h4><i data-lucide="sliders" class="text-accent"></i> Global Default Platform Commission Rate</h4>
+            <p class="text-muted">Adjust the default take-rate auto-deducted from host guest upsell transactions.</p>
+            <div class="form-group" style="margin-top:14px;">
+              <label>Default Take-Rate Percentage (%)</label>
+              <select id="global-commission-select" onchange="changeGlobalCommissionRate(this.value)">
+                <option value="0.05" selected>5.0% (Default Starter Tier)</option>
+                <option value="0.035">3.5% (Discounted Promo)</option>
+                <option value="0.0">0.0% (Global Commission Pause)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <h4><i data-lucide="shield-check" class="text-emerald"></i> Auto-Sweep Engine Status</h4>
+            <p class="text-muted">Platform fee routing engine continuously sweeps commissions to platform bank account.</p>
+            <div class="info-row">
+              <span>Auto-Sweep Engine:</span>
+              <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">● ACTIVE (Real-Time)</span>
+            </div>
+            <div class="info-row">
+              <span>Platform Deposit Bank:</span>
+              <strong>Silicon Valley Bank (****9812 - USD)</strong>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- MODALS                                    -->
+  <!-- ========================================== -->
+
+  <!-- SUBSCRIPTION CHECKOUT MODAL -->
+  <div id="modal-lemon-checkout" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('modal-lemon-checkout')"><i data-lucide="x"></i></button>
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+        <i data-lucide="shield-check" class="icon-lg text-emerald"></i>
+        <h3>Secure Merchant Checkout</h3>
+      </div>
+      <p class="modal-desc-text">Complete your host SaaS subscription. Tax compliance & instant invoicing included.</p>
+
+      <div class="lemon-summary-card" style="background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.2); padding:14px; border-radius:8px; margin-bottom:16px;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+          <span>Selected SaaS Plan:</span>
+          <strong id="lemon-plan-name">Pro Host Plan</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between;">
+          <span>14-Day Free Trial Due Today:</span>
+          <strong class="text-emerald" id="lemon-plan-price">$0.00 Today</strong>
+        </div>
+      </div>
+
+      <form onsubmit="event.preventDefault(); processLemonSqueezySubscribe();">
+        <div class="form-group">
+          <label>Host Email Address</label>
+          <input type="email" id="lemon-email" placeholder="sarah@malibuvillas.com" value="sarah@malibuvillas.com" required>
+        </div>
+
+        <div class="form-group">
+          <label>Credit / Debit Card</label>
+          <div class="input-icon-wrapper">
+            <input type="text" id="lemon-card" placeholder="4242 •••• •••• 4242" value="4242 9918 2201 4242" required>
+            <i data-lucide="credit-card" class="input-right-icon"></i>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Expires</label>
+            <input type="text" placeholder="MM/YY" value="10/29" required>
+          </div>
+          <div class="form-group">
+            <label>CVC</label>
+            <input type="text" placeholder="123" value="991" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary-lg" id="btn-lemon-submit">
+          <i data-lucide="shield-check"></i>
+          <span>Complete 14-Day Free Registration</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- EDIT HOST CUSTOM PAYMENT LINK MODAL -->
+  <div id="modal-edit-pay-link" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('modal-edit-pay-link')"><i data-lucide="x"></i></button>
+      <h3><i data-lucide="link" class="text-accent"></i> Edit Host Custom Payment Link</h3>
+      <p class="modal-desc-text">Paste your custom payment link. Guests will be redirected to pay directly to your custom gateway.</p>
+
+      <form onsubmit="event.preventDefault(); submitCustomPayLink();">
+        <div class="form-group">
+          <label>Custom Payment Link URL</label>
+          <input type="url" id="custom-pay-url-input" placeholder="https://buy.stripe.com/your-custom-link" required>
+        </div>
+        <button type="submit" class="btn-primary-lg">Save Custom Payment Link</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- EDIT WI-FI MODAL -->
+  <div id="modal-edit-wifi" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('modal-edit-wifi')"><i data-lucide="x"></i></button>
+      <h3><i data-lucide="wifi" class="text-accent"></i> Edit Wi-Fi Network Credentials</h3>
+      
+      <form onsubmit="event.preventDefault(); submitEditWifi();">
+        <div class="form-group">
+          <label>Wi-Fi Network SSID (Name)</label>
+          <input type="text" id="edit-wifi-ssid" placeholder="MalibuVilla_5G" required>
+        </div>
+        <div class="form-group">
+          <label>Wi-Fi Password</label>
+          <input type="text" id="edit-wifi-pass" placeholder="MalibuPass2026!" required>
+        </div>
+        <button type="submit" class="btn-primary-lg">Save & Update Wi-Fi Credentials</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- EDIT DOOR PIN MODAL -->
+  <div id="modal-edit-pin" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('modal-edit-pin')"><i data-lucide="x"></i></button>
+      <h3><i data-lucide="key" class="text-accent"></i> Edit Door Access PIN Code</h3>
+      
+      <form onsubmit="event.preventDefault(); submitEditPin();">
+        <div class="form-group">
+          <label>Door Lockbox Access Code</label>
+          <input type="text" id="edit-door-pin" placeholder="4821" required>
+        </div>
+        <button type="submit" class="btn-primary-lg">Save & Update Access Code</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- EDIT PAYOUT BANK MODAL -->
+  <div id="modal-edit-bank" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('modal-edit-bank')"><i data-lucide="x"></i></button>
+      <h3><i data-lucide="landmark" class="text-accent"></i> Edit Payout Bank Account</h3>
+      
+      <form onsubmit="event.preventDefault(); submitEditBank();">
+        <div class="form-group">
+          <label>Bank Name & Account Info</label>
+          <input type="text" id="edit-bank-name" placeholder="Chase Bank (****4821 - USD)" required>
+        </div>
+        <button type="submit" class="btn-primary-lg">Save & Update Payout Bank</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADD VIDEO GUIDE MODAL -->
+  <div id="modal-add-video" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('modal-add-video')"><i data-lucide="x"></i></button>
+      <h3><i data-lucide="video" class="text-accent"></i> Add Appliance Video Guide</h3>
+      <p class="modal-desc-text">Add a short video guide for thermostats, coffee machines, hot tubs, or TV remotes.</p>
+      
+      <form onsubmit="event.preventDefault(); submitNewVideoGuide();">
+        <div class="form-group">
+          <label>Appliance / Feature Name</label>
+          <input type="text" id="new-v-title" placeholder="e.g. Pool Heating & Jet Controls" required>
+        </div>
+        <div class="form-group">
+          <label>Video Instructions / Description</label>
+          <input type="text" id="new-v-desc" placeholder="How to switch on the pool heater and massage jets." required>
+        </div>
+
+        <button type="submit" class="btn-primary-lg">Save Video Guide to Guidebook</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- CREATE GUEST TUNNEL MODAL -->
+  <div id="modal-create-tunnel" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('modal-create-tunnel')"><i data-lucide="x"></i></button>
+      <h3><i data-lucide="zap" class="text-accent"></i> Create Automated Guest Tunnel</h3>
+      <p class="modal-desc-text">Configure a time-triggered automated message sequence to offer upsell services to guests.</p>
+      
+      <form onsubmit="event.preventDefault(); submitNewTunnel();">
+        <div class="form-group">
+          <label>Tunnel Name</label>
+          <input type="text" id="new-t-name" placeholder="e.g. Mid-Stay Deep Clean Tunnel" required>
+        </div>
+        
+        <div class="form-group">
+          <label>Trigger Event Timing</label>
+          <select id="new-t-trigger">
+            <option value="48 Hours Before Check-in">48 Hours Before Check-in (Pre-Arrival)</option>
+            <option value="Check-in Day at 2:00 PM">Check-in Day (Welcome PIN & Wi-Fi)</option>
+            <option value="Day 3 of Stay at 10:00 AM">Day 3 of Stay (Mid-Stay Refresh)</option>
+            <option value="Night Before Check-out (6:00 PM)">Night Before Check-out (Late Check-out Offer)</option>
+            <option value="2 Hours After Check-out">2 Hours After Check-out (5-Star & Direct Booking)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Automated Messaging Channel</label>
+          <select id="new-t-channel">
+            <option value="WhatsApp & SMS">WhatsApp & SMS (Recommended)</option>
+            <option value="PWA Push Notification">PWA Web Push Notification</option>
+            <option value="Airbnb / Channel Inbox">Airbnb / Vrbo Inbox API</option>
+            <option value="Email">Transactional Email</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Target Upsell Service</label>
+          <select id="new-t-offer">
+            <option value="VIP Airport Shuttle ($75.00)">VIP Airport Shuttle ($75.00)</option>
+            <option value="Late Check-out 2:00 PM ($45.00)">Late Check-out 2:00 PM ($45.00)</option>
+            <option value="Mid-Stay Deep Clean ($65.00)">Mid-Stay Deep Clean ($65.00)</option>
+            <option value="Breakfast Basket ($30.00)">Artisan Breakfast Basket ($30.00)</option>
+            <option value="15% Off Direct Next Booking">15% Off Direct Next Booking Coupon</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-primary-lg">Launch Automated Guest Tunnel</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- AI MULTI-PLATFORM IMPORT MODAL -->
+  <div id="modal-ai-import" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('modal-ai-import')"><i data-lucide="x"></i></button>
+      <h3><i data-lucide="wand-2" class="text-accent"></i> Universal AI Importer & Local Spot Scraper</h3>
+      <p class="modal-desc-text">Paste any listing link from Airbnb, Vrbo, Booking.com, or your Direct Hotel website. Our AI will auto-import house rules AND auto-discover nearby local coffee spots, dining, beaches, & supermarkets.</p>
+      
+      <div class="form-group">
+        <label>Listing Platform Channel</label>
+        <select id="ai-platform-select">
+          <option value="Airbnb">Airbnb (airbnb.com)</option>
+          <option value="Vrbo">Vrbo (vrbo.com)</option>
+          <option value="Booking.com">Booking.com (booking.com)</option>
+          <option value="Direct Web">Direct Hotel / Villa Website</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Property Listing URL</label>
+        <input type="url" id="ai-url-input" placeholder="https://www.airbnb.com/rooms/12345678" value="https://www.airbnb.com/rooms/8942104">
+      </div>
+
+      <button class="btn-primary-lg" id="btn-run-ai-scrape" onclick="runAiScrapeSimulator()">
+        <i data-lucide="wand-2"></i>
+        <span>Auto-Scrape Listing & Discover Nearby Places</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ADD NEW PROPERTY MODAL -->
+  <div id="modal-add-property" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('modal-add-property')"><i data-lucide="x"></i></button>
+      <h3><i data-lucide="building" class="text-accent"></i> Add New Property</h3>
+      
+      <form onsubmit="event.preventDefault(); submitNewProperty();">
+        <div class="form-group">
+          <label>Property Title</label>
+          <input type="text" id="new-p-title" placeholder="e.g. Miami Sunset Penthouse" required>
+        </div>
+        <div class="form-group">
+          <label>Channel Platform</label>
+          <select id="new-p-platform">
+            <option value="Airbnb">Airbnb</option>
+            <option value="Vrbo">Vrbo</option>
+            <option value="Booking.com">Booking.com</option>
+            <option value="Direct Web">Direct Website</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Full Address</label>
+          <input type="text" id="new-p-address" placeholder="e.g. 1100 Biscayne Blvd, Miami, FL" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Wi-Fi Network Name</label>
+            <input type="text" id="new-p-wifi" placeholder="MiamiPenthouse_5G">
+          </div>
+          <div class="form-group">
+            <label>Door Access PIN</label>
+            <input type="text" id="new-p-pin" placeholder="7789">
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary-lg">Create Property & Guidebook</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- VIDEO MANUAL MODAL -->
+  <div id="modal-video" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('modal-video')"><i data-lucide="x"></i></button>
+      <h3 id="v-modal-title">Appliance Guide</h3>
+      <div class="video-preview-wrapper">
+        <img id="v-modal-img" src="" alt="Guide Preview">
+        <div class="simulated-play-bar">
+          <i data-lucide="pause-circle"></i>
+          <div class="progress-line"><div class="progress-fill" style="width: 45%;"></div></div>
+          <span>0:22 / 0:45</span>
+        </div>
+      </div>
+      <p id="v-modal-desc" class="modal-desc-text"></p>
+    </div>
+  </div>
+
+  <!-- GUEST CHECKOUT MODAL -->
+  <div id="modal-checkout" class="modal-backdrop">
+    <div class="modal-card modal-lg">
+      <button class="modal-close" onclick="closeModal('modal-checkout')"><i data-lucide="x"></i></button>
+
+      <div class="checkout-grid">
+        <div class="checkout-summary">
+          <h3><i data-lucide="shopping-bag"></i> Guest Order Summary</h3>
+          <div class="cart-items-list" id="checkout-cart-items">
+            <!-- Dynamically Rendered -->
+          </div>
+          <div class="cart-total-box">
+            <div class="total-row">
+              <span>Subtotal:</span>
+              <strong id="cart-subtotal">$0.00</strong>
+            </div>
+            <div class="total-row">
+              <span>Taxes & Service Fee:</span>
+              <span>$0.00</span>
+            </div>
+            <div class="total-row main-total">
+              <span>Total Due Now:</span>
+              <strong id="cart-final-total" class="text-accent">$0.00</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="checkout-payment-box">
+          <div class="stripe-header">
+            <span class="stripe-badge"><i data-lucide="lock"></i> 256-bit Encrypted SSL</span>
+            <h3>Secure Guest Checkout</h3>
+          </div>
+
+          <div class="express-pay-buttons">
+            <button class="btn-apple-pay" onclick="processStripePayment('Apple Pay')">
+              <i data-lucide="smartphone"></i> Pay with Apple Pay
+            </button>
+            <button class="btn-google-pay" onclick="processStripePayment('Google Pay')">
+              Pay with Google Pay
+            </button>
+          </div>
+
+          <div class="divider-text"><span>or pay via Host Custom Gateway</span></div>
+
+          <form onsubmit="event.preventDefault(); processStripePayment('Credit Card');" class="stripe-card-form">
+            <div class="form-group">
+              <label>Cardholder Name</label>
+              <input type="text" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+              <label>Card Number</label>
+              <div class="input-icon-wrapper">
+                <input type="text" placeholder="4242 •••• •••• 4242" required>
+                <i data-lucide="credit-card" class="input-right-icon"></i>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Expires</label>
+                <input type="text" placeholder="MM/YY" required>
+              </div>
+              <div class="form-group">
+                <label>CVC</label>
+                <input type="text" placeholder="123" required>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-pay-now" id="btn-pay-submit">
+              <i data-lucide="check-circle"></i>
+              <span>Pay & Confirm Order</span>
+            </button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ADD NEW SERVICE MODAL -->
+  <div id="modal-add-service" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('modal-add-service')"><i data-lucide="x"></i></button>
+      <h3>Add New Ancillary Service</h3>
+      
+      <form onsubmit="event.preventDefault(); submitNewService();">
+        <div class="form-group">
+          <label>Service Name</label>
+          <input type="text" id="new-s-name" placeholder="e.g. VIP Airport Transfer" required>
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select id="new-s-cat">
+            <option value="transport">Transportation</option>
+            <option value="stay">Check-in / Check-out</option>
+            <option value="cleaning">Housekeeping</option>
+            <option value="food">Dining & Breakfast</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Price (USD)</label>
+          <input type="number" id="new-s-price" placeholder="45.00" step="0.01" required>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <input type="text" id="new-s-desc" placeholder="Private driver directly from airport arrival hall." required>
+        </div>
+
+        <button type="submit" class="btn-primary-lg">Save & Publish to Guidebook</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- PWA INSTALLATION INSTRUCTION MODAL -->
+  <div id="modal-pwa-install" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('modal-pwa-install')"><i data-lucide="x"></i></button>
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+        <i data-lucide="download-cloud" class="icon-lg text-emerald"></i>
+        <h3>Install GuestFlow App on Phone</h3>
+      </div>
+      <p class="modal-desc-text">Install GuestFlow on your iPhone or Android home screen for 1-click app access!</p>
+
+      <div class="pwa-guide-box" style="background:var(--bg-obsidian); border:1px solid var(--border-subtle); padding:16px; border-radius:12px; margin-bottom:16px;">
+        <h4 style="margin:0 0 10px; color:var(--accent-emerald); font-size:14px;"><i data-lucide="smartphone"></i> iPhone / iPad (Safari)</h4>
+        <ol style="padding-left:20px; font-size:13px; color:var(--text-secondary); line-height:1.6;">
+          <li>Tap the <strong>Share Icon</strong> (square with arrow up) at the bottom of Safari.</li>
+          <li>Scroll down and tap <strong>"Add to Home Screen" ("Ana Ekrana Ekle")</strong>.</li>
+          <li>Tap <strong>Add</strong> in the top right. GuestFlow icon will appear on your phone home screen!</li>
+        </ol>
+      </div>
+
+      <div class="pwa-guide-box" style="background:var(--bg-obsidian); border:1px solid var(--border-subtle); padding:16px; border-radius:12px; margin-bottom:16px;">
+        <h4 style="margin:0 0 10px; color:var(--accent-indigo); font-size:14px;"><i data-lucide="smartphone"></i> Android (Chrome / Samsung)</h4>
+        <ol style="padding-left:20px; font-size:13px; color:var(--text-secondary); line-height:1.6;">
+          <li>Tap the <strong>3 dots menu</strong> in the top right of Chrome.</li>
+          <li>Tap <strong>"Install app" / "Add to Home screen" ("Uygulamayı Yükle")</strong>.</li>
+          <li>Confirm <strong>Install</strong>. The app installs automatically on your phone!</li>
+        </ol>
+      </div>
+
+      <button class="btn-primary-lg" id="btn-trigger-pwa-prompt" onclick="triggerNativePwaInstall()">
+        <i data-lucide="download"></i>
+        <span>Install App Automatically</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification Bar -->
+  <div id="toast-notification" class="toast-bar">
+
+    <i data-lucide="check-circle" id="toast-icon"></i>
+    <span id="toast-message">Copied to clipboard!</span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

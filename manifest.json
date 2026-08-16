@@ -1,0 +1,21 @@
+{
+  "name": "GuestFlow - Host & Guest Operating App",
+  "short_name": "GuestFlow",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#090D14",
+  "theme_color": "#10B981",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://api.qrserver.com/v1/create-qr-code/?size=192x192&data=GuestFlowApp",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://api.qrserver.com/v1/create-qr-code/?size=512x512&data=GuestFlowApp",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
