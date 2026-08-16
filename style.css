@@ -208,12 +208,25 @@ button, select, input {
   font-family: var(--font-heading);
   font-size: 22px;
   font-weight: 800;
-  color: #fff;
+  color: var(--text-primary);
+}
+
+body.theme-light .brand-name,
+body.theme-light .landing-footer span,
+body.theme-light .landing-footer p,
+body.theme-light .landing-footer a {
+  color: #0F172A !important;
+}
+
+body.theme-light .landing-footer {
+  background: #FFFFFF !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
 }
 
 .text-accent {
   color: var(--accent-emerald);
 }
+
 
 .badge-tag {
   font-size: 10px;
