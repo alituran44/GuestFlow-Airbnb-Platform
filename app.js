@@ -34,7 +34,7 @@ const i18nDict = {
     heroSub: "Turn your property guidebook into a 24/7 digital concierge. Eliminate guest calls, automate Wi-Fi & door PINs, and generate +$420/mo in upsells.",
     startTrial: "Start 14-Day Free Trial",
     viewDemo: "View Live Demo",
-    navHome: "Home & Funnel",
+    navHome: "Home",
     navGuest: "Guest View (PWA)",
     navHost: "Host Portal",
     navAdmin: "Super Admin",
@@ -45,7 +45,7 @@ const i18nDict = {
     heroSub: "Convierte tu guía de alojamiento en un conserje digital 24/7. Elimina llamadas de huéspedes, automatiza Wi-Fi y genera +420€/mes.",
     startTrial: "Comenzar prueba gratis de 14 días",
     viewDemo: "Ver demostración en vivo",
-    navHome: "Inicio y Embudo",
+    navHome: "Inicio",
     navGuest: "Vista Huésped (PWA)",
     navHost: "Portal Anfitrión",
     navAdmin: "Super Admin",
@@ -56,7 +56,7 @@ const i18nDict = {
     heroSub: "Transformez votre livret d'accueil en conciergerie numérique 24/7. Éliminez les appels, automatisez le Wi-Fi et générez +420€/mois.",
     startTrial: "Démarrer l'essai gratuit de 14 jours",
     viewDemo: "Voir la démo en direct",
-    navHome: "Accueil & Entonnoir",
+    navHome: "Accueil",
     navGuest: "Vue Invité (PWA)",
     navHost: "Portail Hôte",
     navAdmin: "Super Admin",
@@ -67,7 +67,7 @@ const i18nDict = {
     heroSub: "Verwandeln Sie Ihren Gästeführer in einen digitalen Concierge 24/7. Automatisch WLAN & PIN-Codes bereitstellen und +420€/Monat verdienen.",
     startTrial: "14 Tage kostenlos testen",
     viewDemo: "Live-Demo ansehen",
-    navHome: "Startseite & Funnel",
+    navHome: "Startseite",
     navGuest: "Gast-Ansicht (PWA)",
     navHost: "Gastgeber-Portal",
     navAdmin: "Super Admin",
@@ -78,7 +78,7 @@ const i18nDict = {
     heroSub: "Trasforma la tua guida per gli ospiti in un concierge digitale 24/7. Elimina le chiamate, automatizza il Wi-Fi e guadagna +420€/mese.",
     startTrial: "Inizia la prova gratuita di 14 giorni",
     viewDemo: "Guarda la demo dal vivo",
-    navHome: "Home e Funnel",
+    navHome: "Home",
     navGuest: "Vista Ospite (PWA)",
     navHost: "Portale Host",
     navAdmin: "Super Admin",
@@ -89,7 +89,7 @@ const i18nDict = {
     heroSub: "Transforme o seu guia em um concierge digital 24/7. Elimine chamadas, automatize o Wi-Fi e gere +420€/mês em vendas extras.",
     startTrial: "Iniciar teste gratuito de 14 dias",
     viewDemo: "Ver demonstração ao vivo",
-    navHome: "Início & Funil",
+    navHome: "Início",
     navGuest: "Vista Hóspede (PWA)",
     navHost: "Portal Anfitrião",
     navAdmin: "Super Admin",
@@ -100,7 +100,7 @@ const i18nDict = {
     heroSub: "デジタルガイドブックを24時間年中無休のコンシェルジュに。Wi-FiとドアPINを自動化し、月額+$420の追加収益を達成。",
     startTrial: "14日間無料トライアルを開始",
     viewDemo: "ライブデモを見る",
-    navHome: "ホーム＆ファネル",
+    navHome: "ホーム",
     navGuest: "ゲストビュー (PWA)",
     navHost: "ホストポータル",
     navAdmin: "スーパー管理者",
@@ -111,13 +111,14 @@ const i18nDict = {
     heroSub: "Dijital rehberinizi 7/24 canlı bir konsiyerje dönüştürün. Gece aramalarını bitirin, Wi-Fi ve kapı PIN kodlarını otomatikleştirelim.",
     startTrial: "14 Günlük Ücretsiz Denemeyi Başlat",
     viewDemo: "Canlı Demoyu İncele",
-    navHome: "Ana Sayfa & Funnel",
+    navHome: "Ana Sayfa",
     navGuest: "Misafir Görünümü (PWA)",
     navHost: "Ev Sahibi Portalı",
     navAdmin: "Süper Admin",
     toastLang: "Dil Türkçe olarak güncellendi (TRY)"
   }
 };
+
 
 function changeLanguage(langKey) {
   if (!i18nDict[langKey]) return;
