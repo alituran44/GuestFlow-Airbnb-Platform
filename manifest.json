@@ -1,6 +1,6 @@
 {
-  "name": "GuestFlow - Host & Guest Operating App",
-  "short_name": "GuestFlow",
+  "name": "HostifyOS - The Modern Hosting OS",
+  "short_name": "HostifyOS",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#090D14",
@@ -8,14 +8,14 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "https://api.qrserver.com/v1/create-qr-code/?size=192x192&data=GuestFlowApp",
+      "src": "brand_logo.jpg",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/jpeg"
     },
     {
-      "src": "https://api.qrserver.com/v1/create-qr-code/?size=512x512&data=GuestFlowApp",
+      "src": "brand_logo.jpg",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/jpeg"
     }
   ]
 }

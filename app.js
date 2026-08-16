@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Register PWA Service Worker
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js')
-      .then(reg => console.log('GuestFlow PWA Service Worker registered'))
+      .then(reg => console.log('HostifyOS PWA Service Worker registered'))
       .catch(err => console.log('SW Registration failed', err));
   }
   
@@ -230,7 +230,7 @@ function triggerNativePwaInstall() {
     deferredPwaPrompt.prompt();
     deferredPwaPrompt.userChoice.then((choiceResult) => {
       if (choiceResult.outcome === 'accepted') {
-        showToast("🎉 GuestFlow App installed on your phone home screen!");
+        showToast("🎉 HostifyOS App installed on your phone home screen!");
       }
       deferredPwaPrompt = null;
       closeModal('modal-pwa-install');
@@ -239,6 +239,7 @@ function triggerNativePwaInstall() {
     showToast("Follow the Safari / Chrome instructions above to add to Home Screen!");
   }
 }
+
 
 // LIGHT / DARK MODE THEME SWITCHER ("AÇIK EKRAN")
 let isLightTheme = false;
