@@ -1173,20 +1173,38 @@ function toggleBillingCycle(type) {
 
   const proPriceEl = document.getElementById('price-pro-val');
   const entPriceEl = document.getElementById('price-ent-val');
+  const proNoteEl = document.getElementById('price-pro-note');
+  const entNoteEl = document.getElementById('price-ent-note');
 
   if (type === 'annual') {
     if (proPriceEl) proPriceEl.textContent = formatPrice(14.0);
     if (entPriceEl) entPriceEl.textContent = formatPrice(29.0);
+    if (proNoteEl) proNoteEl.textContent = 'Billed annually at $168/yr (Save 20%)';
+    if (entNoteEl) entNoteEl.textContent = 'Billed annually at $348/yr (Save 20%)';
   } else {
     if (proPriceEl) proPriceEl.textContent = formatPrice(18.0);
     if (entPriceEl) entPriceEl.textContent = formatPrice(36.0);
+    if (proNoteEl) proNoteEl.textContent = 'Billed monthly at $18/mo';
+    if (entNoteEl) entNoteEl.textContent = 'Billed monthly at $36/mo';
   }
 }
 
 function selectPricingTier(tierName) {
-  const priceStr = tierName === 'Enterprise' ? '$29.00 / mo' : '$14.00 / mo';
-  openLemonSqueezyCheckout(tierName, priceStr);
+  if (tierName === 'Starter') {
+    openLemonSqueezyCheckout('Starter Free Plan', '$0.00 / month');
+    return;
+  }
+
+  let priceStr = '';
+  if (billingCycle === 'annual') {
+    priceStr = tierName === 'Enterprise' ? '$348.00 / year ($29/mo)' : '$168.00 / year ($14/mo)';
+  } else {
+    priceStr = tierName === 'Enterprise' ? '$36.00 / month' : '$18.00 / month';
+  }
+
+  openLemonSqueezyCheckout(`${tierName} (${billingCycle.toUpperCase()})`, priceStr);
 }
+
 
 // Tunnels Renderer
 function renderTunnelsGrid() {
