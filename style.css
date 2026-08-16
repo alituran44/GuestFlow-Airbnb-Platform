@@ -332,6 +332,19 @@ button, select, input {
   cursor: pointer;
 }
 
+/* Explicit Dropdown Option Styling for Dark & Light Mode Visibility */
+select option {
+  background-color: #090D14 !important;
+  color: #F8FAFC !important;
+  padding: 8px 12px;
+}
+
+body.theme-light select option {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+}
+
+
 
 /* App Main Layout */
 .app-main {
