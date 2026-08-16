@@ -14,7 +14,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="GuestFlow">
-  <link rel="apple-touch-icon" href="https://api.qrserver.com/v1/create-qr-code/?size=192x192&data=GuestFlowApp">
+  <link rel="apple-touch-icon" href="brand_logo.jpg">
+  <link rel="icon" type="image/jpeg" href="brand_logo.jpg">
+
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="style.css">
@@ -28,11 +30,10 @@
       
       <!-- Brand Logo -->
       <div class="brand" onclick="switchView('landing')" style="cursor:pointer;">
-        <div class="logo-icon">
-          <i data-lucide="compass"></i>
-        </div>
+        <img src="brand_logo.jpg" alt="GuestFlow Logo" class="brand-logo-img">
         <span class="brand-name">Guest<span class="text-accent">Flow</span></span>
       </div>
+
 
       <!-- Context-Aware Dynamic Center Navigation -->
       <nav class="center-nav-links" id="center-nav-menu">
