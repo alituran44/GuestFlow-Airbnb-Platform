@@ -653,14 +653,17 @@ body.theme-light .meta-item span {
   border-radius: var(--radius-full);
 }
 
-/* Guest Tab Contents */
-.g-tab-content {
+/* Guest & Host Tab Contents */
+.g-tab-content,
+.h-tab-content {
   display: none;
 }
 
-.g-tab-content.active {
+.g-tab-content.active,
+.h-tab-content.active {
   display: block;
 }
+
 
 .section-block {
   margin-bottom: 20px;

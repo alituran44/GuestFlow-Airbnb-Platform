@@ -808,20 +808,27 @@ function downloadAdminMasterReport() {
 
 // HOST TAB SWITCHER (FAIL-SAFE FIXED)
 function switchHostTab(tabName, btnElement) {
-  document.querySelectorAll('.h-tab').forEach(btn => btn.classList.remove('active'));
-  document.querySelectorAll('.h-tab-content').forEach(c => c.classList.remove('active'));
+  const allTabs = document.querySelectorAll('.h-tab');
+  allTabs.forEach(btn => btn.classList.remove('active'));
+
+  const allContents = document.querySelectorAll('.h-tab-content');
+  allContents.forEach(c => {
+    c.classList.remove('active');
+    c.style.display = 'none';
+  });
 
   const targetContent = document.getElementById(`h-tab-${tabName}`);
   if (targetContent) {
     targetContent.classList.add('active');
+    targetContent.style.display = 'block';
   }
 
   if (btnElement) {
     btnElement.classList.add('active');
   } else {
-    const btns = document.querySelectorAll('.h-tab');
-    btns.forEach(btn => {
-      if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(`'${tabName}'`)) {
+    allTabs.forEach(btn => {
+      const onclickAttr = btn.getAttribute('onclick') || '';
+      if (onclickAttr.includes(`'${tabName}'`)) {
         btn.classList.add('active');
       }
     });
@@ -830,22 +837,30 @@ function switchHostTab(tabName, btnElement) {
   lucide.createIcons();
 }
 
+
 // GUEST TAB SWITCHER (FAIL-SAFE FIXED)
 function switchGuestTab(tabName, btnElement) {
-  document.querySelectorAll('.g-tab').forEach(btn => btn.classList.remove('active'));
-  document.querySelectorAll('.g-tab-content').forEach(c => c.classList.remove('active'));
+  const allTabs = document.querySelectorAll('.g-tab');
+  allTabs.forEach(btn => btn.classList.remove('active'));
+
+  const allContents = document.querySelectorAll('.g-tab-content');
+  allContents.forEach(c => {
+    c.classList.remove('active');
+    c.style.display = 'none';
+  });
 
   const targetContent = document.getElementById(`g-tab-${tabName}`);
   if (targetContent) {
     targetContent.classList.add('active');
+    targetContent.style.display = 'block';
   }
 
   if (btnElement) {
     btnElement.classList.add('active');
   } else {
-    const btns = document.querySelectorAll('.g-tab');
-    btns.forEach(btn => {
-      if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(`'${tabName}'`)) {
+    allTabs.forEach(btn => {
+      const onclickAttr = btn.getAttribute('onclick') || '';
+      if (onclickAttr.includes(`'${tabName}'`)) {
         btn.classList.add('active');
       }
     });
@@ -853,6 +868,7 @@ function switchGuestTab(tabName, btnElement) {
 
   lucide.createIcons();
 }
+
 
 // PLATFORM COMMISSION AGGREGATOR ENGINE
 function calculateCommissionSummary() {
