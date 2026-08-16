@@ -327,8 +327,41 @@ let properties = [
     localSpots: [
       { id: 1, name: 'Malibu Farm Restaurant', type: 'food', rating: '4.8 ★', dist: '0.4 miles', img: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=400&q=80', desc: 'AI Recommends: Fresh organic farm-to-table dining right on Malibu Pier.' }
     ]
+  },
+  {
+    id: 'prop-hotel',
+
+    platform: 'Enterprise Hotel',
+    title: 'Grand Horizon Boutique Hotel & Spa',
+    address: '88 Cliffside Resort Way, Santorini, Greece',
+    wifiName: 'GrandHorizon_VIP',
+    wifiPass: 'HorizonSpa2026',
+    doorPin: '9982',
+    payoutBank: 'Bank of Greece (****9982 - EUR)',
+    customPayUrl: 'https://buy.stripe.com/grand_horizon_hotel_direct',
+    heroImg: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
+    checkIn: '2:00 PM',
+    checkOut: '12:00 PM',
+    whatsapp: '302286055500',
+    revenueUSD: 3890.0,
+    platformFeesTotalUSD: 0.0,
+    views: 1240,
+    completedOrders: 94,
+    slug: 'grand-horizon-hotel',
+    services: [
+      { id: 201, name: 'In-Room Gourmet Breakfast & Champagne', category: 'food', priceUSD: 65.0, desc: 'Served directly to your private sea-view terrace.', status: 'Active' },
+      { id: 202, name: 'Couples Sunset Massage & Spa Session', category: 'spa', priceUSD: 180.0, desc: '90-minute volcanic stone aromatherapy massage.', status: 'Active' },
+      { id: 203, name: 'Private Catamaran Island Cruise', category: 'tours', priceUSD: 240.0, desc: 'Half-day private yacht charter with open bar.', status: 'Active' }
+    ],
+    videos: [
+      { title: 'Terrace Private Jacuzzi Controls', time: '1:10 min', img: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80', desc: 'Temperature & hydro-massage jet instructions.' }
+    ],
+    localSpots: [
+      { id: 2, name: 'Santo Wines Winery', type: 'food', rating: '4.9 ★', dist: '1.2 miles', img: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=400&q=80', desc: 'Famous wine tasting with panoramic caldera sunset views.' }
+    ]
   }
 ];
+
 
 let activePropertyId = 'prop-malibu';
 let cart = [];
