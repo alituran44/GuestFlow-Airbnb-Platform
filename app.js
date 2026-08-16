@@ -379,7 +379,9 @@ document.addEventListener('DOMContentLoaded', () => {
   renderHostOrdersTable();
   renderCommissionAggregator();
   renderAdminHostsTable();
+  renderHostInvoicesTable();
   updateTrialStatusUI();
+
   updateRoiCalculator(3);
   updateTopNavAuthUI();
   
@@ -918,6 +920,69 @@ function openLemonSqueezyCheckout(tierName, priceStr) {
   document.getElementById('modal-lemon-checkout').classList.add('active');
 }
 
+let hostInvoices = [
+  {
+    id: 'INV-2026-8801',
+    date: 'Aug 17, 2026',
+    issuer: 'Ali Turan Inc.',
+    plan: 'Pro Host (Annual Plan - $14/mo rate)',
+    amountStr: '$168.00 / yr',
+    status: 'Paid & Emailed',
+    card: 'Visa (•••• 4242)',
+    email: 'sarah@malibuvillas.com'
+  },
+  {
+    id: 'INV-2026-7209',
+    date: 'Jul 17, 2026',
+    issuer: 'Ali Turan Inc.',
+    plan: 'Pro Host (Monthly Plan)',
+    amountStr: '$18.00 / mo',
+    status: 'Paid & Emailed',
+    card: 'Visa (•••• 4242)',
+    email: 'sarah@malibuvillas.com'
+  }
+];
+
+function renderHostInvoicesTable() {
+  const tbody = document.getElementById('host-invoices-table-body');
+  if (!tbody) return;
+
+  tbody.innerHTML = hostInvoices.map(inv => `
+    <tr>
+      <td><strong>#${inv.id}</strong></td>
+      <td>${inv.date}</td>
+      <td><span class="badge-tag" style="background:rgba(59,130,246,0.15); color:#60A5FA;">${inv.issuer}</span></td>
+      <td><strong>${inv.plan}</strong></td>
+      <td><strong style="color:var(--accent-emerald);">${inv.amountStr}</strong></td>
+      <td>
+        <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">
+          <i data-lucide="mail"></i> Sent to ${inv.email}
+        </span>
+      </td>
+      <td>
+        <div style="display:flex; gap:6px;">
+          <button class="btn-primary-sm" onclick="downloadHostInvoicePDF('${inv.id}')" title="Download Invoice PDF">
+            <i data-lucide="download"></i> Invoice PDF
+          </button>
+          <button class="btn-secondary-sm" onclick="resendInvoiceEmail('${inv.id}', '${inv.email}')" title="Resend Email">
+            <i data-lucide="send"></i> Resend Email
+          </button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+
+  lucide.createIcons();
+}
+
+function downloadHostInvoicePDF(invId) {
+  showToast(`📄 Downloading official Tax Invoice #${invId} issued by Ali Turan Inc. (PDF format)...`);
+}
+
+function resendInvoiceEmail(invId, email) {
+  showToast(`📧 Invoice & Payment Receipt #${invId} resent to ${email}!`);
+}
+
 function processLemonSqueezySubscribe() {
   const email = document.getElementById('lemon-email').value;
   const card = document.getElementById('lemon-card').value;
@@ -937,20 +1002,38 @@ function processLemonSqueezySubscribe() {
     hostAuth.cardOnFile = `•••• •••• •••• ${card.slice(-4) || '4242'}`;
     hostAuth.subscriptionStatus = 'subscribed';
     hostAuth.trialDaysLeft = 14;
-    hostAuth.plan = 'Pro Host Plan (0% Platform Commission)';
+    hostAuth.plan = billingCycle === 'annual' ? 'Pro Host Annual Plan ($168/yr - 0% Comm)' : 'Pro Host Monthly Plan ($18/mo - 0% Comm)';
     hostAuth.commissionRate = 0.0;
     currentUserRole = 'host';
+
+    const newInvId = `INV-2026-${Math.floor(8000 + Math.random() * 1000)}`;
+    const isAnnual = billingCycle === 'annual';
+    const amountStr = isAnnual ? '$168.00 / yr' : '$18.00 / mo';
+    const planTitle = isAnnual ? 'Pro Host (Annual Plan - $14/mo rate)' : 'Pro Host (Monthly Plan - $18/mo)';
+
+    hostInvoices.unshift({
+      id: newInvId,
+      date: 'Aug 17, 2026',
+      issuer: 'Ali Turan Inc.',
+      plan: planTitle,
+      amountStr: amountStr,
+      status: 'Paid & Emailed',
+      card: `Visa (${hostAuth.cardOnFile})`,
+      email: email
+    });
 
     updateTopNavAuthUI();
     updateTrialStatusUI();
     renderCommissionAggregator();
+    renderHostInvoicesTable();
     closeModal('modal-lemon-checkout');
     btn.innerHTML = `<i data-lucide="shield-check"></i> Complete 14-Day Free Registration`;
     
     switchView('host');
-    showToast("Upgraded to Pro Host Plan! 0% Platform Commission active.");
+    showToast(`🎉 Subscription Active! Charged ${amountStr}. Tax Invoice #${newInvId} by Ali Turan Inc. sent to ${email}!`);
   }, 1400);
 }
+
 
 // HOST CUSTOM PAYMENT LINK & AUTO TAKE-RATE MANAGEMENT
 function openEditCustomPayLinkModal() {
