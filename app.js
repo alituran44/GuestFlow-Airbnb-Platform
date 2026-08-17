@@ -2694,15 +2694,15 @@ async function fetchLiveWeather(lat = 34.0259, lon = -118.7798) {
       const weatherEl = document.getElementById('live-weather-widget');
       if (weatherEl) {
         weatherEl.innerHTML = `
-          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.2); padding:10px 14px; border-radius:12px; margin-bottom:14px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; background:var(--bg-dark); border:1px solid var(--border-color); padding:10px 14px; border-radius:12px;">
             <div style="display:flex; align-items:center; gap:10px;">
-              <span style="font-size:22px;">🌤️</span>
+              <span style="font-size:20px;">🌤️</span>
               <div>
-                <strong style="font-size:13px; color:var(--text-main);">${tempC}°C / ${tempF}°F — ${weatherText}</strong>
+                <strong style="font-size:12px; color:var(--text-main);">${tempC}°C / ${tempF}°F — ${weatherText}</strong>
                 <div style="font-size:10px; color:var(--text-muted);">Destination Weather • Live Open-Meteo API</div>
               </div>
             </div>
-            <span class="badge-tag" style="background:rgba(16,185,129,0.2); color:var(--accent-emerald); font-size:9px;">● Live API</span>
+            <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald); font-size:9px;">● Live API</span>
           </div>
         `;
       }
