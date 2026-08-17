@@ -1244,7 +1244,7 @@ let properties = [
     wifiName: 'MalibuVilla_5G',
     wifiPass: 'MalibuPass2026!',
     doorPin: '4821',
-    payoutBank: 'Chase Bank (****4821 - USD)',
+    payoutBank: 'Demo Merchant Bank (****4821 - USD)',
     customPayUrl: 'https://buy.stripe.com/malibu_villa_direct',
     heroImg: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
     checkIn: '3:00 PM',
@@ -2142,7 +2142,7 @@ function submitEditPin() {
 
 function openEditBankModal() {
   const prop = getActiveProperty();
-  document.getElementById('edit-bank-name').value = prop.payoutBank || 'Chase Bank (****4821 - USD)';
+  document.getElementById('edit-bank-name').value = prop.payoutBank || 'Demo Merchant Bank (****4821 - USD)';
   document.getElementById('modal-edit-bank').classList.add('active');
 }
 
@@ -2385,7 +2385,7 @@ function loadActivePropertyData() {
   if (hostPropTitle) hostPropTitle.textContent = prop.title;
   if (hostWifiDisplay) hostWifiDisplay.textContent = `${prop.wifiName} (${prop.wifiPass})`;
   if (hostPinDisplay) hostPinDisplay.textContent = prop.doorPin;
-  if (hostBankDisplay) hostBankDisplay.textContent = prop.payoutBank || 'Chase Bank (****4821 - USD)';
+  if (hostBankDisplay) hostBankDisplay.textContent = prop.payoutBank || 'Demo Merchant Bank (****4821 - USD)';
   if (hostCustomLinkDisplay) hostCustomLinkDisplay.textContent = prop.customPayUrl || hostAuth.customPaymentLink;
 
   if (doorPinEl) {
@@ -2494,7 +2494,7 @@ function runAiScrapeSimulator() {
       wifiName: 'OceanEstate_HighSpeed',
       wifiPass: 'MiamiBeach#2026',
       doorPin: '5512',
-      payoutBank: 'Chase Bank (****4821 - USD)',
+      payoutBank: 'Demo Merchant Bank (****4821 - USD)',
       customPayUrl: 'https://buy.stripe.com/miami_horizon_direct',
       heroImg: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
       checkIn: '3:00 PM',
@@ -2588,7 +2588,7 @@ function submitNewProperty() {
     wifiName: wifiName || 'Guest_WiFi_5G',
     wifiPass: 'Welcome2026!',
     doorPin: doorPin || '1234',
-    payoutBank: 'Chase Bank (****4821 - USD)',
+    payoutBank: 'Demo Merchant Bank (****4821 - USD)',
     customPayUrl: 'https://buy.stripe.com/new_property_direct',
     heroImg: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
     checkIn: '3:00 PM',
