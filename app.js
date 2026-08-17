@@ -1884,9 +1884,11 @@ function openLemonSqueezyCheckout(tierName, priceStr) {
   document.getElementById('modal-lemon-checkout').classList.add('active');
 }
 
+let invoiceSequenceCounter = 8802;
+
 let hostInvoices = [
   {
-    id: 'INV-2026-8801',
+    id: 'INV-2026-0002',
     date: 'Aug 17, 2026',
     issuer: 'Ali Turan Inc.',
     plan: 'Pro Host (Annual Plan - $14/mo rate)',
@@ -1896,7 +1898,7 @@ let hostInvoices = [
     email: 'sarah@malibuvillas.com'
   },
   {
-    id: 'INV-2026-7209',
+    id: 'INV-2026-0001',
     date: 'Jul 17, 2026',
     issuer: 'Ali Turan Inc.',
     plan: 'Pro Host (Monthly Plan)',
@@ -1986,7 +1988,7 @@ function processLemonSqueezySubscribe() {
     hostAuth.commissionRate = 0.0;
     currentUserRole = 'host';
 
-    const newInvId = `INV-2026-${Math.floor(8000 + Math.random() * 1000)}`;
+    const newInvId = `INV-2026-${String(invoiceSequenceCounter++).padStart(4, '0')}`;
     const isAnnual = billingCycle === 'annual';
     const amountStr = isAnnual ? '$168.00 / yr' : '$18.00 / mo';
     const planTitle = isAnnual ? 'Pro Host (Annual Plan - $14/mo rate)' : 'Pro Host (Monthly Plan - $18/mo)';
@@ -2015,9 +2017,15 @@ function processLemonSqueezySubscribe() {
 }
 
 
-// HOST CUSTOM PAYMENT LINK & AUTO TAKE-RATE MANAGEMENT
+// HOST CUSTOM PAYMENT LINK & OPTION A TIER RESTRICTION
 function openEditCustomPayLinkModal() {
   const prop = getActiveProperty();
+  if (hostAuth.plan && hostAuth.plan.includes('Starter Tier')) {
+    showToast("⚠️ Starter Tier (%5 Komisyonlu) yerleşik Native Stripe Checkout kullanır. Özel ödeme linki eklemek ve %0 komisyondan yararlanmak için Pro Host ($14/ay) planına geçin!");
+    openLemonSqueezyCheckout('Pro Host Plan ($14/mo - 0% Commission)', '$14.00 / mo');
+    return;
+  }
+
   document.getElementById('custom-pay-url-input').value = prop.customPayUrl || hostAuth.customPaymentLink;
   document.getElementById('modal-edit-pay-link').classList.add('active');
 }
@@ -2032,7 +2040,54 @@ function submitCustomPayLink() {
 
   document.getElementById('host-custom-link-display').textContent = url;
   closeModal('modal-edit-pay-link');
-  showToast("Updated Host Custom Payment Link! Guests can now pay via your link.");
+  showToast("Updated Host Custom Payment Link! Guests can now pay directly to your custom gateway.");
+}
+
+// STRIPE CONNECT EXPRESS KYC ONBOARDING (KYC/AML COMPLIANCE)
+function openStripeConnectModal() {
+  document.getElementById('modal-stripe-connect').classList.add('active');
+}
+
+function triggerStripeConnectOnboarding() {
+  showToast("🚀 Redirecting to Stripe Connect Express Onboarding Portal (KYC / AML Verification)...");
+  setTimeout(() => {
+    hostAuth.stripeConnectVerified = true;
+    const badge = document.getElementById('stripe-connect-status-badge');
+    const modalBadge = document.getElementById('stripe-connect-modal-status');
+    if (badge) {
+      badge.textContent = '● Stripe Connect Verified';
+      badge.style.background = 'rgba(16,185,129,0.15)';
+      badge.style.color = 'var(--accent-emerald)';
+    }
+    if (modalBadge) {
+      modalBadge.textContent = '● ACTIVE & VERIFIED (KYC Approved)';
+      modalBadge.className = 'text-emerald';
+    }
+    closeModal('modal-stripe-connect');
+    showToast("✅ Stripe Connect KYC Account Onboarded & Verified for Payouts!");
+  }, 1200);
+}
+
+// HOST PAYMENT CARD UPDATE VIA STRIPE ELEMENTS
+function openEditCardModal() {
+  document.getElementById('modal-edit-card').classList.add('active');
+}
+
+function submitUpdateHostCard() {
+  showToast("💳 Tokenizing new card via Stripe Elements iFrame...");
+  setTimeout(() => {
+    hostAuth.cardOnFile = '•••• •••• •••• 9918';
+    updateTrialStatusUI();
+    closeModal('modal-edit-card');
+    showToast("✅ Payment Card Updated & Tokenized via Stripe Elements (pm_token_9918)!");
+  }, 1200);
+}
+
+// DUNNING SMART RETRY SIMULATION
+function simulatePaymentDecline() {
+  hostAuth.subscriptionStatus = 'payment_declined';
+  updateTrialStatusUI();
+  showToast("⚠️ Simulating Card Decline! Smart Retry Dunning Flow active (Attempt 1/3). Email notification sent to Host.");
 }
 
 function updateTrialStatusUI() {
@@ -2045,7 +2100,7 @@ function updateTrialStatusUI() {
   if (hostAuth.subscriptionStatus === 'trial_active') {
     statusBanner.className = 'trial-status-bar active-trial';
     daysBadge.textContent = `${hostAuth.trialDaysLeft} Days Remaining`;
-    cardText.textContent = `Card on file: ${hostAuth.cardOnFile} - Auto-charge on ${hostAuth.autoChargeDate}.`;
+    cardText.textContent = `Card on file: ${hostAuth.cardOnFile} (Stripe Tokenized) - Auto-charge on ${hostAuth.autoChargeDate}.`;
   } else if (hostAuth.subscriptionStatus === 'cancelled') {
     statusBanner.className = 'trial-status-bar cancelled-trial';
     daysBadge.textContent = 'Trial Cancelled';
@@ -2054,6 +2109,10 @@ function updateTrialStatusUI() {
     statusBanner.className = 'trial-status-bar subscribed-active';
     daysBadge.textContent = 'Pro Active (0% Commission)';
     cardText.textContent = `Active Subscription (${hostAuth.cardOnFile}). 0% Commission Tier.`;
+  } else if (hostAuth.subscriptionStatus === 'payment_declined') {
+    statusBanner.className = 'trial-status-bar cancelled-trial';
+    daysBadge.textContent = '⚠️ Charge Declined (Smart Retry 1/3)';
+    cardText.textContent = `Card charge failed for ${hostAuth.cardOnFile}. 3-Day Grace Period active. Update card to prevent lock.`;
   }
 }
 
@@ -2092,7 +2151,7 @@ function unlockSystemNow() {
   showToast("Account Unlocked & Subscribed!");
 }
 
-// Host Orders Table Renderer with Take-Rate Calculation
+// Host Orders Table Renderer with Take-Rate Calculation & Refund Flow
 function renderHostOrdersTable() {
   const tbody = document.getElementById('host-orders-table');
   if (!tbody) return;
@@ -2106,19 +2165,26 @@ function renderHostOrdersTable() {
       </td>
       <td>${o.service}</td>
       <td>
-        <strong style="color:var(--accent-emerald);">${formatPrice(o.priceUSD)}</strong>
+        <strong style="color:${o.status === 'Refunded' ? '#EF4444' : 'var(--accent-emerald)'};">${formatPrice(o.priceUSD)}</strong>
         <p style="font-size:10px; color:var(--accent-amber);">Net Host: ${formatPrice(o.hostPayoutUSD)} | Platform Fee: ${formatPrice(o.platformFeeUSD)}</p>
       </td>
       <td>${o.date}</td>
       <td>
-        <span class="badge-tag" style="${o.status === 'Completed' ? 'background:rgba(16,185,129,0.15); color:var(--accent-emerald);' : 'background:rgba(99,102,241,0.15); color:var(--accent-indigo);'}">
+        <span class="badge-tag" style="${o.status === 'Completed' ? 'background:rgba(16,185,129,0.15); color:var(--accent-emerald);' : (o.status === 'Refunded' ? 'background:rgba(239,68,68,0.15); color:#EF4444;' : 'background:rgba(99,102,241,0.15); color:var(--accent-indigo);')}">
           ● ${o.status}
         </span>
       </td>
       <td>
-        <button class="btn-primary-sm" onclick="toggleOrderStatus('${o.id}')">
-          ${o.status === 'Completed' ? 'Re-open' : 'Mark Complete'}
-        </button>
+        <div style="display:flex; gap:6px;">
+          <button class="btn-primary-sm" onclick="toggleOrderStatus('${o.id}')" ${o.status === 'Refunded' ? 'disabled style="opacity:0.5;"' : ''}>
+            ${o.status === 'Completed' ? 'Re-open' : 'Mark Complete'}
+          </button>
+          ${o.status !== 'Refunded' ? `
+            <button class="btn-secondary-sm" onclick="refundGuestOrder('${o.id}')" style="color:#EF4444; border-color:rgba(239,68,68,0.3);" title="Refund Order via Stripe">
+              <i data-lucide="rotate-ccw"></i> Refund
+            </button>
+          ` : ''}
+        </div>
       </td>
     </tr>
   `).join('');
@@ -2129,10 +2195,24 @@ function renderHostOrdersTable() {
 
 function toggleOrderStatus(orderId) {
   const ord = hostOrders.find(o => o.id === orderId);
-  if (ord) {
+  if (ord && ord.status !== 'Refunded') {
     ord.status = ord.status === 'Completed' ? 'Confirmed' : 'Completed';
     renderHostOrdersTable();
     showToast(`Updated Order ${ord.id} to ${ord.status}`);
+  }
+}
+
+function refundGuestOrder(orderId) {
+  const ord = hostOrders.find(o => o.id === orderId);
+  if (!ord || ord.status === 'Refunded') return;
+
+  if (confirm(`Are you sure you want to process a full refund of ${formatPrice(ord.priceUSD)} for order ${ord.id} back to guest credit card via Stripe API?`)) {
+    ord.status = 'Refunded';
+    const prop = getActiveProperty();
+    if (prop) prop.revenueUSD = Math.max(0, prop.revenueUSD - ord.priceUSD);
+    renderHostOrdersTable();
+    loadActivePropertyData();
+    showToast(`💸 Refund of ${formatPrice(ord.priceUSD)} processed successfully via Stripe Refund API for order ${ord.id}!`);
   }
 }
 

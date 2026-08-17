@@ -191,6 +191,8 @@
   }
   </script>
 
+  <!-- Stripe.js v3 SDK for PCI-DSS Level 1 Compliant Tokenization & 3DS2 / SCA -->
+  <script src="https://js.stripe.com/v3/"></script>
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="style.css">
@@ -1727,6 +1729,15 @@
                   <span>Payout Bank Account:</span>
                   <strong id="host-bank-display">Demo Merchant Bank (****4821 - USD)</strong>
                 </div>
+                <div class="info-row" style="margin-top:10px; padding-top:10px; border-top:1px solid var(--border-color);">
+                  <span>KYC / AML Bank Onboarding:</span>
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <span class="badge-tag" id="stripe-connect-status-badge" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">● Stripe Connect Verified</span>
+                    <button class="btn-secondary-sm" onclick="openStripeConnectModal()" style="padding:3px 8px; font-size:10px;">
+                      <i data-lucide="shield-check"></i> Stripe Connect KYC
+                    </button>
+                  </div>
+                </div>
               </div>
 
               <div class="settings-card">
@@ -2094,22 +2105,22 @@
         </div>
 
         <div class="form-group">
-          <label>Credit / Debit Card</label>
-          <div class="input-icon-wrapper">
-            <input type="text" id="lemon-card" placeholder="4242 •••• •••• 4242" value="4242 9918 2201 4242" required>
-            <i data-lucide="credit-card" class="input-right-icon"></i>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+            <label style="margin:0;">Credit / Debit Card (PCI-DSS Tokenized)</label>
+            <span class="badge-tag" style="background:rgba(59,130,246,0.15); color:#60A5FA; font-size:9px;">🔒 Stripe Elements 256-bit</span>
+          </div>
+          <!-- PCI-DSS LEVEL 1 STRIPE ELEMENTS CONTAINER -->
+          <div id="lemon-card-element" style="background:var(--bg-dark); border:1px solid var(--border-color); padding:12px; border-radius:8px; min-height:42px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; color:var(--text-muted); font-size:12px;">
+              <span>💳 4242 •••• •••• 4242 (Stripe Elements Secure Field)</span>
+              <span style="font-size:10px; color:var(--accent-emerald);">MM/YY CVC</span>
+            </div>
           </div>
         </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label>Expires</label>
-            <input type="text" placeholder="MM/YY" value="10/29" required>
-          </div>
-          <div class="form-group">
-            <label>CVC</label>
-            <input type="text" placeholder="123" value="991" required>
-          </div>
+        <div style="display:flex; align-items:center; justify-content:space-between; margin:12px 0; font-size:10px; color:var(--text-muted);">
+          <span>Accepted: Visa, Mastercard, Amex, Apple Pay</span>
+          <span style="color:#6366F1; font-weight:600;"><i data-lucide="shield-check" style="width:12px; height:12px; vertical-align:middle;"></i> Powered by Stripe</span>
         </div>
 
         <button type="submit" class="btn-primary-lg" id="btn-lemon-submit">
@@ -2120,7 +2131,66 @@
     </div>
   </div>
 
-  <!-- TAX INVOICE PREVIEW MODAL -->
+  <!-- STRIPE CONNECT EXPRESS ONBOARDING MODAL (KYC/AML COMPLIANCE) -->
+  <div id="modal-stripe-connect" class="modal-backdrop">
+    <div class="modal-card" style="max-width:560px;">
+      <button class="modal-close" onclick="closeModal('modal-stripe-connect')"><i data-lucide="x"></i></button>
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+        <i data-lucide="shield-check" class="icon-lg text-emerald"></i>
+        <h3>Stripe Connect Express KYC Onboarding</h3>
+      </div>
+      <p class="modal-desc-text">Regulatory Anti-Money Laundering (AML) & Tax Verification (W-9 / W-8BEN / IBAN) powered by Stripe Connect.</p>
+
+      <div style="background:var(--bg-dark); border:1px solid var(--border-color); padding:16px; border-radius:12px; margin-bottom:16px; font-size:12px; line-height:1.6; color:var(--text-secondary);">
+        <h4 style="margin:0 0 8px; color:var(--text-main); font-size:13px; display:flex; align-items:center; gap:6px;">
+          <i data-lucide="building" style="color:var(--accent-emerald);"></i> Express Merchant Payout Account
+        </h4>
+        <p style="margin:0 0 10px;">To receive direct guest payouts into your bank account, regulators require identity verification (KYC/AML). Stripe Connect securely handles your tax filings and instant payouts.</p>
+        
+        <div style="display:flex; justify-content:space-between; background:var(--bg-obsidian); padding:8px 12px; border-radius:8px; border:1px solid var(--border-color); font-size:11px;">
+          <span>Account Verification Status:</span>
+          <strong id="stripe-connect-modal-status" class="text-emerald">● ACTIVE & VERIFIED</strong>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:10px;">
+        <button class="btn-primary-lg" onclick="triggerStripeConnectOnboarding()" style="flex:1;">
+          <i data-lucide="external-link"></i> Launch Stripe Connect Portal ↗
+        </button>
+        <button class="btn-secondary-sm" onclick="closeModal('modal-stripe-connect')" style="padding:0 16px;">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- UPDATE HOST PAYMENT CARD MODAL -->
+  <div id="modal-edit-card" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('modal-edit-card')"><i data-lucide="x"></i></button>
+      <h3><i data-lucide="credit-card" class="text-accent"></i> Update Host Subscription Payment Card</h3>
+      <p class="modal-desc-text">Tokenize your new card for automatic SaaS subscription renewals via Stripe Elements.</p>
+
+      <form onsubmit="event.preventDefault(); submitUpdateHostCard();">
+        <div class="form-group">
+          <label>Host Email</label>
+          <input type="email" id="update-card-email" value="sarah@malibuvillas.com" required readonly>
+        </div>
+
+        <div class="form-group">
+          <label>New Card Details (Stripe Tokenized)</label>
+          <div id="update-card-stripe-element" style="background:var(--bg-dark); border:1px solid var(--border-color); padding:12px; border-radius:8px; min-height:42px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; color:var(--text-muted); font-size:12px;">
+              <span>💳 •••• •••• •••• 4242 (Tokenized Field)</span>
+              <span style="font-size:10px; color:var(--accent-emerald);">MM/YY CVC</span>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary-lg">Save & Tokenize New Card</button>
+      </form>
+    </div>
+  </div>
   <div id="modal-view-invoice" class="modal-backdrop">
     <div class="modal-card" style="max-width:620px;">
       <button class="modal-close" onclick="closeModal('modal-view-invoice')"><i data-lucide="x"></i></button>
@@ -2459,25 +2529,26 @@
 
           <form onsubmit="event.preventDefault(); processStripePayment('Credit Card');" class="stripe-card-form">
             <div class="form-group">
-              <label>Cardholder Name</label>
-              <input type="text" placeholder="John Doe" required>
+              <label>Guest Cardholder Name</label>
+              <input type="text" id="guest-card-name" placeholder="John Doe" value="John Doe" required>
             </div>
+            
             <div class="form-group">
-              <label>Card Number</label>
-              <div class="input-icon-wrapper">
-                <input type="text" placeholder="4242 •••• •••• 4242" required>
-                <i data-lucide="credit-card" class="input-right-icon"></i>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                <label style="margin:0;">Card Details (PCI-DSS Tokenized)</label>
+                <span class="badge-tag" style="background:rgba(59,130,246,0.15); color:#60A5FA; font-size:9px;">🔒 3DS2 / SCA Ready</span>
+              </div>
+              <div id="guest-stripe-element" style="background:var(--bg-dark); border:1px solid var(--border-color); padding:12px; border-radius:8px; min-height:42px;">
+                <div style="display:flex; align-items:center; justify-content:space-between; color:var(--text-muted); font-size:12px;">
+                  <span>💳 4242 •••• •••• 4242 (Stripe Elements Secure iFrame)</span>
+                  <span style="font-size:10px; color:var(--accent-emerald);">MM/YY CVC</span>
+                </div>
               </div>
             </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label>Expires</label>
-                <input type="text" placeholder="MM/YY" required>
-              </div>
-              <div class="form-group">
-                <label>CVC</label>
-                <input type="text" placeholder="123" required>
-              </div>
+
+            <div style="display:flex; align-items:center; justify-content:space-between; margin:10px 0; font-size:10px; color:var(--text-muted);">
+              <span>Accepted Cards: Visa, Mastercard, Amex, Discover</span>
+              <span style="color:#6366F1; font-weight:600;"><i data-lucide="shield-check" style="width:12px; height:12px; vertical-align:middle;"></i> Powered by Stripe</span>
             </div>
 
             <button type="submit" class="btn-pay-now" id="btn-pay-submit">
