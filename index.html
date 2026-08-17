@@ -945,6 +945,19 @@
                   <span>Check-out: 11:00 AM</span>
                 </div>
               </div>
+          </div>
+
+          <!-- LIVE DESTINATION WEATHER WIDGET (POWERED BY OPEN-METEO PUBLIC API) -->
+          <div id="live-weather-widget">
+            <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.2); padding:10px 14px; border-radius:12px; margin-bottom:14px;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-size:18px;">🌤️</span>
+                <div>
+                  <strong style="font-size:12px; color:var(--text-main);">Fetching Live Weather...</strong>
+                  <div style="font-size:10px; color:var(--text-muted);">Open-Meteo API Sync</div>
+                </div>
+              </div>
+              <span class="badge-tag" style="background:rgba(16,185,129,0.2); color:var(--accent-emerald); font-size:9px;">● Live API</span>
             </div>
           </div>
 
@@ -1053,6 +1066,9 @@
               <div class="local-spots-list" id="local-spots-container">
                 <!-- Dynamically Populated by JS -->
               </div>
+
+              <!-- LIVE PUBLIC HOLIDAYS & EVENTS WIDGET (NAGER.DATE PUBLIC API) -->
+              <div id="local-holidays-widget"></div>
             </div>
           </div>
 

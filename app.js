@@ -1323,8 +1323,14 @@ document.addEventListener('DOMContentLoaded', () => {
   updateRoiCalculator(3);
   updateTopNavAuthUI();
   
-  // Fetch live real-time daily currency exchange rates from API
+  // Fetch live real-time daily currency exchange rates from Open-Exchange-Rates API
   fetchLiveExchangeRates();
+
+  // Fetch live destination weather from Open-Meteo Public API
+  fetchLiveWeather();
+
+  // Fetch live local events & public holidays from Nager.Date Public API
+  fetchLocalHolidays();
 
   // Register PWA Service Worker
   if ('serviceWorker' in navigator) {
@@ -2428,6 +2434,15 @@ function loadActivePropertyData() {
   renderLocalSpots('all');
   renderHostServicesTable();
 
+  // Update Live API Widgets (Weather & Local Holidays) for active property
+  let propLat = 34.0259, propLon = -118.7798, propCountry = 'US';
+  if (prop.id === 'prop-miami') { propLat = 25.7617; propLon = -80.1918; propCountry = 'US'; }
+  else if (prop.id === 'prop-tokyo') { propLat = 35.6762; propLon = 139.6503; propCountry = 'JP'; }
+  else if (prop.id === 'prop-santorini') { propLat = 36.3932; propLon = 25.4615; propCountry = 'GR'; }
+  
+  fetchLiveWeather(propLat, propLon);
+  fetchLocalHolidays(propCountry);
+
   document.getElementById('metric-revenue').textContent = formatPrice(prop.revenueUSD);
   document.getElementById('metric-views').textContent = `${prop.views} views`;
   document.getElementById('metric-orders').textContent = `${prop.completedOrders} orders`;
@@ -2658,6 +2673,76 @@ async function fetchLiveExchangeRates() {
     }
   } catch (err) {
     console.warn('⚠️ Using fallback daily exchange rates:', err);
+  }
+}
+
+// FETCH LIVE DESTINATION WEATHER FROM OPEN-METEO PUBLIC API
+async function fetchLiveWeather(lat = 34.0259, lon = -118.7798) {
+  try {
+    const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
+    if (!res.ok) return;
+    const data = await res.json();
+    if (data && data.current_weather) {
+      const tempC = Math.round(data.current_weather.temperature);
+      const tempF = Math.round((tempC * 9/5) + 32);
+      const code = data.current_weather.weathercode;
+      let weatherText = 'Sunny & Clear ☀️';
+      if (code >= 1 && code <= 3) weatherText = 'Partly Cloudy ⛅';
+      else if (code >= 45 && code <= 48) weatherText = 'Foggy 🌫️';
+      else if (code >= 51 && code <= 80) weatherText = 'Light Rain 🌧️';
+
+      const weatherEl = document.getElementById('live-weather-widget');
+      if (weatherEl) {
+        weatherEl.innerHTML = `
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.2); padding:10px 14px; border-radius:12px; margin-bottom:14px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span style="font-size:22px;">🌤️</span>
+              <div>
+                <strong style="font-size:13px; color:var(--text-main);">${tempC}°C / ${tempF}°F — ${weatherText}</strong>
+                <div style="font-size:10px; color:var(--text-muted);">Destination Weather • Live Open-Meteo API</div>
+              </div>
+            </div>
+            <span class="badge-tag" style="background:rgba(16,185,129,0.2); color:var(--accent-emerald); font-size:9px;">● Live API</span>
+          </div>
+        `;
+      }
+    }
+  } catch(err) {
+    console.warn('Weather API fallback:', err);
+  }
+}
+
+// FETCH LIVE PUBLIC HOLIDAYS & LOCAL EVENTS FROM NAGER.DATE PUBLIC API
+async function fetchLocalHolidays(countryCode = 'US') {
+  try {
+    const year = new Date().getFullYear();
+    const res = await fetch(`https://date.nager.at/api/v3/publicholidays/${year}/${countryCode}`);
+    if (!res.ok) return;
+    const data = await res.json();
+    if (Array.isArray(data) && data.length > 0) {
+      const container = document.getElementById('local-holidays-widget');
+      if (container) {
+        const upcoming = data.slice(0, 3);
+        container.innerHTML = `
+          <div style="background:var(--bg-obsidian); border:1px solid var(--border-color); padding:14px; border-radius:12px; margin-top:16px;">
+            <h4 style="font-size:12px; color:var(--accent-indigo); margin-bottom:10px; display:flex; align-items:center; justify-content:space-between;">
+              <span>🎉 Local Holidays & Event Highlights</span>
+              <span style="font-size:9px; color:var(--text-muted);">Nager.Date API</span>
+            </h4>
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              ${upcoming.map(h => `
+                <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px; color:var(--text-secondary); background:var(--bg-dark); padding:8px 10px; border-radius:8px; border:1px solid var(--border-color);">
+                  <span><strong>${h.localName}</strong> (${h.name})</span>
+                  <span class="badge-tag" style="font-size:9px; background:rgba(99,102,241,0.15); color:var(--accent-indigo);">${h.date}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+    }
+  } catch(err) {
+    console.warn('Holidays API fallback:', err);
   }
 }
 
