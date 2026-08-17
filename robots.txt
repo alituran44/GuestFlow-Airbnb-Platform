@@ -1,0 +1,12 @@
+# HostifyOS - The Modern Hosting OS & High-Converting Sales Funnel
+# Website: https://guestflow-airbnb-platform.vercel.app
+
+User-agent: *
+Allow: /
+Disallow: /admin
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: https://guestflow-airbnb-platform.vercel.app/sitemap.xml

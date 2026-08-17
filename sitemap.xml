@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <url>
+    <loc>https://guestflow-airbnb-platform.vercel.app/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    
+    <!-- Multi-Language Hreflang Alternates -->
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://guestflow-airbnb-platform.vercel.app/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://guestflow-airbnb-platform.vercel.app/?lang=EN" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://guestflow-airbnb-platform.vercel.app/?lang=TR" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://guestflow-airbnb-platform.vercel.app/?lang=ES" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://guestflow-airbnb-platform.vercel.app/?lang=FR" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://guestflow-airbnb-platform.vercel.app/?lang=DE" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://guestflow-airbnb-platform.vercel.app/?lang=IT" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://guestflow-airbnb-platform.vercel.app/?lang=PT" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://guestflow-airbnb-platform.vercel.app/?lang=JA" />
+    
+    <!-- Visual Brand Image -->
+    <image:image>
+      <image:loc>https://guestflow-airbnb-platform.vercel.app/brand_logo.jpg</image:loc>
+      <image:title>HostifyOS Brand Emblem</image:title>
+      <image:caption>The Modern Hosting OS &amp; Automated Short-Term Rental Revenue Engine</image:caption>
+    </image:image>
+  </url>
+  
+</urlset>
