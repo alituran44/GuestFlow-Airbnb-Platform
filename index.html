@@ -25,10 +25,8 @@
   <link rel="alternate" hreflang="ja" href="https://guestflow-airbnb-platform.vercel.app/?lang=JA" />
 
   <!-- GEO & Localized Targeting Metadata -->
-  <meta name="geo.region" content="US-CA">
-  <meta name="geo.placename" content="Global Host Operating Network">
-  <meta name="geo.position" content="37.7749;-122.4194">
-  <meta name="ICBM" content="37.7749, -122.4194">
+  <meta name="geo.region" content="Global">
+  <meta name="geo.placename" content="Ali Turan Inc. Global Hosting Network">
 
   <!-- Open Graph / Facebook / LinkedIn Social Meta Tags -->
   <meta property="og:type" content="website">
@@ -2827,6 +2825,119 @@
     </div>
   </footer>
 
+
+  <!-- GDPR COOKIE CONSENT BANNER -->
+  <div id="cookie-consent-banner" style="position:fixed; bottom:0; left:0; right:0; background:var(--bg-card); border-top:1px solid var(--border-color); padding:16px 24px; z-index:99999; display:flex; align-items:center; justify-content:space-between; gap:20px; box-shadow:0 -10px 30px rgba(0,0,0,0.5);">
+    <div style="display:flex; align-items:center; gap:14px; max-width:760px;">
+      <div style="width:40px; height:40px; border-radius:10px; background:rgba(99,102,241,0.15); display:flex; align-items:center; justify-content:center; color:var(--accent-indigo); flex-shrink:0;">
+        <i data-lucide="cookie" style="width:20px; height:20px;"></i>
+      </div>
+      <div style="font-size:12px; line-height:1.5; color:var(--text-secondary);">
+        <strong style="color:var(--text-main); font-size:13px; display:block; margin-bottom:2px;">GDPR & ePrivacy Cookie Choices</strong>
+        We use essential cookies to operate HostifyOS and optional analytics cookies to improve platform stability. You have full control over your privacy under GDPR/CCPA.
+      </div>
+    </div>
+    <div style="display:flex; gap:10px; flex-shrink:0;">
+      <button class="btn-secondary-sm" onclick="acceptCookieChoice('essential')" style="padding:8px 14px; font-size:12px;">Decline Non-Essential</button>
+      <button class="btn-secondary-sm" onclick="openModal('modal-cookie-settings')" style="padding:8px 12px; font-size:12px;">Preferences</button>
+      <button class="btn-primary-sm" onclick="acceptCookieChoice('all')" style="padding:8px 16px; font-size:12px;">Accept All Cookies</button>
+    </div>
+  </div>
+
+  <!-- COOKIE PREFERENCES MODAL -->
+  <div id="modal-cookie-settings" class="modal-backdrop">
+    <div class="modal-card" style="max-width:500px;">
+      <button class="modal-close" onclick="closeModal('modal-cookie-settings')"><i data-lucide="x"></i></button>
+      <h3><i data-lucide="cookie" class="text-accent"></i> Cookie & Privacy Preferences</h3>
+      <p class="modal-desc-text">Manage your granular consent for data storage under GDPR & CCPA.</p>
+
+      <div style="display:flex; flex-direction:column; gap:12px; margin:16px 0;">
+        <div style="background:var(--bg-dark); border:1px solid var(--border-color); padding:12px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <strong style="font-size:12px; color:var(--text-main);">Essential System Cookies</strong>
+            <p style="font-size:11px; color:var(--text-muted); margin:2px 0 0;">Required for host authentication, Stripe Elements & door PIN encryption.</p>
+          </div>
+          <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald); font-size:10px;">Always Active</span>
+        </div>
+
+        <div style="background:var(--bg-dark); border:1px solid var(--border-color); padding:12px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <strong style="font-size:12px; color:var(--text-main);">Performance & Analytics Cookies</strong>
+            <p style="font-size:11px; color:var(--text-muted); margin:2px 0 0;">Help us monitor uptime performance & guidebook open rates.</p>
+          </div>
+          <input type="checkbox" id="cookie-opt-analytics" checked style="width:18px; height:18px; accent-color:var(--accent-indigo);">
+        </div>
+      </div>
+
+      <div style="display:flex; gap:10px;">
+        <button class="btn-primary-lg" onclick="saveCookiePreferences()">Save Preferences</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUPER ADMIN MAKER-CHECKER (DOUBLE APPROVAL) MODAL -->
+  <div id="modal-admin-double-approve" class="modal-backdrop">
+    <div class="modal-card" style="max-width:520px;">
+      <button class="modal-close" onclick="closeModal('modal-admin-double-approve')"><i data-lucide="x"></i></button>
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+        <div style="width:42px; height:42px; border-radius:10px; background:rgba(239,68,68,0.15); display:flex; align-items:center; justify-content:center; color:#EF4444;">
+          <i data-lucide="alert-triangle" style="width:22px; height:22px;"></i>
+        </div>
+        <div>
+          <h3 style="margin:0;">High-Impact Financial Double Approval</h3>
+          <span class="badge-tag" style="background:rgba(239,68,68,0.15); color:#EF4444; font-size:9px;">Maker-Checker 4-Eyes Principle</span>
+        </div>
+      </div>
+      <p class="modal-desc-text" style="font-size:12px;">This critical financial action impacts platform revenue and host accounts. Dual authorization required.</p>
+
+      <div style="background:var(--bg-dark); border:1px solid var(--border-color); padding:14px; border-radius:10px; margin-bottom:14px; font-size:12px; line-height:1.6; color:var(--text-secondary);">
+        <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+          <span>Action Title:</span>
+          <strong id="approve-action-title" style="color:var(--text-main);">Master Fee Sweep / Rate Change</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+          <span>Affected Host Portfolio:</span>
+          <strong id="approve-action-impact" class="text-accent">1,420 Host Accounts ($4,820.00 Total)</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between;">
+          <span>Initiator Admin:</span>
+          <strong id="approve-action-admin">admin@hostifyos.com</strong>
+        </div>
+      </div>
+
+      <form onsubmit="event.preventDefault(); executeDoubleApprovedAction();">
+        <div class="form-group">
+          <label>Enter Master Security Key to Authorize (`CONFIRM-SWEEP-2026`):</label>
+          <input type="text" id="approve-security-key" placeholder="CONFIRM-SWEEP-2026" required style="font-family:var(--font-mono); text-align:center; font-weight:700;">
+        </div>
+        <button type="submit" class="btn-primary-lg" style="background:#EF4444; border-color:#EF4444;">
+          <i data-lucide="shield-alert"></i> Authorize & Log to Immutable Audit Log
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- EMAIL VERIFICATION OTP MODAL -->
+  <div id="modal-email-verify" class="modal-backdrop">
+    <div class="modal-card" style="max-width:440px; text-align:center;">
+      <button class="modal-close" onclick="closeModal('modal-email-verify')"><i data-lucide="x"></i></button>
+      <div style="width:48px; height:48px; border-radius:12px; background:rgba(16,185,129,0.15); display:inline-flex; align-items:center; justify-content:center; color:var(--accent-emerald); margin-bottom:8px;">
+        <i data-lucide="mail-check" style="width:24px; height:24px;"></i>
+      </div>
+      <h3 style="margin:0 0 4px;">Verify Your Host Email</h3>
+      <p class="modal-desc-text" style="font-size:11px;">We sent a 6-digit verification OTP code to <strong id="verify-email-target" class="text-accent">sarah@malibuvillas.com</strong>.</p>
+
+      <form onsubmit="event.preventDefault(); submitEmailOTPVerification();" style="margin-top:14px;">
+        <div class="form-group">
+          <input type="text" id="input-email-otp" placeholder="884920" maxlength="6" style="text-align:center; font-size:22px; letter-spacing:6px; font-family:var(--font-mono); font-weight:700; color:var(--accent-emerald);" required>
+        </div>
+        <button type="button" class="btn-secondary-sm" onclick="autofillDemoOTP()" style="width:100%; margin-bottom:12px; font-size:10px; color:var(--accent-emerald); border-color:rgba(16,185,129,0.3);">
+          ⚡ Click to Autofill Demo OTP (884920)
+        </button>
+        <button type="submit" class="btn-primary-lg">Confirm Email & Unlock Account</button>
+      </form>
+    </div>
+  </div>
 
   <!-- Toast Notification Bar -->
   <div id="toast-notification" class="toast-bar">

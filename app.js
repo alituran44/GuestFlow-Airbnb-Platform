@@ -1248,10 +1248,11 @@ let hostOrders = [
     guest: 'Alexander Wright', 
     property: 'Malibu Beachfront Villa & Suite', 
     service: 'VIP Airport Shuttle', 
-    date: 'Aug 18, 2026', 
+    date: 'Aug 17, 2026', 
     priceUSD: 75.0, 
     hostPayoutUSD: 71.25,
     platformFeeUSD: 3.75,
+    commissionRateAtPurchase: 0.05,
     status: 'Confirmed', 
     payMethod: 'Card Checkout' 
   },
@@ -1260,12 +1261,33 @@ let hostOrders = [
     guest: 'Sophia Martinez', 
     property: 'Malibu Beachfront Villa & Suite', 
     service: 'Late Check-out (2:00 PM)', 
-    date: 'Aug 19, 2026', 
+    date: 'Aug 16, 2026', 
     priceUSD: 45.0, 
     hostPayoutUSD: 42.75,
     platformFeeUSD: 2.25,
+    commissionRateAtPurchase: 0.05,
     status: 'Completed', 
     payMethod: 'Custom Host Link' 
+  }
+];
+
+// IMMUTABLE APPEND-ONLY AUDIT LOG DATA MODEL
+let adminAuditLogs = [
+  {
+    id: 'AUD-9901',
+    timestamp: 'Aug 17, 2026 14:22 UTC',
+    admin: 'admin@hostifyos.com',
+    action: 'Stripe Connect Express KYC Verification',
+    details: 'Verified Merchant Account for Sarah Miller (Malibu Beachfront Villa)',
+    status: 'AUTHENTICATED'
+  },
+  {
+    id: 'AUD-9902',
+    timestamp: 'Aug 17, 2026 16:45 UTC',
+    admin: 'admin@hostifyos.com',
+    action: 'SaaS Plan Upgrade (Pro Host)',
+    details: 'Upgraded Sarah Miller to Pro Host Plan ($14/mo - 0% Commission)',
+    status: 'AUTHENTICATED'
   }
 ];
 
@@ -1352,11 +1374,13 @@ document.addEventListener('DOMContentLoaded', () => {
   renderHostOrdersTable();
   renderCommissionAggregator();
   renderAdminHostsTable();
+  renderAdminAuditLogsTable();
   renderHostInvoicesTable();
   updateTrialStatusUI();
 
   updateRoiCalculator(3);
   updateTopNavAuthUI();
+  checkCookieConsentOnLoad();
   
   // Fetch live real-time daily currency exchange rates from Open-Exchange-Rates API
   fetchLiveExchangeRates();
@@ -1852,19 +1876,143 @@ function adminActionUpgradeHost(hostId) {
   }
 }
 
+let pendingAdminAction = null;
+
+function renderAdminAuditLogsTable() {
+  const tbody = document.getElementById('admin-audit-logs-table-body');
+  if (!tbody) return;
+
+  tbody.innerHTML = adminAuditLogs.map(log => `
+    <tr>
+      <td><strong>#${log.id}</strong></td>
+      <td>${log.timestamp}</td>
+      <td><span class="badge-tag" style="background:rgba(245,158,11,0.15); color:var(--accent-amber);">${log.admin}</span></td>
+      <td><strong>${log.action}</strong></td>
+      <td><span style="font-size:11px; color:var(--text-muted);">${log.details}</span></td>
+      <td>
+        <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">
+          ● ${log.status}
+        </span>
+      </td>
+    </tr>
+  `).join('');
+  lucide.createIcons();
+}
+
 function changeGlobalCommissionRate(newRate) {
   const ratePct = (parseFloat(newRate) * 100).toFixed(1);
-  hostAuth.commissionRate = parseFloat(newRate);
-  renderCommissionAggregator();
-  showToast(`Global Default Platform Commission updated to ${ratePct}%!`);
+  pendingAdminAction = {
+    type: 'rate_change',
+    value: newRate,
+    title: `Change Global Default Commission to ${ratePct}%`,
+    impact: `Affects all 1,420 Host Accounts & future guest checkout splits`
+  };
+
+  document.getElementById('approve-action-title').textContent = pendingAdminAction.title;
+  document.getElementById('approve-action-impact').textContent = pendingAdminAction.impact;
+  document.getElementById('modal-admin-double-approve').classList.add('active');
 }
 
 function triggerGlobalFeeSweep() {
-  showToast("Master Sweep Triggered: $4,820.00 in platform fees swept across all 1,420 host accounts!");
+  pendingAdminAction = {
+    type: 'fee_sweep',
+    value: null,
+    title: 'Sweep All Platform Commissions to Master Account',
+    impact: '1,420 Host Accounts ($4,820.00 Total Swept)'
+  };
+
+  document.getElementById('approve-action-title').textContent = pendingAdminAction.title;
+  document.getElementById('approve-action-impact').textContent = pendingAdminAction.impact;
+  document.getElementById('modal-admin-double-approve').classList.add('active');
+}
+
+function executeDoubleApprovedAction() {
+  const key = document.getElementById('approve-security-key').value;
+  if (key !== 'CONFIRM-SWEEP-2026') {
+    showToast("⚠️ Invalid Security Key! Master dual-authorization failed.");
+    return;
+  }
+
+  if (!pendingAdminAction) return;
+
+  if (pendingAdminAction.type === 'rate_change') {
+    hostAuth.commissionRate = parseFloat(pendingAdminAction.value);
+    renderCommissionAggregator();
+
+    adminAuditLogs.unshift({
+      id: `AUD-${Math.floor(9900 + Math.random() * 100)}`,
+      timestamp: new Date().toUTCString().slice(5, 22),
+      admin: adminAuth.email || 'admin@hostifyos.com',
+      action: 'Global Commission Rate Change',
+      details: pendingAdminAction.title,
+      status: 'DOUBLE_APPROVED'
+    });
+
+    showToast(`✅ Dual Authorized: Global Default Platform Commission updated to ${(hostAuth.commissionRate * 100).toFixed(1)}%!`);
+  } else if (pendingAdminAction.type === 'fee_sweep') {
+    adminAuditLogs.unshift({
+      id: `AUD-${Math.floor(9900 + Math.random() * 100)}`,
+      timestamp: new Date().toUTCString().slice(5, 22),
+      admin: adminAuth.email || 'admin@hostifyos.com',
+      action: 'Master Platform Fee Sweep',
+      details: 'Swept $4,820.00 across 1,420 Host Accounts into Master Account',
+      status: 'DOUBLE_APPROVED'
+    });
+
+    showToast("✅ Dual Authorized: $4,820.00 in platform fees swept across all host accounts into Master Account!");
+  }
+
+  renderAdminAuditLogsTable();
+  closeModal('modal-admin-double-approve');
+  pendingAdminAction = null;
 }
 
 function downloadAdminMasterReport() {
   showToast("Exporting Master Platform Report (CSV) containing all host accounts & SaaS billing histories...");
+}
+
+// GDPR COOKIE CONSENT BANNER LOGIC
+function checkCookieConsentOnLoad() {
+  const consent = localStorage.getItem('hostifyos_cookie_consent');
+  const banner = document.getElementById('cookie-consent-banner');
+  if (consent && banner) {
+    banner.style.display = 'none';
+  }
+}
+
+function acceptCookieChoice(choice) {
+  localStorage.setItem('hostifyos_cookie_consent', choice);
+  const banner = document.getElementById('cookie-consent-banner');
+  if (banner) banner.style.display = 'none';
+  showToast(choice === 'all' ? '🍪 Accepted all cookies (GDPR Compliant)' : '🔒 Non-essential cookies declined');
+}
+
+function saveCookiePreferences() {
+  const analytics = document.getElementById('cookie-opt-analytics') ? document.getElementById('cookie-opt-analytics').checked : false;
+  localStorage.setItem('hostifyos_cookie_consent', analytics ? 'all' : 'essential');
+  closeModal('modal-cookie-settings');
+  const banner = document.getElementById('cookie-consent-banner');
+  if (banner) banner.style.display = 'none';
+  showToast('🔒 Cookie preferences saved securely under GDPR!');
+}
+
+// HOST EMAIL VERIFICATION OTP FLOW
+function autofillDemoOTP() {
+  const input = document.getElementById('input-email-otp');
+  if (input) input.value = '884920';
+  showToast("⚡ Demo Email Verification OTP (884920) filled!");
+}
+
+function submitEmailOTPVerification() {
+  const otp = document.getElementById('input-email-otp').value;
+  if (otp !== '884920') {
+    showToast("⚠️ Invalid OTP code! Please use demo OTP 884920.");
+    return;
+  }
+
+  hostAuth.isEmailVerified = true;
+  closeModal('modal-email-verify');
+  showToast("✅ Email Address Verified! Full Account Access & Tax Invoicing Enabled.");
 }
 
 // HOST TAB SWITCHER (FAIL-SAFE FIXED)
