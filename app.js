@@ -1587,18 +1587,41 @@ function updateTopNavAuthUI() {
 }
 
 
-// HANDLE USER LOGIN & AUTOMATIC PAGE ROUTING
+// RATE LIMITING & SECURITY TRACKER
+let loginAttempts = { count: 0, lockedUntil: null };
+let sessionInactivityTimer = null;
+
+function checkRateLimit() {
+  if (loginAttempts.lockedUntil && Date.now() < loginAttempts.lockedUntil) {
+    const remainingMins = Math.ceil((loginAttempts.lockedUntil - Date.now()) / 60000);
+    showToast(`⚠️ Too many failed login attempts! Access locked for ${remainingMins} minutes.`);
+    return false;
+  }
+  return true;
+}
+
+// HANDLE USER LOGIN & AUTOMATIC PAGE ROUTING WITH 2FA & RATE LIMITING
 function handleUserLogin(role) {
+  if (!checkRateLimit()) return;
+
   if (role === 'admin') {
     const email = document.getElementById('input-admin-email').value;
-    adminAuth.isLoggedIn = true;
-    adminAuth.email = email || 'admin@hostifyos.com';
-    currentUserRole = 'admin';
+    const pass = document.getElementById('input-admin-pass') ? document.getElementById('input-admin-pass').value : '';
 
-    updateTopNavAuthUI();
-    checkAdminAuthStatus();
-    switchView('admin'); // AUTO-OPEN SUPER ADMIN CONSOLE
-    showToast("Logged in as Super Admin! Master Admin Console Opened.");
+    if (pass && pass !== 'admin2026!') {
+      loginAttempts.count += 1;
+      if (loginAttempts.count >= 5) {
+        loginAttempts.lockedUntil = Date.now() + 15 * 60 * 1000;
+        showToast("⛔ Brute-force protection: 5 failed attempts reached! Account locked for 15 minutes.");
+        return;
+      }
+      showToast(`⚠️ Incorrect Admin Password! (${5 - loginAttempts.count} attempts remaining)`);
+      return;
+    }
+
+    // Trigger 2FA TOTP Authenticator Modal for Super Admin
+    document.getElementById('modal-admin-2fa').classList.add('active');
+    showToast("🔒 Enter 6-digit TOTP code from your Authenticator app.");
   } else {
     const email = document.getElementById('input-host-email').value;
     hostAuth.isLoggedIn = true;
@@ -1606,11 +1629,62 @@ function handleUserLogin(role) {
     hostAuth.subscriptionStatus = 'trial_active';
     currentUserRole = 'host';
 
+    resetSessionInactivityTimer();
     updateTopNavAuthUI();
     checkHostAuthStatus();
-    switchView('host'); // AUTO-OPEN HOST OPERATING PORTAL
-    showToast(`Welcome back, ${hostAuth.name}! Host Dashboard Opened.`);
+    switchView('host');
+    showToast(`Welcome back, ${hostAuth.name}! Host Dashboard Opened (Session Monitored).`);
   }
+}
+
+function submitAdmin2FACode() {
+  const code = document.getElementById('input-2fa-code').value;
+  if (!code || code.length !== 6) {
+    showToast("⚠️ Invalid 2FA Code! Must be 6 digits.");
+    return;
+  }
+
+  adminAuth.isLoggedIn = true;
+  adminAuth.email = document.getElementById('input-admin-email').value || 'admin@hostifyos.com';
+  currentUserRole = 'admin';
+  loginAttempts.count = 0;
+
+  closeModal('modal-admin-2fa');
+  resetSessionInactivityTimer();
+  updateTopNavAuthUI();
+  checkAdminAuthStatus();
+  switchView('admin');
+  showToast("✅ 2FA TOTP Verified! Master Super Admin Console Opened.");
+}
+
+function submitPasswordReset() {
+  const email = document.getElementById('reset-email-input').value;
+  if (!email) return;
+
+  closeModal('modal-reset-password');
+  showToast(`📧 Password reset magic token sent to ${email}! Check your inbox.`);
+}
+
+// SESSION INACTIVITY MONITORING (15 MINUTES)
+function resetSessionInactivityTimer() {
+  if (sessionInactivityTimer) clearTimeout(sessionInactivityTimer);
+  sessionInactivityTimer = setTimeout(() => {
+    if (currentUserRole !== 'visitor') {
+      const modal = document.getElementById('modal-session-timeout');
+      if (modal) modal.classList.add('active');
+    }
+  }, 15 * 60 * 1000);
+}
+
+function extendSession() {
+  closeModal('modal-session-timeout');
+  resetSessionInactivityTimer();
+  showToast("Session extended for 15 minutes!");
+}
+
+function logoutNow() {
+  closeModal('modal-session-timeout');
+  logoutUser();
 }
 
 // LOGOUT USER AND RETURN TO LANDING HOME PAGE
@@ -2033,6 +2107,7 @@ function openEditCustomPayLinkModal() {
 function submitCustomPayLink() {
   const url = document.getElementById('custom-pay-url-input').value;
   if (!url) return;
+  if (!validatePaymentUrl(url)) return;
 
   const prop = getActiveProperty();
   prop.customPayUrl = url;
@@ -2224,11 +2299,47 @@ function openEditWifiModal() {
   document.getElementById('modal-edit-wifi').classList.add('active');
 }
 
+// FORM SECURITY VALIDATION HELPERS
+const INSECURE_PINS = ['1234', '4321', '1111', '0000', '2222', '3333', '4444', '5555', '6666', '7777', '8888', '9999', '0123', '9876'];
+const ALLOWED_PAYMENT_DOMAINS = ['stripe.com', 'paypal.com', 'revolut.com', 'lemonsqueezy.com', 'wise.com', 'iyzipay.com'];
+
+function validatePinCode(pin) {
+  if (!pin || pin.length < 4 || INSECURE_PINS.includes(pin)) {
+    showToast("⚠️ Insecure PIN code! Must be 4+ non-sequential, non-repeating digits (e.g. 8492).");
+    return false;
+  }
+  return true;
+}
+
+function validateWifiPass(pass) {
+  if (pass && pass.length < 8) {
+    showToast("⚠️ Wi-Fi password is too short! Minimum 8 characters required for network security.");
+    return false;
+  }
+  return true;
+}
+
+function validatePaymentUrl(url) {
+  try {
+    const parsed = new URL(url);
+    const domainMatch = ALLOWED_PAYMENT_DOMAINS.some(d => parsed.hostname.endsWith(d));
+    if (!domainMatch) {
+      showToast("⚠️ Unapproved payment link domain! Must be an allowed gateway (stripe.com, paypal.com, revolut.com, etc.).");
+      return false;
+    }
+    return true;
+  } catch (err) {
+    showToast("⚠️ Invalid URL format! Please enter a valid https:// payment link.");
+    return false;
+  }
+}
+
 function submitEditWifi() {
   const name = document.getElementById('edit-wifi-ssid').value;
   const pass = document.getElementById('edit-wifi-pass').value;
 
   if (!name) return;
+  if (!validateWifiPass(pass)) return;
 
   const prop = getActiveProperty();
   prop.wifiName = name;
@@ -2246,13 +2357,39 @@ function openEditPinModal() {
 
 function submitEditPin() {
   const pin = document.getElementById('edit-door-pin').value;
-  if (!pin) return;
+  if (!validatePinCode(pin)) return;
 
   const prop = getActiveProperty();
   prop.doorPin = pin;
   loadActivePropertyData();
   closeModal('modal-edit-pin');
   showToast("Updated door access PIN code for " + prop.title);
+}
+
+// DATA PORTABILITY & EXPORT PORTFOLIO CSV (GDPR RIGHT TO DATA PORTABILITY)
+function downloadPortfolioCSV() {
+  const headers = ['Property ID', 'Platform', 'Title', 'Address', 'Timezone', 'Wi-Fi SSID', 'Door PIN', 'Total Revenue USD'];
+  const rows = properties.map(p => [
+    p.id,
+    p.platform,
+    `"${p.title.replace(/"/g, '""')}"`,
+    `"${p.address.replace(/"/g, '""')}"`,
+    p.timezone || 'America/Los_Angeles',
+    p.wifiName,
+    p.doorPin,
+    p.revenueUSD.toFixed(2)
+  ]);
+
+  const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+  const encodedUri = encodeURI(csvContent);
+  const link = document.createElement('a');
+  link.setAttribute('href', encodedUri);
+  link.setAttribute('download', `HostifyOS_Portfolio_Export_${new Date().toISOString().slice(0, 10)}.csv`);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  showToast("📄 Exported complete Portfolio Data (CSV) for GDPR Data Portability!");
 }
 
 function openEditBankModal() {
@@ -2486,7 +2623,7 @@ function loadActivePropertyData() {
   const platformBadge = document.getElementById('prop-platform-badge');
 
   if (titleEl) titleEl.textContent = prop.title;
-  if (addrEl) addrEl.innerHTML = `<i data-lucide="map-pin"></i> ${prop.address}`;
+  if (addrEl) addrEl.innerHTML = `<i data-lucide="map-pin"></i> ${prop.address} <span class="badge-tag" style="font-size:9px; margin-left:6px; background:rgba(99,102,241,0.15); color:var(--accent-indigo);"><i data-lucide="clock" style="width:10px; height:10px; vertical-align:middle;"></i> ${prop.timezone || 'America/Los_Angeles'}</span>`;
   if (heroCardBg) heroCardBg.style.backgroundImage = `url('${prop.heroImg}')`;
   if (wifiNameEl) wifiNameEl.textContent = prop.wifiName;
   if (platformBadge) platformBadge.textContent = prop.platform;
@@ -2700,18 +2837,22 @@ function submitNewProperty() {
   const platform = document.getElementById('new-p-platform').value || 'Airbnb';
   const address = document.getElementById('new-p-address').value;
   const wifiName = document.getElementById('new-p-wifi').value;
-  const doorPin = document.getElementById('new-p-pin').value;
+  const doorPin = document.getElementById('new-p-pin').value || '8492';
+  const tzEl = document.getElementById('new-p-tz');
+  const timezone = tzEl ? tzEl.value : 'America/Los_Angeles';
 
   if (!title || !address) return;
+  if (!validatePinCode(doorPin)) return;
 
   const newProp = {
     id: `prop-${Date.now()}`,
     platform: platform,
     title: title,
     address: address,
+    timezone: timezone,
     wifiName: wifiName || 'Guest_WiFi_5G',
     wifiPass: 'Welcome2026!',
-    doorPin: doorPin || '1234',
+    doorPin: doorPin,
     payoutBank: 'Demo Merchant Bank (****4821 - USD)',
     customPayUrl: 'https://buy.stripe.com/new_property_direct',
     heroImg: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',

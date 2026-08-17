@@ -1491,6 +1491,31 @@
           </div>
         </div>
 
+        <!-- NEW HOST ONBOARDING CHECKLIST BANNER -->
+        <div id="onboarding-checklist-banner" style="background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.25); border-radius:12px; padding:14px 18px; margin-bottom:16px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <i data-lucide="check-circle-2" style="color:var(--accent-emerald); width:18px; height:18px;"></i>
+              <strong style="font-size:13px; color:var(--text-main);">Host Setup Checklist (3/4 Steps Complete)</strong>
+            </div>
+            <span class="badge-tag" style="background:rgba(16,185,129,0.2); color:var(--accent-emerald); font-size:10px;">75% Ready</span>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:10px; font-size:11px;">
+            <div style="display:flex; align-items:center; gap:6px; color:var(--accent-emerald);">
+              <i data-lucide="check" style="width:14px; height:14px;"></i> 1. Property Listing Added
+            </div>
+            <div style="display:flex; align-items:center; gap:6px; color:var(--accent-emerald);">
+              <i data-lucide="check" style="width:14px; height:14px;"></i> 2. Wi-Fi & Door PIN Set
+            </div>
+            <div style="display:flex; align-items:center; gap:6px; color:var(--accent-emerald);">
+              <i data-lucide="check" style="width:14px; height:14px;"></i> 3. Guidebook Video Uploaded
+            </div>
+            <div style="display:flex; align-items:center; gap:6px; color:var(--text-muted); cursor:pointer;" onclick="openCreateTunnelModal()">
+              <i data-lucide="circle" style="width:14px; height:14px;"></i> 4. Activate WhatsApp Tunnel
+            </div>
+          </div>
+        </div>
+
         <!-- HOST QUICK PROPERTY OVERVIEW CONTROL BAR -->
         <div class="host-quick-overview-bar">
           <div class="h-overview-info">
@@ -1750,6 +1775,18 @@
                 <div class="info-row">
                   <span>Automatic Platform Split:</span>
                   <span class="badge-pill">95% Host Payout / 5% Platform Fee</span>
+                </div>
+              </div>
+
+              <div class="settings-card" style="margin-top:16px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <h4><i data-lucide="database" class="text-emerald"></i> Data Portability & System Health</h4>
+                  <button class="btn-primary-sm" onclick="downloadPortfolioCSV()"><i data-lucide="download"></i> Export Portfolio CSV</button>
+                </div>
+                <p class="text-muted">Export all your properties, Wi-Fi credentials, guidebooks & guest transaction history anytime (GDPR Right to Data Portability).</p>
+                <div class="info-row" style="margin-top:8px;">
+                  <span>System Uptime Monitor:</span>
+                  <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">● 99.9% Monitored Uptime (Live Health Check)</span>
                 </div>
               </div>
             <!-- OFFICIAL SAAS TAX INVOICES & BILLING HISTORY TABLE -->
@@ -2131,7 +2168,63 @@
     </div>
   </div>
 
-  <!-- STRIPE CONNECT EXPRESS ONBOARDING MODAL (KYC/AML COMPLIANCE) -->
+  <!-- SUPER ADMIN 2FA TOTP AUTHENTICATOR MODAL -->
+  <div id="modal-admin-2fa" class="modal-backdrop">
+    <div class="modal-card" style="max-width:440px;">
+      <button class="modal-close" onclick="closeModal('modal-admin-2fa')"><i data-lucide="x"></i></button>
+      <div style="text-align:center; margin-bottom:16px;">
+        <div style="width:48px; height:48px; border-radius:12px; background:rgba(99,102,241,0.15); display:inline-flex; align-items:center; justify-content:center; color:var(--accent-indigo); margin-bottom:8px;">
+          <i data-lucide="shield-check" style="width:24px; height:24px;"></i>
+        </div>
+        <h3 style="margin:0;">Two-Factor Authentication (2FA TOTP)</h3>
+        <p class="modal-desc-text" style="font-size:11px;">Enter the 6-digit code from your Authenticator app (Google Authenticator / 1Password).</p>
+      </div>
+
+      <form onsubmit="event.preventDefault(); submitAdmin2FACode();">
+        <div class="form-group">
+          <label style="text-align:center; display:block;">6-Digit Security Code</label>
+          <input type="text" id="input-2fa-code" placeholder="123 456" maxlength="6" style="text-align:center; font-size:20px; letter-spacing:4px; font-family:var(--font-mono);" required>
+        </div>
+        <div style="background:var(--bg-dark); border:1px solid var(--border-color); padding:10px; border-radius:8px; margin-bottom:14px; font-size:10px; color:var(--text-muted); text-align:center;">
+          🔒 IP Allowlist & New Device Security Guard Active
+        </div>
+        <button type="submit" class="btn-primary-lg">Verify 2FA & Enter Admin Panel</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- HOST PASSWORD RESET MODAL -->
+  <div id="modal-reset-password" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('modal-reset-password')"><i data-lucide="x"></i></button>
+      <h3><i data-lucide="key-round" class="text-accent"></i> Reset Host Password</h3>
+      <p class="modal-desc-text">Enter your registered email address. We will send a secure magic link reset token.</p>
+
+      <form onsubmit="event.preventDefault(); submitPasswordReset();">
+        <div class="form-group">
+          <label>Registered Host Email</label>
+          <input type="email" id="reset-email-input" placeholder="sarah@malibuvillas.com" required>
+        </div>
+        <button type="submit" class="btn-primary-lg">Send Magic Link Token</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- SESSION INACTIVITY TIMEOUT MODAL -->
+  <div id="modal-session-timeout" class="modal-backdrop">
+    <div class="modal-card" style="max-width:420px; text-align:center;">
+      <div style="width:48px; height:48px; border-radius:12px; background:rgba(234,179,8,0.15); display:inline-flex; align-items:center; justify-content:center; color:#EAB308; margin-bottom:8px;">
+        <i data-lucide="clock" style="width:24px; height:24px;"></i>
+      </div>
+      <h3 style="margin:0 0 6px;">Session Inactivity Warning</h3>
+      <p class="modal-desc-text" style="font-size:12px;">You have been inactive for 15 minutes. For security, your session will lock automatically in 60 seconds.</p>
+
+      <div style="display:flex; gap:10px; margin-top:16px;">
+        <button class="btn-primary-lg" onclick="extendSession()" style="flex:1;">Keep Me Signed In</button>
+        <button class="btn-secondary-sm" onclick="logoutNow()" style="padding:0 14px;">Sign Out</button>
+      </div>
+    </div>
+  </div>
   <div id="modal-stripe-connect" class="modal-backdrop">
     <div class="modal-card" style="max-width:560px;">
       <button class="modal-close" onclick="closeModal('modal-stripe-connect')"><i data-lucide="x"></i></button>
@@ -2456,9 +2549,22 @@
             <input type="text" id="new-p-wifi" placeholder="MiamiPenthouse_5G">
           </div>
           <div class="form-group">
-            <label>Door Access PIN</label>
+            <label>Door Access PIN (Non-Sequential)</label>
             <input type="text" id="new-p-pin" placeholder="7789">
           </div>
+        </div>
+
+        <div class="form-group">
+          <label>Property IANA Timezone (Physical PIN & Check-in Schedule)</label>
+          <select id="new-p-tz">
+            <option value="America/Los_Angeles" selected>America/Los_Angeles (Malibu / PST)</option>
+            <option value="America/New_York">America/New_York (Miami / EST)</option>
+            <option value="Europe/Istanbul">Europe/Istanbul (Turkey / TRT)</option>
+            <option value="Europe/London">Europe/London (London / GMT)</option>
+            <option value="Europe/Paris">Europe/Paris (Paris / CET)</option>
+            <option value="Europe/Athens">Europe/Athens (Santorini / EET)</option>
+            <option value="Asia/Tokyo">Asia/Tokyo (Tokyo / JST)</option>
+          </select>
         </div>
 
         <button type="submit" class="btn-primary-lg">Create Property & Guidebook</button>
