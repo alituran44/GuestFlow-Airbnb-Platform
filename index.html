@@ -931,7 +931,7 @@
             <div class="hero-overlay"></div>
             <div class="hero-content">
               <div style="display:flex; justify-content:space-between; align-items:center;">
-                <span class="welcome-pill">Welcome to your stay</span>
+                <span class="welcome-pill" data-i18n="welcomePill">Welcome to your stay</span>
                 <span class="badge-tag" id="prop-platform-badge">Airbnb</span>
               </div>
               <h1 id="prop-title">Malibu Beachfront Villa & Suite</h1>
@@ -940,11 +940,11 @@
               <div class="stay-meta-bar">
                 <div class="meta-item">
                   <i data-lucide="calendar"></i>
-                  <span>Check-in: 3:00 PM</span>
+                  <span data-i18n="guestCheckInLabel">Check-in: 3:00 PM</span>
                 </div>
                 <div class="meta-item">
                   <i data-lucide="clock"></i>
-                  <span>Check-out: 11:00 AM</span>
+                  <span data-i18n="guestCheckOutLabel">Check-out: 11:00 AM</span>
                 </div>
               </div>
             </div>
@@ -970,7 +970,7 @@
                 <i data-lucide="wifi"></i>
               </div>
               <div class="card-body">
-                <span class="card-label">Instant Wi-Fi</span>
+                <span class="card-label" data-i18n="instantWifi">Instant Wi-Fi</span>
                 <span class="card-val" id="wifi-name">MalibuVilla_5G</span>
               </div>
               <button class="btn-icon-copy" title="Copy Password">
@@ -983,7 +983,7 @@
                 <i data-lucide="key-round"></i>
               </div>
               <div class="card-body">
-                <span class="card-label">Door Access Code</span>
+                <span class="card-label" data-i18n="doorAccessCode">Door Access Code</span>
                 <span class="card-val" id="door-pin-display">••••-8921</span>
               </div>
               <button class="btn-reveal" onclick="togglePinReveal()">
@@ -994,40 +994,40 @@
 
           <div class="guest-tabs">
             <button class="g-tab active" onclick="switchGuestTab('guide', this)">
-              <i data-lucide="book-open"></i> House Manual
+              <i data-lucide="book-open"></i> <span data-i18n="tabHouseManual">House Manual</span>
             </button>
             <button class="g-tab" onclick="switchGuestTab('upsell', this)">
-              <i data-lucide="sparkles"></i> Concierge & Store
+              <i data-lucide="sparkles"></i> <span data-i18n="tabConciergeStore">Concierge & Store</span>
               <span class="badge-count" id="cart-count-badge" style="display:none;">0</span>
             </button>
             <button class="g-tab" onclick="switchGuestTab('local', this)">
-              <i data-lucide="map"></i> AI Local Guide
+              <i data-lucide="map"></i> <span data-i18n="tabAiLocalGuide">AI Local Guide</span>
             </button>
           </div>
 
           <div id="g-tab-guide" class="g-tab-content active">
             <div class="section-block">
-              <h3 class="section-title"><i data-lucide="video"></i> Appliance Video Guides</h3>
+              <h3 class="section-title"><i data-lucide="video"></i> <span data-i18n="applianceVideoGuides">Appliance Video Guides</span></h3>
               <div class="video-guides-scroll" id="video-guides-scroll">
                 <!-- Dynamically Rendered -->
               </div>
             </div>
 
             <div class="section-block">
-              <h3 class="section-title"><i data-lucide="shield-alert"></i> House Rules & Guidelines</h3>
+              <h3 class="section-title"><i data-lucide="shield-alert"></i> <span data-i18n="houseRulesTitle">House Rules & Guidelines</span></h3>
               <div class="rules-list">
                 <div class="rule-item">
                   <i data-lucide="volume-2" class="rule-icon"></i>
                   <div>
-                    <strong>Quiet Hours</strong>
-                    <p>10:00 PM – 8:00 AM out of respect for neighbors.</p>
+                    <strong data-i18n="ruleQuietHoursTitle">Quiet Hours</strong>
+                    <p data-i18n="ruleQuietHoursDesc">10:00 PM – 8:00 AM out of respect for neighbors.</p>
                   </div>
                 </div>
                 <div class="rule-item">
                   <i data-lucide="trash-2" class="rule-icon"></i>
                   <div>
-                    <strong>Trash & Recycling</strong>
-                    <p>Bins are located on the side walkway. Black for general waste, Blue for recyclables.</p>
+                    <strong data-i18n="ruleTrashTitle">Trash & Recycling</strong>
+                    <p data-i18n="ruleTrashDesc">Bins are located on the side walkway. Black for general waste, Blue for recyclables.</p>
                   </div>
                 </div>
               </div>
@@ -1038,8 +1038,8 @@
             <div class="section-block">
               <div class="store-header">
                 <div>
-                  <h3 class="section-title"><i data-lucide="sparkles"></i> Guest Services & Upsells</h3>
-                  <p class="section-sub">Book extra services instantly for your stay.</p>
+                  <h3 class="section-title"><i data-lucide="sparkles"></i> <span data-i18n="guestServicesTitle">Guest Services & Upsells</span></h3>
+                  <p class="section-sub" data-i18n="guestServicesSub">Book extra services instantly for your stay.</p>
                 </div>
                 <button class="btn-cart-trigger" onclick="openCheckoutModal()">
                   <i data-lucide="shopping-bag"></i>
@@ -1056,7 +1056,7 @@
           <div id="g-tab-local" class="g-tab-content">
             <div class="section-block">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                <h3 class="section-title"><i data-lucide="wand-2" class="text-accent"></i> AI Auto-Discovered Places</h3>
+                <h3 class="section-title"><i data-lucide="wand-2" class="text-accent"></i> <span data-i18n="aiPlacesTitle">AI Auto-Discovered Places</span></h3>
                 <span class="badge-tag">AI Geo-Scraped</span>
               </div>
               <div class="local-category-chips">

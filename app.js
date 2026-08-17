@@ -145,12 +145,29 @@ const i18nDict = {
     ctaTitle: "Ready to Automate Your STR Operations & Boost Revenue?",
     ctaSub: "Join over 3,400+ hosts scaling their guest experience today.",
     btnCtaTrial: "Start Your 14-Day Free Trial ($0 Today)",
-    startTrial: "Start 14-Day Free Trial",
     navHome: "Home",
     navGuest: "Guest View (PWA)",
     navHost: "Host Portal",
     navAdmin: "Super Admin",
-    toastLang: "Language updated to English (USD)"
+    toastLang: "Language updated to English (USD)",
+    welcomePill: "Welcome to your stay",
+    guestCheckInLabel: "Check-in: 3:00 PM",
+    guestCheckOutLabel: "Check-out: 11:00 AM",
+    instantWifi: "Instant Wi-Fi",
+    doorAccessCode: "Door Access Code",
+    tabHouseManual: "House Manual",
+    tabConciergeStore: "Concierge & Store",
+    tabAiLocalGuide: "AI Local Guide",
+    applianceVideoGuides: "Appliance Video Guides",
+    houseRulesTitle: "House Rules & Guidelines",
+    ruleQuietHoursTitle: "Quiet Hours",
+    ruleQuietHoursDesc: "10:00 PM – 8:00 AM out of respect for neighbors.",
+    ruleTrashTitle: "Trash & Recycling",
+    ruleTrashDesc: "Bins are located on the side walkway. Black for general waste, Blue for recyclables.",
+    guestServicesTitle: "Guest Services & Upsells",
+    guestServicesSub: "Book extra services instantly for your stay.",
+    aiPlacesTitle: "AI Auto-Discovered Places",
+    btnWhatsappHost: "Need help? Message Host on WhatsApp"
   },
   TR: {
     heroBadge: "Airbnb ve Kiralık Evler İçin Otomatik Ek Gelir Motoru",
@@ -273,7 +290,25 @@ const i18nDict = {
     navGuest: "Misafir Görünümü (PWA)",
     navHost: "Ev Sahibi Portalı",
     navAdmin: "Süper Admin",
-    toastLang: "Dil Türkçe olarak güncellendi (TRY)"
+    toastLang: "Dil Türkçe olarak güncellendi (TRY)",
+    welcomePill: "Konaklamanıza Hoş Geldiniz",
+    guestCheckInLabel: "Giriş: 15:00",
+    guestCheckOutLabel: "Çıkış: 11:00",
+    instantWifi: "Hızlı Wi-Fi",
+    doorAccessCode: "Kapı Şifresi",
+    tabHouseManual: "Ev Rehberi",
+    tabConciergeStore: "Konsiyerj & Mağaza",
+    tabAiLocalGuide: "Yapay Zeka Şehir Rehberi",
+    applianceVideoGuides: "Cihaz Kullanım Videoları",
+    houseRulesTitle: "Ev Kuralları & Yönergeler",
+    ruleQuietHoursTitle: "Sessizlik Saatleri",
+    ruleQuietHoursDesc: "Komşulara saygı için 22:00 – 08:00 arası sessizlik.",
+    ruleTrashTitle: "Çöp & Geri Dönüşüm",
+    ruleTrashDesc: "Çöp kovaları yan yürüme yolundadır. Siyah genel çöp, Mavi geri dönüşüm.",
+    guestServicesTitle: "Misafir Hizmetleri & Ekstra Servisler",
+    guestServicesSub: "Konaklamanız için ekstra hizmetleri anında satın alın.",
+    aiPlacesTitle: "Yapay Zeka Keşif Noktaları",
+    btnWhatsappHost: "Yardım mı lazım? Ev Sahibine WhatsApp'tan Yaz"
   },
   ES: {
     heroBadge: "Motor de ingresos automatizado para alquileres vacacionales",
@@ -1029,16 +1064,16 @@ function changeLanguage(langKey) {
 
   const t = i18nDict[langKey];
   
-  // Translate all elements with data-i18n attribute
+  // Translate all elements with data-i18n attribute with safe fallback
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
-    if (t[key]) {
-      // Preserve internal icons if present
+    const val = t[key] || (i18nDict['EN'] ? i18nDict['EN'][key] : null) || (i18nDict['TR'] ? i18nDict['TR'][key] : null);
+    if (val) {
       const icon = el.querySelector('i');
       if (icon) {
-        el.innerHTML = `${icon.outerHTML} ${t[key]}`;
+        el.innerHTML = `${icon.outerHTML} ${val}`;
       } else {
-        el.innerText = t[key];
+        el.innerText = val;
       }
     }
   });
