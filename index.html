@@ -2103,7 +2103,73 @@
     </div>
   </div>
 
-  <!-- EDIT HOST CUSTOM PAYMENT LINK MODAL -->
+  <!-- TAX INVOICE PREVIEW MODAL -->
+  <div id="modal-view-invoice" class="modal-backdrop">
+    <div class="modal-card" style="max-width:620px;">
+      <button class="modal-close" onclick="closeModal('modal-view-invoice')"><i data-lucide="x"></i></button>
+      
+      <div id="invoice-printable-area" style="background:var(--bg-obsidian); border:1px solid var(--border-color); border-radius:12px; padding:24px; color:var(--text-main);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:20px; border-bottom:1px solid var(--border-color); padding-bottom:16px;">
+          <div>
+            <h3 style="margin:0 0 4px; font-size:18px; color:var(--accent-emerald);">TAX INVOICE</h3>
+            <p style="margin:0; font-size:11px; color:var(--text-muted);">Issued by <strong>Ali Turan Inc. (Ali Turan Şirketi)</strong></p>
+          </div>
+          <div style="text-align:right;">
+            <strong id="inv-preview-id" style="font-size:14px; color:var(--accent-indigo);">#INV-2026-8801</strong>
+            <div id="inv-preview-date" style="font-size:11px; color:var(--text-muted);">Date: Aug 17, 2026</div>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px; font-size:12px;">
+          <div>
+            <span style="color:var(--text-muted); display:block; font-size:10px;">MERCHANT / ISSUER:</span>
+            <strong>Ali Turan Inc. (Ali Turan Şirketi)</strong><br>
+            <span style="color:var(--text-muted);">HostifyOS SaaS Platform</span><br>
+            <span style="color:var(--text-muted);">billing@hostifyos.com</span>
+          </div>
+          <div>
+            <span style="color:var(--text-muted); display:block; font-size:10px;">BILLED TO HOST:</span>
+            <strong id="inv-preview-email">sarah@malibuvillas.com</strong><br>
+            <span style="color:var(--text-muted);" id="inv-preview-card">Visa (•••• 4242)</span><br>
+            <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald); font-size:10px;">Status: Paid</span>
+          </div>
+        </div>
+
+        <table style="width:100%; border-collapse:collapse; margin-bottom:20px; font-size:12px;">
+          <thead>
+            <tr style="background:var(--bg-dark); border-bottom:1px solid var(--border-color); text-align:left;">
+              <th style="padding:8px;">Description</th>
+              <th style="padding:8px; text-align:right;">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border-color);">
+              <td style="padding:10px 8px;" id="inv-preview-plan">Pro Host (Annual Plan - 0% Commission)</td>
+              <td style="padding:10px 8px; text-align:right;"><strong id="inv-preview-amount">$168.00</strong></td>
+            </tr>
+            <tr>
+              <td style="padding:8px; color:var(--text-muted);">Digital Services VAT / Tax (0% Export):</td>
+              <td style="padding:8px; text-align:right; color:var(--text-muted);">$0.00</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.2); padding:12px 16px; border-radius:8px;">
+          <span style="font-weight:600;">Total Paid Amount:</span>
+          <strong style="font-size:18px; color:var(--accent-emerald);" id="inv-preview-total">$168.00</strong>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:10px; margin-top:16px;">
+        <button class="btn-primary-lg" onclick="printInvoicePDF()" style="flex:1;">
+          <i data-lucide="printer"></i> Print / Save PDF Invoice
+        </button>
+        <button class="btn-secondary-sm" onclick="closeModal('modal-view-invoice')" style="padding:0 16px;">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
   <div id="modal-edit-pay-link" class="modal-backdrop">
     <div class="modal-card">
       <button class="modal-close" onclick="closeModal('modal-edit-pay-link')"><i data-lucide="x"></i></button>

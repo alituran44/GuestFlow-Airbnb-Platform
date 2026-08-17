@@ -1858,10 +1858,23 @@ function downloadCommissionStatement() {
   showToast("Downloading Monthly Commission Statement (PDF / CSV) for Host Accounting...");
 }
 
-// HOST SUBSCRIPTION CHECKOUT MODAL
 function openLemonSqueezyCheckout(tierName, priceStr) {
   document.getElementById('lemon-plan-name').textContent = tierName;
-  document.getElementById('lemon-plan-price').textContent = priceStr;
+  
+  let formattedPriceStr = priceStr;
+  if (priceStr.includes('$14.00')) {
+    formattedPriceStr = `${formatPrice(14.0)} / mo`;
+  } else if (priceStr.includes('$168.00')) {
+    formattedPriceStr = `${formatPrice(168.0)} / yr`;
+  } else if (priceStr.includes('$18.00')) {
+    formattedPriceStr = `${formatPrice(18.0)} / mo`;
+  } else if (priceStr.includes('$29.00')) {
+    formattedPriceStr = `${formatPrice(29.0)} / mo`;
+  } else if (priceStr.includes('$0.00')) {
+    formattedPriceStr = `${formatPrice(0.0)} Free Trial`;
+  }
+
+  document.getElementById('lemon-plan-price').textContent = `${formattedPriceStr} ($0.00 Due Today)`;
   document.getElementById('modal-lemon-checkout').classList.add('active');
 }
 
@@ -1921,11 +1934,27 @@ function renderHostInvoicesTable() {
 }
 
 function downloadHostInvoicePDF(invId) {
-  showToast(`📄 Downloading official Tax Invoice #${invId} issued by Ali Turan Inc. (PDF format)...`);
+  const inv = hostInvoices.find(i => i.id === invId) || hostInvoices[0];
+  if (!inv) return;
+
+  document.getElementById('inv-preview-id').textContent = `#${inv.id}`;
+  document.getElementById('inv-preview-date').textContent = `Date: ${inv.date}`;
+  document.getElementById('inv-preview-email').textContent = inv.email;
+  document.getElementById('inv-preview-card').textContent = inv.card;
+  document.getElementById('inv-preview-plan').textContent = inv.plan;
+  document.getElementById('inv-preview-amount').textContent = inv.amountStr;
+  document.getElementById('inv-preview-total').textContent = inv.amountStr.split(' / ')[0];
+
+  document.getElementById('modal-view-invoice').classList.add('active');
+  showToast(`📄 Loaded official Tax Invoice #${inv.id} issued by Ali Turan Inc.!`);
+}
+
+function printInvoicePDF() {
+  window.print();
 }
 
 function resendInvoiceEmail(invId, email) {
-  showToast(`📧 Invoice & Payment Receipt #${invId} resent to ${email}!`);
+  showToast(`📧 Official Tax Invoice #${invId} by Ali Turan Inc. resent to ${email}!`);
 }
 
 function processLemonSqueezySubscribe() {
