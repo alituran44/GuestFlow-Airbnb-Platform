@@ -355,6 +355,125 @@ body.theme-light .landing-footer {
   cursor: pointer;
 }
 
+/* Custom Multi-Language Dropdown Widget */
+.custom-lang-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.lang-trigger-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lang-trigger-btn:hover {
+  border-color: var(--accent-emerald);
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.lang-trigger-btn .flag-icon {
+  font-size: 15px;
+  line-height: 1;
+}
+
+.lang-trigger-btn .chevron-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--text-muted);
+  transition: transform 0.2s ease;
+}
+
+.custom-lang-dropdown.open .lang-trigger-btn .chevron-icon {
+  transform: rotate(180deg);
+}
+
+.lang-menu-panel {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 210px;
+  background: #090D14;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+  padding: 6px;
+  z-index: 1000;
+  backdrop-filter: blur(16px);
+}
+
+body.theme-light .lang-menu-panel {
+  background: #FFFFFF !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15) !important;
+}
+
+.custom-lang-dropdown.open .lang-menu-panel {
+  display: block;
+  animation: fadeInDown 0.15s ease-out;
+}
+
+.lang-menu-header {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  padding: 6px 10px 4px 10px;
+  font-weight: 700;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 4px;
+}
+
+.lang-option-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.lang-option-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+body.theme-light .lang-option-item:hover {
+  background: rgba(0, 0, 0, 0.04) !important;
+}
+
+.lang-option-item.active {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--accent-emerald);
+  font-weight: 700;
+}
+
+.lang-option-item .flag {
+  font-size: 16px;
+}
+
+.lang-option-item .name {
+  flex: 1;
+  font-size: 13px;
+}
+
+.lang-option-item .currency-tag {
+  font-size: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--text-muted);
+}
+
 /* Explicit Dropdown Option Styling for Dark & Light Mode Visibility */
 select option {
   background-color: #090D14 !important;

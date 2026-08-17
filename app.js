@@ -426,6 +426,46 @@ function changeLanguage(langKey) {
   lucide.createIcons();
 }
 
+const langMeta = {
+  EN: { flag: '🇺🇸', name: 'English' },
+  TR: { flag: '🇹🇷', name: 'Türkçe' },
+  ES: { flag: '🇪🇸', name: 'Español' },
+  FR: { flag: '🇫🇷', name: 'Français' },
+  DE: { flag: '🇩🇪', name: 'Deutsch' },
+  IT: { flag: '🇮🇹', name: 'Italiano' },
+  PT: { flag: '🇵🇹', name: 'Português' },
+  JA: { flag: '🇯🇵', name: '日本語' }
+};
+
+function toggleLangMenu(event) {
+  if (event) event.stopPropagation();
+  const dropdown = document.getElementById('custom-lang-dropdown');
+  if (dropdown) dropdown.classList.toggle('open');
+}
+
+function selectCustomLang(langKey) {
+  const meta = langMeta[langKey] || langMeta.EN;
+  const flagEl = document.getElementById('active-lang-flag');
+  const codeEl = document.getElementById('active-lang-code');
+  if (flagEl) flagEl.innerText = meta.flag;
+  if (codeEl) codeEl.innerText = meta.name;
+
+  document.querySelectorAll('.lang-option-item').forEach(item => {
+    item.classList.toggle('active', item.getAttribute('data-lang') === langKey);
+  });
+
+  const dropdown = document.getElementById('custom-lang-dropdown');
+  if (dropdown) dropdown.classList.remove('open');
+
+  changeLanguage(langKey);
+}
+
+window.addEventListener('click', (e) => {
+  const dropdown = document.getElementById('custom-lang-dropdown');
+  if (dropdown && !dropdown.contains(e.target)) {
+    dropdown.classList.remove('open');
+  }
+});
 
 let billingCycle = 'annual';
 

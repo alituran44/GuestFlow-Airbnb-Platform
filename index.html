@@ -81,19 +81,56 @@
         </button>
 
 
-        <!-- Global Multi-Language & Auto-Currency Selector -->
-        <div class="currency-selector">
-          <i data-lucide="languages" class="text-accent"></i>
-          <select id="lang-select" onchange="changeLanguage(this.value)">
-            <option value="EN">🇺🇸 English</option>
-            <option value="ES">🇪🇸 Español</option>
-            <option value="FR">🇫🇷 Français</option>
-            <option value="DE">🇩🇪 Deutsch</option>
-            <option value="IT">🇮🇹 Italiano</option>
-            <option value="PT">🇵🇹 Português</option>
-            <option value="JA">🇯🇵 日本語</option>
-            <option value="TR">🇹🇷 Türkçe</option>
-          </select>
+        <!-- Global Custom Multi-Language Selector Widget -->
+        <div class="custom-lang-dropdown" id="custom-lang-dropdown">
+          <button class="lang-trigger-btn" onclick="toggleLangMenu(event)" title="Select Language & Currency">
+            <span id="active-lang-flag" class="flag-icon">🇺🇸</span>
+            <span id="active-lang-code" class="lang-code-text">English</span>
+            <i data-lucide="chevron-down" class="chevron-icon"></i>
+          </button>
+          <div class="lang-menu-panel" id="lang-menu-panel">
+            <div class="lang-menu-header">Select Language / Dil Seçin</div>
+            <div class="lang-option-item active" data-lang="EN" onclick="selectCustomLang('EN')">
+              <span class="flag">🇺🇸</span>
+              <span class="name">English</span>
+              <span class="currency-tag">USD ($)</span>
+            </div>
+            <div class="lang-option-item" data-lang="TR" onclick="selectCustomLang('TR')">
+              <span class="flag">🇹🇷</span>
+              <span class="name">Türkçe</span>
+              <span class="currency-tag">TRY (₺)</span>
+            </div>
+            <div class="lang-option-item" data-lang="ES" onclick="selectCustomLang('ES')">
+              <span class="flag">🇪🇸</span>
+              <span class="name">Español</span>
+              <span class="currency-tag">EUR (€)</span>
+            </div>
+            <div class="lang-option-item" data-lang="FR" onclick="selectCustomLang('FR')">
+              <span class="flag">🇫🇷</span>
+              <span class="name">Français</span>
+              <span class="currency-tag">EUR (€)</span>
+            </div>
+            <div class="lang-option-item" data-lang="DE" onclick="selectCustomLang('DE')">
+              <span class="flag">🇩🇪</span>
+              <span class="name">Deutsch</span>
+              <span class="currency-tag">EUR (€)</span>
+            </div>
+            <div class="lang-option-item" data-lang="IT" onclick="selectCustomLang('IT')">
+              <span class="flag">🇮🇹</span>
+              <span class="name">Italiano</span>
+              <span class="currency-tag">EUR (€)</span>
+            </div>
+            <div class="lang-option-item" data-lang="PT" onclick="selectCustomLang('PT')">
+              <span class="flag">🇵🇹</span>
+              <span class="name">Português</span>
+              <span class="currency-tag">EUR (€)</span>
+            </div>
+            <div class="lang-option-item" data-lang="JA" onclick="selectCustomLang('JA')">
+              <span class="flag">🇯🇵</span>
+              <span class="name">日本語</span>
+              <span class="currency-tag">JPY (¥)</span>
+            </div>
+          </div>
         </div>
 
         <div class="currency-selector">
