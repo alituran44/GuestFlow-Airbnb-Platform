@@ -228,24 +228,24 @@
       <!-- FUNNEL STEP 3: DETAILED INTERACTIVE PRODUCT SHOWCASE TABS -->
       <div class="landing-section">
         <div class="section-center-head">
-          <span class="badge-tag">Interactive Feature Showcase</span>
-          <h2>See How HostifyOS Automates Every Step of the Stay</h2>
-          <p>Click through the 4 core pillars of our hospitality operating system.</p>
+          <span class="badge-tag" data-i18n="showcaseTag">Interactive Feature Showcase</span>
+          <h2 data-i18n="showcaseTitle">See How HostifyOS Automates Every Step of the Stay</h2>
+          <p data-i18n="showcaseSub">Click through the 4 core pillars of our hospitality operating system.</p>
         </div>
 
         <div class="feature-showcase-container">
           <div class="showcase-tabs">
             <button class="s-tab active" onclick="switchShowcaseTab('wifi', this)">
-              <i data-lucide="wifi"></i> 1-Tap Wi-Fi & Door PIN
+              <i data-lucide="wifi"></i> <span data-i18n="showcaseTab1">1-Tap Wi-Fi & Door PIN</span>
             </button>
             <button class="s-tab" onclick="switchShowcaseTab('videos', this)">
-              <i data-lucide="video"></i> Appliance Video Manuals
+              <i data-lucide="video"></i> <span data-i18n="showcaseTab2">Appliance Video Manuals</span>
             </button>
             <button class="s-tab" onclick="switchShowcaseTab('tunnels', this)">
-              <i data-lucide="zap"></i> Automated Messaging Tunnels
+              <i data-lucide="zap"></i> <span data-i18n="showcaseTab3">Automated Messaging Tunnels</span>
             </button>
             <button class="s-tab" onclick="switchShowcaseTab('payouts', this)">
-              <i data-lucide="credit-card"></i> Custom Pay Links & Split
+              <i data-lucide="credit-card"></i> <span data-i18n="showcaseTab4">Custom Pay Links & Split</span>
             </button>
           </div>
 
@@ -253,12 +253,12 @@
             <div id="showcase-wifi" class="showcase-panel active">
               <div class="s-panel-grid">
                 <div>
-                  <span class="badge-tag">Zero Guest Calls</span>
-                  <h3>Instant 1-Tap Wi-Fi Copy & Time-Gated Door PIN</h3>
-                  <p>Guests tap once on their phone screen to automatically copy the Wi-Fi password. Door lockbox PIN codes are time-gated so guests only see code 2 hours before check-in time.</p>
+                  <span class="badge-tag" data-i18n="sc1Badge">Zero Guest Calls</span>
+                  <h3 data-i18n="sc1Title">Instant 1-Tap Wi-Fi Copy & Time-Gated Door PIN</h3>
+                  <p data-i18n="sc1Desc">Guests tap once on their phone screen to automatically copy the Wi-Fi password. Door lockbox PIN codes are time-gated so guests only see code 2 hours before check-in time.</p>
                   <ul class="s-check-list">
-                    <li><i data-lucide="check" class="text-emerald"></i> Eliminates 80% of repetitive check-in questions</li>
-                    <li><i data-lucide="check" class="text-emerald"></i> Auto-expires door PIN code at 11:00 AM check-out</li>
+                    <li><i data-lucide="check" class="text-emerald"></i> <span data-i18n="sc1Check1">Eliminates 80% of repetitive check-in questions</span></li>
+                    <li><i data-lucide="check" class="text-emerald"></i> <span data-i18n="sc1Check2">Auto-expires door PIN code at 11:00 AM check-out</span></li>
                   </ul>
                 </div>
                 <div class="s-panel-preview">
@@ -277,12 +277,12 @@
             <div id="showcase-videos" class="showcase-panel">
               <div class="s-panel-grid">
                 <div>
-                  <span class="badge-tag">Visual Manuals</span>
-                  <h3>30-Second Appliance Video Guides</h3>
-                  <p>Upload short video guides showing guests how to operate Nest thermostats, Nespresso coffee machines, TV remotes, and pool heaters.</p>
+                  <span class="badge-tag" data-i18n="sc2Badge">Visual Manuals</span>
+                  <h3 data-i18n="sc2Title">30-Second Appliance Video Guides</h3>
+                  <p data-i18n="sc2Desc">Upload short video guides showing guests how to operate Nest thermostats, Nespresso coffee machines, TV remotes, and pool heaters.</p>
                   <ul class="s-check-list">
-                    <li><i data-lucide="check" class="text-emerald"></i> No more broken appliances or wrong AC settings</li>
-                    <li><i data-lucide="check" class="text-emerald"></i> High resolution mobile video player with subtitles</li>
+                    <li><i data-lucide="check" class="text-emerald"></i> <span data-i18n="sc2Check1">No more broken appliances or wrong AC settings</span></li>
+                    <li><i data-lucide="check" class="text-emerald"></i> <span data-i18n="sc2Check2">High resolution mobile video player with subtitles</span></li>
                   </ul>
                 </div>
                 <div class="s-panel-preview">
@@ -303,12 +303,12 @@
             <div id="showcase-tunnels" class="showcase-panel">
               <div class="s-panel-grid">
                 <div>
-                  <span class="badge-tag">Automated Upsells</span>
-                  <h3>Automated WhatsApp & SMS Guest Tunnels</h3>
-                  <p>Set time-triggered automated messages. For example, send a WhatsApp message 24 hours before check-out offering a 2:00 PM Late Check-out for $45.</p>
+                  <span class="badge-tag" data-i18n="sc3Badge">Automated Upsells</span>
+                  <h3 data-i18n="sc3Title">Automated WhatsApp & SMS Guest Tunnels</h3>
+                  <p data-i18n="sc3Desc">Set time-triggered automated messages. For example, send a WhatsApp message 24 hours before check-out offering a 2:00 PM Late Check-out for $45.</p>
                   <ul class="s-check-list">
-                    <li><i data-lucide="check" class="text-emerald"></i> 32.4% average conversion rate on guest upsells</li>
-                    <li><i data-lucide="check" class="text-emerald"></i> Supports WhatsApp, SMS, and PWA Push</li>
+                    <li><i data-lucide="check" class="text-emerald"></i> <span data-i18n="sc3Check1">32.4% average conversion rate on guest upsells</span></li>
+                    <li><i data-lucide="check" class="text-emerald"></i> <span data-i18n="sc3Check2">Supports WhatsApp, SMS, and PWA Push</span></li>
                   </ul>
                 </div>
                 <div class="s-panel-preview">
@@ -329,12 +329,12 @@
             <div id="showcase-payouts" class="showcase-panel">
               <div class="s-panel-grid">
                 <div>
-                  <span class="badge-tag">Direct Bank Payouts</span>
-                  <h3>Host Custom Payment Links & Take-Rate Split</h3>
-                  <p>Paste your custom payment link (Stripe, Revolut, PayPal). Platform commission is automatically calculated and routed while net host payout deposits to your bank.</p>
+                  <span class="badge-tag" data-i18n="sc4Badge">Direct Bank Payouts</span>
+                  <h3 data-i18n="sc4Title">Host Custom Payment Links & Take-Rate Split</h3>
+                  <p data-i18n="sc4Desc">Paste your custom payment link (Stripe, Revolut, PayPal). Platform commission is automatically calculated and routed while net host payout deposits to your bank.</p>
                   <ul class="s-check-list">
-                    <li><i data-lucide="check" class="text-emerald"></i> 0% platform commission on Pro Host Tier</li>
-                    <li><i data-lucide="check" class="text-emerald"></i> Direct payout bank account deposits</li>
+                    <li><i data-lucide="check" class="text-emerald"></i> <span data-i18n="sc4Check1">0% platform commission on Pro Host Tier</span></li>
+                    <li><i data-lucide="check" class="text-emerald"></i> <span data-i18n="sc4Check2">Direct payout bank account deposits</span></li>
                   </ul>
                 </div>
                 <div class="s-panel-preview">
@@ -355,9 +355,9 @@
       <!-- FUNNEL STEP 4: REAL HOST CASE STUDIES & TESTIMONIALS -->
       <div class="landing-section">
         <div class="section-center-head">
-          <span class="badge-tag">Real Host Case Studies</span>
-          <h2>Hear From Superhosts Scaling With HostifyOS</h2>
-          <p>Join over 3,400+ short-term rental managers worldwide.</p>
+          <span class="badge-tag" data-i18n="testimonialsTag">Real Host Case Studies</span>
+          <h2 data-i18n="testimonialsTitle">Hear From Superhosts Scaling With HostifyOS</h2>
+          <p data-i18n="testimonialsSub">Join over 3,400+ short-term rental managers worldwide.</p>
         </div>
 
         <div class="testimonials-grid">
@@ -439,35 +439,35 @@
       <!-- FUNNEL STEP 5: PROBLEM AGITATION MATRIX (BEFORE VS AFTER HOSTIFYOS) -->
       <div class="landing-section">
         <div class="section-center-head">
-          <span class="badge-tag">The STR Host Transformation</span>
-          <h2>Why 3,400+ Hosts Switched to HostifyOS</h2>
-          <p>Stop wasting 15+ hours a week answering the same Wi-Fi and TV remote questions.</p>
+          <span class="badge-tag" data-i18n="agitTag">The STR Host Transformation</span>
+          <h2 data-i18n="agitTitle">Why 3,400+ Hosts Switched to HostifyOS</h2>
+          <p data-i18n="agitSub">Stop wasting 15+ hours a week answering the same Wi-Fi and TV remote questions.</p>
         </div>
 
         <div class="agitation-grid">
           <div class="agit-card before">
             <div class="agit-header">
               <i data-lucide="x-circle" class="text-red"></i>
-              <h3>Old Way (Without HostifyOS)</h3>
+              <h3 data-i18n="oldWayHead">Old Way (Without HostifyOS)</h3>
             </div>
             <ul class="agit-list">
-              <li>❌ Answering late-night messages: "What's the Wi-Fi password?"</li>
-              <li>❌ Guest confusion over thermostat, coffee machine & hot tub buttons.</li>
-              <li>❌ $0 extra revenue from airport shuttles or late check-outs.</li>
-              <li>❌ Endless back-and-forth bank details for extra payments.</li>
+              <li>❌ <span data-i18n="oldWay1">Answering late-night messages: "What's the Wi-Fi password?"</span></li>
+              <li>❌ <span data-i18n="oldWay2">Guest confusion over thermostat, coffee machine & hot tub buttons.</span></li>
+              <li>❌ <span data-i18n="oldWay3">$0 extra revenue from airport shuttles or late check-outs.</span></li>
+              <li>❌ <span data-i18n="oldWay4">Endless back-and-forth bank details for extra payments.</span></li>
             </ul>
           </div>
 
           <div class="agit-card after">
             <div class="agit-header">
               <i data-lucide="check-circle-2" class="text-emerald"></i>
-              <h3>New Way (With HostifyOS Funnel)</h3>
+              <h3 data-i18n="newWayHead">New Way (With HostifyOS Funnel)</h3>
             </div>
             <ul class="agit-list">
-              <li>✅ 1-Tap instant Wi-Fi copy & time-gated door lockbox PIN.</li>
-              <li>✅ Short 30-sec video manuals for every home appliance.</li>
-              <li>✅ <strong>+$420/mo extra income</strong> per listing from 1-click upsells.</li>
-              <li>✅ Host custom payment link & automatic 0% commission payout.</li>
+              <li>✅ <span data-i18n="newWay1">1-Tap instant Wi-Fi copy & time-gated door lockbox PIN.</span></li>
+              <li>✅ <span data-i18n="newWay2">Short 30-sec video manuals for every home appliance.</span></li>
+              <li>✅ <span data-i18n="newWay3">+$420/mo extra income per listing from 1-click upsells.</span></li>
+              <li>✅ <span data-i18n="newWay4">Host custom payment link & automatic 0% commission payout.</span></li>
             </ul>
           </div>
         </div>
@@ -477,13 +477,13 @@
       <div class="landing-section">
         <div class="roi-calc-wrapper">
           <div class="calc-header">
-            <h3><i data-lucide="calculator" class="text-accent"></i> Real-Time Revenue & Time Savings Calculator</h3>
-            <p>Slide the bar to select your property portfolio size.</p>
+            <h3><i data-lucide="calculator" class="text-accent"></i> <span data-i18n="roiTitle">Real-Time Revenue & Time Savings Calculator</span></h3>
+            <p data-i18n="roiSub">Slide the bar to select your property portfolio size.</p>
           </div>
           
           <div class="calc-slider-box">
             <div class="slider-label-row">
-              <span>Properties Portfolio Size:</span>
+              <span data-i18n="roiLabelCount">Properties Portfolio Size:</span>
               <strong id="calc-prop-count">3 Properties</strong>
             </div>
             <input type="range" min="1" max="25" value="3" class="roi-slider" oninput="updateRoiCalculator(this.value)">
@@ -491,14 +491,14 @@
 
           <div class="calc-results-grid">
             <div class="calc-res-card">
-              <span class="res-label">Est. Extra Monthly Upsell Revenue</span>
+              <span class="res-label" data-i18n="roiLabelRev">Est. Extra Monthly Upsell Revenue</span>
               <strong class="res-val text-emerald" id="calc-revenue-val">$1,260.00</strong>
-              <span class="res-sub">From Shuttles, Late Check-out & Cleaning</span>
+              <span class="res-sub" data-i18n="roiSubRev">From Shuttles, Late Check-out & Cleaning</span>
             </div>
             <div class="calc-res-card">
-              <span class="res-label">Host Messaging Hours Saved</span>
+              <span class="res-label" data-i18n="roiLabelTime">Host Messaging Hours Saved</span>
               <strong class="res-val text-indigo" id="calc-time-saved">42 Hours / mo</strong>
-              <span class="res-sub">No more repeating Wi-Fi & AC questions</span>
+              <span class="res-sub" data-i18n="roiSubTime">No more repeating Wi-Fi & AC questions</span>
             </div>
           </div>
         </div>
@@ -507,16 +507,16 @@
       <!-- FUNNEL STEP 7: TRANSPARENT SAAS PRICING TIERS -->
       <div class="landing-section" id="pricing-section">
         <div class="section-center-head">
-          <span class="badge-tag">Transparent SaaS Pricing</span>
-          <h2>Select Your 14-Day Free Trial Plan</h2>
-          <p>Register today ($0 charged). Cancel anytime before Day 14 with 1-click.</p>
+          <span class="badge-tag" data-i18n="pricingTag">Transparent SaaS Pricing</span>
+          <h2 data-i18n="pricingTitle">Select Your 14-Day Free Trial Plan</h2>
+          <p data-i18n="pricingSub">Register today ($0 charged). Cancel anytime before Day 14 with 1-click.</p>
 
           <div class="billing-toggle-box">
             <button id="btn-bill-annual" class="b-toggle active" onclick="toggleBillingCycle('annual')">
-              Annual Billing <span class="badge-save">Save 20%</span>
+              <span data-i18n="btnAnnual">Annual Billing</span> <span class="badge-save">Save 20%</span>
             </button>
             <button id="btn-bill-monthly" class="b-toggle" onclick="toggleBillingCycle('monthly')">
-              Monthly Billing
+              <span data-i18n="btnMonthly">Monthly Billing</span>
             </button>
           </div>
         </div>
@@ -525,29 +525,29 @@
           
           <div class="pricing-card">
             <div class="p-card-header">
-              <span class="p-tier-name">Starter Host</span>
-              <p class="p-tier-desc">Perfect for single property hosts starting out.</p>
+              <span class="p-tier-name" data-i18n="starterName">Starter Host</span>
+              <p class="p-tier-desc" data-i18n="starterDesc">Perfect for single property hosts starting out.</p>
               <div class="p-price-box">
                 <span class="p-price">$0</span>
                 <span class="p-period">/ month forever</span>
               </div>
             </div>
             <ul class="p-features-list">
-              <li><i data-lucide="check" class="text-emerald"></i> <strong>1 Property Listing</strong></li>
-              <li><i data-lucide="check" class="text-emerald"></i> Unlimited Digital Guidebook Views</li>
-              <li><i data-lucide="check" class="text-emerald"></i> 1-Tap Wi-Fi & Time-Gated Door PIN</li>
-              <li><i data-lucide="check" class="text-emerald"></i> Host Custom Payment Link Support</li>
-              <li><i data-lucide="check" class="text-emerald"></i> Auto Take-Rate Split Engine</li>
-              <li class="fee-note"><i data-lucide="info"></i> 5% auto platform commission on guest upsells</li>
+              <li><i data-lucide="check" class="text-emerald"></i> <strong><span data-i18n="starterProp">1 Property Listing</span></strong></li>
+              <li><i data-lucide="check" class="text-emerald"></i> <span data-i18n="starterViews">Unlimited Digital Guidebook Views</span></li>
+              <li><i data-lucide="check" class="text-emerald"></i> <span data-i18n="starterWifi">1-Tap Wi-Fi & Time-Gated Door PIN</span></li>
+              <li><i data-lucide="check" class="text-emerald"></i> <span data-i18n="starterPay">Host Custom Payment Link Support</span></li>
+              <li><i data-lucide="check" class="text-emerald"></i> <span data-i18n="starterSplit">Auto Take-Rate Split Engine</span></li>
+              <li class="fee-note"><i data-lucide="info"></i> <span data-i18n="starterComm">5% auto platform commission on guest upsells</span></li>
             </ul>
-            <button class="btn-tier-action secondary" onclick="selectPricingTier('Starter')">Start Free Plan</button>
+            <button class="btn-tier-action secondary" onclick="selectPricingTier('Starter')"><span data-i18n="btnStartFree">Start Free Plan</span></button>
           </div>
 
           <div class="pricing-card popular">
             <div class="popular-ribbon">14-DAY FREE TRIAL</div>
             <div class="p-card-header">
-              <span class="p-tier-name text-emerald">Pro Host</span>
-              <p class="p-tier-desc">For growing hosts & multi-listing managers.</p>
+              <span class="p-tier-name text-emerald" data-i18n="proName">Pro Host</span>
+              <p class="p-tier-desc" data-i18n="proDesc">For growing hosts & multi-listing managers.</p>
               <div class="p-price-box">
                 <span class="p-price" id="price-pro-val">$14.00</span>
                 <span class="p-period">/ property / month</span>
@@ -555,20 +555,20 @@
               </div>
             </div>
             <ul class="p-features-list">
-              <li><i data-lucide="check" class="text-emerald"></i> <strong>Up to 10 Properties</strong></li>
-              <li><i data-lucide="check" class="text-emerald"></i> <strong>0% Platform Commission (Keep 100%)</strong></li>
-              <li><i data-lucide="check" class="text-emerald"></i> <strong>Host Custom Payment Links Allowed</strong></li>
-              <li><i data-lucide="check" class="text-emerald"></i> Automated Guest Tunnels (WhatsApp & SMS)</li>
-              <li><i data-lucide="check" class="text-emerald"></i> Global Merchant Invoicing</li>
-              <li><i data-lucide="check" class="text-emerald"></i> Printable Room Stand PDF Generator</li>
+              <li><i data-lucide="check" class="text-emerald"></i> <strong><span data-i18n="proProps">Up to 10 Properties</span></strong></li>
+              <li><i data-lucide="check" class="text-emerald"></i> <strong><span data-i18n="proComm">0% Platform Commission (Keep 100%)</span></strong></li>
+              <li><i data-lucide="check" class="text-emerald"></i> <strong><span data-i18n="proPay">Host Custom Payment Links Allowed</span></strong></li>
+              <li><i data-lucide="check" class="text-emerald"></i> <span data-i18n="proTunnels">Automated Guest Tunnels (WhatsApp & SMS)</span></li>
+              <li><i data-lucide="check" class="text-emerald"></i> <span data-i18n="proInv">Global Merchant Invoicing</span></li>
+              <li><i data-lucide="check" class="text-emerald"></i> <span data-i18n="proStand">Printable Room Stand PDF Generator</span></li>
             </ul>
-            <button class="btn-tier-action primary" onclick="selectPricingTier('Pro Host')">Start 14-Day Free Trial ($0 Today)</button>
+            <button class="btn-tier-action primary" onclick="selectPricingTier('Pro Host')"><span data-i18n="btnProTrial">Start 14-Day Free Trial ($0 Today)</span></button>
           </div>
 
           <div class="pricing-card">
             <div class="p-card-header">
-              <span class="p-tier-name text-indigo">Enterprise & Hotel</span>
-              <p class="p-tier-desc">For boutique hotels, resorts & large property teams.</p>
+              <span class="p-tier-name text-indigo" data-i18n="entName">Enterprise & Hotel</span>
+              <p class="p-tier-desc" data-i18n="entDesc">For boutique hotels, resorts & large property teams.</p>
               <div class="p-price-box">
                 <span class="p-price" id="price-ent-val">$29.00</span>
                 <span class="p-period">/ property / month</span>
@@ -576,13 +576,13 @@
               </div>
             </div>
             <ul class="p-features-list">
-              <li><i data-lucide="check" class="text-emerald"></i> <strong>10+ Properties & Boutique Hotels</strong></li>
-              <li><i data-lucide="check" class="text-emerald"></i> <strong>0% Commission on Upsells</strong></li>
-              <li><i data-lucide="check" class="text-emerald"></i> <strong>White-Label Domain (yourhotel.hostifyos.com)</strong></li>
-              <li><i data-lucide="check" class="text-emerald"></i> Dedicated Merchant Account</li>
-              <li><i data-lucide="check" class="text-emerald"></i> 24/7 Priority VIP Phone Support</li>
+              <li><i data-lucide="check" class="text-emerald"></i> <strong><span data-i18n="entProps">10+ Properties & Boutique Hotels</span></strong></li>
+              <li><i data-lucide="check" class="text-emerald"></i> <strong><span data-i18n="entComm">0% Commission on Upsells</span></strong></li>
+              <li><i data-lucide="check" class="text-emerald"></i> <strong><span data-i18n="entDomain">White-Label Domain (yourhotel.hostifyos.com)</span></strong></li>
+              <li><i data-lucide="check" class="text-emerald"></i> <span data-i18n="entAccount">Dedicated Merchant Account</span></li>
+              <li><i data-lucide="check" class="text-emerald"></i> <span data-i18n="entPhone">24/7 Priority VIP Phone Support</span></li>
             </ul>
-            <button class="btn-tier-action secondary" onclick="selectPricingTier('Enterprise')">Start Enterprise Trial</button>
+            <button class="btn-tier-action secondary" onclick="selectPricingTier('Enterprise')"><span data-i18n="btnEntTrial">Start Enterprise Trial</span></button>
           </div>
 
 
@@ -592,59 +592,59 @@
       <!-- FUNNEL STEP 8: FREQUENTLY ASKED QUESTIONS (OBJECTION HANDLING) -->
       <div class="landing-section">
         <div class="section-center-head">
-          <span class="badge-tag">FAQ</span>
-          <h2>Frequently Asked Questions</h2>
-          <p>Everything you need to know about HostifyOS guidebooks & billing.</p>
+          <span class="badge-tag" data-i18n="faqTag">FAQ</span>
+          <h2 data-i18n="faqTitle">Frequently Asked Questions</h2>
+          <p data-i18n="faqSub">Everything you need to know about HostifyOS guidebooks & billing.</p>
         </div>
 
         <div class="faq-accordion-wrapper">
           <div class="faq-item" onclick="toggleFaq(this)">
             <div class="faq-question">
-              <h4>Do my guests need to download an app?</h4>
+              <h4 data-i18n="faqQ1">Do my guests need to download an app?</h4>
               <i data-lucide="chevron-down" class="faq-icon"></i>
             </div>
             <div class="faq-answer">
-              <p>No! HostifyOS works as an instant Web App (PWA). Guests simply scan your printed QR stand or click your link to view Wi-Fi and services instantly on any smartphone browser.</p>
+              <p data-i18n="faqA1">No! HostifyOS works as an instant Web App (PWA). Guests simply scan your printed QR stand or click your link to view Wi-Fi and services instantly on any smartphone browser.</p>
             </div>
           </div>
 
           <div class="faq-item" onclick="toggleFaq(this)">
             <div class="faq-question">
-              <h4>Can I use my own custom payment link?</h4>
+              <h4 data-i18n="faqQ2">Can I use my own custom payment link?</h4>
               <i data-lucide="chevron-down" class="faq-icon"></i>
             </div>
             <div class="faq-answer">
-              <p>Yes! Hosts can paste their custom payment URL (Stripe, Revolut, PayPal, Lemon Squeezy, etc.) so guest payments go directly into your account.</p>
+              <p data-i18n="faqA2">Yes! Hosts can paste their custom payment URL (Stripe, Revolut, PayPal, Lemon Squeezy, etc.) so guest payments go directly into your account.</p>
             </div>
           </div>
 
           <div class="faq-item" onclick="toggleFaq(this)">
             <div class="faq-question">
-              <h4>How does the 14-Day Free Trial work?</h4>
+              <h4 data-i18n="faqQ3">How does the 14-Day Free Trial work?</h4>
               <i data-lucide="chevron-down" class="faq-icon"></i>
             </div>
             <div class="faq-answer">
-              <p>When you sign up, $0 is charged today. You get 14 full days to test HostifyOS with your properties. If you decide to cancel anytime before Day 14, your card will never be charged.</p>
+              <p data-i18n="faqA3">When you sign up, $0 is charged today. You get 14 full days to test HostifyOS with your properties. If you decide to cancel anytime before Day 14, your card will never be charged.</p>
             </div>
           </div>
 
           <div class="faq-item" onclick="toggleFaq(this)">
             <div class="faq-question">
-              <h4>How do guests access the guidebook in their room?</h4>
+              <h4 data-i18n="faqQ4">How do guests access the guidebook in their room?</h4>
               <i data-lucide="chevron-down" class="faq-icon"></i>
             </div>
             <div class="faq-answer">
-              <p>Guests can scan the printable A5 room stand QR code placed in your villa or apartment, or click the automatic WhatsApp/SMS welcome link sent before check-in.</p>
+              <p data-i18n="faqA4">Guests can scan the printable A5 room stand QR code placed in your villa or apartment, or click the automatic WhatsApp/SMS welcome link sent before check-in.</p>
             </div>
           </div>
 
           <div class="faq-item" onclick="toggleFaq(this)">
             <div class="faq-question">
-              <h4>How does the platform commission split work?</h4>
+              <h4 data-i18n="faqQ5">How does the platform commission split work?</h4>
               <i data-lucide="chevron-down" class="faq-icon"></i>
             </div>
             <div class="faq-answer">
-              <p>On the Starter tier ($0/mo), guest upsell sales incur a 5% platform fee automatically deducted during payout. On Pro Host ($14/mo) and Enterprise tiers, you pay 0% platform commission and keep 100% of guest sales.</p>
+              <p data-i18n="faqA5">On the Starter tier ($0/mo), guest upsell sales incur a 5% platform fee automatically deducted during payout. On Pro Host ($14/mo) and Enterprise tiers, you pay 0% platform commission and keep 100% of guest sales.</p>
             </div>
           </div>
 
