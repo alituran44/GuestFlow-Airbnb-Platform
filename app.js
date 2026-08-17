@@ -1584,7 +1584,7 @@ function updateTopNavAuthUI() {
     if (container) {
       container.innerHTML = `
         <div style="display:flex; align-items:center; gap:8px;">
-          <span class="user-pill-badge"><i data-lucide="user-check"></i> ${hostAuth.name} (Host)</span>
+          <span class="user-pill-badge"><i data-lucide="user"></i> ${hostAuth.name} (Host)</span>
           <button class="btn-secondary-sm" onclick="logoutUser()">
             <i data-lucide="log-out"></i> Logout
           </button>
@@ -1967,6 +1967,26 @@ function renderCommissionAggregator() {
   if (feeEl) feeEl.textContent = formatPrice(summary.totalPlatformFees);
   if (netEl) netEl.textContent = formatPrice(summary.totalHostPayouts);
   if (rateEl) rateEl.textContent = `${(hostAuth.commissionRate * 100).toFixed(1)}%`;
+
+  // Synchronize Top Metrics Grid Cards & Top Header Badge
+  const metricRev = document.getElementById('metric-revenue');
+  const metricFees = document.getElementById('metric-platform-fees');
+  const headerBadge = document.getElementById('host-header-badge');
+  const subTierDisplay = document.getElementById('host-sub-tier-display');
+
+  if (metricRev) metricRev.textContent = formatPrice(summary.grossSales);
+  if (metricFees) metricFees.textContent = formatPrice(summary.totalPlatformFees);
+
+  const isPro = hostAuth.commissionRate === 0 || (hostAuth.plan && hostAuth.plan.includes('Pro'));
+  if (headerBadge) {
+    headerBadge.textContent = isPro ? 'PRO HOST ACTIVE (0% COMM)' : 'STARTER TIER ACTIVE';
+    headerBadge.style.background = isPro ? 'rgba(99,102,241,0.15)' : 'rgba(245,158,11,0.15)';
+    headerBadge.style.color = isPro ? 'var(--accent-indigo)' : 'var(--accent-amber)';
+  }
+
+  if (subTierDisplay) {
+    subTierDisplay.textContent = isPro ? 'Pro Host Tier (0% Comm)' : 'Starter Tier (5% Comm)';
+  }
 }
 
 function triggerInstantFeeSweep() {
