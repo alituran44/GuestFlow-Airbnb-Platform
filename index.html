@@ -2170,25 +2170,41 @@
 
   <!-- SUPER ADMIN 2FA TOTP AUTHENTICATOR MODAL -->
   <div id="modal-admin-2fa" class="modal-backdrop">
-    <div class="modal-card" style="max-width:440px;">
+    <div class="modal-card" style="max-width:480px;">
       <button class="modal-close" onclick="closeModal('modal-admin-2fa')"><i data-lucide="x"></i></button>
-      <div style="text-align:center; margin-bottom:16px;">
-        <div style="width:48px; height:48px; border-radius:12px; background:rgba(99,102,241,0.15); display:inline-flex; align-items:center; justify-content:center; color:var(--accent-indigo); margin-bottom:8px;">
-          <i data-lucide="shield-check" style="width:24px; height:24px;"></i>
+      <div style="text-align:center; margin-bottom:14px;">
+        <div style="width:44px; height:44px; border-radius:12px; background:rgba(99,102,241,0.15); display:inline-flex; align-items:center; justify-content:center; color:var(--accent-indigo); margin-bottom:6px;">
+          <i data-lucide="shield-check" style="width:22px; height:22px;"></i>
         </div>
         <h3 style="margin:0;">Two-Factor Authentication (2FA TOTP)</h3>
-        <p class="modal-desc-text" style="font-size:11px;">Enter the 6-digit code from your Authenticator app (Google Authenticator / 1Password).</p>
+        <p class="modal-desc-text" style="font-size:11px; margin-top:2px;">Scan the QR code with Google Authenticator, 1Password, or Authy to generate your 6-digit TOTP code.</p>
+      </div>
+
+      <!-- 2FA QR CODE & SECRET SETUP BOX -->
+      <div style="background:var(--bg-dark); border:1px solid var(--border-color); padding:14px; border-radius:12px; margin-bottom:14px; display:flex; gap:14px; align-items:center;">
+        <div style="background:#fff; padding:6px; border-radius:8px; display:inline-flex;">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=otpauth://totp/HostifyOS:admin@hostifyos.com?secret=JBSWY3DPEHPK3PXP&issuer=HostifyOS" alt="2FA TOTP QR Code" style="width:100px; height:100px; display:block;">
+        </div>
+        <div style="flex:1; font-size:11px; color:var(--text-secondary);">
+          <strong style="color:var(--text-main); display:block; margin-bottom:4px;">1. Scan QR Code or enter Secret:</strong>
+          <div style="background:var(--bg-obsidian); border:1px dashed var(--border-color); padding:6px 8px; border-radius:6px; font-family:var(--font-mono); font-size:11px; color:var(--accent-indigo); margin-bottom:6px; letter-spacing:1px; word-break:break-all;">
+            JBSWY3DPEHPK3PXP
+          </div>
+          <button type="button" class="btn-secondary-sm" onclick="autofillDemo2FA()" style="width:100%; font-size:10px; padding:4px 8px; color:var(--accent-emerald); border-color:rgba(16,185,129,0.3);">
+            ⚡ Click for Demo Code (123456)
+          </button>
+        </div>
       </div>
 
       <form onsubmit="event.preventDefault(); submitAdmin2FACode();">
-        <div class="form-group">
-          <label style="text-align:center; display:block;">6-Digit Security Code</label>
-          <input type="text" id="input-2fa-code" placeholder="123 456" maxlength="6" style="text-align:center; font-size:20px; letter-spacing:4px; font-family:var(--font-mono);" required>
+        <div class="form-group" style="margin-bottom:12px;">
+          <label style="text-align:center; display:block; font-size:11px;">Enter 6-Digit Authenticator Code</label>
+          <input type="text" id="input-2fa-code" placeholder="123456" maxlength="6" style="text-align:center; font-size:22px; letter-spacing:6px; font-family:var(--font-mono); font-weight:700; color:var(--accent-emerald);" required>
         </div>
-        <div style="background:var(--bg-dark); border:1px solid var(--border-color); padding:10px; border-radius:8px; margin-bottom:14px; font-size:10px; color:var(--text-muted); text-align:center;">
-          🔒 IP Allowlist & New Device Security Guard Active
+        <div style="background:rgba(99,102,241,0.1); border:1px solid rgba(99,102,241,0.2); padding:8px; border-radius:8px; margin-bottom:12px; font-size:10px; color:var(--accent-indigo); text-align:center;">
+          🔒 IP Allowlist & Device Fingerprint Security Active
         </div>
-        <button type="submit" class="btn-primary-lg">Verify 2FA & Enter Admin Panel</button>
+        <button type="submit" class="btn-primary-lg">Verify 2FA & Enter Admin Console</button>
       </form>
     </div>
   </div>

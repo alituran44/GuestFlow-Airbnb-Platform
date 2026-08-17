@@ -1672,6 +1672,12 @@ function handleUserLogin(role) {
   }
 }
 
+function autofillDemo2FA() {
+  const input = document.getElementById('input-2fa-code');
+  if (input) input.value = '123456';
+  showToast("⚡ Demo 2FA TOTP Code (123456) filled automatically!");
+}
+
 function submitAdmin2FACode() {
   const code = document.getElementById('input-2fa-code').value;
   if (!code || code.length !== 6) {
