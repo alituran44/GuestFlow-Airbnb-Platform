@@ -2330,19 +2330,8 @@ function openLemonSqueezyCheckout(tierName, priceStr) {
   const planNameEl = document.getElementById('lemon-plan-name');
   if (planNameEl) planNameEl.textContent = tierName;
   
-  let formattedPriceStr = priceStr;
-  if (priceStr.includes('ANNUAL') || priceStr.includes('$168.00') || priceStr.includes('yr')) {
-    formattedPriceStr = `${formatPrice(168.0)} / yr`;
-  } else if (tierName.includes('Enterprise') || priceStr.includes('$29.00')) {
-    formattedPriceStr = `${formatPrice(29.0)} / mo`;
-  } else if (priceStr.includes('$0.00')) {
-    formattedPriceStr = `${formatPrice(0.0)} Free Trial`;
-  } else {
-    formattedPriceStr = `${formatPrice(14.0)} / mo`;
-  }
-
   const planPriceEl = document.getElementById('lemon-plan-price');
-  if (planPriceEl) planPriceEl.textContent = `${formattedPriceStr} ($0.00 Due Today)`;
+  if (planPriceEl) planPriceEl.textContent = `${priceStr} ($0.00 Due Today)`;
 
   openModal('modal-lemon-checkout');
 }
@@ -2870,10 +2859,10 @@ function toggleBillingCycle(type) {
     if (proNoteEl) proNoteEl.textContent = 'Billed annually at $168/yr (Save 20%)';
     if (entNoteEl) entNoteEl.textContent = 'Billed annually at $348/yr (Save 20%)';
   } else {
-    if (proPriceEl) proPriceEl.textContent = formatPrice(18.0);
-    if (entPriceEl) entPriceEl.textContent = formatPrice(36.0);
-    if (proNoteEl) proNoteEl.textContent = 'Billed monthly at $18/mo';
-    if (entNoteEl) entNoteEl.textContent = 'Billed monthly at $36/mo';
+    if (proPriceEl) proPriceEl.textContent = formatPrice(19.0);
+    if (entPriceEl) entPriceEl.textContent = formatPrice(39.0);
+    if (proNoteEl) proNoteEl.textContent = 'Billed monthly at $19/mo';
+    if (entNoteEl) entNoteEl.textContent = 'Billed monthly at $39/mo';
   }
 }
 
@@ -2887,7 +2876,7 @@ function selectPricingTier(tierName) {
   if (billingCycle === 'annual') {
     priceStr = tierName === 'Enterprise' ? '$348.00 / year ($29/mo)' : '$168.00 / year ($14/mo)';
   } else {
-    priceStr = tierName === 'Enterprise' ? '$36.00 / month' : '$18.00 / month';
+    priceStr = tierName === 'Enterprise' ? '$39.00 / month' : '$19.00 / month';
   }
 
   openLemonSqueezyCheckout(`${tierName} (${billingCycle.toUpperCase()})`, priceStr);
