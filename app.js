@@ -2366,9 +2366,11 @@ let LEMONSQUEEZY_STORE_CONFIG = {
   apiKey: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NGQ1OWNlZi1kYmI4LTRlYTUtYjE3OC1kMjU0MGZjZDY5MTkiLCJqdGkiOiIyZDdkYjBhMjYxN2VhYWExZjM4NDMxN2FkM2ZiYTk5MTYwZGI2Yjc2OGViZDJjNGM3ZDFiNjM3ZTQxYWQ1YzEwNTU3Njk4NzQzNzI1NzY0MCIsImlhdCI6MTc4NzQyMzkyOS45MTI1MTgsIm5iZiI6MTc4NzQyMzkyOS45MTI1MjIsImV4cCI6MTgwMzI1NDQwMC4wMzAyNywic3ViIjoiNzgwNzY2OSIsInNjb3BlcyI6W119.UlNtirQ5vkEh4n9l0qGF4fpjSKFou5SvEpHiXHb4T6ATAerzDYE5nzvKpLR2RccgWerrIkEDXd84jdIBo9ZlEvwn6oTO_0RM6aVqo1i5WvHgwf92FnV3gwA4tdTUKtllnCOq7uHjY6eK5w2GEZZ62TbHo-27lACYMU0DHMfT18X6zmc3GgHJGx2bFj9D5WPpM72TuFm3hig7OwZO6TPhX15BC1HY7EXXGWzQ3QW42aH_eFO7fSBGBXtR3a5Aw8tpzXpqy8KfdP26f27e8y7OGG_tm6ROa9fRNDfAMTGap16E_T0h3nMrOLUGjI1nP7LizqM5FL1iiMgNnNdHaGLMrp87F948kAkLgYnT-RmIQT3QGa_25ZdWoUqs9ZcFUEor6-iiWwlv_f0jHJKlb0vSbXIbwojlvdH1k0-trLLxaCUUC88gix9B1gyEgod9gFO37qcTpCqBqnmwIUWTatPOsM4OjOojTcr6xkfVnqaOP1vhfQbTiscXSpvBnRPIneIhfzS9OmN96lNeVHC-3GMku-_xcJsjLWNs3JbwG57IqpV0kkit62DEbLAzVuEVo7-KdMqcS75YLRQYlmPx3Rw21jxR9VkAEfT1VCEJhFw8GDGsv-F27Hg6H3FZMooBPzTbaOfHCN0vQ75u7J7hiLh2a_RLux7CJVPOSr8c-RKIbGk',
   storeId: '456562',
   storeUrl: 'https://hostifyos.lemonsqueezy.com',
-  proMonthlyUrl: 'https://hostifyos.lemonsqueezy.com/checkout',
-  proAnnualUrl: 'https://hostifyos.lemonsqueezy.com/checkout',
-  enterpriseUrl: 'https://hostifyos.lemonsqueezy.com/checkout'
+  starterUrl: 'https://hostifyos.lemonsqueezy.com/checkout/buy/39a89d21-fdde-4466-9d8d-35bf2a1a7aed',
+  proMonthlyUrl: 'https://hostifyos.lemonsqueezy.com/checkout/buy/638c165d-bb93-4c79-b896-ea2ff3ef4bb2',
+  proAnnualUrl: 'https://hostifyos.lemonsqueezy.com/checkout/buy/344b7365-ce37-4081-886a-b8aaf84b9488',
+  enterpriseMonthlyUrl: 'https://hostifyos.lemonsqueezy.com/checkout/buy/d778e297-9e79-41ab-be9b-1ec3a67b6655',
+  enterpriseAnnualUrl: 'https://hostifyos.lemonsqueezy.com/checkout/buy/626e768b-a63a-4355-b893-ec52414ba8e0'
 };
 
 function initLemonSqueezyApi(apiKey, storeId) {
@@ -2379,7 +2381,7 @@ function initLemonSqueezyApi(apiKey, storeId) {
       window.LemonSqueezy.Setup({
         eventHandler: (event) => {
           if (event.event === 'Checkout.Success') {
-            showToast("🎉 HostifyOS Pro Subscription Activated via Lemon Squeezy!");
+            showToast("🎉 HostifyOS Subscription Activated via Lemon Squeezy Store #456562!");
           }
         }
       });
@@ -2411,18 +2413,24 @@ function formatCardExp(input) {
 function setLemonSqueezyUrls(monthlyUrl, annualUrl, enterpriseUrl) {
   if (monthlyUrl) LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl = monthlyUrl;
   if (annualUrl) LEMONSQUEEZY_STORE_CONFIG.proAnnualUrl = annualUrl;
-  if (enterpriseUrl) LEMONSQUEEZY_STORE_CONFIG.enterpriseUrl = enterpriseUrl;
+  if (enterpriseUrl) LEMONSQUEEZY_STORE_CONFIG.enterpriseMonthlyUrl = enterpriseUrl;
   showToast("✅ Lemon Squeezy Store Checkout URLs Updated!");
 }
 
 function openLemonSqueezyCheckout(tierName, priceStr) {
-  const planNameEl = document.getElementById('lemon-plan-name');
-  if (planNameEl) planNameEl.textContent = tierName;
-  
-  const planPriceEl = document.getElementById('lemon-plan-price');
-  if (planPriceEl) planPriceEl.textContent = `${priceStr} ($0.00 Due Today)`;
+  let targetUrl = LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl;
+  if (tierName.includes('Starter')) targetUrl = LEMONSQUEEZY_STORE_CONFIG.starterUrl;
+  else if (tierName.includes('Pro Host') && tierName.includes('ANNUAL')) targetUrl = LEMONSQUEEZY_STORE_CONFIG.proAnnualUrl;
+  else if (tierName.includes('Pro Host')) targetUrl = LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl;
+  else if (tierName.includes('Enterprise') && tierName.includes('ANNUAL')) targetUrl = LEMONSQUEEZY_STORE_CONFIG.enterpriseAnnualUrl;
+  else if (tierName.includes('Enterprise')) targetUrl = LEMONSQUEEZY_STORE_CONFIG.enterpriseMonthlyUrl;
 
-  openModal('modal-lemon-checkout');
+  // Open Lemon Squeezy overlay or direct checkout link
+  if (window.LemonSqueezy && typeof window.LemonSqueezy.Url === 'object') {
+    window.LemonSqueezy.Url.Open(targetUrl);
+  } else {
+    window.open(targetUrl, '_blank');
+  }
 }
 
 function processLemonSqueezySubscribe() {
@@ -2435,9 +2443,11 @@ function processLemonSqueezySubscribe() {
   
   closeModal('modal-lemon-checkout');
 
-  if (LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl && LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl.includes('/buy/')) {
-    window.open(LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl, '_blank');
-  }
+  let targetUrl = LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl;
+  if (hostAuth.plan.includes('Starter')) targetUrl = LEMONSQUEEZY_STORE_CONFIG.starterUrl;
+  else if (hostAuth.plan.includes('Annual') || hostAuth.plan.includes('ANNUAL')) targetUrl = LEMONSQUEEZY_STORE_CONFIG.proAnnualUrl;
+
+  window.open(targetUrl, '_blank');
 
   showToast(`🎉 Welcome ${email}! 14-Day Free Trial Activated ($0 Charged Today).`);
   switchView('portal');
