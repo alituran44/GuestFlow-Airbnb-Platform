@@ -1378,14 +1378,14 @@
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
                   <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <span class="welcome-pill">WELCOME TO YOUR STAY</span>
+                    <span class="welcome-pill" data-i18n="welcomePill">WELCOME TO YOUR STAY</span>
                     <span class="badge-tag" style="background:rgba(59,130,246,0.3); color:#60A5FA;">AIRBNB</span>
                   </div>
                   <h1 style="font-size:17px; margin-bottom:2px;">Malibu Beachfront Villa & Suite</h1>
                   <p style="font-size:11px; margin-bottom:8px;"><i data-lucide="map-pin"></i> 22804 Pacific Coast Hwy, Malibu, CA</p>
                   <div class="stay-meta-bar" style="padding:4px 8px; font-size:10px;">
-                    <div class="meta-item"><i data-lucide="calendar"></i> <span>Check-in: 3:00 PM</span></div>
-                    <div class="meta-item"><i data-lucide="clock"></i> <span>Check-out: 11:00 AM</span></div>
+                    <div class="meta-item"><i data-lucide="calendar"></i> <span data-i18n="guestCheckInLabel">Check-in: 3:00 PM</span></div>
+                    <div class="meta-item"><i data-lucide="clock"></i> <span data-i18n="guestCheckOutLabel">Check-out: 11:00 AM</span></div>
                   </div>
                 </div>
               </div>
@@ -1398,7 +1398,7 @@
                     <i data-lucide="copy" style="width:14px; height:14px; color:var(--text-muted);"></i>
                   </div>
                   <div style="margin-top:6px;">
-                    <span style="font-size:9px; text-transform:uppercase; color:var(--text-muted); display:block;">INSTANT WI-FI</span>
+                    <span style="font-size:9px; text-transform:uppercase; color:var(--text-muted); display:block;" data-i18n="instantWifi">INSTANT WI-FI</span>
                     <strong style="font-size:11px; color:#fff;">MalibuVilla_5G</strong>
                   </div>
                 </div>
@@ -1409,7 +1409,7 @@
                     <i data-lucide="eye" style="width:14px; height:14px; color:var(--text-muted);"></i>
                   </div>
                   <div style="margin-top:6px;">
-                    <span style="font-size:9px; text-transform:uppercase; color:var(--text-muted); display:block;">DOOR ACCESS CODE</span>
+                    <span style="font-size:9px; text-transform:uppercase; color:var(--text-muted); display:block;" data-i18n="doorAccessCode">DOOR ACCESS CODE</span>
                     <strong style="font-size:11px; color:#fff;" id="mob-pin-code-reveal">••••-21</strong>
                   </div>
                 </div>
@@ -1417,14 +1417,14 @@
 
               <!-- 2ND PHOTO SUB TABS -->
               <div style="display:flex; gap:6px; padding:0 10px 10px;">
-                <button class="g-tab active" style="flex:1; padding:6px 4px; font-size:10px;"><i data-lucide="book-open"></i> House Manual</button>
-                <button class="g-tab" style="flex:1; padding:6px 4px; font-size:10px;" onclick="switchMobileTab('home', null)"><i data-lucide="sparkles"></i> Store</button>
-                <button class="g-tab" style="flex:1; padding:6px 4px; font-size:10px;"><i data-lucide="map"></i> AI Local Guide</button>
+                <button class="g-tab active" style="flex:1; padding:6px 4px; font-size:10px;"><i data-lucide="book-open"></i> <span data-i18n="tabHouseManual">House Manual</span></button>
+                <button class="g-tab" style="flex:1; padding:6px 4px; font-size:10px;" onclick="switchMobileTab('home', null)"><i data-lucide="sparkles"></i> <span data-i18n="tabConciergeStore">Store</span></button>
+                <button class="g-tab" style="flex:1; padding:6px 4px; font-size:10px;"><i data-lucide="map"></i> <span data-i18n="tabAiLocalGuide">AI Local Guide</span></button>
               </div>
 
               <!-- 2ND PHOTO APPLIANCE VIDEO MANUALS -->
               <div style="padding:0 10px 10px;">
-                <h4 style="font-size:12px; margin-bottom:8px; display:flex; align-items:center; gap:4px; color:#fff;">
+                <h4 style="font-size:12px; margin-bottom:8px; display:flex; align-items:center; gap:4px; color:#fff;" data-i18n="applianceVideoGuides">
                   <i data-lucide="video" style="color:var(--accent-emerald);"></i> Appliance Video Guides
                 </h4>
                 <div style="background:var(--bg-obsidian); border:1px solid var(--border-subtle); border-radius:8px; overflow:hidden; display:flex; gap:10px; padding:8px; cursor:pointer;" onclick="openVideoModal('Nest AC & Thermostat', 'https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?auto=format&fit=crop&w=600&q=80')">
@@ -1441,16 +1441,16 @@
 
               <!-- 2ND PHOTO HOUSE RULES & WHATSAPP BUTTON -->
               <div style="padding:0 10px 10px;">
-                <h4 style="font-size:12px; margin-bottom:8px; display:flex; align-items:center; gap:4px; color:#fff;">
+                <h4 style="font-size:12px; margin-bottom:8px; display:flex; align-items:center; gap:4px; color:#fff;" data-i18n="houseRulesTitle">
                   <i data-lucide="shield-check" style="color:var(--accent-emerald);"></i> House Rules & Guidelines
                 </h4>
                 <div style="background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:8px; padding:8px; margin-bottom:8px;">
-                  <strong style="font-size:11px; color:#fff;">🔊 Quiet Hours</strong>
-                  <p style="font-size:10px; color:var(--text-secondary); margin:2px 0 0;">10:00 PM – 8:00 AM out of respect for neighbors.</p>
+                  <strong style="font-size:11px; color:#fff;" data-i18n="ruleQuietHoursTitle">🔊 Quiet Hours</strong>
+                  <p style="font-size:10px; color:var(--text-secondary); margin:2px 0 0;" data-i18n="ruleQuietHoursDesc">10:00 PM – 8:00 AM out of respect for neighbors.</p>
                 </div>
                 <button class="btn-whatsapp-host" onclick="contactHostWhatsApp()" style="width:100%; padding:10px; font-size:12px; margin-bottom:6px;">
                   <i data-lucide="message-square"></i>
-                  <span>Need help? Message Host on WhatsApp</span>
+                  <span data-i18n="btnWhatsappHost">Need help? Message Host on WhatsApp</span>
                 </button>
                 <p style="text-align:center; font-size:9px; color:var(--text-muted); margin:0;">Powered by <strong>HostifyOS.com</strong></p>
               </div>

@@ -1173,6 +1173,7 @@ const i18nDict = {
 function changeLanguage(langKey) {
   if (!i18nDict[langKey]) return;
   currentLanguage = langKey;
+  document.documentElement.lang = langKey.toLowerCase();
   
   const targetCurrency = languageCurrencyMap[langKey] || 'USD';
   changeCurrency(targetCurrency);
@@ -1181,7 +1182,13 @@ function changeLanguage(langKey) {
   if (currSelect) currSelect.value = targetCurrency;
 
   const t = i18nDict[langKey];
-  
+  const meta = langMeta[langKey] || langMeta.EN;
+
+  const flagEl = document.getElementById('active-lang-flag');
+  const codeEl = document.getElementById('active-lang-code');
+  if (flagEl) flagEl.innerText = meta.flag;
+  if (codeEl) codeEl.innerText = meta.name;
+
   // Translate all elements with data-i18n attribute with safe fallback
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
@@ -1189,7 +1196,11 @@ function changeLanguage(langKey) {
     if (val) {
       const icon = el.querySelector('i');
       if (icon) {
-        el.innerHTML = `${icon.outerHTML} ${val}`;
+        // Keep Lucide icon SVG/i element intact
+        const iconClone = icon.cloneNode(true);
+        el.innerHTML = '';
+        el.appendChild(iconClone);
+        el.appendChild(document.createTextNode(` ${val}`));
       } else {
         el.innerText = val;
       }
@@ -1207,6 +1218,14 @@ function changeLanguage(langKey) {
 
   const navAdminSpan = document.querySelector('#btn-view-admin span');
   if (navAdminSpan && t.navAdmin) navAdminSpan.innerText = t.navAdmin;
+
+  // Re-render dynamic guest cards & spots
+  const prop = getActiveProperty();
+  if (prop) {
+    if (typeof renderVideoManuals === 'function') renderVideoManuals(prop.videos);
+    if (typeof renderGuestServices === 'function') renderGuestServices();
+    if (typeof renderLocalSpots === 'function') renderLocalSpots('all');
+  }
 
   showToast(t.toastLang);
   lucide.createIcons();
