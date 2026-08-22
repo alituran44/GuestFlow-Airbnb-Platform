@@ -31,7 +31,7 @@ const languageCurrencyMap = {
 const i18nDict = {
   EN: {
     heroBadge: "Automated Short-Term Rental Revenue Engine",
-    heroTitle: "Turn Every Guest Stay Into +$400+/mo Extra Income Per Property",
+    heroTitle: "Turn Every Guest Stay Into +$420/mo Extra Income Per Property",
     heroSub: "Eliminate repetitive guest messages about Wi-Fi & AC. Offer 1-tap digital guidebooks, time-gated door access, custom payment links, and automated messaging tunnels.",
     btnCalcHero: "Calculate Your Extra Revenue (10-Sec Quiz)",
     viewDemo: "Interactive Guest Demo",
@@ -431,7 +431,26 @@ const i18nDict = {
     navGuest: "Vista Huésped (PWA)",
     navHost: "Portal Anfitrión",
     navAdmin: "Super Admin",
-    toastLang: "Idioma actualizado a Español (EUR)"
+    toastLang: "Idioma actualizado a Español (EUR)",
+    welcomePill: "Bienvenido a su estancia",
+    guestCheckInLabel: "Entrada: 15:00",
+    guestCheckOutLabel: "Salida: 11:00",
+    instantWifi: "Wi-Fi Instantáneo",
+    doorAccessCode: "Código de Puerta",
+    tabHouseManual: "Manual de la Casa",
+    tabConciergeStore: "Conserjería y Tienda",
+    tabAiLocalGuide: "Guía Local IA",
+    applianceVideoGuides: "Guías en Video de Electrodomésticos",
+    houseRulesTitle: "Reglas de la Casa",
+    ruleQuietHoursTitle: "Horas de Silencio",
+    ruleQuietHoursDesc: "22:00 – 08:00 por respeto a los vecinos.",
+    ruleTrashTitle: "Basura y Reciclaje",
+    ruleTrashDesc: "Los contenedores están en el pasillo lateral.",
+    guestServicesTitle: "Servicios para Huéspedes",
+    guestServicesSub: "Reserve servicios extra al instante.",
+    aiPlacesTitle: "Lugares Descubiertos por IA",
+    btnWhatsappHost: "¿Ayuda? Contactar por WhatsApp",
+    destinationWeatherSub: "Clima del Destino • Open-Meteo API En Vivo"
   },
   FR: {
     heroBadge: "Moteur de revenus automatisé pour locations saisonnières",
@@ -554,7 +573,26 @@ const i18nDict = {
     navGuest: "Vue Invité (PWA)",
     navHost: "Portail Hôte",
     navAdmin: "Super Admin",
-    toastLang: "Langue mise à jour en Français (EUR)"
+    toastLang: "Langue mise à jour en Français (EUR)",
+    welcomePill: "Bienvenue pour votre séjour",
+    guestCheckInLabel: "Arrivée: 15:00",
+    guestCheckOutLabel: "Départ: 11:00",
+    instantWifi: "Wi-Fi Instantané",
+    doorAccessCode: "Code d'accès Porte",
+    tabHouseManual: "Manuel de la Maison",
+    tabConciergeStore: "Conciergerie & Boutique",
+    tabAiLocalGuide: "Guide Local IA",
+    applianceVideoGuides: "Guides Vidéo des Équipements",
+    houseRulesTitle: "Règles de la Maison",
+    ruleQuietHoursTitle: "Heures de Silence",
+    ruleQuietHoursDesc: "22h00 – 08h00 par respect pour le voisinage.",
+    ruleTrashTitle: "Poubelles & Recyclage",
+    ruleTrashDesc: "Les poubelles sont situées sur l'allée latérale.",
+    guestServicesTitle: "Services & Conciergerie",
+    guestServicesSub: "Réservez des services supplémentaires instantanément.",
+    aiPlacesTitle: "Lieux Découverts par l'IA",
+    btnWhatsappHost: "Besoin d'aide ? Message WhatsApp",
+    destinationWeatherSub: "Météo de la Destination • API Open-Meteo En Direct"
   },
   DE: {
     heroBadge: "Automatisiertes Einnahmen-System für Ferienunterkünfte",
@@ -677,7 +715,26 @@ const i18nDict = {
     navGuest: "Gast-Ansicht (PWA)",
     navHost: "Gastgeber-Portal",
     navAdmin: "Super Admin",
-    toastLang: "Sprache geändert zu Deutsch (EUR)"
+    toastLang: "Sprache geändert zu Deutsch (EUR)",
+    welcomePill: "Willkommen zu Ihrem Aufenthalt",
+    guestCheckInLabel: "Check-in: 15:00 Uhr",
+    guestCheckOutLabel: "Check-out: 11:00 Uhr",
+    instantWifi: "Sofort-WLAN",
+    doorAccessCode: "Tür-Zugangscode",
+    tabHouseManual: "Hausanleitung",
+    tabConciergeStore: "Concierge & Shop",
+    tabAiLocalGuide: "KI-Lokalguide",
+    applianceVideoGuides: "Geräte-Videoanleitungen",
+    houseRulesTitle: "Hausregeln & Richtlinien",
+    ruleQuietHoursTitle: "Ruhezeiten",
+    ruleQuietHoursDesc: "22:00 – 08:00 Uhr aus Rücksicht auf Nachbarn.",
+    ruleTrashTitle: "Müll & Recycling",
+    ruleTrashDesc: "Mülltonnen befinden sich am seitlichen Gehweg.",
+    guestServicesTitle: "Gästeservices & Extras",
+    guestServicesSub: "Buchen Sie Zusatzleistungen sofort.",
+    aiPlacesTitle: "KI-Entdeckte Orte",
+    btnWhatsappHost: "Hilfe? WhatsApp an den Gastgeber",
+    destinationWeatherSub: "Zielwetter • Live Open-Meteo API"
   },
   IT: {
     heroBadge: "Motore di entrate automatizzato per case vacanze",
@@ -800,7 +857,26 @@ const i18nDict = {
     navGuest: "Vista Ospite (PWA)",
     navHost: "Portale Host",
     navAdmin: "Super Admin",
-    toastLang: "Lingua aggiornata in Italiano (EUR)"
+    toastLang: "Lingua aggiornata in Italiano (EUR)",
+    welcomePill: "Benvenuto nel tuo soggiorno",
+    guestCheckInLabel: "Check-in: 15:00",
+    guestCheckOutLabel: "Check-out: 11:00",
+    instantWifi: "Wi-Fi Istantaneo",
+    doorAccessCode: "Codice Accesso Porta",
+    tabHouseManual: "Manuale di Casa",
+    tabConciergeStore: "Concierge & Store",
+    tabAiLocalGuide: "Guida Locale IA",
+    applianceVideoGuides: "Guide Video Elettrodomestici",
+    houseRulesTitle: "Regole della Casa",
+    ruleQuietHoursTitle: "Orari di Silenzio",
+    ruleQuietHoursDesc: "22:00 – 08:00 nel rispetto dei vicini.",
+    ruleTrashTitle: "Rifiuti e Riciclaggio",
+    ruleTrashDesc: "I bidoni si trovano sul camminamento laterale.",
+    guestServicesTitle: "Servizi per gli Ospiti",
+    guestServicesSub: "Prenota servizi extra all'istante.",
+    aiPlacesTitle: "Luoghi Scoperti dall'IA",
+    btnWhatsappHost: "Serve aiuto? Scrivi su WhatsApp",
+    destinationWeatherSub: "Meteo Destinazione • API Open-Meteo In Diretta"
   },
   PT: {
     heroBadge: "Motor de receita automatizado para aluguel por temporada",
@@ -923,7 +999,26 @@ const i18nDict = {
     navGuest: "Vista Hóspede (PWA)",
     navHost: "Portal Anfitrião",
     navAdmin: "Super Admin",
-    toastLang: "Idioma atualizado para Português (EUR)"
+    toastLang: "Idioma atualizado para Português (EUR)",
+    welcomePill: "Bem-vindo à sua estadia",
+    guestCheckInLabel: "Check-in: 15:00",
+    guestCheckOutLabel: "Check-out: 11:00",
+    instantWifi: "Wi-Fi Instantâneo",
+    doorAccessCode: "Código da Porta",
+    tabHouseManual: "Manual da Casa",
+    tabConciergeStore: "Concierge & Loja",
+    tabAiLocalGuide: "Guia Local IA",
+    applianceVideoGuides: "Vídeo-Guias dos Eletrodomésticos",
+    houseRulesTitle: "Regras da Casa",
+    ruleQuietHoursTitle: "Horas de Silêncio",
+    ruleQuietHoursDesc: "22:00 – 08:00 em respeito aos vizinhos.",
+    ruleTrashTitle: "Lixo e Reciclagem",
+    ruleTrashDesc: "As lixeiras ficam no corredor lateral.",
+    guestServicesTitle: "Serviços para Hóspedes",
+    guestServicesSub: "Reserve serviços extras instantaneamente.",
+    aiPlacesTitle: "Locais Descobertos por IA",
+    btnWhatsappHost: "Precisa de ajuda? WhatsApp",
+    destinationWeatherSub: "Clima no Destino • API Open-Meteo Ao Vivo"
   },
   JA: {
     heroBadge: "民泊＆バケーションレンタル自動収益エンジン",
@@ -1046,7 +1141,26 @@ const i18nDict = {
     navGuest: "ゲストビュー (PWA)",
     navHost: "ホストポータル",
     navAdmin: "スーパー管理者",
-    toastLang: "言語を日本語に更新しました (JPY)"
+    toastLang: "言語を日本語に更新しました (JPY)",
+    welcomePill: "ご滞在へようこそ",
+    guestCheckInLabel: "チェックイン: 15:00",
+    guestCheckOutLabel: "チェックアウト: 11:00",
+    instantWifi: "インスタントWi-Fi",
+    doorAccessCode: "ドアアクセスコード",
+    tabHouseManual: "ハウスガイド",
+    tabConciergeStore: "コンシェルジュ＆ストア",
+    tabAiLocalGuide: "AIローカルガイド",
+    applianceVideoGuides: "家電動画ガイド",
+    houseRulesTitle: "ハウスルール",
+    ruleQuietHoursTitle: "クワイエットタイム",
+    ruleQuietHoursDesc: "近隣への配慮のため 22:00〜08:00 はお静かに。",
+    ruleTrashTitle: "ゴミ＆リサイクル",
+    ruleTrashDesc: "ゴミ箱は横の通路にあります。",
+    guestServicesTitle: "ゲストサービス＆オプション",
+    guestServicesSub: "滞在中の追加サービスを即座に予約できます。",
+    aiPlacesTitle: "AI自動発見スポット",
+    btnWhatsappHost: "お困りですか？WhatsAppでホストに連絡",
+    destinationWeatherSub: "目的地の天気 • リアルタイム Open-Meteo API"
   }
 };
 
@@ -1158,7 +1272,7 @@ let hostAuth = {
 // SUPER ADMIN AUTH STATE
 let adminAuth = {
   isLoggedIn: false,
-  email: 'admin@hostifyos.com',
+  email: 'hostifyos@gmail.com',
   name: 'Master Platform Admin',
   role: 'Super Admin'
 };
@@ -1276,7 +1390,7 @@ let adminAuditLogs = [
   {
     id: 'AUD-9901',
     timestamp: 'Aug 17, 2026 14:22 UTC',
-    admin: 'admin@hostifyos.com',
+    admin: 'hostifyos@gmail.com',
     action: 'Stripe Connect Express KYC Verification',
     details: 'Verified Merchant Account for Sarah Miller (Malibu Beachfront Villa)',
     status: 'AUTHENTICATED'
@@ -1284,7 +1398,7 @@ let adminAuditLogs = [
   {
     id: 'AUD-9902',
     timestamp: 'Aug 17, 2026 16:45 UTC',
-    admin: 'admin@hostifyos.com',
+    admin: 'hostifyos@gmail.com',
     action: 'SaaS Plan Upgrade (Pro Host)',
     details: 'Upgraded Sarah Miller to Pro Host Plan ($14/mo - 0% Commission)',
     status: 'AUTHENTICATED'
@@ -1381,6 +1495,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateRoiCalculator(3);
   updateTopNavAuthUI();
   checkCookieConsentOnLoad();
+  initLemonSqueezyApi();
   
   // Fetch live real-time daily currency exchange rates from Open-Exchange-Rates API
   fetchLiveExchangeRates();
@@ -1927,13 +2042,23 @@ function triggerGlobalFeeSweep() {
 }
 
 function executeDoubleApprovedAction() {
+  const checkerEmail = document.getElementById('checker-admin-email').value;
   const key = document.getElementById('approve-security-key').value;
-  if (key !== 'CONFIRM-SWEEP-2026') {
+  const initiatorEmail = adminAuth.email || 'hostifyos@gmail.com';
+
+  if (checkerEmail.toLowerCase() === initiatorEmail.toLowerCase()) {
+    showToast("⚠️ Self-Approval Prohibited! Initiator and Checker must be distinct Admin accounts.");
+    return;
+  }
+
+  if (!key || key.length < 6) {
     showToast("⚠️ Invalid Security Key! Master dual-authorization failed.");
     return;
   }
 
   if (!pendingAdminAction) return;
+
+  const actionHash = `SHA256-${Math.random().toString(36).substring(2, 10).toUpperCase()}`;
 
   if (pendingAdminAction.type === 'rate_change') {
     hostAuth.commissionRate = parseFloat(pendingAdminAction.value);
@@ -1942,24 +2067,24 @@ function executeDoubleApprovedAction() {
     adminAuditLogs.unshift({
       id: `AUD-${Math.floor(9900 + Math.random() * 100)}`,
       timestamp: new Date().toUTCString().slice(5, 22),
-      admin: adminAuth.email || 'admin@hostifyos.com',
+      admin: `${initiatorEmail} (Initiator) & ${checkerEmail} (Checker)`,
       action: 'Global Commission Rate Change',
-      details: pendingAdminAction.title,
+      details: `${pendingAdminAction.title} [Hash: ${actionHash}]`,
       status: 'DOUBLE_APPROVED'
     });
 
-    showToast(`✅ Dual Authorized: Global Default Platform Commission updated to ${(hostAuth.commissionRate * 100).toFixed(1)}%!`);
+    showToast(`✅ Dual Authorized (Initiator: ${initiatorEmail}, Checker: ${checkerEmail}): Commission updated to ${(hostAuth.commissionRate * 100).toFixed(1)}%!`);
   } else if (pendingAdminAction.type === 'fee_sweep') {
     adminAuditLogs.unshift({
       id: `AUD-${Math.floor(9900 + Math.random() * 100)}`,
       timestamp: new Date().toUTCString().slice(5, 22),
-      admin: adminAuth.email || 'admin@hostifyos.com',
+      admin: `${initiatorEmail} (Initiator) & ${checkerEmail} (Checker)`,
       action: 'Master Platform Fee Sweep',
-      details: 'Swept $4,820.00 across 1,420 Host Accounts into Master Account',
+      details: `Swept $4,820.00 across 1,420 Host Accounts [Hash: ${actionHash}]`,
       status: 'DOUBLE_APPROVED'
     });
 
-    showToast("✅ Dual Authorized: $4,820.00 in platform fees swept across all host accounts into Master Account!");
+    showToast(`✅ Dual Authorized (Initiator: ${initiatorEmail}, Checker: ${checkerEmail}): $4,820.00 swept into Master Account!`);
   }
 
   renderAdminAuditLogsTable();
@@ -2147,24 +2272,63 @@ function downloadCommissionStatement() {
   showToast("Downloading Monthly Commission Statement (PDF / CSV) for Host Accounting...");
 }
 
+// LEMON SQUEEZY CHECKOUT & API CONFIGURATION
+let LEMONSQUEEZY_STORE_CONFIG = {
+  apiKey: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NGQ1OWNlZi1kYmI4LTRlYTUtYjE3OC1kMjU0MGZjZDY5MTkiLCJqdGkiOiIyZDdkYjBhMjYxN2VhYWExZjM4NDMxN2FkM2ZiYTk5MTYwZGI2Yjc2OGViZDJjNGM3ZDFiNjM3ZTQxYWQ1YzEwNTU3Njk4NzQzNzI1NzY0MCIsImlhdCI6MTc4NzQyMzkyOS45MTI1MTgsIm5iZiI6MTc4NzQyMzkyOS45MTI1MjIsImV4cCI6MTgwMzI1NDQwMC4wMzAyNywic3ViIjoiNzgwNzY2OSIsInNjb3BlcyI6W119.UlNtirQ5vkEh4n9l0qGF4fpjSKFou5SvEpHiXHb4T6ATAerzDYE5nzvKpLR2RccgWerrIkEDXd84jdIBo9ZlEvwn6oTO_0RM6aVqo1i5WvHgwf92FnV3gwA4tdTUKtllnCOq7uHjY6eK5w2GEZZ62TbHo-27lACYMU0DHMfT18X6zmc3GgHJGx2bFj9D5WPpM72TuFm3hig7OwZO6TPhX15BC1HY7EXXGWzQ3QW42aH_eFO7fSBGBXtR3a5Aw8tpzXpqy8KfdP26f27e8y7OGG_tm6ROa9fRNDfAMTGap16E_T0h3nMrOLUGjI1nP7LizqM5FL1iiMgNnNdHaGLMrp87F948kAkLgYnT-RmIQT3QGa_25ZdWoUqs9ZcFUEor6-iiWwlv_f0jHJKlb0vSbXIbwojlvdH1k0-trLLxaCUUC88gix9B1gyEgod9gFO37qcTpCqBqnmwIUWTatPOsM4OjOojTcr6xkfVnqaOP1vhfQbTiscXSpvBnRPIneIhfzS9OmN96lNeVHC-3GMku-_xcJsjLWNs3JbwG57IqpV0kkit62DEbLAzVuEVo7-KdMqcS75YLRQYlmPx3Rw21jxR9VkAEfT1VCEJhFw8GDGsv-F27Hg6H3FZMooBPzTbaOfHCN0vQ75u7J7hiLh2a_RLux7CJVPOSr8c-RKIbGk',
+  storeId: '456562',
+  storeUrl: 'https://hostifyos.lemonsqueezy.com',
+  proMonthlyUrl: 'https://hostifyos.lemonsqueezy.com/checkout',
+  proAnnualUrl: 'https://hostifyos.lemonsqueezy.com/checkout',
+  enterpriseUrl: 'https://hostifyos.lemonsqueezy.com/checkout'
+};
+
+function initLemonSqueezyApi(apiKey, storeId) {
+  if (apiKey) LEMONSQUEEZY_STORE_CONFIG.apiKey = apiKey;
+  if (storeId) LEMONSQUEEZY_STORE_CONFIG.storeId = storeId;
+  if (window.LemonSqueezy) {
+    try {
+      window.LemonSqueezy.Setup({
+        eventHandler: (event) => {
+          if (event.event === 'Checkout.Success') {
+            showToast("🎉 HostifyOS Pro Subscription Activated via Lemon Squeezy!");
+          }
+        }
+      });
+    } catch (e) { console.log(e); }
+  }
+  showToast("⚡ Lemon Squeezy Store #456562 Connected!");
+}
+
+function setLemonSqueezyUrls(monthlyUrl, annualUrl, enterpriseUrl) {
+  if (monthlyUrl) LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl = monthlyUrl;
+  if (annualUrl) LEMONSQUEEZY_STORE_CONFIG.proAnnualUrl = annualUrl;
+  if (enterpriseUrl) LEMONSQUEEZY_STORE_CONFIG.enterpriseUrl = enterpriseUrl;
+  showToast("✅ Lemon Squeezy Store Checkout URLs Updated!");
+}
+
 function openLemonSqueezyCheckout(tierName, priceStr) {
   document.getElementById('lemon-plan-name').textContent = tierName;
   
   let formattedPriceStr = priceStr;
-  if (priceStr.includes('$14.00')) {
-    formattedPriceStr = `${formatPrice(14.0)} / mo`;
-  } else if (priceStr.includes('$168.00')) {
+  let targetCheckoutUrl = LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl;
+
+  if (priceStr.includes('ANNUAL') || priceStr.includes('$168.00') || priceStr.includes('yr')) {
     formattedPriceStr = `${formatPrice(168.0)} / yr`;
-  } else if (priceStr.includes('$18.00')) {
-    formattedPriceStr = `${formatPrice(18.0)} / mo`;
-  } else if (priceStr.includes('$29.00')) {
+    targetCheckoutUrl = LEMONSQUEEZY_STORE_CONFIG.proAnnualUrl;
+  } else if (tierName.includes('Enterprise') || priceStr.includes('$29.00')) {
     formattedPriceStr = `${formatPrice(29.0)} / mo`;
-  } else if (priceStr.includes('$0.00')) {
-    formattedPriceStr = `${formatPrice(0.0)} Free Trial`;
+    targetCheckoutUrl = LEMONSQUEEZY_STORE_CONFIG.enterpriseUrl;
+  } else {
+    formattedPriceStr = `${formatPrice(14.0)} / mo`;
   }
 
   document.getElementById('lemon-plan-price').textContent = `${formattedPriceStr} ($0.00 Due Today)`;
-  document.getElementById('modal-lemon-checkout').classList.add('active');
+
+  if (window.LemonSqueezy && targetCheckoutUrl && !targetCheckoutUrl.endsWith('/pro-monthly')) {
+    window.LemonSqueezy.Url.Open(targetCheckoutUrl);
+  } else {
+    document.getElementById('modal-lemon-checkout').classList.add('active');
+  }
 }
 
 let invoiceSequenceCounter = 8802;
