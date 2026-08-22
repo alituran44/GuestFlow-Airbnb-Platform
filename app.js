@@ -2307,28 +2307,43 @@ function setLemonSqueezyUrls(monthlyUrl, annualUrl, enterpriseUrl) {
 }
 
 function openLemonSqueezyCheckout(tierName, priceStr) {
-  document.getElementById('lemon-plan-name').textContent = tierName;
+  const planNameEl = document.getElementById('lemon-plan-name');
+  if (planNameEl) planNameEl.textContent = tierName;
   
   let formattedPriceStr = priceStr;
-  let targetCheckoutUrl = LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl;
-
   if (priceStr.includes('ANNUAL') || priceStr.includes('$168.00') || priceStr.includes('yr')) {
     formattedPriceStr = `${formatPrice(168.0)} / yr`;
-    targetCheckoutUrl = LEMONSQUEEZY_STORE_CONFIG.proAnnualUrl;
   } else if (tierName.includes('Enterprise') || priceStr.includes('$29.00')) {
     formattedPriceStr = `${formatPrice(29.0)} / mo`;
-    targetCheckoutUrl = LEMONSQUEEZY_STORE_CONFIG.enterpriseUrl;
+  } else if (priceStr.includes('$0.00')) {
+    formattedPriceStr = `${formatPrice(0.0)} Free Trial`;
   } else {
     formattedPriceStr = `${formatPrice(14.0)} / mo`;
   }
 
-  document.getElementById('lemon-plan-price').textContent = `${formattedPriceStr} ($0.00 Due Today)`;
+  const planPriceEl = document.getElementById('lemon-plan-price');
+  if (planPriceEl) planPriceEl.textContent = `${formattedPriceStr} ($0.00 Due Today)`;
 
-  if (window.LemonSqueezy && targetCheckoutUrl && !targetCheckoutUrl.endsWith('/pro-monthly')) {
-    window.LemonSqueezy.Url.Open(targetCheckoutUrl);
-  } else {
-    document.getElementById('modal-lemon-checkout').classList.add('active');
+  openModal('modal-lemon-checkout');
+}
+
+function processLemonSqueezySubscribe() {
+  const emailInput = document.getElementById('lemon-email') || document.getElementById('lemon-checkout-email');
+  const email = emailInput ? emailInput.value : 'host@hostifyos.com';
+
+  hostAuth.email = email;
+  hostAuth.isLoggedIn = true;
+  hostAuth.plan = document.getElementById('lemon-plan-name') ? document.getElementById('lemon-plan-name').textContent : 'Pro Host Plan';
+  
+  closeModal('modal-lemon-checkout');
+
+  if (LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl && LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl.includes('/buy/')) {
+    window.open(LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl, '_blank');
   }
+
+  showToast(`🎉 Welcome ${email}! 14-Day Free Trial Activated ($0 Charged Today).`);
+  switchView('portal');
+  updateTopNavAuthUI();
 }
 
 let invoiceSequenceCounter = 8802;
