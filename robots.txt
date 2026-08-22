@@ -1,12 +1,28 @@
-# HostifyOS - The Modern Hosting OS & High-Converting Sales Funnel
-# Website: https://guestflow-airbnb-platform.vercel.app
+# HostifyOS — The Modern Hosting OS & Automated STR Revenue Engine
+# Official Domain: https://www.hostifyos.com
 
 User-agent: *
 Allow: /
-Disallow: /admin
+Disallow: /admin/
 
-# Crawl-delay for polite crawling
-Crawl-delay: 1
+# AI Search Engine & Generative Engine Crawlers (GEO Optimization)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
 
 # Sitemaps
-Sitemap: https://guestflow-airbnb-platform.vercel.app/sitemap.xml
+Sitemap: https://www.hostifyos.com/sitemap.xml

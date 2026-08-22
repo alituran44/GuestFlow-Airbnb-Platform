@@ -4,27 +4,32 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   
   <url>
-    <loc>https://guestflow-airbnb-platform.vercel.app/</loc>
-    <lastmod>2026-08-17</lastmod>
+    <loc>https://www.hostifyos.com/</loc>
+    <lastmod>2026-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     
     <!-- Multi-Language Hreflang Alternates -->
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://guestflow-airbnb-platform.vercel.app/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://guestflow-airbnb-platform.vercel.app/?lang=EN" />
-    <xhtml:link rel="alternate" hreflang="tr" href="https://guestflow-airbnb-platform.vercel.app/?lang=TR" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://guestflow-airbnb-platform.vercel.app/?lang=ES" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://guestflow-airbnb-platform.vercel.app/?lang=FR" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://guestflow-airbnb-platform.vercel.app/?lang=DE" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://guestflow-airbnb-platform.vercel.app/?lang=IT" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://guestflow-airbnb-platform.vercel.app/?lang=PT" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://guestflow-airbnb-platform.vercel.app/?lang=JA" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hostifyos.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hostifyos.com/?lang=EN" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.hostifyos.com/?lang=TR" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.hostifyos.com/?lang=ES" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.hostifyos.com/?lang=FR" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.hostifyos.com/?lang=DE" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.hostifyos.com/?lang=IT" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.hostifyos.com/?lang=PT" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.hostifyos.com/?lang=JA" />
     
-    <!-- Visual Brand Image -->
+    <!-- Visual Brand Images -->
     <image:image>
-      <image:loc>https://guestflow-airbnb-platform.vercel.app/brand_logo.jpg</image:loc>
+      <image:loc>https://www.hostifyos.com/brand_logo.jpg</image:loc>
       <image:title>HostifyOS Brand Emblem</image:title>
       <image:caption>The Modern Hosting OS &amp; Automated Short-Term Rental Revenue Engine</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.hostifyos.com/hero_bg_villa.jpg</image:loc>
+      <image:title>HostifyOS Luxury Villa Digital Guest Guidebook</image:title>
+      <image:caption>Automated guest messaging, 1-tap Wi-Fi sharing, and custom host upsell store</image:caption>
     </image:image>
   </url>
   
