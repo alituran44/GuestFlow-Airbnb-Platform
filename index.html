@@ -752,13 +752,49 @@
           <p data-i18n="pricingSub">Register today ($0 charged). Cancel anytime before Day 14 with 1-click.</p>
 
           <div class="billing-toggle-box">
-            <button id="btn-bill-annual" class="b-toggle active" onclick="window.toggleBillingCycle('annual')">
+            <button id="btn-bill-annual" class="b-toggle active" onclick="switchBilling('annual')">
               <span data-i18n="btnAnnual">Annual Billing</span> <span class="badge-save">Save 26%</span>
             </button>
-            <button id="btn-bill-monthly" class="b-toggle" onclick="window.toggleBillingCycle('monthly')">
+            <button id="btn-bill-monthly" class="b-toggle" onclick="switchBilling('monthly')">
               <span data-i18n="btnMonthly">Monthly Billing</span>
             </button>
           </div>
+          <script>
+            function switchBilling(type) {
+              if (typeof window.toggleBillingCycle === 'function') {
+                window.toggleBillingCycle(type);
+              } else {
+                const btnA = document.getElementById('btn-bill-annual');
+                const btnM = document.getElementById('btn-bill-monthly');
+                const proP = document.getElementById('price-pro-val');
+                const entP = document.getElementById('price-ent-val');
+                const proPeriod = document.getElementById('price-pro-period');
+                const entPeriod = document.getElementById('price-ent-period');
+                const proNote = document.getElementById('price-pro-note');
+                const entNote = document.getElementById('price-ent-note');
+
+                if (type === 'annual') {
+                  if (btnA) btnA.className = 'b-toggle active';
+                  if (btnM) btnM.className = 'b-toggle';
+                  if (proP) proP.textContent = '$14.00';
+                  if (entP) entP.textContent = '$29.00';
+                  if (proPeriod) proPeriod.textContent = '/ property / month';
+                  if (entPeriod) entPeriod.textContent = '/ property / month';
+                  if (proNote) proNote.textContent = 'Billed annually at $168/yr (Save 26%)';
+                  if (entNote) entNote.textContent = 'Billed annually at $348/yr (Save 26%)';
+                } else {
+                  if (btnA) btnA.className = 'b-toggle';
+                  if (btnM) btnM.className = 'b-toggle active';
+                  if (proP) proP.textContent = '$19.00';
+                  if (entP) entP.textContent = '$39.00';
+                  if (proPeriod) proPeriod.textContent = '/ month';
+                  if (entPeriod) entPeriod.textContent = '/ month';
+                  if (proNote) proNote.textContent = 'Billed monthly at $19/mo';
+                  if (entNote) entNote.textContent = 'Billed monthly at $39/mo';
+                }
+              }
+            }
+          </script>
         </div>
 
         <div class="pricing-cards-grid">
@@ -3115,7 +3151,7 @@
     <span id="toast-message">Copied to clipboard!</span>
   </div>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=20260823_v5"></script>
 </body>
 </html>
 
