@@ -38,6 +38,17 @@
   --radius-full: 9999px;
 }
 
+/* Lucide SVG Icons Base Sizing & Alignment */
+i[data-lucide], svg.lucide, .lucide {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1.2em;
+  height: 1.2em;
+  stroke-width: 2px;
+  stroke: currentColor;
+  fill: none;
+}
+
 /* Light Mode Theme Overrides ("Açık Ekran") */
 body.theme-light {
   --bg-obsidian: #F8FAFC;

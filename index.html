@@ -204,8 +204,18 @@
   <script src="https://js.stripe.com/v3/"></script>
   <!-- Lemon Squeezy JS Overlay Checkout SDK -->
   <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
-  <!-- Lucide Icons CDN -->
+  <!-- Lucide Icons CDNs with fallback & auto-init -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>
+    function initIcons() {
+      if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons();
+      }
+    }
+    document.addEventListener('DOMContentLoaded', initIcons);
+    window.addEventListener('load', initIcons);
+  </script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-obsidian text-slate">
