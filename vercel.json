@@ -3,8 +3,9 @@
   "public": true,
   "cleanUrls": true,
   "trailingSlash": false,
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
+  "rewrites": [
+    { "source": "/g/(.*)", "destination": "/index.html" },
+    { "source": "/guidebook/(.*)", "destination": "/index.html" },
+    { "source": "/portal", "destination": "/index.html" }
   ]
 }

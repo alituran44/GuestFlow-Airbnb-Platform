@@ -4003,3 +4003,32 @@ function sendAiChatMessage() {
     container.scrollTop = container.scrollHeight;
   }, 400);
 }
+
+// URL ROUTING & SLUG PARSER
+function handleUrlRouting() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const path = window.location.pathname.toLowerCase();
+  
+  const viewParam = urlParams.get('v') || urlParams.get('view');
+  const slugParam = urlParams.get('slug') || urlParams.get('g');
+
+  if (viewParam === 'guest' || path.includes('/g/') || path.includes('/guidebook/') || slugParam) {
+    if (slugParam) {
+      const match = properties.find(p => p.slug === slugParam || p.id.includes(slugParam) || slugParam.includes(p.slug));
+      if (match) {
+        activePropertyId = match.id;
+        loadActivePropertyData();
+      }
+    }
+    switchView('guest');
+    return;
+  }
+
+  if (viewParam === 'portal' || path.includes('/portal') || path.includes('/host')) {
+    switchView('portal');
+    return;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', handleUrlRouting);
+window.addEventListener('load', handleUrlRouting);
