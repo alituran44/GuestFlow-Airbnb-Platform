@@ -2934,24 +2934,33 @@ function updateRoiCalculator(propertyCount) {
 
 function toggleBillingCycle(type) {
   billingCycle = type;
-  document.getElementById('btn-bill-annual').classList.toggle('active', type === 'annual');
-  document.getElementById('btn-bill-monthly').classList.toggle('active', type === 'monthly');
+  const btnAnnual = document.getElementById('btn-bill-annual');
+  const btnMonthly = document.getElementById('btn-bill-monthly');
+
+  if (btnAnnual) btnAnnual.classList.toggle('active', type === 'annual');
+  if (btnMonthly) btnMonthly.classList.toggle('active', type === 'monthly');
 
   const proPriceEl = document.getElementById('price-pro-val');
   const entPriceEl = document.getElementById('price-ent-val');
+  const proPeriodEl = document.getElementById('price-pro-period');
+  const entPeriodEl = document.getElementById('price-ent-period');
   const proNoteEl = document.getElementById('price-pro-note');
   const entNoteEl = document.getElementById('price-ent-note');
 
   if (type === 'annual') {
     if (proPriceEl) proPriceEl.textContent = formatPrice(14.0);
     if (entPriceEl) entPriceEl.textContent = formatPrice(29.0);
-    if (proNoteEl) proNoteEl.textContent = 'Billed annually at $168/yr (Save 20%)';
-    if (entNoteEl) entNoteEl.textContent = 'Billed annually at $348/yr (Save 20%)';
+    if (proPeriodEl) proPeriodEl.textContent = '/ property / month';
+    if (entPeriodEl) entPeriodEl.textContent = '/ property / month';
+    if (proNoteEl) proNoteEl.textContent = `Billed annually at ${formatPrice(168.0)}/yr (Save 20%)`;
+    if (entNoteEl) entNoteEl.textContent = `Billed annually at ${formatPrice(348.0)}/yr (Save 20%)`;
   } else {
     if (proPriceEl) proPriceEl.textContent = formatPrice(19.0);
     if (entPriceEl) entPriceEl.textContent = formatPrice(39.0);
-    if (proNoteEl) proNoteEl.textContent = 'Billed monthly at $19/mo';
-    if (entNoteEl) entNoteEl.textContent = 'Billed monthly at $39/mo';
+    if (proPeriodEl) proPeriodEl.textContent = '/ month';
+    if (entPeriodEl) entPeriodEl.textContent = '/ month';
+    if (proNoteEl) proNoteEl.textContent = `Billed monthly at ${formatPrice(19.0)}/mo`;
+    if (entNoteEl) entNoteEl.textContent = `Billed monthly at ${formatPrice(39.0)}/mo`;
   }
 }
 
