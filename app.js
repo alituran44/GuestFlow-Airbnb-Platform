@@ -1491,6 +1491,8 @@ document.addEventListener('DOMContentLoaded', () => {
   renderAdminAuditLogsTable();
   renderHostInvoicesTable();
   updateTrialStatusUI();
+  renderCrmLeadsTable();
+  loadEmailTemplatePreset('welcome');
 
   updateRoiCalculator(3);
   updateTopNavAuthUI();
@@ -3692,4 +3694,234 @@ function showToast(msg) {
   setTimeout(() => {
     toast.classList.remove('active');
   }, 3000);
+}
+
+// ====================================================
+// SUPER ADMIN CRM & LEAD PIPELINE DATA MODEL
+// ====================================================
+let crmHostLeads = [
+  { id: 'crm-1', name: 'Sarah Miller', email: 'sarah@malibuvillas.com', properties: 3, mrr: 19.00, status: 'pro', notes: 'High-intent villa manager in Malibu, requested VIP shuttle upsell template.' },
+  { id: 'crm-2', name: 'Marcus Vance', email: 'marcus@santorini-suites.com', properties: 8, mrr: 39.00, status: 'enterprise', notes: 'Boutique hotel manager in Santorini. Interested in white-label domain.' },
+  { id: 'crm-3', name: 'Elena Rostova', email: 'elena@alpine-chalet.ch', properties: 1, mrr: 0.00, status: 'trial', notes: '14-day trial active. Needs assistance with appliance video upload.' },
+  { id: 'crm-4', name: 'David Chen', email: 'david@tokyo-apartments.jp', properties: 2, mrr: 19.00, status: 'pro', notes: 'Japanese host, activated 1-tap Wi-Fi guide for Shibuya listing.' }
+];
+
+function renderCrmLeadsTable(filter = 'all') {
+  const tbody = document.getElementById('admin-crm-table-body');
+  if (!tbody) return;
+
+  const filtered = crmHostLeads.filter(l => filter === 'all' || l.status === filter);
+
+  tbody.innerHTML = filtered.map(l => `
+    <tr>
+      <td>
+        <strong>${l.name}</strong>
+        <p style="font-size:11px; color:var(--text-muted); margin:2px 0 0;">${l.email}</p>
+      </td>
+      <td><strong>${l.properties} Units</strong></td>
+      <td><strong class="text-emerald">${formatPrice(l.mrr)} / mo</strong></td>
+      <td>
+        <span class="badge-tag" style="${l.status === 'pro' ? 'background:rgba(16,185,129,0.15); color:var(--accent-emerald);' : l.status === 'enterprise' ? 'background:rgba(99,102,241,0.15); color:var(--accent-indigo);' : 'background:rgba(245,158,11,0.15); color:var(--accent-amber);'}">
+          ● ${l.status.toUpperCase()}
+        </span>
+      </td>
+      <td><span style="font-size:11px; color:var(--text-muted);">${l.notes}</span></td>
+      <td>
+        <button class="btn-primary-sm" style="padding:4px 8px; font-size:10px;" onclick="prepareEmailToLead('${l.email}')">
+          <i data-lucide="mail"></i> Email Host
+        </button>
+      </td>
+    </tr>
+  `).join('');
+
+  lucide.createIcons();
+}
+
+function filterCrmLeads(filter) {
+  renderCrmLeadsTable(filter);
+}
+
+function prepareEmailToLead(email) {
+  const select = document.getElementById('email-broadcast-target');
+  const groupCustom = document.getElementById('group-custom-email');
+  const customInput = document.getElementById('email-custom-target');
+
+  if (select) select.value = 'custom';
+  if (groupCustom) groupCustom.style.display = 'block';
+  if (customInput) customInput.value = email;
+
+  showToast(`Prepared email target for ${email}`);
+}
+
+// EMAIL TEMPLATES LIBRARY
+const EMAIL_PRESETS = {
+  welcome: {
+    subject: 'Welcome to HostifyOS — Your 14-Day Free Trial is Active!',
+    body: `Hello {Host_Name},
+
+Welcome to HostifyOS (Ali Turan Inc.)! 
+
+Your 14-day free trial has been activated ($0.00 charged today). Your digital guidebook is ready to automate 1-tap Wi-Fi sharing, time-gated door lockbox PINs, and guest upsells for your properties.
+
+Log in anytime at: https://hostifyos.com
+
+Official Merchant Support: hostifyos@gmail.com
+HostifyOS Team`
+  },
+  receipt: {
+    subject: 'HostifyOS SaaS Subscription Receipt & Tax Invoice',
+    body: `Hi {Host_Name},
+
+Thank you for subscribing to HostifyOS Pro Host Plan ($19.00 / month).
+
+Transaction Details:
+- Issuer: Ali Turan Inc. (Ali Turan Şirketi)
+- Official Merchant Email: hostifyos@gmail.com
+- Amount Paid: $19.00 USD
+- Status: Paid & Active
+
+Your account remains fully unlocked with 0% platform commission on guest upsells!
+
+Best regards,
+Ali Turan Inc. Billing Team`
+  },
+  expiry: {
+    subject: '⏰ Action Required: Your HostifyOS 14-Day Free Trial Ends Soon',
+    body: `Hello {Host_Name},
+
+Your 14-day free trial on HostifyOS will complete in 2 days.
+
+To keep your digital guidebooks and door lockbox PINs active for your guests, ensure your subscription card is active.
+
+Upgrade or manage subscription: https://hostifyos.com
+
+HostifyOS Support: hostifyos@gmail.com`
+  },
+  invoice: {
+    subject: '🧾 HostifyOS Monthly Commission Settlement Invoice',
+    body: `Hi {Host_Name},
+
+Here is your monthly platform commission settlement invoice for Starter Tier (5% Take-Rate).
+
+- Gross Guest Upsells: $250.00
+- Accrued Platform Fee (5%): $12.50
+- Net Host Payout: $237.50
+
+Pay Settlement Invoice securely: https://hostifyos.com`
+  },
+  security: {
+    subject: '🔒 HostifyOS Security Alert: 2FA & Login Verification',
+    body: `Security Alert for {Host_Email},
+
+A new login session was authenticated for your HostifyOS account.
+
+If this was you, no action is needed. If you did not recognize this login, contact our security team immediately at hostifyos@gmail.com.
+
+HostifyOS Security Team`
+  }
+};
+
+function loadEmailTemplatePreset(presetKey) {
+  const preset = EMAIL_PRESETS[presetKey];
+  if (preset) {
+    const subjEl = document.getElementById('email-broadcast-subject');
+    const bodyEl = document.getElementById('email-broadcast-body');
+    const prevEl = document.getElementById('email-template-preview-box');
+
+    if (subjEl) subjEl.value = preset.subject;
+    if (bodyEl) bodyEl.value = preset.body;
+    if (prevEl) {
+      prevEl.innerHTML = `
+        <strong style="color:var(--accent-emerald);">Subject:</strong> ${preset.subject}<br><br>
+        <div style="white-space:pre-wrap; font-family:monospace; background:#090D14; padding:10px; border-radius:6px; border:1px solid rgba(255,255,255,0.06);">${preset.body}</div>
+      `;
+    }
+  }
+}
+
+function sendAdminEmailBroadcast() {
+  const subject = document.getElementById('email-broadcast-subject').value;
+  const target = document.getElementById('email-broadcast-target').value;
+  const customTarget = document.getElementById('email-custom-target') ? document.getElementById('email-custom-target').value : '';
+
+  const recipientStr = target === 'custom' ? customTarget : `${target.toUpperCase()} Group (1,420 Hosts)`;
+  showToast(`⚡ Dispatched Email Broadcast from hostifyos@gmail.com to ${recipientStr}!`);
+}
+
+// FLOATING WIDGET & AI GUEST WELCOME ASSISTANT LOGIC
+let widgetConfig = {
+  whatsappNum: '+905440000000',
+  whatsappEnabled: true,
+  aiEnabled: true,
+  greeting: 'Hello! 👋 Welcome to HostifyOS.com. How can I assist your stay or hosting today?'
+};
+
+function toggleAiChatWidget() {
+  const win = document.getElementById('ai-chat-window');
+  if (win) {
+    win.style.display = win.style.display === 'none' ? 'block' : 'none';
+    lucide.createIcons();
+  }
+}
+
+function saveWidgetSettings() {
+  const numInput = document.getElementById('widget-whatsapp-num');
+  const waEnInput = document.getElementById('widget-whatsapp-enabled');
+  const aiEnInput = document.getElementById('widget-ai-enabled');
+  const greetInput = document.getElementById('widget-ai-greeting');
+
+  if (numInput) widgetConfig.whatsappNum = numInput.value;
+  if (waEnInput) widgetConfig.whatsappEnabled = waEnInput.value === 'true';
+  if (aiEnInput) widgetConfig.aiEnabled = aiEnInput.value === 'true';
+  if (greetInput) widgetConfig.greeting = greetInput.value;
+
+  const btnWa = document.getElementById('btn-floating-whatsapp');
+  if (btnWa) {
+    btnWa.href = `https://wa.me/${widgetConfig.whatsappNum.replace(/[^0-9]/g, '')}`;
+    btnWa.style.display = widgetConfig.whatsappEnabled ? 'flex' : 'none';
+  }
+
+  const btnAi = document.getElementById('btn-floating-ai');
+  if (btnAi) btnAi.style.display = widgetConfig.aiEnabled ? 'flex' : 'none';
+
+  const welcomeMsg = document.getElementById('ai-chat-welcome-msg');
+  if (welcomeMsg) welcomeMsg.textContent = widgetConfig.greeting;
+
+  showToast("✅ Widget & AI Assistant Settings Saved!");
+}
+
+function sendAiChatMessage() {
+  const input = document.getElementById('ai-chat-input');
+  const container = document.getElementById('ai-chat-messages');
+  if (!input || !container || !input.value.trim()) return;
+
+  const userQuery = input.value.trim();
+  input.value = '';
+
+  container.innerHTML += `
+    <div style="background:rgba(99,102,241,0.15); border:1px solid rgba(99,102,241,0.3); padding:8px 12px; border-radius:10px; max-width:85%; align-self:flex-end; color:#fff;">
+      ${userQuery}
+    </div>
+  `;
+
+  setTimeout(() => {
+    let reply = "I can certainly help with that! HostifyOS provides 1-tap Wi-Fi sharing, time-gated door lockbox PINs, and 0% commission guest upsells for Airbnb hosts. Try it free for 14 days at hostifyos.com!";
+    const q = userQuery.toLowerCase();
+    if (q.includes('wifi') || q.includes('wi-fi')) {
+      reply = "📶 Wi-Fi Sharing: Guests simply scan the QR code stand in your room and tap 'Copy Wi-Fi Password' — no app download required!";
+    } else if (q.includes('pin') || q.includes('door') || q.includes('key')) {
+      reply = "🔑 Door Access PINs: You can set time-gated PIN codes that automatically expire at check-out time (11:00 AM) for maximum security.";
+    } else if (q.includes('price') || q.includes('cost') || q.includes('plan')) {
+      reply = "💳 Pricing: Pro Host Plan is $19/mo (or $14/mo billed annually) with 0% platform commission and a 14-day free trial ($0 today).";
+    } else if (q.includes('whatsapp') || q.includes('contact') || q.includes('support')) {
+      reply = `💬 Support: You can message our host support team on WhatsApp at ${widgetConfig.whatsappNum} or email hostifyos@gmail.com.`;
+    }
+
+    container.innerHTML += `
+      <div style="background:#131924; border:1px solid rgba(16,185,129,0.3); padding:8px 12px; border-radius:10px; max-width:85%; color:#E2E8F0; line-height:1.4;">
+        ${reply}
+      </div>
+    `;
+    container.scrollTop = container.scrollHeight;
+  }, 400);
 }
