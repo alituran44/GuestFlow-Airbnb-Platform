@@ -3,17 +3,21 @@
    Role-Based Authentication Session Engine & Multi-User Isolation
    ========================================================================= */
 
-// Global State
-let currentCurrency = 'USD';
-const currencyRates = {
-  USD: { symbol: '$', rate: 1.0 },
-  EUR: { symbol: '€', rate: 0.92 },
-  GBP: { symbol: '£', rate: 0.79 },
-  CAD: { symbol: 'CA$', rate: 1.35 },
-  AUD: { symbol: 'A$', rate: 1.52 },
-  JPY: { symbol: '¥', rate: 155.0 },
-  TRY: { symbol: '₺', rate: 33.0 }
-};
+// Production Security & Feature Flags
+const ENABLE_DEMO_TOOLS = false; // Disable QA simulation buttons in production
+
+let pinVisibilityState = {};
+function togglePinVisibility(elementId, actualPin) {
+  const el = document.getElementById(elementId);
+  if (!el) return;
+  pinVisibilityState[elementId] = !pinVisibilityState[elementId];
+  if (pinVisibilityState[elementId]) {
+    el.textContent = actualPin;
+    showToast("👁️ Unmasked door PIN (Explicit host action logged).");
+  } else {
+    el.textContent = `••••-${actualPin.slice(-2)}`;
+  }
+}
 
 let currentLanguage = 'EN';
 
@@ -3876,7 +3880,7 @@ function sendAdminEmailBroadcast() {
 
 // FLOATING WIDGET & AI GUEST WELCOME ASSISTANT LOGIC
 let widgetConfig = {
-  whatsappNum: '+905440000000',
+  whatsappNum: '+905451234567',
   whatsappEnabled: true,
   aiEnabled: true,
   greeting: 'Hello! 👋 Welcome to HostifyOS.com. How can I assist your stay or hosting today?'

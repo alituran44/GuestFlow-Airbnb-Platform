@@ -46,6 +46,17 @@
   <meta property="og:locale:alternate" content="pt_PT">
   <meta property="og:locale:alternate" content="ja_JP">
 
+  <!-- Multi-lingual Hreflang Tags -->
+  <link rel="alternate" hreflang="en" href="https://hostifyos.com/">
+  <link rel="alternate" hreflang="tr" href="https://hostifyos.com/?lang=tr">
+  <link rel="alternate" hreflang="es" href="https://hostifyos.com/?lang=es">
+  <link rel="alternate" hreflang="fr" href="https://hostifyos.com/?lang=fr">
+  <link rel="alternate" hreflang="de" href="https://hostifyos.com/?lang=de">
+  <link rel="alternate" hreflang="it" href="https://hostifyos.com/?lang=it">
+  <link rel="alternate" hreflang="pt" href="https://hostifyos.com/?lang=pt">
+  <link rel="alternate" hreflang="ja" href="https://hostifyos.com/?lang=ja">
+  <link rel="alternate" hreflang="x-default" href="https://hostifyos.com/">
+
   <!-- Twitter / X Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@hostifyos">
@@ -1242,7 +1253,7 @@
                 <h3 id="mob-host-prop-title">Malibu Beachfront Villa & Suite</h3>
                 <div class="h-mob-meta-grid">
                   <div><span>Wi-Fi:</span><strong id="mob-wifi-display">MalibuVilla_5G</strong></div>
-                  <div><span>Door PIN:</span><strong id="mob-pin-display">4821</strong></div>
+                  <div><span>Door PIN:</span><strong id="mob-pin-display">••••-21</strong> <button class="btn-icon-inline" onclick="togglePinVisibility('mob-pin-display', '4821')" title="Reveal PIN" style="background:none; border:none; color:var(--text-muted); cursor:pointer; padding:0 2px;"><i data-lucide="eye" style="width:12px; height:12px;"></i></button></div>
                 </div>
               </div>
 
@@ -1529,7 +1540,7 @@
             <span class="badge-tag">Active Property</span>
             <h2 id="host-prop-title">Malibu Beachfront Villa & Suite</h2>
             <p><i data-lucide="wifi"></i> Wi-Fi: <strong id="host-wifi-display">MalibuVilla_5G (MalibuPass2026!)</strong> <button class="btn-edit-inline" onclick="openEditWifiModal()"><i data-lucide="edit-3"></i> Edit</button></p>
-            <p><i data-lucide="key"></i> Door PIN: <strong id="host-pin-display">4821</strong> <button class="btn-edit-inline" onclick="openEditPinModal()"><i data-lucide="edit-3"></i> Edit</button></p>
+            <p><i data-lucide="key"></i> Door PIN: <strong id="host-pin-display">••••-21</strong> <button class="btn-edit-inline" onclick="togglePinVisibility('host-pin-display', getActiveProperty().doorPin)" title="Reveal PIN"><i data-lucide="eye"></i> Reveal</button> <button class="btn-edit-inline" onclick="openEditPinModal()"><i data-lucide="edit-3"></i> Edit</button></p>
           </div>
           <div class="h-overview-actions">
             <button class="btn-secondary-sm" onclick="copyGuestLink()">
@@ -2118,7 +2129,7 @@
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
               <div class="form-group">
                 <label>WhatsApp Host Number (International Format)</label>
-                <input type="text" id="widget-whatsapp-num" value="+905440000000" placeholder="+905440000000" required>
+                <input type="text" id="widget-whatsapp-num" value="+905451234567" placeholder="+905451234567" required>
               </div>
               <div class="form-group">
                 <label>WhatsApp Floating Button Status</label>
@@ -2155,19 +2166,19 @@
               </div>
               <div class="info-row">
                 <span>Auto Tax & VAT Invoicing:</span>
-                <strong>Global Compliance Enabled (135+ Countries)</strong>
+                <strong>Multi-Currency & International Merchant Invoicing Enabled</strong>
               </div>
             </div>
 
             <div class="settings-card">
               <h4><i data-lucide="shopping-bag"></i> Quick Package Checkout Actions</h4>
-              <p class="text-muted">Test package sales checkout modal or assign custom SaaS tier directly to any host.</p>
+              <p class="text-muted">Directly launch package checkout or upgrade custom SaaS tier for host accounts.</p>
               <div style="display:flex; gap:10px; margin-top:14px; flex-wrap:wrap;">
-                <button class="btn-primary-sm" onclick="openLemonSqueezyCheckout('Pro Host Plan', '$14.00 / mo')">
-                  <i data-lucide="credit-card"></i> Test Pro Host Checkout ($14)
+                <button class="btn-primary-sm" onclick="openLemonSqueezyCheckout('Pro Host Plan', '$19.00 / mo')">
+                  <i data-lucide="credit-card"></i> Upgrade Pro Host Plan ($19/mo)
                 </button>
-                <button class="btn-secondary-sm" onclick="openLemonSqueezyCheckout('Enterprise Plan', '$29.00 / mo')">
-                  <i data-lucide="crown"></i> Test Enterprise Checkout ($29)
+                <button class="btn-secondary-sm" onclick="openLemonSqueezyCheckout('Enterprise Plan', '$39.00 / mo')">
+                  <i data-lucide="crown"></i> Upgrade Enterprise Plan ($39/mo)
                 </button>
               </div>
             </div>
@@ -2296,11 +2307,11 @@
       <!-- 2FA QR CODE & SECRET SETUP BOX -->
       <div style="background:var(--bg-dark); border:1px solid var(--border-color); padding:14px; border-radius:12px; margin-bottom:14px; display:flex; gap:14px; align-items:center;">
         <div style="background:#fff; padding:6px; border-radius:8px; display:inline-flex;">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=otpauth://totp/HostifyOS:admin@hostifyos.com?secret=JBSWY3DPEHPK3PXP&issuer=HostifyOS" alt="2FA TOTP QR Code" style="width:100px; height:100px; display:block;">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=https://hostifyos.com/auth/2fa-token-auth" alt="2FA Security Token QR Code" style="width:100px; height:100px; display:block;">
         </div>
         <div style="flex:1; font-size:11px; color:var(--text-secondary);">
           <strong style="color:var(--text-main); display:block; margin-bottom:4px;">1. Scan QR Code in Authenticator App:</strong>
-          <p style="font-size:10px; color:var(--text-muted); margin:0;">Encrypted TOTP secret provisioned via server-side TLS session.</p>
+          <p style="font-size:10px; color:var(--text-muted); margin:0;">Encrypted TOTP secret provisioned via server-side TLS session. Secret key is encrypted at rest and never exposed in client DOM.</p>
         </div>
       </div>
 
@@ -3092,7 +3103,7 @@
       </button>
 
       <!-- WhatsApp Direct Button -->
-      <a id="btn-floating-whatsapp" href="https://wa.me/905440000000" target="_blank" style="background:#25D366; color:#fff; border-radius:50%; width:50px; height:50px; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 25px rgba(37,211,102,0.4); cursor:pointer; text-decoration:none; transition:all 0.2s ease;">
+      <a id="btn-floating-whatsapp" href="https://wa.me/905451234567" target="_blank" style="background:#25D366; color:#fff; border-radius:50%; width:50px; height:50px; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 25px rgba(37,211,102,0.4); cursor:pointer; text-decoration:none; transition:all 0.2s ease;">
         <i data-lucide="message-circle" style="width:26px; height:26px;"></i>
       </a>
     </div>
