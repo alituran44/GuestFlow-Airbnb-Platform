@@ -3473,14 +3473,23 @@ async function fetchLocalHolidays(countryCode = 'US') {
   }
 }
 
+let currentCurrency = 'USD';
+let currencyRates = {
+  USD: { symbol: '$', rate: 1.0 },
+  EUR: { symbol: '€', rate: 0.92 },
+  GBP: { symbol: '£', rate: 0.79 },
+  TRY: { symbol: '₺', rate: 33.5 },
+  JPY: { symbol: '¥', rate: 155.0 }
+};
+
 function changeCurrency(newCurrency) {
   currentCurrency = newCurrency;
   updateCurrencyDisplays();
 }
 
-
 function formatPrice(amountUSD) {
-  const info = currencyRates[currentCurrency] || currencyRates.USD;
+  if (typeof amountUSD !== 'number' || isNaN(amountUSD)) return '$0.00';
+  const info = (currencyRates && currencyRates[currentCurrency]) ? currencyRates[currentCurrency] : { symbol: '$', rate: 1.0 };
   const converted = amountUSD * info.rate;
   return `${info.symbol}${converted.toFixed(2)}`;
 }
