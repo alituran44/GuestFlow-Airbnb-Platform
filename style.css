@@ -1819,10 +1819,17 @@ body.theme-light .meta-item span {
    B2B SAAS LANDING PAGE & PRICING STYLING
    ========================================================================== */
 .landing-hero {
+  position: relative;
   text-align: center;
-  max-width: 900px;
-  margin: 40px auto 60px;
-  padding: 0 16px;
+  max-width: 1040px;
+  margin: 20px auto 50px;
+  padding: 50px 24px 60px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(11, 15, 25, 0.72) 0%, rgba(11, 15, 25, 0.88) 70%, rgba(11, 15, 25, 0.98) 100%),
+              url('hero_bg_villa.jpg') center/cover no-repeat;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  overflow: hidden;
 }
 
 .hero-badge {
