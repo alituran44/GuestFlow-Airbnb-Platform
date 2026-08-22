@@ -1284,9 +1284,11 @@ let allHostAccounts = [
     name: 'Sarah Miller',
     email: 'sarah@malibuvillas.com',
     propertiesCount: 3,
-    plan: 'Pro Host Plan',
+    plan: 'Pro Host Plan ($19/mo)',
     status: 'trial_active',
     trialDays: 14,
+    nextBillingDate: 'Aug 30, 2026',
+    cardOnFile: 'Visa (•••• 4242)',
     commissionRate: '0.0%',
     upsellsTotalUSD: 1480.0
   },
@@ -1295,9 +1297,11 @@ let allHostAccounts = [
     name: 'Marcus Vance',
     email: 'marcus@vancehospitality.com',
     propertiesCount: 1,
-    plan: 'Starter Host',
+    plan: 'Starter Host ($0/mo)',
     status: 'trial_active',
-    trialDays: 11,
+    trialDays: 5,
+    nextBillingDate: 'Aug 27, 2026',
+    cardOnFile: 'Mastercard (•••• 8821)',
     commissionRate: '5.0%',
     upsellsTotalUSD: 420.0
   },
@@ -1306,9 +1310,11 @@ let allHostAccounts = [
     name: 'Elena Rostova',
     email: 'elena@santorini-suites.gr',
     propertiesCount: 18,
-    plan: 'Enterprise & Hotel',
+    plan: 'Enterprise Plan ($39/mo)',
     status: 'subscribed',
     trialDays: 0,
+    nextBillingDate: 'Sep 15, 2026',
+    cardOnFile: 'Amex (•••• 1009)',
     commissionRate: '0.0%',
     upsellsTotalUSD: 9450.0
   },
@@ -1317,11 +1323,13 @@ let allHostAccounts = [
     name: 'David Chen',
     email: 'david@bayareastays.com',
     propertiesCount: 2,
-    plan: 'Starter Host',
-    status: 'expired_locked',
+    plan: 'Pro Host Plan ($19/mo)',
+    status: 'subscribed',
     trialDays: 0,
-    commissionRate: '5.0%',
-    upsellsTotalUSD: 180.0
+    nextBillingDate: 'Sep 02, 2026',
+    cardOnFile: 'Visa (•••• 9931)',
+    commissionRate: '0.0%',
+    upsellsTotalUSD: 1120.0
   }
 ];
 
@@ -1942,27 +1950,35 @@ function renderAdminHostsTable() {
     <tr>
       <td>
         <strong>${h.name}</strong>
-        <p style="font-size:11px; color:var(--text-muted);">${h.email}</p>
+        <p style="font-size:11px; color:var(--text-muted); margin:2px 0 0;">${h.email}</p>
       </td>
       <td><strong>${h.propertiesCount} Units</strong></td>
       <td><span class="badge-tag">${h.plan}</span></td>
       <td>
-        <span class="badge-tag" style="${h.status === 'subscribed' ? 'background:rgba(16,185,129,0.15); color:var(--accent-emerald);' : h.status === 'trial_active' ? 'background:rgba(99,102,241,0.15); color:var(--accent-indigo);' : 'background:rgba(239,68,68,0.15); color:#EF4444;'}">
-          ● ${h.status.replace('_', ' ').toUpperCase()}
-        </span>
+        <div style="display:flex; flex-direction:column; gap:2px;">
+          <span class="badge-tag" style="${h.status === 'subscribed' ? 'background:rgba(16,185,129,0.15); color:var(--accent-emerald);' : 'background:rgba(245,158,11,0.15); color:var(--accent-amber);'}">
+            ⏳ ${h.status === 'subscribed' ? 'Subscribed & Active' : `${h.trialDays} Days Remaining`}
+          </span>
+          <span style="font-size:10px; color:var(--text-muted);">Renewal: ${h.nextBillingDate}</span>
+        </div>
+      </td>
+      <td>
+        <div style="font-size:11px;">
+          <strong style="color:var(--text-main);">💳 ${h.cardOnFile}</strong>
+          <span style="display:block; font-size:10px; color:var(--accent-emerald);">Auto-charge ${h.plan.includes('Pro') ? '$19.00' : h.plan.includes('Enterprise') ? '$39.00' : '$0.00'}</span>
+        </div>
       </td>
       <td><strong>${h.commissionRate}</strong></td>
-      <td><strong class="text-emerald">${formatPrice(h.upsellsTotalUSD)}</strong></td>
       <td>
         <div style="display:flex; gap:6px; flex-wrap:wrap;">
-          <button class="btn-primary-sm" style="padding:4px 8px; font-size:10px;" onclick="openLemonSqueezyCheckout('${h.plan === 'Pro Host Plan' ? 'Enterprise Plan' : 'Pro Host Plan'}', '${h.plan === 'Pro Host Plan' ? '$29.00 / mo' : '$14.00 / mo'}')">
-            <i data-lucide="shopping-bag"></i> Buy Package
+          <button class="btn-primary-sm" style="padding:4px 8px; font-size:10px;" onclick="prepareEmailToLead('${h.email}')">
+            <i data-lucide="mail"></i> Email
+          </button>
+          <button class="btn-secondary-sm" style="padding:4px 8px; font-size:10px;" onclick="adminExtendHostTrial('${h.id}')">
+            +7 Days
           </button>
           <button class="btn-secondary-sm" style="padding:4px 8px; font-size:10px;" onclick="adminActionLockHost('${h.id}')">
             ${h.status === 'expired_locked' ? 'Unlock' : 'Lock'}
-          </button>
-          <button class="btn-secondary-sm" style="padding:4px 8px; font-size:10px;" onclick="adminActionUpgradeHost('${h.id}')">
-            Set Pro
           </button>
         </div>
       </td>
@@ -1970,6 +1986,16 @@ function renderAdminHostsTable() {
   `).join('');
 
   lucide.createIcons();
+}
+
+function adminExtendHostTrial(hostId) {
+  const host = allHostAccounts.find(h => h.id === hostId);
+  if (host) {
+    host.trialDays = (host.trialDays || 0) + 7;
+    host.status = 'trial_active';
+    renderAdminHostsTable();
+    showToast(`⚡ Extended trial for ${host.email} by +7 days! (${host.trialDays} days remaining)`);
+  }
 }
 
 
