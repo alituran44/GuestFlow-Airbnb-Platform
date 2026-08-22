@@ -3,28 +3,458 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Malibu Beachfront Villa & Suite — Digital Guest Guidebook | HostifyOS</title>
+  <title>Malibu Beachfront Villa — Digital Guest Guidebook | HostifyOS</title>
   
-  <meta name="description" content="Welcome to Malibu Beachfront Villa & Suite. Access 1-tap Wi-Fi, time-gated door lock PIN, appliance video guides, and local recommendations.">
-  <meta property="og:title" content="Malibu Beachfront Villa — Guest Guidebook">
-  <meta property="og:description" content="Instant 1-tap Wi-Fi, door code, appliance videos & local recommendations.">
-  <meta property="og:image" content="https://www.hostifyos.com/hero_bg_villa.jpg">
+  <meta name="description" content="Official Digital Guest Guidebook for Malibu Beachfront Villa & Suite. Access 1-tap Wi-Fi, time-gated door lock PIN, appliance video manuals, and room service concierge.">
+  <meta property="og:title" content="Malibu Beachfront Villa — Digital Guidebook">
+  <meta property="og:description" content="1-Tap Wi-Fi, door access PIN code, video guides & in-room concierge.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
-  <script>
-    // Redirect to main PWA app with guest view and malibu-villa slug
-    window.location.href = "https://www.hostifyos.com/?v=guest&slug=malibu-villa";
-  </script>
-</head>
-<body style="background:#090D14; color:#F8FAFC; font-family:-apple-system,BlinkMacSystemFont,sans-serif; display:flex; align-items:center; justify-content:center; height:100vh; margin:0;">
-  <div style="text-align:center; padding:20px;">
-    <div style="width:60px; height:60px; border:3px solid #10B981; border-top-color:transparent; border-radius:50%; animation:spin 1s linear infinite; margin:0 auto 20px;"></div>
-    <h2 style="font-size:20px; margin-bottom:8px;">Opening Malibu Beachfront Villa Guidebook...</h2>
-    <p style="color:#94A3B8; font-size:14px;">Loading 1-tap Wi-Fi & instant guest access</p>
-  </div>
+
   <style>
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    :root {
+      --bg-obsidian: #090D14;
+      --bg-card: #131924;
+      --bg-card-hover: #1A2232;
+      --accent-emerald: #10B981;
+      --accent-emerald-glow: rgba(16, 185, 129, 0.2);
+      --accent-indigo: #6366F1;
+      --text-primary: #F8FAFC;
+      --text-secondary: #CBD5E1;
+      --text-muted: #64748B;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-obsidian);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      line-height: 1.5;
+      padding-bottom: 90px;
+    }
+
+    .pwa-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 13, 20, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #fff;
+    }
+    .brand-logo img {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .brand-name {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* Property Hero Banner */
+    .prop-hero {
+      position: relative;
+      height: 240px;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      background: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    }
+    .prop-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(9,13,20,0.2) 0%, rgba(9,13,20,0.95) 100%);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .prop-badge {
+      align-self: flex-start;
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: var(--accent-emerald);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .prop-title {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    .prop-address {
+      font-size: 13px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    /* Quick Action Cards */
+    .action-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .icon-box {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-emerald);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .info-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-obsidian);
+      border: 1px solid var(--border-subtle);
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+    .info-label { font-size: 12px; color: var(--text-muted); }
+    .info-val { font-family: monospace; font-size: 16px; font-weight: 700; color: #fff; }
+
+    .btn-action {
+      width: 100%;
+      background: var(--accent-emerald);
+      color: #090D14;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 14px;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+      transition: all 0.2s;
+    }
+    .btn-action:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* Video Manuals Grid */
+    .video-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px;
+    }
+    .video-thumb {
+      width: 80px;
+      height: 60px;
+      border-radius: 10px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .video-thumb::after {
+      content: '▶';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 14px;
+    }
+    .video-info h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .video-info p { font-size: 11px; color: var(--text-muted); }
+
+    /* Concierge Services */
+    .service-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .svc-name { font-size: 14px; font-weight: 700; }
+    .svc-desc { font-size: 12px; color: var(--text-secondary); }
+    .svc-price { font-size: 15px; font-weight: 800; color: var(--accent-emerald); }
+    .btn-buy {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--accent-emerald);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    /* Fixed Bottom Bar */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(9, 13, 20, 0.9);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid var(--border-subtle);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+    }
+    .btn-wa {
+      background: #25D366;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 13px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: #10B981;
+      color: #090D14;
+      padding: 10px 24px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 13px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+    .toast.active { transform: translateX(-50%) translateY(0); }
   </style>
+</head>
+<body>
+
+  <!-- Toast Bar -->
+  <div id="toast" class="toast">Copied to Clipboard!</div>
+
+  <!-- Header -->
+  <header class="pwa-header">
+    <a href="https://www.hostifyos.com" class="brand-logo">
+      <img src="https://www.hostifyos.com/brand_logo.jpg" alt="HostifyOS Logo">
+      <span class="brand-name">HostifyOS</span>
+    </a>
+    <span style="font-size:12px; color:var(--text-muted); background:var(--bg-card); padding:4px 10px; border-radius:999px; border:1px solid var(--border-subtle);">PWA Guidebook</span>
+  </header>
+
+  <main class="container">
+
+    <!-- Property Hero -->
+    <div class="prop-hero">
+      <div class="prop-hero-overlay">
+        <span class="prop-badge">VERIFIED HOST PROPERTY</span>
+        <h1 class="prop-title">Malibu Beachfront Villa & Suite</h1>
+        <p class="prop-address"><i data-lucide="map-pin" style="width:14px; height:14px;"></i> 24840 Pacific Coast Hwy, Malibu, CA 90265</p>
+      </div>
+    </div>
+
+    <!-- 1-Tap Wi-Fi Sharing -->
+    <div class="action-card">
+      <div class="card-head">
+        <span class="card-title"><div class="icon-box"><i data-lucide="wifi"></i></div> 1-Tap Instant Wi-Fi Access</span>
+      </div>
+      <div class="info-row">
+        <div>
+          <div class="info-label">NETWORK (SSID)</div>
+          <div class="info-val">MalibuVilla_5G_Guest</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div>
+          <div class="info-label">PASSWORD</div>
+          <div class="info-val">OceanBreeze2026!</div>
+        </div>
+      </div>
+      <button class="btn-action" onclick="copyWifi('OceanBreeze2026!')">
+        <i data-lucide="copy"></i> Copy Wi-Fi Password
+      </button>
+    </div>
+
+    <!-- Time-Gated Door Lock Code -->
+    <div class="action-card">
+      <div class="card-head">
+        <span class="card-title"><div class="icon-box"><i data-lucide="key-round"></i></div> Time-Gated Keyless Door PIN</span>
+        <span style="font-size:11px; color:#10B981; font-weight:700; background:rgba(16,185,129,0.15); padding:2px 8px; border-radius:6px;">CHECK-IN ACTIVE</span>
+      </div>
+      <div class="info-row">
+        <div>
+          <div class="info-label">LOCKBOX PIN CODE</div>
+          <div class="info-val" id="door-pin-text">••••</div>
+        </div>
+        <button class="btn-buy" onclick="toggleDoorPin()">Show PIN Code</button>
+      </div>
+      <p style="font-size:11px; color:var(--text-muted); margin-top:6px;">⚡ Code automatically expires at 11:00 AM check-out time for your security.</p>
+    </div>
+
+    <!-- Appliance Video Guides -->
+    <div style="margin-bottom:20px;">
+      <h3 style="font-family:var(--font-heading); font-size:18px; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+        <i data-lucide="video" class="text-accent"></i> Appliance Video Manuals
+      </h3>
+      <div class="video-card">
+        <div class="video-thumb" style="background-image:url('https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?auto=format&fit=crop&w=300&q=80')"></div>
+        <div class="video-info">
+          <h4>Nest AC & Thermostat Guide</h4>
+          <p>0:45 min • How to switch cooling and heating modes</p>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb" style="background-image:url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=300&q=80')"></div>
+        <div class="video-info">
+          <h4>Outdoor Spa Jacuzzi Controls</h4>
+          <p>1:10 min • Temperature & hydro-massage jet instructions</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- In-Room Concierge & Upsell Store -->
+    <div style="margin-bottom:20px;">
+      <h3 style="font-family:var(--font-heading); font-size:18px; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+        <i data-lucide="shopping-bag" class="text-accent"></i> In-Room Concierge & Upsells
+      </h3>
+      <div class="service-item">
+        <div>
+          <div class="svc-name">VIP Airport Shuttle (One Way)</div>
+          <div class="svc-desc">Private luxury sedan pickup directly from LAX terminal.</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="svc-price">$75.00</div>
+          <button class="btn-buy" onclick="buyService('VIP Airport Shuttle')">Order</button>
+        </div>
+      </div>
+
+      <div class="service-item">
+        <div>
+          <div class="svc-name">Late Check-out (Until 2:00 PM)</div>
+          <div class="svc-desc">Extend your departure time and enjoy the ocean view longer.</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="svc-price">$45.00</div>
+          <button class="btn-buy" onclick="buyService('Late Check-out')">Order</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Fixed Bottom Bar -->
+  <div class="bottom-bar">
+    <div>
+      <div style="font-size:12px; color:var(--text-muted);">HOST CONTACT</div>
+      <div style="font-weight:700; font-size:14px;">Sarah Miller (Superhost)</div>
+    </div>
+    <a href="https://wa.me/13105550199?text=Hello%20Sarah!%20I%20am%20staying%20at%20Malibu%20Beachfront%20Villa." target="_blank" class="btn-wa">
+      <i data-lucide="message-circle"></i> Message Host on WhatsApp
+    </a>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) window.lucide.createIcons();
+    });
+
+    function copyWifi(pass) {
+      navigator.clipboard.writeText(pass);
+      showToast("📶 Wi-Fi Password Copied to Clipboard!");
+    }
+
+    function toggleDoorPin() {
+      const el = document.getElementById('door-pin-text');
+      if (el.textContent === '••••') {
+        el.textContent = '4242';
+        showToast("🔑 Keyless Door PIN Code Revealed: 4242");
+      } else {
+        el.textContent = '••••';
+      }
+    }
+
+    function buyService(name) {
+      window.open('https://buy.stripe.com/malibu_villa_direct', '_blank');
+      showToast(`🛒 Directing to secure Host Payment Gateway for ${name}`);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('active');
+      setTimeout(() => toast.classList.remove('active'), 3000);
+    }
+  </script>
 </body>
 </html>
