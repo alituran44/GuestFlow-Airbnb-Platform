@@ -2299,6 +2299,26 @@ function initLemonSqueezyApi(apiKey, storeId) {
   showToast("⚡ Lemon Squeezy Store #456562 Connected!");
 }
 
+function formatCardNumber(input) {
+  let v = input.value.replace(/\s+/g, '').replace(/[^0-9]/g, '');
+  let matches = v.match(/\d{4,16}/g);
+  let match = (matches && matches[0]) || '';
+  let parts = [];
+  for (let i = 0, len = match.length; i < len; i += 4) {
+    parts.push(match.substring(i, i + 4));
+  }
+  input.value = parts.length ? parts.join(' ') : v;
+}
+
+function formatCardExp(input) {
+  let v = input.value.replace(/\s+/g, '').replace(/[^0-9]/g, '');
+  if (v.length >= 2) {
+    input.value = v.substring(0, 2) + '/' + v.substring(2, 4);
+  } else {
+    input.value = v;
+  }
+}
+
 function setLemonSqueezyUrls(monthlyUrl, annualUrl, enterpriseUrl) {
   if (monthlyUrl) LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl = monthlyUrl;
   if (annualUrl) LEMONSQUEEZY_STORE_CONFIG.proAnnualUrl = annualUrl;

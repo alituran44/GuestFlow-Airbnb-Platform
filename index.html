@@ -2146,27 +2146,40 @@
         </div>
 
         <div class="form-group">
+          <label>Cardholder Name</label>
+          <input type="text" id="card-name" placeholder="Sarah Miller" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:10px 14px; border-radius:8px; width:100%; font-size:13px;">
+        </div>
+
+        <div class="form-group">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-            <label style="margin:0;">Credit / Debit Card (PCI-DSS Tokenized)</label>
-            <span class="badge-tag" style="background:rgba(59,130,246,0.15); color:#60A5FA; font-size:9px;">🔒 Stripe Elements 256-bit</span>
+            <label style="margin:0;">Credit / Debit Card Number</label>
+            <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:#10B981; font-size:9px;">🔒 256-Bit SSL Encrypted</span>
           </div>
-          <!-- PCI-DSS LEVEL 1 STRIPE ELEMENTS CONTAINER -->
-          <div id="lemon-card-element" style="background:var(--bg-dark); border:1px solid var(--border-color); padding:12px; border-radius:8px; min-height:42px;">
-            <div style="display:flex; align-items:center; justify-content:space-between; color:var(--text-muted); font-size:12px;">
-              <span>💳 4242 •••• •••• 4242 (Stripe Elements Secure Field)</span>
-              <span style="font-size:10px; color:var(--accent-emerald);">MM/YY CVC</span>
-            </div>
+          <div style="position:relative;">
+            <input type="text" id="card-number" placeholder="4242 •••• •••• 4242" maxlength="19" oninput="formatCardNumber(this)" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:10px 14px 10px 42px; border-radius:8px; width:100%; font-family:monospace; font-size:14px; letter-spacing:1px;">
+            <span style="position:absolute; left:14px; top:50%; transform:translateY(-50%); font-size:16px;">💳</span>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div class="form-group">
+            <label>Expiry Date</label>
+            <input type="text" id="card-exp" placeholder="MM / YY" maxlength="5" oninput="formatCardExp(this)" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:10px 14px; border-radius:8px; width:100%; text-align:center; font-family:monospace; font-size:13px;">
+          </div>
+          <div class="form-group">
+            <label>CVC / CVV</label>
+            <input type="password" id="card-cvc" placeholder="•••" maxlength="4" oninput="this.value=this.value.replace(/[^0-9]/g,'')" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:10px 14px; border-radius:8px; width:100%; text-align:center; font-family:monospace; font-size:13px;">
           </div>
         </div>
 
         <div style="display:flex; align-items:center; justify-content:space-between; margin:12px 0; font-size:10px; color:var(--text-muted);">
           <span>Accepted: Visa, Mastercard, Amex, Apple Pay</span>
-          <span style="color:#6366F1; font-weight:600;"><i data-lucide="shield-check" style="width:12px; height:12px; vertical-align:middle;"></i> Powered by Stripe</span>
+          <span style="color:#10B981; font-weight:600;"><i data-lucide="shield-check" style="width:12px; height:12px; vertical-align:middle;"></i> Merchant ID #456562</span>
         </div>
 
         <button type="submit" class="btn-primary-lg" id="btn-lemon-submit">
           <i data-lucide="shield-check"></i>
-          <span>Complete 14-Day Free Registration</span>
+          <span>Complete 14-Day Free Registration ($0.00 Today)</span>
         </button>
       </form>
     </div>
