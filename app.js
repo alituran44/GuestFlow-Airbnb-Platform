@@ -2952,8 +2952,8 @@ function toggleBillingCycle(type) {
     if (entPriceEl) entPriceEl.textContent = formatPrice(29.0);
     if (proPeriodEl) proPeriodEl.textContent = '/ property / month';
     if (entPeriodEl) entPeriodEl.textContent = '/ property / month';
-    if (proNoteEl) proNoteEl.textContent = `Billed annually at ${formatPrice(168.0)}/yr (Save 20%)`;
-    if (entNoteEl) entNoteEl.textContent = `Billed annually at ${formatPrice(348.0)}/yr (Save 20%)`;
+    if (proNoteEl) proNoteEl.textContent = `Billed annually at ${formatPrice(168.0)}/yr (Save 26%)`;
+    if (entNoteEl) entNoteEl.textContent = `Billed annually at ${formatPrice(348.0)}/yr (Save 26%)`;
   } else {
     if (proPriceEl) proPriceEl.textContent = formatPrice(19.0);
     if (entPriceEl) entPriceEl.textContent = formatPrice(39.0);
@@ -2963,6 +2963,7 @@ function toggleBillingCycle(type) {
     if (entNoteEl) entNoteEl.textContent = `Billed monthly at ${formatPrice(39.0)}/mo`;
   }
 }
+window.toggleBillingCycle = toggleBillingCycle;
 
 function selectPricingTier(tierName) {
   if (tierName === 'Starter') {
