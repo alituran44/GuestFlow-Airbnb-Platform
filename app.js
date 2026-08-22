@@ -1090,7 +1090,7 @@ const i18nDict = {
     pricingTag: "透明性のあるSaaS料金プラン",
     pricingTitle: "14日間の無料トライアルプランを選択",
     pricingSub: "本日のお支払いは0円。14日以内ならワンクリックでいつでもキャンセル可能。",
-    btnAnnual: "年払い（20%割引）",
+    btnAnnual: "年払い（26%割引）",
     btnMonthly: "月払い",
     starterName: "スタータープラン",
     starterDesc: "1物件を管理するホストに最適。",
