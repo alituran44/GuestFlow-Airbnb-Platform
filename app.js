@@ -2250,9 +2250,9 @@ function renderCommissionAggregator() {
   if (metricRev) metricRev.textContent = formatPrice(summary.grossSales);
   if (metricFees) metricFees.textContent = formatPrice(summary.totalPlatformFees);
 
-  const isPro = hostAuth.commissionRate === 0 || (hostAuth.plan && hostAuth.plan.includes('Pro'));
+  const isPro = hostAuth.commissionRate === 0 || (hostAuth.plan && (hostAuth.plan.includes('Pro') || hostAuth.plan.includes('Enterprise')));
   if (headerBadge) {
-    headerBadge.textContent = isPro ? 'PRO HOST ACTIVE (0% COMM)' : 'STARTER TIER ACTIVE';
+    headerBadge.textContent = isPro ? 'PRO HOST ACTIVE (0% COMM)' : 'STARTER TIER (5% COMM)';
     headerBadge.style.background = isPro ? 'rgba(99,102,241,0.15)' : 'rgba(245,158,11,0.15)';
     headerBadge.style.color = isPro ? 'var(--accent-indigo)' : 'var(--accent-amber)';
   }
@@ -2260,6 +2260,44 @@ function renderCommissionAggregator() {
   if (subTierDisplay) {
     subTierDisplay.textContent = isPro ? 'Pro Host Tier (0% Comm)' : 'Starter Tier (5% Comm)';
   }
+
+  // METHOD 2: RENDER PRO UPGRADE NUDGE BANNER FOR STARTER HOSTS
+  const nudgeContainer = document.getElementById('starter-nudge-container');
+  if (nudgeContainer) {
+    if (!isPro) {
+      nudgeContainer.style.display = 'block';
+      nudgeContainer.innerHTML = `
+        <div style="background:linear-gradient(135deg, rgba(16,185,129,0.12), rgba(99,102,241,0.12)); border:1px solid rgba(16,185,129,0.3); border-radius:12px; padding:16px; margin-bottom:20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:40px; height:40px; border-radius:10px; background:rgba(16,185,129,0.2); display:flex; align-items:center; justify-content:center; color:#10B981;">
+              <i data-lucide="zap" style="width:20px; height:20px;"></i>
+            </div>
+            <div>
+              <h4 style="margin:0; font-size:14px; color:#F8FAFC;">Starter Plan 5% Commission Active (${formatPrice(summary.totalPlatformFees)} Accrued)</h4>
+              <p style="margin:2px 0 0; font-size:12px; color:#94A3B8;">Upgrade to Pro Host ($19/mo) now to unlock 0% commission & keep 100% of your guest upsell revenue!</p>
+            </div>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn-primary-sm" style="background:#10B981; color:#fff;" onclick="openLemonSqueezyCheckout('Pro Host Plan ($19/mo - 0% Comm)', '$19.00 / mo')">
+              <i data-lucide="shield-check"></i> Upgrade to Pro ($19/mo)
+            </button>
+            <button class="btn-secondary-sm" onclick="generateMonthlyCommissionInvoice()">
+              <i data-lucide="receipt"></i> Pay Accrued $${summary.totalPlatformFees.toFixed(2)} Fee
+            </button>
+          </div>
+        </div>
+      `;
+    } else {
+      nudgeContainer.style.display = 'none';
+    }
+  }
+}
+
+function generateMonthlyCommissionInvoice() {
+  const summary = calculateCommissionSummary();
+  const feeAmount = summary.totalPlatformFees > 0 ? summary.totalPlatformFees : 12.50;
+  openLemonSqueezyCheckout('Starter 5% Platform Fee Settlement', `$${feeAmount.toFixed(2)} Invoice`);
+  showToast(`⚡ Generated Monthly Commission Settlement Invoice ($${feeAmount.toFixed(2)}) via Lemon Squeezy!`);
 }
 
 function triggerInstantFeeSweep() {
