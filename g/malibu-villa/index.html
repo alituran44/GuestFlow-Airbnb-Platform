@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Malibu Beachfront Villa — Digital Guest Guidebook | HostifyOS</title>
   
-  <meta name="description" content="Official Digital Guest Guidebook for Malibu Beachfront Villa & Suite. Access 1-tap Wi-Fi, time-gated door lock PIN, appliance video manuals, and room service concierge.">
-  <meta property="og:title" content="Malibu Beachfront Villa — Digital Guidebook">
-  <meta property="og:description" content="1-Tap Wi-Fi, door access PIN code, video guides & in-room concierge.">
+  <meta name="description" content="Official Digital Guest Guidebook for Malibu Beachfront Villa & Suite. Access 1-tap Google/Apple Maps navigation, multiple Wi-Fi networks, door PIN, and room service.">
+  <meta property="og:title" content="Malibu Beachfront Villa — Guest Guidebook">
+  <meta property="og:description" content="1-Tap Maps navigation, multiple Wi-Fi networks, door code & room concierge.">
   <meta property="og:image" content="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +23,6 @@
       --bg-card: #131924;
       --bg-card-hover: #1A2232;
       --accent-emerald: #10B981;
-      --accent-emerald-glow: rgba(16, 185, 129, 0.2);
       --accent-indigo: #6366F1;
       --text-primary: #F8FAFC;
       --text-secondary: #CBD5E1;
@@ -39,7 +38,7 @@
       color: var(--text-primary);
       font-family: var(--font-body);
       line-height: 1.5;
-      padding-bottom: 90px;
+      padding-bottom: 95px;
     }
 
     .pwa-header {
@@ -79,7 +78,6 @@
       padding: 16px;
     }
 
-    /* Property Hero Banner */
     .prop-hero {
       position: relative;
       height: 240px;
@@ -125,7 +123,6 @@
       margin-top: 4px;
     }
 
-    /* Quick Action Cards */
     .action-card {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
@@ -169,7 +166,7 @@
       margin-bottom: 8px;
     }
     .info-label { font-size: 12px; color: var(--text-muted); }
-    .info-val { font-family: monospace; font-size: 16px; font-weight: 700; color: #fff; }
+    .info-val { font-family: monospace; font-size: 15px; font-weight: 700; color: #fff; }
 
     .btn-action {
       width: 100%;
@@ -187,46 +184,38 @@
       justify-content: center;
       gap: 8px;
       box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
-      transition: all 0.2s;
     }
-    .btn-action:hover { opacity: 0.9; transform: translateY(-1px); }
 
-    /* Video Manuals Grid */
-    .video-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 14px;
-      overflow: hidden;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px;
-    }
-    .video-thumb {
-      width: 80px;
-      height: 60px;
-      border-radius: 10px;
-      background-size: cover;
-      background-position: center;
-      position: relative;
-      flex-shrink: 0;
-    }
-    .video-thumb::after {
-      content: '▶';
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.4);
+    .btn-nav {
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      color: #818CF8;
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
-      font-size: 14px;
+      gap: 8px;
+      text-decoration: none;
+      margin-top: 10px;
     }
-    .video-info h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-    .video-info p { font-size: 11px; color: var(--text-muted); }
 
-    /* Concierge Services */
+    .wifi-pill-item {
+      background: var(--bg-obsidian);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
     .service-item {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
@@ -251,7 +240,6 @@
       cursor: pointer;
     }
 
-    /* Fixed Bottom Bar */
     .bottom-bar {
       position: fixed;
       bottom: 0;
@@ -277,10 +265,8 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
     }
 
-    /* Toast Notification */
     .toast {
       position: fixed;
       top: 20px;
@@ -292,7 +278,6 @@
       border-radius: 999px;
       font-weight: 800;
       font-size: 13px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
       transition: all 0.3s ease;
       z-index: 999;
     }
@@ -301,10 +286,8 @@
 </head>
 <body>
 
-  <!-- Toast Bar -->
   <div id="toast" class="toast">Copied to Clipboard!</div>
 
-  <!-- Header -->
   <header class="pwa-header">
     <a href="https://www.hostifyos.com" class="brand-logo">
       <img src="https://www.hostifyos.com/brand_logo.jpg" alt="HostifyOS Logo">
@@ -324,26 +307,40 @@
       </div>
     </div>
 
-    <!-- 1-Tap Wi-Fi Sharing -->
+    <!-- 1-TAP MAP NAVIGATION CARD -->
     <div class="action-card">
       <div class="card-head">
-        <span class="card-title"><div class="icon-box"><i data-lucide="wifi"></i></div> 1-Tap Instant Wi-Fi Access</span>
+        <span class="card-title"><div class="icon-box" style="background:rgba(99,102,241,0.15); color:#818CF8;"><i data-lucide="navigation"></i></div> 1-Tap Navigation & Directions</span>
       </div>
-      <div class="info-row">
+      <p style="font-size:12px; color:var(--text-secondary); margin-bottom:10px;">Tap below to open turn-by-turn navigation directly in Google Maps or Apple Maps.</p>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=24840+Pacific+Coast+Hwy,+Malibu,+CA+90265" target="_blank" class="btn-nav">
+        <i data-lucide="map"></i> Open Location in Google Maps / Apple Maps
+      </a>
+    </div>
+
+    <!-- MULTIPLE WI-FI NETWORKS CARD -->
+    <div class="action-card">
+      <div class="card-head">
+        <span class="card-title"><div class="icon-box"><i data-lucide="wifi"></i></div> Available Wi-Fi Networks (2)</span>
+      </div>
+      
+      <!-- Wi-Fi 1 -->
+      <div class="wifi-pill-item">
         <div>
-          <div class="info-label">NETWORK (SSID)</div>
-          <div class="info-val">MalibuVilla_5G_Guest</div>
+          <span style="font-size:10px; color:var(--text-muted); text-transform:uppercase; display:block;">Villa Main Wi-Fi (5GHz)</span>
+          <strong style="font-size:14px; color:#fff;">MalibuVilla_5G_Guest</strong>
         </div>
+        <button class="btn-buy" onclick="copyWifi('OceanBreeze2026!')">Copy Password</button>
       </div>
-      <div class="info-row">
+
+      <!-- Wi-Fi 2 -->
+      <div class="wifi-pill-item">
         <div>
-          <div class="info-label">PASSWORD</div>
-          <div class="info-val">OceanBreeze2026!</div>
+          <span style="font-size:10px; color:var(--text-muted); text-transform:uppercase; display:block;">Outdoor Pool & Beach Deck</span>
+          <strong style="font-size:14px; color:#fff;">MalibuVilla_Pool_Guest</strong>
         </div>
+        <button class="btn-buy" onclick="copyWifi('PoolSide2026!')">Copy Password</button>
       </div>
-      <button class="btn-action" onclick="copyWifi('OceanBreeze2026!')">
-        <i data-lucide="copy"></i> Copy Wi-Fi Password
-      </button>
     </div>
 
     <!-- Time-Gated Door Lock Code -->
@@ -360,27 +357,6 @@
         <button class="btn-buy" onclick="toggleDoorPin()">Show PIN Code</button>
       </div>
       <p style="font-size:11px; color:var(--text-muted); margin-top:6px;">⚡ Code automatically expires at 11:00 AM check-out time for your security.</p>
-    </div>
-
-    <!-- Appliance Video Guides -->
-    <div style="margin-bottom:20px;">
-      <h3 style="font-family:var(--font-heading); font-size:18px; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
-        <i data-lucide="video" class="text-accent"></i> Appliance Video Manuals
-      </h3>
-      <div class="video-card">
-        <div class="video-thumb" style="background-image:url('https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?auto=format&fit=crop&w=300&q=80')"></div>
-        <div class="video-info">
-          <h4>Nest AC & Thermostat Guide</h4>
-          <p>0:45 min • How to switch cooling and heating modes</p>
-        </div>
-      </div>
-      <div class="video-card">
-        <div class="video-thumb" style="background-image:url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=300&q=80')"></div>
-        <div class="video-info">
-          <h4>Outdoor Spa Jacuzzi Controls</h4>
-          <p>1:10 min • Temperature & hydro-massage jet instructions</p>
-        </div>
-      </div>
     </div>
 
     <!-- In-Room Concierge & Upsell Store -->

@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Grand Horizon Boutique Hotel — Digital Guest Guidebook | HostifyOS</title>
   
-  <meta name="description" content="Official Digital Guest Guidebook for Grand Horizon Boutique Hotel & Spa. Access 1-tap Wi-Fi, spa booking, room service concierge, and caldera tours.">
+  <meta name="description" content="Official Digital Guest Guidebook for Grand Horizon Boutique Hotel & Spa. Access 1-tap Google Maps navigation, 3 hotel Wi-Fi networks, spa booking, and concierge.">
   <meta property="og:title" content="Grand Horizon Boutique Hotel — Guest Guidebook">
-  <meta property="og:description" content="1-Tap Wi-Fi, room concierge, spa booking & volcano catamaran tours.">
+  <meta property="og:description" content="1-Tap Maps navigation, 3 Hotel Wi-Fi networks, spa booking & volcano catamaran tours.">
   <meta property="og:image" content="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,7 +37,7 @@
       color: var(--text-primary);
       font-family: var(--font-body);
       line-height: 1.5;
-      padding-bottom: 90px;
+      padding-bottom: 95px;
     }
 
     .pwa-header {
@@ -154,35 +154,34 @@
       align-items: center;
       justify-content: center;
     }
-    .info-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: var(--bg-obsidian);
-      border: 1px solid var(--border-subtle);
-      padding: 12px 16px;
-      border-radius: 12px;
-      margin-bottom: 8px;
-    }
-    .info-label { font-size: 12px; color: var(--text-muted); }
-    .info-val { font-family: monospace; font-size: 16px; font-weight: 700; color: #fff; }
 
-    .btn-action {
+    .btn-nav {
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      color: #818CF8;
       width: 100%;
-      background: var(--accent-emerald);
-      color: #090D14;
-      font-family: var(--font-heading);
-      font-weight: 800;
-      font-size: 14px;
       padding: 12px;
-      border: none;
       border-radius: 12px;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 13px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+      text-decoration: none;
+    }
+
+    .wifi-pill-item {
+      background: var(--bg-obsidian);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .service-item {
@@ -275,26 +274,49 @@
       </div>
     </div>
 
-    <!-- Wi-Fi -->
+    <!-- 1-TAP MAP NAVIGATION CARD -->
     <div class="action-card">
       <div class="card-head">
-        <span class="card-title"><div class="icon-box"><i data-lucide="wifi"></i></div> High-Speed Hotel Wi-Fi</span>
+        <span class="card-title"><div class="icon-box" style="background:rgba(99,102,241,0.15); color:#818CF8;"><i data-lucide="navigation"></i></div> Hotel Navigation & Directions</span>
       </div>
-      <div class="info-row">
+      <p style="font-size:12px; color:var(--text-secondary); margin-bottom:10px;">Tap below to open Google Maps or Apple Maps turn-by-turn navigation directly to hotel front entrance.</p>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=88+Cliffside+Resort+Way,+Santorini,+Greece" target="_blank" class="btn-nav">
+        <i data-lucide="map"></i> Open Hotel Location in Google Maps / Apple Maps
+      </a>
+    </div>
+
+    <!-- MULTIPLE HOTEL WI-FI NETWORKS CARD -->
+    <div class="action-card">
+      <div class="card-head">
+        <span class="card-title"><div class="icon-box"><i data-lucide="wifi"></i></div> Hotel Wi-Fi Networks (3 Areas)</span>
+      </div>
+      
+      <!-- Wi-Fi 1 -->
+      <div class="wifi-pill-item">
         <div>
-          <div class="info-label">HOTEL NETWORK</div>
-          <div class="info-val">GrandHorizon_VIP</div>
+          <span style="font-size:10px; color:var(--text-muted); text-transform:uppercase; display:block;">Hotel Lobby & Lounge</span>
+          <strong style="font-size:14px; color:#fff;">GrandHorizon_Lobby_VIP</strong>
         </div>
+        <button class="btn-buy" onclick="copyWifi('WelcomeHorizon2026')">Copy Password</button>
       </div>
-      <div class="info-row">
+
+      <!-- Wi-Fi 2 -->
+      <div class="wifi-pill-item">
         <div>
-          <div class="info-label">PASSWORD</div>
-          <div class="info-val">HorizonSpa2026</div>
+          <span style="font-size:10px; color:var(--text-muted); text-transform:uppercase; display:block;">Infinity Pool & Beach Bar</span>
+          <strong style="font-size:14px; color:#fff;">GrandHorizon_Pool_Bar</strong>
         </div>
+        <button class="btn-buy" onclick="copyWifi('SunsetCocktails2026')">Copy Password</button>
       </div>
-      <button class="btn-action" onclick="copyWifi('HorizonSpa2026')">
-        <i data-lucide="copy"></i> Copy Hotel Wi-Fi Password
-      </button>
+
+      <!-- Wi-Fi 3 -->
+      <div class="wifi-pill-item">
+        <div>
+          <span style="font-size:10px; color:var(--text-muted); text-transform:uppercase; display:block;">Spa & Wellness Center</span>
+          <strong style="font-size:14px; color:#fff;">GrandHorizon_Spa_Relax</strong>
+        </div>
+        <button class="btn-buy" onclick="copyWifi('SpaRelaxation2026')">Copy Password</button>
+      </div>
     </div>
 
     <!-- Concierge Services -->
