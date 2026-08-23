@@ -3759,6 +3759,53 @@ body.theme-light .blog-filter-btn.active {
   color: #FFFFFF;
 }
 
+/* ==================================================== */
+/* OFFICIAL MAIN FOOTER STYLING (DARK & LIGHT MODES)   */
+/* ==================================================== */
+footer.main-footer {
+  margin-top: 60px;
+  padding: 30px 20px;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+footer.main-footer .footer-brand-title {
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+footer.main-footer a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+footer.main-footer a:hover {
+  color: var(--accent-emerald);
+}
+
+body.theme-light footer.main-footer {
+  background: #FFFFFF !important;
+  border-top-color: #E2E8F0 !important;
+  color: #334155 !important;
+}
+
+body.theme-light footer.main-footer .footer-brand-title {
+  color: #0F172A !important;
+}
+
+body.theme-light footer.main-footer a {
+  color: #475569 !important;
+}
+
+body.theme-light footer.main-footer a:hover {
+  color: #10B981 !important;
+}
+
 
 
 
