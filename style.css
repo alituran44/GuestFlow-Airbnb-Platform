@@ -64,6 +64,112 @@ body.theme-light {
   --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
+/* Light Mode Hero Section Overlay & Contrast Protection */
+body.theme-light .landing-hero {
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.78) 0%, rgba(15, 23, 42, 0.92) 70%, rgba(15, 23, 42, 0.98) 100%),
+              url('hero_bg_villa.jpg') center/cover no-repeat !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  color: #FFFFFF !important;
+}
+
+body.theme-light .landing-hero .hero-title,
+body.theme-light .landing-hero h1,
+body.theme-light .landing-hero span:not(.text-gradient) {
+  color: #FFFFFF !important;
+}
+
+body.theme-light .landing-hero .hero-sub,
+body.theme-light .landing-hero p {
+  color: #CBD5E1 !important;
+}
+
+body.theme-light .landing-hero .hero-badge {
+  color: #FFFFFF !important;
+  background: rgba(16, 185, 129, 0.25) !important;
+  border-color: rgba(16, 185, 129, 0.4) !important;
+}
+
+body.theme-light .btn-hero-secondary {
+  background: #FFFFFF !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+}
+
+body.theme-light .hero-stats-strip {
+  background: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  color: #0F172A !important;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.06) !important;
+}
+
+body.theme-light .hero-stats-strip .h-stat-num {
+  color: #0F172A !important;
+}
+
+body.theme-light .hero-stats-strip .h-stat-label {
+  color: #64748B !important;
+}
+
+body.theme-light .billing-toggle-box {
+  background: #E2E8F0 !important;
+  border-color: #CBD5E1 !important;
+}
+
+body.theme-light .b-toggle {
+  color: #475569 !important;
+}
+
+body.theme-light .b-toggle.active {
+  background: #10B981 !important;
+  color: #FFFFFF !important;
+}
+
+body.theme-light .pricing-card {
+  background: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  color: #0F172A !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+}
+
+body.theme-light .pricing-card.popular {
+  border-color: #10B981 !important;
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.15) !important;
+}
+
+body.theme-light .p-tier-name {
+  color: #0F172A !important;
+}
+
+body.theme-light .p-tier-desc {
+  color: #64748B !important;
+}
+
+body.theme-light .p-price {
+  color: #0F172A !important;
+}
+
+body.theme-light .p-period {
+  color: #64748B !important;
+}
+
+body.theme-light .p-features-list li {
+  color: #334155 !important;
+}
+
+body.theme-light .faq-item {
+  background: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  color: #0F172A !important;
+}
+
+body.theme-light .faq-question h4 {
+  color: #0F172A !important;
+}
+
+body.theme-light .faq-answer p {
+  color: #475569 !important;
+}
+
 body.theme-light .top-nav {
   background: rgba(255, 255, 255, 0.92);
   border-bottom-color: rgba(0, 0, 0, 0.08);
