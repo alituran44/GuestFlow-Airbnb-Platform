@@ -73,8 +73,7 @@ body.theme-light .landing-hero {
 }
 
 body.theme-light .landing-hero .hero-title,
-body.theme-light .landing-hero h1,
-body.theme-light .landing-hero span:not(.text-gradient) {
+body.theme-light .landing-hero h1 {
   color: #FFFFFF !important;
 }
 
@@ -91,8 +90,15 @@ body.theme-light .landing-hero .hero-badge {
 
 body.theme-light .btn-hero-secondary {
   background: #FFFFFF !important;
+  border: 1px solid #94A3B8 !important;
   color: #0F172A !important;
-  border-color: #CBD5E1 !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+body.theme-light .btn-hero-secondary span,
+body.theme-light .btn-hero-secondary i,
+body.theme-light .btn-hero-secondary svg {
+  color: #0F172A !important;
 }
 
 body.theme-light .hero-stats-strip {
