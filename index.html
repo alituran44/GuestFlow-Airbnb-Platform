@@ -1006,6 +1006,37 @@
         </div>
       </div>
 
+      <!-- FUNNEL STEP 8.5: HOSPITALITY LABS & 20 SEO BLOG ARTICLES CENTER -->
+      <div class="landing-section" id="blog-section">
+        <div class="section-center-head">
+          <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">HOSPITALITY LABS & STR GUIDES</span>
+          <h2>Hospitality & Short-Term Rental Insights</h2>
+          <p>Expert guides on Airbnb automation, digital guest guidebooks, keyless security, and revenue optimization.</p>
+        </div>
+
+        <!-- BLOG FILTER & SEARCH TOOLBAR -->
+        <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:16px; margin-bottom:24px;">
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="blog-filter-btn active" data-cat="all" onclick="filterBlogCategory('all', this)">All (20 Articles)</button>
+            <button class="blog-filter-btn" data-cat="Revenue Growth" onclick="filterBlogCategory('Revenue Growth', this)">💰 Revenue Growth</button>
+            <button class="blog-filter-btn" data-cat="Guest Experience" onclick="filterBlogCategory('Guest Experience', this)">⭐ Guest Experience</button>
+            <button class="blog-filter-btn" data-cat="Smart Access" onclick="filterBlogCategory('Smart Access', this)">🔑 Smart Access</button>
+            <button class="blog-filter-btn" data-cat="Airbnb Automation" onclick="filterBlogCategory('Airbnb Automation', this)">⚡ Airbnb Automation</button>
+            <button class="blog-filter-btn" data-cat="Hotel Tech" onclick="filterBlogCategory('Hotel Tech', this)">🏨 Hotel Tech</button>
+          </div>
+
+          <div style="position:relative; width:100%; max-width:280px;">
+            <input type="text" id="blog-search-input" placeholder="Search guides..." oninput="handleBlogSearch(this.value)" style="width:100%; padding:10px 14px 10px 36px; border-radius:999px; background:var(--bg-card); border:1px solid var(--border-subtle); color:#fff; font-size:13px;">
+            <i data-lucide="search" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); width:16px; height:16px; color:var(--text-muted);"></i>
+          </div>
+        </div>
+
+        <!-- BLOG ARTICLES GRID -->
+        <div class="blog-grid" id="blog-grid-container">
+          <!-- Dynamically Rendered 20 Articles by blog_articles.js -->
+        </div>
+      </div>
+
 
       <!-- FUNNEL STEP 9: FINAL HIGH-CONVERTING CLOSING CTA -->
       <div class="landing-bottom-cta">
@@ -2432,6 +2463,16 @@
   <!-- MODALS                                    -->
   <!-- ========================================== -->
 
+  <!-- BLOG READER FULL-SCREEN MODAL -->
+  <div id="modal-blog-reader" class="modal-backdrop">
+    <div class="modal-card" style="max-width:850px; width:95%; max-height:90vh; overflow-y:auto; padding:28px;">
+      <button class="modal-close" onclick="closeModal('modal-blog-reader')"><i data-lucide="x"></i></button>
+      <div id="blog-reader-content">
+        <!-- Dynamically Rendered by blog_articles.js -->
+      </div>
+    </div>
+  </div>
+
   <!-- SUBSCRIPTION CHECKOUT MODAL -->
   <div id="modal-lemon-checkout" class="modal-backdrop">
     <div class="modal-card">
@@ -3322,6 +3363,7 @@
     <span id="toast-message">Copied to clipboard!</span>
   </div>
 
+  <script src="blog_articles.js?v=20260823_v1"></script>
   <script src="app.js?v=20260823_v10"></script>
 </body>
 </html>
