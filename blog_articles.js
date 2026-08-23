@@ -367,36 +367,36 @@ function renderBlogArticlesGrid(filterCategory = 'all', searchQuery = '') {
   }
 
   if (articles.length === 0) {
-    container.innerHTML = \`
+    container.innerHTML = `
       <div style="grid-column:1/-1; text-align:center; padding:40px; background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:16px;">
         <i data-lucide="search-x" style="width:36px; height:36px; color:var(--text-muted); margin-bottom:12px;"></i>
         <h4 style="color:#fff; margin-bottom:4px;">No matching articles found</h4>
         <p style="font-size:12px; color:var(--text-muted);">Try searching for "Wi-Fi", "Revenue", "Guidebook", or "Airbnb".</p>
       </div>
-    \`;
+    `;
     if (window.lucide) window.lucide.createIcons();
     return;
   }
 
-  container.innerHTML = articles.map(a => \`
-    <article class="blog-card" onclick="openBlogArticleModal('\${a.id}')">
+  container.innerHTML = articles.map(a => `
+    <article class="blog-card" onclick="openBlogArticleModal('${a.id}')">
       <div class="blog-card-img">
-        <img src="\${a.image}" alt="\${a.title}" loading="lazy">
-        <span class="blog-card-badge">\${a.categoryBadge}</span>
+        <img src="${a.image}" alt="${a.title}" loading="lazy">
+        <span class="blog-card-badge">${a.categoryBadge}</span>
       </div>
       <div class="blog-card-body">
         <div class="blog-card-meta">
-          <span>\${a.date}</span> • <span>\${a.readTime}</span>
+          <span>${a.date}</span> • <span>${a.readTime}</span>
         </div>
-        <h3 class="blog-card-title">\${a.title}</h3>
-        <p class="blog-card-excerpt">\${a.excerpt}</p>
+        <h3 class="blog-card-title">${a.title}</h3>
+        <p class="blog-card-excerpt">${a.excerpt}</p>
         <div class="blog-card-footer">
-          <span class="blog-author">By \${a.author}</span>
+          <span class="blog-author">By ${a.author}</span>
           <span class="blog-read-link">Read Guide <i data-lucide="arrow-right"></i></span>
         </div>
       </div>
     </article>
-  \`).join('');
+  `).join('');
 
   if (window.lucide) window.lucide.createIcons();
 }
@@ -410,23 +410,23 @@ function openBlogArticleModal(articleId) {
   const contentBox = document.getElementById('blog-reader-content');
   if (!modal || !contentBox) return;
 
-  contentBox.innerHTML = \`
+  contentBox.innerHTML = `
     <div class="blog-modal-header">
-      <span class="blog-card-badge" style="margin-bottom:12px; display:inline-block;">\${article.categoryBadge}</span>
-      <h1 class="blog-modal-title">\${article.title}</h1>
+      <span class="blog-card-badge" style="margin-bottom:12px; display:inline-block;">${article.categoryBadge}</span>
+      <h1 class="blog-modal-title">${article.title}</h1>
       <div class="blog-modal-meta">
-        <span><i data-lucide="user" style="width:14px; height:14px;"></i> \${article.author}</span> • 
-        <span><i data-lucide="calendar" style="width:14px; height:14px;"></i> \${article.date}</span> • 
-        <span><i data-lucide="clock" style="width:14px; height:14px;"></i> \${article.readTime}</span>
+        <span><i data-lucide="user" style="width:14px; height:14px;"></i> ${article.author}</span> • 
+        <span><i data-lucide="calendar" style="width:14px; height:14px;"></i> ${article.date}</span> • 
+        <span><i data-lucide="clock" style="width:14px; height:14px;"></i> ${article.readTime}</span>
       </div>
     </div>
 
     <div class="blog-modal-hero-img">
-      <img src="\${article.image}" alt="\${article.title}">
+      <img src="${article.image}" alt="${article.title}">
     </div>
 
     <div class="blog-modal-body">
-      \${article.content}
+      ${article.content}
     </div>
 
     <div class="blog-modal-cta">
@@ -436,7 +436,7 @@ function openBlogArticleModal(articleId) {
         <i data-lucide="shield-check"></i> Start Your 14-Day Free Trial ($0 Today)
       </button>
     </div>
-  \`;
+  `;
 
   modal.classList.add('active');
   if (window.lucide) window.lucide.createIcons();
