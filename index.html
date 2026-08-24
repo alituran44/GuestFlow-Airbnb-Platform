@@ -247,9 +247,8 @@
   <script type="text/javascript">
     if (window.Paddle) {
       try {
-        if ("live_7d279f61a3499fed520f7cd8c08".startsWith("test_") || window.location.hostname === "localhost") {
-          Paddle.Environment.set('sandbox');
-        }
+        // Set Sandbox environment for Paddle Billing v2
+        Paddle.Environment.set('sandbox');
         Paddle.Initialize({
           token: "live_7d279f61a3499fed520f7cd8c08",
           eventCallback: function(data) {

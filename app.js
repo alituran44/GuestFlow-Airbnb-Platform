@@ -2452,10 +2452,17 @@ function openLemonSqueezyCheckout(tierName, priceStr) {
   if (window.Paddle && typeof window.Paddle.Checkout === 'object' && window.Paddle.Checkout.open) {
     try {
       window.Paddle.Checkout.open({
-        items: [{ priceId: priceId, quantity: 1 }]
+        items: [{ priceId: priceId, quantity: 1 }],
+        settings: {
+          displayMode: "overlay",
+          theme: "dark",
+          locale: "en"
+        }
       });
       return;
-    } catch (e) { console.warn("Paddle.Checkout fallback", e); }
+    } catch (e) {
+      console.warn("Paddle.Checkout fallback triggered", e);
+    }
   }
 
   // Fallback to internal checkout modal or direct window link
