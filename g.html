@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Villa Sunset Bodrum — Guest Digital Guidebook</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0B0F17;
+      --card-bg: #111827;
+      --text: #F8FAFC;
+      --text-muted: #94A3B8;
+      --accent: #10B981;
+      --border: rgba(255, 255, 255, 0.08);
+      --gradient: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.6;
+    }
+    .hero-banner {
+      position: relative;
+      height: 220px;
+      background: linear-gradient(rgba(11, 15, 23, 0.4), rgba(11, 15, 23, 0.95)), url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      display: flex;
+      align-items: flex-end;
+      padding: 24px;
+    }
+    .hero-title {
+      font-size: 28px;
+      font-weight: 800;
+      margin: 0;
+      letter-spacing: -0.5px;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--accent);
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+    }
+    .wifi-box {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+    .wifi-name {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .wifi-pass {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .btn-action {
+      background: var(--gradient);
+      color: #fff;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      transition: opacity 0.2s ease;
+    }
+    .btn-action:hover {
+      opacity: 0.9;
+    }
+    .pin-box {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    .pin-code {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 6px;
+      color: var(--accent);
+    }
+    .rule-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .rule-item:last-child {
+      border-bottom: none;
+    }
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 99px;
+      font-size: 14px;
+      font-weight: 700;
+      display: none;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+    footer {
+      text-align: center;
+      padding: 32px 0;
+      color: var(--text-muted);
+      font-size: 12px;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Property Cover Hero Banner -->
+  <div class="hero-banner">
+    <div>
+      <span class="hero-badge">Verified Guest Portal</span>
+      <h1 class="hero-title" id="g-prop-title">Villa Sunset Bodrum</h1>
+    </div>
+  </div>
+
+  <div class="container">
+    
+    <!-- 1. Wi-Fi Access Section -->
+    <div class="section-card">
+      <h2 class="card-title">📶 1-Tap Guest Wi-Fi Access</h2>
+      <div class="wifi-box">
+        <div class="wifi-name" id="g-wifi-ssid">Villa_Sunset_5G</div>
+        <div class="wifi-pass">Password: <strong style="color:#fff;" id="g-wifi-pass">SunsetBodrum2026</strong></div>
+        <button class="btn-action" onclick="copyWifiPass()">Copy Wi-Fi Password</button>
+      </div>
+    </div>
+
+    <!-- 2. Smart Lock PIN Code -->
+    <div class="section-card">
+      <h2 class="card-title">🔑 Smart Lock Door Access PIN</h2>
+      <div class="pin-box">
+        <div class="pin-code">8 4 9 2 #</div>
+        <div style="font-size:12px; color:var(--text-muted); margin-top:6px;">Time-Gated Access (Valid 14:00 - 11:00)</div>
+      </div>
+    </div>
+
+    <!-- 3. House Rules & Checkout -->
+    <div class="section-card">
+      <h2 class="card-title">📋 House Rules & Instructions</h2>
+      <div class="rule-item">
+        <span>🔇</span>
+        <div><strong>Quiet Hours:</strong> Please keep noise levels low between 23:00 PM and 08:00 AM.</div>
+      </div>
+      <div class="rule-item">
+        <span>🚭</span>
+        <div><strong>Smoking Policy:</strong> Strictly outdoors only. Please use patio ashtrays.</div>
+      </div>
+      <div class="rule-item">
+        <span>🕒</span>
+        <div><strong>Check-out Time:</strong> 11:00 AM sharp. Please leave keys on kitchen table.</div>
+      </div>
+    </div>
+
+    <!-- 4. Host Recommendations -->
+    <div class="section-card">
+      <h2 class="card-title">📍 Host Neighborhood Guide</h2>
+      <div class="rule-item">
+        <span>🍽️</span>
+        <div>
+          <strong>Bodrum Marina Restaurant</strong> (5 min walk)<br>
+          <span style="font-size:12px;">Fresh Mediterranean seafood with ocean sunset views.</span>
+        </div>
+      </div>
+      <div class="rule-item">
+        <span>☕</span>
+        <div>
+          <strong>Coffee & Co Artisan Bakery</strong> (3 min walk)<br>
+          <span style="font-size:12px;">Best specialty espresso and fresh croissants.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Room Service & Extras -->
+    <div class="section-card">
+      <h2 class="card-title">🍷 Room Service & Host Extras</h2>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div style="background:rgba(255,255,255,0.04); padding:14px; border-radius:12px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <strong style="font-size:15px; color:#fff;">Organic Welcome Wine Selection</strong>
+            <div style="font-size:13px; color:var(--accent); font-weight:700;">$25.00</div>
+          </div>
+          <button class="btn-action" onclick="orderExtra('Organic Wine')" style="width:auto; padding:8px 16px; font-size:13px;">Order</button>
+        </div>
+        <div style="background:rgba(255,255,255,0.04); padding:14px; border-radius:12px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <strong style="font-size:15px; color:#fff;">Late Check-out (2 Hours Extra)</strong>
+            <div style="font-size:13px; color:var(--accent); font-weight:700;">$30.00</div>
+          </div>
+          <button class="btn-action" onclick="orderExtra('Late Check-out')" style="width:auto; padding:8px 16px; font-size:13px;">Order</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <footer>
+    Powered by <strong>HostifyOS.com</strong> — The Modern Hosting OS
+  </footer>
+
+  <script>
+    function copyWifiPass() {
+      const pass = document.getElementById('g-wifi-pass').textContent;
+      navigator.clipboard.writeText(pass).then(() => {
+        showToast('📶 Wi-Fi Password Copied to Clipboard!');
+      });
+    }
+
+    function orderExtra(item) {
+      showToast('🍷 ' + item + ' requested! Host notified.');
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.display = 'block';
+      setTimeout(() => { t.style.display = 'none'; }, 3000);
+    }
+  </script>
+</body>
+</html>
