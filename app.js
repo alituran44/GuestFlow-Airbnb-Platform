@@ -2365,11 +2365,11 @@ function downloadCommissionStatement() {
 let PADDLE_STORE_CONFIG = {
   apiKey: typeof atob === 'function' ? atob('cGRsX2xpdmVfYXBpa2V5XzAxbTB0dDN6NHZwcjliMGRrdHozZWY5ZmU1X25hQUFQUHFiQTc4TnR5VlFmMUJhUUFfQUhw') : '',
   clientToken: 'live_7d279f61a3499fed520f7cd8c08',
-  starterProductId: 'pro_01m0tsbnqmkdgtgz6hr62mrs6g',          // Starter Host Plan ($0/mo)
-  proMonthlyProductId: 'pro_01m0trwqc1z5zdz67aeh67jr84',       // Pro Host Plan (Monthly - $19/mo)
-  proAnnualProductId: 'pro_01m0ts3932r21xgx3qtbww4bfd',        // Pro Host Plan (Annual - $168/yr)
-  enterpriseMonthlyProductId: 'pro_01m0ts5tpxh5fzf2rex99z4adg', // Enterprise Monthly ($39/mo)
-  enterpriseAnnualProductId: 'pro_01m0ts85ne6sg7n0m1vg26x1aa'  // Enterprise Annual ($348/yr)
+  starterPriceId: 'pri_01m0tsfdwyv1g4k22zabs39mjt',          // Starter Host Plan ($0/mo)
+  proMonthlyPriceId: 'pri_01m0ts1ge696rasc79cwad1ves',       // Pro Host Plan (Monthly - $19/mo)
+  proAnnualPriceId: 'pri_01m0ts4h9764t5n7xm9sphrs6d',        // Pro Host Plan (Annual - $168/yr)
+  enterpriseMonthlyPriceId: 'pri_01m0ts6xzdftg72j4k0cvc3s90', // Enterprise Monthly ($39/mo)
+  enterpriseAnnualPriceId: 'pri_01m0ts9wrdrfj7174f24f9dfvb'  // Enterprise Annual ($348/yr)
 };
 
 let LEMONSQUEEZY_STORE_CONFIG = {
@@ -2428,23 +2428,23 @@ function setLemonSqueezyUrls(monthlyUrl, annualUrl, enterpriseUrl) {
 }
 
 function openLemonSqueezyCheckout(tierName, priceStr) {
-  let productId = PADDLE_STORE_CONFIG.proMonthlyProductId;
+  let priceId = PADDLE_STORE_CONFIG.proMonthlyPriceId;
   let targetUrl = LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl;
 
   if (tierName.includes('Starter')) {
-    productId = PADDLE_STORE_CONFIG.starterProductId;
+    priceId = PADDLE_STORE_CONFIG.starterPriceId;
     targetUrl = LEMONSQUEEZY_STORE_CONFIG.starterUrl;
   } else if (tierName.includes('Pro Host') && tierName.includes('ANNUAL')) {
-    productId = PADDLE_STORE_CONFIG.proAnnualProductId;
+    priceId = PADDLE_STORE_CONFIG.proAnnualPriceId;
     targetUrl = LEMONSQUEEZY_STORE_CONFIG.proAnnualUrl;
   } else if (tierName.includes('Pro Host')) {
-    productId = PADDLE_STORE_CONFIG.proMonthlyProductId;
+    priceId = PADDLE_STORE_CONFIG.proMonthlyPriceId;
     targetUrl = LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl;
   } else if (tierName.includes('Enterprise') && tierName.includes('ANNUAL')) {
-    productId = PADDLE_STORE_CONFIG.enterpriseAnnualProductId;
+    priceId = PADDLE_STORE_CONFIG.enterpriseAnnualPriceId;
     targetUrl = LEMONSQUEEZY_STORE_CONFIG.enterpriseAnnualUrl;
   } else if (tierName.includes('Enterprise')) {
-    productId = PADDLE_STORE_CONFIG.enterpriseMonthlyProductId;
+    priceId = PADDLE_STORE_CONFIG.enterpriseMonthlyPriceId;
     targetUrl = LEMONSQUEEZY_STORE_CONFIG.enterpriseMonthlyUrl;
   }
 
@@ -2452,7 +2452,7 @@ function openLemonSqueezyCheckout(tierName, priceStr) {
   if (window.Paddle && typeof window.Paddle.Checkout === 'object' && window.Paddle.Checkout.open) {
     try {
       window.Paddle.Checkout.open({
-        items: [{ priceId: productId, quantity: 1 }]
+        items: [{ priceId: priceId, quantity: 1 }]
       });
       return;
     } catch (e) { console.warn("Paddle.Checkout fallback", e); }
