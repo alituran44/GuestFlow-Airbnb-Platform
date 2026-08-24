@@ -2361,7 +2361,15 @@ function downloadCommissionStatement() {
   showToast("Downloading Monthly Commission Statement (PDF / CSV) for Host Accounting...");
 }
 
-// LEMON SQUEEZY CHECKOUT & API CONFIGURATION
+// OFFICIAL PADDLE & LEMON SQUEEZY CHECKOUT CONFIGURATION
+let PADDLE_STORE_CONFIG = {
+  starterProductId: 'pro_01m0tsbnqmkdgtgz6hr62mrs6g',          // Starter Host Plan ($0/mo)
+  proMonthlyProductId: 'pro_01m0trwqc1z5zdz67aeh67jr84',       // Pro Host Plan (Monthly - $19/mo)
+  proAnnualProductId: 'pro_01m0ts3932r21xgx3qtbww4bfd',        // Pro Host Plan (Annual - $168/yr)
+  enterpriseMonthlyProductId: 'pro_01m0ts5tpxh5fzf2rex99z4adg', // Enterprise Monthly ($39/mo)
+  enterpriseAnnualProductId: 'pro_01m0ts85ne6sg7n0m1vg26x1aa'  // Enterprise Annual ($348/yr)
+};
+
 let LEMONSQUEEZY_STORE_CONFIG = {
   apiKey: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NGQ1OWNlZi1kYmI4LTRlYTUtYjE3OC1kMjU0MGZjZDY5MTkiLCJqdGkiOiIyZDdkYjBhMjYxN2VhYWExZjM4NDMxN2FkM2ZiYTk5MTYwZGI2Yjc2OGViZDJjNGM3ZDFiNjM3ZTQxYWQ1YzEwNTU3Njk4NzQzNzI1NzY0MCIsImlhdCI6MTc4NzQyMzkyOS45MTI1MTgsIm5iZiI6MTc4NzQyMzkyOS45MTI1MjIsImV4cCI6MTgwMzI1NDQwMC4wMzAyNywic3ViIjoiNzgwNzY2OSIsInNjb3BlcyI6W119.UlNtirQ5vkEh4n9l0qGF4fpjSKFou5SvEpHiXHb4T6ATAerzDYE5nzvKpLR2RccgWerrIkEDXd84jdIBo9ZlEvwn6oTO_0RM6aVqo1i5WvHgwf92FnV3gwA4tdTUKtllnCOq7uHjY6eK5w2GEZZ62TbHo-27lACYMU0DHMfT18X6zmc3GgHJGx2bFj9D5WPpM72TuFm3hig7OwZO6TPhX15BC1HY7EXXGWzQ3QW42aH_eFO7fSBGBXtR3a5Aw8tpzXpqy8KfdP26f27e8y7OGG_tm6ROa9fRNDfAMTGap16E_T0h3nMrOLUGjI1nP7LizqM5FL1iiMgNnNdHaGLMrp87F948kAkLgYnT-RmIQT3QGa_25ZdWoUqs9ZcFUEor6-iiWwlv_f0jHJKlb0vSbXIbwojlvdH1k0-trLLxaCUUC88gix9B1gyEgod9gFO37qcTpCqBqnmwIUWTatPOsM4OjOojTcr6xkfVnqaOP1vhfQbTiscXSpvBnRPIneIhfzS9OmN96lNeVHC-3GMku-_xcJsjLWNs3JbwG57IqpV0kkit62DEbLAzVuEVo7-KdMqcS75YLRQYlmPx3Rw21jxR9VkAEfT1VCEJhFw8GDGsv-F27Hg6H3FZMooBPzTbaOfHCN0vQ75u7J7hiLh2a_RLux7CJVPOSr8c-RKIbGk',
   storeId: '456562',
@@ -2381,13 +2389,13 @@ function initLemonSqueezyApi(apiKey, storeId) {
       window.LemonSqueezy.Setup({
         eventHandler: (event) => {
           if (event.event === 'Checkout.Success') {
-            showToast("🎉 HostifyOS Subscription Activated via Lemon Squeezy Store #456562!");
+            showToast("🎉 HostifyOS Subscription Activated!");
           }
         }
       });
     } catch (e) { console.log(e); }
   }
-  showToast("⚡ Lemon Squeezy Store #456562 Connected!");
+  showToast("⚡ Paddle & Merchant Checkout Engine Connected!");
 }
 
 function formatCardNumber(input) {
@@ -2414,22 +2422,54 @@ function setLemonSqueezyUrls(monthlyUrl, annualUrl, enterpriseUrl) {
   if (monthlyUrl) LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl = monthlyUrl;
   if (annualUrl) LEMONSQUEEZY_STORE_CONFIG.proAnnualUrl = annualUrl;
   if (enterpriseUrl) LEMONSQUEEZY_STORE_CONFIG.enterpriseMonthlyUrl = enterpriseUrl;
-  showToast("✅ Lemon Squeezy Store Checkout URLs Updated!");
+  showToast("✅ Store Checkout URLs Updated!");
 }
 
 function openLemonSqueezyCheckout(tierName, priceStr) {
+  let productId = PADDLE_STORE_CONFIG.proMonthlyProductId;
   let targetUrl = LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl;
-  if (tierName.includes('Starter')) targetUrl = LEMONSQUEEZY_STORE_CONFIG.starterUrl;
-  else if (tierName.includes('Pro Host') && tierName.includes('ANNUAL')) targetUrl = LEMONSQUEEZY_STORE_CONFIG.proAnnualUrl;
-  else if (tierName.includes('Pro Host')) targetUrl = LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl;
-  else if (tierName.includes('Enterprise') && tierName.includes('ANNUAL')) targetUrl = LEMONSQUEEZY_STORE_CONFIG.enterpriseAnnualUrl;
-  else if (tierName.includes('Enterprise')) targetUrl = LEMONSQUEEZY_STORE_CONFIG.enterpriseMonthlyUrl;
 
-  // Open Lemon Squeezy overlay or direct checkout link
+  if (tierName.includes('Starter')) {
+    productId = PADDLE_STORE_CONFIG.starterProductId;
+    targetUrl = LEMONSQUEEZY_STORE_CONFIG.starterUrl;
+  } else if (tierName.includes('Pro Host') && tierName.includes('ANNUAL')) {
+    productId = PADDLE_STORE_CONFIG.proAnnualProductId;
+    targetUrl = LEMONSQUEEZY_STORE_CONFIG.proAnnualUrl;
+  } else if (tierName.includes('Pro Host')) {
+    productId = PADDLE_STORE_CONFIG.proMonthlyProductId;
+    targetUrl = LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl;
+  } else if (tierName.includes('Enterprise') && tierName.includes('ANNUAL')) {
+    productId = PADDLE_STORE_CONFIG.enterpriseAnnualProductId;
+    targetUrl = LEMONSQUEEZY_STORE_CONFIG.enterpriseAnnualUrl;
+  } else if (tierName.includes('Enterprise')) {
+    productId = PADDLE_STORE_CONFIG.enterpriseMonthlyProductId;
+    targetUrl = LEMONSQUEEZY_STORE_CONFIG.enterpriseMonthlyUrl;
+  }
+
+  // Trigger Paddle Checkout overlay if available, otherwise open store link
+  if (window.Paddle && typeof window.Paddle.Checkout === 'object' && window.Paddle.Checkout.open) {
+    try {
+      window.Paddle.Checkout.open({
+        items: [{ priceId: productId, quantity: 1 }]
+      });
+      return;
+    } catch (e) { console.warn("Paddle.Checkout fallback", e); }
+  }
+
+  // Fallback to internal checkout modal or direct window link
   if (window.LemonSqueezy && typeof window.LemonSqueezy.Url === 'object') {
     window.LemonSqueezy.Url.Open(targetUrl);
   } else {
-    window.open(targetUrl, '_blank');
+    const modal = document.getElementById('modal-lemon-checkout');
+    if (modal) {
+      const planNameEl = document.getElementById('lemon-plan-name');
+      const planPriceEl = document.getElementById('lemon-plan-price');
+      if (planNameEl) planNameEl.textContent = tierName;
+      if (planPriceEl) planPriceEl.textContent = priceStr;
+      modal.classList.add('active');
+    } else {
+      window.open(targetUrl, '_blank');
+    }
   }
 }
 
