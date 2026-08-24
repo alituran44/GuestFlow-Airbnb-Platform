@@ -247,10 +247,11 @@
   <script type="text/javascript">
     if (window.Paddle) {
       try {
-        // Set Sandbox environment for Paddle Billing v2
-        Paddle.Environment.set('sandbox');
+        if ("live_396f4c5ef8e1fadb94dcc972f51".startsWith("test_")) {
+          Paddle.Environment.set('sandbox');
+        }
         Paddle.Initialize({
-          token: "live_7d279f61a3499fed520f7cd8c08",
+          token: "live_396f4c5ef8e1fadb94dcc972f51",
           eventCallback: function(data) {
             if (data.name === 'checkout.completed') {
               showToast("🎉 HostifyOS Subscription Activated via Paddle!");

@@ -2364,7 +2364,7 @@ function downloadCommissionStatement() {
 // OFFICIAL PADDLE & LEMON SQUEEZY CHECKOUT CONFIGURATION
 let PADDLE_STORE_CONFIG = {
   apiKey: typeof atob === 'function' ? atob('cGRsX2xpdmVfYXBpa2V5XzAxbTB0dDN6NHZwcjliMGRrdHozZWY5ZmU1X25hQUFQUHFiQTc4TnR5VlFmMUJhUUFfQUhw') : '',
-  clientToken: 'live_7d279f61a3499fed520f7cd8c08',
+  clientToken: 'live_396f4c5ef8e1fadb94dcc972f51',
   starterPriceId: 'pri_01m0tsfdwyv1g4k22zabs39mjt',          // Starter Host Plan ($0/mo)
   proMonthlyPriceId: 'pri_01m0ts1ge696rasc79cwad1ves',       // Pro Host Plan (Monthly - $19/mo)
   proAnnualPriceId: 'pri_01m0ts4h9764t5n7xm9sphrs6d',        // Pro Host Plan (Annual - $168/yr)
