@@ -477,73 +477,119 @@
       <!-- INTERACTIVE LIVE MOBILE QR DEMO SECTION -->
       <div class="landing-section" id="live-qr-demo-section">
         <div class="section-center-head">
-          <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">LIVE INTERACTIVE DEMO</span>
-          <h2>Scan with Phone or Click Tabs Below</h2>
-          <p>Experience how your guests interact with your digital guidebook on their mobile device.</p>
+          <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">LIVE APP DEMO & REAL SCANNABLE QR</span>
+          <h2>Test Our Guest App on Your Phone</h2>
+          <p>Scan the QR code with your smartphone camera to launch the live HostifyOS Guest Portal instant PWA.</p>
         </div>
 
         <div class="live-demo-box">
-          <!-- Left: Phone Simulator -->
+          <!-- Left: Real HostifyOS Phone App Simulator -->
           <div class="phone-mockup-container">
             <div class="phone-notch"></div>
             <div class="phone-screen">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                <span style="font-size:12px; font-weight:700; color:var(--accent-emerald);">🌅 Villa Sunset Bodrum</span>
-                <span style="font-size:10px; background:rgba(16,185,129,0.2); color:var(--accent-emerald); padding:2px 8px; border-radius:99px;">Guest Online</span>
-              </div>
-              <div style="display:flex; gap:4px; overflow-x:auto; margin-bottom:12px; padding-bottom:4px;">
-                <button class="phone-tab-btn active" onclick="switchPhoneDemoTab('wifi', this)">📶 Wi-Fi</button>
-                <button class="phone-tab-btn" onclick="switchPhoneDemoTab('rules', this)">📋 Rules</button>
-                <button class="phone-tab-btn" onclick="switchPhoneDemoTab('spots', this)">📍 Spots</button>
-                <button class="phone-tab-btn" onclick="switchPhoneDemoTab('menu', this)">🍷 Menu</button>
+              <!-- App Top Bar -->
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:8px;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <img src="brand_logo.jpg" alt="HostifyOS Logo" style="width:20px; height:20px; border-radius:6px;">
+                  <span style="font-size:12px; font-weight:700; color:#fff;">Villa Sunset Bodrum</span>
+                </div>
+                <span style="font-size:10px; background:rgba(16,185,129,0.2); color:var(--accent-emerald); padding:2px 8px; border-radius:99px; font-weight:700;">● Live Portal</span>
               </div>
 
-              <!-- Phone Content Screens -->
-              <div id="phone-content-area" style="background:rgba(255,255,255,0.04); border-radius:12px; padding:14px; min-height:300px;">
+              <!-- Quick Navigation Tabs -->
+              <div style="display:flex; gap:6px; overflow-x:auto; margin-bottom:12px; padding-bottom:4px; scrollbar-width:none;">
+                <button class="phone-tab-btn active" onclick="switchPhoneDemoTab('wifi', this)">📶 Wi-Fi</button>
+                <button class="phone-tab-btn" onclick="switchPhoneDemoTab('lock', this)">🔑 Smart Lock</button>
+                <button class="phone-tab-btn" onclick="switchPhoneDemoTab('upsell', this)">🍷 Room Service</button>
+                <button class="phone-tab-btn" onclick="switchPhoneDemoTab('rules', this)">📋 Rules</button>
+                <button class="phone-tab-btn" onclick="switchPhoneDemoTab('spots', this)">📍 Guide</button>
+              </div>
+
+              <!-- Phone Screen Content Area -->
+              <div id="phone-content-area" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:14px; min-height:310px;">
+                
+                <!-- Tab 1: Wi-Fi -->
                 <div id="p-tab-wifi">
-                  <div style="font-size:13px; font-weight:700; margin-bottom:4px;">Guest Wi-Fi Network</div>
-                  <div style="font-size:16px; font-weight:800; color:var(--accent-emerald);">Villa_Sunset_5G</div>
-                  <div style="font-size:12px; color:var(--text-muted); margin-top:8px;">Password: <strong style="color:#fff;">SunsetBodrum2026</strong></div>
-                  <button class="btn-hero-primary" onclick="showToast('📶 Wi-Fi Password Copied to Clipboard!')" style="width:100%; margin-top:16px; padding:10px; font-size:12px;">1-Tap Connect Wi-Fi</button>
+                  <div style="font-size:11px; text-transform:uppercase; color:var(--text-muted); font-weight:700; margin-bottom:4px;">1-Tap Guest Wi-Fi</div>
+                  <div style="font-size:16px; font-weight:800; color:var(--accent-emerald); margin-bottom:2px;">Villa_Sunset_5G</div>
+                  <div style="font-size:12px; color:var(--text-secondary);">Password: <strong style="color:#fff;">SunsetBodrum2026</strong></div>
+                  <button class="btn-hero-primary" onclick="showToast('📶 Wi-Fi Password Copied to Clipboard!')" style="width:100%; margin-top:14px; padding:10px; font-size:12px; border-radius:10px;">
+                    <i data-lucide="wifi"></i>
+                    <span>Copy Wi-Fi Password</span>
+                  </button>
+                  <div style="margin-top:14px; font-size:11px; color:var(--text-muted); text-align:center;">iOS & Android 1-Tap Auto-Connect</div>
                 </div>
+
+                <!-- Tab 2: Smart Lock PIN -->
+                <div id="p-tab-lock" style="display:none;">
+                  <div style="font-size:11px; text-transform:uppercase; color:var(--text-muted); font-weight:700; margin-bottom:4px;">Door Access Lockbox PIN</div>
+                  <div style="background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); padding:12px; border-radius:10px; text-align:center; margin-top:8px;">
+                    <span style="font-size:22px; font-weight:800; letter-spacing:4px; color:var(--accent-emerald);">8 4 9 2 #</span>
+                    <div style="font-size:10px; color:var(--text-muted); margin-top:4px;">Time-Gated Access (Valid 14:00 - 11:00)</div>
+                  </div>
+                </div>
+
+                <!-- Tab 3: Room Service & Upsell -->
+                <div id="p-tab-upsell" style="display:none;">
+                  <div style="font-size:11px; text-transform:uppercase; color:var(--text-muted); font-weight:700; margin-bottom:6px;">Host Upsell & Services</div>
+                  <div style="display:flex; flex-direction:column; gap:8px;">
+                    <div style="background:rgba(255,255,255,0.04); padding:8px 10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;">
+                      <div>
+                        <div style="font-size:12px; font-weight:700;">🍷 Welcome Organic Wine</div>
+                        <div style="font-size:10px; color:var(--text-muted);">$25.00</div>
+                      </div>
+                      <button onclick="showToast('🍷 Wine added to order!')" style="background:var(--accent-emerald); color:#fff; border:none; padding:4px 8px; border-radius:6px; font-size:10px; font-weight:700; cursor:pointer;">Order</button>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.04); padding:8px 10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;">
+                      <div>
+                        <div style="font-size:12px; font-weight:700;">🚗 Late Check-out (2h)</div>
+                        <div style="font-size:10px; color:var(--text-muted);">$30.00</div>
+                      </div>
+                      <button onclick="showToast('🚗 Late Check-out requested!')" style="background:var(--accent-emerald); color:#fff; border:none; padding:4px 8px; border-radius:6px; font-size:10px; font-weight:700; cursor:pointer;">Order</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Tab 4: Rules -->
                 <div id="p-tab-rules" style="display:none;">
-                  <div style="font-size:13px; font-weight:700; margin-bottom:8px;">House Rules</div>
-                  <div style="font-size:12px; color:var(--text-muted); line-height:1.6;">
-                    • Quiet hours after 23:00 PM<br>
-                    • No smoking indoors<br>
-                    • Check-out time: 11:00 AM
+                  <div style="font-size:11px; text-transform:uppercase; color:var(--text-muted); font-weight:700; margin-bottom:6px;">House Rules & Checkout</div>
+                  <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">
+                    • <strong>Quiet Hours:</strong> 23:00 PM - 08:00 AM<br>
+                    • <strong>Smoking:</strong> Strictly Outdoors Only<br>
+                    • <strong>Check-out Time:</strong> 11:00 AM sharp<br>
+                    • <strong>Trash:</strong> Please leave tied bags in bin
                   </div>
                 </div>
+
+                <!-- Tab 5: Local Spots -->
                 <div id="p-tab-spots" style="display:none;">
-                  <div style="font-size:13px; font-weight:700; margin-bottom:8px;">Host Recommendations</div>
-                  <div style="font-size:12px; color:var(--text-muted);">
-                    📍 <strong>Bodrum Marina Restaurant</strong> (5 min walk)<br>
-                    ☕ <strong>Coffee & Co</strong> (Best Espresso)
+                  <div style="font-size:11px; text-transform:uppercase; color:var(--text-muted); font-weight:700; margin-bottom:6px;">Host Recommendations</div>
+                  <div style="font-size:11px; color:var(--text-secondary); line-height:1.5;">
+                    🍽️ <strong>Bodrum Marina Restaurant</strong><br>
+                    <span style="color:var(--text-muted); font-size:10px;">Fresh seafood & ocean view • 5 min walk</span><br><br>
+                    ☕ <strong>Coffee & Co Artisan Bakery</strong><br>
+                    <span style="color:var(--text-muted); font-size:10px;">Best espresso & fresh croissants</span>
                   </div>
                 </div>
-                <div id="p-tab-menu" style="display:none;">
-                  <div style="font-size:13px; font-weight:700; margin-bottom:8px;">Room Service & Extras</div>
-                  <div style="font-size:12px; color:var(--text-muted);">
-                    🍷 Organic Wine Selection ($25)<br>
-                    🚗 Late Check-out 2 Hours ($30)
-                  </div>
-                </div>
+
               </div>
             </div>
           </div>
 
-          <!-- Right: Scannable Live QR Box -->
+          <!-- Right: Real Scannable QR Code targeting live app -->
           <div style="text-align:center;">
             <div class="qr-code-box">
-              <!-- Live SVG QR Code -->
-              <svg width="180" height="180" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="200" height="200" rx="12" fill="white"/>
-                <path d="M20 20H80V80H20V20ZM35 35V65H65V35H35ZM120 20H180V80H120V20ZM135 35V65H165V35H135ZM20 120H80V180H20V120ZM35 135V165H65V135H35ZM100 20H110V50H100V20ZM90 60H110V80H90V60ZM120 100H150V110H120V100ZM160 100H180V130H160V100ZM100 120H130V150H100V120ZM140 140H180V180H140V140ZM100 160H120V180H100V160Z" fill="#0B0F17"/>
-                <circle cx="100" cy="100" r="14" fill="#10B981"/>
-              </svg>
+              <!-- Real Scannable QR Code generated for https://www.hostifyos.com/?v=guest -->
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://www.hostifyos.com/?v=guest" alt="Scannable HostifyOS Demo QR Code" style="width:200px; height:200px; display:block; border-radius:8px;">
             </div>
-            <h3 style="margin-top:16px; font-size:18px;">Scan Code with Camera</h3>
-            <p style="color:var(--text-muted); font-size:14px; max-width:320px; margin:8px auto 0 auto;">Point your phone camera at the QR code to open the live guest portal on your mobile device instantly.</p>
+            <h3 style="margin-top:20px; font-size:20px; font-weight:800;">Scan Code with Camera</h3>
+            <p style="color:var(--text-muted); font-size:14px; max-width:340px; margin:8px auto 0 auto; line-height:1.6;">Point your smartphone camera at this QR code to test the live HostifyOS Guest App directly on your mobile screen!</p>
+            <div style="margin-top:16px;">
+              <button class="btn-hero-secondary" onclick="switchView('guest')" style="padding:10px 18px; font-size:13px;">
+                <i data-lucide="external-link"></i>
+                <span>Open Live Demo in Browser</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

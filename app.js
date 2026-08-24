@@ -4087,7 +4087,7 @@ window.addEventListener('load', handleUrlRouting);
 // ----------------------------------------------------------------------
 
 function switchPhoneDemoTab(tabName, btnEl) {
-  const tabs = ['wifi', 'rules', 'spots', 'menu'];
+  const tabs = ['wifi', 'lock', 'upsell', 'rules', 'spots'];
   tabs.forEach(t => {
     const el = document.getElementById('p-tab-' + t);
     if (el) el.style.display = (t === tabName) ? 'block' : 'none';
