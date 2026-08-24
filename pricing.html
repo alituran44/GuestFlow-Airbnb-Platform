@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HostifyOS Pricing — Flexible Subscription Plans for STR & Hotel Hosts</title>
+  <title>HostifyOS Pricing — Flexible Monthly & Annual Plans</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <!-- Paddle.js v2 Overlay Checkout SDK -->
@@ -64,7 +64,7 @@
     }
     .hero-pricing {
       text-align: center;
-      margin-bottom: 60px;
+      margin-bottom: 40px;
     }
     .badge {
       display: inline-block;
@@ -91,6 +91,70 @@
       max-width: 600px;
       margin: 0 auto;
     }
+    /* TOGGLE STYLES */
+    .toggle-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin: 32px 0 48px 0;
+    }
+    .toggle-label {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .toggle-label.active {
+      color: #fff;
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 56px;
+      height: 30px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #1E293B;
+      transition: .3s;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 22px;
+      width: 22px;
+      left: 4px;
+      bottom: 3px;
+      background-color: #fff;
+      transition: .3s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: var(--accent);
+    }
+    input:checked + .slider:before {
+      transform: translateX(24px);
+    }
+    .discount-tag {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 99px;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
     .pricing-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -151,6 +215,13 @@
       color: var(--text-muted);
       font-weight: 500;
     }
+    .billing-hint {
+      font-size: 12px;
+      color: var(--accent);
+      min-height: 18px;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
     .btn-plan {
       background: var(--gradient);
       color: #fff;
@@ -161,7 +232,7 @@
       font-weight: 700;
       cursor: pointer;
       width: 100%;
-      margin: 24px 0 32px 0;
+      margin: 8px 0 32px 0;
       transition: opacity 0.2s ease;
     }
     .btn-plan:hover {
@@ -221,6 +292,16 @@
       <span class="badge">Transparent SaaS Pricing</span>
       <h1>Simple Plans for Modern Hosts</h1>
       <p class="sub">Choose the plan that fits your property scale. 14-day money-back guarantee on all paid plans.</p>
+
+      <!-- TOGGLE SWITCH (Monthly / Annual) -->
+      <div class="toggle-container">
+        <span class="toggle-label active" id="label-monthly">Monthly Billing</span>
+        <label class="switch">
+          <input type="checkbox" id="billing-toggle" onchange="toggleBillingCycle()">
+          <span class="slider"></span>
+        </label>
+        <span class="toggle-label" id="label-annual">Annual Billing <span class="discount-tag">Save 26%</span></span>
+      </div>
     </div>
 
     <div class="pricing-grid">
@@ -229,7 +310,8 @@
         <div class="plan-name">Starter Host</div>
         <div class="plan-desc">Perfect for new hosts managing 1 property.</div>
         <div class="plan-price">$0 <span class="period">/ month</span></div>
-        <button class="btn-plan outline" onclick="triggerCheckout('pri_01m0tsfdwyv1g4k22zabs39mjt')">Start Free Plan</button>
+        <div class="billing-hint">Free Forever</div>
+        <button class="btn-plan outline" onclick="triggerCheckout('starter')">Start Free Plan</button>
         <ul class="features-list">
           <li>1 Active Property Listing</li>
           <li>Digital Guidebook Builder</li>
@@ -243,8 +325,9 @@
         <div class="featured-tag">Most Popular</div>
         <div class="plan-name">Pro Host</div>
         <div class="plan-desc">For active hosts scaling revenue & guest experience.</div>
-        <div class="plan-price">$19 <span class="period">/ month</span></div>
-        <button class="btn-plan" onclick="triggerCheckout('pri_01m0ts1ge696rasc79cwad1ves')">Upgrade to Pro Host</button>
+        <div class="plan-price" id="price-pro">$19 <span class="period">/ month</span></div>
+        <div class="billing-hint" id="hint-pro">Billed monthly</div>
+        <button class="btn-plan" onclick="triggerCheckout('pro')">Upgrade to Pro Host</button>
         <ul class="features-list">
           <li>Up to 10 Property Listings</li>
           <li>Automated Guest Check-in Engine</li>
@@ -258,8 +341,9 @@
       <div class="pricing-card">
         <div class="plan-name">Enterprise & Hotel</div>
         <div class="plan-desc">For property managers & boutique hotels.</div>
-        <div class="plan-price">$39 <span class="period">/ month</span></div>
-        <button class="btn-plan outline" onclick="triggerCheckout('pri_01m0ts6xzdftg72j4k0cvc3s90')">Get Enterprise Plan</button>
+        <div class="plan-price" id="price-enterprise">$39 <span class="period">/ month</span></div>
+        <div class="billing-hint" id="hint-enterprise">Billed monthly</div>
+        <button class="btn-plan outline" onclick="triggerCheckout('enterprise')">Get Enterprise Plan</button>
         <ul class="features-list">
           <li>Unlimited Property Listings</li>
           <li>Custom Domain Integration</li>
@@ -272,10 +356,54 @@
   </div>
 
   <script>
-    function triggerCheckout(priceId) {
+    let isAnnual = false;
+
+    const PADDLE_PRICES = {
+      starter: 'pri_01m0tsfdwyv1g4k22zabs39mjt',
+      proMonthly: 'pri_01m0ts1ge696rasc79cwad1ves',
+      proAnnual: 'pri_01m0ts4h9764t5n7xm9sphrs6d',
+      enterpriseMonthly: 'pri_01m0ts6xzdftg72j4k0cvc3s90',
+      enterpriseAnnual: 'pri_01m0ts9wrdrfj7174f24f9dfvb'
+    };
+
+    function toggleBillingCycle() {
+      isAnnual = document.getElementById('billing-toggle').checked;
+      
+      const labelMonthly = document.getElementById('label-monthly');
+      const labelAnnual = document.getElementById('label-annual');
+      const pricePro = document.getElementById('price-pro');
+      const priceEnterprise = document.getElementById('price-enterprise');
+      const hintPro = document.getElementById('hint-pro');
+      const hintEnterprise = document.getElementById('hint-enterprise');
+
+      if (isAnnual) {
+        labelMonthly.classList.remove('active');
+        labelAnnual.classList.add('active');
+        pricePro.innerHTML = '$14 <span class="period">/ month</span>';
+        priceEnterprise.innerHTML = '$29 <span class="period">/ month</span>';
+        hintPro.textContent = 'Billed $168 annually (Save 26%)';
+        hintEnterprise.textContent = 'Billed $348 annually (Save 26%)';
+      } else {
+        labelAnnual.classList.remove('active');
+        labelMonthly.classList.add('active');
+        pricePro.innerHTML = '$19 <span class="period">/ month</span>';
+        priceEnterprise.innerHTML = '$39 <span class="period">/ month</span>';
+        hintPro.textContent = 'Billed monthly';
+        hintEnterprise.textContent = 'Billed monthly';
+      }
+    }
+
+    function triggerCheckout(tier) {
+      let targetPriceId = PADDLE_PRICES.starter;
+      if (tier === 'pro') {
+        targetPriceId = isAnnual ? PADDLE_PRICES.proAnnual : PADDLE_PRICES.proMonthly;
+      } else if (tier === 'enterprise') {
+        targetPriceId = isAnnual ? PADDLE_PRICES.enterpriseAnnual : PADDLE_PRICES.enterpriseMonthly;
+      }
+
       if (window.Paddle && typeof window.Paddle.Checkout === 'object') {
         Paddle.Checkout.open({
-          items: [{ priceId: priceId, quantity: 1 }]
+          items: [{ priceId: targetPriceId, quantity: 1 }]
         });
       } else {
         window.location.href = '/#pricing';
