@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HostifyOS Pricing — Flexible Subscription Plans for STR & Hotel Hosts</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Paddle.js v2 Overlay Checkout SDK -->
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+  <script type="text/javascript">
+    if (window.Paddle) {
+      try {
+        Paddle.Environment.set('sandbox');
+        Paddle.Initialize({
+          token: "test_396f4c5ef8e1fadb94dcc972f51"
+        });
+      } catch(e) { console.warn("Paddle setup error", e); }
+    }
+  </script>
+  <style>
+    :root {
+      --bg: #0B0F17;
+      --card-bg: #111827;
+      --text: #F8FAFC;
+      --text-muted: #94A3B8;
+      --accent: #10B981;
+      --border: rgba(255, 255, 255, 0.08);
+      --gradient: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.7;
+    }
+    .header {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 700;
+      font-size: 20px;
+    }
+    .logo img {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 0 24px;
+    }
+    .hero-pricing {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--accent);
+      padding: 6px 16px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    h1 {
+      font-size: 44px;
+      font-weight: 800;
+      margin: 0 0 16px 0;
+      letter-spacing: -1px;
+    }
+    p.sub {
+      color: var(--text-muted);
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      align-items: stretch;
+    }
+    .pricing-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+    .pricing-card.featured {
+      border: 2px solid var(--accent);
+      box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15);
+    }
+    .featured-tag {
+      position: absolute;
+      top: -14px;
+      right: 24px;
+      background: var(--gradient);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 99px;
+      text-transform: uppercase;
+    }
+    .plan-name {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .plan-desc {
+      color: var(--text-muted);
+      font-size: 14px;
+      min-height: 42px;
+      margin-bottom: 24px;
+    }
+    .plan-price {
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .plan-price span.period {
+      font-size: 15px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .btn-plan {
+      background: var(--gradient);
+      color: #fff;
+      border: none;
+      padding: 16px 24px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      margin: 24px 0 32px 0;
+      transition: opacity 0.2s ease;
+    }
+    .btn-plan:hover {
+      opacity: 0.9;
+    }
+    .btn-plan.outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: #fff;
+    }
+    .btn-plan.outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .features-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+    }
+    .features-list li {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .features-list li::before {
+      content: "✓";
+      color: var(--accent);
+      font-weight: 800;
+    }
+    footer {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-muted);
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+      margin-top: 80px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="/" class="logo">
+      <img src="brand_logo.jpg" alt="HostifyOS Logo">
+      <span>HostifyOS.com</span>
+    </a>
+    <a href="/" style="color:var(--accent); text-decoration:none; font-weight:600; font-size:14px;">← Back to Home</a>
+  </header>
+
+  <div class="container">
+    <div class="hero-pricing">
+      <span class="badge">Transparent SaaS Pricing</span>
+      <h1>Simple Plans for Modern Hosts</h1>
+      <p class="sub">Choose the plan that fits your property scale. 14-day money-back guarantee on all paid plans.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- Starter Free Plan -->
+      <div class="pricing-card">
+        <div class="plan-name">Starter Host</div>
+        <div class="plan-desc">Perfect for new hosts managing 1 property.</div>
+        <div class="plan-price">$0 <span class="period">/ month</span></div>
+        <button class="btn-plan outline" onclick="triggerCheckout('pri_01m0tsfdwyv1g4k22zabs39mjt')">Start Free Plan</button>
+        <ul class="features-list">
+          <li>1 Active Property Listing</li>
+          <li>Digital Guidebook Builder</li>
+          <li>Basic Dynamic QR Code</li>
+          <li>Community Host Support</li>
+        </ul>
+      </div>
+
+      <!-- Pro Host Plan (Featured) -->
+      <div class="pricing-card featured">
+        <div class="featured-tag">Most Popular</div>
+        <div class="plan-name">Pro Host</div>
+        <div class="plan-desc">For active hosts scaling revenue & guest experience.</div>
+        <div class="plan-price">$19 <span class="period">/ month</span></div>
+        <button class="btn-plan" onclick="triggerCheckout('pri_01m0ts1ge696rasc79cwad1ves')">Upgrade to Pro Host</button>
+        <ul class="features-list">
+          <li>Up to 10 Property Listings</li>
+          <li>Automated Guest Check-in Engine</li>
+          <li>Room Service PDF Generator</li>
+          <li>Multi-Calendar Sync</li>
+          <li>Priority 24/7 Host Support</li>
+        </ul>
+      </div>
+
+      <!-- Enterprise Plan -->
+      <div class="pricing-card">
+        <div class="plan-name">Enterprise & Hotel</div>
+        <div class="plan-desc">For property managers & boutique hotels.</div>
+        <div class="plan-price">$39 <span class="period">/ month</span></div>
+        <button class="btn-plan outline" onclick="triggerCheckout('pri_01m0ts6xzdftg72j4k0cvc3s90')">Get Enterprise Plan</button>
+        <ul class="features-list">
+          <li>Unlimited Property Listings</li>
+          <li>Custom Domain Integration</li>
+          <li>Staff & Cleaning Team Portal</li>
+          <li>API Access & Custom Webhooks</li>
+          <li>Dedicated Account Manager</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function triggerCheckout(priceId) {
+      if (window.Paddle && typeof window.Paddle.Checkout === 'object') {
+        Paddle.Checkout.open({
+          items: [{ priceId: priceId, quantity: 1 }]
+        });
+      } else {
+        window.location.href = '/#pricing';
+      }
+    }
+  </script>
+
+  <footer>
+    <div style="margin-bottom:12px; display:flex; justify-content:center; gap:20px;">
+      <a href="/terms.html" style="color:var(--text-muted); text-decoration:none;">Terms of Service</a>
+      <a href="/privacy.html" style="color:var(--text-muted); text-decoration:none;">Privacy Policy</a>
+      <a href="/refund.html" style="color:var(--text-muted); text-decoration:none;">Refund Policy</a>
+    </div>
+    © 2026 HostifyOS.com — Ali Turan Inc. All Rights Reserved.
+  </footer>
+
+</body>
+</html>
