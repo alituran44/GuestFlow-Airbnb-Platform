@@ -4081,3 +4081,77 @@ function handleUrlRouting() {
 
 document.addEventListener('DOMContentLoaded', handleUrlRouting);
 window.addEventListener('load', handleUrlRouting);
+
+// ----------------------------------------------------------------------
+// 3 STRATEGIC GROWTH ENGINES: LIVE DEMO, CURRENCY SWITCHER, LEAD MAGNET
+// ----------------------------------------------------------------------
+
+function switchPhoneDemoTab(tabName, btnEl) {
+  const tabs = ['wifi', 'rules', 'spots', 'menu'];
+  tabs.forEach(t => {
+    const el = document.getElementById('p-tab-' + t);
+    if (el) el.style.display = (t === tabName) ? 'block' : 'none';
+  });
+
+  const btns = document.querySelectorAll('.phone-tab-btn');
+  btns.forEach(b => b.classList.remove('active'));
+  if (btnEl) btnEl.classList.add('active');
+}
+
+let activeGlobalCurrency = 'USD';
+
+const CURRENCY_MAP = {
+  USD: {
+    symbol: '$',
+    proMonthly: '$19 / mo',
+    proAnnual: '$14 / mo',
+    enterpriseMonthly: '$39 / mo',
+    enterpriseAnnual: '$29 / mo'
+  },
+  EUR: {
+    symbol: '€',
+    proMonthly: '€18 / mo',
+    proAnnual: '€13 / mo',
+    enterpriseMonthly: '€36 / mo',
+    enterpriseAnnual: '€27 / mo'
+  },
+  TRY: {
+    symbol: '₺',
+    proMonthly: '₺690 / ay',
+    proAnnual: '₺490 / ay',
+    enterpriseMonthly: '₺1,390 / ay',
+    enterpriseAnnual: '₺990 / ay'
+  }
+};
+
+function changeGlobalCurrency(curr) {
+  activeGlobalCurrency = curr;
+  try { localStorage.setItem('hostifyos_currency', curr); } catch(e){}
+
+  ['usd', 'eur', 'try'].forEach(c => {
+    const btn = document.getElementById('curr-btn-' + c);
+    if (btn) {
+      if (c.toUpperCase() === curr) btn.classList.add('active');
+      else btn.classList.remove('active');
+    }
+  });
+
+  const conf = CURRENCY_MAP[curr] || CURRENCY_MAP.USD;
+  const proPriceEl = document.getElementById('price-pro');
+  const entPriceEl = document.getElementById('price-enterprise');
+
+  if (proPriceEl) proPriceEl.innerHTML = `${conf.proMonthly.split(' ')[0]} <span class="period">/ month</span>`;
+  if (entPriceEl) entPriceEl.innerHTML = `${conf.enterpriseMonthly.split(' ')[0]} <span class="period">/ month</span>`;
+
+  showToast(`Currency updated to ${curr} (${conf.symbol})`);
+}
+
+function generateInstantFreeGuidebook() {
+  const propName = document.getElementById('lm-property-name')?.value || 'My Villa Guest Guide';
+  
+  showToast(`🎉 Guidebook "${propName}" created! Opening preview...`);
+  
+  setTimeout(() => {
+    switchView('guest');
+  }, 800);
+}

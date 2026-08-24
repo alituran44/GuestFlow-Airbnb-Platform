@@ -330,6 +330,13 @@
           <i data-lucide="sun" id="theme-icon"></i>
         </button>
 
+        <!-- Global Currency Switcher (USD $ / EUR € / TRY ₺) -->
+        <div style="display:flex; gap:3px; align-items:center; background:rgba(255,255,255,0.04); padding:3px 6px; border-radius:999px; border:1px solid var(--border-subtle);" title="Select Currency">
+          <button class="currency-btn active" id="curr-btn-usd" onclick="changeGlobalCurrency('USD')">$ USD</button>
+          <button class="currency-btn" id="curr-btn-eur" onclick="changeGlobalCurrency('EUR')">€ EUR</button>
+          <button class="currency-btn" id="curr-btn-try" onclick="changeGlobalCurrency('TRY')">₺ TRY</button>
+        </div>
+
         <!-- Install PWA App Button -->
         <button class="theme-toggle-btn" onclick="openPwaInstallModal()" title="Install Mobile App on Phone">
           <i data-lucide="download-cloud"></i>
@@ -466,6 +473,115 @@
           </div>
         </div>
       </div>
+
+      <!-- INTERACTIVE LIVE MOBILE QR DEMO SECTION -->
+      <div class="landing-section" id="live-qr-demo-section">
+        <div class="section-center-head">
+          <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">LIVE INTERACTIVE DEMO</span>
+          <h2>Scan with Phone or Click Tabs Below</h2>
+          <p>Experience how your guests interact with your digital guidebook on their mobile device.</p>
+        </div>
+
+        <div class="live-demo-box">
+          <!-- Left: Phone Simulator -->
+          <div class="phone-mockup-container">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <span style="font-size:12px; font-weight:700; color:var(--accent-emerald);">🌅 Villa Sunset Bodrum</span>
+                <span style="font-size:10px; background:rgba(16,185,129,0.2); color:var(--accent-emerald); padding:2px 8px; border-radius:99px;">Guest Online</span>
+              </div>
+              <div style="display:flex; gap:4px; overflow-x:auto; margin-bottom:12px; padding-bottom:4px;">
+                <button class="phone-tab-btn active" onclick="switchPhoneDemoTab('wifi', this)">📶 Wi-Fi</button>
+                <button class="phone-tab-btn" onclick="switchPhoneDemoTab('rules', this)">📋 Rules</button>
+                <button class="phone-tab-btn" onclick="switchPhoneDemoTab('spots', this)">📍 Spots</button>
+                <button class="phone-tab-btn" onclick="switchPhoneDemoTab('menu', this)">🍷 Menu</button>
+              </div>
+
+              <!-- Phone Content Screens -->
+              <div id="phone-content-area" style="background:rgba(255,255,255,0.04); border-radius:12px; padding:14px; min-height:300px;">
+                <div id="p-tab-wifi">
+                  <div style="font-size:13px; font-weight:700; margin-bottom:4px;">Guest Wi-Fi Network</div>
+                  <div style="font-size:16px; font-weight:800; color:var(--accent-emerald);">Villa_Sunset_5G</div>
+                  <div style="font-size:12px; color:var(--text-muted); margin-top:8px;">Password: <strong style="color:#fff;">SunsetBodrum2026</strong></div>
+                  <button class="btn-hero-primary" onclick="showToast('📶 Wi-Fi Password Copied to Clipboard!')" style="width:100%; margin-top:16px; padding:10px; font-size:12px;">1-Tap Connect Wi-Fi</button>
+                </div>
+                <div id="p-tab-rules" style="display:none;">
+                  <div style="font-size:13px; font-weight:700; margin-bottom:8px;">House Rules</div>
+                  <div style="font-size:12px; color:var(--text-muted); line-height:1.6;">
+                    • Quiet hours after 23:00 PM<br>
+                    • No smoking indoors<br>
+                    • Check-out time: 11:00 AM
+                  </div>
+                </div>
+                <div id="p-tab-spots" style="display:none;">
+                  <div style="font-size:13px; font-weight:700; margin-bottom:8px;">Host Recommendations</div>
+                  <div style="font-size:12px; color:var(--text-muted);">
+                    📍 <strong>Bodrum Marina Restaurant</strong> (5 min walk)<br>
+                    ☕ <strong>Coffee & Co</strong> (Best Espresso)
+                  </div>
+                </div>
+                <div id="p-tab-menu" style="display:none;">
+                  <div style="font-size:13px; font-weight:700; margin-bottom:8px;">Room Service & Extras</div>
+                  <div style="font-size:12px; color:var(--text-muted);">
+                    🍷 Organic Wine Selection ($25)<br>
+                    🚗 Late Check-out 2 Hours ($30)
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Scannable Live QR Box -->
+          <div style="text-align:center;">
+            <div class="qr-code-box">
+              <!-- Live SVG QR Code -->
+              <svg width="180" height="180" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="200" height="200" rx="12" fill="white"/>
+                <path d="M20 20H80V80H20V20ZM35 35V65H65V35H35ZM120 20H180V80H120V20ZM135 35V65H165V35H135ZM20 120H80V180H20V120ZM35 135V165H65V135H35ZM100 20H110V50H100V20ZM90 60H110V80H90V60ZM120 100H150V110H120V100ZM160 100H180V130H160V100ZM100 120H130V150H100V120ZM140 140H180V180H140V140ZM100 160H120V180H100V160Z" fill="#0B0F17"/>
+                <circle cx="100" cy="100" r="14" fill="#10B981"/>
+              </svg>
+            </div>
+            <h3 style="margin-top:16px; font-size:18px;">Scan Code with Camera</h3>
+            <p style="color:var(--text-muted); font-size:14px; max-width:320px; margin:8px auto 0 auto;">Point your phone camera at the QR code to open the live guest portal on your mobile device instantly.</p>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- INSTANT FREE GUIDEBOOK BUILDER LEAD MAGNET SECTION -->
+      <div class="landing-section" id="free-guidebook-builder-section">
+        <div class="lead-magnet-box">
+          <div style="text-align:center; max-width:640px; margin:0 auto 32px auto;">
+            <span class="badge-tag" style="background:rgba(16,185,129,0.2); color:var(--accent-emerald);">FREE HOST TOOL</span>
+            <h2 style="font-size:32px; margin-top:8px;">Build Your 1-Minute Digital Guidebook Free</h2>
+            <p style="color:var(--text-muted);">No credit card required. Fill 3 fields below to generate your property's QR code & guest portal right now.</p>
+          </div>
+
+          <div style="max-width:540px; margin:0 auto; background:rgba(15,23,42,0.8); border:1px solid var(--border-subtle); padding:24px; border-radius:16px;">
+            <div style="margin-bottom:14px;">
+              <label style="font-size:12px; font-weight:700; color:var(--text-secondary); display:block; margin-bottom:6px;">Property Name / Listing Title</label>
+              <input type="text" id="lm-property-name" placeholder="e.g. Luxury Sea View Villa" style="width:100%; padding:12px; border-radius:10px; background:#0B0F17; border:1px solid var(--border-subtle); color:#fff; font-size:14px;">
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px;">
+              <div>
+                <label style="font-size:12px; font-weight:700; color:var(--text-secondary); display:block; margin-bottom:6px;">Wi-Fi Name (SSID)</label>
+                <input type="text" id="lm-wifi-ssid" placeholder="e.g. Villa_Guest_5G" style="width:100%; padding:12px; border-radius:10px; background:#0B0F17; border:1px solid var(--border-subtle); color:#fff; font-size:14px;">
+              </div>
+              <div>
+                <label style="font-size:12px; font-weight:700; color:var(--text-secondary); display:block; margin-bottom:6px;">Wi-Fi Password</label>
+                <input type="text" id="lm-wifi-pass" placeholder="e.g. Welcome2026" style="width:100%; padding:12px; border-radius:10px; background:#0B0F17; border:1px solid var(--border-subtle); color:#fff; font-size:14px;">
+              </div>
+            </div>
+
+            <button class="btn-hero-primary" onclick="generateInstantFreeGuidebook()" style="width:100%; padding:14px; font-size:15px; font-weight:700;">
+              <i data-lucide="sparkles"></i>
+              <span>Generate My Free Guidebook & QR Code</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
 
       <!-- FUNNEL STEP 2: INTERACTIVE REVENUE AUDIT QUIZ (HIGH CONVERSION HOOK) -->
       <div class="landing-section" id="funnel-quiz-section">
