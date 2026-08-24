@@ -242,15 +242,13 @@
 
   <!-- Stripe.js v3 SDK for PCI-DSS Level 1 Compliant Tokenization & 3DS2 / SCA -->
   <script src="https://js.stripe.com/v3/"></script>
-  <!-- Paddle.js v2 Overlay Checkout SDK & Client Token Initialization -->
+  <!-- Paddle.js v2 Overlay Checkout SDK & Test Client Token Initialization -->
   <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
   <script type="text/javascript">
     if (window.Paddle) {
       try {
-        const clientToken = "live_396f4c5ef8e1fadb94dcc972f51";
-        if (clientToken.startsWith('test_')) {
-          Paddle.Environment.set('sandbox');
-        }
+        const clientToken = "test_396f4c5ef8e1fadb94dcc972f51";
+        Paddle.Environment.set('sandbox');
         Paddle.Initialize({
           token: clientToken,
           eventCallback: function(data) {
