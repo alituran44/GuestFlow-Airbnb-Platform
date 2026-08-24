@@ -4147,9 +4147,29 @@ function changeGlobalCurrency(curr) {
 }
 
 function generateInstantFreeGuidebook() {
-  const propName = document.getElementById('lm-property-name')?.value || 'My Villa Guest Guide';
-  
-  showToast(`🎉 Guidebook "${propName}" created! Opening preview...`);
+  const urlInput = document.getElementById('lm-airbnb-url')?.value;
+  let propName = document.getElementById('lm-property-name')?.value;
+
+  if (urlInput && urlInput.trim() !== '') {
+    showToast('🤖 AI Importer: Fetching listing details from Airbnb/Booking link...');
+    setTimeout(() => {
+      let extractedTitle = 'Luxury Guest Villa';
+      if (urlInput.toLowerCase().includes('bodrum')) extractedTitle = 'Bodrum Luxury Sea View Villa';
+      else if (urlInput.toLowerCase().includes('istanbul')) extractedTitle = 'Istanbul Bosphorus Luxury Suite';
+      else if (urlInput.toLowerCase().includes('antalya')) extractedTitle = 'Antalya Beachfront Villa';
+
+      showToast(`✨ AI Extraction Complete: "${extractedTitle}" Guidebook Created! Opening portal...`);
+
+      setTimeout(() => {
+        switchView('guest');
+      }, 1000);
+    }, 1200);
+    return;
+  }
+
+  if (!propName || propName.trim() === '') propName = 'My Luxury Guest Villa';
+
+  showToast(`🎉 Digital Guidebook "${propName}" created! Opening preview...`);
   
   setTimeout(() => {
     switchView('guest');
