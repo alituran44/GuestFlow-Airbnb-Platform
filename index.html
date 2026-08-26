@@ -299,15 +299,21 @@
           <span>Home</span>
         </button>
 
+        <button class="nav-link" onclick="scrollToFunnelSection('pricing')">
+          <i data-lucide="tag"></i>
+          <span>Pricing</span>
+        </button>
+
         <a href="/blog.html" class="nav-link" style="text-decoration:none;">
           <i data-lucide="book-open"></i>
           <span>Blog & Guides</span>
         </a>
 
-        <button id="btn-view-guest" class="nav-link" onclick="switchView('guest')">
+        <a href="/g.html" class="nav-link" style="text-decoration:none;">
           <i data-lucide="smartphone"></i>
-          <span>Guest View (PWA)</span>
-        </button>
+          <span>Guest View</span>
+        </a>
+
         <button id="btn-view-host" class="nav-link" onclick="switchView('host')" style="display:none;">
           <i data-lucide="layout-dashboard"></i>
           <span>Host Portal</span>
@@ -318,11 +324,10 @@
         </button>
       </nav>
 
-
-      <!-- Right Controls: Active Property, Theme Switcher, Currency & Account -->
+      <!-- Right Controls: Currency Switcher, Theme Switcher, Language & Account -->
       <div class="nav-right">
         
-        <!-- Active Property Selector Dropdown -->
+        <!-- Active Property Selector Dropdown (visible in host portal) -->
         <div class="property-nav-selector" id="nav-property-container" style="display:none;">
           <i data-lucide="home"></i>
           <select id="property-select-nav" onchange="changeActiveProperty(this.value)">
@@ -330,29 +335,23 @@
           </select>
         </div>
 
-        <!-- Light / Dark Mode Theme Switcher -->
-        <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Light / Dark Mode">
-          <i data-lucide="sun" id="theme-icon"></i>
-        </button>
-
         <!-- Global Currency Switcher (USD $ / EUR € / TRY ₺) -->
-        <div style="display:flex; gap:3px; align-items:center; background:rgba(255,255,255,0.04); padding:3px 6px; border-radius:999px; border:1px solid var(--border-subtle);" title="Select Currency">
+        <div style="display:flex; gap:2px; align-items:center; background:rgba(255,255,255,0.04); padding:3px 6px; border-radius:999px; border:1px solid var(--border-subtle);" title="Select Currency">
           <button class="currency-btn active" id="curr-btn-usd" onclick="changeGlobalCurrency('USD')">$ USD</button>
           <button class="currency-btn" id="curr-btn-eur" onclick="changeGlobalCurrency('EUR')">€ EUR</button>
           <button class="currency-btn" id="curr-btn-try" onclick="changeGlobalCurrency('TRY')">₺ TRY</button>
         </div>
 
-        <!-- Install PWA App Button -->
-        <button class="theme-toggle-btn" onclick="openPwaInstallModal()" title="Install Mobile App on Phone">
-          <i data-lucide="download-cloud"></i>
+        <!-- Light / Dark Mode Theme Switcher -->
+        <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Light / Dark Mode">
+          <i data-lucide="sun" id="theme-icon"></i>
         </button>
-
 
         <!-- Global Custom Multi-Language Selector Widget -->
         <div class="custom-lang-dropdown" id="custom-lang-dropdown">
-          <button class="lang-trigger-btn" onclick="toggleLangMenu(event)" title="Select Language & Currency">
+          <button class="lang-trigger-btn" onclick="toggleLangMenu(event)" title="Select Language">
             <span id="active-lang-flag" class="flag-icon">🇺🇸</span>
-            <span id="active-lang-code" class="lang-code-text">English</span>
+            <span id="active-lang-code" class="lang-code-text">EN</span>
             <i data-lucide="chevron-down" class="chevron-icon"></i>
           </button>
           <div class="lang-menu-panel" id="lang-menu-panel">
@@ -387,33 +386,10 @@
               <span class="name">Italiano</span>
               <span class="currency-tag">EUR (€)</span>
             </div>
-            <div class="lang-option-item" data-lang="PT" onclick="selectCustomLang('PT')">
-              <span class="flag">🇵🇹</span>
-              <span class="name">Português</span>
-              <span class="currency-tag">EUR (€)</span>
-            </div>
-            <div class="lang-option-item" data-lang="JA" onclick="selectCustomLang('JA')">
-              <span class="flag">🇯🇵</span>
-              <span class="name">日本語</span>
-              <span class="currency-tag">JPY (¥)</span>
-            </div>
           </div>
         </div>
 
-        <div class="currency-selector">
-          <i data-lucide="coins"></i>
-          <select id="currency-select" onchange="changeCurrency(this.value)">
-            <option value="USD">USD ($)</option>
-            <option value="EUR">EUR (€)</option>
-            <option value="GBP">GBP (£)</option>
-            <option value="CAD">CAD ($)</option>
-            <option value="AUD">AUD ($)</option>
-            <option value="JPY">JPY (¥)</option>
-            <option value="TRY">TRY (₺)</option>
-          </select>
-        </div>
-
-
+        <!-- Login / Start Free Trial Button -->
         <div id="user-nav-status">
           <button class="btn-primary-sm" onclick="openLoginModal('host')">
             <i data-lucide="log-in"></i>

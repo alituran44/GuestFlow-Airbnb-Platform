@@ -286,29 +286,34 @@ button, select, input {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(9, 13, 20, 0.85);
+  background: rgba(9, 13, 20, 0.90);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-subtle);
-  padding: 12px 24px;
+  padding: 10px 24px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .nav-container {
-  max-width: 1280px;
+  max-width: 1380px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
+  width: 100%;
 }
 
 .brand {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .brand-logo-img {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   border-radius: var(--radius-sm);
   object-fit: cover;
   border: 1px solid var(--border-subtle);
@@ -329,7 +334,7 @@ button, select, input {
 
 .brand-name {
   font-family: var(--font-heading);
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 800;
   background: linear-gradient(135deg, #10B981 0%, #3B82F6 55%, #6366F1 100%);
   -webkit-background-clip: text;
@@ -375,18 +380,20 @@ body.theme-light .landing-footer {
 /* Center Navigation Links & Mode Switcher */
 .center-nav-links {
   display: flex;
+  align-items: center;
   background: var(--bg-card);
-  padding: 4px;
+  padding: 3px 6px;
   border-radius: var(--radius-full);
   border: 1px solid var(--border-subtle);
-  gap: 2px;
+  gap: 4px;
+  flex-shrink: 0;
 }
 
 .nav-link {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 18px;
+  gap: 6px;
+  padding: 6px 14px;
   border-radius: var(--radius-full);
   border: none;
   background: transparent;
@@ -394,17 +401,19 @@ body.theme-light .landing-footer {
   font-weight: 600;
   font-size: 13px;
   cursor: pointer;
+  text-decoration: none;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .nav-link svg {
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
 }
 
 .nav-link:hover:not(.active) {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .nav-link.active {
@@ -418,7 +427,8 @@ body.theme-light .landing-footer {
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .property-nav-selector {
