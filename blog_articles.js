@@ -381,9 +381,9 @@ function renderBlogArticlesGrid(filterCategory = 'all', searchQuery = '') {
     }
   }
 
-  // Render on homepage (limited to 4 curated articles)
+  // Render on homepage (limited to 3 curated articles in 1 clean row)
   if (homeContainer && !allContainer) {
-    const featuredArticles = HOSTIFYOS_BLOG_ARTICLES.slice(0, 4);
+    const featuredArticles = HOSTIFYOS_BLOG_ARTICLES.slice(0, 3);
     homeContainer.innerHTML = featuredArticles.map(a => generateBlogCardHtml(a)).join('');
   }
 
