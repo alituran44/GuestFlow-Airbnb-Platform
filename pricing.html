@@ -273,18 +273,35 @@
       color: var(--text-muted);
       font-size: 13px;
       border-top: 1px solid var(--border);
-      margin-top: 80px;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
-  <header class="header">
-    <a href="/" class="logo">
-      <img src="brand_logo.jpg" alt="HostifyOS Logo">
-      <span>HostifyOS.com</span>
-    </a>
-    <a href="/" style="color:var(--accent); text-decoration:none; font-weight:600; font-size:14px;">← Back to Home</a>
+  <!-- Top Navigation Header -->
+  <header class="top-nav">
+    <div class="nav-container">
+      <a href="/" class="brand" style="text-decoration:none;">
+        <img src="brand_logo.jpg" alt="HostifyOS Logo" class="brand-logo-img">
+        <span class="brand-name">HostifyOS</span>
+      </a>
+
+      <nav class="center-nav-links">
+        <a href="/" class="nav-link"><i data-lucide="home"></i> <span>Home</span></a>
+        <a href="/pricing.html" class="nav-link active"><i data-lucide="tag"></i> <span>Pricing</span></a>
+        <a href="/blog.html" class="nav-link"><i data-lucide="book-open"></i> <span>Blog & Guides</span></a>
+        <a href="/g.html" class="nav-link"><i data-lucide="smartphone"></i> <span>Guest Demo</span></a>
+      </nav>
+
+      <div class="nav-right">
+        <button class="theme-toggle-btn" onclick="togglePricingTheme()" title="Toggle Light / Dark Mode">
+          <i data-lucide="sun" id="theme-icon"></i>
+        </button>
+        <a href="#pricing-grid" class="btn-hero-primary" style="padding:8px 16px; font-size:13px; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+          <i data-lucide="zap"></i> <span>Start 14-Day Free Trial</span>
+        </a>
+      </div>
+    </div>
   </header>
 
   <div class="container">
@@ -409,6 +426,20 @@
         window.location.href = '/#pricing';
       }
     }
+
+    function togglePricingTheme() {
+      document.body.classList.toggle('theme-light');
+      const isLight = document.body.classList.contains('theme-light');
+      const icon = document.getElementById('theme-icon');
+      if (icon && window.lucide) {
+        icon.setAttribute('data-lucide', isLight ? 'moon' : 'sun');
+        lucide.createIcons();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) lucide.createIcons();
+    });
   </script>
 
   <footer>
