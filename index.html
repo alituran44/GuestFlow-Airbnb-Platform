@@ -299,6 +299,11 @@
           <span>Home</span>
         </button>
 
+        <a href="/blog.html" class="nav-link" style="text-decoration:none;">
+          <i data-lucide="book-open"></i>
+          <span>Blog & Guides</span>
+        </a>
+
         <button id="btn-view-guest" class="nav-link" onclick="switchView('guest')">
           <i data-lucide="smartphone"></i>
           <span>Guest View (PWA)</span>
@@ -1203,34 +1208,26 @@
         </div>
       </div>
 
-      <!-- FUNNEL STEP 8.5: HOSPITALITY LABS & 20 SEO BLOG ARTICLES CENTER -->
+      <!-- FUNNEL STEP 8.5: HOSPITALITY LABS & FEATURED BLOG GUIDES -->
       <div class="landing-section" id="blog-section">
         <div class="section-center-head">
-          <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">HOSPITALITY LABS & STR GUIDES</span>
-          <h2>Hospitality & Short-Term Rental Insights</h2>
-          <p>Expert guides on Airbnb automation, digital guest guidebooks, keyless security, and revenue optimization.</p>
+          <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">HOSPITALITY LABS & STR INSIGHTS</span>
+          <h2>Featured Short-Term Rental Guides</h2>
+          <p>Proven playbooks on vacation rental automation, digital guidebooks, and revenue scaling.</p>
         </div>
 
-        <!-- BLOG FILTER & SEARCH TOOLBAR -->
-        <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:16px; margin-bottom:24px;">
-          <div style="display:flex; gap:8px; flex-wrap:wrap;">
-            <button class="blog-filter-btn active" data-cat="all" onclick="filterBlogCategory('all', this)">All (20 Articles)</button>
-            <button class="blog-filter-btn" data-cat="Revenue Growth" onclick="filterBlogCategory('Revenue Growth', this)">💰 Revenue Growth</button>
-            <button class="blog-filter-btn" data-cat="Guest Experience" onclick="filterBlogCategory('Guest Experience', this)">⭐ Guest Experience</button>
-            <button class="blog-filter-btn" data-cat="Smart Access" onclick="filterBlogCategory('Smart Access', this)">🔑 Smart Access</button>
-            <button class="blog-filter-btn" data-cat="Airbnb Automation" onclick="filterBlogCategory('Airbnb Automation', this)">⚡ Airbnb Automation</button>
-            <button class="blog-filter-btn" data-cat="Hotel Tech" onclick="filterBlogCategory('Hotel Tech', this)">🏨 Hotel Tech</button>
-          </div>
-
-          <div style="position:relative; width:100%; max-width:280px;">
-            <input type="text" id="blog-search-input" placeholder="Search guides..." oninput="handleBlogSearch(this.value)" style="width:100%; padding:10px 14px 10px 36px; border-radius:999px; background:var(--bg-card); border:1px solid var(--border-subtle); color:#fff; font-size:13px;">
-            <i data-lucide="search" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); width:16px; height:16px; color:var(--text-muted);"></i>
-          </div>
+        <!-- HOMEPAGE 4 FEATURED ARTICLES GRID -->
+        <div class="blog-grid" id="blog-grid-container-home">
+          <!-- Dynamically Rendered 4 Featured Articles by blog_articles.js -->
         </div>
 
-        <!-- BLOG ARTICLES GRID -->
-        <div class="blog-grid" id="blog-grid-container">
-          <!-- Dynamically Rendered 20 Articles by blog_articles.js -->
+        <!-- EXPLORE ALL ARTICLES CTA BUTTON -->
+        <div style="text-align:center; margin-top:36px;">
+          <a href="/blog.html" class="btn-hero-secondary" style="display:inline-flex; align-items:center; gap:10px; padding:14px 28px; text-decoration:none; font-size:15px; font-weight:700; border-radius:999px; background:var(--bg-surface); border:1px solid var(--border-strong);">
+            <i data-lucide="book-open"></i>
+            <span>Explore All Hospitality Guides (20+ Articles)</span>
+            <i data-lucide="arrow-right"></i>
+          </a>
         </div>
       </div>
 
@@ -1256,6 +1253,8 @@
             <span>Merchant: <strong class="footer-brand-title">Ali Turan Inc. (hostifyos@gmail.com)</strong></span>
           </div>
           <div style="display:flex; gap:14px; font-size:11px; align-items:center;">
+            <a href="/pricing.html" style="color:var(--text-secondary); text-decoration:none;">Pricing</a>
+            <a href="/blog.html" style="color:var(--text-secondary); text-decoration:none;">Blog</a>
             <a href="/terms.html" target="_blank" style="color:var(--text-secondary); text-decoration:none;">Terms of Service</a>
             <a href="/privacy.html" target="_blank" style="color:var(--text-secondary); text-decoration:none;">Privacy Policy</a>
             <a href="/refund.html" target="_blank" style="color:var(--text-secondary); text-decoration:none;">Refund Policy</a>

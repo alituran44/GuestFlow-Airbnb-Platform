@@ -350,10 +350,10 @@ const HOSTIFYOS_BLOG_ARTICLES = [
   }
 ];
 
-// RENDER 20 BLOG ARTICLES GRID ON LANDING PAGE
+// RENDER BLOG ARTICLES (HOMEPAGE 4 FEATURED VS DEDICATED ALL ARTICLES)
 function renderBlogArticlesGrid(filterCategory = 'all', searchQuery = '') {
-  const container = document.getElementById('blog-grid-container');
-  if (!container) return;
+  const homeContainer = document.getElementById('blog-grid-container-home') || document.getElementById('blog-grid-container');
+  const allContainer = document.getElementById('blog-grid-container-all');
 
   let articles = HOSTIFYOS_BLOG_ARTICLES;
 
@@ -366,19 +366,32 @@ function renderBlogArticlesGrid(filterCategory = 'all', searchQuery = '') {
     articles = articles.filter(a => a.title.toLowerCase().includes(q) || a.excerpt.toLowerCase().includes(q) || a.category.toLowerCase().includes(q));
   }
 
-  if (articles.length === 0) {
-    container.innerHTML = `
-      <div style="grid-column:1/-1; text-align:center; padding:40px; background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:16px;">
-        <i data-lucide="search-x" style="width:36px; height:36px; color:var(--text-muted); margin-bottom:12px;"></i>
-        <h4 style="color:#fff; margin-bottom:4px;">No matching articles found</h4>
-        <p style="font-size:12px; color:var(--text-muted);">Try searching for "Wi-Fi", "Revenue", "Guidebook", or "Airbnb".</p>
-      </div>
-    `;
-    if (window.lucide) window.lucide.createIcons();
-    return;
+  // Render on dedicated blog.html if present
+  if (allContainer) {
+    if (articles.length === 0) {
+      allContainer.innerHTML = `
+        <div style="grid-column:1/-1; text-align:center; padding:40px; background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:16px;">
+          <i data-lucide="search-x" style="width:36px; height:36px; color:var(--text-muted); margin-bottom:12px;"></i>
+          <h4 style="color:#fff; margin-bottom:4px;">No matching articles found</h4>
+          <p style="font-size:12px; color:var(--text-muted);">Try searching for "Wi-Fi", "Revenue", "Guidebook", or "Airbnb".</p>
+        </div>
+      `;
+    } else {
+      allContainer.innerHTML = articles.map(a => generateBlogCardHtml(a)).join('');
+    }
   }
 
-  container.innerHTML = articles.map(a => `
+  // Render on homepage (limited to 4 curated articles)
+  if (homeContainer && !allContainer) {
+    const featuredArticles = HOSTIFYOS_BLOG_ARTICLES.slice(0, 4);
+    homeContainer.innerHTML = featuredArticles.map(a => generateBlogCardHtml(a)).join('');
+  }
+
+  if (window.lucide) window.lucide.createIcons();
+}
+
+function generateBlogCardHtml(a) {
+  return `
     <article class="blog-card" onclick="openBlogArticleModal('${a.id}')">
       <div class="blog-card-img">
         <img src="${a.image}" alt="${a.title}" loading="lazy">
@@ -396,9 +409,7 @@ function renderBlogArticlesGrid(filterCategory = 'all', searchQuery = '') {
         </div>
       </div>
     </article>
-  `).join('');
-
-  if (window.lucide) window.lucide.createIcons();
+  `;
 }
 
 // OPEN INTERACTIVE BLOG READER MODAL
@@ -432,7 +443,7 @@ function openBlogArticleModal(articleId) {
     <div class="blog-modal-cta">
       <h3>Ready to Implement This Revenue Strategy in Your Rental?</h3>
       <p>Try HostifyOS free for 14 days. Generate digital guidebooks, automate Wi-Fi passwords, and offer 1-tap upsells with 0% commission.</p>
-      <button class="btn-hero-primary" onclick="closeModal('modal-blog-reader'); openLemonSqueezyCheckout('Pro Host Plan', '$14.00 / mo');">
+      <button class="btn-hero-primary" onclick="closeModal('modal-blog-reader'); if(typeof openLemonSqueezyCheckout === 'function'){openLemonSqueezyCheckout('Pro Host Plan', '$14.00 / mo');} else { window.location.href='/#pricing'; }">
         <i data-lucide="shield-check"></i> Start Your 14-Day Free Trial ($0 Today)
       </button>
     </div>
@@ -440,6 +451,12 @@ function openBlogArticleModal(articleId) {
 
   modal.classList.add('active');
   if (window.lucide) window.lucide.createIcons();
+}
+
+// CLOSE MODAL HELPER
+function closeBlogModal() {
+  const modal = document.getElementById('modal-blog-reader');
+  if (modal) modal.classList.remove('active');
 }
 
 // FILTER BLOG BY CATEGORY CHIP
