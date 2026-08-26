@@ -464,92 +464,120 @@
         </div>
 
         <div class="live-demo-box">
-          <!-- Left: Real HostifyOS Phone App Simulator -->
+          <!-- Left: Real HostifyOS Guest Guidebook Phone Screen Preview -->
           <div class="phone-mockup-container">
             <div class="phone-notch"></div>
-            <div class="phone-screen">
-              <!-- App Top Bar -->
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:8px;">
-                <div style="display:flex; align-items:center; gap:8px;">
-                  <img src="brand_logo.jpg" alt="HostifyOS Logo" style="width:20px; height:20px; border-radius:6px;">
-                  <span style="font-size:12px; font-weight:700; color:#fff;">Villa Sunset Bodrum</span>
+            <div class="phone-screen" style="padding:0; overflow:hidden; border-radius:24px; background:#090D14;">
+              
+              <!-- Property Hero Banner -->
+              <div style="position:relative; height:130px; background:linear-gradient(rgba(9,13,20,0.2), rgba(9,13,20,0.95)), url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80') center/cover no-repeat; display:flex; align-items:flex-end; padding:12px;">
+                <div>
+                  <span style="display:inline-flex; align-items:center; gap:4px; background:rgba(16,185,129,0.25); color:var(--accent-emerald); padding:2px 8px; border-radius:99px; font-size:9px; font-weight:800; border:1px solid rgba(16,185,129,0.3);">
+                    ● Verified Guest Guide
+                  </span>
+                  <div style="font-size:15px; font-weight:800; color:#fff; margin-top:2px;">Villa Sunset Bodrum</div>
+                  <div style="font-size:10px; color:var(--text-muted);">Yalıkavak Marina • Luxury Villa</div>
                 </div>
-                <span style="font-size:10px; background:rgba(16,185,129,0.2); color:var(--accent-emerald); padding:2px 8px; border-radius:99px; font-weight:700;">● Live Portal</span>
+              </div>
+
+              <!-- Quick 1-Tap Action Pills Grid -->
+              <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:6px; padding:10px 12px 6px 12px;">
+                <a href="https://wa.me/905550000000" target="_blank" style="background:#111827; border:1px solid rgba(37,211,102,0.3); border-radius:10px; padding:6px 2px; text-decoration:none; display:flex; flex-direction:column; align-items:center; gap:2px; color:#25D366;">
+                  <i data-lucide="message-circle" style="width:14px; height:14px;"></i>
+                  <span style="font-size:8px; font-weight:700; color:#fff;">WhatsApp</span>
+                </a>
+                <a href="https://maps.google.com" target="_blank" style="background:#111827; border:1px solid rgba(59,130,246,0.3); border-radius:10px; padding:6px 2px; text-decoration:none; display:flex; flex-direction:column; align-items:center; gap:2px; color:#3B82F6;">
+                  <i data-lucide="map-pin" style="width:14px; height:14px;"></i>
+                  <span style="font-size:8px; font-weight:700; color:#fff;">Map</span>
+                </a>
+                <a href="tel:02523854000" style="background:#111827; border:1px solid rgba(234,179,8,0.3); border-radius:10px; padding:6px 2px; text-decoration:none; display:flex; flex-direction:column; align-items:center; gap:2px; color:#EAB308;">
+                  <i data-lucide="car" style="width:14px; height:14px;"></i>
+                  <span style="font-size:8px; font-weight:700; color:#fff;">Taxi</span>
+                </a>
+                <a href="tel:112" style="background:#111827; border:1px solid rgba(239,68,68,0.3); border-radius:10px; padding:6px 2px; text-decoration:none; display:flex; flex-direction:column; align-items:center; gap:2px; color:#EF4444;">
+                  <i data-lucide="phone-call" style="width:14px; height:14px;"></i>
+                  <span style="font-size:8px; font-weight:700; color:#fff;">112</span>
+                </a>
               </div>
 
               <!-- Quick Navigation Tabs -->
-              <div style="display:flex; gap:6px; overflow-x:auto; margin-bottom:12px; padding-bottom:4px; scrollbar-width:none;">
+              <div style="display:flex; gap:4px; overflow-x:auto; padding:6px 12px; scrollbar-width:none;">
                 <button class="phone-tab-btn active" onclick="switchPhoneDemoTab('wifi', this)">📶 Wi-Fi</button>
                 <button class="phone-tab-btn" onclick="switchPhoneDemoTab('lock', this)">🔑 Smart Lock</button>
-                <button class="phone-tab-btn" onclick="switchPhoneDemoTab('upsell', this)">🍷 Room Service</button>
-                <button class="phone-tab-btn" onclick="switchPhoneDemoTab('rules', this)">📋 Rules</button>
+                <button class="phone-tab-btn" onclick="switchPhoneDemoTab('upsell', this)">🍷 Concierge</button>
+                <button class="phone-tab-btn" onclick="switchPhoneDemoTab('rules', this)">📋 Rules & A/C</button>
                 <button class="phone-tab-btn" onclick="switchPhoneDemoTab('spots', this)">📍 Guide</button>
               </div>
 
               <!-- Phone Screen Content Area -->
-              <div id="phone-content-area" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:14px; min-height:310px;">
+              <div id="phone-content-area" style="background:rgba(255,255,255,0.03); border-top:1px solid rgba(255,255,255,0.08); padding:12px; min-height:260px;">
                 
                 <!-- Tab 1: Wi-Fi -->
                 <div id="p-tab-wifi">
-                  <div style="font-size:11px; text-transform:uppercase; color:var(--text-muted); font-weight:700; margin-bottom:4px;">1-Tap Guest Wi-Fi</div>
-                  <div style="font-size:16px; font-weight:800; color:var(--accent-emerald); margin-bottom:2px;">Villa_Sunset_5G</div>
-                  <div style="font-size:12px; color:var(--text-secondary);">Password: <strong style="color:#fff;">SunsetBodrum2026</strong></div>
-                  <button class="btn-hero-primary" onclick="showToast('📶 Wi-Fi Password Copied to Clipboard!')" style="width:100%; margin-top:14px; padding:10px; font-size:12px; border-radius:10px;">
-                    <i data-lucide="wifi"></i>
-                    <span>Copy Wi-Fi Password</span>
-                  </button>
-                  <div style="margin-top:14px; font-size:11px; color:var(--text-muted); text-align:center;">iOS & Android 1-Tap Auto-Connect</div>
+                  <div style="font-size:10px; text-transform:uppercase; color:var(--text-muted); font-weight:700; margin-bottom:4px;">1-Tap Guest Wi-Fi</div>
+                  <div style="background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.25); border-radius:10px; padding:10px; text-align:center;">
+                    <div style="font-size:15px; font-weight:800; color:var(--accent-emerald);">Villa_Sunset_5G</div>
+                    <div style="font-size:11px; color:var(--text-secondary); margin-top:2px;">Password: <strong style="color:#fff;">SunsetBodrum2026</strong></div>
+                    <button class="btn-hero-primary" onclick="showToast('📶 Wi-Fi Password Copied to Clipboard!')" style="width:100%; margin-top:8px; padding:8px; font-size:11px; border-radius:8px;">
+                      <i data-lucide="copy" style="width:12px; height:12px;"></i>
+                      <span>Copy Wi-Fi Password</span>
+                    </button>
+                  </div>
+                  <div style="margin-top:8px; font-size:10px; color:var(--text-muted); text-align:center;">High-Speed Fiber (250 Mbps)</div>
                 </div>
 
                 <!-- Tab 2: Smart Lock PIN -->
                 <div id="p-tab-lock" style="display:none;">
-                  <div style="font-size:11px; text-transform:uppercase; color:var(--text-muted); font-weight:700; margin-bottom:4px;">Door Access Lockbox PIN</div>
-                  <div style="background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); padding:12px; border-radius:10px; text-align:center; margin-top:8px;">
-                    <span style="font-size:22px; font-weight:800; letter-spacing:4px; color:var(--accent-emerald);">8 4 9 2 #</span>
-                    <div style="font-size:10px; color:var(--text-muted); margin-top:4px;">Time-Gated Access (Valid 14:00 - 11:00)</div>
+                  <div style="font-size:10px; text-transform:uppercase; color:var(--text-muted); font-weight:700; margin-bottom:4px;">Door Access Lockbox PIN</div>
+                  <div style="background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); padding:12px; border-radius:10px; text-align:center;">
+                    <span style="font-size:24px; font-weight:800; letter-spacing:4px; color:var(--accent-emerald);">8 4 9 2 #</span>
+                    <div style="font-size:10px; color:var(--text-muted); margin-top:4px;">Valid 14:00 Check-in to 11:00 Check-out</div>
+                  </div>
+                  <div style="font-size:10px; color:var(--text-secondary); margin-top:8px; background:rgba(255,255,255,0.03); padding:6px 10px; border-radius:8px;">
+                    💡 Touch keypad to wake, enter <strong>8492#</strong>, and turn lock.
                   </div>
                 </div>
 
                 <!-- Tab 3: Room Service & Upsell -->
                 <div id="p-tab-upsell" style="display:none;">
-                  <div style="font-size:11px; text-transform:uppercase; color:var(--text-muted); font-weight:700; margin-bottom:6px;">Host Upsell & Services</div>
-                  <div style="display:flex; flex-direction:column; gap:8px;">
-                    <div style="background:rgba(255,255,255,0.04); padding:8px 10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;">
+                  <div style="font-size:10px; text-transform:uppercase; color:var(--text-muted); font-weight:700; margin-bottom:6px;">In-Room Concierge & Extras</div>
+                  <div style="display:flex; flex-direction:column; gap:6px;">
+                    <div style="background:rgba(255,255,255,0.04); padding:6px 8px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;">
                       <div>
-                        <div style="font-size:12px; font-weight:700;">🍷 Welcome Organic Wine</div>
-                        <div style="font-size:10px; color:var(--text-muted);">$25.00</div>
+                        <div style="font-size:11px; font-weight:700;">🍷 Welcome Organic Wine Basket</div>
+                        <div style="font-size:10px; color:var(--accent-emerald); font-weight:700;">$25.00</div>
                       </div>
-                      <button onclick="showToast('🍷 Wine added to order!')" style="background:var(--accent-emerald); color:#fff; border:none; padding:4px 8px; border-radius:6px; font-size:10px; font-weight:700; cursor:pointer;">Order</button>
+                      <button onclick="showToast('🍷 Wine requested! Host notified.')" style="background:var(--accent-emerald); color:#fff; border:none; padding:4px 8px; border-radius:6px; font-size:10px; font-weight:700; cursor:pointer;">Order</button>
                     </div>
-                    <div style="background:rgba(255,255,255,0.04); padding:8px 10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;">
+                    <div style="background:rgba(255,255,255,0.04); padding:6px 8px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;">
                       <div>
-                        <div style="font-size:12px; font-weight:700;">🚗 Late Check-out (2h)</div>
-                        <div style="font-size:10px; color:var(--text-muted);">$30.00</div>
+                        <div style="font-size:11px; font-weight:700;">🚗 Late Check-out (2h Extra)</div>
+                        <div style="font-size:10px; color:var(--accent-emerald); font-weight:700;">$30.00</div>
                       </div>
                       <button onclick="showToast('🚗 Late Check-out requested!')" style="background:var(--accent-emerald); color:#fff; border:none; padding:4px 8px; border-radius:6px; font-size:10px; font-weight:700; cursor:pointer;">Order</button>
                     </div>
                   </div>
                 </div>
 
-                <!-- Tab 4: Rules -->
+                <!-- Tab 4: Rules & A/C -->
                 <div id="p-tab-rules" style="display:none;">
-                  <div style="font-size:11px; text-transform:uppercase; color:var(--text-muted); font-weight:700; margin-bottom:6px;">House Rules & Checkout</div>
-                  <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">
+                  <div style="font-size:10px; text-transform:uppercase; color:var(--text-muted); font-weight:700; margin-bottom:4px;">House Rules & Appliances</div>
+                  <div style="font-size:10px; color:var(--text-secondary); line-height:1.5;">
                     • <strong>Quiet Hours:</strong> 23:00 PM - 08:00 AM<br>
-                    • <strong>Smoking:</strong> Strictly Outdoors Only<br>
-                    • <strong>Check-out Time:</strong> 11:00 AM sharp<br>
-                    • <strong>Trash:</strong> Please leave tied bags in bin
+                    • <strong>A/C Setting:</strong> Set remote to 22°C (72°F) Cool mode.<br>
+                    • <strong>Garbage:</strong> Dumpster 30m left of main gate (20:00 pickup).<br>
+                    • <strong>Check-out:</strong> 11:00 AM sharp.
                   </div>
                 </div>
 
                 <!-- Tab 5: Local Spots -->
                 <div id="p-tab-spots" style="display:none;">
-                  <div style="font-size:11px; text-transform:uppercase; color:var(--text-muted); font-weight:700; margin-bottom:6px;">Host Recommendations</div>
-                  <div style="font-size:11px; color:var(--text-secondary); line-height:1.5;">
-                    🍽️ <strong>Bodrum Marina Restaurant</strong><br>
-                    <span style="color:var(--text-muted); font-size:10px;">Fresh seafood & ocean view • 5 min walk</span><br><br>
-                    ☕ <strong>Coffee & Co Artisan Bakery</strong><br>
-                    <span style="color:var(--text-muted); font-size:10px;">Best espresso & fresh croissants</span>
+                  <div style="font-size:10px; text-transform:uppercase; color:var(--text-muted); font-weight:700; margin-bottom:4px;">Host Curated Recommendations</div>
+                  <div style="font-size:10px; color:var(--text-secondary); line-height:1.4;">
+                    🍽️ <strong>Bodrum Marina Seafood</strong> (5 min walk)<br>
+                    <span style="color:var(--text-muted); font-size:9px;">Fresh Mediterranean catch with sunset views</span><br><br>
+                    ☕ <strong>Coffee & Co Artisan Bakery</strong> (3 min walk)<br>
+                    <span style="color:var(--text-muted); font-size:9px;">Best espresso & fresh sourdough pastries</span>
                   </div>
                 </div>
 
@@ -564,12 +592,12 @@
               <img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=https://www.hostifyos.com/g.html" alt="Scannable HostifyOS Guest Web Page QR Code" style="width:210px; height:210px; display:block; border-radius:10px;">
             </div>
             <h3 style="margin-top:20px; font-size:20px; font-weight:800;">Scan Code with Camera</h3>
-            <p style="color:var(--text-muted); font-size:14px; max-width:340px; margin:8px auto 0 auto; line-height:1.6;">Point your smartphone camera at this QR code to test the live HostifyOS Guest App directly on your mobile screen!</p>
+            <p style="color:var(--text-muted); font-size:14px; max-width:340px; margin:8px auto 0 auto; line-height:1.6;">Point your smartphone camera at this QR code to test the live HostifyOS Guest Guide directly on your mobile screen!</p>
             <div style="margin-top:16px;">
-              <button class="btn-hero-secondary" onclick="switchView('guest')" style="padding:10px 18px; font-size:13px;">
+              <a href="/g.html" target="_blank" class="btn-hero-secondary" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 20px; font-size:14px; border-radius:12px;">
                 <i data-lucide="external-link"></i>
                 <span>Open Live Demo in Browser</span>
-              </button>
+              </a>
             </div>
           </div>
         </div>

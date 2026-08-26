@@ -6,15 +6,19 @@
   <title>Welcome to Villa Sunset Bodrum — Guest Digital Guidebook</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     :root {
-      --bg: #0B0F17;
+      --bg: #090D14;
       --card-bg: #111827;
       --text: #F8FAFC;
       --text-muted: #94A3B8;
+      --text-secondary: #CBD5E1;
       --accent: #10B981;
+      --accent-hover: #059669;
       --border: rgba(255, 255, 255, 0.08);
       --gradient: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      --whatsapp: #25D366;
     }
     body {
       margin: 0;
@@ -23,11 +27,12 @@
       color: var(--text);
       font-family: 'Plus Jakarta Sans', sans-serif;
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
     .hero-banner {
       position: relative;
-      height: 220px;
-      background: linear-gradient(rgba(11, 15, 23, 0.4), rgba(11, 15, 23, 0.95)), url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      height: 240px;
+      background: linear-gradient(rgba(9, 13, 20, 0.35), rgba(9, 13, 20, 0.95)), url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
       display: flex;
       align-items: flex-end;
       padding: 24px;
@@ -37,9 +42,12 @@
       font-weight: 800;
       margin: 0;
       letter-spacing: -0.5px;
+      color: #fff;
     }
     .hero-badge {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       background: rgba(16, 185, 129, 0.2);
       color: var(--accent);
       padding: 4px 12px;
@@ -52,17 +60,18 @@
     .container {
       max-width: 680px;
       margin: 0 auto;
-      padding: 24px;
+      padding: 20px 16px 80px 16px;
     }
     .section-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 24px;
-      margin-bottom: 20px;
+      padding: 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
     }
     .card-title {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 700;
       margin-top: 0;
       margin-bottom: 16px;
@@ -74,7 +83,7 @@
     .wifi-box {
       background: rgba(16, 185, 129, 0.08);
       border: 1px solid rgba(16, 185, 129, 0.25);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 20px;
       text-align: center;
     }
@@ -93,41 +102,90 @@
       background: var(--gradient);
       color: #fff;
       border: none;
-      padding: 14px 24px;
+      padding: 14px 20px;
       border-radius: 12px;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
       cursor: pointer;
       width: 100%;
-      transition: opacity 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: all 0.2s ease;
     }
     .btn-action:hover {
-      opacity: 0.9;
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+    .btn-whatsapp {
+      background: #25D366;
+      color: #062812;
+      font-weight: 800;
+    }
+    .btn-whatsapp:hover {
+      background: #20BA5A;
+      color: #062812;
     }
     .pin-box {
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
+      border-radius: 14px;
+      padding: 18px;
       text-align: center;
     }
     .pin-code {
-      font-size: 28px;
+      font-size: 32px;
       font-weight: 800;
       letter-spacing: 6px;
       color: var(--accent);
+    }
+    .quick-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .quick-btn-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      text-decoration: none;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .quick-btn-card:hover {
+      border-color: var(--accent);
+      background: rgba(16, 185, 129, 0.06);
+    }
+    .quick-btn-card span.label {
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .quick-btn-card span.sub {
+      font-size: 11px;
+      color: var(--text-muted);
     }
     .rule-item {
       display: flex;
       align-items: flex-start;
       gap: 12px;
-      padding: 10px 0;
+      padding: 12px 0;
       border-bottom: 1px solid var(--border);
-      color: var(--text-muted);
+      color: var(--text-secondary);
       font-size: 14px;
     }
     .rule-item:last-child {
       border-bottom: none;
+      padding-bottom: 0;
     }
     .toast {
       position: fixed;
@@ -135,13 +193,14 @@
       left: 50%;
       transform: translateX(-50%);
       background: var(--accent);
-      color: #fff;
+      color: #090D14;
       padding: 12px 24px;
       border-radius: 99px;
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 800;
       display: none;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      z-index: 1000;
     }
     footer {
       text-align: center;
@@ -158,87 +217,202 @@
   <!-- Property Cover Hero Banner -->
   <div class="hero-banner">
     <div>
-      <span class="hero-badge">Verified Guest Portal</span>
+      <span class="hero-badge">
+        <span style="width:6px; height:6px; background:#10B981; border-radius:50%; display:inline-block;"></span>
+        Verified Guest Digital Guide
+      </span>
       <h1 class="hero-title" id="g-prop-title">Villa Sunset Bodrum</h1>
+      <div style="font-size:13px; color:var(--text-muted); margin-top:4px;">Yalıkavak Marina, Bodrum • Private Luxury Villa</div>
     </div>
   </div>
 
   <div class="container">
     
+    <!-- 0. 1-Tap Quick Action Buttons Grid -->
+    <div class="quick-grid">
+      <a href="https://wa.me/905550000000?text=Hello!%20I%20am%20a%20guest%20at%20Villa%20Sunset%20Bodrum." target="_blank" class="quick-btn-card" style="border-color:rgba(37,211,102,0.3);">
+        <div style="width:36px; height:36px; border-radius:10px; background:rgba(37,211,102,0.15); display:flex; align-items:center; justify-content:center; color:#25D366;">
+          <i data-lucide="message-circle"></i>
+        </div>
+        <span class="label">WhatsApp Host</span>
+        <span class="sub">Instant Response</span>
+      </a>
+
+      <a href="https://maps.google.com/?q=Yalikavak+Bodrum" target="_blank" class="quick-btn-card">
+        <div style="width:36px; height:36px; border-radius:10px; background:rgba(59,130,246,0.15); display:flex; align-items:center; justify-content:center; color:#3B82F6;">
+          <i data-lucide="map-pin"></i>
+        </div>
+        <span class="label">Google Maps</span>
+        <span class="sub">Doorstep Directions</span>
+      </a>
+
+      <a href="tel:02523854000" class="quick-btn-card">
+        <div style="width:36px; height:36px; border-radius:10px; background:rgba(234,179,8,0.15); display:flex; align-items:center; justify-content:center; color:#EAB308;">
+          <i data-lucide="car"></i>
+        </div>
+        <span class="label">Call Marina Taxi</span>
+        <span class="sub">5-Min Pickup</span>
+      </a>
+
+      <a href="tel:112" class="quick-btn-card" style="border-color:rgba(239,68,68,0.25);">
+        <div style="width:36px; height:36px; border-radius:10px; background:rgba(239,68,68,0.15); display:flex; align-items:center; justify-content:center; color:#EF4444;">
+          <i data-lucide="phone-call"></i>
+        </div>
+        <span class="label">Emergency (112)</span>
+        <span class="sub">Police & Medical</span>
+      </a>
+    </div>
+
     <!-- 1. Wi-Fi Access Section -->
     <div class="section-card">
-      <h2 class="card-title">📶 1-Tap Guest Wi-Fi Access</h2>
+      <h2 class="card-title">
+        <i data-lucide="wifi" style="color:var(--accent);"></i>
+        <span>1-Tap Guest Wi-Fi Access</span>
+      </h2>
       <div class="wifi-box">
         <div class="wifi-name" id="g-wifi-ssid">Villa_Sunset_5G</div>
         <div class="wifi-pass">Password: <strong style="color:#fff;" id="g-wifi-pass">SunsetBodrum2026</strong></div>
-        <button class="btn-action" onclick="copyWifiPass()">Copy Wi-Fi Password</button>
+        <button class="btn-action" onclick="copyWifiPass()">
+          <i data-lucide="copy"></i>
+          <span>Copy Wi-Fi Password</span>
+        </button>
+        <div style="font-size:11px; color:var(--text-muted); margin-top:10px;">High-speed fiber (250 Mbps) • Free for all devices</div>
       </div>
     </div>
 
     <!-- 2. Smart Lock PIN Code -->
     <div class="section-card">
-      <h2 class="card-title">🔑 Smart Lock Door Access PIN</h2>
+      <h2 class="card-title">
+        <i data-lucide="key" style="color:var(--accent);"></i>
+        <span>Smart Lock Door Access PIN</span>
+      </h2>
       <div class="pin-box">
         <div class="pin-code">8 4 9 2 #</div>
-        <div style="font-size:12px; color:var(--text-muted); margin-top:6px;">Time-Gated Access (Valid 14:00 - 11:00)</div>
+        <div style="font-size:12px; color:var(--text-muted); margin-top:6px;">Time-Gated Access (Valid Check-in 14:00 to Check-out 11:00)</div>
+        <div style="font-size:12px; color:var(--text-secondary); margin-top:10px; background:rgba(255,255,255,0.03); padding:8px 12px; border-radius:8px;">
+          💡 <strong>How to Unlock:</strong> Touch keypad to illuminate, type <strong>8492#</strong>, and turn lock clockwise.
+        </div>
       </div>
     </div>
 
-    <!-- 3. House Rules & Checkout -->
+    <!-- 3. Climate, Hot Water & Appliances Guide -->
     <div class="section-card">
-      <h2 class="card-title">📋 House Rules & Instructions</h2>
+      <h2 class="card-title">
+        <i data-lucide="settings" style="color:var(--accent);"></i>
+        <span>A/C & Appliance Instructions</span>
+      </h2>
       <div class="rule-item">
-        <span>🔇</span>
+        <i data-lucide="wind" style="color:var(--accent); flex-shrink:0;"></i>
+        <div>
+          <strong>Air Conditioning (A/C):</strong><br>
+          <span style="font-size:13px; color:var(--text-muted);">Please keep remote on "COOL" mode at 22°C (72°F). Please turn off units when leaving the villa.</span>
+        </div>
+      </div>
+      <div class="rule-item">
+        <i data-lucide="flame" style="color:#F59E0B; flex-shrink:0;"></i>
+        <div>
+          <strong>Hot Water (Continuous Solar & Electric):</strong><br>
+          <span style="font-size:13px; color:var(--text-muted);">Hot water is always active. If needed, the booster switch is on the master bathroom wall.</span>
+        </div>
+      </div>
+      <div class="rule-item">
+        <i data-lucide="tv" style="color:#3B82F6; flex-shrink:0;"></i>
+        <div>
+          <strong>Smart TV & Streaming:</strong><br>
+          <span style="font-size:13px; color:var(--text-muted);">Netflix, YouTube, and Apple TV are pre-logged in for guest entertainment.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Garbage, Recycling & House Rules -->
+    <div class="section-card">
+      <h2 class="card-title">
+        <i data-lucide="shield-check" style="color:var(--accent);"></i>
+        <span>House Rules & Waste Disposal</span>
+      </h2>
+      <div class="rule-item">
+        <i data-lucide="volume-x" style="color:#EF4444; flex-shrink:0;"></i>
         <div><strong>Quiet Hours:</strong> Please keep noise levels low between 23:00 PM and 08:00 AM.</div>
       </div>
       <div class="rule-item">
-        <span>🚭</span>
-        <div><strong>Smoking Policy:</strong> Strictly outdoors only. Please use patio ashtrays.</div>
+        <i data-lucide="trash-2" style="color:var(--accent); flex-shrink:0;"></i>
+        <div><strong>Garbage & Recycling:</strong> Green dumpster located 30 meters left of the main villa gate. Municipal pickup occurs daily at 20:00.</div>
       </div>
       <div class="rule-item">
-        <span>🕒</span>
-        <div><strong>Check-out Time:</strong> 11:00 AM sharp. Please leave keys on kitchen table.</div>
+        <i data-lucide="clock" style="color:#3B82F6; flex-shrink:0;"></i>
+        <div><strong>Check-out Time:</strong> 11:00 AM sharp. Please leave keys on the kitchen counter and lock the front door.</div>
       </div>
     </div>
 
-    <!-- 4. Host Recommendations -->
+    <!-- 5. Host Neighborhood Guide -->
     <div class="section-card">
-      <h2 class="card-title">📍 Host Neighborhood Guide</h2>
+      <h2 class="card-title">
+        <i data-lucide="compass" style="color:var(--accent);"></i>
+        <span>Host Curated Local Recommendations</span>
+      </h2>
       <div class="rule-item">
-        <span>🍽️</span>
+        <i data-lucide="utensils" style="color:#F59E0B; flex-shrink:0;"></i>
         <div>
-          <strong>Bodrum Marina Restaurant</strong> (5 min walk)<br>
-          <span style="font-size:12px;">Fresh Mediterranean seafood with ocean sunset views.</span>
+          <strong>Bodrum Marina Seafood Restaurant</strong> (5 min walk)<br>
+          <span style="font-size:13px; color:var(--text-muted);">Fresh Mediterranean catch with breathtaking sunset views over the yachts.</span>
         </div>
       </div>
       <div class="rule-item">
-        <span>☕</span>
+        <i data-lucide="coffee" style="color:#10B981; flex-shrink:0;"></i>
         <div>
           <strong>Coffee & Co Artisan Bakery</strong> (3 min walk)<br>
-          <span style="font-size:12px;">Best specialty espresso and fresh croissants.</span>
+          <span style="font-size:13px; color:var(--text-muted);">Specialty espresso, sourdough pastries, and fresh organic breakfast bowls.</span>
+        </div>
+      </div>
+      <div class="rule-item">
+        <i data-lucide="shopping-bag" style="color:#8B5CF6; flex-shrink:0;"></i>
+        <div>
+          <strong>Macrocenter Gourmet Supermarket</strong> (4 min drive)<br>
+          <span style="font-size:13px; color:var(--text-muted);">Premium groceries, imported wines, cheeses, and fresh butcher selection.</span>
         </div>
       </div>
     </div>
 
-    <!-- 5. Room Service & Extras -->
+    <!-- 6. Room Service & In-Room Extras -->
     <div class="section-card">
-      <h2 class="card-title">🍷 Room Service & Host Extras</h2>
+      <h2 class="card-title">
+        <i data-lucide="sparkles" style="color:var(--accent);"></i>
+        <span>In-Room Concierge & Extra Services</span>
+      </h2>
       <div style="display:flex; flex-direction:column; gap:12px;">
-        <div style="background:rgba(255,255,255,0.04); padding:14px; border-radius:12px; display:flex; justify-content:space-between; align-items:center;">
+        <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border); padding:14px; border-radius:12px; display:flex; justify-content:space-between; align-items:center;">
           <div>
-            <strong style="font-size:15px; color:#fff;">Organic Welcome Wine Selection</strong>
-            <div style="font-size:13px; color:var(--accent); font-weight:700;">$25.00</div>
+            <strong style="font-size:14px; color:#fff;">🍷 Welcome Organic Wine & Fruit Basket</strong>
+            <div style="font-size:13px; color:var(--accent); font-weight:700; margin-top:2px;">$25.00</div>
           </div>
-          <button class="btn-action" onclick="orderExtra('Organic Wine')" style="width:auto; padding:8px 16px; font-size:13px;">Order</button>
+          <button class="btn-action" onclick="orderExtra('Organic Wine Basket')" style="width:auto; padding:8px 16px; font-size:12px;">Order</button>
         </div>
-        <div style="background:rgba(255,255,255,0.04); padding:14px; border-radius:12px; display:flex; justify-content:space-between; align-items:center;">
+        <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border); padding:14px; border-radius:12px; display:flex; justify-content:space-between; align-items:center;">
           <div>
-            <strong style="font-size:15px; color:#fff;">Late Check-out (2 Hours Extra)</strong>
-            <div style="font-size:13px; color:var(--accent); font-weight:700;">$30.00</div>
+            <strong style="font-size:14px; color:#fff;">🚗 Late Check-out (2 Hours Extra until 13:00)</strong>
+            <div style="font-size:13px; color:var(--accent); font-weight:700; margin-top:2px;">$30.00</div>
           </div>
-          <button class="btn-action" onclick="orderExtra('Late Check-out')" style="width:auto; padding:8px 16px; font-size:13px;">Order</button>
+          <button class="btn-action" onclick="orderExtra('Late Check-out')" style="width:auto; padding:8px 16px; font-size:12px;">Order</button>
+        </div>
+        <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border); padding:14px; border-radius:12px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <strong style="font-size:14px; color:#fff;">✈️ VIP Airport Transfer (Milas-Bodrum BJV)</strong>
+            <div style="font-size:13px; color:var(--accent); font-weight:700; margin-top:2px;">$65.00</div>
+          </div>
+          <button class="btn-action" onclick="orderExtra('VIP Airport Transfer')" style="width:auto; padding:8px 16px; font-size:12px;">Order</button>
         </div>
       </div>
+    </div>
+
+    <!-- 7. 5-Star Review & Feedback Collector -->
+    <div class="section-card" style="border-color:rgba(16,185,129,0.3); background:linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(17,24,39,0.95) 100%); text-align:center;">
+      <div style="font-size:24px; margin-bottom:8px;">⭐⭐⭐⭐⭐</div>
+      <h3 style="margin:0 0 8px 0; font-size:18px; color:#fff;">Enjoying Your Stay at Villa Sunset?</h3>
+      <p style="font-size:13px; color:var(--text-muted); margin:0 0 16px 0;">Your 5-star review means the world to our family host team.</p>
+      <button class="btn-action" onclick="showToast('⭐ Thank you! Opening review link...')" style="background:#fff; color:#090D14; font-weight:800;">
+        <i data-lucide="star"></i>
+        <span>Leave a 5-Star Review</span>
+      </button>
     </div>
 
   </div>
@@ -246,7 +420,7 @@
   <div id="toast" class="toast"></div>
 
   <footer>
-    Powered by <strong>HostifyOS.com</strong> — The Modern Hosting OS
+    Powered by <strong>HostifyOS.com</strong> — Luxury Guest Hospitality OS
   </footer>
 
   <script>
@@ -258,15 +432,19 @@
     }
 
     function orderExtra(item) {
-      showToast('🍷 ' + item + ' requested! Host notified.');
+      showToast('✨ ' + item + ' requested! Host notified via WhatsApp/SMS.');
     }
 
     function showToast(msg) {
       const t = document.getElementById('toast');
       t.textContent = msg;
       t.style.display = 'block';
-      setTimeout(() => { t.style.display = 'none'; }, 3000);
+      setTimeout(() => { t.style.display = 'none'; }, 3500);
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) lucide.createIcons();
+    });
   </script>
 </body>
 </html>
