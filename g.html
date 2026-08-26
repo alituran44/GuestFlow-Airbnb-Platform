@@ -29,16 +29,68 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
+
+    /* Sticky Language & Host Bar */
+    .top-guest-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 13, 20, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .lang-pill-selector {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      padding: 3px 6px;
+      border-radius: 999px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .lang-pill-selector::-webkit-scrollbar {
+      display: none;
+    }
+
+    .g-lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .g-lang-btn.active {
+      background: var(--accent);
+      color: #090D14;
+    }
+
     .hero-banner {
       position: relative;
-      height: 240px;
+      height: 230px;
       background: linear-gradient(rgba(9, 13, 20, 0.35), rgba(9, 13, 20, 0.95)), url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
       display: flex;
       align-items: flex-end;
-      padding: 24px;
+      padding: 24px 20px;
     }
     .hero-title {
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 800;
       margin: 0;
       letter-spacing: -0.5px;
@@ -52,22 +104,22 @@
       color: var(--accent);
       padding: 4px 12px;
       border-radius: 99px;
-      font-size: 12px;
-      font-weight: 700;
-      margin-bottom: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 6px;
       border: 1px solid rgba(16, 185, 129, 0.3);
     }
     .container {
       max-width: 680px;
       margin: 0 auto;
-      padding: 20px 16px 80px 16px;
+      padding: 16px 16px 80px 16px;
     }
     .section-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 22px;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
     }
     .card-title {
@@ -84,7 +136,7 @@
       background: rgba(16, 185, 129, 0.08);
       border: 1px solid rgba(16, 185, 129, 0.25);
       border-radius: 14px;
-      padding: 20px;
+      padding: 18px;
       text-align: center;
     }
     .wifi-name {
@@ -96,13 +148,13 @@
     .wifi-pass {
       font-size: 15px;
       color: var(--text-muted);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     .btn-action {
       background: var(--gradient);
       color: #fff;
       border: none;
-      padding: 14px 20px;
+      padding: 13px 20px;
       border-radius: 12px;
       font-size: 14px;
       font-weight: 700;
@@ -114,25 +166,17 @@
       gap: 8px;
       text-decoration: none;
       transition: all 0.2s ease;
+      box-sizing: border-box;
     }
     .btn-action:hover {
       opacity: 0.92;
       transform: translateY(-1px);
     }
-    .btn-whatsapp {
-      background: #25D366;
-      color: #062812;
-      font-weight: 800;
-    }
-    .btn-whatsapp:hover {
-      background: #20BA5A;
-      color: #062812;
-    }
     .pin-box {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 18px;
+      padding: 16px;
       text-align: center;
     }
     .pin-code {
@@ -143,22 +187,22 @@
     }
     .quick-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 18px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
     }
     .quick-btn-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 16px;
+      border-radius: 12px;
+      padding: 12px 6px;
       text-decoration: none;
       color: #fff;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      gap: 8px;
+      gap: 4px;
       cursor: pointer;
       transition: all 0.2s ease;
     }
@@ -167,12 +211,9 @@
       background: rgba(16, 185, 129, 0.06);
     }
     .quick-btn-card span.label {
-      font-size: 13px;
-      font-weight: 700;
-    }
-    .quick-btn-card span.sub {
       font-size: 11px;
-      color: var(--text-muted);
+      font-weight: 700;
+      white-space: nowrap;
     }
     .rule-item {
       display: flex;
@@ -201,6 +242,7 @@
       display: none;
       box-shadow: 0 10px 30px rgba(0,0,0,0.6);
       z-index: 1000;
+      white-space: nowrap;
     }
     footer {
       text-align: center;
@@ -214,15 +256,31 @@
 </head>
 <body>
 
+  <!-- Top Sticky Bar with Multi-Language Switcher -->
+  <div class="top-guest-bar">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <span style="font-size:11px; font-weight:700; color:var(--text-muted);" id="txt-select-lang">Language / Dil:</span>
+    </div>
+    <div class="lang-pill-selector">
+      <button class="g-lang-btn active" onclick="setGuestLanguage('EN', this)">🇬🇧 EN</button>
+      <button class="g-lang-btn" onclick="setGuestLanguage('TR', this)">🇹🇷 TR</button>
+      <button class="g-lang-btn" onclick="setGuestLanguage('DE', this)">🇩🇪 DE</button>
+      <button class="g-lang-btn" onclick="setGuestLanguage('RU', this)">🇷🇺 RU</button>
+      <button class="g-lang-btn" onclick="setGuestLanguage('FR', this)">🇫🇷 FR</button>
+      <button class="g-lang-btn" onclick="setGuestLanguage('ES', this)">🇪🇸 ES</button>
+      <button class="g-lang-btn" onclick="setGuestLanguage('AR', this)">🇸🇦 AR</button>
+    </div>
+  </div>
+
   <!-- Property Cover Hero Banner -->
   <div class="hero-banner">
     <div>
       <span class="hero-badge">
         <span style="width:6px; height:6px; background:#10B981; border-radius:50%; display:inline-block;"></span>
-        Verified Guest Digital Guide
+        <span id="txt-badge">Verified Guest Digital Guide</span>
       </span>
       <h1 class="hero-title" id="g-prop-title">Villa Sunset Bodrum</h1>
-      <div style="font-size:13px; color:var(--text-muted); margin-top:4px;">Yalıkavak Marina, Bodrum • Private Luxury Villa</div>
+      <div style="font-size:13px; color:var(--text-muted); margin-top:4px;" id="txt-location">Yalıkavak Marina, Bodrum • Private Luxury Villa</div>
     </div>
   </div>
 
@@ -231,35 +289,31 @@
     <!-- 0. 1-Tap Quick Action Buttons Grid -->
     <div class="quick-grid">
       <a href="https://wa.me/905550000000?text=Hello!%20I%20am%20a%20guest%20at%20Villa%20Sunset%20Bodrum." target="_blank" class="quick-btn-card" style="border-color:rgba(37,211,102,0.3);">
-        <div style="width:36px; height:36px; border-radius:10px; background:rgba(37,211,102,0.15); display:flex; align-items:center; justify-content:center; color:#25D366;">
-          <i data-lucide="message-circle"></i>
+        <div style="width:30px; height:30px; border-radius:8px; background:rgba(37,211,102,0.15); display:flex; align-items:center; justify-content:center; color:#25D366;">
+          <i data-lucide="message-circle" style="width:16px; height:16px;"></i>
         </div>
-        <span class="label">WhatsApp Host</span>
-        <span class="sub">Instant Response</span>
+        <span class="label" id="btn-txt-whatsapp">WhatsApp</span>
       </a>
 
       <a href="https://maps.google.com/?q=Yalikavak+Bodrum" target="_blank" class="quick-btn-card">
-        <div style="width:36px; height:36px; border-radius:10px; background:rgba(59,130,246,0.15); display:flex; align-items:center; justify-content:center; color:#3B82F6;">
-          <i data-lucide="map-pin"></i>
+        <div style="width:30px; height:30px; border-radius:8px; background:rgba(59,130,246,0.15); display:flex; align-items:center; justify-content:center; color:#3B82F6;">
+          <i data-lucide="map-pin" style="width:16px; height:16px;"></i>
         </div>
-        <span class="label">Google Maps</span>
-        <span class="sub">Doorstep Directions</span>
+        <span class="label" id="btn-txt-maps">Maps</span>
       </a>
 
       <a href="tel:02523854000" class="quick-btn-card">
-        <div style="width:36px; height:36px; border-radius:10px; background:rgba(234,179,8,0.15); display:flex; align-items:center; justify-content:center; color:#EAB308;">
-          <i data-lucide="car"></i>
+        <div style="width:30px; height:30px; border-radius:8px; background:rgba(234,179,8,0.15); display:flex; align-items:center; justify-content:center; color:#EAB308;">
+          <i data-lucide="car" style="width:16px; height:16px;"></i>
         </div>
-        <span class="label">Call Marina Taxi</span>
-        <span class="sub">5-Min Pickup</span>
+        <span class="label" id="btn-txt-taxi">Call Taxi</span>
       </a>
 
       <a href="tel:112" class="quick-btn-card" style="border-color:rgba(239,68,68,0.25);">
-        <div style="width:36px; height:36px; border-radius:10px; background:rgba(239,68,68,0.15); display:flex; align-items:center; justify-content:center; color:#EF4444;">
-          <i data-lucide="phone-call"></i>
+        <div style="width:30px; height:30px; border-radius:8px; background:rgba(239,68,68,0.15); display:flex; align-items:center; justify-content:center; color:#EF4444;">
+          <i data-lucide="phone-call" style="width:16px; height:16px;"></i>
         </div>
-        <span class="label">Emergency (112)</span>
-        <span class="sub">Police & Medical</span>
+        <span class="label" id="btn-txt-emergency">112 Help</span>
       </a>
     </div>
 
@@ -267,16 +321,16 @@
     <div class="section-card">
       <h2 class="card-title">
         <i data-lucide="wifi" style="color:var(--accent);"></i>
-        <span>1-Tap Guest Wi-Fi Access</span>
+        <span id="title-wifi">1-Tap Guest Wi-Fi Access</span>
       </h2>
       <div class="wifi-box">
         <div class="wifi-name" id="g-wifi-ssid">Villa_Sunset_5G</div>
-        <div class="wifi-pass">Password: <strong style="color:#fff;" id="g-wifi-pass">SunsetBodrum2026</strong></div>
+        <div class="wifi-pass"><span id="lbl-password">Password:</span> <strong style="color:#fff;" id="g-wifi-pass">SunsetBodrum2026</strong></div>
         <button class="btn-action" onclick="copyWifiPass()">
           <i data-lucide="copy"></i>
-          <span>Copy Wi-Fi Password</span>
+          <span id="btn-copy-wifi">Copy Wi-Fi Password</span>
         </button>
-        <div style="font-size:11px; color:var(--text-muted); margin-top:10px;">High-speed fiber (250 Mbps) • Free for all devices</div>
+        <div style="font-size:11px; color:var(--text-muted); margin-top:10px;" id="txt-wifi-sub">High-speed fiber (250 Mbps) • Free unlimited devices</div>
       </div>
     </div>
 
@@ -284,132 +338,168 @@
     <div class="section-card">
       <h2 class="card-title">
         <i data-lucide="key" style="color:var(--accent);"></i>
-        <span>Smart Lock Door Access PIN</span>
+        <span id="title-lock">Smart Lock Door Access PIN</span>
       </h2>
       <div class="pin-box">
         <div class="pin-code">8 4 9 2 #</div>
-        <div style="font-size:12px; color:var(--text-muted); margin-top:6px;">Time-Gated Access (Valid Check-in 14:00 to Check-out 11:00)</div>
-        <div style="font-size:12px; color:var(--text-secondary); margin-top:10px; background:rgba(255,255,255,0.03); padding:8px 12px; border-radius:8px;">
+        <div style="font-size:12px; color:var(--text-muted); margin-top:6px;" id="txt-lock-valid">Time-Gated Access (Valid Check-in 14:00 to Check-out 11:00)</div>
+        <div style="font-size:12px; color:var(--text-secondary); margin-top:10px; background:rgba(255,255,255,0.03); padding:8px 12px; border-radius:8px;" id="txt-lock-hint">
           💡 <strong>How to Unlock:</strong> Touch keypad to illuminate, type <strong>8492#</strong>, and turn lock clockwise.
         </div>
       </div>
     </div>
 
-    <!-- 3. Climate, Hot Water & Appliances Guide -->
+    <!-- 3. Parking & EV Charging Guide (NEW) -->
+    <div class="section-card">
+      <h2 class="card-title">
+        <i data-lucide="car" style="color:var(--accent);"></i>
+        <span id="title-parking">Car Parking & EV Charging Guide</span>
+      </h2>
+      <div class="rule-item">
+        <i data-lucide="check-circle-2" style="color:var(--accent); flex-shrink:0;"></i>
+        <div>
+          <strong id="lbl-parking-private">Private Villa Driveway:</strong><br>
+          <span style="font-size:13px; color:var(--text-muted);" id="txt-parking-private">Dedicated private parking inside the villa gate for up to 2 SUVs/sedans.</span>
+        </div>
+      </div>
+      <div class="rule-item">
+        <i data-lucide="key-round" style="color:#3B82F6; flex-shrink:0;"></i>
+        <div>
+          <strong id="lbl-parking-gate">Automatic Gate Access:</strong><br>
+          <span style="font-size:13px; color:var(--text-muted);" id="txt-parking-gate">Gate PIN: <strong>#1905</strong> or use the small remote fob attached to the villa keychain.</span>
+        </div>
+      </div>
+      <div class="rule-item">
+        <i data-lucide="zap" style="color:#F59E0B; flex-shrink:0;"></i>
+        <div>
+          <strong id="lbl-parking-ev">22kW Type-2 EV Fast Charger:</strong><br>
+          <span style="font-size:13px; color:var(--text-muted);" id="txt-parking-ev">Wallbox in garage (Tesla, Porsche, Mercedes, BYD, Togg compatible). Contact host on WhatsApp to activate charging session.</span>
+        </div>
+      </div>
+      <div class="rule-item">
+        <i data-lucide="alert-circle" style="color:#94A3B8; flex-shrink:0;"></i>
+        <div>
+          <strong id="lbl-parking-street">Street Parking Rules:</strong><br>
+          <span style="font-size:13px; color:var(--text-muted);" id="txt-parking-street">Free street parking outside the gate. Please do not park directly in front of neighbor driveway gates.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Climate, Hot Water & Appliances Guide -->
     <div class="section-card">
       <h2 class="card-title">
         <i data-lucide="settings" style="color:var(--accent);"></i>
-        <span>A/C & Appliance Instructions</span>
+        <span id="title-appliances">A/C & Appliance Instructions</span>
       </h2>
       <div class="rule-item">
         <i data-lucide="wind" style="color:var(--accent); flex-shrink:0;"></i>
         <div>
-          <strong>Air Conditioning (A/C):</strong><br>
-          <span style="font-size:13px; color:var(--text-muted);">Please keep remote on "COOL" mode at 22°C (72°F). Please turn off units when leaving the villa.</span>
+          <strong id="lbl-ac">Air Conditioning (A/C):</strong><br>
+          <span style="font-size:13px; color:var(--text-muted);" id="txt-ac">Keep remote in "COOL" mode at 22°C (72°F). Please turn off units when leaving the villa.</span>
         </div>
       </div>
       <div class="rule-item">
         <i data-lucide="flame" style="color:#F59E0B; flex-shrink:0;"></i>
         <div>
-          <strong>Hot Water (Continuous Solar & Electric):</strong><br>
-          <span style="font-size:13px; color:var(--text-muted);">Hot water is always active. If needed, the booster switch is on the master bathroom wall.</span>
+          <strong id="lbl-hotwater">Hot Water (Continuous):</strong><br>
+          <span style="font-size:13px; color:var(--text-muted);" id="txt-hotwater">Solar & electric hot water is active 24/7. Booster switch is located on the master bathroom wall.</span>
         </div>
       </div>
       <div class="rule-item">
         <i data-lucide="tv" style="color:#3B82F6; flex-shrink:0;"></i>
         <div>
-          <strong>Smart TV & Streaming:</strong><br>
-          <span style="font-size:13px; color:var(--text-muted);">Netflix, YouTube, and Apple TV are pre-logged in for guest entertainment.</span>
+          <strong id="lbl-tv">Smart TV & Entertainment:</strong><br>
+          <span style="font-size:13px; color:var(--text-muted);" id="txt-tv">Netflix, YouTube, and Apple TV are pre-logged in for guest entertainment.</span>
         </div>
       </div>
     </div>
 
-    <!-- 4. Garbage, Recycling & House Rules -->
+    <!-- 5. Garbage, Recycling & House Rules -->
     <div class="section-card">
       <h2 class="card-title">
         <i data-lucide="shield-check" style="color:var(--accent);"></i>
-        <span>House Rules & Waste Disposal</span>
+        <span id="title-rules">House Rules & Waste Disposal</span>
       </h2>
       <div class="rule-item">
         <i data-lucide="volume-x" style="color:#EF4444; flex-shrink:0;"></i>
-        <div><strong>Quiet Hours:</strong> Please keep noise levels low between 23:00 PM and 08:00 AM.</div>
+        <div><strong id="lbl-quiet">Quiet Hours:</strong> <span id="txt-quiet">Please keep noise levels low between 23:00 PM and 08:00 AM.</span></div>
       </div>
       <div class="rule-item">
         <i data-lucide="trash-2" style="color:var(--accent); flex-shrink:0;"></i>
-        <div><strong>Garbage & Recycling:</strong> Green dumpster located 30 meters left of the main villa gate. Municipal pickup occurs daily at 20:00.</div>
+        <div><strong id="lbl-trash">Garbage & Waste:</strong> <span id="txt-trash">Green dumpster located 30 meters left of the main villa gate. Municipal pickup occurs daily at 20:00.</span></div>
       </div>
       <div class="rule-item">
         <i data-lucide="clock" style="color:#3B82F6; flex-shrink:0;"></i>
-        <div><strong>Check-out Time:</strong> 11:00 AM sharp. Please leave keys on the kitchen counter and lock the front door.</div>
+        <div><strong id="lbl-checkout">Check-out Time:</strong> <span id="txt-checkout">11:00 AM sharp. Please leave keys on the kitchen counter and lock the front door.</span></div>
       </div>
     </div>
 
-    <!-- 5. Host Neighborhood Guide -->
+    <!-- 6. Host Neighborhood Guide -->
     <div class="section-card">
       <h2 class="card-title">
         <i data-lucide="compass" style="color:var(--accent);"></i>
-        <span>Host Curated Local Recommendations</span>
+        <span id="title-guide">Host Curated Local Recommendations</span>
       </h2>
       <div class="rule-item">
         <i data-lucide="utensils" style="color:#F59E0B; flex-shrink:0;"></i>
         <div>
-          <strong>Bodrum Marina Seafood Restaurant</strong> (5 min walk)<br>
-          <span style="font-size:13px; color:var(--text-muted);">Fresh Mediterranean catch with breathtaking sunset views over the yachts.</span>
+          <strong id="rec-1-title">Bodrum Marina Seafood Restaurant</strong> (5 min walk)<br>
+          <span style="font-size:13px; color:var(--text-muted);" id="rec-1-sub">Fresh Mediterranean catch with breathtaking sunset views over the yachts.</span>
         </div>
       </div>
       <div class="rule-item">
         <i data-lucide="coffee" style="color:#10B981; flex-shrink:0;"></i>
         <div>
-          <strong>Coffee & Co Artisan Bakery</strong> (3 min walk)<br>
-          <span style="font-size:13px; color:var(--text-muted);">Specialty espresso, sourdough pastries, and fresh organic breakfast bowls.</span>
+          <strong id="rec-2-title">Coffee & Co Artisan Bakery</strong> (3 min walk)<br>
+          <span style="font-size:13px; color:var(--text-muted);" id="rec-2-sub">Specialty espresso, sourdough pastries, and fresh organic breakfast bowls.</span>
         </div>
       </div>
       <div class="rule-item">
         <i data-lucide="shopping-bag" style="color:#8B5CF6; flex-shrink:0;"></i>
         <div>
-          <strong>Macrocenter Gourmet Supermarket</strong> (4 min drive)<br>
-          <span style="font-size:13px; color:var(--text-muted);">Premium groceries, imported wines, cheeses, and fresh butcher selection.</span>
+          <strong id="rec-3-title">Macrocenter Gourmet Supermarket</strong> (4 min drive)<br>
+          <span style="font-size:13px; color:var(--text-muted);" id="rec-3-sub">Premium groceries, imported wines, cheeses, and fresh butcher selection.</span>
         </div>
       </div>
     </div>
 
-    <!-- 6. Room Service & In-Room Extras -->
+    <!-- 7. Room Service & In-Room Extras -->
     <div class="section-card">
       <h2 class="card-title">
         <i data-lucide="sparkles" style="color:var(--accent);"></i>
-        <span>In-Room Concierge & Extra Services</span>
+        <span id="title-extras">In-Room Concierge & Extra Services</span>
       </h2>
       <div style="display:flex; flex-direction:column; gap:12px;">
         <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border); padding:14px; border-radius:12px; display:flex; justify-content:space-between; align-items:center;">
           <div>
-            <strong style="font-size:14px; color:#fff;">🍷 Welcome Organic Wine & Fruit Basket</strong>
+            <strong style="font-size:14px; color:#fff;" id="extra-1-title">🍷 Welcome Organic Wine & Fruit Basket</strong>
             <div style="font-size:13px; color:var(--accent); font-weight:700; margin-top:2px;">$25.00</div>
           </div>
-          <button class="btn-action" onclick="orderExtra('Organic Wine Basket')" style="width:auto; padding:8px 16px; font-size:12px;">Order</button>
+          <button class="btn-action" onclick="orderExtra('Organic Wine Basket')" style="width:auto; padding:8px 16px; font-size:12px;" id="btn-order-1">Order</button>
         </div>
         <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border); padding:14px; border-radius:12px; display:flex; justify-content:space-between; align-items:center;">
           <div>
-            <strong style="font-size:14px; color:#fff;">🚗 Late Check-out (2 Hours Extra until 13:00)</strong>
+            <strong style="font-size:14px; color:#fff;" id="extra-2-title">🚗 Late Check-out (2 Hours Extra until 13:00)</strong>
             <div style="font-size:13px; color:var(--accent); font-weight:700; margin-top:2px;">$30.00</div>
           </div>
-          <button class="btn-action" onclick="orderExtra('Late Check-out')" style="width:auto; padding:8px 16px; font-size:12px;">Order</button>
+          <button class="btn-action" onclick="orderExtra('Late Check-out')" style="width:auto; padding:8px 16px; font-size:12px;" id="btn-order-2">Order</button>
         </div>
         <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border); padding:14px; border-radius:12px; display:flex; justify-content:space-between; align-items:center;">
           <div>
-            <strong style="font-size:14px; color:#fff;">✈️ VIP Airport Transfer (Milas-Bodrum BJV)</strong>
+            <strong style="font-size:14px; color:#fff;" id="extra-3-title">✈️ VIP Airport Transfer (Milas-Bodrum BJV)</strong>
             <div style="font-size:13px; color:var(--accent); font-weight:700; margin-top:2px;">$65.00</div>
           </div>
-          <button class="btn-action" onclick="orderExtra('VIP Airport Transfer')" style="width:auto; padding:8px 16px; font-size:12px;">Order</button>
+          <button class="btn-action" onclick="orderExtra('VIP Airport Transfer')" style="width:auto; padding:8px 16px; font-size:12px;" id="btn-order-3">Order</button>
         </div>
       </div>
     </div>
 
-    <!-- 7. 5-Star Review & Feedback Collector -->
+    <!-- 8. 5-Star Review & Feedback Collector -->
     <div class="section-card" style="border-color:rgba(16,185,129,0.3); background:linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(17,24,39,0.95) 100%); text-align:center;">
       <div style="font-size:24px; margin-bottom:8px;">⭐⭐⭐⭐⭐</div>
-      <h3 style="margin:0 0 8px 0; font-size:18px; color:#fff;">Enjoying Your Stay at Villa Sunset?</h3>
-      <p style="font-size:13px; color:var(--text-muted); margin:0 0 16px 0;">Your 5-star review means the world to our family host team.</p>
-      <button class="btn-action" onclick="showToast('⭐ Thank you! Opening review link...')" style="background:#fff; color:#090D14; font-weight:800;">
+      <h3 style="margin:0 0 8px 0; font-size:18px; color:#fff;" id="review-title">Enjoying Your Stay at Villa Sunset?</h3>
+      <p style="font-size:13px; color:var(--text-muted); margin:0 0 16px 0;" id="review-sub">Your 5-star review means the world to our family host team.</p>
+      <button class="btn-action" onclick="showToast('⭐ Thank you! Opening review link...')" style="background:#fff; color:#090D14; font-weight:800;" id="btn-review">
         <i data-lucide="star"></i>
         <span>Leave a 5-Star Review</span>
       </button>
@@ -424,15 +514,515 @@
   </footer>
 
   <script>
+    const GUEST_I18N = {
+      EN: {
+        selectLang: "Language:",
+        badge: "Verified Guest Digital Guide",
+        location: "Yalıkavak Marina, Bodrum • Private Luxury Villa",
+        btnWhatsapp: "WhatsApp",
+        btnMaps: "Maps",
+        btnTaxi: "Call Taxi",
+        btnEmergency: "112 Help",
+        titleWifi: "1-Tap Guest Wi-Fi Access",
+        lblPassword: "Password:",
+        btnCopyWifi: "Copy Wi-Fi Password",
+        txtWifiSub: "High-speed fiber (250 Mbps) • Free unlimited devices",
+        titleLock: "Smart Lock Door Access PIN",
+        txtLockValid: "Time-Gated Access (Valid Check-in 14:00 to Check-out 11:00)",
+        txtLockHint: "💡 <strong>How to Unlock:</strong> Touch keypad to illuminate, type <strong>8492#</strong>, and turn lock clockwise.",
+        titleParking: "Car Parking & EV Charging Guide",
+        lblParkingPrivate: "Private Villa Driveway:",
+        txtParkingPrivate: "Dedicated private parking inside the villa gate for up to 2 SUVs/sedans.",
+        lblParkingGate: "Automatic Gate Access:",
+        txtParkingGate: "Gate PIN: <strong>#1905</strong> or use the small remote fob attached to the villa keychain.",
+        lblParkingEv: "22kW Type-2 EV Fast Charger:",
+        txtParkingEv: "Wallbox in garage (Tesla, Porsche, Mercedes, BYD, Togg compatible). Contact host on WhatsApp to activate charging session.",
+        lblParkingStreet: "Street Parking Rules:",
+        txtParkingStreet: "Free street parking outside the gate. Please do not park directly in front of neighbor driveway gates.",
+        titleAppliances: "A/C & Appliance Instructions",
+        lblAc: "Air Conditioning (A/C):",
+        txtAc: "Keep remote in 'COOL' mode at 22°C (72°F). Please turn off units when leaving the villa.",
+        lblHotwater: "Hot Water (Continuous):",
+        txtHotwater: "Solar & electric hot water is active 24/7. Booster switch is located on the master bathroom wall.",
+        lblTv: "Smart TV & Entertainment:",
+        txtTv: "Netflix, YouTube, and Apple TV are pre-logged in for guest entertainment.",
+        titleRules: "House Rules & Waste Disposal",
+        lblQuiet: "Quiet Hours:",
+        txtQuiet: "Please keep noise levels low between 23:00 PM and 08:00 AM.",
+        lblTrash: "Garbage & Waste:",
+        txtTrash: "Green dumpster located 30 meters left of the main villa gate. Municipal pickup occurs daily at 20:00.",
+        lblCheckout: "Check-out Time:",
+        txtCheckout: "11:00 AM sharp. Please leave keys on the kitchen counter and lock the front door.",
+        titleGuide: "Host Curated Local Recommendations",
+        rec1Title: "Bodrum Marina Seafood Restaurant",
+        rec1Sub: "Fresh Mediterranean catch with breathtaking sunset views over the yachts.",
+        rec2Title: "Coffee & Co Artisan Bakery",
+        rec2Sub: "Specialty espresso, sourdough pastries, and fresh organic breakfast bowls.",
+        rec3Title: "Macrocenter Gourmet Supermarket",
+        rec3Sub: "Premium groceries, imported wines, cheeses, and fresh butcher selection.",
+        titleExtras: "In-Room Concierge & Extra Services",
+        extra1Title: "🍷 Welcome Organic Wine & Fruit Basket",
+        extra2Title: "🚗 Late Check-out (2 Hours Extra until 13:00)",
+        extra3Title: "✈️ VIP Airport Transfer (Milas-Bodrum BJV)",
+        btnOrder: "Order",
+        reviewTitle: "Enjoying Your Stay at Villa Sunset?",
+        reviewSub: "Your 5-star review means the world to our family host team.",
+        btnReview: "Leave a 5-Star Review",
+        copiedToast: "📶 Wi-Fi Password Copied to Clipboard!",
+        orderedToast: "✨ Service requested! Host notified via WhatsApp/SMS."
+      },
+      TR: {
+        selectLang: "Dil Seçimi:",
+        badge: "Doğrulanmış Dijital Misafir Rehberi",
+        location: "Yalıkavak Marina, Bodrum • Özel Lüks Villa",
+        btnWhatsapp: "WhatsApp",
+        btnMaps: "Harita",
+        btnTaxi: "Taksi Çağır",
+        btnEmergency: "112 Acil",
+        titleWifi: "1-Tıkla Misafir Wi-Fi Erişimi",
+        lblPassword: "Şifre:",
+        btnCopyWifi: "Wi-Fi Şifresini Kopyala",
+        txtWifiSub: "Yüksek hızlı fiber (250 Mbps) • Tüm cihazlar için sınırsız",
+        titleLock: "Akıllı Kapı Giriş Şifresi (PIN)",
+        txtLockValid: "Zaman Korumalı Erişim (Giriş 14:00 - Çıkış 11:00 arası geçerli)",
+        txtLockHint: "💡 <strong>Nasıl Açılır:</strong> Tuş takımına dokunun, <strong>8492#</strong> tuşlayın ve kilidi saat yönünde çevirin.",
+        titleParking: "Otopark & Araç Şarj (EV) Kılavuzu",
+        lblParkingPrivate: "Villaya Özel Özel Garaj Girişi:",
+        txtParkingPrivate: "Villa bahçesi içinde 2 SUV/binek araçlık korunaklı özel otopark alanı mevcuttur.",
+        lblParkingGate: "Otomatik Bahçe Kapısı:",
+        txtParkingGate: "Kapı Şifresi: <strong>#1905</strong> veya villa anahtarlığındaki uzaktan kumandayı kullanabilirsiniz.",
+        lblParkingEv: "22kW Tip-2 Hızlı Araç Şarjı (EV):",
+        txtParkingEv: "Garaj içinde Tesla, Togg, Mercedes, Porsche, BYD uyumlu Wallbox istasyonu mevcuttur. Başlatmak için ev sahibine WhatsApp'tan yazın.",
+        lblParkingStreet: "Sokak Park Kuralları:",
+        txtParkingStreet: "Dış sokak boyunca ücretsiz park serbesttir. Lütfen komşu villa girişlerini kapatmayınız.",
+        titleAppliances: "Klima & Cihaz Kullanım Talimatları",
+        lblAc: "Klima (A/C) Ayarı:",
+        txtAc: "Kumandayı 'COOL' (Soğutma) modunda ve 22°C'de tutmanız önerilir. Evden çıkarken lütfen kapatınız.",
+        lblHotwater: "Sıcak Su (Kesintisiz):",
+        txtHotwater: "Güneş enerjisi ve elektrikli termosifon 7/24 devrededir. Ekstra şalter ebeveyn banyo duvarındadır.",
+        lblTv: "Smart TV & Eğlence:",
+        txtTv: "Netflix, YouTube ve Apple TV misafirlerimiz için açık ve kullanıma hazırdır.",
+        titleRules: "Ev Kuralları & Çöp Talimatı",
+        lblQuiet: "Sessizlik Saatleri:",
+        txtQuiet: "23:00 - 08:00 saatleri arasında çevre sakinlerinin huzuru için lütfen yüksek ses çıkarmayınız.",
+        lblTrash: "Çöp & Atık Yönetimi:",
+        txtTrash: "Yeşil çöp konteyneri ana bahçe kapısının 30 metre solundadır. Belediye araçları her akşam 20:00'de toplar.",
+        lblCheckout: "Çıkış Saati (Check-out):",
+        txtCheckout: "En geç 11:00. Lütfen anahtarları mutfak tezgahına bırakıp kapıyı kilitleyiniz.",
+        titleGuide: "Ev Sahibinden Özel Çevre Önerileri",
+        rec1Title: "Bodrum Marina Balıkçısı",
+        rec1Sub: "Gün batımı eşliğinde taze Ege mezeleri ve deniz ürünleri (5 dk yürüyüş).",
+        rec2Title: "Coffee & Co Fırın & Kafe",
+        rec2Sub: "Nitelikli espresso kahve, taze kruvasan ve organik kahvaltı kaseleri (3 dk yürüyüş).",
+        rec3Title: "Macrocenter Gurme Market",
+        rec3Sub: "İthal şarküteri, şarap, et ve taze meyve alışverişi (4 dk araçla).",
+        titleExtras: "Oda İçi Konsiyerj & Ekstra Hizmetler",
+        extra1Title: "🍷 Karşılama Organik Şarap & Meyve Sepeti",
+        extra2Title: "🚗 Geç Çıkış İzni (Saat 13:00'e kadar +2 Saat)",
+        extra3Title: "✈️ VIP Havalimanı Transferi (Bodrum BJV)",
+        btnOrder: "Sipariş Ver",
+        reviewTitle: "Konaklamanızdan Memnun Musunuz?",
+        reviewSub: "5 yıldızlı güzel yorumunuz aile işletmemiz için çok değerlidir.",
+        btnReview: "5 Yıldızlı Yorum Bırak",
+        copiedToast: "📶 Wi-Fi Şifresi Panoya Kopyalandı!",
+        orderedToast: "✨ Siparişiniz alındı! Ev sahibine WhatsApp/SMS ile iletildi."
+      },
+      DE: {
+        selectLang: "Sprache:",
+        badge: "Verifizierter Digitaler Gästeführer",
+        location: "Yalıkavak Marina, Bodrum • Private Luxusvilla",
+        btnWhatsapp: "WhatsApp",
+        btnMaps: "Karten",
+        btnTaxi: "Taxi Rufen",
+        btnEmergency: "112 Notruf",
+        titleWifi: "1-Klick Gäste-WLAN",
+        lblPassword: "Passwort:",
+        btnCopyWifi: "WLAN-Passwort Kopieren",
+        txtWifiSub: "Glasfaser-Highspeed (250 Mbps) • Unbegrenzt",
+        titleLock: "Smart Lock Tür-PIN",
+        txtLockValid: "Zeitgesteuerter Zugang (Check-in 14:00 - Check-out 11:00)",
+        txtLockHint: "💡 <strong>Tür öffnen:</strong> Tastenfeld berühren, <strong>8492#</strong> eingeben und Drehknauf im Uhrzeigersinn drehen.",
+        titleParking: "Parkplatz & E-Auto Ladestation",
+        lblParkingPrivate: "Private Villeneinfahrt:",
+        txtParkingPrivate: "Eigener gesicherter Parkplatz für bis zu 2 Fahrzeuge im Innenhof.",
+        lblParkingGate: "Automatisches Tor:",
+        txtParkingGate: "Tor-PIN: <strong>#1905</strong> oder die Fernbedienung am Schlüsselbund nutzen.",
+        lblParkingEv: "22kW Typ-2 Wallbox (E-Auto):",
+        txtParkingEv: "Ladestation in der Garage (kompatibel mit Tesla, Porsche, Mercedes, BMW). Kontaktieren Sie den Gastgeber via WhatsApp.",
+        lblParkingStreet: "Parken an der Straße:",
+        txtParkingStreet: "Kostenloses Parken an der Straße möglich. Bitte keine Nachbareinfahrten blockieren.",
+        titleAppliances: "Klimaanlage & Haushaltsgeräte",
+        lblAc: "Klimaanlage (A/C):",
+        txtAc: "Empfohlen: 'COOL'-Modus bei 22°C. Bitte beim Verlassen der Villa ausschalten.",
+        lblHotwater: "Warmwasser (24/7):",
+        txtHotwater: "Solar- & Elektro-Warmwasser ist durchgehend aktiv.",
+        lblTv: "Smart TV & Streaming:",
+        txtTv: "Netflix, YouTube und Apple TV sind bereits für Sie eingerichtet.",
+        titleRules: "Hausordnung & Müllentsorgung",
+        lblQuiet: "Ruhezeiten:",
+        txtQuiet: "Bitte zwischen 23:00 und 08:00 Uhr leise verhalten.",
+        lblTrash: "Müllentsorgung:",
+        txtTrash: "Grüner Müllcontainer 30m links vom Haupttor. Tägliche Abholung um 20:00 Uhr.",
+        lblCheckout: "Check-out Zeit:",
+        txtCheckout: "Pünktlich bis 11:00 Uhr. Schlüssel bitte auf der Küchentheke hinterlassen.",
+        titleGuide: "Lokale Gastgeber-Empfehlungen",
+        rec1Title: "Bodrum Marina Fischrestaurant",
+        rec1Sub: "Fangfrischer mediterraner Fisch mit Sonnenuntergang über den Yachten.",
+        rec2Title: "Coffee & Co Handwerksbäckerei",
+        rec2Sub: "Bester Espresso, Croissants und Bio-Frühstück.",
+        rec3Title: "Macrocenter Gourmet-Supermarkt",
+        rec3Sub: "Premium-Lebensmittel, Weine und Spezialitäten.",
+        titleExtras: "Zimmerservice & Zusatzangebote",
+        extra1Title: "🍷 Willkommens-Wein & Obstkorb",
+        extra2Title: "🚗 Später Check-out (+2 Std. bis 13:00)",
+        extra3Title: "✈️ VIP-Flughafentransfer (Bodrum BJV)",
+        btnOrder: "Bestellen",
+        reviewTitle: "Gefällt Ihnen der Aufenthalt?",
+        reviewSub: "Ihre 5-Sterne-Bewertung bedeutet unserem Team sehr viel.",
+        btnReview: "5-Sterne-Bewertung abgeben",
+        copiedToast: "📶 WLAN-Passwort kopiert!",
+        orderedToast: "✨ Anfrage gesendet! Gastgeber benachrichtigt."
+      },
+      RU: {
+        selectLang: "Язык:",
+        badge: "Официальный гид для гостей",
+        location: "Ялыкавак Марина, Бодрум • Частная вилла",
+        btnWhatsapp: "WhatsApp",
+        btnMaps: "Карты",
+        btnTaxi: "Такси",
+        btnEmergency: "112 Помощь",
+        titleWifi: "Wi-Fi в 1 клик",
+        lblPassword: "Пароль:",
+        btnCopyWifi: "Скопировать пароль Wi-Fi",
+        txtWifiSub: "Высокоскоростной оптоволоконный интернет (250 Мбит/с)",
+        titleLock: "ПИН-код от дверного замка",
+        txtLockValid: "Доступ действителен с 14:00 (заезд) до 11:00 (выезд)",
+        txtLockHint: "💡 <strong>Как открыть:</strong> Коснитесь панели, введите <strong>8492#</strong> и поверните замок по часовой стрелке.",
+        titleParking: "Парковка и зарядка электромобилей",
+        lblParkingPrivate: "Частная парковка на вилле:",
+        txtParkingPrivate: "Охраняемая частная парковка во дворе на 2 внедорожника или легковых автомобиля.",
+        lblParkingGate: "Автоматические ворота:",
+        txtParkingGate: "ПИН ворот: <strong>#1905</strong> или кнопка на брелоке от ключей.",
+        lblParkingEv: "Зарядка для электрокаров 22 кВт Type-2:",
+        txtParkingEv: "Станция в гараже (Tesla, Porsche, Mercedes, Zeekr). Напишите хозяину в WhatsApp для активации.",
+        lblParkingStreet: "Парковка на улице:",
+        txtParkingStreet: "Бесплатная уличная парковка за воротами. Пожалуйста, не перекрывайте выезды соседей.",
+        titleAppliances: "Кондиционер и техника",
+        lblAc: "Кондиционер (A/C):",
+        txtAc: "Рекомендуемый режим 'COOL' при 22°C. Выключайте при выходе из виллы.",
+        lblHotwater: "Горячая вода (24/7):",
+        txtHotwater: "Круглосуточная подача горячей воды.",
+        lblTv: "Smart TV и кино:",
+        txtTv: "Netflix, YouTube и Apple TV подключены и готовы к просмотру.",
+        titleRules: "Правила дома и вынос мусора",
+        lblQuiet: "Тихие часы:",
+        txtQuiet: "Пожалуйста, соблюдайте тишину с 23:00 до 08:00.",
+        lblTrash: "Вынос мусора:",
+        txtTrash: "Зеленый контейнер в 30 метрах слева от главных ворот. Вывоз мусора ежедневно в 20:00.",
+        lblCheckout: "Время выезда:",
+        txtCheckout: "Строго до 11:00. Оставьте ключи на кухонном столе и закройте дверь.",
+        titleGuide: "Рекомендации от хозяина",
+        rec1Title: "Рыбный ресторан Bodrum Marina",
+        rec1Sub: "Свежие морепродукты и великолепный закат над яхтами.",
+        rec2Title: "Пекарня Coffee & Co",
+        rec2Sub: "Отличный кофе, свежие круассаны и завтраки.",
+        rec3Title: "Супермаркет Macrocenter Gourmet",
+        rec3Sub: "Элитные продукты, сыры, вина и деликатесы.",
+        titleExtras: "Дополнительные услуги",
+        extra1Title: "🍷 Приветственное вино и фруктовая корзина",
+        extra2Title: "🚗 Поздний выезд (+2 часа до 13:00)",
+        extra3Title: "✈️ VIP-трансфер в аэропорт (Бодрум BJV)",
+        btnOrder: "Заказать",
+        reviewTitle: "Вам нравится пребывание на вилле?",
+        reviewSub: "Ваш 5-звездочный отзыв очень важен для нас.",
+        btnReview: "Оставить 5 звезд",
+        copiedToast: "📶 Пароль Wi-Fi скопирован!",
+        orderedToast: "✨ Заказ оформлен! Хозяин уведомлен."
+      },
+      FR: {
+        selectLang: "Langue:",
+        badge: "Guide Numérique Vérifié",
+        location: "Yalıkavak Marina, Bodrum • Villa de Luxe Privée",
+        btnWhatsapp: "WhatsApp",
+        btnMaps: "Plans",
+        btnTaxi: "Appeler Taxi",
+        btnEmergency: "112 Urgence",
+        titleWifi: "Accès Wi-Fi en 1 Clic",
+        lblPassword: "Mot de passe:",
+        btnCopyWifi: "Copier le Mot de Passe",
+        txtWifiSub: "Fibre haut débit (250 Mbps) • Illimité",
+        titleLock: "Code PIN Serrure Intelligente",
+        txtLockValid: "Accès Valide de 14:00 (Arrivée) à 11:00 (Départ)",
+        txtLockHint: "💡 <strong>Déverrouillage:</strong> Touchez le clavier, tapez <strong>8492#</strong> et tournez le verrou.",
+        titleParking: "Stationnement & Recharge VE",
+        lblParkingPrivate: "Allée privée de la villa:",
+        txtParkingPrivate: "Stationnement privé sécurisé à l'intérieur pour 2 véhicules.",
+        lblParkingGate: "Portail Automatique:",
+        txtParkingGate: "PIN Portail: <strong>#1905</strong> ou télécommande sur le trousseau.",
+        lblParkingEv: "Borne 22kW Type-2 (Véhicule Électrique):",
+        txtParkingEv: "Borne dans le garage (Tesla, Porsche, Mercedes). Contactez l'hôte sur WhatsApp.",
+        lblParkingStreet: "Stationnement dans la rue:",
+        txtParkingStreet: "Gratuit dans la rue. Veuillez ne pas bloquer les sorties voisines.",
+        titleAppliances: "Climatisation & Équipements",
+        lblAc: "Climatisation (A/C):",
+        txtAc: "Mode 'COOL' recommandé à 22°C. Éteindre en quittant la villa.",
+        lblHotwater: "Eau Chaude (24/7):",
+        txtHotwater: "Eau chaude solaire et électrique active en permanence.",
+        lblTv: "Smart TV & Streaming:",
+        txtTv: "Netflix, YouTube et Apple TV sont pré-connectés.",
+        titleRules: "Règlement & Ordures",
+        lblQuiet: "Heures Silencieuses:",
+        txtQuiet: "Veuillez respecter le calme entre 23:00 et 08:00.",
+        lblTrash: "Poubelles & Tri:",
+        txtTrash: "Conteneur vert à 30m à gauche du portail. Ramassage quotidien à 20:00.",
+        lblCheckout: "Heure de Départ:",
+        txtCheckout: "11:00 précises. Laissez les clés sur la table de la cuisine.",
+        titleGuide: "Recommandations de l'Hôte",
+        rec1Title: "Restaurant de fruits de mer Bodrum Marina",
+        rec1Sub: "Poissons frais et vue imprenable sur le coucher de soleil.",
+        rec2Title: "Boulangerie Coffee & Co",
+        rec2Sub: "Café d'exception et croissants frais du matin.",
+        rec3Title: "Supermarché Gourmet Macrocenter",
+        rec3Sub: "Produits fins, vins et fromages d'exception.",
+        titleExtras: "Conciergerie & Extras",
+        extra1Title: "🍷 Panier Vin Biologique & Fruits",
+        extra2Title: "🚗 Départ Tardif (+2h jusqu'à 13:00)",
+        extra3Title: "✈️ Transfert VIP Aéroport (Bodrum BJV)",
+        btnOrder: "Commander",
+        reviewTitle: "Vous appréciez votre séjour?",
+        reviewSub: "Votre avis 5 étoiles est précieux pour notre équipe.",
+        btnReview: "Laisser un Avis 5 Étoiles",
+        copiedToast: "📶 Mot de passe Wi-Fi copié!",
+        orderedToast: "✨ Demande transmise à l'hôte!"
+      },
+      ES: {
+        selectLang: "Idioma:",
+        badge: "Guía Digital de Huéspedes",
+        location: "Yalıkavak Marina, Bodrum • Villa de Lujo Privada",
+        btnWhatsapp: "WhatsApp",
+        btnMaps: "Mapas",
+        btnTaxi: "Pedir Taxi",
+        btnEmergency: "112 Ayuda",
+        titleWifi: "Acceso Wi-Fi en 1 Toque",
+        lblPassword: "Clave:",
+        btnCopyWifi: "Copiar Clave Wi-Fi",
+        txtWifiSub: "Fibra de alta velocidad (250 Mbps) • Ilimitado",
+        titleLock: "PIN de Cerradura Inteligente",
+        txtLockValid: "Acceso Válido de 14:00 (Llegada) a 11:00 (Salida)",
+        txtLockHint: "💡 <strong>Cómo Abrir:</strong> Toque el teclado, marque <strong>8492#</strong> y gire la cerradura.",
+        titleParking: "Aparcamiento & Carga de VE",
+        lblParkingPrivate: "Entrada Privada de la Villa:",
+        txtParkingPrivate: "Aparcamiento privado dentro del recinto para hasta 2 vehículos.",
+        lblParkingGate: "Portón Automático:",
+        txtParkingGate: "PIN del Portón: <strong>#1905</strong> o use el mando a distancia del llavero.",
+        lblParkingEv: "Cargador Rápido 22kW Tipo-2 (VE):",
+        txtParkingEv: "Wallbox en garaje (compatible con Tesla, Porsche, Mercedes). Contacte al anfitrión en WhatsApp.",
+        lblParkingStreet: "Aparcamiento en Calle:",
+        txtParkingStreet: "Gratuito en la calle. Por favor no bloquee las salidas de los vecinos.",
+        titleAppliances: "Aire Acondicionado & Electrodomésticos",
+        lblAc: "Aire Acondicionado:",
+        txtAc: "Recomendado modo 'COOL' a 22°C. Apagar al salir de la villa.",
+        lblHotwater: "Agua Caliente (24/7):",
+        txtHotwater: "Agua caliente solar y eléctrica activa continuamente.",
+        lblTv: "Smart TV & Entretenimiento:",
+        txtTv: "Netflix, YouTube y Apple TV listos para usar.",
+        titleRules: "Normas de la Casa & Basura",
+        lblQuiet: "Horas de Silencio:",
+        txtQuiet: "Por favor mantener el silencio entre las 23:00 y las 08:00.",
+        lblTrash: "Basuras & Reciclaje:",
+        txtTrash: "Contenedor verde a 30m a la izquierda del portón. Recogida diaria a las 20:00.",
+        lblCheckout: "Hora de Salida:",
+        txtCheckout: "11:00 en punto. Deje las llaves sobre la mesa de la cocina.",
+        titleGuide: "Recomendaciones del Anfitrión",
+        rec1Title: "Restaurante de Mariscos Bodrum Marina",
+        rec1Sub: "Pescado fresco del Mediterráneo con vistas al atardecer.",
+        rec2Title: "Panadería Artesanal Coffee & Co",
+        rec2Sub: "Café de especialidad y croissants recién horneados.",
+        rec3Title: "Supermercado Gourmet Macrocenter",
+        rec3Sub: "Alimentos selectos, quesos y vinos importados.",
+        titleExtras: "Servicios de Conserjería & Extras",
+        extra1Title: "🍷 Cesta de Vino Orgánico & Frutas",
+        extra2Title: "🚗 Salida Tardía (+2h hasta las 13:00)",
+        extra3Title: "✈️ Traslado VIP al Aeropuerto (Bodrum BJV)",
+        btnOrder: "Pedir",
+        reviewTitle: "¿Disfrutando de su estancia?",
+        reviewSub: "Su reseña de 5 estrellas nos ayuda muchísimo.",
+        btnReview: "Dejar Reseña de 5 Estrellas",
+        copiedToast: "📶 ¡Clave Wi-Fi copiada!",
+        orderedToast: "✨ ¡Solicitud enviada al anfitrión!"
+      },
+      AR: {
+        selectLang: "اللغة:",
+        badge: "دليل الضيف الرقمي المعتمد",
+        location: "مارينا ياليكافاك، بودروم • فيلا فاخرة خاصة",
+        btnWhatsapp: "واتساب",
+        btnMaps: "الخرائط",
+        btnTaxi: "طلب تاكسي",
+        btnEmergency: "112 طوارئ",
+        titleWifi: "واي فاي بلمسة واحدة",
+        lblPassword: "كلمة المرور:",
+        btnCopyWifi: "نسخ كلمة مرور الواي فاي",
+        txtWifiSub: "ألياف بصرية فائقة السرعة (250 ميجابت/ث) • مجاني وغير محدود",
+        titleLock: "رمز القفل الذكي للباب",
+        txtLockValid: "صلاحية الدخول (من 14:00 تسجيل الوصول حتى 11:00 المغادرة)",
+        txtLockHint: "💡 <strong>طريقة الفتح:</strong> المس لوحة الأرقام لتضيء، أدخل <strong>8492#</strong> وادر القفل باتجاه عقارب الساعة.",
+        titleParking: "دليل مواقف السيارات وشحن السيارات الكهربائية",
+        lblParkingPrivate: "موقف سيارات خاص بالفيلا:",
+        txtParkingPrivate: "موقف سيارات آمن وخاص داخل بوابة الفيلا يتسع لسيارتين كبيرتين.",
+        lblParkingGate: "بوابة إلكترونية أوتوماتيكية:",
+        txtParkingGate: "رمز البوابة: <strong>#1905</strong> أو استخدم جهاز التحكم الصغير في ميدالية المفاتيح.",
+        lblParkingEv: "شاحن سريع 22 كيلووات للسيارات الكهربائية:",
+        txtParkingEv: "محطة شحن متوافقة مع تيسلا ومرسيدس وبورشه داخل المرآب. تواصل مع المضيف لتفعيل الشحن.",
+        lblParkingStreet: "مواقف الشارع الخارجية:",
+        txtParkingStreet: "المواقف في الشارع الخارجي مجانية. يرجى عدم إغلاق بوابات الجيران.",
+        titleAppliances: "تعليمات التكييف والأجهزة المنزلية",
+        lblAc: "التكييف:",
+        txtAc: "يرجى ضبط الريموت على وضع 'COOL' عند 22 درجة مئوية. يرجى إطفاء الأجهزة عند الخروج.",
+        lblHotwater: "الماء الساخن (24/7):",
+        txtHotwater: "الماء الساخن متوفر على مدار الساعة بالطاقة الشمسية والكهربائية.",
+        lblTv: "التلفزيون الذكي والترفيه:",
+        txtTv: "نتفليكس ويوتيوب وآبل تي في جاهزة للاستخدام الترفيهي.",
+        titleRules: "قواعد المنزل والنفايات",
+        lblQuiet: "أوقات الهدوء:",
+        txtQuiet: "يرجى مراعاة الهدوء وخفض الصوت بين الساعة 23:00 و 08:00 صباحاً.",
+        lblTrash: "رمي القمامة والنفايات:",
+        txtTrash: "الحاوية الخضراء تقع على بعد 30 متراً يسار البوابة الرئيسية. يتم جمعها يومياً في الساعة 20:00.",
+        lblCheckout: "موعد المغادرة:",
+        txtCheckout: "الساعة 11:00 صباحاً تماماً. يرجى ترك المفاتيح على طاولة المطبخ وقفل الباب.",
+        titleGuide: "أفضل توصيات المضيف للأماكن المجاورة",
+        rec1Title: "مطعم مأكولات بحرية في مارينا بودروم",
+        rec1Sub: "أسماك طازجة وإطلالة ساحرة على اليخوت وغروب الشمس (5 دقائق مشياً).",
+        rec2Title: "مخبز ومقهى Coffee & Co الحرفي",
+        rec2Sub: "قهوة مختصة، كرواسون طازج، ووجبات إفطار عضوية (3 دقائق مشياً).",
+        rec3Title: "سوبرماركت ماكرو سنتر الفاخر",
+        rec3Sub: "أجود الأطعمة والمنتجات المستوردة الطازجة (4 دقائق بالسيارة).",
+        titleExtras: "خدمات الضيافة والإضافات في الغرفة",
+        extra1Title: "🍷 سلة فواكه وعصائر ترحيبية فاخرة",
+        extra2Title: "🚗 تمديد وقت المغادرة (+ ساعتان حتى 13:00)",
+        extra3Title: "✈️ خدمة التوصيل VIP من/إلى مطار بودروم (BJV)",
+        btnOrder: "طلب الخدمة",
+        reviewTitle: "هل تستمتع بإقامتك في الفيلا؟",
+        reviewSub: "تقييمك بخمس نجوم يسعدنا ويساعد فريقنا العائلي كثيراً.",
+        btnReview: "ترك تقييم 5 نجوم",
+        copiedToast: "📶 تم نسخ كلمة مرور الواي فاي بنجاح!",
+        orderedToast: "✨ تم استلام طلبك وإرسال إشعار للمضيف!"
+      }
+    };
+
+    let currentGuestLang = 'EN';
+
+    function setGuestLanguage(lang, btnEl) {
+      if (!GUEST_I18N[lang]) lang = 'EN';
+      currentGuestLang = lang;
+      const dict = GUEST_I18N[lang];
+
+      // Update Active Button Pill
+      document.querySelectorAll('.g-lang-btn').forEach(b => b.classList.remove('active'));
+      if (btnEl) {
+        btnEl.classList.add('active');
+      } else {
+        const matchingBtn = Array.from(document.querySelectorAll('.g-lang-btn')).find(b => b.textContent.includes(lang));
+        if (matchingBtn) matchingBtn.classList.add('active');
+      }
+
+      // Apply RTL if Arabic
+      if (lang === 'AR') {
+        document.body.setAttribute('dir', 'rtl');
+        document.body.style.textAlign = 'right';
+      } else {
+        document.body.removeAttribute('dir');
+        document.body.style.textAlign = 'left';
+      }
+
+      // Translate DOM
+      document.getElementById('txt-select-lang').textContent = dict.selectLang;
+      document.getElementById('txt-badge').textContent = dict.badge;
+      document.getElementById('txt-location').textContent = dict.location;
+      document.getElementById('btn-txt-whatsapp').textContent = dict.btnWhatsapp;
+      document.getElementById('btn-txt-maps').textContent = dict.btnMaps;
+      document.getElementById('btn-txt-taxi').textContent = dict.btnTaxi;
+      document.getElementById('btn-txt-emergency').textContent = dict.btnEmergency;
+
+      document.getElementById('title-wifi').textContent = dict.titleWifi;
+      document.getElementById('lbl-password').textContent = dict.lblPassword;
+      document.getElementById('btn-copy-wifi').textContent = dict.btnCopyWifi;
+      document.getElementById('txt-wifi-sub').textContent = dict.txtWifiSub;
+
+      document.getElementById('title-lock').textContent = dict.titleLock;
+      document.getElementById('txt-lock-valid').textContent = dict.txtLockValid;
+      document.getElementById('txt-lock-hint').innerHTML = dict.txtLockHint;
+
+      document.getElementById('title-parking').textContent = dict.titleParking;
+      document.getElementById('lbl-parking-private').textContent = dict.lblParkingPrivate;
+      document.getElementById('txt-parking-private').textContent = dict.txtParkingPrivate;
+      document.getElementById('lbl-parking-gate').textContent = dict.lblParkingGate;
+      document.getElementById('txt-parking-gate').innerHTML = dict.txtParkingGate;
+      document.getElementById('lbl-parking-ev').textContent = dict.lblParkingEv;
+      document.getElementById('txt-parking-ev').textContent = dict.txtParkingEv;
+      document.getElementById('lbl-parking-street').textContent = dict.lblParkingStreet;
+      document.getElementById('txt-parking-street').textContent = dict.txtParkingStreet;
+
+      document.getElementById('title-appliances').textContent = dict.titleAppliances;
+      document.getElementById('lbl-ac').textContent = dict.lblAc;
+      document.getElementById('txt-ac').textContent = dict.txtAc;
+      document.getElementById('lbl-hotwater').textContent = dict.lblHotwater;
+      document.getElementById('txt-hotwater').textContent = dict.txtHotwater;
+      document.getElementById('lbl-tv').textContent = dict.lblTv;
+      document.getElementById('txt-tv').textContent = dict.txtTv;
+
+      document.getElementById('title-rules').textContent = dict.titleRules;
+      document.getElementById('lbl-quiet').textContent = dict.lblQuiet;
+      document.getElementById('txt-quiet').textContent = dict.txtQuiet;
+      document.getElementById('lbl-trash').textContent = dict.lblTrash;
+      document.getElementById('txt-trash').textContent = dict.txtTrash;
+      document.getElementById('lbl-checkout').textContent = dict.lblCheckout;
+      document.getElementById('txt-checkout').textContent = dict.txtCheckout;
+
+      document.getElementById('title-guide').textContent = dict.titleGuide;
+      document.getElementById('rec-1-title').textContent = dict.rec1Title;
+      document.getElementById('rec-1-sub').textContent = dict.rec1Sub;
+      document.getElementById('rec-2-title').textContent = dict.rec2Title;
+      document.getElementById('rec-2-sub').textContent = dict.rec2Sub;
+      document.getElementById('rec-3-title').textContent = dict.rec3Title;
+      document.getElementById('rec-3-sub').textContent = dict.rec3Sub;
+
+      document.getElementById('title-extras').textContent = dict.titleExtras;
+      document.getElementById('extra-1-title').textContent = dict.extra1Title;
+      document.getElementById('extra-2-title').textContent = dict.extra2Title;
+      document.getElementById('extra-3-title').textContent = dict.extra3Title;
+      document.getElementById('btn-order-1').textContent = dict.btnOrder;
+      document.getElementById('btn-order-2').textContent = dict.btnOrder;
+      document.getElementById('btn-order-3').textContent = dict.btnOrder;
+
+      document.getElementById('review-title').textContent = dict.reviewTitle;
+      document.getElementById('review-sub').textContent = dict.reviewSub;
+      document.getElementById('btn-review').querySelector('span').textContent = dict.btnReview;
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function autoDetectGuestLanguage() {
+      const browserLang = (navigator.language || navigator.userLanguage || 'en').toUpperCase();
+      if (browserLang.startsWith('TR')) setGuestLanguage('TR');
+      else if (browserLang.startsWith('DE')) setGuestLanguage('DE');
+      else if (browserLang.startsWith('RU')) setGuestLanguage('RU');
+      else if (browserLang.startsWith('FR')) setGuestLanguage('FR');
+      else if (browserLang.startsWith('ES')) setGuestLanguage('ES');
+      else if (browserLang.startsWith('AR')) setGuestLanguage('AR');
+      else setGuestLanguage('EN');
+    }
+
     function copyWifiPass() {
       const pass = document.getElementById('g-wifi-pass').textContent;
+      const dict = GUEST_I18N[currentGuestLang] || GUEST_I18N.EN;
       navigator.clipboard.writeText(pass).then(() => {
-        showToast('📶 Wi-Fi Password Copied to Clipboard!');
+        showToast(dict.copiedToast);
       });
     }
 
     function orderExtra(item) {
-      showToast('✨ ' + item + ' requested! Host notified via WhatsApp/SMS.');
+      const dict = GUEST_I18N[currentGuestLang] || GUEST_I18N.EN;
+      showToast(dict.orderedToast);
     }
 
     function showToast(msg) {
@@ -443,6 +1033,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      autoDetectGuestLanguage();
       if (window.lucide) lucide.createIcons();
     });
   </script>
