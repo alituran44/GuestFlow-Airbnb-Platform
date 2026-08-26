@@ -1,10 +1,9 @@
-﻿const fs = require('fs');
-const html = `<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="tr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>How to Import Airbnb & Booking.com Listings — HostifyOS Integration Guide</title>
+  <title>Airbnb & Booking İlanlarını 15 Saniyede İçe Aktarma Rehberi — HostifyOS</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -28,14 +27,14 @@ const html = `<!DOCTYPE html>
     }
 
     .guide-container {
-      max-width: 1080px;
+      max-width: 1120px;
       margin: 40px auto 80px auto;
-      padding: 0 24px;
+      padding: 0 20px;
     }
 
     .guide-header {
       text-align: center;
-      margin-bottom: 48px;
+      margin-bottom: 40px;
     }
 
     .guide-header h1 {
@@ -45,46 +44,118 @@ const html = `<!DOCTYPE html>
       letter-spacing: -1px;
     }
 
-    /* Video Player Canvas / Frame Container */
+    /* Video & Interactive Screen Player Container */
     .video-player-container {
       background: #0D131F;
-      border: 1px solid rgba(16, 185, 129, 0.3);
+      border: 1px solid rgba(16, 185, 129, 0.35);
       border-radius: 24px;
       overflow: hidden;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
-      margin-bottom: 60px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+      margin-bottom: 50px;
       position: relative;
     }
 
     .video-top-bar {
       background: #111827;
-      padding: 12px 20px;
+      padding: 14px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid var(--border);
     }
 
+    .step-pills-nav {
+      display: flex;
+      gap: 8px;
+    }
+
+    .step-pill-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .step-pill-btn.active {
+      background: var(--accent);
+      color: #090D14;
+      border-color: var(--accent);
+    }
+
+    /* Video Screen Canvas */
     .video-screen-canvas {
       position: relative;
-      height: 440px;
+      height: 480px;
       background: radial-gradient(circle at center, #131E33 0%, #090D14 100%);
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      padding: 24px;
     }
 
-    .video-step-overlay {
+    .video-step-slide {
       position: absolute;
       inset: 0;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
+      padding: 30px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      transform: scale(0.98);
+    }
+
+    .video-step-slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
+    }
+
+    .sim-browser-window {
+      background: #111827;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 820px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+    }
+
+    .sim-browser-head {
+      background: #090D14;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sim-url-bar {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #38BDF8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sim-browser-body {
       padding: 24px;
-      text-align: center;
-      transition: opacity 0.5s ease;
     }
 
     .video-controls-bar {
@@ -132,71 +203,47 @@ const html = `<!DOCTYPE html>
       transform: scale(1.08);
     }
 
-    /* Comparison & Steps Grid */
-    .methods-grid {
+    /* Explanation Cards Grid */
+    .faq-explainer-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
       margin-bottom: 60px;
     }
 
-    @media (max-width: 868px) {
-      .methods-grid {
+    @media (max-width: 900px) {
+      .faq-explainer-grid {
         grid-template-columns: 1fr;
       }
       .video-screen-canvas {
-        height: 360px;
+        height: 520px;
+        padding: 12px;
+      }
+      .step-pills-nav {
+        display: none;
       }
       .guide-header h1 {
         font-size: 28px;
       }
     }
 
-    .method-card {
+    .explainer-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 32px;
+      border-radius: 18px;
+      padding: 24px;
       display: flex;
       flex-direction: column;
-      transition: border-color 0.2s ease;
     }
 
-    .method-card:hover {
-      border-color: rgba(16, 185, 129, 0.4);
-    }
-
-    .step-item {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-
-    .step-number {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: rgba(16, 185, 129, 0.15);
-      color: var(--accent);
-      font-weight: 800;
-      font-size: 14px;
+    .explainer-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-    }
-
-    .code-box {
-      background: #090D14;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 12px 16px;
-      border-radius: 10px;
-      font-family: monospace;
-      font-size: 13px;
-      color: #38BDF8;
-      margin-top: 8px;
-      word-break: break-all;
+      margin-bottom: 16px;
     }
   </style>
 </head>
@@ -211,19 +258,19 @@ const html = `<!DOCTYPE html>
       </a>
 
       <nav class="center-nav-links">
-        <a href="/" class="nav-link"><i data-lucide="home"></i> <span>Home</span></a>
-        <a href="/pricing.html" class="nav-link"><i data-lucide="tag"></i> <span>Pricing</span></a>
-        <a href="/blog.html" class="nav-link"><i data-lucide="book-open"></i> <span>Blog & Guides</span></a>
-        <a href="/import-guide.html" class="nav-link active"><i data-lucide="layers"></i> <span>How It Works</span></a>
-        <a href="/g.html" class="nav-link"><i data-lucide="smartphone"></i> <span>Guest Demo</span></a>
+        <a href="/" class="nav-link"><i data-lucide="home"></i> <span>Ana Sayfa</span></a>
+        <a href="/pricing.html" class="nav-link"><i data-lucide="tag"></i> <span>Fiyatlandırma</span></a>
+        <a href="/blog.html" class="nav-link"><i data-lucide="book-open"></i> <span>Rehberler & Blog</span></a>
+        <a href="/import-guide.html" class="nav-link active"><i data-lucide="layers"></i> <span>Nasıl Çalışır?</span></a>
+        <a href="/g.html" class="nav-link"><i data-lucide="smartphone"></i> <span>Misafir Demosu</span></a>
       </nav>
 
       <div class="nav-right">
-        <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Light / Dark Mode">
+        <button class="theme-toggle-btn" onclick="toggleTheme()" title="Temayı Değiştir">
           <i data-lucide="sun" id="theme-icon"></i>
         </button>
         <a href="/#free-guidebook-builder-section" class="btn-hero-primary" style="padding:8px 16px; font-size:13px; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
-          <i data-lucide="sparkles"></i> <span>Import Listing Now</span>
+          <i data-lucide="sparkles"></i> <span>İlanımı İçe Aktar</span>
         </a>
       </div>
     </div>
@@ -232,9 +279,9 @@ const html = `<!DOCTYPE html>
   <div class="guide-container">
     
     <div class="guide-header">
-      <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent);">⚡ ZERO DATA RE-ENTRY PROTOCOL</span>
-      <h1>How to Import from Airbnb & Booking.com in 15 Seconds</h1>
-      <p style="color:var(--text-muted); font-size:17px; max-width:680px; margin:0 auto;">Never type your property details twice. Discover how HostifyOS automatically extracts photos, rules, parking, and calendars with 1-click.</p>
+      <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent);">⚡ SIFIR YENİDEN VERİ GİRİŞİ PROTOKOLÜ</span>
+      <h1>Airbnb & Booking Bilgileri Nasıl Otomatik Aktarılır?</h1>
+      <p style="color:var(--text-muted); font-size:17px; max-width:760px; margin:0 auto;">Bilgileri ikinci kez elle yazmanıza gerek yok. İlan linkinizi nereye yapıştıracağınızı ve 3. adımda nelerin hazırlandığını aşağıdaki interaktif simülasyonda canlı izleyin.</p>
     </div>
 
     <!-- Interactive Video Walkthrough Player -->
@@ -244,51 +291,129 @@ const html = `<!DOCTYPE html>
           <span style="width:10px; height:10px; border-radius:50%; background:#EF4444; display:inline-block;"></span>
           <span style="width:10px; height:10px; border-radius:50%; background:#F59E0B; display:inline-block;"></span>
           <span style="width:10px; height:10px; border-radius:50%; background:#10B981; display:inline-block;"></span>
-          <span style="font-size:12px; font-weight:700; color:var(--text-muted); margin-left:8px;">HostifyOS 4K Interactive Workflow Simulation</span>
+          <span style="font-size:13px; font-weight:800; color:#fff; margin-left:8px;">Adım Adım Görsel Video Simülasyonu</span>
         </div>
-        <span style="font-size:11px; background:rgba(16,185,129,0.2); color:var(--accent); padding:2px 8px; border-radius:99px; font-weight:800;" id="video-step-tag">STEP 1 OF 3</span>
+
+        <div class="step-pills-nav">
+          <button class="step-pill-btn active" id="pill-1" onclick="jumpToStep(1)">1. Linki Kopyala</button>
+          <button class="step-pill-btn" id="pill-2" onclick="jumpToStep(2)">2. Kutuya Yapıştır</button>
+          <button class="step-pill-btn" id="pill-3" onclick="jumpToStep(3)">3. Hazır Rehber & QR Standı</button>
+        </div>
       </div>
 
       <div class="video-screen-canvas" id="videoCanvas">
         
-        <!-- Video Slide 1: Copy Link -->
-        <div class="video-step-overlay" id="vslide-1" style="opacity:1;">
-          <div style="width:60px; height:60px; border-radius:18px; background:rgba(255,56,92,0.15); border:1px solid rgba(255,56,92,0.4); display:flex; align-items:center; justify-content:center; color:#FF385C; margin-bottom:16px;">
-            <i data-lucide="link" style="width:32px; height:32px;"></i>
+        <!-- SLIDE 1: Copy Link from Airbnb -->
+        <div class="video-step-slide active" id="vslide-1">
+          <div class="sim-browser-window">
+            <div class="sim-browser-head">
+              <div style="display:flex; gap:6px;">
+                <span style="width:8px; height:8px; border-radius:50%; background:#EF4444; display:inline-block;"></span>
+                <span style="width:8px; height:8px; border-radius:50%; background:#F59E0B; display:inline-block;"></span>
+                <span style="width:8px; height:8px; border-radius:50%; background:#10B981; display:inline-block;"></span>
+              </div>
+              <div class="sim-url-bar">
+                <i data-lucide="lock" style="width:12px; height:12px; color:#10B981;"></i>
+                <span>https://www.airbnb.com.tr/rooms/1149283748293</span>
+              </div>
+              <span style="background:#FF385C; color:#fff; font-size:11px; font-weight:800; padding:2px 8px; border-radius:4px;">Airbnb</span>
+            </div>
+            <div class="sim-browser-body">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                <div>
+                  <h3 style="margin:0; font-size:18px; color:#fff;">Villa Sunset Bodrum — Deniz Manzaralı Lüks Villa</h3>
+                  <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Yalıkavak, Bodrum • 4 Yatak Odası • Özel Havuz</div>
+                </div>
+                <div style="background:rgba(255,56,92,0.15); border:1px solid #FF385C; color:#FF385C; padding:6px 12px; border-radius:8px; font-size:12px; font-weight:800; display:flex; align-items:center; gap:6px;">
+                  <i data-lucide="copy" style="width:14px; height:14px;"></i>
+                  <span>Paylaş / Linki Kopyala</span>
+                </div>
+              </div>
+              <div style="background:rgba(255,255,255,0.03); border:1px dashed rgba(255,255,255,0.15); padding:16px; border-radius:12px; text-align:center;">
+                <span style="color:var(--accent); font-weight:700; font-size:13px;">✅ 1. ADIM:</span>
+                <p style="margin:4px 0 0 0; font-size:13px; color:var(--text-muted);">Airbnb veya Booking.com ilan sayfanızın web adresini tarayıcınızdan veya uygulamadaki <strong>"Paylaş"</strong> butonundan kopyalayın.</p>
+              </div>
+            </div>
           </div>
-          <h2 style="font-size:24px; font-weight:800; margin:0 0 8px 0; color:#fff;">Step 1: Copy Your Airbnb or Booking.com URL</h2>
-          <p style="color:var(--text-muted); font-size:14px; max-width:480px;">Simply open your Airbnb listing and copy the share link from your browser or mobile app.</p>
-          <div class="code-box">https://www.airbnb.com/rooms/1149283748293</div>
         </div>
 
-        <!-- Video Slide 2: AI Parsing -->
-        <div class="video-step-overlay" id="vslide-2" style="opacity:0; pointer-events:none;">
-          <div style="width:60px; height:60px; border-radius:18px; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.4); display:flex; align-items:center; justify-content:center; color:var(--accent); margin-bottom:16px;">
-            <i data-lucide="cpu" style="width:32px; height:32px;"></i>
-          </div>
-          <h2 style="font-size:24px; font-weight:800; margin:0 0 8px 0; color:#fff;">Step 2: AI Extracts All Photos & Amenities in 3 Seconds</h2>
-          <p style="color:var(--text-muted); font-size:14px; max-width:480px;">HostifyOS AI parses the cover photo, bedroom specs, parking rules, A/C instructions, and check-in times automatically.</p>
-          <div style="display:flex; gap:12px; margin-top:12px;">
-            <span style="background:rgba(16,185,129,0.2); color:var(--accent); font-size:12px; padding:4px 10px; border-radius:6px;">✓ 12 HD Photos</span>
-            <span style="background:rgba(16,185,129,0.2); color:var(--accent); font-size:12px; padding:4px 10px; border-radius:6px;">✓ House Rules</span>
-            <span style="background:rgba(16,185,129,0.2); color:var(--accent); font-size:12px; padding:4px 10px; border-radius:6px;">✓ Check-in 14:00</span>
+        <!-- SLIDE 2: Paste into HostifyOS Box -->
+        <div class="video-step-slide" id="vslide-2">
+          <div class="sim-browser-window">
+            <div class="sim-browser-head">
+              <div style="display:flex; gap:6px;">
+                <span style="width:8px; height:8px; border-radius:50%; background:#EF4444; display:inline-block;"></span>
+                <span style="width:8px; height:8px; border-radius:50%; background:#F59E0B; display:inline-block;"></span>
+                <span style="width:8px; height:8px; border-radius:50%; background:#10B981; display:inline-block;"></span>
+              </div>
+              <div class="sim-url-bar">
+                <i data-lucide="lock" style="width:12px; height:12px; color:#10B981;"></i>
+                <span>https://www.hostifyos.com/#free-guidebook-builder-section</span>
+              </div>
+              <span style="background:var(--accent); color:#090D14; font-size:11px; font-weight:800; padding:2px 8px; border-radius:4px;">HostifyOS</span>
+            </div>
+            <div class="sim-browser-body">
+              <div style="text-align:center; margin-bottom:14px;">
+                <span style="color:var(--accent); font-weight:800; font-size:13px;">📍 NEREYE YAPIŞTIRACAKSINIZ?</span>
+                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">HostifyOS Ana Sayfasındaki veya Ev Sahibi Panelindeki kutuya linki yapıştırın:</div>
+              </div>
+
+              <div style="background:#090D14; border:2px solid var(--accent); padding:14px; border-radius:12px; margin-bottom:12px; display:flex; align-items:center; gap:10px;">
+                <i data-lucide="link" style="color:var(--accent); width:18px; height:18px; flex-shrink:0;"></i>
+                <span style="font-family:monospace; font-size:13px; color:#fff; word-break:break-all;">https://www.airbnb.com/rooms/1149283748293</span>
+                <span style="margin-left:auto; background:rgba(16,185,129,0.2); color:var(--accent); font-size:11px; font-weight:800; padding:2px 8px; border-radius:4px; flex-shrink:0;">YAPIŞTIRILDI ✓</span>
+              </div>
+
+              <button class="btn-hero-primary" style="width:100%; padding:12px; font-size:14px; border-radius:10px; display:flex; align-items:center; justify-content:center; gap:6px;">
+                <i data-lucide="sparkles"></i>
+                <span>"Rehberi ve QR Kodu Otomatik Oluştur" Butonuna Basın</span>
+              </button>
+            </div>
           </div>
         </div>
 
-        <!-- Video Slide 3: QR & Guidebook Ready -->
-        <div class="video-step-overlay" id="vslide-3" style="opacity:0; pointer-events:none;">
-          <div style="width:60px; height:60px; border-radius:18px; background:rgba(59,130,246,0.15); border:1px solid rgba(59,130,246,0.4); display:flex; align-items:center; justify-content:center; color:#3B82F6; margin-bottom:16px;">
-            <i data-lucide="qr-code" style="width:32px; height:32px;"></i>
+        <!-- SLIDE 3: Output Deliverables (What is Step 3?) -->
+        <div class="video-step-slide" id="vslide-3">
+          <div class="sim-browser-window">
+            <div class="sim-browser-head">
+              <div style="display:flex; gap:6px;">
+                <span style="width:8px; height:8px; border-radius:50%; background:#EF4444; display:inline-block;"></span>
+                <span style="width:8px; height:8px; border-radius:50%; background:#F59E0B; display:inline-block;"></span>
+                <span style="width:8px; height:8px; border-radius:50%; background:#10B981; display:inline-block;"></span>
+              </div>
+              <div class="sim-url-bar">
+                <i data-lucide="sparkles" style="width:12px; height:12px; color:#10B981;"></i>
+                <span>https://www.hostifyos.com/g.html (Canlı Misafir Web Uygulaması)</span>
+              </div>
+              <span style="background:#3B82F6; color:#fff; font-size:11px; font-weight:800; padding:2px 8px; border-radius:4px;">3. ADIM ÇIKTISI</span>
+            </div>
+            <div class="sim-browser-body">
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                
+                <!-- Output 1: Mobile App -->
+                <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border); padding:14px; border-radius:12px; text-align:center;">
+                  <div style="font-size:24px; margin-bottom:4px;">📱</div>
+                  <strong style="color:#fff; font-size:13px; display:block;">1. Canlı Misafir Rehberi</strong>
+                  <p style="font-size:11px; color:var(--text-muted); margin:4px 0 8px 0;">Wi-Fi, kapı şifresi, otopark, klima & oda servisi misafirin telefonunda anında açılır.</p>
+                  <a href="/g.html" target="_blank" style="color:var(--accent); font-size:11px; font-weight:700; text-decoration:none;">Canlı Önizle →</a>
+                </div>
+
+                <!-- Output 2: Acrylic QR Stand -->
+                <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border); padding:14px; border-radius:12px; text-align:center;">
+                  <div style="font-size:24px; margin-bottom:4px;">🪧</div>
+                  <strong style="color:#fff; font-size:13px; display:block;">2. Yazdırılabilir Masa QR Standı</strong>
+                  <p style="font-size:11px; color:var(--text-muted); margin:4px 0 8px 0;">Evin masasına veya sehpasına koymak için logonuzla hazır A5 PDF akrilik stand çıktısı.</p>
+                  <span style="color:#3B82F6; font-size:11px; font-weight:700;">1-Tıkla PDF İndir</span>
+                </div>
+
+              </div>
+            </div>
           </div>
-          <h2 style="font-size:24px; font-weight:800; margin:0 0 8px 0; color:#fff;">Step 3: Instant Scannable QR Code & Guidebook Live!</h2>
-          <p style="color:var(--text-muted); font-size:14px; max-width:480px;">Print the A5 acrylic stand or send the link via WhatsApp. Your guests enjoy 1-tap Wi-Fi, door codes, taxi calling, and local food guides.</p>
-          <a href="/g.html" target="_blank" class="btn-action" style="width:auto; margin-top:12px; padding:10px 20px; font-size:13px;">
-            <i data-lucide="external-link"></i> <span>View Generated Guest Guidebook</span>
-          </a>
         </div>
 
       </div>
 
+      <!-- Video Timeline & Play Controls -->
       <div class="video-controls-bar">
         <button class="btn-play-pause" id="btnVideoToggle" onclick="toggleVideoPlay()">
           <i data-lucide="pause" id="videoPlayIcon"></i>
@@ -301,93 +426,47 @@ const html = `<!DOCTYPE html>
       </div>
     </div>
 
-    <!-- The 2 Complete Import Methods Detailed -->
-    <div class="methods-grid">
+    <!-- 3 Core Questions Answered Clearly -->
+    <div class="faq-explainer-grid">
       
-      <!-- Method 1: AI Instant URL Extractor -->
-      <div class="method-card">
-        <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
-          <div style="width:44px; height:44px; border-radius:12px; background:rgba(16,185,129,0.15); display:flex; align-items:center; justify-content:center; color:var(--accent);">
-            <i data-lucide="sparkles"></i>
-          </div>
-          <div>
-            <h3 style="margin:0; font-size:20px; font-weight:800;">Method 1: AI 1-Click Link Import</h3>
-            <span style="font-size:12px; color:var(--accent); font-weight:700;">Best for instant setup in 15 seconds</span>
-          </div>
+      <!-- Card 1: Nereye Yapıştırılacak? -->
+      <div class="explainer-card">
+        <div class="explainer-icon-box" style="background:rgba(16,185,129,0.15); color:var(--accent);">
+          <i data-lucide="mouse-pointer-click"></i>
         </div>
-
-        <div class="step-item">
-          <div class="step-number">1</div>
-          <div>
-            <strong style="color:#fff; font-size:15px;">Copy Listing URL</strong>
-            <p style="font-size:13px; color:var(--text-muted); margin:4px 0 0 0;">Go to Airbnb, Vrbo, or Booking.com and copy your property's public web link.</p>
-          </div>
-        </div>
-
-        <div class="step-item">
-          <div class="step-number">2</div>
-          <div>
-            <strong style="color:#fff; font-size:15px;">Paste in HostifyOS AI Importer</strong>
-            <p style="font-size:13px; color:var(--text-muted); margin:4px 0 0 0;">Paste the URL into our free builder box on the homepage or in your Host Dashboard.</p>
-          </div>
-        </div>
-
-        <div class="step-item">
-          <div class="step-number">3</div>
-          <div>
-            <strong style="color:#fff; font-size:15px;">Enter Wi-Fi & Door Lock PIN</strong>
-            <p style="font-size:13px; color:var(--text-muted); margin:4px 0 0 0;">Because platforms hide Wi-Fi passwords from public pages for safety, simply enter your Wi-Fi password and PIN once.</p>
-          </div>
-        </div>
-
-        <div style="margin-top:auto; padding-top:16px;">
-          <a href="/#free-guidebook-builder-section" class="btn-action" style="text-align:center;">
-            <span>Try AI URL Import Now →</span>
-          </a>
-        </div>
+        <h3 style="font-size:18px; font-weight:800; margin:0 0 8px 0; color:#fff;">1. Linki Kopyaladıktan Sonra Nereye Yapıştıracaksınız?</h3>
+        <p style="font-size:13px; color:var(--text-muted); margin:0 0 16px 0;">HostifyOS ana sayfasında yer alan <strong>"⚡ İlan Linkini Yapıştır"</strong> kutusuna (veya üye girişi yaptıktan sonra Ev Sahibi Panelindeki <em>"Yeni Mülk Ekle"</em> alanına) yapıştırıp butona basmanız yeterlidir.</p>
+        <a href="/#free-guidebook-builder-section" class="btn-hero-primary" style="padding:10px; font-size:12px; text-decoration:none; text-align:center; margin-top:auto; border-radius:8px;">
+          <span>Ana Sayfadaki Kutuya Git →</span>
+        </a>
       </div>
 
-      <!-- Method 2: iCal Calendar 2-Way Auto-Sync -->
-      <div class="method-card">
-        <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
-          <div style="width:44px; height:44px; border-radius:12px; background:rgba(59,130,246,0.15); display:flex; align-items:center; justify-content:center; color:#3B82F6;">
-            <i data-lucide="calendar-sync"></i>
-          </div>
-          <div>
-            <h3 style="margin:0; font-size:20px; font-weight:800;">Method 2: iCal Calendar Sync</h3>
-            <span style="font-size:12px; color:#3B82F6; font-weight:700;">Best for automated reservations & PIN codes</span>
-          </div>
+      <!-- Card 2: 3.ncü Olan Nedir? -->
+      <div class="explainer-card">
+        <div class="explainer-icon-box" style="background:rgba(59,130,246,0.15); color:#3B82F6;">
+          <i data-lucide="package-check"></i>
         </div>
+        <h3 style="font-size:18px; font-weight:800; margin:0 0 8px 0; color:#fff;">2. 3.ncü Adım / 3.ncü Olan Nedir?</h3>
+        <p style="font-size:13px; color:var(--text-muted); margin:0 0 16px 0;">3. Adım, içe aktarma bittiğinde sistemin ev sahibine teslim ettiği <strong>2 Nihai Çıktıdır:</strong></p>
+        <ul style="font-size:13px; color:var(--text-muted); margin:0 0 16px 0; padding-left:18px; line-height:1.6;">
+          <li><strong style="color:#fff;">Canlı Dijital Rehber:</strong> Misafirin WhatsApp mesajında açtığı 7 dilli web kılavuzu.</li>
+          <li><strong style="color:#fff;">A5 Masaüstü Akrilik QR Standı:</strong> Evin sehpasında duran ve kamerayla taranan şık baskı tasarımı.</li>
+        </ul>
+        <a href="/g.html" target="_blank" style="color:var(--accent); font-size:12px; font-weight:700; text-decoration:none; margin-top:auto;">
+          <span>Misafir Rehberini İncele (Demo) →</span>
+        </a>
+      </div>
 
-        <div class="step-item">
-          <div class="step-number" style="background:rgba(59,130,246,0.15); color:#3B82F6; border-color:rgba(59,130,246,0.3);">1</div>
-          <div>
-            <strong style="color:#fff; font-size:15px;">Export Airbnb / Booking iCal (.ics)</strong>
-            <p style="font-size:13px; color:var(--text-muted); margin:4px 0 0 0;">In Airbnb Host Portal: Go to <em>Listing → Pricing and availability → Calendar sync → Export Calendar</em>.</p>
-          </div>
+      <!-- Card 3: 2. Yöntem (iCal Takvim) -->
+      <div class="explainer-card">
+        <div class="explainer-icon-box" style="background:rgba(245,158,11,0.15); color:#F59E0B;">
+          <i data-lucide="calendar-sync"></i>
         </div>
-
-        <div class="step-item">
-          <div class="step-number" style="background:rgba(59,130,246,0.15); color:#3B82F6; border-color:rgba(59,130,246,0.3);">2</div>
-          <div>
-            <strong style="color:#fff; font-size:15px;">Paste .ics Feed URL into HostifyOS</strong>
-            <p style="font-size:13px; color:var(--text-muted); margin:4px 0 0 0;">HostifyOS polls your calendar every 15 minutes to detect new guest check-in & check-out dates automatically.</p>
-          </div>
-        </div>
-
-        <div class="step-item">
-          <div class="step-number" style="background:rgba(59,130,246,0.15); color:#3B82F6; border-color:rgba(59,130,246,0.3);">3</div>
-          <div>
-            <strong style="color:#fff; font-size:15px;">Automatic Time-Gated Smart Lock Codes</strong>
-            <p style="font-size:13px; color:var(--text-muted); margin:4px 0 0 0;">Smart lock PINs activate on check-in at 14:00 and expire on check-out at 11:00 without lifting a finger.</p>
-          </div>
-        </div>
-
-        <div style="margin-top:auto; padding-top:16px;">
-          <button onclick="openLoginModal('host')" class="btn-action" style="background:linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%); text-align:center;">
-            <span>Connect iCal in Host Portal →</span>
-          </button>
-        </div>
+        <h3 style="font-size:18px; font-weight:800; margin:0 0 8px 0; color:#fff;">3. Rezervasyonlar İçin: iCal Takvim Eşitleme</h3>
+        <p style="font-size:13px; color:var(--text-muted); margin:0 0 16px 0;">Eğer her yeni rezervasyonda tarihleri elle girmek istemiyorsanız; Airbnb Takvim linkinizi (.ics) bağlayın. Giriş günü ve saatine özel kapı şifresi misafire otomatik iletilir.</p>
+        <button onclick="openLoginModal('host')" class="btn-hero-secondary" style="padding:10px; font-size:12px; text-align:center; margin-top:auto; border-radius:8px; cursor:pointer;">
+          <span>Panelde iCal Bağla →</span>
+        </button>
       </div>
 
     </div>
@@ -395,11 +474,11 @@ const html = `<!DOCTYPE html>
   </div>
 
   <footer>
-    © 2026 HostifyOS.com — Ali Turan Inc. All Rights Reserved.
+    © 2026 HostifyOS.com — Ali Turan Inc. Tüm Hakları Saklıdır.
   </footer>
 
   <script>
-    // VIDEO SIMULATOR SCRIPT
+    // VIDEO TIMELINE SCRIPT
     let videoPlaying = true;
     let videoCurrentSec = 0;
     const videoTotalSec = 15;
@@ -427,24 +506,29 @@ const html = `<!DOCTYPE html>
       const s1 = document.getElementById('vslide-1');
       const s2 = document.getElementById('vslide-2');
       const s3 = document.getElementById('vslide-3');
-      const tag = document.getElementById('video-step-tag');
+      const p1 = document.getElementById('pill-1');
+      const p2 = document.getElementById('pill-2');
+      const p3 = document.getElementById('pill-3');
+
+      [p1, p2, p3].forEach(p => p && p.classList.remove('active'));
 
       if (videoCurrentSec < 5) {
-        s1.style.opacity = '1'; s1.style.pointerEvents = 'auto';
-        s2.style.opacity = '0'; s2.style.pointerEvents = 'none';
-        s3.style.opacity = '0'; s3.style.pointerEvents = 'none';
-        if (tag) tag.textContent = 'STEP 1 OF 3';
+        s1.classList.add('active'); s2.classList.remove('active'); s3.classList.remove('active');
+        if (p1) p1.classList.add('active');
       } else if (videoCurrentSec < 10) {
-        s1.style.opacity = '0'; s1.style.pointerEvents = 'none';
-        s2.style.opacity = '1'; s2.style.pointerEvents = 'auto';
-        s3.style.opacity = '0'; s3.style.pointerEvents = 'none';
-        if (tag) tag.textContent = 'STEP 2 OF 3';
+        s1.classList.remove('active'); s2.classList.add('active'); s3.classList.remove('active');
+        if (p2) p2.classList.add('active');
       } else {
-        s1.style.opacity = '0'; s1.style.pointerEvents = 'none';
-        s2.style.opacity = '0'; s2.style.pointerEvents = 'none';
-        s3.style.opacity = '1'; s3.style.pointerEvents = 'auto';
-        if (tag) tag.textContent = 'STEP 3 OF 3';
+        s1.classList.remove('active'); s2.classList.remove('active'); s3.classList.add('active');
+        if (p3) p3.classList.add('active');
       }
+    }
+
+    function jumpToStep(stepNum) {
+      if (stepNum === 1) videoCurrentSec = 0;
+      else if (stepNum === 2) videoCurrentSec = 5.1;
+      else if (stepNum === 3) videoCurrentSec = 10.1;
+      updateVideoUi();
     }
 
     function toggleVideoPlay() {
