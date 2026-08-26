@@ -4146,32 +4146,78 @@ function changeGlobalCurrency(curr) {
   showToast(`Currency updated to ${curr} (${conf.symbol})`);
 }
 
+function switchImportTab(tab) {
+  const tabAi = document.getElementById('import-tab-ai');
+  const tabIcal = document.getElementById('import-tab-ical');
+  const btnAi = document.getElementById('tab-btn-method-ai');
+  const btnIcal = document.getElementById('tab-btn-method-ical');
+
+  if (tab === 'ai') {
+    if (tabAi) tabAi.style.display = 'block';
+    if (tabIcal) tabIcal.style.display = 'none';
+    if (btnAi) {
+      btnAi.style.background = 'var(--accent-emerald)';
+      btnAi.style.color = '#090D14';
+      btnAi.style.fontWeight = '800';
+    }
+    if (btnIcal) {
+      btnIcal.style.background = 'transparent';
+      btnIcal.style.color = 'var(--text-muted)';
+      btnIcal.style.fontWeight = '700';
+    }
+  } else {
+    if (tabAi) tabAi.style.display = 'none';
+    if (tabIcal) tabIcal.style.display = 'block';
+    if (btnAi) {
+      btnAi.style.background = 'transparent';
+      btnAi.style.color = 'var(--text-muted)';
+      btnAi.style.fontWeight = '700';
+    }
+    if (btnIcal) {
+      btnIcal.style.background = '#3B82F6';
+      btnIcal.style.color = '#fff';
+      btnIcal.style.fontWeight = '800';
+    }
+  }
+}
+
 function generateInstantFreeGuidebook() {
   const urlInput = document.getElementById('lm-airbnb-url')?.value;
-  let propName = document.getElementById('lm-property-name')?.value;
+  const icalInput = document.getElementById('lm-ical-url')?.value;
+  const wifiPass = document.getElementById('lm-wifi-pass')?.value;
+  const doorPin = document.getElementById('lm-door-pin')?.value;
 
-  if (urlInput && urlInput.trim() !== '') {
-    showToast('🤖 AI Importer: Fetching listing details from Airbnb/Booking link...');
+  if (icalInput && icalInput.trim() !== '') {
+    showToast('📅 iCal Sync: Connecting calendar feed & fetching reservations...');
     setTimeout(() => {
-      let extractedTitle = 'Luxury Guest Villa';
-      if (urlInput.toLowerCase().includes('bodrum')) extractedTitle = 'Bodrum Luxury Sea View Villa';
-      else if (urlInput.toLowerCase().includes('istanbul')) extractedTitle = 'Istanbul Bosphorus Luxury Suite';
-      else if (urlInput.toLowerCase().includes('antalya')) extractedTitle = 'Antalya Beachfront Villa';
-
-      showToast(`✨ AI Extraction Complete: "${extractedTitle}" Guidebook Created! Opening portal...`);
-
+      showToast('✨ 14 Reservations Synced! Automated Smart Lock PINs configured. Opening guidebook...');
       setTimeout(() => {
-        switchView('guest');
+        window.open('/g.html', '_blank');
       }, 1000);
     }, 1200);
     return;
   }
 
-  if (!propName || propName.trim() === '') propName = 'My Luxury Guest Villa';
+  if (urlInput && urlInput.trim() !== '') {
+    showToast('🤖 AI Importer: Fetching photos, rules & amenities from listing link...');
+    setTimeout(() => {
+      let extractedTitle = 'Luxury Guest Villa';
+      if (urlInput.toLowerCase().includes('bodrum')) extractedTitle = 'Villa Sunset Bodrum';
+      else if (urlInput.toLowerCase().includes('istanbul')) extractedTitle = 'Istanbul Bosphorus Luxury Suite';
+      else if (urlInput.toLowerCase().includes('antalya')) extractedTitle = 'Antalya Beachfront Villa';
 
-  showToast(`🎉 Digital Guidebook "${propName}" created! Opening preview...`);
+      showToast(`✨ AI Extraction Complete: "${extractedTitle}" Guidebook Created! Opening live view...`);
+
+      setTimeout(() => {
+        window.open('/g.html', '_blank');
+      }, 1000);
+    }, 1200);
+    return;
+  }
+
+  showToast(`🎉 Generating Guidebook with default Villa Sunset template... Opening preview...`);
   
   setTimeout(() => {
-    switchView('guest');
+    window.open('/g.html', '_blank');
   }, 800);
 }

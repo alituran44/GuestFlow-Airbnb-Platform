@@ -1,0 +1,473 @@
+﻿const fs = require('fs');
+const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Import Airbnb & Booking.com Listings — HostifyOS Integration Guide</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --bg: #090D14;
+      --card-bg: #111827;
+      --text: #F8FAFC;
+      --text-muted: #94A3B8;
+      --accent: #10B981;
+      --border: rgba(255, 255, 255, 0.08);
+      --gradient: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.7;
+    }
+
+    .guide-container {
+      max-width: 1080px;
+      margin: 40px auto 80px auto;
+      padding: 0 24px;
+    }
+
+    .guide-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .guide-header h1 {
+      font-size: 38px;
+      font-weight: 800;
+      margin: 12px 0 16px 0;
+      letter-spacing: -1px;
+    }
+
+    /* Video Player Canvas / Frame Container */
+    .video-player-container {
+      background: #0D131F;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+      margin-bottom: 60px;
+      position: relative;
+    }
+
+    .video-top-bar {
+      background: #111827;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .video-screen-canvas {
+      position: relative;
+      height: 440px;
+      background: radial-gradient(circle at center, #131E33 0%, #090D14 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .video-step-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      transition: opacity 0.5s ease;
+    }
+
+    .video-controls-bar {
+      background: #111827;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .video-progress-track {
+      flex: 1;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .video-progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 999px;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    .btn-play-pause {
+      background: var(--accent);
+      border: none;
+      color: #090D14;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-weight: 800;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-play-pause:hover {
+      transform: scale(1.08);
+    }
+
+    /* Comparison & Steps Grid */
+    .methods-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 60px;
+    }
+
+    @media (max-width: 868px) {
+      .methods-grid {
+        grid-template-columns: 1fr;
+      }
+      .video-screen-canvas {
+        height: 360px;
+      }
+      .guide-header h1 {
+        font-size: 28px;
+      }
+    }
+
+    .method-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s ease;
+    }
+
+    .method-card:hover {
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+
+    .step-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .code-box {
+      background: #090D14;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-family: monospace;
+      font-size: 13px;
+      color: #38BDF8;
+      margin-top: 8px;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="top-nav">
+    <div class="nav-container">
+      <a href="/" class="brand" style="text-decoration:none;">
+        <img src="brand_logo.jpg" alt="HostifyOS Logo" class="brand-logo-img">
+        <span class="brand-name">HostifyOS</span>
+      </a>
+
+      <nav class="center-nav-links">
+        <a href="/" class="nav-link"><i data-lucide="home"></i> <span>Home</span></a>
+        <a href="/pricing.html" class="nav-link"><i data-lucide="tag"></i> <span>Pricing</span></a>
+        <a href="/blog.html" class="nav-link"><i data-lucide="book-open"></i> <span>Blog & Guides</span></a>
+        <a href="/import-guide.html" class="nav-link active"><i data-lucide="layers"></i> <span>How It Works</span></a>
+        <a href="/g.html" class="nav-link"><i data-lucide="smartphone"></i> <span>Guest Demo</span></a>
+      </nav>
+
+      <div class="nav-right">
+        <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Light / Dark Mode">
+          <i data-lucide="sun" id="theme-icon"></i>
+        </button>
+        <a href="/#free-guidebook-builder-section" class="btn-hero-primary" style="padding:8px 16px; font-size:13px; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+          <i data-lucide="sparkles"></i> <span>Import Listing Now</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="guide-container">
+    
+    <div class="guide-header">
+      <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent);">⚡ ZERO DATA RE-ENTRY PROTOCOL</span>
+      <h1>How to Import from Airbnb & Booking.com in 15 Seconds</h1>
+      <p style="color:var(--text-muted); font-size:17px; max-width:680px; margin:0 auto;">Never type your property details twice. Discover how HostifyOS automatically extracts photos, rules, parking, and calendars with 1-click.</p>
+    </div>
+
+    <!-- Interactive Video Walkthrough Player -->
+    <div class="video-player-container">
+      <div class="video-top-bar">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="width:10px; height:10px; border-radius:50%; background:#EF4444; display:inline-block;"></span>
+          <span style="width:10px; height:10px; border-radius:50%; background:#F59E0B; display:inline-block;"></span>
+          <span style="width:10px; height:10px; border-radius:50%; background:#10B981; display:inline-block;"></span>
+          <span style="font-size:12px; font-weight:700; color:var(--text-muted); margin-left:8px;">HostifyOS 4K Interactive Workflow Simulation</span>
+        </div>
+        <span style="font-size:11px; background:rgba(16,185,129,0.2); color:var(--accent); padding:2px 8px; border-radius:99px; font-weight:800;" id="video-step-tag">STEP 1 OF 3</span>
+      </div>
+
+      <div class="video-screen-canvas" id="videoCanvas">
+        
+        <!-- Video Slide 1: Copy Link -->
+        <div class="video-step-overlay" id="vslide-1" style="opacity:1;">
+          <div style="width:60px; height:60px; border-radius:18px; background:rgba(255,56,92,0.15); border:1px solid rgba(255,56,92,0.4); display:flex; align-items:center; justify-content:center; color:#FF385C; margin-bottom:16px;">
+            <i data-lucide="link" style="width:32px; height:32px;"></i>
+          </div>
+          <h2 style="font-size:24px; font-weight:800; margin:0 0 8px 0; color:#fff;">Step 1: Copy Your Airbnb or Booking.com URL</h2>
+          <p style="color:var(--text-muted); font-size:14px; max-width:480px;">Simply open your Airbnb listing and copy the share link from your browser or mobile app.</p>
+          <div class="code-box">https://www.airbnb.com/rooms/1149283748293</div>
+        </div>
+
+        <!-- Video Slide 2: AI Parsing -->
+        <div class="video-step-overlay" id="vslide-2" style="opacity:0; pointer-events:none;">
+          <div style="width:60px; height:60px; border-radius:18px; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.4); display:flex; align-items:center; justify-content:center; color:var(--accent); margin-bottom:16px;">
+            <i data-lucide="cpu" style="width:32px; height:32px;"></i>
+          </div>
+          <h2 style="font-size:24px; font-weight:800; margin:0 0 8px 0; color:#fff;">Step 2: AI Extracts All Photos & Amenities in 3 Seconds</h2>
+          <p style="color:var(--text-muted); font-size:14px; max-width:480px;">HostifyOS AI parses the cover photo, bedroom specs, parking rules, A/C instructions, and check-in times automatically.</p>
+          <div style="display:flex; gap:12px; margin-top:12px;">
+            <span style="background:rgba(16,185,129,0.2); color:var(--accent); font-size:12px; padding:4px 10px; border-radius:6px;">✓ 12 HD Photos</span>
+            <span style="background:rgba(16,185,129,0.2); color:var(--accent); font-size:12px; padding:4px 10px; border-radius:6px;">✓ House Rules</span>
+            <span style="background:rgba(16,185,129,0.2); color:var(--accent); font-size:12px; padding:4px 10px; border-radius:6px;">✓ Check-in 14:00</span>
+          </div>
+        </div>
+
+        <!-- Video Slide 3: QR & Guidebook Ready -->
+        <div class="video-step-overlay" id="vslide-3" style="opacity:0; pointer-events:none;">
+          <div style="width:60px; height:60px; border-radius:18px; background:rgba(59,130,246,0.15); border:1px solid rgba(59,130,246,0.4); display:flex; align-items:center; justify-content:center; color:#3B82F6; margin-bottom:16px;">
+            <i data-lucide="qr-code" style="width:32px; height:32px;"></i>
+          </div>
+          <h2 style="font-size:24px; font-weight:800; margin:0 0 8px 0; color:#fff;">Step 3: Instant Scannable QR Code & Guidebook Live!</h2>
+          <p style="color:var(--text-muted); font-size:14px; max-width:480px;">Print the A5 acrylic stand or send the link via WhatsApp. Your guests enjoy 1-tap Wi-Fi, door codes, taxi calling, and local food guides.</p>
+          <a href="/g.html" target="_blank" class="btn-action" style="width:auto; margin-top:12px; padding:10px 20px; font-size:13px;">
+            <i data-lucide="external-link"></i> <span>View Generated Guest Guidebook</span>
+          </a>
+        </div>
+
+      </div>
+
+      <div class="video-controls-bar">
+        <button class="btn-play-pause" id="btnVideoToggle" onclick="toggleVideoPlay()">
+          <i data-lucide="pause" id="videoPlayIcon"></i>
+        </button>
+        <span style="font-size:12px; font-weight:700; color:#fff; min-width:40px;" id="videoTimeDisplay">0:00</span>
+        <div class="video-progress-track" onclick="scrubVideo(event)">
+          <div class="video-progress-fill" id="videoProgressFill"></div>
+        </div>
+        <span style="font-size:12px; color:var(--text-muted);">0:15</span>
+      </div>
+    </div>
+
+    <!-- The 2 Complete Import Methods Detailed -->
+    <div class="methods-grid">
+      
+      <!-- Method 1: AI Instant URL Extractor -->
+      <div class="method-card">
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+          <div style="width:44px; height:44px; border-radius:12px; background:rgba(16,185,129,0.15); display:flex; align-items:center; justify-content:center; color:var(--accent);">
+            <i data-lucide="sparkles"></i>
+          </div>
+          <div>
+            <h3 style="margin:0; font-size:20px; font-weight:800;">Method 1: AI 1-Click Link Import</h3>
+            <span style="font-size:12px; color:var(--accent); font-weight:700;">Best for instant setup in 15 seconds</span>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div>
+            <strong style="color:#fff; font-size:15px;">Copy Listing URL</strong>
+            <p style="font-size:13px; color:var(--text-muted); margin:4px 0 0 0;">Go to Airbnb, Vrbo, or Booking.com and copy your property's public web link.</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div>
+            <strong style="color:#fff; font-size:15px;">Paste in HostifyOS AI Importer</strong>
+            <p style="font-size:13px; color:var(--text-muted); margin:4px 0 0 0;">Paste the URL into our free builder box on the homepage or in your Host Dashboard.</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div>
+            <strong style="color:#fff; font-size:15px;">Enter Wi-Fi & Door Lock PIN</strong>
+            <p style="font-size:13px; color:var(--text-muted); margin:4px 0 0 0;">Because platforms hide Wi-Fi passwords from public pages for safety, simply enter your Wi-Fi password and PIN once.</p>
+          </div>
+        </div>
+
+        <div style="margin-top:auto; padding-top:16px;">
+          <a href="/#free-guidebook-builder-section" class="btn-action" style="text-align:center;">
+            <span>Try AI URL Import Now →</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Method 2: iCal Calendar 2-Way Auto-Sync -->
+      <div class="method-card">
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+          <div style="width:44px; height:44px; border-radius:12px; background:rgba(59,130,246,0.15); display:flex; align-items:center; justify-content:center; color:#3B82F6;">
+            <i data-lucide="calendar-sync"></i>
+          </div>
+          <div>
+            <h3 style="margin:0; font-size:20px; font-weight:800;">Method 2: iCal Calendar Sync</h3>
+            <span style="font-size:12px; color:#3B82F6; font-weight:700;">Best for automated reservations & PIN codes</span>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number" style="background:rgba(59,130,246,0.15); color:#3B82F6; border-color:rgba(59,130,246,0.3);">1</div>
+          <div>
+            <strong style="color:#fff; font-size:15px;">Export Airbnb / Booking iCal (.ics)</strong>
+            <p style="font-size:13px; color:var(--text-muted); margin:4px 0 0 0;">In Airbnb Host Portal: Go to <em>Listing → Pricing and availability → Calendar sync → Export Calendar</em>.</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number" style="background:rgba(59,130,246,0.15); color:#3B82F6; border-color:rgba(59,130,246,0.3);">2</div>
+          <div>
+            <strong style="color:#fff; font-size:15px;">Paste .ics Feed URL into HostifyOS</strong>
+            <p style="font-size:13px; color:var(--text-muted); margin:4px 0 0 0;">HostifyOS polls your calendar every 15 minutes to detect new guest check-in & check-out dates automatically.</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number" style="background:rgba(59,130,246,0.15); color:#3B82F6; border-color:rgba(59,130,246,0.3);">3</div>
+          <div>
+            <strong style="color:#fff; font-size:15px;">Automatic Time-Gated Smart Lock Codes</strong>
+            <p style="font-size:13px; color:var(--text-muted); margin:4px 0 0 0;">Smart lock PINs activate on check-in at 14:00 and expire on check-out at 11:00 without lifting a finger.</p>
+          </div>
+        </div>
+
+        <div style="margin-top:auto; padding-top:16px;">
+          <button onclick="openLoginModal('host')" class="btn-action" style="background:linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%); text-align:center;">
+            <span>Connect iCal in Host Portal →</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    © 2026 HostifyOS.com — Ali Turan Inc. All Rights Reserved.
+  </footer>
+
+  <script>
+    // VIDEO SIMULATOR SCRIPT
+    let videoPlaying = true;
+    let videoCurrentSec = 0;
+    const videoTotalSec = 15;
+    let videoInterval = null;
+
+    function startVideoTimer() {
+      if (videoInterval) clearInterval(videoInterval);
+      videoInterval = setInterval(() => {
+        if (!videoPlaying) return;
+        videoCurrentSec += 0.1;
+        if (videoCurrentSec >= videoTotalSec) {
+          videoCurrentSec = 0;
+        }
+        updateVideoUi();
+      }, 100);
+    }
+
+    function updateVideoUi() {
+      const progressPercent = (videoCurrentSec / videoTotalSec) * 100;
+      document.getElementById('videoProgressFill').style.width = progressPercent + '%';
+      
+      const secFormatted = Math.floor(videoCurrentSec);
+      document.getElementById('videoTimeDisplay').textContent = '0:' + (secFormatted < 10 ? '0' : '') + secFormatted;
+
+      const s1 = document.getElementById('vslide-1');
+      const s2 = document.getElementById('vslide-2');
+      const s3 = document.getElementById('vslide-3');
+      const tag = document.getElementById('video-step-tag');
+
+      if (videoCurrentSec < 5) {
+        s1.style.opacity = '1'; s1.style.pointerEvents = 'auto';
+        s2.style.opacity = '0'; s2.style.pointerEvents = 'none';
+        s3.style.opacity = '0'; s3.style.pointerEvents = 'none';
+        if (tag) tag.textContent = 'STEP 1 OF 3';
+      } else if (videoCurrentSec < 10) {
+        s1.style.opacity = '0'; s1.style.pointerEvents = 'none';
+        s2.style.opacity = '1'; s2.style.pointerEvents = 'auto';
+        s3.style.opacity = '0'; s3.style.pointerEvents = 'none';
+        if (tag) tag.textContent = 'STEP 2 OF 3';
+      } else {
+        s1.style.opacity = '0'; s1.style.pointerEvents = 'none';
+        s2.style.opacity = '0'; s2.style.pointerEvents = 'none';
+        s3.style.opacity = '1'; s3.style.pointerEvents = 'auto';
+        if (tag) tag.textContent = 'STEP 3 OF 3';
+      }
+    }
+
+    function toggleVideoPlay() {
+      videoPlaying = !videoPlaying;
+      const icon = document.getElementById('videoPlayIcon');
+      if (icon) {
+        icon.setAttribute('data-lucide', videoPlaying ? 'pause' : 'play');
+        lucide.createIcons();
+      }
+    }
+
+    function scrubVideo(e) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const pct = clickX / rect.width;
+      videoCurrentSec = pct * videoTotalSec;
+      updateVideoUi();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) lucide.createIcons();
+      startVideoTimer();
+    });
+  </script>
+</body>
+</html>

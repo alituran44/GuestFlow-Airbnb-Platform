@@ -309,6 +309,11 @@
           <span>Blog & Guides</span>
         </a>
 
+        <a href="/import-guide.html" class="nav-link" style="text-decoration:none;">
+          <i data-lucide="layers"></i>
+          <span>How It Works</span>
+        </a>
+
         <a href="/g.html" class="nav-link" style="text-decoration:none;">
           <i data-lucide="smartphone"></i>
           <span>Guest View</span>
@@ -607,46 +612,76 @@
       <!-- INSTANT FREE GUIDEBOOK BUILDER & AI LISTING IMPORTER LEAD MAGNET SECTION -->
       <div class="landing-section" id="free-guidebook-builder-section">
         <div class="lead-magnet-box">
-          <div style="text-align:center; max-width:640px; margin:0 auto 32px auto;">
-            <span class="badge-tag" style="background:rgba(16,185,129,0.2); color:var(--accent-emerald);">⚡ AI ONE-CLICK GUIDEBOOK GENERATOR</span>
-            <h2 style="font-size:32px; margin-top:8px;">Import from Airbnb or Booking.com Link</h2>
-            <p style="color:var(--text-muted);">Paste your listing link below. Our AI will automatically extract property photos, Wi-Fi details, house rules, and generate a live Digital Guidebook & QR Code in seconds.</p>
+          <div style="text-align:center; max-width:680px; margin:0 auto 28px auto;">
+            <span class="badge-tag" style="background:rgba(16,185,129,0.2); color:var(--accent-emerald);">⚡ ZERO DATA RE-ENTRY PROTOCOL</span>
+            <h2 style="font-size:34px; margin-top:8px; font-weight:800;">Import from Airbnb or Booking.com in 15 Seconds</h2>
+            <p style="color:var(--text-muted); font-size:15px;">Never re-type your listing info. Choose your preferred import method below to auto-generate your live Digital Guidebook & QR Code.</p>
+            <div style="margin-top:12px;">
+              <a href="/import-guide.html" style="color:var(--accent-emerald); font-weight:700; font-size:14px; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+                <i data-lucide="play-circle"></i>
+                <span>Watch Video & Step-by-Step Integration Guide →</span>
+              </a>
+            </div>
           </div>
 
-          <div style="max-width:560px; margin:0 auto; background:rgba(15,23,42,0.85); border:1px solid var(--border-subtle); padding:28px; border-radius:20px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+          <div style="max-width:600px; margin:0 auto; background:rgba(15,23,42,0.9); border:1px solid var(--border-subtle); padding:28px; border-radius:20px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
             
-            <!-- AirBnb / Booking URL Input Field -->
-            <div style="margin-bottom:16px;">
-              <label style="font-size:12px; font-weight:700; color:var(--accent-emerald); display:flex; align-items:center; gap:6px; margin-bottom:8px;">
-                <i data-lucide="link"></i>
-                <span>Paste Airbnb, Vrbo, or Booking.com Listing URL</span>
-              </label>
-              <input type="url" id="lm-airbnb-url" placeholder="e.g. https://www.airbnb.com/rooms/12345678" style="width:100%; padding:14px; border-radius:12px; background:#0B0F17; border:1px solid rgba(16,185,129,0.3); color:#fff; font-size:14px;">
+            <!-- Import Method Mode Tabs -->
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:20px; background:rgba(0,0,0,0.4); padding:4px; border-radius:12px; border:1px solid var(--border-subtle);">
+              <button id="tab-btn-method-ai" onclick="switchImportTab('ai')" style="background:var(--accent-emerald); color:#090D14; border:none; padding:10px; border-radius:8px; font-size:13px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;">
+                <i data-lucide="sparkles" style="width:16px; height:16px;"></i>
+                <span>Method 1: AI URL Import</span>
+              </button>
+              <button id="tab-btn-method-ical" onclick="switchImportTab('ical')" style="background:transparent; color:var(--text-muted); border:none; padding:10px; border-radius:8px; font-size:13px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;">
+                <i data-lucide="calendar-sync" style="width:16px; height:16px;"></i>
+                <span>Method 2: iCal Sync</span>
+              </button>
             </div>
 
-            <div style="display:flex; align-items:center; gap:12px; margin:16px 0; color:var(--text-muted); font-size:12px;">
-              <div style="flex:1; height:1px; background:rgba(255,255,255,0.1);"></div>
-              <span>OR enter details manually</span>
-              <div style="flex:1; height:1px; background:rgba(255,255,255,0.1);"></div>
-            </div>
-
-            <!-- Manual Fields Fallback -->
-            <div style="margin-bottom:14px;">
-              <label style="font-size:12px; font-weight:700; color:var(--text-secondary); display:block; margin-bottom:6px;">Property Name / Title</label>
-              <input type="text" id="lm-property-name" placeholder="e.g. Luxury Sea View Villa Bodrum" style="width:100%; padding:12px; border-radius:10px; background:#0B0F17; border:1px solid var(--border-subtle); color:#fff; font-size:14px;">
-            </div>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
-              <div>
-                <label style="font-size:12px; font-weight:700; color:var(--text-secondary); display:block; margin-bottom:6px;">Wi-Fi Name (SSID)</label>
-                <input type="text" id="lm-wifi-ssid" placeholder="e.g. Villa_Guest_5G" style="width:100%; padding:12px; border-radius:10px; background:#0B0F17; border:1px solid var(--border-subtle); color:#fff; font-size:14px;">
-              </div>
-              <div>
-                <label style="font-size:12px; font-weight:700; color:var(--text-secondary); display:block; margin-bottom:6px;">Wi-Fi Password</label>
-                <input type="text" id="lm-wifi-pass" placeholder="e.g. Welcome2026" style="width:100%; padding:12px; border-radius:10px; background:#0B0F17; border:1px solid var(--border-subtle); color:#fff; font-size:14px;">
+            <!-- Tab Content 1: AI URL -->
+            <div id="import-tab-ai">
+              <div style="margin-bottom:16px;">
+                <label style="font-size:12px; font-weight:700; color:var(--accent-emerald); display:flex; align-items:center; gap:6px; margin-bottom:8px;">
+                  <i data-lucide="link"></i>
+                  <span>Paste Airbnb, Vrbo, or Booking.com Listing URL</span>
+                </label>
+                <input type="url" id="lm-airbnb-url" placeholder="e.g. https://www.airbnb.com/rooms/1149283748293" style="width:100%; padding:14px; border-radius:12px; background:#0B0F17; border:1px solid rgba(16,185,129,0.3); color:#fff; font-size:14px; box-sizing:border-box;">
               </div>
             </div>
 
-            <button class="btn-hero-primary" onclick="generateInstantFreeGuidebook()" style="width:100%; padding:16px; font-size:16px; font-weight:800; border-radius:12px;">
+            <!-- Tab Content 2: iCal Feed -->
+            <div id="import-tab-ical" style="display:none;">
+              <div style="margin-bottom:16px;">
+                <label style="font-size:12px; font-weight:700; color:#3B82F6; display:flex; align-items:center; gap:6px; margin-bottom:8px;">
+                  <i data-lucide="calendar"></i>
+                  <span>Paste Airbnb / Booking iCal (.ics) Calendar Feed URL</span>
+                </label>
+                <input type="url" id="lm-ical-url" placeholder="e.g. https://www.airbnb.com/calendar/ical/12345.ics?s=abcdef..." style="width:100%; padding:14px; border-radius:12px; background:#0B0F17; border:1px solid rgba(59,130,246,0.4); color:#fff; font-size:14px; box-sizing:border-box;">
+                <div style="font-size:11px; color:var(--text-muted); margin-top:6px;">
+                  💡 Found in Airbnb Host Portal → Listing → Pricing & Availability → Sync Calendar.
+                </div>
+              </div>
+            </div>
+
+            <!-- Safety / Private Details Section (Wi-Fi & Door PIN) -->
+            <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-subtle); border-radius:12px; padding:16px; margin-bottom:18px;">
+              <div style="font-size:12px; font-weight:700; color:#fff; margin-bottom:10px; display:flex; align-items:center; gap:6px;">
+                <i data-lucide="shield-check" style="color:var(--accent-emerald); width:16px; height:16px;"></i>
+                <span>Private Security Details (Kept encrypted for your guests)</span>
+              </div>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                <div>
+                  <label style="font-size:11px; font-weight:700; color:var(--text-secondary); display:block; margin-bottom:4px;">Wi-Fi Password</label>
+                  <input type="text" id="lm-wifi-pass" placeholder="e.g. SunsetBodrum2026" style="width:100%; padding:10px; border-radius:8px; background:#0B0F17; border:1px solid var(--border-subtle); color:#fff; font-size:13px; box-sizing:border-box;">
+                </div>
+                <div>
+                  <label style="font-size:11px; font-weight:700; color:var(--text-secondary); display:block; margin-bottom:4px;">Door Smart Lock PIN</label>
+                  <input type="text" id="lm-door-pin" placeholder="e.g. 8492#" style="width:100%; padding:10px; border-radius:8px; background:#0B0F17; border:1px solid var(--border-subtle); color:#fff; font-size:13px; box-sizing:border-box;">
+                </div>
+              </div>
+            </div>
+
+            <button class="btn-hero-primary" onclick="generateInstantFreeGuidebook()" style="width:100%; padding:16px; font-size:16px; font-weight:800; border-radius:12px; display:flex; align-items:center; justify-content:center; gap:8px;">
               <i data-lucide="sparkles"></i>
               <span>Auto-Generate Digital Guidebook & QR Code</span>
             </button>
