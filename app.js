@@ -1987,7 +1987,8 @@ function handleSocialLogin(provider) {
   }
 
   if (provider === 'Apple') {
-    handleAppleLogin();
+    showToast(`⚡ Apple ID ile Giriş Yakında! Şu an Google veya E-posta ile 14 gün ücretsiz başlayabilirsiniz.`);
+    switchHostAuthTab('signup');
     return;
   }
 
