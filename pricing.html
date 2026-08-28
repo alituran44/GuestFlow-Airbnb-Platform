@@ -13,6 +13,7 @@
       --text: #F8FAFC;
       --text-muted: #94A3B8;
       --accent: #10B981;
+      --accent-hover: #059669;
       --border: rgba(255, 255, 255, 0.08);
       --gradient: linear-gradient(135deg, #10B981 0%, #059669 100%);
     }
@@ -61,7 +62,7 @@
       color: #fff;
     }
     .container {
-      max-width: 1100px;
+      max-width: 1120px;
       margin: 50px auto 80px auto;
       padding: 0 24px;
     }
@@ -238,7 +239,7 @@
       font-weight: 800;
       cursor: pointer;
       width: 100%;
-      margin: 8px 0 10px 0;
+      margin: 8px 0 24px 0;
       transition: opacity 0.2s ease, transform 0.1s ease;
     }
     .btn-plan:hover {
@@ -249,22 +250,6 @@
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border);
       color: #fff;
-    }
-    .btn-crypto-alt {
-      width: 100%;
-      padding: 11px;
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      color: var(--accent);
-      font-weight: 700;
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 13px;
-      margin-bottom: 24px;
-      transition: all 0.2s ease;
-    }
-    .btn-crypto-alt:hover {
-      background: rgba(16, 185, 129, 0.2);
     }
     .features-list {
       list-style: none;
@@ -287,13 +272,13 @@
       font-weight: 800;
     }
 
-    /* MODAL */
+    /* 4-TAB MODAL STYLES */
     .modal-backdrop {
       display: none;
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, 0.88);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
       z-index: 999999;
       justify-content: center;
       align-items: center;
@@ -304,14 +289,14 @@
     }
     .modal-card {
       background: #111827;
-      border: 1px solid rgba(16, 185, 129, 0.4);
+      border: 1px solid rgba(16, 185, 129, 0.35);
       border-radius: 24px;
-      padding: 36px 32px;
-      max-width: 440px;
+      padding: 32px;
+      max-width: 520px;
       width: 100%;
       text-align: center;
       position: relative;
-      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95);
       animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
     @keyframes modalPop {
@@ -331,40 +316,76 @@
       cursor: pointer;
       font-size: 16px;
     }
-    .qr-box {
+
+    /* 4 TABS */
+    .payment-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      background: #090D14;
+      padding: 6px;
+      border-radius: 14px;
+      margin: 20px 0;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .pay-tab-btn {
+      background: transparent;
+      border: none;
+      color: #94A3B8;
+      padding: 10px 4px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .pay-tab-btn.active {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10B981;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .tab-content {
+      display: none;
+      text-align: left;
+    }
+    .tab-content.active {
+      display: block;
+    }
+
+    .tab-box {
       background: #090D14;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 18px;
-      padding: 20px;
-      margin: 18px 0;
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 16px;
     }
-    .qr-img {
-      width: 170px;
-      height: 170px;
-      border-radius: 12px;
-      margin-bottom: 10px;
-    }
-    .wallet-input-row {
+    .copy-row {
       display: flex;
       gap: 8px;
+      margin-top: 8px;
     }
-    .wallet-input {
+    .copy-input {
       flex: 1;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
+      border-radius: 8px;
       color: #10B981;
       font-family: monospace;
       font-size: 11px;
-      padding: 10px 12px;
+      padding: 8px 10px;
       font-weight: 700;
     }
     .btn-copy {
       background: #10B981;
       color: #090D14;
       border: none;
-      border-radius: 10px;
-      padding: 10px 16px;
+      border-radius: 8px;
+      padding: 8px 14px;
       font-weight: 800;
       cursor: pointer;
       font-size: 12px;
@@ -409,7 +430,7 @@
     <div class="hero-pricing">
       <span class="badge">Simple Transparent Pricing</span>
       <h1>Scale Your Short-Term Rentals</h1>
-      <p class="sub">Choose the plan that fits your property scale. Instant activation & 14-day money-back guarantee.</p>
+      <p class="sub">Choose the plan that fits your property scale. 4 instant payment methods & 14-day money-back guarantee.</p>
 
       <!-- BILLING TOGGLE -->
       <div class="toggle-container">
@@ -451,8 +472,7 @@
           <div class="plan-desc">For scaling hosts, villas, and superhosts.</div>
           <div class="plan-price" id="price-pro">$19 <span class="period">/ month</span></div>
           <div class="billing-hint" id="hint-pro">Billed monthly</div>
-          <button class="btn-plan" onclick="openCryptoModal('Pro Host Plan', 19)">Upgrade to Pro Host</button>
-          <button class="btn-crypto-alt" onclick="openCryptoModal('Pro Host Plan', 19)">💎 Pay with Binance USDT</button>
+          <button class="btn-plan" onclick="openMultiPaymentModal('Pro Host Plan', 19)">Upgrade to Pro ($19)</button>
         </div>
         <ul class="features-list">
           <li>Up to 10 Property Listings</li>
@@ -471,8 +491,7 @@
           <div class="plan-desc">For boutique hotels & property teams.</div>
           <div class="plan-price" id="price-enterprise">$39 <span class="period">/ month</span></div>
           <div class="billing-hint" id="hint-enterprise">Billed monthly</div>
-          <button class="btn-plan outline" onclick="openCryptoModal('Enterprise & Hotel Plan', 39)">Get Enterprise Plan</button>
-          <button class="btn-crypto-alt" onclick="openCryptoModal('Enterprise & Hotel Plan', 39)">💎 Pay with Binance USDT</button>
+          <button class="btn-plan outline" onclick="openMultiPaymentModal('Enterprise & Hotel Plan', 39)">Get Enterprise ($39)</button>
         </div>
         <ul class="features-list">
           <li>Unlimited Property Listings</li>
@@ -486,37 +505,102 @@
     </div>
   </div>
 
-  <!-- DIRECT BINANCE USDT CRYPTO CHECKOUT MODAL -->
-  <div id="cryptoModal" class="modal-backdrop">
+  <!-- 4-TAB MULTI-PAYMENT CHECKOUT MODAL -->
+  <div id="paymentModal" class="modal-backdrop">
     <div class="modal-card">
-      <button class="modal-close-btn" onclick="closeCryptoModal()">✕</button>
+      <button class="modal-close-btn" onclick="closePaymentModal()">✕</button>
       
-      <span style="background:rgba(16,185,129,0.15); color:#10B981; padding:4px 14px; border-radius:99px; font-size:11px; font-weight:800; text-transform:uppercase;">⚡ Instant Binance USDT Checkout</span>
-      <h2 id="modalPlanTitle" style="margin:12px 0 4px 0; font-size:22px; font-weight:800;">Pro Host Plan</h2>
-      <div id="modalPlanAmount" style="font-size:34px; font-weight:800; color:#10B981; margin-bottom:6px;">$19 USDT</div>
-      <p style="color:#94A3B8; font-size:12px; margin:0 0 14px 0;">Zero bank restrictions • 100% instant activation</p>
+      <span style="background:rgba(16,185,129,0.15); color:#10B981; padding:4px 14px; border-radius:99px; font-size:11px; font-weight:800; text-transform:uppercase;">⚡ HostifyOS Secure Checkout</span>
+      <h2 id="modalPlanTitle" style="margin:10px 0 2px 0; font-size:22px; font-weight:800;">Pro Host Plan</h2>
+      <div id="modalPlanAmount" style="font-size:32px; font-weight:800; color:#10B981; margin-bottom:4px;">$19 USD</div>
+      <p style="color:#94A3B8; font-size:12px; margin:0;">Select your preferred payment method:</p>
 
-      <div class="qr-box">
-        <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa&color=090D14&bgcolor=10B981" alt="Binance QR Code">
-        <div style="color:#10B981; font-size:12px; font-weight:700; margin-bottom:8px;">Network: Tron (TRC-20)</div>
-        
-        <div class="wallet-input-row">
-          <input type="text" id="walletAddr" class="wallet-input" readonly value="TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa">
-          <button class="btn-copy" onclick="copyAddr()">Copy</button>
+      <!-- 4 TABS NAVIGATION -->
+      <div class="payment-tabs">
+        <button id="tab-btn-crypto" class="pay-tab-btn active" onclick="switchPayTab('crypto')">
+          <span>💎 USDT</span>
+          <span style="font-size:10px; opacity:0.8;">Crypto</span>
+        </button>
+        <button id="tab-btn-card" class="pay-tab-btn" onclick="switchPayTab('card')">
+          <span>💳 Card</span>
+          <span style="font-size:10px; opacity:0.8;">Apple Pay</span>
+        </button>
+        <button id="tab-btn-iban" class="pay-tab-btn" onclick="switchPayTab('iban')">
+          <span>🏦 Bank</span>
+          <span style="font-size:10px; opacity:0.8;">IBAN/FAST</span>
+        </button>
+        <button id="tab-btn-wa" class="pay-tab-btn" onclick="switchPayTab('wa')">
+          <span>💬 Chat</span>
+          <span style="font-size:10px; opacity:0.8;">WhatsApp</span>
+        </button>
+      </div>
+
+      <!-- TAB 1: BINANCE USDT (TRC-20) -->
+      <div id="tab-content-crypto" class="tab-content active">
+        <div class="tab-box" style="text-align:center;">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa&color=090D14&bgcolor=10B981" alt="Binance QR" style="width:140px; height:140px; border-radius:10px; margin-bottom:8px;">
+          <div style="color:#10B981; font-size:11px; font-weight:700; margin-bottom:6px;">Network: Tron (TRC-20) • Zero Fees</div>
+          <div class="copy-row">
+            <input type="text" id="cryptoAddr" class="copy-input" readonly value="TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa">
+            <button class="btn-copy" onclick="copyValue('cryptoAddr', 'Binance USDT Address Copied!')">Copy</button>
+          </div>
         </div>
+        <input type="email" id="cryptoEmail" placeholder="Account Email (for instant activation)" style="width:100%; box-sizing:border-box; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px 12px; margin-bottom:10px;">
+        <button class="btn-plan" style="margin:0;" onclick="submitCryptoPay()">
+          ✅ I Have Sent USDT (Instant Activation)
+        </button>
       </div>
 
-      <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
-        <input type="email" id="userEmail" placeholder="Your Account Email (for activation)" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:12px 14px; box-sizing:border-box;">
-        <input type="text" id="userTxid" placeholder="Transaction TXID / Hash (Optional)" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:12px 14px; box-sizing:border-box;">
+      <!-- TAB 2: CREDIT CARD & APPLE PAY -->
+      <div id="tab-content-card" class="tab-content">
+        <div class="tab-box">
+          <div style="font-weight:700; color:#fff; margin-bottom:4px; font-size:14px;">Online Card Checkout (Visa / Mastercard / Apple Pay)</div>
+          <p style="color:#94A3B8; font-size:12px; margin:0 0 12px 0;">3D Secure protected global payment gateway with instant invoice generation.</p>
+          <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); padding:12px; border-radius:10px; font-size:12px; color:#CBD5E1;">
+            ✓ All International & Turkish Cards Accepted<br>
+            ✓ Apple Pay & Google Pay Supported<br>
+            ✓ Instant License Activation
+          </div>
+        </div>
+        <button class="btn-plan" style="margin:0;" onclick="openCardPayment()">
+          💳 Proceed to Card Checkout (USD/TL)
+        </button>
       </div>
 
-      <button class="btn-plan" style="margin:0;" onclick="submitPayment()">
-        ✅ I Have Sent the Payment (Instant Activation)
-      </button>
+      <!-- TAB 3: BANK HAVALESİ / FAST / IBAN -->
+      <div id="tab-content-iban" class="tab-content">
+        <div class="tab-box">
+          <div style="font-size:12px; color:#94A3B8; margin-bottom:4px;">Account Holder: <strong style="color:#fff;">Ali Turan Inc. (Ali Turan)</strong></div>
+          <div style="font-size:12px; color:#94A3B8; margin-bottom:8px;">Bank: <strong style="color:#fff;">Türkiye / Global SWIFT & FAST</strong></div>
+          
+          <div style="font-size:11px; color:#10B981; font-weight:700;">IBAN (TL / USD / EUR):</div>
+          <div class="copy-row">
+            <input type="text" id="ibanVal" class="copy-input" readonly value="TR94 0006 2000 0001 2345 6789 01">
+            <button class="btn-copy" onclick="copyValue('ibanVal', 'IBAN Copied to Clipboard!')">Copy</button>
+          </div>
+        </div>
+        <p style="font-size:11px; color:#94A3B8; margin:0 0 10px 0; text-align:center;">* Açıklama kısmına kayıtlı e-posta adresinizi yazınız.</p>
+        <button class="btn-plan" style="margin:0;" onclick="notifyBankTransfer()">
+          🏦 Bildir: Havale / EFT Yaptım
+        </button>
+      </div>
+
+      <!-- TAB 4: WHATSAPP VIP CONCIERGE -->
+      <div id="tab-content-wa" class="tab-content">
+        <div class="tab-box" style="text-align:center;">
+          <div style="font-size:32px; margin-bottom:6px;">💬</div>
+          <div style="font-weight:700; color:#fff; font-size:15px; margin-bottom:4px;">HostifyOS VIP Concierge Support</div>
+          <p style="color:#94A3B8; font-size:12px; margin:0;">Birebir müşteri temsilcimizle WhatsApp üzerinden iletişime geçerek özel faturalandırma ve anında kurulum yapabilirsiniz.</p>
+        </div>
+        <button class="btn-plan" style="margin:0; background:linear-gradient(135deg, #25D366 0%, #128C7E 100%);" onclick="openWhatsAppCheckout()">
+          💬 WhatsApp ile Sipariş Ver & Destek Al
+        </button>
+      </div>
+
     </div>
   </div>
 
+  <!-- FOOTER -->
   <footer>
     <div style="margin-bottom:12px; display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
       <a href="/terms.html">Terms of Service</a>
@@ -529,6 +613,7 @@
 
   <script>
     let isAnnual = false;
+    let selectedPlan = { name: 'Pro Host Plan', price: 19 };
 
     function toggleBillingCycle() {
       isAnnual = document.getElementById('billing-toggle').checked;
@@ -557,37 +642,67 @@
       }
     }
 
-    function openCryptoModal(planName, monthlyPrice) {
+    function openMultiPaymentModal(planName, monthlyPrice) {
       let finalPrice = monthlyPrice;
       if (isAnnual) {
         finalPrice = (monthlyPrice === 19) ? 168 : 348;
       }
-      const periodText = isAnnual ? 'Annual ($' + finalPrice + ')' : 'Monthly ($' + finalPrice + ')';
+      selectedPlan = {
+        name: planName + (isAnnual ? ' (Annual)' : ' (Monthly)'),
+        price: finalPrice
+      };
+
+      document.getElementById('modalPlanTitle').textContent = selectedPlan.name;
+      document.getElementById('modalPlanAmount').textContent = '$' + selectedPlan.price + ' USD';
       
-      document.getElementById('modalPlanTitle').textContent = planName + ' - ' + periodText;
-      document.getElementById('modalPlanAmount').textContent = '$' + finalPrice + ' USDT';
-      document.getElementById('cryptoModal').classList.add('active');
+      switchPayTab('crypto');
+      document.getElementById('paymentModal').classList.add('active');
     }
 
-    function closeCryptoModal() {
-      document.getElementById('cryptoModal').classList.remove('active');
+    function closePaymentModal() {
+      document.getElementById('paymentModal').classList.remove('active');
     }
 
-    function copyAddr() {
-      const el = document.getElementById('walletAddr');
+    function switchPayTab(tabKey) {
+      document.querySelectorAll('.pay-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+      const activeBtn = document.getElementById('tab-btn-' + tabKey);
+      const activeContent = document.getElementById('tab-content-' + tabKey);
+
+      if (activeBtn) activeBtn.classList.add('active');
+      if (activeContent) activeContent.classList.add('active');
+    }
+
+    function copyValue(elementId, alertMsg) {
+      const el = document.getElementById(elementId);
       el.select();
       navigator.clipboard.writeText(el.value);
-      alert('✅ Official Binance USDT (TRC-20) Address Copied!');
+      alert('✅ ' + alertMsg);
     }
 
-    function submitPayment() {
-      const email = document.getElementById('userEmail').value;
+    function submitCryptoPay() {
+      const email = document.getElementById('cryptoEmail').value;
       if (!email) {
         alert('Please enter your account email for instant activation!');
         return;
       }
-      alert('🎉 Payment submitted! Our system is verifying your transfer. Activation confirmation sent to: ' + email);
-      closeCryptoModal();
+      alert('🎉 Crypto payment notification sent! We will verify the transaction and activate ' + email + ' immediately.');
+      closePaymentModal();
+    }
+
+    function openCardPayment() {
+      alert('💳 Card checkout loading... (If you have a direct Shopier/Stripe checkout link, it will redirect here).');
+    }
+
+    function notifyBankTransfer() {
+      alert('🏦 Banka havalesi bildiriminiz alındı! Transfer kontrol edilip hesabınız 10 dakika içinde aktif edilecektir.');
+      closePaymentModal();
+    }
+
+    function openWhatsAppCheckout() {
+      const text = encodeURIComponent('Merhaba, HostifyOS ' + selectedPlan.name + ' ($' + selectedPlan.price + ') satın almak istiyorum. Ödeme ve kurulum konusunda yardımcı olur musunuz?');
+      window.open('https://wa.me/905300000000?text=' + text, '_blank');
     }
   </script>
 </body>
