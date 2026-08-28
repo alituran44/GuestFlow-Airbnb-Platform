@@ -1831,6 +1831,10 @@ function handleUserLogin(role) {
     showToast("🔒 Enter 6-digit TOTP code from your Authenticator app.");
   } else {
     const email = document.getElementById('input-host-email').value;
+    const nameInput = document.getElementById('input-host-name');
+    if (nameInput && nameInput.value) {
+      hostAuth.name = nameInput.value;
+    }
     hostAuth.isLoggedIn = true;
     hostAuth.email = email || 'sarah@malibuvillas.com';
     hostAuth.subscriptionStatus = 'trial_active';
@@ -1840,8 +1844,44 @@ function handleUserLogin(role) {
     updateTopNavAuthUI();
     checkHostAuthStatus();
     switchView('host');
-    showToast(`Welcome back, ${hostAuth.name}! Host Dashboard Opened (Session Monitored).`);
+    showToast(`🎉 Welcome ${hostAuth.name}! 14-Day Free Pro Host Trial Activated.`);
   }
+}
+
+function switchHostAuthTab(mode) {
+  const tabLogin = document.getElementById('tab-auth-login');
+  const tabSignup = document.getElementById('tab-auth-signup');
+  const nameGroup = document.getElementById('auth-name-group');
+  const btnSubmit = document.getElementById('btn-auth-submit');
+
+  if (mode === 'signup') {
+    if (tabSignup) { tabSignup.style.background = 'rgba(16,185,129,0.15)'; tabSignup.style.color = '#10B981'; }
+    if (tabLogin) { tabLogin.style.background = 'transparent'; tabLogin.style.color = '#94A3B8'; }
+    if (nameGroup) nameGroup.style.display = 'block';
+    if (btnSubmit) btnSubmit.textContent = 'Create Free Host Account (14-Day Pro Access)';
+  } else {
+    if (tabLogin) { tabLogin.style.background = 'rgba(16,185,129,0.15)'; tabLogin.style.color = '#10B981'; }
+    if (tabSignup) { tabSignup.style.background = 'transparent'; tabSignup.style.color = '#94A3B8'; }
+    if (nameGroup) nameGroup.style.display = 'none';
+    if (btnSubmit) btnSubmit.textContent = 'Log In to Host Portal';
+  }
+}
+
+function handleSocialLogin(provider) {
+  showToast(`⚡ Connecting with ${provider}...`);
+  setTimeout(() => {
+    hostAuth.isLoggedIn = true;
+    hostAuth.name = provider + ' Host';
+    hostAuth.email = 'host@' + provider.toLowerCase() + '.com';
+    hostAuth.subscriptionStatus = 'trial_active';
+    currentUserRole = 'host';
+
+    resetSessionInactivityTimer();
+    updateTopNavAuthUI();
+    checkHostAuthStatus();
+    switchView('host');
+    showToast(`🎉 Success! Signed in with ${provider}. 14-Day Pro Trial Active.`);
+  }, 700);
 }
 
 function autofillDemo2FA() {

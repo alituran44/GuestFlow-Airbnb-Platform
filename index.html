@@ -242,24 +242,6 @@
 
   <!-- Stripe.js v3 SDK for PCI-DSS Level 1 Compliant Tokenization & 3DS2 / SCA -->
   <script src="https://js.stripe.com/v3/"></script>
-  <!-- Paddle.js v2 Overlay Checkout SDK & Test Client Token Initialization -->
-  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
-  <script type="text/javascript">
-    if (window.Paddle) {
-      try {
-        const clientToken = "test_396f4c5ef8e1fadb94dcc972f51";
-        Paddle.Environment.set('sandbox');
-        Paddle.Initialize({
-          token: clientToken,
-          eventCallback: function(data) {
-            if (data.name === 'checkout.completed') {
-              showToast("🎉 HostifyOS Subscription Activated via Paddle!");
-            }
-          }
-        });
-      } catch(e) { console.warn("Paddle setup error", e); }
-    }
-  </script>
   <!-- Lemon Squeezy JS Overlay Checkout SDK -->
   <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
   <!-- Lucide Icons CDNs with fallback & auto-init -->
@@ -1500,26 +1482,60 @@
               <i data-lucide="home" class="icon-lg text-emerald"></i>
             </div>
             <h2>Host Account Portal</h2>
-            <p>Log in to manage your property guidebooks, custom payment links & guest orders.</p>
+            <p>Log in or create an account to manage your property guidebooks & guest tools.</p>
             
+            <!-- SOCIAL SIGN IN BUTTONS -->
+            <div style="display:flex; flex-direction:column; gap:10px; margin:20px 0 16px 0;">
+              <!-- Google Button -->
+              <button type="button" class="btn-social-auth" onclick="handleSocialLogin('Google')" style="width:100%; display:flex; align-items:center; justify-content:center; gap:12px; padding:12px 16px; background:#fff; color:#1F2937; border:none; border-radius:12px; font-weight:700; font-size:14px; cursor:pointer; box-shadow:0 2px 10px rgba(0,0,0,0.15); transition:transform 0.1s ease;">
+                <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+                <span>Continue with Google</span>
+              </button>
+
+              <!-- Apple Button -->
+              <button type="button" class="btn-social-auth" onclick="handleSocialLogin('Apple')" style="width:100%; display:flex; align-items:center; justify-content:center; gap:12px; padding:12px 16px; background:#000; color:#fff; border:1px solid rgba(255,255,255,0.2); border-radius:12px; font-weight:700; font-size:14px; cursor:pointer; transition:transform 0.1s ease;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.87c.6-0.74 1.01-1.76.9-2.78-.88.04-1.95.59-2.57 1.33-.55.63-.99 1.66-.86 2.65.98.08 1.93-.46 2.53-1.2"/></svg>
+                <span>Continue with Apple</span>
+              </button>
+
+              <!-- Airbnb Button -->
+              <button type="button" class="btn-social-auth" onclick="handleSocialLogin('Airbnb')" style="width:100%; display:flex; align-items:center; justify-content:center; gap:12px; padding:12px 16px; background:linear-gradient(135deg, #FF5A5F 0%, #E00B41 100%); color:#fff; border:none; border-radius:12px; font-weight:700; font-size:14px; cursor:pointer; box-shadow:0 4px 15px rgba(255,90,95,0.3); transition:transform 0.1s ease;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.11.793-.26.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                <span>Connect with Airbnb</span>
+              </button>
+            </div>
+
+            <!-- TAB SWITCHER: LOGIN VS SIGN UP -->
+            <div style="display:flex; background:#090D14; padding:4px; border-radius:12px; margin-bottom:16px; border:1px solid rgba(255,255,255,0.08);">
+              <button type="button" id="tab-auth-login" onclick="switchHostAuthTab('login')" style="flex:1; padding:8px; border-radius:8px; border:none; background:rgba(16,185,129,0.15); color:#10B981; font-weight:700; font-size:13px; cursor:pointer;">Log In</button>
+              <button type="button" id="tab-auth-signup" onclick="switchHostAuthTab('signup')" style="flex:1; padding:8px; border-radius:8px; border:none; background:transparent; color:#94A3B8; font-weight:700; font-size:13px; cursor:pointer;">Create Account</button>
+            </div>
+
+            <div class="auth-divider"><span>or with email</span></div>
+            
+            <!-- FORM -->
             <form onsubmit="event.preventDefault(); handleUserLogin('host');">
+              <div id="auth-name-group" class="form-group" style="display:none;">
+                <label>Full Name / Property Brand</label>
+                <input type="text" id="input-host-name" placeholder="Sarah Jenkins" value="Sarah Jenkins">
+              </div>
               <div class="form-group">
                 <label>Host Email Address</label>
                 <input type="email" id="input-host-email" placeholder="sarah@malibuvillas.com" value="sarah@malibuvillas.com" required>
               </div>
               <div class="form-group">
                 <label>Password</label>
-                <input type="password" placeholder="••••••••" value="password123" required>
+                <input type="password" id="input-host-pass" placeholder="••••••••" value="password123" required>
               </div>
 
-              <button type="submit" class="btn-primary-lg">Log In to Host Portal</button>
+              <button type="submit" id="btn-auth-submit" class="btn-primary-lg">Log In to Host Portal</button>
             </form>
 
-            <div class="auth-divider"><span>or start trial</span></div>
+            <div class="auth-divider"><span>pricing & upgrades</span></div>
 
-            <button class="btn-secondary-lg" onclick="openLemonSqueezyCheckout('Pro Host Plan', '$14.00 / mo')">
+            <button type="button" class="btn-secondary-lg" onclick="location.href='/pricing.html'">
               <i data-lucide="shield-check"></i>
-              <span>Start 14-Day Free Trial ($0 Charged Today)</span>
+              <span>View Pricing & 14-Day Free Trial Plans</span>
             </button>
           </div>
         </div>
