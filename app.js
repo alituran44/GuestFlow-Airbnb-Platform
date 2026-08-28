@@ -3955,6 +3955,46 @@ function submitNewService() {
   showToast("New service published to " + prop.title);
 }
 
+function saveHostPaymentSettings() {
+  const iban = document.getElementById('cfg-host-iban') ? document.getElementById('cfg-host-iban').value : '';
+  const swift = document.getElementById('cfg-host-swift') ? document.getElementById('cfg-host-swift').value : '';
+  const crypto = document.getElementById('cfg-host-crypto') ? document.getElementById('cfg-host-crypto').value : '';
+  const wa = document.getElementById('cfg-host-whatsapp') ? document.getElementById('cfg-host-whatsapp').value : '';
+  const cardLink = document.getElementById('cfg-host-cardlink') ? document.getElementById('cfg-host-cardlink').value : '';
+
+  const prop = getActiveProperty();
+  if (prop) {
+    prop.fibabankaIban = iban;
+    prop.swiftBic = swift;
+    prop.cryptoUsdt = crypto;
+    if (wa) prop.whatsapp = wa.replace(/[^0-9]/g, '');
+    prop.customPayUrl = cardLink;
+  }
+
+  showToast("🎉 Ev sahibi ödeme bilgileri (IBAN, Kripto, WhatsApp) başarıyla kaydedildi!");
+}
+
+function saveHostGuideContent() {
+  const wifiName = document.getElementById('cfg-guide-wifi-name') ? document.getElementById('cfg-guide-wifi-name').value : '';
+  const wifiPass = document.getElementById('cfg-guide-wifi-pass') ? document.getElementById('cfg-guide-wifi-pass').value : '';
+  const pin = document.getElementById('cfg-guide-pin') ? document.getElementById('cfg-guide-pin').value : '';
+
+  const prop = getActiveProperty();
+  if (prop) {
+    if (wifiName) prop.wifiName = wifiName;
+    if (wifiPass) prop.wifiPass = wifiPass;
+    if (pin) prop.doorPin = pin;
+  }
+
+  // Update live guest elements if present
+  const wifiEl = document.getElementById('guest-wifi-pass');
+  if (wifiEl && wifiPass) wifiEl.textContent = wifiPass;
+  const pinEl = document.getElementById('door-pin-display');
+  if (pinEl && pin) pinEl.textContent = `••••-${pin.slice(-2)}`;
+
+  showToast("🎉 Dijital rehber metinleri & Wi-Fi/PIN bilgileri canlıda güncellendi!");
+}
+
 function updateStandTitle(val) {
   const el = document.getElementById('stand-prop-title');
   if (el) el.textContent = val || 'Your Property Title';

@@ -2157,44 +2157,88 @@
               </div>
             </div>
 
-            <div class="payment-settings-grid" style="margin-top:20px;">
-              <div class="settings-card">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                  <h4><i data-lucide="link"></i> Active Host Custom Payment Link</h4>
-                  <button class="btn-edit-inline" onclick="openEditCustomPayLinkModal()"><i data-lucide="edit-3"></i> Edit Link</button>
+            <!-- 1. HOST DIRECT PAYMENT GATEWAYS MANAGER -->
+            <div class="panel-card" style="margin-top:20px; border:1px solid rgba(16,185,129,0.3); background:rgba(17,24,39,0.85);">
+              <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:12px; margin-bottom:16px;">
+                <div>
+                  <h3 style="color:#fff; font-size:18px; margin:0;"><i data-lucide="wallet" class="text-emerald"></i> Ev Sahibi Canlı Ödeme Kanalları & Cüzdan Yönetimi</h3>
+                  <p style="margin:4px 0 0 0; font-size:13px; color:var(--text-muted);">Misafirlerin rehberinizden yaptığı siparişlerin ödeneceği kendi IBAN, Kripto, WhatsApp ve Kart bilgilerinizi buradan yönetin.</p>
                 </div>
-                <p class="text-muted">Your custom checkout gateway URL for direct guest payments.</p>
-                <div class="info-row">
-                  <span>Custom Pay Gateway:</span>
-                  <strong id="host-custom-link-display" style="word-break:break-all; color:var(--accent-indigo);">https://buy.stripe.com/malibu_villa_direct</strong>
+                <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">⚡ %0 Komisyon Doğrudan Ev Sahibine</span>
+              </div>
+
+              <form onsubmit="event.preventDefault(); saveHostPaymentSettings();" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
+                <div class="form-group" style="margin:0;">
+                  <label style="font-size:12px; font-weight:700; color:#10B981;"><i data-lucide="building"></i> Fibabanka / Banka IBAN (7/24 FAST)</label>
+                  <input type="text" id="cfg-host-iban" value="TR22 0010 3000 0000 0059 1864 21" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
                 </div>
-                <div class="info-row">
-                  <span>Payout Bank Account:</span>
-                  <strong id="host-bank-display">Demo Merchant Bank (****4821 - USD)</strong>
+
+                <div class="form-group" style="margin:0;">
+                  <label style="font-size:12px; font-weight:700; color:#94A3B8;"><i data-lucide="globe"></i> SWIFT / BIC Kodu (Yurt Dışı Transfer)</label>
+                  <input type="text" id="cfg-host-swift" value="FBABTRIS" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
                 </div>
-                <div class="info-row" style="margin-top:10px; padding-top:10px; border-top:1px solid var(--border-color);">
-                  <span>KYC / AML Bank Onboarding:</span>
-                  <div style="display:flex; align-items:center; gap:8px;">
-                    <span class="badge-tag" id="stripe-connect-status-badge" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">● Stripe Connect Verified</span>
-                    <button class="btn-secondary-sm" onclick="openStripeConnectModal()" style="padding:3px 8px; font-size:10px;">
-                      <i data-lucide="shield-check"></i> Stripe Connect KYC
-                    </button>
-                  </div>
+
+                <div class="form-group" style="margin:0;">
+                  <label style="font-size:12px; font-weight:700; color:#10B981;"><i data-lucide="qr-code"></i> Binance USDT (TRC-20) Cüzdan Adresi</label>
+                  <input type="text" id="cfg-host-crypto" value="TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
+                </div>
+
+                <div class="form-group" style="margin:0;">
+                  <label style="font-size:12px; font-weight:700; color:#25D366;"><i data-lucide="message-circle"></i> WhatsApp Sipariş & İletişim Numarası</label>
+                  <input type="text" id="cfg-host-whatsapp" value="+90 543 736 06 60" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
+                </div>
+
+                <div class="form-group" style="margin:0; grid-column:1 / -1;">
+                  <label style="font-size:12px; font-weight:700; color:#60A5FA;"><i data-lucide="credit-card"></i> Kredi Kartı / Shopier / Stripe Özel Ödeme Linki (İsteğe Bağlı)</label>
+                  <input type="text" id="cfg-host-cardlink" value="https://www.hostifyos.com/pricing.html" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
+                </div>
+
+                <div style="grid-column:1 / -1; display:flex; justify-content:flex-end;">
+                  <button type="submit" class="btn-primary-sm" style="padding:10px 20px; font-weight:800;">
+                    <i data-lucide="check"></i> Ödeme Bilgilerini Canlıda Kaydet
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- 2. GUIDEBOOK CONTENT & TEXTS LIVE EDITOR -->
+            <div class="panel-card" style="margin-top:20px;">
+              <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:12px; margin-bottom:16px;">
+                <div>
+                  <h3 style="color:#fff; font-size:18px; margin:0;"><i data-lucide="file-edit" class="text-emerald"></i> Dijital Rehber Metinleri & Kural Düzenleyici</h3>
+                  <p style="margin:4px 0 0 0; font-size:13px; color:var(--text-muted);">Misafirin telefonunda görünen Wi-Fi, kapı şifresi, kurallar ve karşılama metinlerini düzenleyin.</p>
                 </div>
               </div>
 
-              <div class="settings-card">
-                <h4><i data-lucide="percent"></i> Automatic Take-Rate & Commission Split</h4>
-                <p class="text-muted">Platform fee automatically deducted and routed to HostifyOS platform account.</p>
-                <div class="info-row">
-                  <span>Host Subscription Tier:</span>
-                  <strong>Starter Tier (5% Commission)</strong>
+              <form onsubmit="event.preventDefault(); saveHostGuideContent();" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
+                <div class="form-group" style="margin:0;">
+                  <label style="font-size:12px; font-weight:700; color:#fff;">Wi-Fi Ağı Adı</label>
+                  <input type="text" id="cfg-guide-wifi-name" value="VillaSunset_5G" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
                 </div>
-                <div class="info-row">
-                  <span>Automatic Platform Split:</span>
-                  <span class="badge-pill">95% Host Payout / 5% Platform Fee</span>
+                <div class="form-group" style="margin:0;">
+                  <label style="font-size:12px; font-weight:700; color:#fff;">Wi-Fi Şifresi</label>
+                  <input type="text" id="cfg-guide-wifi-pass" value="SunsetBodrum2026!" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
                 </div>
-              </div>
+                <div class="form-group" style="margin:0;">
+                  <label style="font-size:12px; font-weight:700; color:#fff;">Kapı Smart Lock PIN Kodu</label>
+                  <input type="text" id="cfg-guide-pin" value="8492" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
+                </div>
+                <div class="form-group" style="margin:0;">
+                  <label style="font-size:12px; font-weight:700; color:#fff;">Check-in / Check-out Saatleri</label>
+                  <input type="text" id="cfg-guide-hours" value="Giriş: 14:00 • Çıkış: 11:00" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
+                </div>
+                <div class="form-group" style="margin:0; grid-column:1 / -1;">
+                  <label style="font-size:12px; font-weight:700; color:#fff;">Klima & Ev Cihazları Talimatı</label>
+                  <input type="text" id="cfg-guide-ac" value="Kumandayı COOL modunda ve 22°C'de tutmanız önerilir. Evden çıkarken lütfen kapatınız." style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
+                </div>
+
+                <div style="grid-column:1 / -1; display:flex; justify-content:flex-end;">
+                  <button type="submit" class="btn-primary-sm" style="padding:10px 20px; font-weight:800;">
+                    <i data-lucide="check"></i> Rehber Metinlerini Canlıda Güncelle
+                  </button>
+                </div>
+              </form>
+            </div>
 
               <div class="settings-card" style="margin-top:16px;">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
