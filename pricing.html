@@ -567,21 +567,35 @@
         </button>
       </div>
 
-      <!-- TAB 3: BANK HAVALESİ / FAST / IBAN -->
+      <!-- TAB 3: BANK HAVALESİ / FAST / IBAN & SWIFT -->
       <div id="tab-content-iban" class="tab-content">
         <div class="tab-box">
-          <div style="font-size:12px; color:#94A3B8; margin-bottom:4px;">Account Holder: <strong style="color:#fff;">Ali Turan Inc. (Ali Turan)</strong></div>
-          <div style="font-size:12px; color:#94A3B8; margin-bottom:8px;">Bank: <strong style="color:#fff;">Türkiye / Global SWIFT & FAST</strong></div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-size:12px; color:#94A3B8;">Bank: <strong style="color:#10B981;">Fibabanka A.Ş.</strong></span>
+            <span style="background:rgba(16,185,129,0.15); color:#10B981; padding:2px 8px; border-radius:99px; font-size:10px; font-weight:800;">7/24 FAST & SWIFT</span>
+          </div>
+          <div style="font-size:12px; color:#94A3B8; margin-bottom:12px;">Account Holder: <strong style="color:#fff;">Ali Turan (Ali Turan Inc.)</strong></div>
           
-          <div style="font-size:11px; color:#10B981; font-weight:700;">IBAN (TL / USD / EUR):</div>
+          <!-- IBAN -->
+          <div style="font-size:11px; color:#10B981; font-weight:700; margin-bottom:2px;">IBAN (TL / USD / EUR):</div>
+          <div class="copy-row" style="margin-bottom:12px;">
+            <input type="text" id="ibanVal" class="copy-input" readonly value="TR22 0010 3000 0000 0059 1864 21">
+            <button class="btn-copy" onclick="copyValue('ibanVal', 'Fibabanka IBAN Copied to Clipboard!')">Copy</button>
+          </div>
+
+          <!-- SWIFT / BIC -->
+          <div style="font-size:11px; color:#94A3B8; font-weight:700; margin-bottom:2px;">SWIFT / BIC Code (International Wire):</div>
           <div class="copy-row">
-            <input type="text" id="ibanVal" class="copy-input" readonly value="TR94 0006 2000 0001 2345 6789 01">
-            <button class="btn-copy" onclick="copyValue('ibanVal', 'IBAN Copied to Clipboard!')">Copy</button>
+            <input type="text" id="swiftVal" class="copy-input" readonly value="FBABTRIS">
+            <button class="btn-copy" onclick="copyValue('swiftVal', 'Fibabanka SWIFT Code Copied!')">Copy</button>
           </div>
         </div>
-        <p style="font-size:11px; color:#94A3B8; margin:0 0 10px 0; text-align:center;">* Açıklama kısmına kayıtlı e-posta adresinizi yazınız.</p>
+        
+        <input type="email" id="bankUserEmail" placeholder="Your Account Email (for activation)" style="width:100%; box-sizing:border-box; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px 12px; margin-bottom:10px;">
+        
+        <p style="font-size:11px; color:#94A3B8; margin:0 0 10px 0; text-align:center;">* Açıklama kısmına e-posta adresinizi yazınız.</p>
         <button class="btn-plan" style="margin:0;" onclick="notifyBankTransfer()">
-          🏦 Bildir: Havale / EFT Yaptım
+          🏦 Bildir: Havale / EFT / SWIFT Yaptım
         </button>
       </div>
 
@@ -696,7 +710,12 @@
     }
 
     function notifyBankTransfer() {
-      alert('🏦 Banka havalesi bildiriminiz alındı! Transfer kontrol edilip hesabınız 10 dakika içinde aktif edilecektir.');
+      const email = document.getElementById('bankUserEmail').value;
+      if (!email) {
+        alert('Lütfen hesabınızın aktif edilmesi için e-posta adresinizi giriniz!');
+        return;
+      }
+      alert('🎉 Fibabanka havale/SWIFT bildiriminiz alındı! Transferiniz kontrol edilip aktivasyon linkiniz ' + email + ' adresine 10 dakika içinde iletilecektir.');
       closePaymentModal();
     }
 
