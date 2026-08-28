@@ -3860,12 +3860,13 @@ function processStripePayment(method) {
     const prop = getActiveProperty();
     const totalUSD = cart.reduce((sum, item) => sum + item.priceUSD, 0);
     
-    const platformFeeRate = hostAuth.commissionRate !== undefined ? hostAuth.commissionRate : 0.05;
-    const platformFee = totalUSD * platformFeeRate;
-    const hostNetPayout = totalUSD - platformFee;
+    // 0% Platform Commission — 100% Direct Payout to Host
+    const platformFeeRate = 0;
+    const platformFee = 0;
+    const hostNetPayout = totalUSD;
 
     prop.revenueUSD += totalUSD;
-    prop.platformFeesTotalUSD = (prop.platformFeesTotalUSD || 0) + platformFee;
+    prop.platformFeesTotalUSD = 0;
     prop.completedOrders += 1;
 
     hostOrders.unshift({
@@ -3876,8 +3877,8 @@ function processStripePayment(method) {
       date: 'Just Now',
       priceUSD: totalUSD,
       hostPayoutUSD: hostNetPayout,
-      platformFeeUSD: platformFee,
-      status: 'Confirmed',
+      platformFeeUSD: 0,
+      status: 'Confirmed (0% Commission)',
       payMethod: method
     });
 
@@ -3892,7 +3893,7 @@ function processStripePayment(method) {
       submitBtn.innerHTML = `<i data-lucide="check-circle"></i> Pay & Confirm Order`;
     }
 
-    showToast(`Order Confirmed via ${method}! Net Payout: ${formatPrice(hostNetPayout)} deposited to Host Bank.`);
+    showToast(`🎉 Sipariş Alındı! ${formatPrice(totalUSD)} tutarındaki ödeme %0 komisyonla doğrudan ev sahibinin hesabına aktarıldı.`);
   }, 1200);
 }
 

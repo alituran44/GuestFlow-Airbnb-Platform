@@ -475,21 +475,21 @@
             <strong style="font-size:14px; color:#fff;" id="extra-1-title">🍷 Welcome Organic Wine & Fruit Basket</strong>
             <div style="font-size:13px; color:var(--accent); font-weight:700; margin-top:2px;">$25.00</div>
           </div>
-          <button class="btn-action" onclick="orderExtra('Organic Wine Basket')" style="width:auto; padding:8px 16px; font-size:12px;" id="btn-order-1">Order</button>
+          <button class="btn-action" onclick="orderExtra('🍷 Karşılama Organik Şarap & Meyve Sepeti', 25)" style="width:auto; padding:8px 16px; font-size:12px;" id="btn-order-1">Order</button>
         </div>
         <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border); padding:14px; border-radius:12px; display:flex; justify-content:space-between; align-items:center;">
           <div>
             <strong style="font-size:14px; color:#fff;" id="extra-2-title">🚗 Late Check-out (2 Hours Extra until 13:00)</strong>
             <div style="font-size:13px; color:var(--accent); font-weight:700; margin-top:2px;">$30.00</div>
           </div>
-          <button class="btn-action" onclick="orderExtra('Late Check-out')" style="width:auto; padding:8px 16px; font-size:12px;" id="btn-order-2">Order</button>
+          <button class="btn-action" onclick="orderExtra('🚗 Geç Çıkış İzni (Saat 13:00e kadar +2 Saat)', 30)" style="width:auto; padding:8px 16px; font-size:12px;" id="btn-order-2">Order</button>
         </div>
         <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border); padding:14px; border-radius:12px; display:flex; justify-content:space-between; align-items:center;">
           <div>
             <strong style="font-size:14px; color:#fff;" id="extra-3-title">✈️ VIP Airport Transfer (Milas-Bodrum BJV)</strong>
             <div style="font-size:13px; color:var(--accent); font-weight:700; margin-top:2px;">$65.00</div>
           </div>
-          <button class="btn-action" onclick="orderExtra('VIP Airport Transfer')" style="width:auto; padding:8px 16px; font-size:12px;" id="btn-order-3">Order</button>
+          <button class="btn-action" onclick="orderExtra('✈️ VIP Havalimanı Transferi (Bodrum BJV)', 65)" style="width:auto; padding:8px 16px; font-size:12px;" id="btn-order-3">Order</button>
         </div>
       </div>
     </div>
@@ -505,6 +505,56 @@
       </button>
     </div>
 
+  </div>
+
+  <!-- DIRECT HOST PAYMENT & ORDER MODAL -->
+  <div id="hostServiceModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.88); backdrop-filter:blur(12px); z-index:999999; justify-content:center; align-items:center; padding:20px;">
+    <div style="background:#111827; border:1px solid rgba(16,185,129,0.35); border-radius:24px; padding:28px; max-width:460px; width:100%; text-align:center; position:relative; box-shadow:0 30px 80px rgba(0,0,0,0.95);">
+      <button onclick="closeHostServiceModal()" style="position:absolute; top:16px; right:16px; background:rgba(255,255,255,0.08); border:none; color:#94A3B8; width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:16px;">✕</button>
+
+      <span style="background:rgba(16,185,129,0.15); color:#10B981; padding:4px 12px; border-radius:99px; font-size:11px; font-weight:800; text-transform:uppercase;">⚡ 0% Platform Commission • 100% Direct to Host</span>
+      <h3 id="modalServiceTitle" style="color:#fff; margin:12px 0 4px 0; font-size:18px; font-weight:800;">Sipariş</h3>
+      <div id="modalServicePrice" style="font-size:30px; font-weight:800; color:#10B981; margin-bottom:14px;">$25.00</div>
+
+      <!-- PAYMENT METHODS TABS -->
+      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:6px; background:#090D14; padding:4px; border-radius:12px; margin-bottom:14px; border:1px solid rgba(255,255,255,0.08);">
+        <button id="s-tab-btn-iban" onclick="switchServiceTab('iban')" style="background:rgba(16,185,129,0.15); color:#10B981; border:none; border-radius:8px; padding:8px 4px; font-size:12px; font-weight:700; cursor:pointer;">🏦 Banka/IBAN</button>
+        <button id="s-tab-btn-crypto" onclick="switchServiceTab('crypto')" style="background:transparent; color:#94A3B8; border:none; border-radius:8px; padding:8px 4px; font-size:12px; font-weight:700; cursor:pointer;">💎 USDT Cüzdan</button>
+        <button id="s-tab-btn-wa" onclick="switchServiceTab('wa')" style="background:transparent; color:#94A3B8; border:none; border-radius:8px; padding:8px 4px; font-size:12px; font-weight:700; cursor:pointer;">💬 WhatsApp</button>
+      </div>
+
+      <!-- TAB 1: IBAN -->
+      <div id="s-tab-iban" style="text-align:left; background:#090D14; padding:14px; border-radius:14px; border:1px solid rgba(255,255,255,0.06); margin-bottom:14px;">
+        <div style="font-size:11px; color:#94A3B8;">Ev Sahibi: <strong style="color:#fff;">Ali Turan (Fibabanka A.Ş.)</strong></div>
+        <div style="font-size:11px; color:#10B981; font-weight:700; margin-top:6px;">IBAN (7/24 FAST):</div>
+        <div style="display:flex; gap:6px; margin-top:4px;">
+          <input type="text" id="hostIbanInput" readonly value="TR22 0010 3000 0000 0059 1864 21" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#10B981; font-family:monospace; font-size:11px; padding:8px;">
+          <button onclick="copyHostVal('hostIbanInput', 'Ev Sahibi Fibabanka IBAN Kopyalandı!')" style="background:#10B981; color:#090D14; border:none; border-radius:8px; padding:8px 12px; font-weight:800; font-size:11px; cursor:pointer;">Kopyala</button>
+        </div>
+      </div>
+
+      <!-- TAB 2: CRYPTO -->
+      <div id="s-tab-crypto" style="display:none; text-align:center; background:#090D14; padding:14px; border-radius:14px; border:1px solid rgba(255,255,255,0.06); margin-bottom:14px;">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa&color=090D14&bgcolor=10B981" style="width:100px; height:100px; border-radius:8px; margin-bottom:6px;">
+        <div style="font-size:11px; color:#10B981; font-weight:700; margin-bottom:4px;">Tron (TRC-20) USDT Cüzdanı</div>
+        <div style="display:flex; gap:6px;">
+          <input type="text" id="hostCryptoInput" readonly value="TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#10B981; font-family:monospace; font-size:10px; padding:8px;">
+          <button onclick="copyHostVal('hostCryptoInput', 'Cüzdan Adresi Kopyalandı!')" style="background:#10B981; color:#090D14; border:none; border-radius:8px; padding:8px 12px; font-weight:800; font-size:11px; cursor:pointer;">Kopyala</button>
+        </div>
+      </div>
+
+      <!-- TAB 3: WHATSAPP -->
+      <div id="s-tab-wa" style="display:none; text-align:center; background:#090D14; padding:14px; border-radius:14px; border:1px solid rgba(255,255,255,0.06); margin-bottom:14px;">
+        <p style="color:#94A3B8; font-size:12px; margin:0 0 10px 0;">Siparişi doğrudan ev sahibine WhatsApp üzerinden iletebilirsiniz.</p>
+        <button onclick="sendOrderViaWhatsApp()" style="width:100%; padding:10px; border-radius:10px; background:linear-gradient(135deg, #25D366 0%, #128C7E 100%); color:#fff; border:none; font-weight:800; font-size:13px; cursor:pointer;">
+          💬 WhatsApp ile Ev Sahibine Gönder
+        </button>
+      </div>
+
+      <button onclick="confirmHostPayment()" class="btn-action" style="width:100%; margin:0; padding:12px; font-weight:800; font-size:14px; background:linear-gradient(135deg, #10B981 0%, #059669 100%); color:#fff;">
+        ✅ Ödemeyi Gönderdim (Siparişi Tamamla)
+      </button>
+    </div>
   </div>
 
   <div id="toast" class="toast"></div>
@@ -1020,9 +1070,50 @@
       });
     }
 
-    function orderExtra(item) {
-      const dict = GUEST_I18N[currentGuestLang] || GUEST_I18N.EN;
-      showToast(dict.orderedToast);
+    let currentOrderItem = { name: '', price: 25 };
+
+    function orderExtra(itemTitle, price) {
+      currentOrderItem = { name: itemTitle, price: price };
+      document.getElementById('modalServiceTitle').textContent = itemTitle;
+      document.getElementById('modalServicePrice').textContent = '$' + price + '.00';
+      switchServiceTab('iban');
+      document.getElementById('hostServiceModal').style.display = 'flex';
+    }
+
+    function closeHostServiceModal() {
+      document.getElementById('hostServiceModal').style.display = 'none';
+    }
+
+    function switchServiceTab(tabKey) {
+      ['iban', 'crypto', 'wa'].forEach(k => {
+        const btn = document.getElementById('s-tab-btn-' + k);
+        const content = document.getElementById('s-tab-' + k);
+        if (btn) {
+          btn.style.background = (k === tabKey) ? 'rgba(16,185,129,0.15)' : 'transparent';
+          btn.style.color = (k === tabKey) ? '#10B981' : '#94A3B8';
+        }
+        if (content) {
+          content.style.display = (k === tabKey) ? 'block' : 'none';
+        }
+      });
+    }
+
+    function copyHostVal(inputId, msg) {
+      const input = document.getElementById(inputId);
+      input.select();
+      navigator.clipboard.writeText(input.value);
+      showToast('✅ ' + msg);
+    }
+
+    function confirmHostPayment() {
+      showToast('🎉 Siparişiniz alındı! Ödemeniz %0 kesintiyle ev sahibinin hesabına aktarıldı.');
+      closeHostServiceModal();
+    }
+
+    function sendOrderViaWhatsApp() {
+      const msg = encodeURIComponent('Merhaba, ' + currentOrderItem.name + ' ($' + currentOrderItem.price + ') siparişi vermek istiyorum.');
+      window.open('https://wa.me/905437360660?text=' + msg, '_blank');
+      closeHostServiceModal();
     }
 
     function showToast(msg) {
