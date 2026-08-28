@@ -1868,6 +1868,14 @@ function switchHostAuthTab(mode) {
 }
 
 function handleSocialLogin(provider) {
+  if (provider === 'Airbnb') {
+    showToast(`⚡ Airbnb Direct Sync API Yakında! Şu an 1-Tıkla İlan Linki Aktarıcımızı kullanabilirsiniz.`);
+    setTimeout(() => {
+      location.href = '/import-guide.html';
+    }, 1200);
+    return;
+  }
+
   showToast(`⚡ Connecting with ${provider}...`);
   setTimeout(() => {
     hostAuth.isLoggedIn = true;
