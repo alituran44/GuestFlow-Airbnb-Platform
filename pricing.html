@@ -6,18 +6,6 @@
   <title>HostifyOS Pricing — Flexible Monthly & Annual Plans</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <!-- Paddle.js v2 Overlay Checkout SDK -->
-  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
-  <script type="text/javascript">
-    if (window.Paddle) {
-      try {
-        Paddle.Environment.set('sandbox');
-        Paddle.Initialize({
-          token: "test_396f4c5ef8e1fadb94dcc972f51"
-        });
-      } catch(e) { console.warn("Paddle setup error", e); }
-    }
-  </script>
   <style>
     :root {
       --bg: #0B0F17;
@@ -57,14 +45,29 @@
       height: 32px;
       border-radius: 8px;
     }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: #fff;
+    }
     .container {
       max-width: 1100px;
-      margin: 60px auto;
+      margin: 50px auto 80px auto;
       padding: 0 24px;
     }
     .hero-pricing {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 36px;
     }
     .badge {
       display: inline-block;
@@ -87,21 +90,22 @@
     }
     p.sub {
       color: var(--text-muted);
-      font-size: 18px;
+      font-size: 17px;
       max-width: 600px;
       margin: 0 auto;
     }
-    /* TOGGLE STYLES */
+
+    /* TOGGLE */
     .toggle-container {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 16px;
-      margin: 32px 0 48px 0;
+      margin: 32px 0 44px 0;
     }
     .toggle-label {
       font-size: 15px;
-      font-weight: 700;
+      font-weight: 600;
       color: var(--text-muted);
       cursor: pointer;
     }
@@ -111,8 +115,8 @@
     .switch {
       position: relative;
       display: inline-block;
-      width: 56px;
-      height: 30px;
+      width: 52px;
+      height: 28px;
     }
     .switch input {
       opacity: 0;
@@ -123,16 +127,16 @@
       position: absolute;
       cursor: pointer;
       top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #1E293B;
+      background-color: #1F2937;
       transition: .3s;
-      border-radius: 30px;
+      border-radius: 34px;
       border: 1px solid var(--border);
     }
     .slider:before {
       position: absolute;
       content: "";
-      height: 22px;
-      width: 22px;
+      height: 20px;
+      width: 20px;
       left: 4px;
       bottom: 3px;
       background-color: #fff;
@@ -145,8 +149,8 @@
     input:checked + .slider:before {
       transform: translateX(24px);
     }
-    .discount-tag {
-      background: rgba(16, 185, 129, 0.2);
+    .save-badge {
+      background: rgba(16, 185, 129, 0.15);
       color: var(--accent);
       font-size: 12px;
       font-weight: 700;
@@ -164,10 +168,11 @@
     .pricing-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 20px;
+      border-radius: 24px;
       padding: 40px 32px;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
       position: relative;
       transition: transform 0.2s ease, border-color 0.2s ease;
     }
@@ -177,7 +182,7 @@
     }
     .pricing-card.featured {
       border: 2px solid var(--accent);
-      box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15);
+      box-shadow: 0 20px 50px rgba(16, 185, 129, 0.15);
     }
     .featured-tag {
       position: absolute;
@@ -185,11 +190,12 @@
       right: 24px;
       background: var(--gradient);
       color: #fff;
-      font-size: 12px;
-      font-weight: 700;
+      font-size: 11px;
+      font-weight: 800;
       padding: 4px 14px;
       border-radius: 99px;
       text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     .plan-name {
       font-size: 22px;
@@ -200,10 +206,10 @@
       color: var(--text-muted);
       font-size: 14px;
       min-height: 42px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
     .plan-price {
-      font-size: 42px;
+      font-size: 44px;
       font-weight: 800;
       margin-bottom: 4px;
       display: flex;
@@ -219,44 +225,57 @@
       font-size: 12px;
       color: var(--accent);
       min-height: 18px;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       font-weight: 600;
     }
     .btn-plan {
       background: var(--gradient);
       color: #fff;
       border: none;
-      padding: 16px 24px;
+      padding: 15px 24px;
       border-radius: 12px;
       font-size: 15px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       width: 100%;
-      margin: 8px 0 32px 0;
-      transition: opacity 0.2s ease;
+      margin: 8px 0 10px 0;
+      transition: opacity 0.2s ease, transform 0.1s ease;
     }
     .btn-plan:hover {
-      opacity: 0.9;
+      opacity: 0.95;
+      transform: scale(1.01);
     }
     .btn-plan.outline {
-      background: transparent;
+      background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border);
       color: #fff;
     }
-    .btn-plan.outline:hover {
-      border-color: var(--accent);
+    .btn-crypto-alt {
+      width: 100%;
+      padding: 11px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
       color: var(--accent);
+      font-weight: 700;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 13px;
+      margin-bottom: 24px;
+      transition: all 0.2s ease;
+    }
+    .btn-crypto-alt:hover {
+      background: rgba(16, 185, 129, 0.2);
     }
     .features-list {
       list-style: none;
       padding: 0;
       margin: 0;
+      font-size: 14px;
+      color: var(--text-muted);
       border-top: 1px solid var(--border);
-      padding-top: 24px;
+      padding-top: 20px;
     }
     .features-list li {
-      color: var(--text-muted);
-      font-size: 14px;
       margin-bottom: 12px;
       display: flex;
       align-items: center;
@@ -267,124 +286,249 @@
       color: var(--accent);
       font-weight: 800;
     }
-    footer {
+
+    /* MODAL */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(10px);
+      z-index: 999999;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .modal-backdrop.active {
+      display: flex;
+    }
+    .modal-card {
+      background: #111827;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      border-radius: 24px;
+      padding: 36px 32px;
+      max-width: 440px;
+      width: 100%;
       text-align: center;
-      padding: 40px;
+      position: relative;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9);
+      animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes modalPop {
+      0% { transform: scale(0.95); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .modal-close-btn {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      color: #94A3B8;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .qr-box {
+      background: #090D14;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 20px;
+      margin: 18px 0;
+    }
+    .qr-img {
+      width: 170px;
+      height: 170px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+    .wallet-input-row {
+      display: flex;
+      gap: 8px;
+    }
+    .wallet-input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      color: #10B981;
+      font-family: monospace;
+      font-size: 11px;
+      padding: 10px 12px;
+      font-weight: 700;
+    }
+    .btn-copy {
+      background: #10B981;
+      color: #090D14;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-weight: 800;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 20px;
+      text-align: center;
       color: var(--text-muted);
       font-size: 13px;
-      border-top: 1px solid var(--border);
+    }
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    footer a:hover {
+      color: #fff;
     }
   </style>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
-  <!-- Top Navigation Header -->
-  <header class="top-nav">
-    <div class="nav-container">
-      <a href="/" class="brand" style="text-decoration:none;">
-        <img src="brand_logo.jpg" alt="HostifyOS Logo" class="brand-logo-img">
-        <span class="brand-name">HostifyOS</span>
-      </a>
-
-      <nav class="center-nav-links">
-        <a href="/" class="nav-link"><i data-lucide="home"></i> <span>Home</span></a>
-        <a href="/pricing.html" class="nav-link active"><i data-lucide="tag"></i> <span>Pricing</span></a>
-        <a href="/blog.html" class="nav-link"><i data-lucide="book-open"></i> <span>Blog & Guides</span></a>
-        <a href="/import-guide.html" class="nav-link"><i data-lucide="layers"></i> <span>How It Works</span></a>
-        <a href="/g.html" class="nav-link"><i data-lucide="smartphone"></i> <span>Guest Demo</span></a>
-      </nav>
-
-      <div class="nav-right">
-        <button class="theme-toggle-btn" onclick="togglePricingTheme()" title="Toggle Light / Dark Mode">
-          <i data-lucide="sun" id="theme-icon"></i>
-        </button>
-        <a href="#pricing-grid" class="btn-hero-primary" style="padding:8px 16px; font-size:13px; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
-          <i data-lucide="zap"></i> <span>Start 14-Day Free Trial</span>
-        </a>
-      </div>
-    </div>
+  <!-- HEADER -->
+  <header class="header">
+    <a href="/" class="logo">
+      <img src="brand_logo.jpg" alt="HostifyOS Logo">
+      <span>HostifyOS</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="/pricing.html" class="active">Pricing</a>
+      <a href="/import-guide.html">How It Works</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/g.html">Guest Demo</a>
+    </nav>
   </header>
 
+  <!-- MAIN CONTAINER -->
   <div class="container">
     <div class="hero-pricing">
-      <span class="badge">Transparent SaaS Pricing</span>
-      <h1>Simple Plans for Modern Hosts</h1>
-      <p class="sub">Choose the plan that fits your property scale. 14-day money-back guarantee on all paid plans.</p>
+      <span class="badge">Simple Transparent Pricing</span>
+      <h1>Scale Your Short-Term Rentals</h1>
+      <p class="sub">Choose the plan that fits your property scale. Instant activation & 14-day money-back guarantee.</p>
 
-      <!-- TOGGLE SWITCH (Monthly / Annual) -->
+      <!-- BILLING TOGGLE -->
       <div class="toggle-container">
         <span class="toggle-label active" id="label-monthly">Monthly Billing</span>
         <label class="switch">
           <input type="checkbox" id="billing-toggle" onchange="toggleBillingCycle()">
           <span class="slider"></span>
         </label>
-        <span class="toggle-label" id="label-annual">Annual Billing <span class="discount-tag">Save 26%</span></span>
+        <span class="toggle-label" id="label-annual">Annual Billing</span>
+        <span class="save-badge">Save 26%</span>
       </div>
     </div>
 
+    <!-- PRICING CARDS -->
     <div class="pricing-grid">
-      <!-- Starter Free Plan -->
+      <!-- Starter Plan -->
       <div class="pricing-card">
-        <div class="plan-name">Starter Host</div>
-        <div class="plan-desc">Perfect for new hosts managing 1 property.</div>
-        <div class="plan-price">$0 <span class="period">/ month</span></div>
-        <div class="billing-hint">Free Forever</div>
-        <button class="btn-plan outline" onclick="triggerCheckout('starter')">Start Free Plan</button>
+        <div>
+          <div class="plan-name">Starter Host</div>
+          <div class="plan-desc">Perfect for single property hosts starting out.</div>
+          <div class="plan-price">$0 <span class="period">/ month forever</span></div>
+          <div class="billing-hint">Free Forever</div>
+          <button class="btn-plan outline" onclick="location.href='/#free-guidebook-builder-section'">Start Free Plan</button>
+        </div>
         <ul class="features-list">
           <li>1 Active Property Listing</li>
           <li>Digital Guidebook Builder</li>
           <li>Basic Dynamic QR Code</li>
-          <li>Community Host Support</li>
+          <li>Instant Wi-Fi Sharing</li>
+          <li>1-Tap Emergency Contacts</li>
         </ul>
       </div>
 
       <!-- Pro Host Plan (Featured) -->
       <div class="pricing-card featured">
         <div class="featured-tag">Most Popular</div>
-        <div class="plan-name">Pro Host</div>
-        <div class="plan-desc">For active hosts scaling revenue & guest experience.</div>
-        <div class="plan-price" id="price-pro">$19 <span class="period">/ month</span></div>
-        <div class="billing-hint" id="hint-pro">Billed monthly</div>
-        <button class="btn-plan" onclick="triggerCheckout('pro')">Upgrade to Pro Host</button>
+        <div>
+          <div class="plan-name">Pro Host</div>
+          <div class="plan-desc">For scaling hosts, villas, and superhosts.</div>
+          <div class="plan-price" id="price-pro">$19 <span class="period">/ month</span></div>
+          <div class="billing-hint" id="hint-pro">Billed monthly</div>
+          <button class="btn-plan" onclick="openCryptoModal('Pro Host Plan', 19)">Upgrade to Pro Host</button>
+          <button class="btn-crypto-alt" onclick="openCryptoModal('Pro Host Plan', 19)">💎 Pay with Binance USDT</button>
+        </div>
         <ul class="features-list">
           <li>Up to 10 Property Listings</li>
-          <li>Automated Guest Check-in Engine</li>
-          <li>Room Service PDF Generator</li>
-          <li>Multi-Calendar Sync</li>
+          <li>Automated 7-Language Translation</li>
+          <li>Printable A5 Acrylic QR Stand PDF</li>
+          <li>Car Parking & 22kW EV Charger Guide</li>
+          <li>0% Platform Commission on Upsells</li>
           <li>Priority 24/7 Host Support</li>
         </ul>
       </div>
 
       <!-- Enterprise Plan -->
       <div class="pricing-card">
-        <div class="plan-name">Enterprise & Hotel</div>
-        <div class="plan-desc">For property managers & boutique hotels.</div>
-        <div class="plan-price" id="price-enterprise">$39 <span class="period">/ month</span></div>
-        <div class="billing-hint" id="hint-enterprise">Billed monthly</div>
-        <button class="btn-plan outline" onclick="triggerCheckout('enterprise')">Get Enterprise Plan</button>
+        <div>
+          <div class="plan-name">Enterprise & Hotel</div>
+          <div class="plan-desc">For boutique hotels & property teams.</div>
+          <div class="plan-price" id="price-enterprise">$39 <span class="period">/ month</span></div>
+          <div class="billing-hint" id="hint-enterprise">Billed monthly</div>
+          <button class="btn-plan outline" onclick="openCryptoModal('Enterprise & Hotel Plan', 39)">Get Enterprise Plan</button>
+          <button class="btn-crypto-alt" onclick="openCryptoModal('Enterprise & Hotel Plan', 39)">💎 Pay with Binance USDT</button>
+        </div>
         <ul class="features-list">
           <li>Unlimited Property Listings</li>
-          <li>Custom Domain Integration</li>
+          <li>Custom Domain (yourhotel.com)</li>
           <li>Staff & Cleaning Team Portal</li>
           <li>API Access & Custom Webhooks</li>
           <li>Dedicated Account Manager</li>
+          <li>24/7 VIP Phone Support</li>
         </ul>
       </div>
     </div>
   </div>
 
+  <!-- DIRECT BINANCE USDT CRYPTO CHECKOUT MODAL -->
+  <div id="cryptoModal" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeCryptoModal()">✕</button>
+      
+      <span style="background:rgba(16,185,129,0.15); color:#10B981; padding:4px 14px; border-radius:99px; font-size:11px; font-weight:800; text-transform:uppercase;">⚡ Instant Binance USDT Checkout</span>
+      <h2 id="modalPlanTitle" style="margin:12px 0 4px 0; font-size:22px; font-weight:800;">Pro Host Plan</h2>
+      <div id="modalPlanAmount" style="font-size:34px; font-weight:800; color:#10B981; margin-bottom:6px;">$19 USDT</div>
+      <p style="color:#94A3B8; font-size:12px; margin:0 0 14px 0;">Zero bank restrictions • 100% instant activation</p>
+
+      <div class="qr-box">
+        <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa&color=090D14&bgcolor=10B981" alt="Binance QR Code">
+        <div style="color:#10B981; font-size:12px; font-weight:700; margin-bottom:8px;">Network: Tron (TRC-20)</div>
+        
+        <div class="wallet-input-row">
+          <input type="text" id="walletAddr" class="wallet-input" readonly value="TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa">
+          <button class="btn-copy" onclick="copyAddr()">Copy</button>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
+        <input type="email" id="userEmail" placeholder="Your Account Email (for activation)" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:12px 14px; box-sizing:border-box;">
+        <input type="text" id="userTxid" placeholder="Transaction TXID / Hash (Optional)" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:12px 14px; box-sizing:border-box;">
+      </div>
+
+      <button class="btn-plan" style="margin:0;" onclick="submitPayment()">
+        ✅ I Have Sent the Payment (Instant Activation)
+      </button>
+    </div>
+  </div>
+
+  <footer>
+    <div style="margin-bottom:12px; display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
+      <a href="/terms.html">Terms of Service</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/refund.html" style="color:#10B981; font-weight:700;">Refund & Cancellation Policy</a>
+      <a href="/contact.html">Contact Us</a>
+    </div>
+    <p>© 2026 HostifyOS.com — Ali Turan Inc. All Rights Reserved.</p>
+  </footer>
+
   <script>
     let isAnnual = false;
-
-    const PADDLE_PRICES = {
-      starter: 'pri_01m0tsfdwyv1g4k22zabs39mjt',
-      proMonthly: 'pri_01m0ts1ge696rasc79cwad1ves',
-      proAnnual: 'pri_01m0ts4h9764t5n7xm9sphrs6d',
-      enterpriseMonthly: 'pri_01m0ts6xzdftg72j4k0cvc3s90',
-      enterpriseAnnual: 'pri_01m0ts9wrdrfj7174f24f9dfvb'
-    };
 
     function toggleBillingCycle() {
       isAnnual = document.getElementById('billing-toggle').checked;
@@ -413,46 +557,38 @@
       }
     }
 
-    function triggerCheckout(tier) {
-      let targetPriceId = PADDLE_PRICES.starter;
-      if (tier === 'pro') {
-        targetPriceId = isAnnual ? PADDLE_PRICES.proAnnual : PADDLE_PRICES.proMonthly;
-      } else if (tier === 'enterprise') {
-        targetPriceId = isAnnual ? PADDLE_PRICES.enterpriseAnnual : PADDLE_PRICES.enterpriseMonthly;
+    function openCryptoModal(planName, monthlyPrice) {
+      let finalPrice = monthlyPrice;
+      if (isAnnual) {
+        finalPrice = (monthlyPrice === 19) ? 168 : 348;
       }
-
-      if (window.Paddle && typeof window.Paddle.Checkout === 'object') {
-        Paddle.Checkout.open({
-          items: [{ priceId: targetPriceId, quantity: 1 }]
-        });
-      } else {
-        window.location.href = '/#pricing';
-      }
+      const periodText = isAnnual ? 'Annual ($' + finalPrice + ')' : 'Monthly ($' + finalPrice + ')';
+      
+      document.getElementById('modalPlanTitle').textContent = planName + ' - ' + periodText;
+      document.getElementById('modalPlanAmount').textContent = '$' + finalPrice + ' USDT';
+      document.getElementById('cryptoModal').classList.add('active');
     }
 
-    function togglePricingTheme() {
-      document.body.classList.toggle('theme-light');
-      const isLight = document.body.classList.contains('theme-light');
-      const icon = document.getElementById('theme-icon');
-      if (icon && window.lucide) {
-        icon.setAttribute('data-lucide', isLight ? 'moon' : 'sun');
-        lucide.createIcons();
-      }
+    function closeCryptoModal() {
+      document.getElementById('cryptoModal').classList.remove('active');
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      if (window.lucide) lucide.createIcons();
-    });
+    function copyAddr() {
+      const el = document.getElementById('walletAddr');
+      el.select();
+      navigator.clipboard.writeText(el.value);
+      alert('✅ Official Binance USDT (TRC-20) Address Copied!');
+    }
+
+    function submitPayment() {
+      const email = document.getElementById('userEmail').value;
+      if (!email) {
+        alert('Please enter your account email for instant activation!');
+        return;
+      }
+      alert('🎉 Payment submitted! Our system is verifying your transfer. Activation confirmation sent to: ' + email);
+      closeCryptoModal();
+    }
   </script>
-
-  <footer>
-    <div style="margin-bottom:12px; display:flex; justify-content:center; gap:20px;">
-      <a href="/terms.html" style="color:var(--text-muted); text-decoration:none;">Terms of Service</a>
-      <a href="/privacy.html" style="color:var(--text-muted); text-decoration:none;">Privacy Policy</a>
-      <a href="/refund.html" style="color:var(--text-muted); text-decoration:none;">Refund Policy</a>
-    </div>
-    © 2026 HostifyOS.com — Ali Turan Inc. All Rights Reserved.
-  </footer>
-
 </body>
 </html>
