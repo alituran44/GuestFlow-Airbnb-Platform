@@ -517,14 +517,31 @@
       <div id="modalServicePrice" style="font-size:30px; font-weight:800; color:#10B981; margin-bottom:14px;">$25.00</div>
 
       <!-- PAYMENT METHODS TABS -->
-      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:6px; background:#090D14; padding:4px; border-radius:12px; margin-bottom:14px; border:1px solid rgba(255,255,255,0.08);">
-        <button id="s-tab-btn-iban" onclick="switchServiceTab('iban')" style="background:rgba(16,185,129,0.15); color:#10B981; border:none; border-radius:8px; padding:8px 4px; font-size:12px; font-weight:700; cursor:pointer;">🏦 Banka/IBAN</button>
-        <button id="s-tab-btn-crypto" onclick="switchServiceTab('crypto')" style="background:transparent; color:#94A3B8; border:none; border-radius:8px; padding:8px 4px; font-size:12px; font-weight:700; cursor:pointer;">💎 USDT Cüzdan</button>
-        <button id="s-tab-btn-wa" onclick="switchServiceTab('wa')" style="background:transparent; color:#94A3B8; border:none; border-radius:8px; padding:8px 4px; font-size:12px; font-weight:700; cursor:pointer;">💬 WhatsApp</button>
+      <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:4px; background:#090D14; padding:4px; border-radius:12px; margin-bottom:14px; border:1px solid rgba(255,255,255,0.08);">
+        <button id="s-tab-btn-card" onclick="switchServiceTab('card')" style="background:rgba(16,185,129,0.15); color:#10B981; border:none; border-radius:8px; padding:8px 2px; font-size:11px; font-weight:700; cursor:pointer;">💳 Kredi Kartı</button>
+        <button id="s-tab-btn-iban" onclick="switchServiceTab('iban')" style="background:transparent; color:#94A3B8; border:none; border-radius:8px; padding:8px 2px; font-size:11px; font-weight:700; cursor:pointer;">🏦 IBAN/FAST</button>
+        <button id="s-tab-btn-crypto" onclick="switchServiceTab('crypto')" style="background:transparent; color:#94A3B8; border:none; border-radius:8px; padding:8px 2px; font-size:11px; font-weight:700; cursor:pointer;">💎 USDT Cüzdan</button>
+        <button id="s-tab-btn-wa" onclick="switchServiceTab('wa')" style="background:transparent; color:#94A3B8; border:none; border-radius:8px; padding:8px 2px; font-size:11px; font-weight:700; cursor:pointer;">💬 WhatsApp</button>
       </div>
 
-      <!-- TAB 1: IBAN -->
-      <div id="s-tab-iban" style="text-align:left; background:#090D14; padding:14px; border-radius:14px; border:1px solid rgba(255,255,255,0.06); margin-bottom:14px;">
+      <!-- TAB 1: KREDİ KARTI -->
+      <div id="s-tab-card" style="text-align:left; background:#090D14; padding:14px; border-radius:14px; border:1px solid rgba(255,255,255,0.06); margin-bottom:14px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+          <span style="font-size:12px; color:#94A3B8;">Online Kart ile Ödeme:</span>
+          <span style="background:rgba(59,130,246,0.15); color:#60A5FA; font-size:10px; font-weight:700; padding:2px 8px; border-radius:99px;">🔒 3D Secure / SSL</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <input type="text" id="guestCardHolder" placeholder="Kart Üzerindeki İsim" value="Misafir Adı" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff; font-size:12px; padding:8px 10px;">
+          <input type="text" id="guestCardNum" placeholder="•••• •••• •••• •••• (Kart Numarası)" value="•••• •••• •••• 4242" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff; font-size:12px; padding:8px 10px;">
+          <div style="display:flex; gap:8px;">
+            <input type="text" placeholder="AA/YY" value="12/28" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff; font-size:12px; padding:8px 10px;">
+            <input type="password" placeholder="CVC" value="123" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff; font-size:12px; padding:8px 10px;">
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: IBAN -->
+      <div id="s-tab-iban" style="display:none; text-align:left; background:#090D14; padding:14px; border-radius:14px; border:1px solid rgba(255,255,255,0.06); margin-bottom:14px;">
         <div style="font-size:11px; color:#94A3B8;">Ev Sahibi: <strong style="color:#fff;">Ali Turan (Fibabanka A.Ş.)</strong></div>
         <div style="font-size:11px; color:#10B981; font-weight:700; margin-top:6px;">IBAN (7/24 FAST):</div>
         <div style="display:flex; gap:6px; margin-top:4px;">
@@ -533,7 +550,7 @@
         </div>
       </div>
 
-      <!-- TAB 2: CRYPTO -->
+      <!-- TAB 3: CRYPTO -->
       <div id="s-tab-crypto" style="display:none; text-align:center; background:#090D14; padding:14px; border-radius:14px; border:1px solid rgba(255,255,255,0.06); margin-bottom:14px;">
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa&color=090D14&bgcolor=10B981" style="width:100px; height:100px; border-radius:8px; margin-bottom:6px;">
         <div style="font-size:11px; color:#10B981; font-weight:700; margin-bottom:4px;">Tron (TRC-20) USDT Cüzdanı</div>
@@ -543,7 +560,7 @@
         </div>
       </div>
 
-      <!-- TAB 3: WHATSAPP -->
+      <!-- TAB 4: WHATSAPP -->
       <div id="s-tab-wa" style="display:none; text-align:center; background:#090D14; padding:14px; border-radius:14px; border:1px solid rgba(255,255,255,0.06); margin-bottom:14px;">
         <p style="color:#94A3B8; font-size:12px; margin:0 0 10px 0;">Siparişi doğrudan ev sahibine WhatsApp üzerinden iletebilirsiniz.</p>
         <button onclick="sendOrderViaWhatsApp()" style="width:100%; padding:10px; border-radius:10px; background:linear-gradient(135deg, #25D366 0%, #128C7E 100%); color:#fff; border:none; font-weight:800; font-size:13px; cursor:pointer;">
@@ -1076,7 +1093,7 @@
       currentOrderItem = { name: itemTitle, price: price };
       document.getElementById('modalServiceTitle').textContent = itemTitle;
       document.getElementById('modalServicePrice').textContent = '$' + price + '.00';
-      switchServiceTab('iban');
+      switchServiceTab('card');
       document.getElementById('hostServiceModal').style.display = 'flex';
     }
 
@@ -1085,7 +1102,7 @@
     }
 
     function switchServiceTab(tabKey) {
-      ['iban', 'crypto', 'wa'].forEach(k => {
+      ['card', 'iban', 'crypto', 'wa'].forEach(k => {
         const btn = document.getElementById('s-tab-btn-' + k);
         const content = document.getElementById('s-tab-' + k);
         if (btn) {
