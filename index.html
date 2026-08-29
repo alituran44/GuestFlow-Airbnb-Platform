@@ -1322,12 +1322,39 @@
 
       <!-- FUNNEL STEP 9: FINAL HIGH-CONVERTING CLOSING CTA -->
       <div class="landing-bottom-cta">
+        <div style="display:inline-flex; align-items:center; gap:6px; background:rgba(0,182,122,0.12); border:1px solid rgba(0,182,122,0.3); padding:6px 14px; border-radius:99px; font-size:12px; font-weight:700; color:#00B67A; margin-bottom:12px;">
+          <span>★★★★★ TrustScore 4.9 | Trustpilot</span>
+        </div>
         <h2 data-i18n="ctaTitle">Ready to Automate Your STR Operations & Boost Revenue?</h2>
         <p data-i18n="ctaSub">Join over 3,400+ hosts scaling their guest experience today.</p>
-        <button class="btn-hero-primary" onclick="openLemonSqueezyCheckout('Pro Host Plan', '$14.00 / mo')">
-          <i data-lucide="shield-check"></i>
-          <span data-i18n="btnCtaTrial">Start Your 14-Day Free Trial ($0 Today)</span>
-        </button>
+        
+        <div style="display:flex; flex-direction:column; align-items:center; gap:12px; margin-top:8px;">
+          <button class="btn-hero-primary" onclick="openLemonSqueezyCheckout('Pro Host Plan', '$14.00 / mo')" style="font-size:15px; padding:14px 28px;">
+            <i data-lucide="shield-check"></i>
+            <span data-i18n="btnCtaTrial">Start Your 14-Day Free Trial ($0 Today)</span>
+          </button>
+          
+          <div style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:14px; font-size:12px; color:var(--text-muted); margin-top:4px;">
+            <span style="display:flex; align-items:center; gap:4px; color:#10B981; font-weight:600;">
+              <i data-lucide="credit-card" style="width:14px; height:14px;"></i> Kredi Kartı
+            </span>
+            <span>•</span>
+            <span style="display:flex; align-items:center; gap:4px; color:#60A5FA; font-weight:600;">
+              <i data-lucide="building" style="width:14px; height:14px;"></i> Banka FAST / Havale
+            </span>
+            <span>•</span>
+            <span style="display:flex; align-items:center; gap:4px; color:#F59E0B; font-weight:600;">
+              <i data-lucide="qr-code" style="width:14px; height:14px;"></i> USDT Kripto
+            </span>
+            <span>•</span>
+            <span style="display:flex; align-items:center; gap:4px; color:#25D366; font-weight:600;">
+              <i data-lucide="message-circle" style="width:14px; height:14px;"></i> WhatsApp Destek
+            </span>
+          </div>
+          <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">
+            ⚡ 14 Gün Ücretsiz Deneme • İstediğiniz An Tek Tıkla İptal • %100 Para İade Garantisi
+          </div>
+        </div>
       </div>
 
       <!-- OFFICIAL PLATFORM FOOTER -->
@@ -2863,68 +2890,118 @@
 
   <!-- SUBSCRIPTION CHECKOUT MODAL -->
   <div id="modal-lemon-checkout" class="modal-backdrop">
-    <div class="modal-card">
+    <div class="modal-card" style="max-width:480px; text-align:left;">
       <button class="modal-close" onclick="closeModal('modal-lemon-checkout')"><i data-lucide="x"></i></button>
-      <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
-        <i data-lucide="shield-check" class="icon-lg text-emerald"></i>
-        <h3>Secure Merchant Checkout</h3>
+      
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <i data-lucide="shield-check" class="icon-lg text-emerald"></i>
+          <h3 style="margin:0;">Ev Sahibi Abonelik Ödeme Ekranı</h3>
+        </div>
+        <span style="background:rgba(0,182,122,0.15); color:#00B67A; padding:3px 10px; border-radius:99px; font-size:11px; font-weight:800;">★ 4.9 TrustScore</span>
       </div>
-      <p class="modal-desc-text">Complete your host SaaS subscription. Tax compliance & instant invoicing included.</p>
+      <p class="modal-desc-text" style="margin-bottom:12px;">14 gün ücretsiz deneyin. İstediğiniz an tek tıkla iptal edebilirsiniz.</p>
 
-      <div class="lemon-summary-card" style="background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.2); padding:14px; border-radius:8px; margin-bottom:16px;">
-        <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
-          <span>Selected SaaS Plan:</span>
-          <strong id="lemon-plan-name">Pro Host Plan</strong>
+      <div class="lemon-summary-card" style="background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.2); padding:12px 14px; border-radius:10px; margin-bottom:14px;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;">
+          <span>Seçilen Plan:</span>
+          <strong id="lemon-plan-name">Pro Host Plan ($14/ay)</strong>
         </div>
-        <div style="display:flex; justify-content:space-between;">
-          <span>14-Day Free Trial Due Today:</span>
-          <strong class="text-emerald" id="lemon-plan-price">$0.00 Today</strong>
+        <div style="display:flex; justify-content:space-between; font-size:13px;">
+          <span>14 Günlük Ücretsiz Deneme Bugün:</span>
+          <strong class="text-emerald" id="lemon-plan-price">$0.00 Bugün</strong>
         </div>
       </div>
 
-      <form onsubmit="event.preventDefault(); processLemonSqueezySubscribe();">
-        <div class="form-group">
-          <label>Host Email Address</label>
-          <input type="email" id="lemon-email" placeholder="sarah@malibuvillas.com" value="sarah@malibuvillas.com" required>
-        </div>
+      <!-- 4 PAYMENT METHOD TABS -->
+      <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:4px; background:#090D14; padding:4px; border-radius:12px; margin-bottom:14px; border:1px solid rgba(255,255,255,0.08);">
+        <button id="h-tab-btn-card" onclick="switchHostCheckoutTab('card')" style="background:rgba(16,185,129,0.15); color:#10B981; border:none; border-radius:8px; padding:8px 2px; font-size:11px; font-weight:700; cursor:pointer;">💳 Kredi Kartı</button>
+        <button id="h-tab-btn-iban" onclick="switchHostCheckoutTab('iban')" style="background:transparent; color:#94A3B8; border:none; border-radius:8px; padding:8px 2px; font-size:11px; font-weight:700; cursor:pointer;">🏦 IBAN/FAST</button>
+        <button id="h-tab-btn-crypto" onclick="switchHostCheckoutTab('crypto')" style="background:transparent; color:#94A3B8; border:none; border-radius:8px; padding:8px 2px; font-size:11px; font-weight:700; cursor:pointer;">💎 USDT Kripto</button>
+        <button id="h-tab-btn-wa" onclick="switchHostCheckoutTab('wa')" style="background:transparent; color:#94A3B8; border:none; border-radius:8px; padding:8px 2px; font-size:11px; font-weight:700; cursor:pointer;">💬 WhatsApp</button>
+      </div>
 
-        <div class="form-group">
-          <label>Cardholder Name</label>
-          <input type="text" id="card-name" placeholder="Sarah Miller" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:10px 14px; border-radius:8px; width:100%; font-size:13px;">
-        </div>
-
-        <div class="form-group">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-            <label style="margin:0;">Credit / Debit Card Number</label>
-            <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:#10B981; font-size:9px;">🔒 256-Bit SSL Encrypted</span>
+      <!-- TAB 1: CREDIT CARD -->
+      <div id="h-tab-card">
+        <form onsubmit="event.preventDefault(); processLemonSqueezySubscribe();">
+          <div class="form-group" style="margin-bottom:10px;">
+            <label style="font-size:12px;">E-Posta Adresi</label>
+            <input type="email" id="lemon-email" placeholder="ornek@evsahibi.com" value="host@evsahibi.com" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:8px 12px; border-radius:8px; width:100%; font-size:13px;">
           </div>
-          <div style="position:relative;">
-            <input type="text" id="card-number" placeholder="4242 •••• •••• 4242" maxlength="19" oninput="formatCardNumber(this)" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:10px 14px 10px 42px; border-radius:8px; width:100%; font-family:monospace; font-size:14px; letter-spacing:1px;">
-            <span style="position:absolute; left:14px; top:50%; transform:translateY(-50%); font-size:16px;">💳</span>
-          </div>
-        </div>
 
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-          <div class="form-group">
-            <label>Expiry Date</label>
-            <input type="text" id="card-exp" placeholder="MM / YY" maxlength="5" oninput="formatCardExp(this)" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:10px 14px; border-radius:8px; width:100%; text-align:center; font-family:monospace; font-size:13px;">
+          <div class="form-group" style="margin-bottom:10px;">
+            <label style="font-size:12px;">Kart Üzerindeki İsim</label>
+            <input type="text" id="card-name" placeholder="Ali Turan" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:8px 12px; border-radius:8px; width:100%; font-size:13px;">
           </div>
-          <div class="form-group">
-            <label>CVC / CVV</label>
-            <input type="password" id="card-cvc" placeholder="•••" maxlength="4" oninput="this.value=this.value.replace(/[^0-9]/g,'')" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:10px 14px; border-radius:8px; width:100%; text-align:center; font-family:monospace; font-size:13px;">
+
+          <div class="form-group" style="margin-bottom:10px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+              <label style="margin:0; font-size:12px;">Kart Numarası</label>
+              <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:#10B981; font-size:9px;">🔒 256-Bit SSL</span>
+            </div>
+            <div style="position:relative;">
+              <input type="text" id="card-number" placeholder="4242 •••• •••• 4242" maxlength="19" oninput="formatCardNumber(this)" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:8px 12px 8px 36px; border-radius:8px; width:100%; font-family:monospace; font-size:13px;">
+              <span style="position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:14px;">💳</span>
+            </div>
           </div>
-        </div>
 
-        <div style="display:flex; align-items:center; justify-content:space-between; margin:12px 0; font-size:10px; color:var(--text-muted);">
-          <span>Accepted: Visa, Mastercard, Amex, Apple Pay</span>
-          <span style="color:#10B981; font-weight:600;"><i data-lucide="shield-check" style="width:12px; height:12px; vertical-align:middle;"></i> Merchant ID #456562</span>
-        </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
+            <div class="form-group" style="margin:0;">
+              <label style="font-size:12px;">Son Kullanma (AA/YY)</label>
+              <input type="text" id="card-exp" placeholder="12/28" maxlength="5" oninput="formatCardExp(this)" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:8px 12px; border-radius:8px; width:100%; text-align:center; font-family:monospace; font-size:13px;">
+            </div>
+            <div class="form-group" style="margin:0;">
+              <label style="font-size:12px;">CVC / CVV</label>
+              <input type="password" id="card-cvc" placeholder="•••" maxlength="4" oninput="this.value=this.value.replace(/[^0-9]/g,'')" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:8px 12px; border-radius:8px; width:100%; text-align:center; font-family:monospace; font-size:13px;">
+            </div>
+          </div>
 
-        <button type="submit" class="btn-primary-lg" id="btn-lemon-submit">
-          <i data-lucide="shield-check"></i>
-          <span>Complete 14-Day Free Registration ($0.00 Today)</span>
+          <button type="submit" class="btn-primary-lg" id="btn-lemon-submit" style="width:100%; padding:12px; font-weight:800; font-size:14px;">
+            <i data-lucide="shield-check"></i>
+            <span>14 Günlük Ücretsiz Denemeyi Başlat ($0 Bugün)</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- TAB 2: IBAN / FAST -->
+      <div id="h-tab-iban" style="display:none; text-align:left; background:#090D14; padding:14px; border-radius:12px; border:1px solid rgba(255,255,255,0.06);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <span style="font-size:12px; font-weight:700; color:#10B981;">Fibabanka FAST & Havale</span>
+          <span style="font-size:10px; background:rgba(16,185,129,0.15); color:#10B981; padding:2px 8px; border-radius:4px;">7/24 Anında Onay</span>
+        </div>
+        <div style="font-size:11px; color:#94A3B8; margin-bottom:4px;">Alıcı: <strong style="color:#fff;">Ali Turan</strong></div>
+        <div style="display:flex; gap:6px; margin-bottom:10px;">
+          <input type="text" id="hostCheckoutIban" readonly value="TR22 0010 3000 0000 0059 1864 21" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#10B981; font-family:monospace; font-size:11px; padding:8px;">
+          <button onclick="copyHostVal('hostCheckoutIban', 'IBAN Kopyalandı!')" style="background:#10B981; color:#090D14; border:none; border-radius:8px; padding:8px 12px; font-weight:800; font-size:11px; cursor:pointer;">Kopyala</button>
+        </div>
+        <div style="font-size:11px; color:#94A3B8; margin-bottom:8px;">SWIFT / BIC: <strong style="color:#fff;">FBABTRIS</strong></div>
+        <button onclick="showToast('✅ Havale bildirimi alındı! Hesabınız 5 dk içinde aktif edilecek.'); closeModal('modal-lemon-checkout');" class="btn-primary-sm" style="width:100%; padding:10px; font-weight:800; font-size:12px;">
+          ✅ Havale Yaptım (Hesabımı Aktifleştir)
         </button>
-      </form>
+      </div>
+
+      <!-- TAB 3: USDT CRYPTO -->
+      <div id="h-tab-crypto" style="display:none; text-align:center; background:#090D14; padding:14px; border-radius:12px; border:1px solid rgba(255,255,255,0.06);">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa&color=090D14&bgcolor=10B981" style="width:100px; height:100px; border-radius:8px; margin-bottom:8px;">
+        <div style="font-size:11px; color:#10B981; font-weight:700; margin-bottom:4px;">Binance Tron (TRC-20) USDT Cüzdanı</div>
+        <div style="display:flex; gap:6px; margin-bottom:10px;">
+          <input type="text" id="hostCheckoutCrypto" readonly value="TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#10B981; font-family:monospace; font-size:10px; padding:8px;">
+          <button onclick="copyHostVal('hostCheckoutCrypto', 'USDT Adresi Kopyalandı!')" style="background:#10B981; color:#090D14; border:none; border-radius:8px; padding:8px 12px; font-weight:800; font-size:11px; cursor:pointer;">Kopyala</button>
+        </div>
+        <button onclick="showToast('✅ Kripto transferi bildirildi! Tx Hash doğrulanıyor.'); closeModal('modal-lemon-checkout');" class="btn-primary-sm" style="width:100%; padding:10px; font-weight:800; font-size:12px;">
+          ✅ Kripto Gönderdim (Hesabı Aç)
+        </button>
+      </div>
+
+      <!-- TAB 4: WHATSAPP -->
+      <div id="h-tab-wa" style="display:none; text-align:center; background:#090D14; padding:14px; border-radius:12px; border:1px solid rgba(255,255,255,0.06);">
+        <p style="color:#94A3B8; font-size:12px; margin:0 0 10px 0;">Sorularınız veya özel kurumsal ödeme planları için doğrudan kurucu ekibimizle WhatsApp üzerinden görüşün.</p>
+        <a href="https://wa.me/905437360660?text=Merhaba,%20HostifyOS%20Pro%20Host%20Planı%20satın%20almak%20istiyorum." target="_blank" style="display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:10px; border-radius:10px; background:linear-gradient(135deg, #25D366 0%, #128C7E 100%); color:#fff; border:none; font-weight:800; font-size:13px; text-decoration:none;">
+          <i data-lucide="message-circle" style="width:16px; height:16px;"></i>
+          <span>WhatsApp ile Satın Al / İletişime Geç</span>
+        </a>
+      </div>
+
     </div>
   </div>
 

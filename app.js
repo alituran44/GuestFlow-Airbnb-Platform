@@ -2668,11 +2668,27 @@ function openLemonSqueezyCheckout(tierName, priceStr) {
       const planPriceEl = document.getElementById('lemon-plan-price');
       if (planNameEl) planNameEl.textContent = tierName;
       if (planPriceEl) planPriceEl.textContent = priceStr;
+      switchHostCheckoutTab('card');
       modal.classList.add('active');
     } else {
       window.open(targetUrl, '_blank');
     }
   }
+}
+
+function switchHostCheckoutTab(tabKey) {
+  ['card', 'iban', 'crypto', 'wa'].forEach(k => {
+    const btn = document.getElementById('h-tab-btn-' + k);
+    const content = document.getElementById('h-tab-' + k);
+    if (btn) {
+      btn.style.background = (k === tabKey) ? 'rgba(16,185,129,0.15)' : 'transparent';
+      btn.style.color = (k === tabKey) ? '#10B981' : '#94A3B8';
+    }
+    if (content) {
+      content.style.display = (k === tabKey) ? 'block' : 'none';
+    }
+  });
+  if (window.lucide) lucide.createIcons();
 }
 
 function processLemonSqueezySubscribe() {
