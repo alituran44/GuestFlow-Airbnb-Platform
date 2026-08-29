@@ -2691,6 +2691,44 @@ function switchHostCheckoutTab(tabKey) {
   if (window.lucide) lucide.createIcons();
 }
 
+function switchCtaPayTab(tabKey) {
+  ['card', 'iban', 'crypto', 'wa'].forEach(k => {
+    const btn = document.getElementById('cta-tab-btn-' + k);
+    const content = document.getElementById('cta-tab-' + k);
+    if (btn) {
+      btn.style.background = (k === tabKey) ? 'rgba(16,185,129,0.2)' : 'transparent';
+      btn.style.color = (k === tabKey) ? '#10B981' : '#94A3B8';
+    }
+    if (content) {
+      content.style.display = (k === tabKey) ? 'block' : 'none';
+    }
+  });
+  if (window.lucide) lucide.createIcons();
+}
+
+function selectClosingPlan(planKey) {
+  const proBtn = document.getElementById('plan-sel-pro');
+  const entBtn = document.getElementById('plan-sel-ent');
+  const freeBtn = document.getElementById('plan-sel-free');
+  const titleEl = document.getElementById('cta-checkout-plan-title');
+  const submitBtn = document.getElementById('cta-btn-submit-text');
+
+  if (proBtn) { proBtn.style.background = (planKey === 'pro') ? 'rgba(16,185,129,0.2)' : 'transparent'; proBtn.style.color = (planKey === 'pro') ? '#10B981' : '#94A3B8'; }
+  if (entBtn) { entBtn.style.background = (planKey === 'ent') ? 'rgba(16,185,129,0.2)' : 'transparent'; entBtn.style.color = (planKey === 'ent') ? '#10B981' : '#94A3B8'; }
+  if (freeBtn) { freeBtn.style.background = (planKey === 'free') ? 'rgba(16,185,129,0.2)' : 'transparent'; freeBtn.style.color = (planKey === 'free') ? '#10B981' : '#94A3B8'; }
+
+  if (planKey === 'pro') {
+    if (titleEl) titleEl.innerHTML = '⭐ Pro Host Plan ($14/ay) — <span style="color:#10B981;">14 Günlük Ücretsiz Deneme</span>';
+    if (submitBtn) submitBtn.textContent = '14 Günlük Ücretsiz Denemeyi Başlat ($0 Bugün)';
+  } else if (planKey === 'ent') {
+    if (titleEl) titleEl.innerHTML = '🏢 Enterprise Plan ($29/ay) — <span style="color:#10B981;">14 Günlük VIP Deneme</span>';
+    if (submitBtn) submitBtn.textContent = 'Enterprise VIP Denemeyi Başlat ($0 Bugün)';
+  } else if (planKey === 'free') {
+    if (titleEl) titleEl.innerHTML = '🌱 Starter Plan ($0/ay) — <span style="color:#10B981;">Süresiz Ücretsiz</span>';
+    if (submitBtn) submitBtn.textContent = 'Ücretsiz Başlat (Kredi Kartı Gerekmez)';
+  }
+}
+
 function processLemonSqueezySubscribe() {
   const emailInput = document.getElementById('lemon-email') || document.getElementById('lemon-checkout-email');
   const email = emailInput ? emailInput.value : 'host@hostifyos.com';
