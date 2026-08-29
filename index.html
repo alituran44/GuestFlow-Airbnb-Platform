@@ -508,9 +508,12 @@
               <!-- Quick Navigation Tabs -->
               <div style="display:flex; gap:4px; overflow-x:auto; padding:6px 12px; scrollbar-width:none;">
                 <button class="phone-tab-btn active" onclick="switchPhoneDemoTab('wifi', this)">📶 Wi-Fi</button>
+                <button class="phone-tab-btn" onclick="switchPhoneDemoTab('weather', this)">🌤️ Weather</button>
+                <button class="phone-tab-btn" onclick="switchPhoneDemoTab('flight', this)">✈️ Flight</button>
+                <button class="phone-tab-btn" onclick="switchPhoneDemoTab('prayer', this)">🕌 Prayer</button>
                 <button class="phone-tab-btn" onclick="switchPhoneDemoTab('lock', this)">🔑 Smart Lock</button>
                 <button class="phone-tab-btn" onclick="switchPhoneDemoTab('upsell', this)">🍷 Concierge</button>
-                <button class="phone-tab-btn" onclick="switchPhoneDemoTab('rules', this)">📋 Rules & A/C</button>
+                <button class="phone-tab-btn" onclick="switchPhoneDemoTab('rules', this)">📋 Rules</button>
                 <button class="phone-tab-btn" onclick="switchPhoneDemoTab('spots', this)">📍 Guide</button>
               </div>
 
@@ -529,6 +532,52 @@
                     </button>
                   </div>
                   <div style="margin-top:8px; font-size:10px; color:var(--text-muted); text-align:center;">High-Speed Fiber (250 Mbps)</div>
+                </div>
+
+                <!-- Tab: Live Weather -->
+                <div id="p-tab-weather" style="display:none;">
+                  <div style="font-size:10px; text-transform:uppercase; color:var(--text-muted); font-weight:700; margin-bottom:6px;">🌤️ Live Open-Meteo Weather</div>
+                  <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:4px; text-align:center;">
+                    <div style="background:rgba(255,255,255,0.04); padding:8px; border-radius:8px;">
+                      <div style="font-size:14px;">☀️</div>
+                      <div style="font-size:12px; font-weight:800; color:#fff;">29°C</div>
+                      <div style="font-size:8px; color:var(--text-muted);">Bodrum</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.04); padding:8px; border-radius:8px;">
+                      <div style="font-size:14px;">💨</div>
+                      <div style="font-size:12px; font-weight:800; color:#fff;">14 km/h</div>
+                      <div style="font-size:8px; color:var(--text-muted);">Wind NW</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.04); padding:8px; border-radius:8px;">
+                      <div style="font-size:14px;">🌊</div>
+                      <div style="font-size:12px; font-weight:800; color:#fff;">25°C</div>
+                      <div style="font-size:8px; color:var(--text-muted);">Sea Temp</div>
+                    </div>
+                  </div>
+                  <div style="margin-top:8px; font-size:10px; color:var(--accent-emerald); text-align:center; font-weight:700;">● Live API Sync Active</div>
+                </div>
+
+                <!-- Tab: Flight -->
+                <div id="p-tab-flight" style="display:none;">
+                  <div style="font-size:10px; text-transform:uppercase; color:var(--text-muted); font-weight:700; margin-bottom:6px;">✈️ Live Flight Tracker</div>
+                  <div style="background:rgba(255,255,255,0.04); padding:8px; border-radius:8px; font-size:10px;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                      <strong>TK2520 (IST ➔ BJV)</strong>
+                      <span style="color:#10B981; font-weight:800;">● On Time</span>
+                    </div>
+                    <div style="color:var(--text-muted);">Arrival: 14:45 • Gate 204B</div>
+                  </div>
+                </div>
+
+                <!-- Tab: Prayer Times -->
+                <div id="p-tab-prayer" style="display:none;">
+                  <div style="font-size:10px; text-transform:uppercase; color:var(--text-muted); font-weight:700; margin-bottom:6px;">🕌 Aladhan Prayer Times</div>
+                  <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:4px; text-align:center; font-size:9px;">
+                    <div style="background:rgba(255,255,255,0.04); padding:4px; border-radius:6px;">Fajr: <strong>05:08</strong></div>
+                    <div style="background:rgba(255,255,255,0.04); padding:4px; border-radius:6px;">Dhuhr: <strong>13:16</strong></div>
+                    <div style="background:rgba(255,255,255,0.04); padding:4px; border-radius:6px;">Maghrib: <strong>19:47</strong></div>
+                  </div>
+                  <div style="margin-top:6px; font-size:9px; color:var(--accent-emerald); text-align:center;">Qibla Angle: 142° SE</div>
                 </div>
 
                 <!-- Tab 2: Smart Lock PIN -->
