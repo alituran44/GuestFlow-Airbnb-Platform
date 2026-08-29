@@ -3978,12 +3978,16 @@ function saveHostGuideContent() {
   const wifiName = document.getElementById('cfg-guide-wifi-name') ? document.getElementById('cfg-guide-wifi-name').value : '';
   const wifiPass = document.getElementById('cfg-guide-wifi-pass') ? document.getElementById('cfg-guide-wifi-pass').value : '';
   const pin = document.getElementById('cfg-guide-pin') ? document.getElementById('cfg-guide-pin').value : '';
+  const taxiName = document.getElementById('cfg-guide-taxi-name') ? document.getElementById('cfg-guide-taxi-name').value : '';
+  const taxiPhone = document.getElementById('cfg-guide-taxi-phone') ? document.getElementById('cfg-guide-taxi-phone').value : '';
 
   const prop = getActiveProperty();
   if (prop) {
     if (wifiName) prop.wifiName = wifiName;
     if (wifiPass) prop.wifiPass = wifiPass;
     if (pin) prop.doorPin = pin;
+    if (taxiName) prop.taxiName = taxiName;
+    if (taxiPhone) prop.taxiPhone = taxiPhone;
   }
 
   // Update live guest elements if present
@@ -3992,7 +3996,7 @@ function saveHostGuideContent() {
   const pinEl = document.getElementById('door-pin-display');
   if (pinEl && pin) pinEl.textContent = `••••-${pin.slice(-2)}`;
 
-  showToast("🎉 Dijital rehber metinleri & Wi-Fi/PIN bilgileri canlıda güncellendi!");
+  showToast("🎉 Dijital rehber metinleri, Wi-Fi/PIN ve Bölgesel Taksi bilgileri canlıda güncellendi!");
 }
 
 function updateStandTitle(val) {

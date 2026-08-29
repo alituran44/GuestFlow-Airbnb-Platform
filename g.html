@@ -302,12 +302,12 @@
         <span class="label" id="btn-txt-maps">Maps</span>
       </a>
 
-      <a href="tel:02523854000" class="quick-btn-card">
+      <div onclick="openTaxiModal()" class="quick-btn-card" style="cursor:pointer; border-color:rgba(234,179,8,0.35);">
         <div style="width:30px; height:30px; border-radius:8px; background:rgba(234,179,8,0.15); display:flex; align-items:center; justify-content:center; color:#EAB308;">
           <i data-lucide="car" style="width:16px; height:16px;"></i>
         </div>
         <span class="label" id="btn-txt-taxi">Call Taxi</span>
-      </a>
+      </div>
 
       <a href="tel:112" class="quick-btn-card" style="border-color:rgba(239,68,68,0.25);">
         <div style="width:30px; height:30px; border-radius:8px; background:rgba(239,68,68,0.15); display:flex; align-items:center; justify-content:center; color:#EF4444;">
@@ -769,6 +769,44 @@
       <button onclick="confirmHostPayment()" class="btn-action" style="width:100%; margin:0; padding:12px; font-weight:800; font-size:14px; background:linear-gradient(135deg, #10B981 0%, #059669 100%); color:#fff;">
         ✅ Ödemeyi Gönderdim (Siparişi Tamamla)
       </button>
+    </div>
+  </div>
+
+  <!-- SMART REGIONAL TAXI MODAL -->
+  <div id="taxiModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.88); backdrop-filter:blur(12px); z-index:999999; justify-content:center; align-items:center; padding:20px;">
+    <div style="background:#111827; border:1px solid rgba(234,179,8,0.35); border-radius:24px; padding:24px; max-width:440px; width:100%; text-align:center; position:relative; box-shadow:0 30px 80px rgba(0,0,0,0.95);">
+      <button onclick="closeTaxiModal()" style="position:absolute; top:16px; right:16px; background:rgba(255,255,255,0.08); border:none; color:#94A3B8; width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:16px;">✕</button>
+
+      <div style="width:48px; height:48px; border-radius:14px; background:rgba(234,179,8,0.15); color:#EAB308; display:flex; align-items:center; justify-content:center; margin:0 auto 12px auto;">
+        <i data-lucide="car" style="width:26px; height:26px;"></i>
+      </div>
+      <span style="background:rgba(234,179,8,0.15); color:#EAB308; padding:3px 10px; border-radius:99px; font-size:11px; font-weight:800; text-transform:uppercase;">📍 Konuma Göre En Yakın Taksi</span>
+      <h3 style="color:#fff; margin:10px 0 4px 0; font-size:18px; font-weight:800;" id="taxi-station-name">Yalıkavak Marina Taksi Durağı</h3>
+      <p style="color:var(--text-muted); font-size:12px; margin:0 0 16px 0;" id="taxi-station-dist">Villanıza en yakın resmi taksi durağı (250m • 3 dk)</p>
+
+      <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
+        <!-- Button 1: Call Taxi Direct -->
+        <a id="btn-dial-taxi" href="tel:+902523854000" class="btn-action" style="background:#EAB308; color:#090D14; font-weight:800; font-size:14px; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:8px; margin:0;">
+          <i data-lucide="phone-call" style="width:18px; height:18px;"></i>
+          <span id="txt-taxi-num">0252 385 40 00 (Hemen Ara)</span>
+        </a>
+
+        <!-- Button 2: Google Maps Real-Time Nearby Taxis Search -->
+        <a id="btn-gmaps-taxi" href="https://www.google.com/maps/search/taxi+near+Yalikavak+Bodrum" target="_blank" style="background:rgba(255,255,255,0.05); border:1px solid var(--border); color:#fff; padding:12px; border-radius:12px; font-size:13px; font-weight:700; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:8px;">
+          <i data-lucide="map-pin" style="color:#3B82F6; width:16px; height:16px;"></i>
+          <span>Google Haritalar'da Çevredeki Taksileri Gör</span>
+        </a>
+
+        <!-- Button 3: WhatsApp Share Location to Taxi / Host Concierge -->
+        <button onclick="requestTaxiViaWhatsApp()" style="background:rgba(37,211,102,0.1); border:1px solid rgba(37,211,102,0.3); color:#25D366; padding:10px; border-radius:12px; font-size:12px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;">
+          <i data-lucide="message-circle" style="width:16px; height:16px;"></i>
+          <span>WhatsApp ile Konum Göndererek Taksi İste</span>
+        </button>
+      </div>
+
+      <div style="font-size:11px; color:var(--text-muted); border-top:1px solid rgba(255,255,255,0.08); padding-top:10px;">
+        💡 <strong>İpucu:</strong> Taksiye bindiğinizde taksimetre açılmasını talep edebilirsiniz.
+      </div>
     </div>
   </div>
 
@@ -1408,6 +1446,45 @@
         `;
       }
       showToast(`✈️ ${code} uçuş durumu güncellendi!`);
+    }
+
+    // 🚕 REGIONAL DYNAMIC TAXI DATABASE & GOOGLE MAPS RESOLVER
+    const REGIONAL_TAXIS = {
+      'BODRUM': { name: 'Yalıkavak Marina Taksi Durağı', phone: '+902523854000', displayPhone: '0252 385 40 00', dist: 'Villanıza en yakın resmi taksi durağı (250m • 3 dk)', gmapsQuery: 'Yalikavak+Marina+Taksi+Bodrum' },
+      'KAS': { name: 'Kaş Merkez Meydan Taksi', phone: '+902428361400', displayPhone: '0242 836 14 00', dist: 'Kaş Çarşı & Marina Taksi Noktası (400m)', gmapsQuery: 'Kas+Meydan+Taksi+Antalya' },
+      'CESME': { name: 'Alaçatı Ilıca Taksi Durağı', phone: '+902327168000', displayPhone: '0232 716 80 00', dist: 'Alaçatı Köyiçi Girişi (350m • 4 dk)', gmapsQuery: 'Alacati+Taksi+Cesme' },
+      'ISTANBUL': { name: 'İstanbul 7/24 Bölge Taksi Çağrı Merkezi', phone: '+908507555555', displayPhone: '0850 755 55 55', dist: 'Sarı Taksi & Turkuaz VIP Taksi (Hemen Kapıda)', gmapsQuery: 'taxi+near+me+Istanbul' },
+      'DEFAULT': { name: 'En Yakın Resmi Taksi Durağı', phone: '+902523854000', displayPhone: '0252 385 40 00', dist: 'Villanıza en yakın lisanslı taksi istasyonu', gmapsQuery: 'taxi+near+me' }
+    };
+
+    function openTaxiModal() {
+      const locText = (document.getElementById('txt-location') ? document.getElementById('txt-location').textContent : '').toUpperCase();
+      let key = 'DEFAULT';
+      if (locText.includes('BODRUM') || locText.includes('YALIKAVAK')) key = 'BODRUM';
+      else if (locText.includes('KAŞ') || locText.includes('KAS') || locText.includes('KALKAN')) key = 'KAS';
+      else if (locText.includes('ÇEŞME') || locText.includes('CESME') || locText.includes('ALAÇATI') || locText.includes('ALACATI')) key = 'CESME';
+      else if (locText.includes('ISTANBUL') || locText.includes('İSTANBUL')) key = 'ISTANBUL';
+
+      const taxi = REGIONAL_TAXIS[key] || REGIONAL_TAXIS.DEFAULT;
+      document.getElementById('taxi-station-name').textContent = taxi.name;
+      document.getElementById('taxi-station-dist').textContent = taxi.dist;
+      document.getElementById('btn-dial-taxi').href = 'tel:' + taxi.phone;
+      document.getElementById('txt-taxi-num').textContent = taxi.displayPhone + ' (Hemen Ara)';
+      document.getElementById('btn-gmaps-taxi').href = 'https://www.google.com/maps/search/' + encodeURIComponent(taxi.gmapsQuery);
+      
+      document.getElementById('taxiModal').style.display = 'flex';
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function closeTaxiModal() {
+      document.getElementById('taxiModal').style.display = 'none';
+    }
+
+    function requestTaxiViaWhatsApp() {
+      const propTitle = document.getElementById('g-prop-title') ? document.getElementById('g-prop-title').textContent : 'Villa Sunset';
+      const msg = encodeURIComponent('Merhaba, ' + propTitle + ' adresine acil taksi çağırmak istiyorum. Konum: https://maps.google.com/?q=Yalikavak+Bodrum');
+      window.open('https://wa.me/905437360660?text=' + msg, '_blank');
+      closeTaxiModal();
     }
 
     document.addEventListener('DOMContentLoaded', () => {
