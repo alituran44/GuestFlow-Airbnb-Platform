@@ -259,19 +259,19 @@
   <!-- DEMO ONLY: Top Return to HostifyOS Homepage Banner -->
   <div id="demo-nav-banner" style="background:linear-gradient(90deg, #064E3B 0%, #0F172A 100%); border-bottom:1px solid rgba(16,185,129,0.3); padding:8px 16px; display:flex; justify-content:space-between; align-items:center; font-size:12px; z-index:999999;">
     <div style="display:flex; align-items:center; gap:8px;">
-      <span style="background:#10B981; color:#090D14; font-size:10px; font-weight:800; padding:2px 8px; border-radius:99px; text-transform:uppercase;">CANLI DEMO</span>
-      <span style="color:#E2E8F0; font-weight:600;">HostifyOS Misafir Dijital Rehber Önizlemesi</span>
+      <span id="txt-demo-badge" style="background:#10B981; color:#090D14; font-size:10px; font-weight:800; padding:2px 8px; border-radius:99px; text-transform:uppercase;">LIVE DEMO</span>
+      <span id="txt-demo-title" style="color:#E2E8F0; font-weight:600;">HostifyOS Guest Digital Guide Live Preview</span>
     </div>
     <a href="/" style="background:#10B981; color:#090D14; font-weight:800; font-size:11px; padding:6px 14px; border-radius:8px; text-decoration:none; display:inline-flex; align-items:center; gap:6px; box-shadow:0 2px 10px rgba(16,185,129,0.3);">
       <i data-lucide="arrow-left" style="width:14px; height:14px;"></i>
-      <span>Ana Sayfaya Dön</span>
+      <span id="txt-demo-btn">Return to Homepage</span>
     </a>
   </div>
 
   <!-- DEMO ONLY: Floating Return Button for Testers -->
   <a id="demo-floating-back" href="/" style="position:fixed; bottom:20px; right:20px; background:#10B981; color:#090D14; font-weight:800; font-size:12px; padding:10px 18px; border-radius:99px; text-decoration:none; display:flex; align-items:center; gap:8px; z-index:99999; box-shadow:0 10px 30px rgba(0,0,0,0.85); border:1px solid rgba(255,255,255,0.25);">
     <i data-lucide="home" style="width:16px; height:16px;"></i>
-    <span>Ana Sayfaya Dön</span>
+    <span id="txt-demo-float-btn">Return to Homepage</span>
   </a>
 
   <!-- Top Sticky Bar with Multi-Language Switcher -->
@@ -889,6 +889,9 @@
         reviewTitle: "Enjoying Your Stay at Villa Sunset?",
         reviewSub: "Your 5-star review on Trustpilot means the world to our family host team.",
         btnReview: "Write a 5-Star Review on Trustpilot",
+        demoBadge: "LIVE DEMO",
+        demoTitle: "HostifyOS Guest Digital Guide Live Preview",
+        demoBtn: "Return to Homepage",
         copiedToast: "📶 Wi-Fi Password Copied to Clipboard!",
         orderedToast: "✨ Service requested! Host notified via WhatsApp/SMS."
       },
@@ -945,6 +948,9 @@
         reviewTitle: "Konaklamanızdan Memnun Musunuz?",
         reviewSub: "Trustpilot üzerinde bırakacağınız 5 yıldızlı güzel yorum aile işletmemiz için çok değerlidir.",
         btnReview: "Trustpilot'ta 5 Yıldızlı Yorum Yaz",
+        demoBadge: "CANLI DEMO",
+        demoTitle: "HostifyOS Misafir Dijital Rehber Önizlemesi",
+        demoBtn: "Ana Sayfaya Dön",
         copiedToast: "📶 Wi-Fi Şifresi Panoya Kopyalandı!",
         orderedToast: "✨ Siparişiniz alındı! Ev sahibine WhatsApp/SMS ile iletildi."
       },
@@ -1001,6 +1007,9 @@
         reviewTitle: "Gefällt Ihnen der Aufenthalt?",
         reviewSub: "Ihre 5-Sterne-Bewertung bedeutet unserem Team sehr viel.",
         btnReview: "5-Sterne-Bewertung abgeben",
+        demoBadge: "LIVE-DEMO",
+        demoTitle: "HostifyOS Digitaler Gästeführer Vorschau",
+        demoBtn: "Zur Startseite",
         copiedToast: "📶 WLAN-Passwort kopiert!",
         orderedToast: "✨ Anfrage gesendet! Gastgeber benachrichtigt."
       },
@@ -1057,6 +1066,9 @@
         reviewTitle: "Вам нравится пребывание на вилле?",
         reviewSub: "Ваш 5-звездочный отзыв очень важен для нас.",
         btnReview: "Оставить 5 звезд",
+        demoBadge: "ДЕМО-РЕЖИМ",
+        demoTitle: "Демо-версия цифрового гида HostifyOS",
+        demoBtn: "На главную",
         copiedToast: "📶 Пароль Wi-Fi скопирован!",
         orderedToast: "✨ Заказ оформлен! Хозяин уведомлен."
       },
@@ -1113,6 +1125,9 @@
         reviewTitle: "Vous appréciez votre séjour?",
         reviewSub: "Votre avis 5 étoiles est précieux pour notre équipe.",
         btnReview: "Laisser un Avis 5 Étoiles",
+        demoBadge: "DÉMO EN DIRECT",
+        demoTitle: "Aperçu du Guide Numérique HostifyOS",
+        demoBtn: "Retour à l'accueil",
         copiedToast: "📶 Mot de passe Wi-Fi copié!",
         orderedToast: "✨ Demande transmise à l'hôte!"
       },
@@ -1169,6 +1184,9 @@
         reviewTitle: "¿Disfrutando de su estancia?",
         reviewSub: "Su reseña de 5 estrellas nos ayuda muchísimo.",
         btnReview: "Dejar Reseña de 5 Estrellas",
+        demoBadge: "DEMO EN VIVO",
+        demoTitle: "Vista previa de la guía digital HostifyOS",
+        demoBtn: "Volver al Inicio",
         copiedToast: "📶 ¡Clave Wi-Fi copiada!",
         orderedToast: "✨ ¡Solicitud enviada al anfitrión!"
       },
@@ -1225,6 +1243,9 @@
         reviewTitle: "هل تستمتع بإقامتك في الفيلا؟",
         reviewSub: "تقييمك بخمس نجوم يسعدنا ويساعد فريقنا العائلي كثيراً.",
         btnReview: "ترك تقييم 5 نجوم",
+        demoBadge: "عرض تجريبي",
+        demoTitle: "معاينة دليل الضيوف الرقمي HostifyOS",
+        demoBtn: "العودة للرئيسية",
         copiedToast: "📶 تم نسخ كلمة مرور الواي فاي بنجاح!",
         orderedToast: "✨ تم استلام طلبك وإرسال إشعار للمضيف!"
       }
@@ -1318,6 +1339,17 @@
       document.getElementById('review-title').textContent = dict.reviewTitle;
       document.getElementById('review-sub').textContent = dict.reviewSub;
       document.getElementById('btn-review').querySelector('span').textContent = dict.btnReview;
+
+      // Translate Demo Banner & Floating Button
+      const demoBadgeEl = document.getElementById('txt-demo-badge');
+      const demoTitleEl = document.getElementById('txt-demo-title');
+      const demoBtnEl = document.getElementById('txt-demo-btn');
+      const demoFloatBtnEl = document.getElementById('txt-demo-float-btn');
+
+      if (demoBadgeEl && dict.demoBadge) demoBadgeEl.textContent = dict.demoBadge;
+      if (demoTitleEl && dict.demoTitle) demoTitleEl.textContent = dict.demoTitle;
+      if (demoBtnEl && dict.demoBtn) demoBtnEl.textContent = dict.demoBtn;
+      if (demoFloatBtnEl && dict.demoBtn) demoFloatBtnEl.textContent = dict.demoBtn;
 
       if (window.lucide) lucide.createIcons();
     }
