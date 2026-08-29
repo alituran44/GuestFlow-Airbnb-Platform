@@ -115,7 +115,7 @@ const HOSTIFYOS_BLOG_ARTICLES = [
     date: "Aug 12, 2026",
     readTime: "5 min read",
     author: "Security Desk",
-    image: "https://images.unsplash.com/photo-1528312457489-5e9628375464?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=800&q=80",
     excerpt: "Static lockbox codes pose massive security risks. Learn how dynamic time-gated access PINs protect properties and reassure guests.",
     content: `
       <h2>The Danger of Static Keypad Codes</h2>
@@ -394,7 +394,7 @@ function generateBlogCardHtml(a) {
   return `
     <article class="blog-card" onclick="openBlogArticleModal('${a.id}')">
       <div class="blog-card-img">
-        <img src="${a.image}" alt="${a.title}" loading="lazy">
+        <img src="${a.image}" alt="${a.title}" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80';">
         <span class="blog-card-badge">${a.categoryBadge}</span>
       </div>
       <div class="blog-card-body">
@@ -433,7 +433,7 @@ function openBlogArticleModal(articleId) {
     </div>
 
     <div class="blog-modal-hero-img">
-      <img src="${article.image}" alt="${article.title}">
+      <img src="${article.image}" alt="${article.title}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80';">
     </div>
 
     <div class="blog-modal-body">
