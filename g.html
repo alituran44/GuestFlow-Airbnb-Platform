@@ -317,6 +317,38 @@
       </a>
     </div>
 
+    <!-- 1. Wi-Fi Access Section -->
+    <div class="section-card">
+      <h2 class="card-title">
+        <i data-lucide="wifi" style="color:var(--accent);"></i>
+        <span id="title-wifi">1-Tap Guest Wi-Fi Access</span>
+      </h2>
+      <div class="wifi-box">
+        <div class="wifi-name" id="g-wifi-ssid">Villa_Sunset_5G</div>
+        <div class="wifi-pass"><span id="lbl-password">Password:</span> <strong style="color:#fff;" id="g-wifi-pass">SunsetBodrum2026</strong></div>
+        <button class="btn-action" onclick="copyWifiPass()">
+          <i data-lucide="copy"></i>
+          <span id="btn-copy-wifi">Copy Wi-Fi Password</span>
+        </button>
+        <div style="font-size:11px; color:var(--text-muted); margin-top:10px;" id="txt-wifi-sub">High-speed fiber (250 Mbps) • Free unlimited devices</div>
+      </div>
+    </div>
+
+    <!-- 2. Smart Lock PIN Code -->
+    <div class="section-card">
+      <h2 class="card-title">
+        <i data-lucide="key" style="color:var(--accent);"></i>
+        <span id="title-lock">Smart Lock Door Access PIN</span>
+      </h2>
+      <div class="pin-box">
+        <div class="pin-code">8 4 9 2 #</div>
+        <div style="font-size:12px; color:var(--text-muted); margin-top:6px;" id="txt-lock-valid">Time-Gated Access (Valid Check-in 14:00 to Check-out 11:00)</div>
+        <div style="font-size:12px; color:var(--text-secondary); margin-top:10px; background:rgba(255,255,255,0.03); padding:8px 12px; border-radius:8px;" id="txt-lock-hint">
+          💡 <strong>How to Unlock:</strong> Touch keypad to illuminate, type <strong>8492#</strong>, and turn lock clockwise.
+        </div>
+      </div>
+    </div>
+
     <!-- 🌤️ LIVE WEATHER WIDGET (Open-Meteo Public API) -->
     <div class="section-card" id="card-weather" style="background:linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(17,24,39,0.95) 100%); border-color:rgba(16,185,129,0.25);">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
@@ -381,38 +413,6 @@
         <span style="color:var(--text-muted); font-weight:800;">=</span>
         <div id="cur-result" style="flex:1; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.3); border-radius:8px; color:#10B981; padding:8px; font-size:13px; font-weight:800; text-align:center;">
           1,707.50 ₺
-        </div>
-      </div>
-    </div>
-
-    <!-- 1. Wi-Fi Access Section -->
-    <div class="section-card">
-      <h2 class="card-title">
-        <i data-lucide="wifi" style="color:var(--accent);"></i>
-        <span id="title-wifi">1-Tap Guest Wi-Fi Access</span>
-      </h2>
-      <div class="wifi-box">
-        <div class="wifi-name" id="g-wifi-ssid">Villa_Sunset_5G</div>
-        <div class="wifi-pass"><span id="lbl-password">Password:</span> <strong style="color:#fff;" id="g-wifi-pass">SunsetBodrum2026</strong></div>
-        <button class="btn-action" onclick="copyWifiPass()">
-          <i data-lucide="copy"></i>
-          <span id="btn-copy-wifi">Copy Wi-Fi Password</span>
-        </button>
-        <div style="font-size:11px; color:var(--text-muted); margin-top:10px;" id="txt-wifi-sub">High-speed fiber (250 Mbps) • Free unlimited devices</div>
-      </div>
-    </div>
-
-    <!-- 2. Smart Lock PIN Code -->
-    <div class="section-card">
-      <h2 class="card-title">
-        <i data-lucide="key" style="color:var(--accent);"></i>
-        <span id="title-lock">Smart Lock Door Access PIN</span>
-      </h2>
-      <div class="pin-box">
-        <div class="pin-code">8 4 9 2 #</div>
-        <div style="font-size:12px; color:var(--text-muted); margin-top:6px;" id="txt-lock-valid">Time-Gated Access (Valid Check-in 14:00 to Check-out 11:00)</div>
-        <div style="font-size:12px; color:var(--text-secondary); margin-top:10px; background:rgba(255,255,255,0.03); padding:8px 12px; border-radius:8px;" id="txt-lock-hint">
-          💡 <strong>How to Unlock:</strong> Touch keypad to illuminate, type <strong>8492#</strong>, and turn lock clockwise.
         </div>
       </div>
     </div>
