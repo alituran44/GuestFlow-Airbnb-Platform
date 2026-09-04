@@ -1426,27 +1426,43 @@
       setTimeout(() => { t.style.display = 'none'; }, 3500);
     }
 
-    // 🌤️ LIVE WEATHER API (Open-Meteo)
+    // 🌤️ LIVE WEATHER API (Open-Meteo with 30-min Caching)
     async function fetchLiveWeather() {
+      const cached = sessionStorage.getItem('hostify_weather_cache');
+      if (cached) {
+        try {
+          const parsed = JSON.parse(cached);
+          if (Date.now() - parsed.timestamp < 1800000) { // 30 mins
+            applyWeatherData(parsed.data);
+            return;
+          }
+        } catch(e) {}
+      }
+
       try {
         const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=37.0344&longitude=27.4305&current_weather=true&daily=temperature_2m_max,temperature_2m_min,sunset&timezone=auto');
         if (!res.ok) return;
         const data = await res.json();
-        if (data.current_weather) {
-          const temp = Math.round(data.current_weather.temperature);
-          const wind = Math.round(data.current_weather.windspeed);
-          const tempEl = document.getElementById('w-temp');
-          const windEl = document.getElementById('w-wind');
-          if (tempEl) tempEl.textContent = `${temp}°C`;
-          if (windEl) windEl.textContent = `${wind} km/s`;
-          if (data.daily && data.daily.sunset && data.daily.sunset[0]) {
-            const sunset = data.daily.sunset[0].split('T')[1];
-            const sunEl = document.getElementById('w-sunset');
-            if (sunEl) sunEl.textContent = sunset;
-          }
-        }
+        sessionStorage.setItem('hostify_weather_cache', JSON.stringify({ timestamp: Date.now(), data: data }));
+        applyWeatherData(data);
       } catch (e) {
         console.log('Weather fallback active');
+      }
+    }
+
+    function applyWeatherData(data) {
+      if (data && data.current_weather) {
+        const temp = Math.round(data.current_weather.temperature);
+        const wind = Math.round(data.current_weather.windspeed);
+        const tempEl = document.getElementById('w-temp');
+        const windEl = document.getElementById('w-wind');
+        if (tempEl) tempEl.textContent = `${temp}°C`;
+        if (windEl) windEl.textContent = `${wind} km/s`;
+        if (data.daily && data.daily.sunset && data.daily.sunset[0]) {
+          const sunset = data.daily.sunset[0].split('T')[1];
+          const sunEl = document.getElementById('w-sunset');
+          if (sunEl) sunEl.textContent = sunset;
+        }
       }
     }
 
@@ -1461,23 +1477,39 @@
       if (resEl) resEl.textContent = `${tryVal.toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ₺`;
     }
 
-    // 🕌 LIVE PRAYER TIMES API (Aladhan)
+    // 🕌 LIVE PRAYER TIMES API (Aladhan with 1-Day Caching)
     async function fetchPrayerTimes() {
+      const cached = sessionStorage.getItem('hostify_prayer_cache');
+      if (cached) {
+        try {
+          const parsed = JSON.parse(cached);
+          if (Date.now() - parsed.timestamp < 43200000) { // 12 hours
+            applyPrayerData(parsed.data);
+            return;
+          }
+        } catch(e) {}
+      }
+
       try {
         const res = await fetch('https://api.aladhan.com/v1/timingsByCity?city=Bodrum&country=Turkey&method=13');
         if (!res.ok) return;
         const data = await res.json();
-        if (data.data && data.data.timings) {
-          const t = data.data.timings;
-          if (document.getElementById('p-imsak')) document.getElementById('p-imsak').textContent = t.Fajr;
-          if (document.getElementById('p-gunes')) document.getElementById('p-gunes').textContent = t.Sunrise;
-          if (document.getElementById('p-ogle')) document.getElementById('p-ogle').textContent = t.Dhuhr;
-          if (document.getElementById('p-ikindi')) document.getElementById('p-ikindi').textContent = t.Asr;
-          if (document.getElementById('p-aksam')) document.getElementById('p-aksam').textContent = t.Maghrib;
-          if (document.getElementById('p-yatsi')) document.getElementById('p-yatsi').textContent = t.Isha;
-        }
+        sessionStorage.setItem('hostify_prayer_cache', JSON.stringify({ timestamp: Date.now(), data: data }));
+        applyPrayerData(data);
       } catch (e) {
         console.log('Prayer fallback active');
+      }
+    }
+
+    function applyPrayerData(data) {
+      if (data && data.data && data.data.timings) {
+        const t = data.data.timings;
+        if (document.getElementById('p-imsak')) document.getElementById('p-imsak').textContent = t.Fajr;
+        if (document.getElementById('p-gunes')) document.getElementById('p-gunes').textContent = t.Sunrise;
+        if (document.getElementById('p-ogle')) document.getElementById('p-ogle').textContent = t.Dhuhr;
+        if (document.getElementById('p-ikindi')) document.getElementById('p-ikindi').textContent = t.Asr;
+        if (document.getElementById('p-aksam')) document.getElementById('p-aksam').textContent = t.Maghrib;
+        if (document.getElementById('p-yatsi')) document.getElementById('p-yatsi').textContent = t.Isha;
       }
     }
 
