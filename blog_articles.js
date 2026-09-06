@@ -473,7 +473,19 @@ function handleBlogSearch(query) {
   renderBlogArticlesGrid(cat, query);
 }
 
-// Auto-initialize on load
+// Auto-initialize on load & handle direct article deep-linking
 document.addEventListener('DOMContentLoaded', () => {
   renderBlogArticlesGrid();
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const articleParam = urlParams.get('article') || urlParams.get('id');
+  const hashParam = window.location.hash ? window.location.hash.replace('#', '') : null;
+  const targetSlug = articleParam || hashParam;
+
+  if (targetSlug) {
+    const matched = HOSTIFYOS_BLOG_ARTICLES.find(a => a.id === targetSlug || a.slug === targetSlug);
+    if (matched) {
+      setTimeout(() => openBlogArticleModal(matched.id), 200);
+    }
+  }
 });

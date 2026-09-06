@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   
+  <!-- 1. HOMEPAGE -->
   <url>
     <loc>https://www.hostifyos.com/</loc>
-    <lastmod>2026-08-23</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     
-    <!-- Multi-Language Hreflang Alternates -->
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hostifyos.com/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.hostifyos.com/?lang=EN" />
     <xhtml:link rel="alternate" hreflang="tr" href="https://www.hostifyos.com/?lang=TR" />
@@ -20,11 +20,10 @@
     <xhtml:link rel="alternate" hreflang="pt" href="https://www.hostifyos.com/?lang=PT" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://www.hostifyos.com/?lang=JA" />
     
-    <!-- Visual Brand Images -->
     <image:image>
       <image:loc>https://www.hostifyos.com/brand_logo.jpg</image:loc>
       <image:title>HostifyOS Brand Emblem</image:title>
-      <image:caption>The Modern Hosting OS &amp; Automated Short-Term Rental Revenue Engine</image:caption>
+      <image:caption>The Modern Hosting OS and Automated Short-Term Rental Revenue Engine</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://www.hostifyos.com/hero_bg_villa.jpg</image:loc>
@@ -33,141 +32,204 @@
     </image:image>
   </url>
 
-  <!-- STANDALONE PWA GUIDEBOOK ROUTES -->
+  <!-- 2. CORE MARKETING & PRODUCT PAGES -->
   <url>
-    <loc>https://www.hostifyos.com/g/malibu-villa</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://www.hostifyos.com/pricing.html</loc>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://www.hostifyos.com/g/grand-horizon-hotel</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://www.hostifyos.com/blog.html</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.hostifyos.com/g.html</loc>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- 20 SEO BLOG ARTICLES (HOSPITALITY LABS) -->
   <url>
-    <loc>https://www.hostifyos.com/#increase-airbnb-revenue-420-month-per-property</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://www.hostifyos.com/import-guide.html</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.hostifyos.com/promo-video.html</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.hostifyos.com/contact.html</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.hostifyos.com/privacy.html</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.hostifyos.com/terms.html</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.hostifyos.com/refund.html</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- 3. LIVE GUIDEBOOK PREVIEWS -->
+  <url>
+    <loc>https://www.hostifyos.com/g/malibu-villa/index.html</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.hostifyos.com/g/grand-horizon-hotel/index.html</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 4. 20 DEDICATED SEO BLOG ARTICLES (Clean Canonical URLs) -->
+  <url>
+    <loc>https://www.hostifyos.com/blog.html?article=increase-airbnb-revenue-420-month-per-property</loc>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.hostifyos.com/#ultimate-guide-digital-guest-guidebooks-2026</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://www.hostifyos.com/blog.html?article=ultimate-guide-digital-guest-guidebooks-2026</loc>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.hostifyos.com/#one-tap-wifi-keyless-entry-automation</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://www.hostifyos.com/blog.html?article=one-tap-wifi-keyless-entry-automation</loc>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.hostifyos.com/#why-paper-house-manuals-are-dead</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://www.hostifyos.com/blog.html?article=why-paper-house-manuals-are-dead</loc>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.hostifyos.com/#boutique-hotels-35-percent-higher-payouts-qr-upsells</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://www.hostifyos.com/blog.html?article=boutique-hotels-35-percent-higher-payouts-qr-upsells</loc>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.hostifyos.com/#time-gated-lockbox-pins-vacation-rental-security</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://www.hostifyos.com/blog.html?article=time-gated-lockbox-pins-vacation-rental-security</loc>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.hostifyos.com/#5-in-room-concierge-upsells-guests-pay-for</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://www.hostifyos.com/blog.html?article=5-in-room-concierge-upsells-guests-pay-for</loc>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.hostifyos.com/#automated-whatsapp-guest-tunnels-pre-arrival</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://www.hostifyos.com/blog.html?article=automated-whatsapp-guest-tunnels-pre-arrival</loc>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.hostifyos.com/#build-5-star-guest-onboarding-experience</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://www.hostifyos.com/blog.html?article=build-5-star-guest-onboarding-experience</loc>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.hostifyos.com/#direct-booking-revolution-independent-hosts</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://www.hostifyos.com/blog.html?article=direct-booking-revolution-independent-hosts</loc>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.hostifyos.com/#appliance-video-guides-thermostat-hot-tub</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://www.hostifyos.com/blog.html?article=appliance-video-guides-thermostat-hot-tub</loc>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.hostifyos.com/#printable-a5-room-stands-concierge-stations</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://www.hostifyos.com/blog.html?article=printable-a5-room-stands-concierge-stations</loc>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.hostifyos.com/#ai-geo-scraping-recommends-local-hidden-gems</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://www.hostifyos.com/blog.html?article=ai-geo-scraping-recommends-local-hidden-gems</loc>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.hostifyos.com/#overcoming-check-in-friction-no-app-downloads</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://www.hostifyos.com/blog.html?article=overcoming-check-in-friction-no-app-downloads</loc>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.hostifyos.com/#multi-property-portfolio-management-scaling-str</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://www.hostifyos.com/blog.html?article=multi-property-portfolio-management-scaling-str</loc>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.hostifyos.com/#zero-percent-commission-direct-payments-outdated-ota</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://www.hostifyos.com/blog.html?article=zero-percent-commission-direct-payments-outdated-ota</loc>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.hostifyos.com/#handle-late-check-out-requests-without-disrupting-cleaners</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://www.hostifyos.com/blog.html?article=handle-late-check-out-requests-without-disrupting-cleaners</loc>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.hostifyos.com/#future-of-hospitality-os-smart-locks-pwa-messaging</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://www.hostifyos.com/blog.html?article=future-of-hospitality-os-smart-locks-pwa-messaging</loc>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.hostifyos.com/#top-10-guest-frustrations-short-term-rentals-tech-fixes</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://www.hostifyos.com/blog.html?article=top-10-guest-frustrations-short-term-rentals-tech-fixes</loc>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.hostifyos.com/#multi-network-hotel-wifi-management-essential-resorts</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://www.hostifyos.com/blog.html?article=multi-network-hotel-wifi-management-essential-resorts</loc>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  
 </urlset>
