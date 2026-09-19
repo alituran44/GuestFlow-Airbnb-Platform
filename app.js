@@ -6,6 +6,22 @@
 // Production Security & Feature Flags
 const ENABLE_DEMO_TOOLS = false; // Disable QA simulation buttons in production
 
+/**
+ * Security: HTML entity encoding to prevent Cross-Site Scripting (XSS)
+ * @param {string} str - Raw untrusted input string
+ * @returns {string} - Escaped safe HTML string
+ */
+function escapeHtml(str) {
+  if (str === null || str === undefined) return '';
+  return String(str).replace(/[&<>"']/g, m => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[m]));
+}
+
 let pinVisibilityState = {};
 function togglePinVisibility(elementId, actualPin) {
   const el = document.getElementById(elementId);

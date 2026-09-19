@@ -314,14 +314,14 @@
     
     <!-- 0. 1-Tap Quick Action Buttons Grid -->
     <div class="quick-grid">
-      <a href="https://wa.me/905550000000?text=Hello!%20I%20am%20a%20guest%20at%20Villa%20Sunset%20Bodrum." target="_blank" class="quick-btn-card" style="border-color:rgba(37,211,102,0.3);">
+      <a href="https://wa.me/905550000000?text=Hello!%20I%20am%20a%20guest%20at%20Villa%20Sunset%20Bodrum." target="_blank" rel="noopener noreferrer" class="quick-btn-card" style="border-color:rgba(37,211,102,0.3);">
         <div style="width:30px; height:30px; border-radius:8px; background:rgba(37,211,102,0.15); display:flex; align-items:center; justify-content:center; color:#25D366;">
           <i data-lucide="message-circle" style="width:16px; height:16px;"></i>
         </div>
         <span class="label" id="btn-txt-whatsapp">WhatsApp</span>
       </a>
 
-      <a href="https://maps.google.com/?q=Yalikavak+Bodrum" target="_blank" class="quick-btn-card">
+      <a href="https://maps.google.com/?q=Yalikavak+Bodrum" target="_blank" rel="noopener noreferrer" class="quick-btn-card">
         <div style="width:30px; height:30px; border-radius:8px; background:rgba(59,130,246,0.15); display:flex; align-items:center; justify-content:center; color:#3B82F6;">
           <i data-lucide="map-pin" style="width:16px; height:16px;"></i>
         </div>
@@ -572,7 +572,7 @@
             <div style="font-size:13px; font-weight:700; color:#fff;">💊 Yalıkavak Nöbetçi Eczanesi</div>
             <div style="font-size:11px; color:var(--text-muted);">650 m • 8 dk Yürüme Mesafesi</div>
           </div>
-          <a href="https://maps.google.com/?q=Yalikavak+Eczanesi+Bodrum" target="_blank" style="background:#111827; border:1px solid var(--border); color:#10B981; padding:6px 12px; border-radius:8px; font-size:11px; font-weight:700; text-decoration:none;">Yol Tarifi</a>
+          <a href="https://maps.google.com/?q=Yalikavak+Eczanesi+Bodrum" target="_blank" rel="noopener noreferrer" style="background:#111827; border:1px solid var(--border); color:#10B981; padding:6px 12px; border-radius:8px; font-size:11px; font-weight:700; text-decoration:none;">Yol Tarifi</a>
         </div>
         <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border); padding:10px 12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center;">
           <div>
@@ -586,7 +586,7 @@
             <div style="font-size:13px; font-weight:700; color:#fff;">🛒 Macrocenter Gurme Market</div>
             <div style="font-size:11px; color:var(--text-muted);">400 m • Marina Caddesi No:12</div>
           </div>
-          <a href="https://maps.google.com/?q=Macrocenter+Yalikavak+Bodrum" target="_blank" style="background:#111827; border:1px solid var(--border); color:#10B981; padding:6px 12px; border-radius:8px; font-size:11px; font-weight:700; text-decoration:none;">Yol Tarifi</a>
+          <a href="https://maps.google.com/?q=Macrocenter+Yalikavak+Bodrum" target="_blank" rel="noopener noreferrer" style="background:#111827; border:1px solid var(--border); color:#10B981; padding:6px 12px; border-radius:8px; font-size:11px; font-weight:700; text-decoration:none;">Yol Tarifi</a>
         </div>
       </div>
     </div>
@@ -723,7 +723,7 @@
       </div>
       <h3 style="margin:0 0 6px 0; font-size:18px; color:#fff;" id="review-title">Konaklamanızdan Memnun Musunuz?</h3>
       <p style="font-size:13px; color:var(--text-muted); margin:0 0 16px 0;" id="review-sub">Trustpilot üzerinde bırakacağınız 5 yıldızlı güzel yorum aile işletmemiz için çok değerlidir.</p>
-      <a href="https://www.trustpilot.com/evaluate/hostifyos.com" target="_blank" class="btn-action" style="background:#00B67A; color:#fff; font-weight:800; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:8px;" id="btn-review">
+      <a href="https://www.trustpilot.com/evaluate/hostifyos.com" target="_blank" rel="noopener noreferrer" class="btn-action" style="background:#00B67A; color:#fff; font-weight:800; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:8px;" id="btn-review">
         <i data-lucide="star" style="fill:#fff;"></i>
         <span>Trustpilot'ta 5 Yıldızlı Yorum Yaz</span>
       </a>
@@ -818,7 +818,7 @@
         </a>
 
         <!-- Button 2: Google Maps Real-Time Nearby Taxis Search -->
-        <a id="btn-gmaps-taxi" href="https://www.google.com/maps/search/taxi+near+Yalikavak+Bodrum" target="_blank" style="background:rgba(255,255,255,0.05); border:1px solid var(--border); color:#fff; padding:12px; border-radius:12px; font-size:13px; font-weight:700; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:8px;">
+        <a id="btn-gmaps-taxi" href="https://www.google.com/maps/search/taxi+near+Yalikavak+Bodrum" target="_blank" rel="noopener noreferrer" style="background:rgba(255,255,255,0.05); border:1px solid var(--border); color:#fff; padding:12px; border-radius:12px; font-size:13px; font-weight:700; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:8px;">
           <i data-lucide="map-pin" style="color:#3B82F6; width:16px; height:16px;"></i>
           <span>Google Haritalar'da Çevredeki Taksileri Gör</span>
         </a>
@@ -1521,15 +1521,28 @@
       }
     }
 
+    function escapeHtml(str) {
+      if (typeof str !== 'string') return '';
+      return str.replace(/[&<>"']/g, m => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[m]));
+    }
+
     // ✈️ FLIGHT TRACKER SIMULATION / LIVE LOOKUP
     function trackFlightStatus() {
-      const code = document.getElementById('flight-code-input').value.toUpperCase().trim();
+      const rawCode = document.getElementById('flight-code-input').value.toUpperCase().trim();
+      const code = rawCode.replace(/[^A-Z0-9\s-]/g, '').slice(0, 10);
       if (!code) return;
+      const safeCode = escapeHtml(code);
       const box = document.getElementById('flight-result-box');
       if (box) {
         box.innerHTML = `
           <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
-            <strong style="color:#fff;">${code} • İstanbul (IST) ➔ Bodrum (BJV)</strong>
+            <strong style="color:#fff;">${safeCode} • İstanbul (IST) ➔ Bodrum (BJV)</strong>
             <span style="color:#10B981; font-weight:800;">● Zamanında (On Time)</span>
           </div>
           <div style="color:var(--text-muted);">Tahmini İniş: <strong style="color:#fff;">14:45</strong> • Kapı: <strong style="color:#fff;">204B</strong> • Durum: <strong style="color:#10B981;">Uçuşta (En Route)</strong></div>
