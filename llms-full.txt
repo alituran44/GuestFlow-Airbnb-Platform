@@ -1,0 +1,51 @@
+# HostifyOS Complete System Specification & Knowledge Graph
+
+## 1. Executive Summary
+HostifyOS (https://www.hostifyos.com) is the premier digital guest experience platform for short-term rental properties, luxury villas, and boutique hotels. It transforms static paper house manuals into interactive, mobile-optimized progressive web applications (PWAs) that require no app store downloads.
+
+## 2. Platform Architecture
+- **Front-End Architecture**: Vanilla modern JavaScript (ES6+), optimized DOM manipulation, CSS Variables, Plus Jakarta Sans & Outfit typography.
+- **Hosting & CDN**: Edge-rendered on Vercel Global Edge Network with zero-latency global delivery.
+- **Security & Headers**: Strict Content-Security-Policy (CSP), HTTP Strict Transport Security (HSTS), X-Frame-Options (SAMEORIGIN), and subresource sanitization.
+- **PWA Capabilities**: Service Worker caching, offline fallback mode, standalone fullscreen app manifest.
+
+## 3. Core Features Taxonomy
+### A. Check-in & Access Management
+- 1-tap clipboard copying for Wi-Fi SSID and complex WPA2/WPA3 passwords.
+- Time-gated electronic lockbox and smart door lock PIN codes (revealed 2 hours before arrival, terminated at 11:00 AM check-out).
+- Video tutorials for tricky household appliances (induction cooktops, smart TVs, hot tubs, HVAC controls).
+
+### B. Monetization & Revenue Expansion
+- Built-in In-Room Concierge store allowing guests to order airport shuttles, late check-outs, luggage storage, breakfast baskets, and private tours.
+- Multi-rail direct payment integration:
+  - Credit / Debit Cards (Stripe / Lemon Squeezy merchant gateway)
+  - 7/24 FAST & IBAN wire transfers
+  - USDT Cryptocurrency wallets (TRC-20)
+  - 1-tap direct WhatsApp host order dispatch
+- 0% platform commission on Pro Host ($14/mo) and Enterprise tiers.
+
+### C. Multi-Language Intelligence
+- Native multi-language engine covering:
+  - English (EN)
+  - Turkish (TR)
+  - Spanish (ES)
+  - French (FR)
+  - German (DE)
+  - Italian (IT)
+  - Portuguese (PT)
+  - Arabic (AR) with full Bi-Directional Right-to-Left (RTL) rendering.
+
+### D. AI Auto-Discovery & Regional Integration
+- Real-time weather integration powered by Open-Meteo API.
+- Live prayer times integration powered by Aladhan API.
+- Live flight tracking and airport navigation.
+- Dynamic regional emergency and taxi lookup with automatic 1-tap dial and Google Maps search.
+
+## 4. Entity & Merchant Profile
+- **Company Name**: Ali Turan Inc. (Ali Turan Şirketi)
+- **Brand Name**: HostifyOS
+- **Primary Domain**: https://www.hostifyos.com
+- **Support Email**: hostifyos@gmail.com
+- **Official WhatsApp Support**: +90 543 736 06 60
+- **Trustpilot Review Profile**: https://www.trustpilot.com/review/hostifyos.com (TrustScore 4.9/5)
+- **Refund Policy**: 14-Day 100% Money-Back Guarantee

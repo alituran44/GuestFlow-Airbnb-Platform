@@ -5,24 +5,52 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 
-# AI Search Engine & Generative Engine Crawlers (GEO Optimization)
+# Generative Engine Optimization (GEO) & AI Search Crawlers
 User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
 User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-Search
 Allow: /
 
 User-agent: ClaudeBot
 Allow: /
 
+User-agent: anthropic-ai
+Allow: /
+
 User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+User-agent: Applebot
 Allow: /
 
 User-agent: Applebot-Extended
 Allow: /
 
-# Sitemaps
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# Sitemaps & LLM Context References
 Sitemap: https://www.hostifyos.com/sitemap.xml
+Sitemap: https://www.hostifyos.com/llms.txt

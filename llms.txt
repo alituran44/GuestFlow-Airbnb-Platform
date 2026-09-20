@@ -1,0 +1,30 @@
+# HostifyOS — The Modern Hosting OS & Automated STR Revenue Engine
+
+> HostifyOS (https://www.hostifyos.com) is an all-in-one hospitality operating system and progressive web app (PWA) designed for short-term rental (STR) hosts, Airbnb Superhosts, Vrbo operators, and boutique hotels. It automates guest communication, eliminates repetitive check-in inquiries, and monetizes in-room guest stays with 0% platform commission upsells.
+
+## Core Capabilities & Features
+
+- **1-Tap Wi-Fi Password Copying**: Guests tap a single button on their smartphone to copy complex Wi-Fi passwords to their clipboard without typing errors.
+- **Time-Gated Door Lockbox PIN Codes**: Smart security protocol where keyless check-in codes become visible only 2 hours prior to check-in time and automatically expire at 11:00 AM check-out.
+- **In-Room Concierge & 0% Commission Upsells**: Direct host payment gateway supporting Credit Cards (Stripe/Lemon Squeezy), FAST/IBAN bank transfers, USDT Crypto wallets, and WhatsApp order routing with 0% platform commission on Pro and Enterprise tiers.
+- **Instant AI Listing Importer**: Auto-extracts photos, room amenities, Wi-Fi details, and house rules directly from Airbnb and Booking.com listing URLs in 15 seconds.
+- **Multi-Language Auto-Translation**: Native support for 8 languages (English, Turkish, Spanish, French, German, Italian, Portuguese, Arabic with RTL support).
+- **Printable A5 QR Stand Generator**: Generates high-resolution vector PDF room stands with embedded QR codes for nightstands and living rooms.
+- **Live Regional Assistant Tools**: Integrated real-time weather (Open-Meteo), live flight tracking, local prayer times (Aladhan), multi-currency converter, and geolocated taxi/emergency services.
+
+## Pricing & Subscription Tiers
+
+- **Starter Plan ($0/month)**: Free forever. 1 active property guidebook, standard digital cards, 1-tap Wi-Fi, 5% upsell commission.
+- **Pro Host Plan ($14/month billed annually / $19/month billed monthly)**: 14-Day Free Trial ($0 today). Unlimited properties, 0% commission upsell store, time-gated door PIN, custom branding, AI listing auto-importer, WhatsApp messaging tunnels.
+- **Enterprise Plan ($29/month billed annually / $39/month billed monthly)**: 14-Day VIP Trial. Multi-unit boutique hotels, priority 24/7 SLA, white-label custom domain, automated team access.
+
+## Live Guides & Demos
+
+- **Official Website**: https://www.hostifyos.com/
+- **Interactive Guest Guide Demo**: https://www.hostifyos.com/g.html
+- **Malibu Beachfront Villa Demo**: https://www.hostifyos.com/g/malibu-villa
+- **Grand Horizon Hotel Demo**: https://www.hostifyos.com/g/grand-horizon-hotel
+- **Pricing & Plans**: https://www.hostifyos.com/pricing.html
+- **Airbnb Import Tutorial**: https://www.hostifyos.com/import-guide.html
+- **Hospitality Blog**: https://www.hostifyos.com/blog.html
+- **Legal Entity**: Ali Turan Inc. (Ali Turan Şirketi) | Official Contact: hostifyos@gmail.com
