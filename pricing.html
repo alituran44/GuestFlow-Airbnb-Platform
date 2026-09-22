@@ -603,7 +603,7 @@
           <div class="plan-desc">For scaling hosts, villas, and superhosts.</div>
           <div class="plan-price" id="price-pro">$19 <span class="period">/ month</span></div>
           <div class="billing-hint" id="hint-pro">Billed monthly</div>
-          <button class="btn-plan" onclick="openMultiPaymentModal('Pro Host Plan', 19)">Upgrade to Pro ($19)</button>
+          <button class="btn-plan" id="btn-pro-plan" onclick="openMultiPaymentModal('Pro Host Plan', 19)">Upgrade to Pro ($19/mo)</button>
         </div>
         <ul class="features-list">
           <li>Up to 10 Property Listings</li>
@@ -622,7 +622,7 @@
           <div class="plan-desc">For boutique hotels & property teams.</div>
           <div class="plan-price" id="price-enterprise">$39 <span class="period">/ month</span></div>
           <div class="billing-hint" id="hint-enterprise">Billed monthly</div>
-          <button class="btn-plan outline" onclick="openMultiPaymentModal('Enterprise & Hotel Plan', 39)">Get Enterprise ($39)</button>
+          <button class="btn-plan outline" id="btn-enterprise-plan" onclick="openMultiPaymentModal('Enterprise & Hotel Plan', 39)">Get Enterprise ($39/mo)</button>
         </div>
         <ul class="features-list">
           <li>Unlimited Property Listings</li>
@@ -770,6 +770,8 @@
       const priceEnterprise = document.getElementById('price-enterprise');
       const hintPro = document.getElementById('hint-pro');
       const hintEnterprise = document.getElementById('hint-enterprise');
+      const btnPro = document.getElementById('btn-pro-plan');
+      const btnEnterprise = document.getElementById('btn-enterprise-plan');
 
       if (isAnnual) {
         labelMonthly.classList.remove('active');
@@ -778,6 +780,8 @@
         priceEnterprise.innerHTML = '$29 <span class="period">/ month</span>';
         hintPro.textContent = 'Billed $168 annually (Save 26%)';
         hintEnterprise.textContent = 'Billed $348 annually (Save 26%)';
+        if (btnPro) btnPro.textContent = 'Upgrade to Pro ($14/mo)';
+        if (btnEnterprise) btnEnterprise.textContent = 'Get Enterprise ($29/mo)';
       } else {
         labelAnnual.classList.remove('active');
         labelMonthly.classList.add('active');
@@ -785,6 +789,8 @@
         priceEnterprise.innerHTML = '$39 <span class="period">/ month</span>';
         hintPro.textContent = 'Billed monthly';
         hintEnterprise.textContent = 'Billed monthly';
+        if (btnPro) btnPro.textContent = 'Upgrade to Pro ($19/mo)';
+        if (btnEnterprise) btnEnterprise.textContent = 'Get Enterprise ($39/mo)';
       }
     }
 
@@ -794,14 +800,14 @@
         finalPrice = (monthlyPrice === 19) ? 168 : 348;
       }
       selectedPlan = {
-        name: planName + (isAnnual ? ' (Annual)' : ' (Monthly)'),
+        name: planName + (isAnnual ? ' (Annual - Save 26%)' : ' (Monthly)'),
         price: finalPrice
       };
 
       document.getElementById('modalPlanTitle').textContent = selectedPlan.name;
-      document.getElementById('modalPlanAmount').textContent = '$' + selectedPlan.price + ' USD';
+      document.getElementById('modalPlanAmount').textContent = '$' + selectedPlan.price + ' USD' + (isAnnual ? ' / year' : ' / month');
       
-      switchPayTab('crypto');
+      switchPayTab('card');
       document.getElementById('paymentModal').classList.add('active');
     }
 
@@ -833,12 +839,14 @@
         alert('Please enter your account email for instant activation!');
         return;
       }
-      alert('🎉 Crypto payment notification sent! We will verify the transaction and activate ' + email + ' immediately.');
+      alert('🎉 Crypto payment notification sent for ' + selectedPlan.name + ' ($' + selectedPlan.price + ')! We will verify the transaction and activate ' + email + ' immediately.');
       closePaymentModal();
     }
 
     function openCardPayment() {
-      alert('💳 Card checkout loading... (If you have a direct Shopier/Stripe checkout link, it will redirect here).');
+      const planKey = selectedPlan.name.includes('Enterprise') ? 'ent' : 'pro';
+      const cycleKey = isAnnual ? 'annual' : 'monthly';
+      window.location.href = '/?plan=' + planKey + '&cycle=' + cycleKey + '#direct-checkout-hub';
     }
 
     function notifyBankTransfer() {
@@ -847,12 +855,12 @@
         alert('Please enter your email address to activate your account!');
         return;
       }
-      alert('🎉 Bank wire / SWIFT notification received! Your activation link will be sent to ' + email + ' within 10 minutes.');
+      alert('🎉 Bank wire / SWIFT notification received for ' + selectedPlan.name + ' ($' + selectedPlan.price + ')! Your activation link will be sent to ' + email + ' within 10 minutes.');
       closePaymentModal();
     }
 
     function openWhatsAppCheckout() {
-      const text = encodeURIComponent('Hello, I would like to purchase the HostifyOS ' + selectedPlan.name + ' ($' + selectedPlan.price + ') plan. Could you assist me with onboarding?');
+      const text = encodeURIComponent('Hello, I would like to purchase the HostifyOS ' + selectedPlan.name + ' ($' + selectedPlan.price + ' USD) plan. Could you assist me with onboarding?');
       window.open('https://wa.me/905437360660?text=' + text, '_blank');
     }
   </script>

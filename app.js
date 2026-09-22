@@ -4484,6 +4484,29 @@ function handleUrlRouting() {
     switchView('portal');
     return;
   }
+
+  const cycleParam = urlParams.get('cycle') || urlParams.get('billing');
+  if (cycleParam === 'annual' || cycleParam === 'monthly') {
+    if (typeof toggleBillingCycle === 'function') {
+      toggleBillingCycle(cycleParam);
+    }
+  }
+
+  const planParam = urlParams.get('plan') || urlParams.get('tier');
+  if (planParam) {
+    if (typeof selectClosingPlan === 'function') {
+      selectClosingPlan(planParam);
+    }
+  }
+
+  if (window.location.hash === '#direct-checkout-hub' || planParam) {
+    const hub = document.getElementById('direct-checkout-hub');
+    if (hub) {
+      setTimeout(() => {
+        hub.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 400);
+    }
+  }
 }
 
 document.addEventListener('DOMContentLoaded', handleUrlRouting);
