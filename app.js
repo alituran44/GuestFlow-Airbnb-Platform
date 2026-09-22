@@ -1243,6 +1243,8 @@ function changeLanguage(langKey) {
     if (typeof renderLocalSpots === 'function') renderLocalSpots('all');
   }
 
+  if (typeof updateClosingPlanUI === 'function') updateClosingPlanUI();
+
   showToast(t.toastLang);
   lucide.createIcons();
 }
@@ -2731,41 +2733,65 @@ function switchCtaPayTab(tabKey) {
   if (window.lucide) lucide.createIcons();
 }
 
-function selectClosingPlan(planKey) {
+let currentClosingPlan = 'pro';
+
+function updateClosingPlanUI() {
   const proBtn = document.getElementById('plan-sel-pro');
   const entBtn = document.getElementById('plan-sel-ent');
   const freeBtn = document.getElementById('plan-sel-free');
   const titleEl = document.getElementById('cta-checkout-plan-title');
   const submitBtn = document.getElementById('cta-btn-submit-text');
   const isTr = (typeof currentLanguage !== 'undefined' && currentLanguage === 'TR');
+  const isAnnual = (typeof billingCycle !== 'undefined' && billingCycle === 'annual');
 
-  if (proBtn) { proBtn.style.background = (planKey === 'pro') ? 'rgba(16,185,129,0.2)' : 'transparent'; proBtn.style.color = (planKey === 'pro') ? '#10B981' : '#94A3B8'; }
-  if (entBtn) { entBtn.style.background = (planKey === 'ent') ? 'rgba(16,185,129,0.2)' : 'transparent'; entBtn.style.color = (planKey === 'ent') ? '#10B981' : '#94A3B8'; }
-  if (freeBtn) { freeBtn.style.background = (planKey === 'free') ? 'rgba(16,185,129,0.2)' : 'transparent'; freeBtn.style.color = (planKey === 'free') ? '#10B981' : '#94A3B8'; }
+  if (proBtn) {
+    proBtn.textContent = isAnnual ? (isTr ? '⭐ Pro Plan ($14/ay)' : '⭐ Pro Plan ($14/mo)') : (isTr ? '⭐ Pro Plan ($19/ay)' : '⭐ Pro Plan ($19/mo)');
+    proBtn.style.background = (currentClosingPlan === 'pro') ? 'rgba(16,185,129,0.2)' : 'transparent';
+    proBtn.style.color = (currentClosingPlan === 'pro') ? '#10B981' : '#94A3B8';
+  }
+  if (entBtn) {
+    entBtn.textContent = isAnnual ? (isTr ? '🏢 Enterprise ($29/ay)' : '🏢 Enterprise ($29/mo)') : (isTr ? '🏢 Enterprise ($39/ay)' : '🏢 Enterprise ($39/mo)');
+    entBtn.style.background = (currentClosingPlan === 'ent') ? 'rgba(16,185,129,0.2)' : 'transparent';
+    entBtn.style.color = (currentClosingPlan === 'ent') ? '#10B981' : '#94A3B8';
+  }
+  if (freeBtn) {
+    freeBtn.textContent = isTr ? '🌱 Starter ($0)' : '🌱 Starter ($0)';
+    freeBtn.style.background = (currentClosingPlan === 'free') ? 'rgba(16,185,129,0.2)' : 'transparent';
+    freeBtn.style.color = (currentClosingPlan === 'free') ? '#10B981' : '#94A3B8';
+  }
 
-  if (planKey === 'pro') {
+  if (currentClosingPlan === 'pro') {
+    const priceLabel = isAnnual ? (isTr ? '$14/ay ($168/yıl)' : '$14/mo ($168/yr)') : (isTr ? '$19/ay' : '$19/mo');
     if (titleEl) titleEl.innerHTML = isTr 
-      ? '⭐ Pro Host Plan ($14/ay) — <span style="color:#10B981;">14 Günlük Ücretsiz Deneme</span>'
-      : '⭐ Pro Host Plan ($14/mo) — <span style="color:#10B981;">14-Day Free Trial</span>';
+      ? `⭐ Pro Host Plan (${priceLabel}) — <span style="color:#10B981;">14 Günlük Ücretsiz Deneme</span>`
+      : `⭐ Pro Host Plan (${priceLabel}) — <span style="color:#10B981;">14-Day Free Trial</span>`;
     if (submitBtn) submitBtn.textContent = isTr
       ? '14 Günlük Ücretsiz Denemeyi Başlat ($0 Bugün)'
       : 'Start 14-Day Free Trial ($0 Due Today)';
-  } else if (planKey === 'ent') {
+  } else if (currentClosingPlan === 'ent') {
+    const priceLabel = isAnnual ? (isTr ? '$29/ay ($348/yıl)' : '$29/mo ($348/yr)') : (isTr ? '$39/ay' : '$39/mo');
     if (titleEl) titleEl.innerHTML = isTr
-      ? '🏢 Enterprise Plan ($29/ay) — <span style="color:#10B981;">14 Günlük VIP Deneme</span>'
-      : '🏢 Enterprise Plan ($29/mo) — <span style="color:#10B981;">14-Day VIP Trial</span>';
+      ? `🏢 Enterprise Plan (${priceLabel}) — <span style="color:#10B981;">14 Günlük VIP Deneme</span>`
+      : `🏢 Enterprise Plan (${priceLabel}) — <span style="color:#10B981;">14-Day VIP Trial</span>`;
     if (submitBtn) submitBtn.textContent = isTr
       ? 'Enterprise VIP Denemeyi Başlat ($0 Bugün)'
       : 'Start Enterprise VIP Trial ($0 Due Today)';
-  } else if (planKey === 'free') {
+  } else if (currentClosingPlan === 'free') {
     if (titleEl) titleEl.innerHTML = isTr
-      ? '🌱 Starter Plan ($0/ay) — <span style="color:#10B981;">Süresiz Ücretsiz</span>'
-      : '🌱 Starter Plan ($0/mo) — <span style="color:#10B981;">Free Forever</span>';
+      ? '🌱 Starter Plan ($0) — <span style="color:#10B981;">Süresiz Ücretsiz</span>'
+      : '🌱 Starter Plan ($0) — <span style="color:#10B981;">Free Forever</span>';
     if (submitBtn) submitBtn.textContent = isTr
       ? 'Ücretsiz Başlat (Kredi Kartı Gerekmez)'
       : 'Start Free (No Credit Card Required)';
   }
 }
+window.updateClosingPlanUI = updateClosingPlanUI;
+
+function selectClosingPlan(planKey) {
+  currentClosingPlan = planKey;
+  updateClosingPlanUI();
+}
+window.selectClosingPlan = selectClosingPlan;
 
 async function processLemonSqueezySubscribe() {
   const emailInput = document.getElementById('lemon-email') || document.getElementById('lemon-checkout-email') || document.getElementById('cta-email');
@@ -3336,24 +3362,45 @@ function toggleBillingCycle(type) {
     if (proNoteEl) proNoteEl.textContent = `Billed monthly at ${formatPrice(19.0)}/mo`;
     if (entNoteEl) entNoteEl.textContent = `Billed monthly at ${formatPrice(39.0)}/mo`;
   }
+
+  // Synchronize Direct Closing Checkout Hub prices & button labels!
+  if (typeof updateClosingPlanUI === 'function') {
+    updateClosingPlanUI();
+  }
 }
 window.toggleBillingCycle = toggleBillingCycle;
 
 function selectPricingTier(tierName) {
-  if (tierName === 'Starter') {
-    openLemonSqueezyCheckout('Starter Free Plan', '$0.00 / month');
-    return;
-  }
-
-  let priceStr = '';
-  if (billingCycle === 'annual') {
-    priceStr = tierName === 'Enterprise' ? '$348.00 / year ($29/mo)' : '$168.00 / year ($14/mo)';
+  let targetPlan = 'pro';
+  if (tierName === 'Starter' || tierName.includes('Starter')) {
+    targetPlan = 'free';
+  } else if (tierName === 'Enterprise' || tierName.includes('Enterprise')) {
+    targetPlan = 'ent';
   } else {
-    priceStr = tierName === 'Enterprise' ? '$39.00 / month' : '$19.00 / month';
+    targetPlan = 'pro';
   }
 
-  openLemonSqueezyCheckout(`${tierName} (${billingCycle.toUpperCase()})`, priceStr);
+  selectClosingPlan(targetPlan);
+
+  // Smooth scroll directly to the Closing Checkout Hub
+  const hub = document.getElementById('direct-checkout-hub');
+  if (hub) {
+    hub.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    hub.style.transition = 'box-shadow 0.4s ease, border-color 0.4s ease';
+    hub.style.borderColor = '#10B981';
+    hub.style.boxShadow = '0 0 45px rgba(16,185,129,0.5)';
+    setTimeout(() => {
+      hub.style.borderColor = 'rgba(16,185,129,0.3)';
+      hub.style.boxShadow = '0 25px 60px rgba(0,0,0,0.6)';
+    }, 1800);
+
+    const emailInput = document.getElementById('cta-email');
+    if (emailInput) {
+      setTimeout(() => emailInput.focus(), 600);
+    }
+  }
 }
+window.selectPricingTier = selectPricingTier;
 
 
 // Tunnels Renderer
@@ -4581,3 +4628,15 @@ function generateInstantFreeGuidebook() {
     window.open('/g.html', '_blank');
   }, 800);
 }
+
+// Auto-initialize closing checkout hub on page ready
+if (typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof updateClosingPlanUI === 'function') updateClosingPlanUI();
+    });
+  } else {
+    if (typeof updateClosingPlanUI === 'function') updateClosingPlanUI();
+  }
+}
+
