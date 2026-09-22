@@ -844,15 +844,15 @@
     function notifyBankTransfer() {
       const email = document.getElementById('bankUserEmail').value;
       if (!email) {
-        alert('Lütfen hesabınızın aktif edilmesi için e-posta adresinizi giriniz!');
+        alert('Please enter your email address to activate your account!');
         return;
       }
-      alert('🎉 Fibabanka havale/SWIFT bildiriminiz alındı! Transferiniz kontrol edilip aktivasyon linkiniz ' + email + ' adresine 10 dakika içinde iletilecektir.');
+      alert('🎉 Bank wire / SWIFT notification received! Your activation link will be sent to ' + email + ' within 10 minutes.');
       closePaymentModal();
     }
 
     function openWhatsAppCheckout() {
-      const text = encodeURIComponent('Merhaba, HostifyOS ' + selectedPlan.name + ' ($' + selectedPlan.price + ') satın almak istiyorum. Ödeme ve kurulum konusunda yardımcı olur musunuz?');
+      const text = encodeURIComponent('Hello, I would like to purchase the HostifyOS ' + selectedPlan.name + ' ($' + selectedPlan.price + ') plan. Could you assist me with onboarding?');
       window.open('https://wa.me/905437360660?text=' + text, '_blank');
     }
   </script>

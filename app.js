@@ -2570,7 +2570,16 @@ function downloadCommissionStatement() {
   showToast("Downloading Monthly Commission Statement (PDF / CSV) for Host Accounting...");
 }
 
-// OFFICIAL PADDLE & LEMON SQUEEZY CHECKOUT CONFIGURATION
+// OFFICIAL DODO PAYMENTS, PADDLE & LEMON SQUEEZY CHECKOUT CONFIGURATION
+let DODO_STORE_CONFIG = {
+  apiKey: 'BxWmfn78EloAHJpA.KsEFqECqNpX5PbhpZ2Bhxog2CN0sZ7JGcT4eqJIh-rssUD_3',
+  starterProductId: 'pdt_0NoB0cNCnW5YRU486MeDb',
+  proMonthlyProductId: 'pdt_0NoB0aoePAJvzwbeqpT3B',
+  proAnnualProductId: 'pdt_0NoB0bbRJD7ZDhFlYwVYL',
+  enterpriseMonthlyProductId: 'pdt_0NoB0a45lMIAStRQ38iiA',
+  enterpriseAnnualProductId: 'pdt_0NoB0Yusos1T6J53b2SjT'
+};
+
 let PADDLE_STORE_CONFIG = {
   apiKey: typeof atob === 'function' ? atob('cGRsX2xpdmVfYXBpa2V5XzAxbTB0dDN6NHZwcjliMGRrdHozZWY5ZmU1X25hQUFQUHFiQTc4TnR5VlFmMUJhUUFfQUhw') : '',
   clientToken: 'test_396f4c5ef8e1fadb94dcc972f51',
@@ -2728,26 +2737,41 @@ function selectClosingPlan(planKey) {
   const freeBtn = document.getElementById('plan-sel-free');
   const titleEl = document.getElementById('cta-checkout-plan-title');
   const submitBtn = document.getElementById('cta-btn-submit-text');
+  const isTr = (typeof currentLanguage !== 'undefined' && currentLanguage === 'TR');
 
   if (proBtn) { proBtn.style.background = (planKey === 'pro') ? 'rgba(16,185,129,0.2)' : 'transparent'; proBtn.style.color = (planKey === 'pro') ? '#10B981' : '#94A3B8'; }
   if (entBtn) { entBtn.style.background = (planKey === 'ent') ? 'rgba(16,185,129,0.2)' : 'transparent'; entBtn.style.color = (planKey === 'ent') ? '#10B981' : '#94A3B8'; }
   if (freeBtn) { freeBtn.style.background = (planKey === 'free') ? 'rgba(16,185,129,0.2)' : 'transparent'; freeBtn.style.color = (planKey === 'free') ? '#10B981' : '#94A3B8'; }
 
   if (planKey === 'pro') {
-    if (titleEl) titleEl.innerHTML = '⭐ Pro Host Plan ($14/ay) — <span style="color:#10B981;">14 Günlük Ücretsiz Deneme</span>';
-    if (submitBtn) submitBtn.textContent = '14 Günlük Ücretsiz Denemeyi Başlat ($0 Bugün)';
+    if (titleEl) titleEl.innerHTML = isTr 
+      ? '⭐ Pro Host Plan ($14/ay) — <span style="color:#10B981;">14 Günlük Ücretsiz Deneme</span>'
+      : '⭐ Pro Host Plan ($14/mo) — <span style="color:#10B981;">14-Day Free Trial</span>';
+    if (submitBtn) submitBtn.textContent = isTr
+      ? '14 Günlük Ücretsiz Denemeyi Başlat ($0 Bugün)'
+      : 'Start 14-Day Free Trial ($0 Due Today)';
   } else if (planKey === 'ent') {
-    if (titleEl) titleEl.innerHTML = '🏢 Enterprise Plan ($29/ay) — <span style="color:#10B981;">14 Günlük VIP Deneme</span>';
-    if (submitBtn) submitBtn.textContent = 'Enterprise VIP Denemeyi Başlat ($0 Bugün)';
+    if (titleEl) titleEl.innerHTML = isTr
+      ? '🏢 Enterprise Plan ($29/ay) — <span style="color:#10B981;">14 Günlük VIP Deneme</span>'
+      : '🏢 Enterprise Plan ($29/mo) — <span style="color:#10B981;">14-Day VIP Trial</span>';
+    if (submitBtn) submitBtn.textContent = isTr
+      ? 'Enterprise VIP Denemeyi Başlat ($0 Bugün)'
+      : 'Start Enterprise VIP Trial ($0 Due Today)';
   } else if (planKey === 'free') {
-    if (titleEl) titleEl.innerHTML = '🌱 Starter Plan ($0/ay) — <span style="color:#10B981;">Süresiz Ücretsiz</span>';
-    if (submitBtn) submitBtn.textContent = 'Ücretsiz Başlat (Kredi Kartı Gerekmez)';
+    if (titleEl) titleEl.innerHTML = isTr
+      ? '🌱 Starter Plan ($0/ay) — <span style="color:#10B981;">Süresiz Ücretsiz</span>'
+      : '🌱 Starter Plan ($0/mo) — <span style="color:#10B981;">Free Forever</span>';
+    if (submitBtn) submitBtn.textContent = isTr
+      ? 'Ücretsiz Başlat (Kredi Kartı Gerekmez)'
+      : 'Start Free (No Credit Card Required)';
   }
 }
 
-function processLemonSqueezySubscribe() {
-  const emailInput = document.getElementById('lemon-email') || document.getElementById('lemon-checkout-email');
+async function processLemonSqueezySubscribe() {
+  const emailInput = document.getElementById('lemon-email') || document.getElementById('lemon-checkout-email') || document.getElementById('cta-email');
+  const nameInput = document.getElementById('card-name') || document.getElementById('cta-card-name');
   const email = emailInput ? emailInput.value : 'host@hostifyos.com';
+  const name = nameInput ? nameInput.value : 'Valued Host';
 
   hostAuth.email = email;
   hostAuth.isLoggedIn = true;
@@ -2755,12 +2779,40 @@ function processLemonSqueezySubscribe() {
   
   closeModal('modal-lemon-checkout');
 
+  let planKey = 'pro_monthly';
+  if (hostAuth.plan.includes('Starter') || hostAuth.plan.includes('Free')) planKey = 'starter';
+  else if (hostAuth.plan.includes('Annual') || hostAuth.plan.includes('ANNUAL')) planKey = 'pro_annual';
+  else if (hostAuth.plan.includes('Enterprise')) planKey = 'enterprise_monthly';
+
+  showToast("⚡ Processing Secure Checkout (Dodo / Global Gateway)...");
+
+  try {
+    const res = await fetch('/api/dodo-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        plan: planKey,
+        email: email,
+        name: name,
+        returnUrl: `${window.location.origin}/?session_id={CHECKOUT_SESSION_ID}&status=success`
+      })
+    });
+
+    const data = await res.json();
+    if (data && data.success && data.checkout_url) {
+      window.location.href = data.checkout_url;
+      return;
+    }
+  } catch (e) {
+    console.warn("Dodo serverless session error, using direct store link:", e);
+  }
+
+  // Fallback to direct store URL
   let targetUrl = LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl;
   if (hostAuth.plan.includes('Starter')) targetUrl = LEMONSQUEEZY_STORE_CONFIG.starterUrl;
   else if (hostAuth.plan.includes('Annual') || hostAuth.plan.includes('ANNUAL')) targetUrl = LEMONSQUEEZY_STORE_CONFIG.proAnnualUrl;
 
   window.open(targetUrl, '_blank');
-
   showToast(`🎉 Welcome ${email}! 14-Day Free Trial Activated ($0 Charged Today).`);
   switchView('portal');
   updateTopNavAuthUI();
