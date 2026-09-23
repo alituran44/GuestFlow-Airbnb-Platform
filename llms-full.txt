@@ -18,7 +18,7 @@ HostifyOS (https://www.hostifyos.com) is the premier digital guest experience pl
 ### B. Monetization & Revenue Expansion
 - Built-in In-Room Concierge store allowing guests to order airport shuttles, late check-outs, luggage storage, breakfast baskets, and private tours.
 - Multi-rail direct payment integration:
-  - Credit / Debit Cards (Stripe / Lemon Squeezy merchant gateway)
+  - Credit / Debit Cards (Stripe / Dodo Payments merchant gateway)
   - 7/24 FAST & IBAN wire transfers
   - USDT Cryptocurrency wallets (TRC-20)
   - 1-tap direct WhatsApp host order dispatch

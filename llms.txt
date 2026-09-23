@@ -6,7 +6,7 @@
 
 - **1-Tap Wi-Fi Password Copying**: Guests tap a single button on their smartphone to copy complex Wi-Fi passwords to their clipboard without typing errors.
 - **Time-Gated Door Lockbox PIN Codes**: Smart security protocol where keyless check-in codes become visible only 2 hours prior to check-in time and automatically expire at 11:00 AM check-out.
-- **In-Room Concierge & 0% Commission Upsells**: Direct host payment gateway supporting Credit Cards (Stripe/Lemon Squeezy), FAST/IBAN bank transfers, USDT Crypto wallets, and WhatsApp order routing with 0% platform commission on Pro and Enterprise tiers.
+- **In-Room Concierge & 0% Commission Upsells**: Direct host payment gateway supporting Credit Cards (Stripe/Dodo Payments), FAST/IBAN bank transfers, USDT Crypto wallets, and WhatsApp order routing with 0% platform commission on Pro and Enterprise tiers.
 - **Instant AI Listing Importer**: Auto-extracts photos, room amenities, Wi-Fi details, and house rules directly from Airbnb and Booking.com listing URLs in 15 seconds.
 - **Multi-Language Auto-Translation**: Native support for 8 languages (English, Turkish, Spanish, French, German, Italian, Portuguese, Arabic with RTL support).
 - **Printable A5 QR Stand Generator**: Generates high-resolution vector PDF room stands with embedded QR codes for nightstands and living rooms.

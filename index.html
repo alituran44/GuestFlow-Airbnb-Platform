@@ -187,7 +187,7 @@
             "name": "Can I use my own custom payment link?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes! Hosts can paste their custom payment URL (Stripe, Revolut, PayPal, Lemon Squeezy, etc.) so guest payments go directly into your account."
+              "text": "Yes! Hosts can paste their custom payment URL (Stripe, Revolut, PayPal, Square, etc.) so guest payments go directly into your account."
             }
           },
           {
@@ -235,7 +235,7 @@
             "name": "What payment methods can my guests use to buy upsells?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Guests can pay via Credit/Debit Cards, Apple Pay, Google Pay, or through your custom host gateway URL (Stripe, Revolut, PayPal, Lemon Squeezy, etc.)."
+              "text": "Guests can pay via Credit/Debit Cards, Apple Pay, Google Pay, or through your custom host gateway URL (Stripe, Revolut, PayPal, Square, etc.)."
             }
           }
         ]
@@ -246,8 +246,6 @@
 
   <!-- Stripe.js v3 SDK for PCI-DSS Level 1 Compliant Tokenization & 3DS2 / SCA -->
   <script src="https://js.stripe.com/v3/"></script>
-  <!-- Lemon Squeezy JS Overlay Checkout SDK -->
-  <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
   <!-- Google Identity Services (GSI) OAuth 2.0 SDK -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <!-- Sign in with Apple JS SDK -->
@@ -1204,7 +1202,7 @@
               <i data-lucide="chevron-down" class="faq-icon"></i>
             </div>
             <div class="faq-answer">
-              <p data-i18n="faqA2">Yes! Hosts can paste their custom payment URL (Stripe, Revolut, PayPal, Lemon Squeezy, etc.) so guest payments go directly into your account.</p>
+              <p data-i18n="faqA2">Yes! Hosts can paste their custom payment URL (Stripe, Revolut, PayPal, Square, etc.) so guest payments go directly into your account.</p>
             </div>
           </div>
 
@@ -2646,10 +2644,10 @@
         <div class="panel-card" style="margin-top:24px;">
           <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center;">
             <div>
-              <h3><i data-lucide="credit-card" class="text-emerald"></i> Lemon Squeezy Store & White-Label Merchant Integration</h3>
-              <p>Merchant Account: <strong>Ali Turan Inc. (hostifyos@gmail.com)</strong> • Store ID: <strong>#456562</strong></p>
+              <h3><i data-lucide="credit-card" class="text-emerald"></i> Dodo Payments & Global Merchant of Record Gateway</h3>
+              <p>Merchant Entity: <strong>Ali Turan Inc. (hostifyos@gmail.com)</strong> • Status: <strong>Live MoR Gateway</strong></p>
             </div>
-            <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">● Merchant Gateway Active</span>
+            <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">● Dodo Gateway Active</span>
           </div>
 
           <div class="metrics-grid" style="margin-top:16px;">
@@ -2665,7 +2663,7 @@
             <div class="metric-card">
               <div class="m-icon icon-indigo"><i data-lucide="zap"></i></div>
               <div class="m-data">
-                <span class="m-label">Pro Host Tier ($19/mo)</span>
+                <span class="m-label">Pro Host Tier ($14 - $19/mo)</span>
                 <span class="m-val text-indigo">186 Hosts</span>
                 <span class="m-sub">0% Commission • Unlimited</span>
               </div>
@@ -2674,7 +2672,7 @@
             <div class="metric-card">
               <div class="m-icon icon-amber"><i data-lucide="crown"></i></div>
               <div class="m-data">
-                <span class="m-label">Enterprise & Hotel ($39/mo)</span>
+                <span class="m-label">Enterprise & Hotel ($29 - $39/mo)</span>
                 <span class="m-val style-amber">62 Hotel Chains</span>
                 <span class="m-sub">Multi-User & Custom Domain</span>
               </div>
@@ -2684,24 +2682,24 @@
           <!-- Checkout Links Quick Reference -->
           <div style="margin-top:16px; background:var(--bg-obsidian); border:1px solid var(--border-subtle); padding:14px; border-radius:12px;">
             <h4 style="font-size:13px; font-weight:700; color:#fff; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
-              <i data-lucide="external-link" style="color:var(--accent-emerald);"></i> Live Merchant Checkout Endpoints (Lemon Squeezy Store ID #456562)
+              <i data-lucide="external-link" style="color:var(--accent-emerald);"></i> Live Dodo Payments Product Identifiers (PCI-DSS Level 1)
             </h4>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:12px;">
               <div>
                 <span style="color:var(--text-muted);">Pro Host Monthly ($19/mo):</span><br>
-                <a href="https://hostifyos.lemonsqueezy.com/checkout/buy/638c165d-bb93-4c79-b896-ea2ff3ef4bb2" target="_blank" rel="noopener noreferrer" style="color:var(--accent-emerald); font-family:monospace; text-decoration:none;">hostifyos.lemonsqueezy.com/.../638c165d</a>
+                <code style="color:var(--accent-emerald); font-family:monospace;">pdt_0NoB0aoePAJvzwbeqpT3B</code>
               </div>
               <div>
                 <span style="color:var(--text-muted);">Pro Host Annual ($168/yr - Save 26%):</span><br>
-                <a href="https://hostifyos.lemonsqueezy.com/checkout/buy/344b7365-ce37-4081-886a-b8aaf84b9488" target="_blank" rel="noopener noreferrer" style="color:var(--accent-emerald); font-family:monospace; text-decoration:none;">hostifyos.lemonsqueezy.com/.../344b7365</a>
+                <code style="color:var(--accent-emerald); font-family:monospace;">pdt_0NoB0bbRJD7ZDhFlYwVYL</code>
               </div>
               <div>
                 <span style="color:var(--text-muted);">Enterprise Monthly ($39/mo):</span><br>
-                <a href="https://hostifyos.lemonsqueezy.com/checkout/buy/d778e297-9e79-41ab-be9b-1ec3a67b6655" target="_blank" rel="noopener noreferrer" style="color:var(--accent-indigo); font-family:monospace; text-decoration:none;">hostifyos.lemonsqueezy.com/.../d778e297</a>
+                <code style="color:var(--accent-indigo); font-family:monospace;">pdt_0NoB0a45lMIAStRQ38iiA</code>
               </div>
               <div>
                 <span style="color:var(--text-muted);">Enterprise Annual ($348/yr - Save 26%):</span><br>
-                <a href="https://hostifyos.lemonsqueezy.com/checkout/buy/626e768b-a63a-4355-b893-ec52414ba8e0" target="_blank" rel="noopener noreferrer" style="color:var(--accent-indigo); font-family:monospace; text-decoration:none;">hostifyos.lemonsqueezy.com/.../626e768b</a>
+                <code style="color:var(--accent-indigo); font-family:monospace;">pdt_0NoB0Yusos1T6J53b2SjT</code>
               </div>
             </div>
           </div>
@@ -2922,7 +2920,7 @@
 
           <div class="settings-card">
             <h4><i data-lucide="shield-check" class="text-emerald"></i> Official Merchant Payout & Settlement Gateway</h4>
-            <p class="text-muted">Automated Lemon Squeezy payout settlement engine connected directly to official merchant account.</p>
+            <p class="text-muted">Automated Dodo Payments payout settlement engine connected directly to official merchant account.</p>
             <div class="info-row">
               <span>Merchant Entity:</span>
               <strong>Ali Turan Inc. (Ali Turan Şirketi)</strong>
@@ -2933,7 +2931,7 @@
             </div>
             <div class="info-row">
               <span>Settlement Gateway:</span>
-              <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">● Lemon Squeezy Store ID #456562 (Active)</span>
+              <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">● Dodo Payments MoR Gateway (Active)</span>
             </div>
             <div class="info-row">
               <span>Payout Schedule:</span>

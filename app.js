@@ -149,7 +149,7 @@ const i18nDict = {
     faqQ1: "Do my guests need to download an app?",
     faqA1: "No! HostifyOS works as an instant Web App (PWA). Guests simply scan your printed QR stand or click your link to view Wi-Fi and services instantly on any smartphone browser.",
     faqQ2: "Can I use my own custom payment link?",
-    faqA2: "Yes! Hosts can paste their custom payment URL (Stripe, Revolut, PayPal, Lemon Squeezy, etc.) so guest payments go directly into your account.",
+    faqA2: "Yes! Hosts can paste their custom payment URL (Stripe, Revolut, PayPal, Square, etc.) so guest payments go directly into your account.",
     faqQ3: "How does the 14-Day Free Trial work?",
     faqA3: "When you sign up, $0 is charged today. You get 14 full days to test HostifyOS with your properties. If you decide to cancel anytime before Day 14, your card will never be charged.",
     faqQ4: "How do guests access the guidebook in their room?",
@@ -2558,8 +2558,7 @@ function renderCommissionAggregator() {
 function generateMonthlyCommissionInvoice() {
   const summary = calculateCommissionSummary();
   const feeAmount = summary.totalPlatformFees > 0 ? summary.totalPlatformFees : 12.50;
-  openLemonSqueezyCheckout('Starter 5% Platform Fee Settlement', `$${feeAmount.toFixed(2)} Invoice`);
-  showToast(`⚡ Generated Monthly Commission Settlement Invoice ($${feeAmount.toFixed(2)}) via Lemon Squeezy!`);
+  showToast(`⚡ Generated Monthly Commission Settlement Invoice ($${feeAmount.toFixed(2)}) via Merchant Gateway!`);
 }
 
 function triggerInstantFeeSweep() {
@@ -2572,7 +2571,7 @@ function downloadCommissionStatement() {
   showToast("Downloading Monthly Commission Statement (PDF / CSV) for Host Accounting...");
 }
 
-// OFFICIAL DODO PAYMENTS, PADDLE & LEMON SQUEEZY CHECKOUT CONFIGURATION
+// OFFICIAL DODO PAYMENTS & GLOBAL MERCHANT CHECKOUT CONFIGURATION
 let DODO_STORE_CONFIG = {
   apiKey: 'BxWmfn78EloAHJpA.KsEFqECqNpX5PbhpZ2Bhxog2CN0sZ7JGcT4eqJIh-rssUD_3',
   starterProductId: 'pdt_0NoB0cNCnW5YRU486MeDb',
