@@ -2795,22 +2795,83 @@ window.selectClosingPlan = selectClosingPlan;
 async function processLemonSqueezySubscribe() {
   const emailInput = document.getElementById('lemon-email') || document.getElementById('lemon-checkout-email') || document.getElementById('cta-email');
   const nameInput = document.getElementById('card-name') || document.getElementById('cta-card-name');
+  const cardNumInput = document.getElementById('cta-card-num');
+  const cardExpInput = document.getElementById('cta-card-exp');
+  const cardCvcInput = document.getElementById('cta-card-cvc');
+
   const email = emailInput ? emailInput.value : 'host@hostifyos.com';
   const name = nameInput ? nameInput.value : 'Valued Host';
+  const cardNumber = cardNumInput ? cardNumInput.value : '';
+  const cardExp = cardExpInput ? cardExpInput.value : '';
+  const cardCvc = cardCvcInput ? cardCvcInput.value : '';
 
   hostAuth.email = email;
   hostAuth.isLoggedIn = true;
-  hostAuth.plan = document.getElementById('lemon-plan-name') ? document.getElementById('lemon-plan-name').textContent : 'Pro Host Plan';
+  hostAuth.plan = document.getElementById('lemon-plan-name') ? document.getElementById('lemon-plan-name').textContent : (currentClosingPlan === 'ent' ? 'Enterprise Plan' : 'Pro Host Plan');
   
   closeModal('modal-lemon-checkout');
 
   let planKey = 'pro_monthly';
-  if (hostAuth.plan.includes('Starter') || hostAuth.plan.includes('Free')) planKey = 'starter';
-  else if (hostAuth.plan.includes('Annual') || hostAuth.plan.includes('ANNUAL')) planKey = 'pro_annual';
-  else if (hostAuth.plan.includes('Enterprise')) planKey = 'enterprise_monthly';
+  if (currentClosingPlan === 'free' || hostAuth.plan.includes('Starter') || hostAuth.plan.includes('Free')) planKey = 'starter';
+  else if (billingCycle === 'annual' || hostAuth.plan.includes('Annual') || hostAuth.plan.includes('ANNUAL')) {
+    planKey = (currentClosingPlan === 'ent') ? 'enterprise_annual' : 'pro_annual';
+  } else {
+    planKey = (currentClosingPlan === 'ent') ? 'enterprise_monthly' : 'pro_monthly';
+  }
 
-  showToast("⚡ Processing Secure Checkout (Dodo / Global Gateway)...");
+  const isTr = (typeof currentLanguage !== 'undefined' && currentLanguage === 'TR');
+  showToast(isTr ? "⚡ Paynkolay 3D Güvenli Ödeme Başlatılıyor..." : "⚡ Processing Secure Checkout (Paynkolay / Dodo)...");
 
+  // 1. Try Paynkolay Virtual POS & 3D Secure Gateway
+  try {
+    const paynkolayRes = await fetch('/api/paynkolay-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        plan: planKey,
+        email: email,
+        name: name,
+        cardHolderName: name,
+        cardNumber: cardNumber,
+        cardExp: cardExp,
+        cvc: cardCvc
+      })
+    });
+
+    const pData = await paynkolayRes.json();
+    if (pData && pData.success) {
+      if (pData.type === '3d_secure' && pData.data && pData.data.html) {
+        // Render 3D Secure HTML form from bank
+        const container = document.createElement('div');
+        container.innerHTML = pData.data.html;
+        document.body.appendChild(container);
+        const script = container.querySelector('script');
+        if (script) eval(script.innerText);
+        const form = container.querySelector('form');
+        if (form) form.submit();
+        return;
+      } else if (pData.type === 'hosted_form' && pData.fields) {
+        // Auto-post to Paynkolay Hosted VPOS
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = pData.actionUrl;
+        Object.keys(pData.fields).forEach(k => {
+          const inp = document.createElement('input');
+          inp.type = 'hidden';
+          inp.name = k;
+          inp.value = pData.fields[k];
+          form.appendChild(inp);
+        });
+        document.body.appendChild(form);
+        form.submit();
+        return;
+      }
+    }
+  } catch (err) {
+    console.warn("Paynkolay API attempted, checking Dodo fallback:", err);
+  }
+
+  // 2. Fallback to Dodo Payments Global Gateway
   try {
     const res = await fetch('/api/dodo-checkout', {
       method: 'POST',
@@ -2829,15 +2890,9 @@ async function processLemonSqueezySubscribe() {
       return;
     }
   } catch (e) {
-    console.warn("Dodo serverless session error, using direct store link:", e);
+    console.warn("Dodo serverless session error:", e);
   }
 
-  // Fallback to direct store URL
-  let targetUrl = LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl;
-  if (hostAuth.plan.includes('Starter')) targetUrl = LEMONSQUEEZY_STORE_CONFIG.starterUrl;
-  else if (hostAuth.plan.includes('Annual') || hostAuth.plan.includes('ANNUAL')) targetUrl = LEMONSQUEEZY_STORE_CONFIG.proAnnualUrl;
-
-  window.open(targetUrl, '_blank');
   showToast(`🎉 Welcome ${email}! 14-Day Free Trial Activated ($0 Charged Today).`);
   switchView('portal');
   updateTopNavAuthUI();
