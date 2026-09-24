@@ -3712,11 +3712,11 @@ function runAiScrapeSimulator() {
     return;
   }
 
-  btn.innerHTML = `<i data-lucide="loader-2" class="spin"></i> AI Scraping Listing & Geo-Local Places...`;
+  btn.innerHTML = `<i data-lucide="loader-2" class="spin"></i> Generating Guidebook & Local Discoveries...`;
   lucide.createIcons();
 
   setTimeout(() => {
-    const cleanPlatform = platformSelect || 'Airbnb';
+    const cleanPlatform = platformSelect || 'Custom';
 
     const newScrapedProp = {
       id: `prop-ai-${Date.now()}`,
