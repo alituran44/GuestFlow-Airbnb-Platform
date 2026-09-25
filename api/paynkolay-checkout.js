@@ -16,8 +16,7 @@ const PLAN_PRICE_MAP_TRY = {
   pro_monthly: '650.00',
   pro_annual: '5750.00',
   enterprise_monthly: '1350.00',
-  enterprise_annual: '11900.00',
-  starter: '0.00'
+  enterprise_annual: '11900.00'
 };
 
 export default async function handler(req, res) {

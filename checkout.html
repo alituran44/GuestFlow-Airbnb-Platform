@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HostifyOS — Secure Checkout & 14-Day Free Trial</title>
+  <meta name="description" content="Complete your HostifyOS subscription. 14-day free trial, zero commission, instant activation via Credit Card, Apple Pay, Bank Wire, USDT Crypto or WhatsApp.">
+  <link rel="canonical" href="https://www.hostifyos.com/checkout.html">
+  <link rel="icon" type="image/jpeg" href="brand_logo.jpg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #090D14;
+      --card-bg: #111827;
+      --card-inner: #0F172A;
+      --accent: #10B981;
+      --accent-hover: #059669;
+      --accent-glow: rgba(16, 185, 129, 0.25);
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --border: rgba(255, 255, 255, 0.1);
+      --border-accent: rgba(16, 185, 129, 0.4);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* HEADER */
+    .checkout-header {
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      background: rgba(9, 13, 20, 0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+    }
+    .logo-area img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+    }
+    .logo-area span {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .security-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--accent);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* MAIN CONTAINER */
+    .checkout-container {
+      max-width: 1160px;
+      margin: 40px auto 60px auto;
+      padding: 0 20px;
+      flex: 1;
+      width: 100%;
+    }
+
+    .checkout-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .checkout-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* STEP CARDS */
+    .step-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin-bottom: 24px;
+      position: relative;
+    }
+    .step-title-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #090D14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+    }
+    .step-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    /* PLAN CHOOSER BUTTONS */
+    .plan-selector-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .plan-option {
+      background: var(--card-inner);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .plan-option:hover {
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+    .plan-option.selected {
+      border-color: var(--accent);
+      background: rgba(16, 185, 129, 0.08);
+    }
+    .plan-option .badge-popular {
+      position: absolute;
+      top: -10px;
+      right: 12px;
+      background: var(--accent);
+      color: #090D14;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 99px;
+      text-transform: uppercase;
+    }
+    .plan-option-name {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .plan-option-price {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .plan-option-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* BILLING CYCLE TOGGLE */
+    .cycle-toggle-wrapper {
+      background: #090D14;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 6px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .cycle-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .cycle-btn.active {
+      background: var(--accent);
+      color: #090D14;
+      font-weight: 800;
+      box-shadow: 0 4px 12px var(--accent-glow);
+    }
+    .cycle-save-pill {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--accent);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 99px;
+    }
+    .cycle-btn.active .cycle-save-pill {
+      background: #090D14;
+      color: var(--accent);
+    }
+
+    /* PAYMENT METHOD TABS */
+    .pay-methods-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      background: #090D14;
+      padding: 6px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+    .pay-tab {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 12px 6px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+    .pay-tab.active {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    /* FORM ELEMENTS */
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .form-control {
+      width: 100%;
+      background: #090D14;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: #fff;
+      font-size: 14px;
+      padding: 12px 14px;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    .form-control:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-glow);
+    }
+
+    .btn-submit-checkout {
+      width: 100%;
+      background: var(--accent);
+      color: #090D14;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+      box-shadow: 0 10px 25px var(--accent-glow);
+    }
+    .btn-submit-checkout:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    /* DETAILS BOXES */
+    .info-box {
+      background: var(--card-inner);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .copy-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .copy-input {
+      flex: 1;
+      background: #090D14;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--accent);
+      font-family: monospace;
+      font-size: 13px;
+      padding: 10px 12px;
+      font-weight: 700;
+    }
+    .btn-copy {
+      background: var(--accent);
+      color: #090D14;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 10px 16px;
+      font-weight: 800;
+      font-size: 13px;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+    .btn-copy:hover {
+      opacity: 0.9;
+    }
+
+    /* ORDER SUMMARY SIDEBAR */
+    .summary-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      position: sticky;
+      top: 90px;
+    }
+    .summary-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+    .summary-plan-header {
+      background: var(--card-inner);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .summary-row.total-row {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      margin-top: 14px;
+    }
+    .trial-highlight {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      margin: 16px 0;
+      font-size: 13px;
+      color: var(--accent);
+      line-height: 1.4;
+    }
+    .features-check-list {
+      list-style: none;
+      margin-top: 20px;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+    .features-check-list li {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .features-check-list li::before {
+      content: "✓";
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 30px 20px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-top: auto;
+    }
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    footer a:hover {
+      color: #fff;
+    }
+
+    /* TOAST */
+    #toast {
+      visibility: hidden;
+      min-width: 250px;
+      background-color: #10B981;
+      color: #090D14;
+      text-align: center;
+      border-radius: 10px;
+      padding: 14px 20px;
+      position: fixed;
+      z-index: 999999;
+      right: 24px;
+      bottom: 24px;
+      font-size: 14px;
+      font-weight: 800;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      transition: visibility 0.3s, opacity 0.3s ease;
+      opacity: 0;
+    }
+    #toast.show {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CHECKOUT HEADER -->
+  <header class="checkout-header">
+    <div class="header-inner">
+      <a href="/" class="logo-area">
+        <img src="brand_logo.jpg" alt="HostifyOS Logo">
+        <span>HostifyOS</span>
+      </a>
+      <div style="display:flex; align-items:center; gap:14px;">
+        <span class="security-badge">🔒 256-Bit Bank-Grade SSL</span>
+        <a href="/pricing.html" style="color:var(--text-muted); font-size:13px; font-weight:600; text-decoration:none;">← Back to Plans</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CHECKOUT -->
+  <main class="checkout-container">
+    <div class="checkout-grid">
+      
+      <!-- LEFT COLUMN: PLAN & PAYMENT CONFIG -->
+      <div class="checkout-form-area">
+        
+        <!-- STEP 1: CHOOSE PLAN & BILLING -->
+        <div class="step-card">
+          <div class="step-title-row">
+            <span class="step-num">1</span>
+            <h2 class="step-title">Select Plan & Billing Cycle</h2>
+          </div>
+
+          <!-- Billing Cycle Switcher -->
+          <div class="cycle-toggle-wrapper">
+            <button type="button" class="cycle-btn active" id="btn-cycle-annual" onclick="setBillingCycle('annual')">
+              <span>Annual Billing</span>
+              <span class="cycle-save-pill">Save 26%</span>
+            </button>
+            <button type="button" class="cycle-btn" id="btn-cycle-monthly" onclick="setBillingCycle('monthly')">
+              <span>Monthly Billing</span>
+            </button>
+          </div>
+
+          <!-- 2 Plan Choices -->
+          <div class="plan-selector-grid">
+            
+            <!-- Pro Host Option -->
+            <div class="plan-option selected" id="opt-plan-pro" onclick="selectCheckoutPlan('pro')">
+              <span class="badge-popular">Most Popular</span>
+              <div class="plan-option-name">⭐ Pro Host</div>
+              <div class="plan-option-price" id="opt-pro-price">$14<span style="font-size:13px; color:var(--text-muted); font-weight:500;">/mo</span></div>
+              <div class="plan-option-sub" id="opt-pro-sub">Billed $168 annually • 14-Day Free Trial</div>
+            </div>
+
+            <!-- Enterprise Option -->
+            <div class="plan-option" id="opt-plan-ent" onclick="selectCheckoutPlan('ent')">
+              <div class="plan-option-name">🏢 Enterprise & Hotel</div>
+              <div class="plan-option-price" id="opt-ent-price">$29<span style="font-size:13px; color:var(--text-muted); font-weight:500;">/mo</span></div>
+              <div class="plan-option-sub" id="opt-ent-sub">Billed $348 annually • VIP Onboarding</div>
+            </div>
+
+          </div>
+
+          <p style="font-size:12px; color:var(--text-muted); margin:0;">
+            ✨ Both plans include full access, 0% platform commission on guest upsells, automated multilingual translation, and 24/7 host support.
+          </p>
+        </div>
+
+        <!-- STEP 2: CHOOSE PAYMENT METHOD -->
+        <div class="step-card">
+          <div class="step-title-row">
+            <span class="step-num">2</span>
+            <h2 class="step-title">Select Payment Method</h2>
+          </div>
+
+          <!-- 4 Payment Method Tabs -->
+          <div class="pay-methods-tabs">
+            <button type="button" class="pay-tab active" id="tab-btn-card" onclick="switchPaymentMethod('card')">
+              <span>💳 Card</span>
+              <span style="font-size:9px; opacity:0.8;">Apple/Google Pay</span>
+            </button>
+            <button type="button" class="pay-tab" id="tab-btn-iban" onclick="switchPaymentMethod('iban')">
+              <span>🏦 Bank</span>
+              <span style="font-size:9px; opacity:0.8;">FAST / SWIFT</span>
+            </button>
+            <button type="button" class="pay-tab" id="tab-btn-crypto" onclick="switchPaymentMethod('crypto')">
+              <span>💎 USDT</span>
+              <span style="font-size:9px; opacity:0.8;">Tron TRC-20</span>
+            </button>
+            <button type="button" class="pay-tab" id="tab-btn-wa" onclick="switchPaymentMethod('wa')">
+              <span>💬 WhatsApp</span>
+              <span style="font-size:9px; opacity:0.8;">VIP Concierge</span>
+            </button>
+          </div>
+
+          <!-- METHOD 1: CREDIT CARD / DODO PAYMENTS LIVE / PAYNKOLAY -->
+          <div id="method-content-card">
+            <div class="info-box">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <strong style="color:#fff; font-size:14px;">Instant Online Checkout (Visa / Mastercard / Apple Pay)</strong>
+                <span style="background:rgba(16,185,129,0.15); color:#10B981; padding:2px 8px; border-radius:99px; font-size:10px; font-weight:800;">3D Secure Verified</span>
+              </div>
+              <p style="color:var(--text-muted); font-size:12px; margin:0 0 10px 0;">
+                Start your 14-day free trial ($0 today) or subscribe directly. Powered by Dodo Payments & Global Merchant Infrastructure.
+              </p>
+              <div style="font-size:11px; color:#CBD5E1; line-height:1.5;">
+                ✓ 14-Day Free Trial ($0.00 Due Today)<br>
+                ✓ Automatic Invoice Sent to Your Email<br>
+                ✓ Cancel Anytime in 1-Click with Zero Penalties
+              </div>
+            </div>
+
+            <form id="cardCheckoutForm" onsubmit="event.preventDefault(); submitCardCheckout();">
+              <div class="form-group">
+                <label>Account Email Address</label>
+                <input type="email" id="cardEmail" class="form-control" placeholder="host@example.com" value="host@myproperty.com" required>
+              </div>
+              <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="cardName" class="form-control" placeholder="John Doe" value="John Doe" required>
+              </div>
+
+              <!-- Currency selector toggle (USD vs TRY) -->
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; background:rgba(255,255,255,0.03); border:1px solid var(--border); padding:10px 14px; border-radius:var(--radius-sm);">
+                <span style="font-size:12px; color:var(--text-muted);">Ödeme Para Birimi (Currency):</span>
+                <div style="display:flex; gap:6px;">
+                  <button type="button" id="curr-btn-usd" onclick="setCurrency('USD')" style="background:var(--accent); color:#090D14; border:none; padding:4px 12px; border-radius:6px; font-size:11px; font-weight:800; cursor:pointer;">USD ($)</button>
+                  <button type="button" id="curr-btn-try" onclick="setCurrency('TRY')" style="background:transparent; color:#94A3B8; border:1px solid var(--border); padding:4px 12px; border-radius:6px; font-size:11px; font-weight:700; cursor:pointer;">TRY (₺)</button>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-submit-checkout" id="btnCardSubmit">
+                <span>🔒 Proceed to Secure Checkout</span>
+                <span id="btnCardPriceLabel">($0 Due Today)</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- METHOD 2: BANK HAVALESİ / FAST / SWIFT -->
+          <div id="method-content-iban" style="display:none;">
+            <div class="info-box">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                <span style="font-size:12px; color:var(--text-muted);">Bank: <strong style="color:var(--accent);">Fibabanka A.Ş.</strong></span>
+                <span style="background:rgba(16,185,129,0.15); color:var(--accent); padding:2px 8px; border-radius:99px; font-size:10px; font-weight:800;">7/24 FAST & SWIFT</span>
+              </div>
+              <div style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">
+                Account Beneficiary: <strong style="color:#fff;">Ali Turan Inc. (Ali Turan)</strong>
+              </div>
+              
+              <!-- IBAN -->
+              <div style="font-size:11px; color:var(--accent); font-weight:700; margin-bottom:2px;">IBAN (TL / USD / EUR):</div>
+              <div class="copy-row" style="margin-bottom:12px;">
+                <input type="text" id="bankIbanVal" class="copy-input" readonly value="TR22 0010 3000 0000 0059 1864 21">
+                <button type="button" class="btn-copy" onclick="copyValue('bankIbanVal', 'Fibabanka IBAN Copied!')">Copy</button>
+              </div>
+
+              <!-- SWIFT / BIC -->
+              <div style="font-size:11px; color:var(--text-muted); font-weight:700; margin-bottom:2px;">SWIFT / BIC Code (International Wire):</div>
+              <div class="copy-row">
+                <input type="text" id="bankSwiftVal" class="copy-input" readonly value="FBABTRIS">
+                <button type="button" class="btn-copy" onclick="copyValue('bankSwiftVal', 'SWIFT Code Copied!')">Copy</button>
+              </div>
+
+              <div style="margin-top:14px; padding:10px; background:#090D14; border-radius:8px; font-size:12px; color:#CBD5E1;">
+                Transfer Edilecek Tutar: <strong style="color:var(--accent);" id="bankTransferAmount">5.750,00 TL ($168 USD)</strong>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Hesap E-Posta Adresiniz (Activation Email)</label>
+              <input type="email" id="bankEmail" class="form-control" placeholder="host@example.com">
+            </div>
+
+            <p style="font-size:11px; color:var(--text-muted); margin:0 0 12px 0; text-align:center;">
+              * Havale açıklamasına e-posta adresinizi veya adınızı yazınız.
+            </p>
+
+            <button type="button" class="btn-submit-checkout" onclick="submitBankNotification()">
+              <span>🏦 Havale / FAST Yaptım (Hesabı Etkinleştir)</span>
+            </button>
+          </div>
+
+          <!-- METHOD 3: USDT CRYPTO (BINANCE TRC-20) -->
+          <div id="method-content-crypto" style="display:none;">
+            <div class="info-box" style="text-align:center;">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa&color=090D14&bgcolor=10B981" alt="Binance QR" style="width:130px; height:130px; border-radius:10px; margin-bottom:8px;">
+              <div style="color:var(--accent); font-size:12px; font-weight:800; margin-bottom:6px;">Network: Tron (TRC-20) • 0% Platform Fee</div>
+              
+              <div class="copy-row" style="max-width:440px; margin:0 auto 10px auto;">
+                <input type="text" id="cryptoAddrVal" class="copy-input" readonly value="TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa">
+                <button type="button" class="btn-copy" onclick="copyValue('cryptoAddrVal', 'USDT Address Copied!')">Copy</button>
+              </div>
+
+              <div style="font-size:13px; color:#fff; font-weight:700;">
+                Exact USDT Amount: <span style="color:var(--accent);" id="cryptoUsdtAmount">$168.00 USDT</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Account Email Address</label>
+              <input type="email" id="cryptoEmail" class="form-control" placeholder="host@example.com">
+            </div>
+
+            <button type="button" class="btn-submit-checkout" onclick="submitCryptoNotification()">
+              <span>💎 USDT Gönderdim (Anında Etkinleştir)</span>
+            </button>
+          </div>
+
+          <!-- METHOD 4: WHATSAPP VIP CONCIERGE -->
+          <div id="method-content-wa" style="display:none;">
+            <div class="info-box" style="text-align:center;">
+              <div style="font-size:36px; margin-bottom:6px;">💬</div>
+              <h3 style="font-size:16px; color:#fff; font-weight:800; margin-bottom:4px;">HostifyOS VIP Concierge Desk</h3>
+              <div style="color:#25D366; font-size:15px; font-weight:800; margin-bottom:8px;">+90 543 736 06 60</div>
+              <p style="font-size:12px; color:var(--text-muted); margin:0;">
+                Özel faturalandırma, kurumsal sözleşme veya hızlı kurulum desteği için WhatsApp üzerinden doğrudan kurucu ekibimizle görüşebilirsiniz.
+              </p>
+            </div>
+
+            <button type="button" class="btn-submit-checkout" style="background:linear-gradient(135deg, #25D366 0%, #128C7E 100%); color:#fff;" onclick="openWhatsAppChat()">
+              <span>💬 WhatsApp ile Sipariş Ver & Kurulum Al</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN: ORDER SUMMARY & TRUST GUARANTEES -->
+      <div class="checkout-summary-area">
+        <div class="summary-card">
+          <h3 class="summary-title">Order Summary</h3>
+
+          <div class="summary-plan-header">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <strong style="color:#fff; font-size:16px;" id="sumPlanName">⭐ Pro Host Plan</strong>
+              <span style="background:rgba(16,185,129,0.15); color:var(--accent); font-size:11px; font-weight:800; padding:2px 8px; border-radius:6px;" id="sumCycleBadge">Annual (Save 26%)</span>
+            </div>
+            <div style="color:var(--text-muted); font-size:12px; margin-top:4px;" id="sumPlanDesc">Up to 10 property listings included.</div>
+          </div>
+
+          <div class="summary-row">
+            <span>Subscription Rate</span>
+            <span id="sumBaseRate">$14.00 / month</span>
+          </div>
+
+          <div class="summary-row">
+            <span>Billing Term</span>
+            <span id="sumBillingTerm">Annual ($168.00/year)</span>
+          </div>
+
+          <div class="summary-row">
+            <span>14-Day Free Trial</span>
+            <span style="color:var(--accent); font-weight:700;">100% OFF ($0 Today)</span>
+          </div>
+
+          <div class="summary-row">
+            <span>Taxes & Setup Fees</span>
+            <span>$0.00</span>
+          </div>
+
+          <div class="summary-row total-row">
+            <span>Total Due Today</span>
+            <span style="color:var(--accent);" id="sumTotalToday">$0.00</span>
+          </div>
+
+          <div class="trial-highlight" id="sumTrialHint">
+            🎉 <strong>14-Day Risk-Free Trial:</strong> You will not be charged today. After 14 days, your subscription will renew at $168/year ($14/mo) unless cancelled.
+          </div>
+
+          <!-- Trustpilot Rating Card -->
+          <div style="background:#090D14; border:1px solid var(--border); border-radius:var(--radius-sm); padding:12px; text-align:center; margin-top:16px;">
+            <a href="https://www.trustpilot.com/review/hostifyos.com" target="_blank" rel="noopener noreferrer" style="text-decoration:none; display:flex; flex-direction:column; align-items:center; gap:4px;">
+              <div style="display:flex; gap:3px;">
+                <span style="background:#00B67A; color:#fff; width:16px; height:16px; border-radius:2px; display:inline-flex; align-items:center; justify-content:center; font-size:10px; font-weight:800;">★</span>
+                <span style="background:#00B67A; color:#fff; width:16px; height:16px; border-radius:2px; display:inline-flex; align-items:center; justify-content:center; font-size:10px; font-weight:800;">★</span>
+                <span style="background:#00B67A; color:#fff; width:16px; height:16px; border-radius:2px; display:inline-flex; align-items:center; justify-content:center; font-size:10px; font-weight:800;">★</span>
+                <span style="background:#00B67A; color:#fff; width:16px; height:16px; border-radius:2px; display:inline-flex; align-items:center; justify-content:center; font-size:10px; font-weight:800;">★</span>
+                <span style="background:#00B67A; color:#fff; width:16px; height:16px; border-radius:2px; display:inline-flex; align-items:center; justify-content:center; font-size:10px; font-weight:800;">★</span>
+              </div>
+              <span style="color:#fff; font-size:12px; font-weight:700;">TrustScore <strong style="color:#00B67A;">4.9</strong> | <strong>Trustpilot Verified</strong></span>
+            </a>
+          </div>
+
+          <ul class="features-check-list" id="sumFeaturesList">
+            <li>Up to 10 Property Listings</li>
+            <li>0% Platform Commission on Upsells</li>
+            <li>Automated 7-Language Guest Guidebooks</li>
+            <li>Printable A5 Acrylic QR Stand PDF</li>
+            <li>Car Parking & 22kW EV Charger Guide</li>
+            <li>24/7 Priority Host Support</li>
+          </ul>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div style="margin-bottom:12px; display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
+      <a href="/terms.html">Terms of Service</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/refund.html" style="color:var(--accent); font-weight:700;">Refund & Cancellation Policy</a>
+      <a href="/contact.html">Contact Us</a>
+    </div>
+    <p>© 2026 HostifyOS.com — Ali Turan Inc. All Rights Reserved.</p>
+    <p style="font-size:11px; color:#64748B; margin:8px auto 0; max-width:800px; line-height:1.4;">
+      <strong>Disclaimer:</strong> HostifyOS is an independent software tool for property hosts and is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Airbnb, Inc., Booking.com, or Vrbo.
+    </p>
+  </footer>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast"></div>
+
+  <!-- SCRIPT LOGIC -->
+  <script>
+    // State
+    let currentPlan = 'pro'; // 'pro' | 'ent'
+    let currentCycle = 'annual'; // 'annual' | 'monthly'
+    let currentPayMethod = 'card'; // 'card' | 'iban' | 'crypto' | 'wa'
+    let currentCurrency = 'USD'; // 'USD' | 'TRY'
+
+    // Pricing Config Table
+    const PLAN_PRICING = {
+      pro: {
+        name: 'Pro Host Plan',
+        desc: 'Up to 10 property listings included.',
+        annualRate: 14,
+        annualTotal: 168,
+        monthlyRate: 19,
+        monthlyTotal: 19,
+        annualTry: '5.750,00 TL',
+        monthlyTry: '650,00 TL',
+        features: [
+          'Up to 10 Property Listings',
+          '0% Platform Commission on Upsells',
+          'Automated 7-Language Guest Guidebooks',
+          'Printable A5 Acrylic QR Stand PDF',
+          'Car Parking & 22kW EV Charger Guide',
+          '24/7 Priority Host Support'
+        ]
+      },
+      ent: {
+        name: 'Enterprise & Hotel Plan',
+        desc: 'For boutique hotels, resorts & large property teams.',
+        annualRate: 29,
+        annualTotal: 348,
+        monthlyRate: 39,
+        monthlyTotal: 39,
+        annualTry: '11.900,00 TL',
+        monthlyTry: '1.350,00 TL',
+        features: [
+          'Unlimited Property Listings',
+          '0% Commission on All Upsells',
+          'White-Label Domain (yourhotel.com)',
+          'Staff & Cleaning Portal Integration',
+          'Dedicated Account Manager',
+          '24/7 VIP Phone Support'
+        ]
+      }
+    };
+
+    // Live Dodo Product Mapping
+    const DODO_PRODUCTS = {
+      pro_monthly: 'pdt_0NoB0aoePAJvzwbeqpT3B',
+      pro_annual: 'pdt_0NoB0bbRJD7ZDhFlYwVYL',
+      enterprise_monthly: 'pdt_0NoB0a45lMIAStRQ38iiA',
+      enterprise_annual: 'pdt_0NoB0Yusos1T6J53b2SjT'
+    };
+
+    // Parse URL Params on Load (e.g. ?plan=pro&cycle=annual)
+    function initFromUrlParams() {
+      const params = new URLSearchParams(window.location.search);
+      const p = params.get('plan');
+      const c = params.get('cycle');
+
+      if (p === 'ent' || p === 'enterprise') {
+        currentPlan = 'ent';
+      } else {
+        currentPlan = 'pro';
+      }
+
+      if (c === 'monthly') {
+        currentCycle = 'monthly';
+      } else {
+        currentCycle = 'annual';
+      }
+
+      renderUI();
+    }
+
+    // Set Billing Cycle
+    function setBillingCycle(cycle) {
+      currentCycle = cycle;
+      renderUI();
+    }
+
+    // Select Plan
+    function selectCheckoutPlan(planKey) {
+      currentPlan = planKey;
+      renderUI();
+    }
+
+    // Set Currency
+    function setCurrency(curr) {
+      currentCurrency = curr;
+      const btnUsd = document.getElementById('curr-btn-usd');
+      const btnTry = document.getElementById('curr-btn-try');
+      if (curr === 'USD') {
+        btnUsd.style.background = 'var(--accent)';
+        btnUsd.style.color = '#090D14';
+        btnTry.style.background = 'transparent';
+        btnTry.style.color = '#94A3B8';
+      } else {
+        btnTry.style.background = 'var(--accent)';
+        btnTry.style.color = '#090D14';
+        btnUsd.style.background = 'transparent';
+        btnUsd.style.color = '#94A3B8';
+      }
+      renderUI();
+    }
+
+    // Switch Payment Method Tab
+    function switchPaymentMethod(methodKey) {
+      currentPayMethod = methodKey;
+      
+      ['card', 'iban', 'crypto', 'wa'].forEach(k => {
+        const tabBtn = document.getElementById('tab-btn-' + k);
+        const content = document.getElementById('method-content-' + k);
+        if (tabBtn) {
+          if (k === methodKey) tabBtn.classList.add('active');
+          else tabBtn.classList.remove('active');
+        }
+        if (content) {
+          content.style.display = (k === methodKey) ? 'block' : 'none';
+        }
+      });
+    }
+
+    // Master Render Function
+    function renderUI() {
+      const pInfo = PLAN_PRICING[currentPlan];
+      const isAnnual = (currentCycle === 'annual');
+
+      // 1. Update Cycle Buttons
+      const btnAnnual = document.getElementById('btn-cycle-annual');
+      const btnMonthly = document.getElementById('btn-cycle-monthly');
+      if (isAnnual) {
+        btnAnnual.classList.add('active');
+        btnMonthly.classList.remove('active');
+      } else {
+        btnMonthly.classList.add('active');
+        btnAnnual.classList.remove('active');
+      }
+
+      // 2. Update Plan Options UI
+      const optPro = document.getElementById('opt-plan-pro');
+      const optEnt = document.getElementById('opt-plan-ent');
+      const optProPrice = document.getElementById('opt-pro-price');
+      const optProSub = document.getElementById('opt-pro-sub');
+      const optEntPrice = document.getElementById('opt-ent-price');
+      const optEntSub = document.getElementById('opt-ent-sub');
+
+      if (currentPlan === 'pro') {
+        optPro.classList.add('selected');
+        optEnt.classList.remove('selected');
+      } else {
+        optEnt.classList.add('selected');
+        optPro.classList.remove('selected');
+      }
+
+      if (isAnnual) {
+        optProPrice.innerHTML = '$14<span style="font-size:13px; color:var(--text-muted); font-weight:500;">/mo</span>';
+        optProSub.textContent = 'Billed $168 annually • 14-Day Free Trial';
+        optEntPrice.innerHTML = '$29<span style="font-size:13px; color:var(--text-muted); font-weight:500;">/mo</span>';
+        optEntSub.textContent = 'Billed $348 annually • VIP Onboarding';
+      } else {
+        optProPrice.innerHTML = '$19<span style="font-size:13px; color:var(--text-muted); font-weight:500;">/mo</span>';
+        optProSub.textContent = 'Billed monthly • 14-Day Free Trial';
+        optEntPrice.innerHTML = '$39<span style="font-size:13px; color:var(--text-muted); font-weight:500;">/mo</span>';
+        optEntSub.textContent = 'Billed monthly • VIP Onboarding';
+      }
+
+      // 3. Update Order Summary Sidebar
+      const sumPlanName = document.getElementById('sumPlanName');
+      const sumCycleBadge = document.getElementById('sumCycleBadge');
+      const sumPlanDesc = document.getElementById('sumPlanDesc');
+      const sumBaseRate = document.getElementById('sumBaseRate');
+      const sumBillingTerm = document.getElementById('sumBillingTerm');
+      const sumTrialHint = document.getElementById('sumTrialHint');
+      const sumFeaturesList = document.getElementById('sumFeaturesList');
+
+      sumPlanName.textContent = (currentPlan === 'pro' ? '⭐ ' : '🏢 ') + pInfo.name;
+      sumCycleBadge.textContent = isAnnual ? 'Annual (Save 26%)' : 'Monthly';
+      sumPlanDesc.textContent = pInfo.desc;
+
+      const rate = isAnnual ? pInfo.annualRate : pInfo.monthlyRate;
+      const total = isAnnual ? pInfo.annualTotal : pInfo.monthlyTotal;
+      sumBaseRate.textContent = '$' + rate + '.00 / month';
+      sumBillingTerm.textContent = isAnnual ? ('Annual ($' + total + '.00/year)') : ('Monthly ($' + total + '.00/month)');
+
+      sumTrialHint.innerHTML = isAnnual 
+        ? `🎉 <strong>14-Day Risk-Free Trial:</strong> You will not be charged today ($0.00). After 14 days, your subscription will renew at $${total}/year ($${rate}/mo) unless cancelled.`
+        : `🎉 <strong>14-Day Risk-Free Trial:</strong> You will not be charged today ($0.00). After 14 days, your subscription will renew at $${total}/month unless cancelled.`;
+
+      // Features list
+      sumFeaturesList.innerHTML = pInfo.features.map(f => `<li>${f}</li>`).join('');
+
+      // 4. Update Bank Transfer & Crypto amounts
+      const bankAmountEl = document.getElementById('bankTransferAmount');
+      const cryptoAmountEl = document.getElementById('cryptoUsdtAmount');
+      const bankTryStr = isAnnual ? pInfo.annualTry : pInfo.monthlyTry;
+
+      if (bankAmountEl) bankAmountEl.textContent = `${bankTryStr} ($${total} USD)`;
+      if (cryptoAmountEl) cryptoAmountEl.textContent = `$${total}.00 USDT`;
+
+      // 5. Update Card Checkout Submit Button Label
+      const btnCardPriceLabel = document.getElementById('btnCardPriceLabel');
+      if (btnCardPriceLabel) {
+        btnCardPriceLabel.textContent = `($0 Due Today • 14-Day Free Trial)`;
+      }
+    }
+
+    // Copy to clipboard helper
+    function copyValue(elementId, message) {
+      const input = document.getElementById(elementId);
+      input.select();
+      input.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(input.value);
+      showToast('✅ ' + message);
+    }
+
+    // Toast notification
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.className = 'show';
+      setTimeout(() => { toast.className = toast.className.replace('show', ''); }, 3500);
+    }
+
+    // Submit Card Checkout (Live Dodo Payments or Paynkolay TR)
+    async function submitCardCheckout() {
+      const email = document.getElementById('cardEmail').value;
+      const name = document.getElementById('cardName').value;
+
+      if (!email) {
+        showToast('Please enter your email address!');
+        return;
+      }
+
+      const planKey = (currentPlan === 'ent') 
+        ? (currentCycle === 'annual' ? 'enterprise_annual' : 'enterprise_monthly')
+        : (currentCycle === 'annual' ? 'pro_annual' : 'pro_monthly');
+
+      const submitBtn = document.getElementById('btnCardSubmit');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>⚡ Opening Secure Gateway...</span>';
+
+      try {
+        if (currentCurrency === 'TRY') {
+          // Paynkolay Turkish Lira Virtual POS flow
+          const res = await fetch('/api/paynkolay-checkout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ plan: planKey, email: email, name: name })
+          });
+          const data = await res.json();
+          if (data && data.checkoutUrl) {
+            window.location.href = data.checkoutUrl;
+            return;
+          }
+        }
+
+        // Default: Live Dodo Payments Checkout Session
+        const res = await fetch('/api/dodo-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            plan: planKey,
+            email: email,
+            name: name,
+            returnUrl: window.location.origin + '/?checkout_status=success'
+          })
+        });
+
+        const data = await res.json();
+        if (data && data.success && data.checkout_url) {
+          window.location.href = data.checkout_url;
+        } else {
+          showToast('⚠️ Direct checkout redirecting...');
+          const fallbackUrl = `https://live.dodopayments.com/checkout?product=${DODO_PRODUCTS[planKey]}&email=${encodeURIComponent(email)}`;
+          window.location.href = fallbackUrl;
+        }
+      } catch (err) {
+        console.error('Checkout error:', err);
+        const fallbackUrl = `https://live.dodopayments.com/checkout?product=${DODO_PRODUCTS[planKey]}&email=${encodeURIComponent(email)}`;
+        window.location.href = fallbackUrl;
+      } finally {
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<span>🔒 Proceed to Secure Checkout</span> <span id="btnCardPriceLabel">($0 Due Today)</span>';
+        }, 4000);
+      }
+    }
+
+    // Submit Bank Notification
+    function submitBankNotification() {
+      const email = document.getElementById('bankEmail').value;
+      if (!email) {
+        showToast('Lütfen e-posta adresinizi giriniz!');
+        return;
+      }
+      const pInfo = PLAN_PRICING[currentPlan];
+      const isAnnual = (currentCycle === 'annual');
+      const totalStr = isAnnual ? pInfo.annualTry : pInfo.monthlyTry;
+
+      alert(`🎉 Havale / FAST Bildiriminiz Alındı!\n\nPlan: ${pInfo.name} (${isAnnual ? 'Yıllık' : 'Aylık'})\nTutar: ${totalStr}\nHesap E-Posta: ${email}\n\nÖdemeniz onaylandığında lisans aktivasyon bağlantınız ${email} adresinize iletilecektir.`);
+      window.location.href = '/?status=bank_pending';
+    }
+
+    // Submit Crypto Notification
+    function submitCryptoNotification() {
+      const email = document.getElementById('cryptoEmail').value;
+      if (!email) {
+        showToast('Please enter your email address for activation!');
+        return;
+      }
+      const pInfo = PLAN_PRICING[currentPlan];
+      const total = (currentCycle === 'annual') ? pInfo.annualTotal : pInfo.monthlyTotal;
+
+      alert(`🎉 USDT Crypto Payment Reported!\n\nPlan: ${pInfo.name}\nAmount: $${total} USDT\nEmail: ${email}\n\nOur automated blockchain listener is confirming the TxHash on Tron network. Your account will be activated immediately!`);
+      window.location.href = '/?status=crypto_pending';
+    }
+
+    // Open WhatsApp VIP Chat
+    function openWhatsAppChat() {
+      const pInfo = PLAN_PRICING[currentPlan];
+      const isAnnual = (currentCycle === 'annual');
+      const total = isAnnual ? pInfo.annualTotal : pInfo.monthlyTotal;
+      const cycleText = isAnnual ? 'Annual ($' + total + '/yr)' : 'Monthly ($' + total + '/mo)';
+
+      const text = encodeURIComponent(`Hello, I would like to purchase the HostifyOS ${pInfo.name} (${cycleText}). Please assist me with VIP onboarding and invoice generation.`);
+      window.open(`https://wa.me/905437360660?text=${text}`, '_blank');
+    }
+
+    // Run on load
+    window.addEventListener('DOMContentLoaded', initFromUrlParams);
+  </script>
+</body>
+</html>

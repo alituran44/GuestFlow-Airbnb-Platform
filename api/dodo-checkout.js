@@ -4,7 +4,6 @@
  */
 
 const DODO_PRODUCT_MAP = {
-  starter: 'pdt_0NoB0cNCnW5YRU486MeDb',
   pro_monthly: 'pdt_0NoB0aoePAJvzwbeqpT3B',
   pro_annual: 'pdt_0NoB0bbRJD7ZDhFlYwVYL',
   enterprise_monthly: 'pdt_0NoB0a45lMIAStRQ38iiA',

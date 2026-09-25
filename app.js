@@ -1301,13 +1301,13 @@ let hostAuth = {
   isLoggedIn: false,
   email: 'sarah@malibuvillas.com',
   name: 'Sarah Miller',
-  plan: 'Starter Plan (5% Platform Commission)',
+  plan: 'Pro Host Plan (14-Day Free Trial)',
   trialDaysLeft: 14,
   subscriptionStatus: 'trial_active',
   cardOnFile: '•••• •••• •••• 4242 (Visa)',
   autoChargeDate: 'Aug 30, 2026',
   customPaymentLink: 'https://buy.stripe.com/malibu_villa_direct',
-  commissionRate: 0.05
+  commissionRate: 0.0
 };
 
 // SUPER ADMIN AUTH STATE
@@ -1325,7 +1325,7 @@ let allHostAccounts = [
     name: 'Sarah Miller',
     email: 'sarah@malibuvillas.com',
     propertiesCount: 3,
-    plan: 'Pro Host Plan ($19/mo)',
+    plan: 'Pro Host Plan ($14/mo Annual)',
     status: 'trial_active',
     trialDays: 14,
     nextBillingDate: 'Aug 30, 2026',
@@ -1338,12 +1338,12 @@ let allHostAccounts = [
     name: 'Marcus Vance',
     email: 'marcus@vancehospitality.com',
     propertiesCount: 1,
-    plan: 'Starter Host ($0/mo)',
+    plan: 'Pro Host Plan ($19/mo)',
     status: 'trial_active',
-    trialDays: 5,
+    trialDays: 11,
     nextBillingDate: 'Aug 27, 2026',
     cardOnFile: 'Mastercard (•••• 8821)',
-    commissionRate: '5.0%',
+    commissionRate: '0.0%',
     upsellsTotalUSD: 420.0
   },
   {
@@ -2574,7 +2574,6 @@ function downloadCommissionStatement() {
 // OFFICIAL DODO PAYMENTS & GLOBAL MERCHANT CHECKOUT CONFIGURATION
 let DODO_STORE_CONFIG = {
   apiKey: 'BxWmfn78EloAHJpA.KsEFqECqNpX5PbhpZ2Bhxog2CN0sZ7JGcT4eqJIh-rssUD_3',
-  starterProductId: 'pdt_0NoB0cNCnW5YRU486MeDb',
   proMonthlyProductId: 'pdt_0NoB0aoePAJvzwbeqpT3B',
   proAnnualProductId: 'pdt_0NoB0bbRJD7ZDhFlYwVYL',
   enterpriseMonthlyProductId: 'pdt_0NoB0a45lMIAStRQ38iiA',
@@ -2584,7 +2583,6 @@ let DODO_STORE_CONFIG = {
 let PADDLE_STORE_CONFIG = {
   apiKey: typeof atob === 'function' ? atob('cGRsX2xpdmVfYXBpa2V5XzAxbTB0dDN6NHZwcjliMGRrdHozZWY5ZmU1X25hQUFQUHFiQTc4TnR5VlFmMUJhUUFfQUhw') : '',
   clientToken: 'test_396f4c5ef8e1fadb94dcc972f51',
-  starterPriceId: 'pri_01m0tsfdwyv1g4k22zabs39mjt',          // Starter Host Plan ($0/mo)
   proMonthlyPriceId: 'pri_01m0ts1ge696rasc79cwad1ves',       // Pro Host Plan (Monthly - $19/mo)
   proAnnualPriceId: 'pri_01m0ts4h9764t5n7xm9sphrs6d',        // Pro Host Plan (Annual - $168/yr)
   enterpriseMonthlyPriceId: 'pri_01m0ts6xzdftg72j4k0cvc3s90', // Enterprise Monthly ($39/mo)
@@ -2595,7 +2593,6 @@ let LEMONSQUEEZY_STORE_CONFIG = {
   apiKey: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NGQ1OWNlZi1kYmI4LTRlYTUtYjE3OC1kMjU0MGZjZDY5MTkiLCJqdGkiOiIyZDdkYjBhMjYxN2VhYWExZjM4NDMxN2FkM2ZiYTk5MTYwZGI2Yjc2OGViZDJjNGM3ZDFiNjM3ZTQxYWQ1YzEwNTU3Njk4NzQzNzI1NzY0MCIsImlhdCI6MTc4NzQyMzkyOS45MTI1MTgsIm5iZiI6MTc4NzQyMzkyOS45MTI1MjIsImV4cCI6MTgwMzI1NDQwMC4wMzAyNywic3ViIjoiNzgwNzY2OSIsInNjb3BlcyI6W119.UlNtirQ5vkEh4n9l0qGF4fpjSKFou5SvEpHiXHb4T6ATAerzDYE5nzvKpLR2RccgWerrIkEDXd84jdIBo9ZlEvwn6oTO_0RM6aVqo1i5WvHgwf92FnV3gwA4tdTUKtllnCOq7uHjY6eK5w2GEZZ62TbHo-27lACYMU0DHMfT18X6zmc3GgHJGx2bFj9D5WPpM72TuFm3hig7OwZO6TPhX15BC1HY7EXXGWzQ3QW42aH_eFO7fSBGBXtR3a5Aw8tpzXpqy8KfdP26f27e8y7OGG_tm6ROa9fRNDfAMTGap16E_T0h3nMrOLUGjI1nP7LizqM5FL1iiMgNnNdHaGLMrp87F948kAkLgYnT-RmIQT3QGa_25ZdWoUqs9ZcFUEor6-iiWwlv_f0jHJKlb0vSbXIbwojlvdH1k0-trLLxaCUUC88gix9B1gyEgod9gFO37qcTpCqBqnmwIUWTatPOsM4OjOojTcr6xkfVnqaOP1vhfQbTiscXSpvBnRPIneIhfzS9OmN96lNeVHC-3GMku-_xcJsjLWNs3JbwG57IqpV0kkit62DEbLAzVuEVo7-KdMqcS75YLRQYlmPx3Rw21jxR9VkAEfT1VCEJhFw8GDGsv-F27Hg6H3FZMooBPzTbaOfHCN0vQ75u7J7hiLh2a_RLux7CJVPOSr8c-RKIbGk',
   storeId: '456562',
   storeUrl: 'https://hostifyos.lemonsqueezy.com',
-  starterUrl: 'https://hostifyos.lemonsqueezy.com/checkout/buy/39a89d21-fdde-4466-9d8d-35bf2a1a7aed',
   proMonthlyUrl: 'https://hostifyos.lemonsqueezy.com/checkout/buy/638c165d-bb93-4c79-b896-ea2ff3ef4bb2',
   proAnnualUrl: 'https://hostifyos.lemonsqueezy.com/checkout/buy/344b7365-ce37-4081-886a-b8aaf84b9488',
   enterpriseMonthlyUrl: 'https://hostifyos.lemonsqueezy.com/checkout/buy/d778e297-9e79-41ab-be9b-1ec3a67b6655',
@@ -2647,59 +2644,11 @@ function setLemonSqueezyUrls(monthlyUrl, annualUrl, enterpriseUrl) {
 }
 
 function openLemonSqueezyCheckout(tierName, priceStr) {
-  let priceId = PADDLE_STORE_CONFIG.proMonthlyPriceId;
-  let targetUrl = LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl;
-
-  if (tierName.includes('Starter')) {
-    priceId = PADDLE_STORE_CONFIG.starterPriceId;
-    targetUrl = LEMONSQUEEZY_STORE_CONFIG.starterUrl;
-  } else if (tierName.includes('Pro Host') && tierName.includes('ANNUAL')) {
-    priceId = PADDLE_STORE_CONFIG.proAnnualPriceId;
-    targetUrl = LEMONSQUEEZY_STORE_CONFIG.proAnnualUrl;
-  } else if (tierName.includes('Pro Host')) {
-    priceId = PADDLE_STORE_CONFIG.proMonthlyPriceId;
-    targetUrl = LEMONSQUEEZY_STORE_CONFIG.proMonthlyUrl;
-  } else if (tierName.includes('Enterprise') && tierName.includes('ANNUAL')) {
-    priceId = PADDLE_STORE_CONFIG.enterpriseAnnualPriceId;
-    targetUrl = LEMONSQUEEZY_STORE_CONFIG.enterpriseAnnualUrl;
-  } else if (tierName.includes('Enterprise')) {
-    priceId = PADDLE_STORE_CONFIG.enterpriseMonthlyPriceId;
-    targetUrl = LEMONSQUEEZY_STORE_CONFIG.enterpriseMonthlyUrl;
-  }
-
-  // Trigger Paddle Checkout overlay if available, otherwise open store link
-  if (window.Paddle && typeof window.Paddle.Checkout === 'object' && window.Paddle.Checkout.open) {
-    try {
-      window.Paddle.Checkout.open({
-        items: [{ priceId: priceId, quantity: 1 }],
-        settings: {
-          displayMode: "overlay",
-          theme: "dark",
-          locale: "en"
-        }
-      });
-      return;
-    } catch (e) {
-      console.warn("Paddle.Checkout fallback triggered", e);
-    }
-  }
-
-  // Fallback to internal checkout modal or direct window link
-  if (window.LemonSqueezy && typeof window.LemonSqueezy.Url === 'object') {
-    window.LemonSqueezy.Url.Open(targetUrl);
-  } else {
-    const modal = document.getElementById('modal-lemon-checkout');
-    if (modal) {
-      const planNameEl = document.getElementById('lemon-plan-name');
-      const planPriceEl = document.getElementById('lemon-plan-price');
-      if (planNameEl) planNameEl.textContent = tierName;
-      if (planPriceEl) planPriceEl.textContent = priceStr;
-      switchHostCheckoutTab('card');
-      modal.classList.add('active');
-    } else {
-      window.open(targetUrl, '_blank');
-    }
-  }
+  const isEnt = tierName && tierName.includes('Enterprise');
+  const isAnnual = tierName && (tierName.includes('Annual') || tierName.includes('ANNUAL'));
+  const planKey = isEnt ? 'ent' : 'pro';
+  const cycleKey = isAnnual ? 'annual' : 'monthly';
+  window.location.href = `/checkout.html?plan=${planKey}&cycle=${cycleKey}`;
 }
 
 function switchHostCheckoutTab(tabKey) {
@@ -2737,7 +2686,6 @@ let currentClosingPlan = 'pro';
 function updateClosingPlanUI() {
   const proBtn = document.getElementById('plan-sel-pro');
   const entBtn = document.getElementById('plan-sel-ent');
-  const freeBtn = document.getElementById('plan-sel-free');
   const titleEl = document.getElementById('cta-checkout-plan-title');
   const submitBtn = document.getElementById('cta-btn-submit-text');
   const isTr = (typeof currentLanguage !== 'undefined' && currentLanguage === 'TR');
@@ -2752,11 +2700,6 @@ function updateClosingPlanUI() {
     entBtn.textContent = isAnnual ? (isTr ? '🏢 Enterprise ($29/ay)' : '🏢 Enterprise ($29/mo)') : (isTr ? '🏢 Enterprise ($39/ay)' : '🏢 Enterprise ($39/mo)');
     entBtn.style.background = (currentClosingPlan === 'ent') ? 'rgba(16,185,129,0.2)' : 'transparent';
     entBtn.style.color = (currentClosingPlan === 'ent') ? '#10B981' : '#94A3B8';
-  }
-  if (freeBtn) {
-    freeBtn.textContent = isTr ? '🌱 Starter ($0)' : '🌱 Starter ($0)';
-    freeBtn.style.background = (currentClosingPlan === 'free') ? 'rgba(16,185,129,0.2)' : 'transparent';
-    freeBtn.style.color = (currentClosingPlan === 'free') ? '#10B981' : '#94A3B8';
   }
 
   if (currentClosingPlan === 'pro') {
@@ -2775,13 +2718,6 @@ function updateClosingPlanUI() {
     if (submitBtn) submitBtn.textContent = isTr
       ? 'Enterprise VIP Denemeyi Başlat ($0 Bugün)'
       : 'Start Enterprise VIP Trial ($0 Due Today)';
-  } else if (currentClosingPlan === 'free') {
-    if (titleEl) titleEl.innerHTML = isTr
-      ? '🌱 Starter Plan ($0) — <span style="color:#10B981;">Süresiz Ücretsiz</span>'
-      : '🌱 Starter Plan ($0) — <span style="color:#10B981;">Free Forever</span>';
-    if (submitBtn) submitBtn.textContent = isTr
-      ? 'Ücretsiz Başlat (Kredi Kartı Gerekmez)'
-      : 'Start Free (No Credit Card Required)';
   }
 }
 window.updateClosingPlanUI = updateClosingPlanUI;
@@ -2812,8 +2748,7 @@ async function processLemonSqueezySubscribe() {
   closeModal('modal-lemon-checkout');
 
   let planKey = 'pro_monthly';
-  if (currentClosingPlan === 'free' || hostAuth.plan.includes('Starter') || hostAuth.plan.includes('Free')) planKey = 'starter';
-  else if (billingCycle === 'annual' || hostAuth.plan.includes('Annual') || hostAuth.plan.includes('ANNUAL')) {
+  if (billingCycle === 'annual' || hostAuth.plan.includes('Annual') || hostAuth.plan.includes('ANNUAL')) {
     planKey = (currentClosingPlan === 'ent') ? 'enterprise_annual' : 'pro_annual';
   } else {
     planKey = (currentClosingPlan === 'ent') ? 'enterprise_monthly' : 'pro_monthly';
@@ -3425,34 +3360,11 @@ function toggleBillingCycle(type) {
 window.toggleBillingCycle = toggleBillingCycle;
 
 function selectPricingTier(tierName) {
-  let targetPlan = 'pro';
-  if (tierName === 'Starter' || tierName.includes('Starter')) {
-    targetPlan = 'free';
-  } else if (tierName === 'Enterprise' || tierName.includes('Enterprise')) {
-    targetPlan = 'ent';
-  } else {
-    targetPlan = 'pro';
-  }
-
-  selectClosingPlan(targetPlan);
-
-  // Smooth scroll directly to the Closing Checkout Hub
-  const hub = document.getElementById('direct-checkout-hub');
-  if (hub) {
-    hub.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    hub.style.transition = 'box-shadow 0.4s ease, border-color 0.4s ease';
-    hub.style.borderColor = '#10B981';
-    hub.style.boxShadow = '0 0 45px rgba(16,185,129,0.5)';
-    setTimeout(() => {
-      hub.style.borderColor = 'rgba(16,185,129,0.3)';
-      hub.style.boxShadow = '0 25px 60px rgba(0,0,0,0.6)';
-    }, 1800);
-
-    const emailInput = document.getElementById('cta-email');
-    if (emailInput) {
-      setTimeout(() => emailInput.focus(), 600);
-    }
-  }
+  let targetPlan = (tierName && tierName.includes('Enterprise')) ? 'ent' : 'pro';
+  const cycle = (typeof billingCycle !== 'undefined' && billingCycle === 'annual') ? 'annual' : 'monthly';
+  
+  // Navigate directly to dedicated checkout page
+  window.location.href = `/checkout.html?plan=${targetPlan}&cycle=${cycle}`;
 }
 window.selectPricingTier = selectPricingTier;
 

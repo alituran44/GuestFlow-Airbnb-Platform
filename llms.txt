@@ -14,9 +14,9 @@
 
 ## Pricing & Subscription Tiers
 
-- **Starter Plan ($0/month)**: Free forever. 1 active property guidebook, standard digital cards, 1-tap Wi-Fi, 5% upsell commission.
-- **Pro Host Plan ($14/month billed annually / $19/month billed monthly)**: 14-Day Free Trial ($0 today). Unlimited properties, 0% commission upsell store, time-gated door PIN, custom branding, AI listing auto-importer, WhatsApp messaging tunnels.
-- **Enterprise Plan ($29/month billed annually / $39/month billed monthly)**: 14-Day VIP Trial. Multi-unit boutique hotels, priority 24/7 SLA, white-label custom domain, automated team access.
+- **Pro Host Plan ($14/month billed annually at $168/yr / $19/month billed monthly)**: 14-Day Free Trial ($0 today). Up to 10 properties, 0% commission upsell store, time-gated door PIN, custom branding, AI listing auto-importer, WhatsApp messaging tunnels, A5 Acrylic QR Stand PDF generator.
+- **Enterprise & Hotel Plan ($29/month billed annually at $348/yr / $39/month billed monthly)**: 14-Day VIP Trial. Multi-unit boutique hotels & resorts, priority 24/7 phone SLA, white-label custom domain, automated team cleaning portal.
+- **Secure Checkout Page**: https://www.hostifyos.com/checkout.html (Supports Credit Card, Apple Pay, Bank Wire / FAST, USDT Crypto, WhatsApp VIP)
 
 ## Live Guides & Demos
 

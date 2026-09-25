@@ -97,16 +97,10 @@
         "offers": {
           "@type": "AggregateOffer",
           "priceCurrency": "USD",
-          "lowPrice": "0.00",
+          "lowPrice": "14.00",
           "highPrice": "39.00",
-          "offerCount": "5",
+          "offerCount": "4",
           "offers": [
-            {
-              "@type": "Offer",
-              "name": "Starter Host Plan",
-              "price": "0.00",
-              "priceCurrency": "USD"
-            },
             {
               "@type": "Offer",
               "name": "Pro Host Plan (Annual)",
@@ -211,7 +205,7 @@
             "name": "How does the platform commission split work?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "On the Starter tier ($0/mo), guest upsell sales incur a 5% platform fee automatically deducted during payout. On Pro Host ($14/mo) and Enterprise tiers, you pay 0% platform commission and keep 100% of guest sales."
+              "text": "HostifyOS charges 0% platform commission on both Pro Host ($14/mo) and Enterprise tiers. You keep 100% of guest direct bookings and upsells paid straight to your payment processor or bank account."
             }
           },
           {
@@ -1109,28 +1103,8 @@
           </script>
         </div>
 
-        <div class="pricing-cards-grid">
+        <div class="pricing-cards-grid" style="max-width:860px; margin:0 auto;">
           
-          <div class="pricing-card">
-            <div class="p-card-header">
-              <span class="p-tier-name" data-i18n="starterName">Starter Host</span>
-              <p class="p-tier-desc" data-i18n="starterDesc">Perfect for single property hosts starting out.</p>
-              <div class="p-price-box">
-                <span class="p-price">$0</span>
-                <span class="p-period">/ month forever</span>
-              </div>
-            </div>
-            <ul class="p-features-list">
-              <li><i data-lucide="check" class="text-emerald"></i> <strong><span data-i18n="starterProp">1 Property Listing</span></strong></li>
-              <li><i data-lucide="check" class="text-emerald"></i> <span data-i18n="starterViews">Unlimited Digital Guidebook Views</span></li>
-              <li><i data-lucide="check" class="text-emerald"></i> <span data-i18n="starterWifi">1-Tap Wi-Fi & Time-Gated Door PIN</span></li>
-              <li><i data-lucide="check" class="text-emerald"></i> <span data-i18n="starterPay">Host Custom Payment Link Support</span></li>
-              <li><i data-lucide="check" class="text-emerald"></i> <span data-i18n="starterSplit">Auto Take-Rate Split Engine</span></li>
-              <li class="fee-note"><i data-lucide="info"></i> <span data-i18n="starterComm">5% auto platform commission on guest upsells</span></li>
-            </ul>
-            <button class="btn-tier-action secondary" onclick="selectPricingTier('Starter')"><span data-i18n="btnStartFree">Start Free Plan</span></button>
-          </div>
-
           <div class="pricing-card popular">
             <div class="popular-ribbon">14-DAY FREE TRIAL</div>
             <div class="p-card-header">
@@ -1172,7 +1146,6 @@
             </ul>
             <button class="btn-tier-action secondary" onclick="selectPricingTier('Enterprise')"><span data-i18n="btnEntTrial">Start Enterprise Trial</span></button>
           </div>
-
 
         </div>
       </div>
@@ -1232,7 +1205,7 @@
               <i data-lucide="chevron-down" class="faq-icon"></i>
             </div>
             <div class="faq-answer">
-              <p data-i18n="faqA5">On the Starter tier ($0/mo), guest upsell sales incur a 5% platform fee automatically deducted during payout. On Pro Host ($14/mo) and Enterprise tiers, you pay 0% platform commission and keep 100% of guest sales.</p>
+              <p data-i18n="faqA5">HostifyOS charges 0% platform commission on both Pro Host ($14/mo) and Enterprise plans. You keep 100% of guest direct bookings and upsells paid directly into your own Stripe, Wise, or bank account.</p>
             </div>
           </div>
 
@@ -1306,7 +1279,6 @@
           <div style="display:flex; gap:6px; background:#090D14; padding:4px; border-radius:12px; border:1px solid rgba(255,255,255,0.08);">
             <button id="plan-sel-pro" onclick="selectClosingPlan('pro')" style="background:rgba(16,185,129,0.2); color:#10B981; border:none; padding:8px 14px; border-radius:8px; font-size:12px; font-weight:800; cursor:pointer;">⭐ Pro Plan ($14/mo)</button>
             <button id="plan-sel-ent" onclick="selectClosingPlan('ent')" style="background:transparent; color:#94A3B8; border:none; padding:8px 14px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer;">🏢 Enterprise ($29/mo)</button>
-            <button id="plan-sel-free" onclick="selectClosingPlan('free')" style="background:transparent; color:#94A3B8; border:none; padding:8px 14px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer;">🌱 Starter ($0)</button>
           </div>
         </div>
 
