@@ -574,45 +574,94 @@
 
           <!-- METHOD 1: CREDIT CARD / DODO PAYMENTS LIVE / PAYNKOLAY -->
           <div id="method-content-card">
-            <div class="info-box">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                <strong style="color:#fff; font-size:14px;">Instant Online Checkout (Visa / Mastercard / Apple Pay)</strong>
-                <span style="background:rgba(16,185,129,0.15); color:#10B981; padding:2px 8px; border-radius:99px; font-size:10px; font-weight:800;">3D Secure Verified</span>
-              </div>
-              <p style="color:var(--text-muted); font-size:12px; margin:0 0 10px 0;">
-                Start your 14-day free trial ($0 today) or subscribe directly. Powered by Dodo Payments & Global Merchant Infrastructure.
-              </p>
-              <div style="font-size:11px; color:#CBD5E1; line-height:1.5;">
-                ✓ 14-Day Free Trial ($0.00 Due Today)<br>
-                ✓ Automatic Invoice Sent to Your Email<br>
-                ✓ Cancel Anytime in 1-Click with Zero Penalties
-              </div>
+            
+            <!-- Dual Gateway Provider Switcher -->
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:16px;">
+              <button type="button" id="gw-btn-paynkolay" onclick="setGateway('paynkolay')" style="background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.4); color:#10B981; padding:10px 12px; border-radius:10px; font-size:12px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;">
+                <span>🇹🇷 Türkiye Kartları (TL)</span>
+              </button>
+              <button type="button" id="gw-btn-dodo" onclick="setGateway('dodo')" style="background:transparent; border:1px solid var(--border); color:var(--text-muted); padding:10px 12px; border-radius:10px; font-size:12px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;">
+                <span>🌍 Global & Apple Pay (USD)</span>
+              </button>
             </div>
 
-            <form id="cardCheckoutForm" onsubmit="event.preventDefault(); submitCardCheckout();">
-              <div class="form-group">
-                <label>Account Email Address</label>
-                <input type="email" id="cardEmail" class="form-control" placeholder="host@example.com" value="host@myproperty.com" required>
-              </div>
-              <div class="form-group">
-                <label>Full Name</label>
-                <input type="text" id="cardName" class="form-control" placeholder="John Doe" value="John Doe" required>
+            <!-- PAYNKOLAY TR 3D SECURE FORM -->
+            <div id="form-paynkolay-wrap">
+              <div class="info-box">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                  <strong style="color:#fff; font-size:14px;">Paynkolay 3D Secure Güvenli Ödeme (TL)</strong>
+                  <span style="background:rgba(16,185,129,0.15); color:#10B981; padding:2px 8px; border-radius:99px; font-size:10px; font-weight:800;">Tüm Yerli Kartlar</span>
+                </div>
+                <p style="color:var(--text-muted); font-size:12px; margin:0;">
+                  Türkiye'deki tüm banka ve kredi kartları (Garanti, İş Bankası, Yapı Kredi, Ziraat, Akbank vb.) ile 3D Secure SMS şifrenizle güvenle ödeyin.
+                </p>
               </div>
 
-              <!-- Currency selector toggle (USD vs TRY) -->
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; background:rgba(255,255,255,0.03); border:1px solid var(--border); padding:10px 14px; border-radius:var(--radius-sm);">
-                <span style="font-size:12px; color:var(--text-muted);">Ödeme Para Birimi (Currency):</span>
-                <div style="display:flex; gap:6px;">
-                  <button type="button" id="curr-btn-usd" onclick="setCurrency('USD')" style="background:var(--accent); color:#090D14; border:none; padding:4px 12px; border-radius:6px; font-size:11px; font-weight:800; cursor:pointer;">USD ($)</button>
-                  <button type="button" id="curr-btn-try" onclick="setCurrency('TRY')" style="background:transparent; color:#94A3B8; border:1px solid var(--border); padding:4px 12px; border-radius:6px; font-size:11px; font-weight:700; cursor:pointer;">TRY (₺)</button>
+              <form id="paynkolayForm" onsubmit="event.preventDefault(); submitPaynkolayCheckout();">
+                <div class="form-group">
+                  <label>Hesap E-Posta Adresi (Fatura & Aktivasyon)</label>
+                  <input type="email" id="pkEmail" class="form-control" placeholder="host@example.com" value="host@myproperty.com" required>
+                </div>
+                <div class="form-group">
+                  <label>Kart Üzerindeki İsim</label>
+                  <input type="text" id="pkCardName" class="form-control" placeholder="Ahmet Yılmaz" value="Ahmet Yılmaz" required>
+                </div>
+                <div class="form-group">
+                  <label>Kart Numarası</label>
+                  <input type="text" id="pkCardNum" class="form-control" placeholder="4242 •••• •••• 4242" maxlength="19" oninput="formatCardNumber(this)" required style="font-family:monospace; letter-spacing:1px;">
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                  <div class="form-group">
+                    <label>Son Kullanma (AA/YY)</label>
+                    <input type="text" id="pkCardExp" class="form-control" placeholder="12/28" maxlength="5" oninput="formatCardExp(this)" required style="text-align:center; font-family:monospace;">
+                  </div>
+                  <div class="form-group">
+                    <label>CVV / CVC Kodu</label>
+                    <input type="password" id="pkCardCvc" class="form-control" placeholder="•••" maxlength="4" oninput="this.value=this.value.replace(/[^0-9]/g,'')" required style="text-align:center; font-family:monospace;">
+                  </div>
+                </div>
+
+                <button type="submit" class="btn-submit-checkout" id="btnPaynkolaySubmit">
+                  <span>🔒 Paynkolay 3D Secure ile Öde</span>
+                  <span id="btnPaynkolayAmountLabel">(5.750,00 TL)</span>
+                </button>
+              </form>
+            </div>
+
+            <!-- DODO PAYMENTS GLOBAL FORM -->
+            <div id="form-dodo-wrap" style="display:none;">
+              <div class="info-box">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                  <strong style="color:#fff; font-size:14px;">Dodo Payments Global Checkout (Visa / Mastercard / Apple Pay)</strong>
+                  <span style="background:rgba(16,185,129,0.15); color:#10B981; padding:2px 8px; border-radius:99px; font-size:10px; font-weight:800;">14-Day Free Trial</span>
+                </div>
+                <p style="color:var(--text-muted); font-size:12px; margin:0 0 10px 0;">
+                  International credit/debit cards with $0 charged today and full 14-day free trial protection.
+                </p>
+                <div style="font-size:11px; color:#CBD5E1; line-height:1.5;">
+                  ✓ 14-Day Free Trial ($0.00 Due Today)<br>
+                  ✓ Instant License Activation & Auto Invoice<br>
+                  ✓ 1-Click Cancellation Anytime
                 </div>
               </div>
 
-              <button type="submit" class="btn-submit-checkout" id="btnCardSubmit">
-                <span>🔒 Proceed to Secure Checkout</span>
-                <span id="btnCardPriceLabel">($0 Due Today)</span>
-              </button>
-            </form>
+              <form id="dodoForm" onsubmit="event.preventDefault(); submitDodoCheckout();">
+                <div class="form-group">
+                  <label>Account Email Address</label>
+                  <input type="email" id="dodoEmail" class="form-control" placeholder="host@example.com" value="host@myproperty.com" required>
+                </div>
+                <div class="form-group">
+                  <label>Full Name</label>
+                  <input type="text" id="dodoName" class="form-control" placeholder="John Doe" value="John Doe" required>
+                </div>
+
+                <button type="submit" class="btn-submit-checkout" id="btnDodoSubmit">
+                  <span>🔒 Proceed to Dodo Checkout</span>
+                  <span id="btnDodoPriceLabel">($0 Due Today)</span>
+                </button>
+              </form>
+            </div>
+
           </div>
 
           <!-- METHOD 2: BANK HAVALESİ / FAST / SWIFT -->
@@ -849,11 +898,72 @@
       enterprise_annual: 'pdt_0NoB0Yusos1T6J53b2SjT'
     };
 
-    // Parse URL Params on Load (e.g. ?plan=pro&cycle=annual)
+    let currentGateway = 'paynkolay'; // 'paynkolay' | 'dodo'
+
+    // Set Gateway (Paynkolay vs Dodo)
+    function setGateway(gw) {
+      currentGateway = gw;
+      const btnPk = document.getElementById('gw-btn-paynkolay');
+      const btnDodo = document.getElementById('gw-btn-dodo');
+      const wrapPk = document.getElementById('form-paynkolay-wrap');
+      const wrapDodo = document.getElementById('form-dodo-wrap');
+
+      if (gw === 'paynkolay') {
+        btnPk.style.background = 'rgba(16,185,129,0.15)';
+        btnPk.style.borderColor = 'rgba(16,185,129,0.4)';
+        btnPk.style.color = '#10B981';
+        btnPk.style.fontWeight = '800';
+
+        btnDodo.style.background = 'transparent';
+        btnDodo.style.borderColor = 'var(--border)';
+        btnDodo.style.color = 'var(--text-muted)';
+        btnDodo.style.fontWeight = '700';
+
+        if (wrapPk) wrapPk.style.display = 'block';
+        if (wrapDodo) wrapDodo.style.display = 'none';
+      } else {
+        btnDodo.style.background = 'rgba(16,185,129,0.15)';
+        btnDodo.style.borderColor = 'rgba(16,185,129,0.4)';
+        btnDodo.style.color = '#10B981';
+        btnDodo.style.fontWeight = '800';
+
+        btnPk.style.background = 'transparent';
+        btnPk.style.borderColor = 'var(--border)';
+        btnPk.style.color = 'var(--text-muted)';
+        btnPk.style.fontWeight = '700';
+
+        if (wrapDodo) wrapDodo.style.display = 'block';
+        if (wrapPk) wrapPk.style.display = 'none';
+      }
+    }
+
+    // Input formatters for Card
+    function formatCardNumber(input) {
+      let v = input.value.replace(/\s+/g, '').replace(/[^0-9]/g, '');
+      let matches = v.match(/\d{4,16}/g);
+      let match = (matches && matches[0]) || '';
+      let parts = [];
+      for (let i = 0, len = match.length; i < len; i += 4) {
+        parts.push(match.substring(i, i + 4));
+      }
+      input.value = parts.length ? parts.join(' ') : v;
+    }
+
+    function formatCardExp(input) {
+      let v = input.value.replace(/\s+/g, '').replace(/[^0-9]/g, '');
+      if (v.length >= 2) {
+        input.value = v.substring(0, 2) + '/' + v.substring(2, 4);
+      } else {
+        input.value = v;
+      }
+    }
+
+    // Parse URL Params on Load (e.g. ?plan=pro&cycle=annual&gw=paynkolay)
     function initFromUrlParams() {
       const params = new URLSearchParams(window.location.search);
       const p = params.get('plan');
       const c = params.get('cycle');
+      const gw = params.get('gw');
 
       if (p === 'ent' || p === 'enterprise') {
         currentPlan = 'ent';
@@ -865,6 +975,14 @@
         currentCycle = 'monthly';
       } else {
         currentCycle = 'annual';
+      }
+
+      // Turkish detection
+      const isTr = (navigator.language && navigator.language.toLowerCase().startsWith('tr')) || (gw === 'paynkolay') || (params.get('lang') === 'tr');
+      if (isTr) {
+        setGateway('paynkolay');
+      } else {
+        setGateway('dodo');
       }
 
       renderUI();
@@ -885,19 +1003,6 @@
     // Set Currency
     function setCurrency(curr) {
       currentCurrency = curr;
-      const btnUsd = document.getElementById('curr-btn-usd');
-      const btnTry = document.getElementById('curr-btn-try');
-      if (curr === 'USD') {
-        btnUsd.style.background = 'var(--accent)';
-        btnUsd.style.color = '#090D14';
-        btnTry.style.background = 'transparent';
-        btnTry.style.color = '#94A3B8';
-      } else {
-        btnTry.style.background = 'var(--accent)';
-        btnTry.style.color = '#090D14';
-        btnUsd.style.background = 'transparent';
-        btnUsd.style.color = '#94A3B8';
-      }
       renderUI();
     }
 
@@ -995,10 +1100,15 @@
       if (bankAmountEl) bankAmountEl.textContent = `${bankTryStr} ($${total} USD)`;
       if (cryptoAmountEl) cryptoAmountEl.textContent = `$${total}.00 USDT`;
 
-      // 5. Update Card Checkout Submit Button Label
-      const btnCardPriceLabel = document.getElementById('btnCardPriceLabel');
-      if (btnCardPriceLabel) {
-        btnCardPriceLabel.textContent = `($0 Due Today • 14-Day Free Trial)`;
+      // 5. Update Submit Button Labels
+      const btnPaynkolayAmountLabel = document.getElementById('btnPaynkolayAmountLabel');
+      if (btnPaynkolayAmountLabel) {
+        btnPaynkolayAmountLabel.textContent = `(${bankTryStr})`;
+      }
+
+      const btnDodoPriceLabel = document.getElementById('btnDodoPriceLabel');
+      if (btnDodoPriceLabel) {
+        btnDodoPriceLabel.textContent = `($0 Due Today • 14-Day Free Trial)`;
       }
     }
 
@@ -1019,10 +1129,92 @@
       setTimeout(() => { toast.className = toast.className.replace('show', ''); }, 3500);
     }
 
-    // Submit Card Checkout (Live Dodo Payments or Paynkolay TR)
-    async function submitCardCheckout() {
-      const email = document.getElementById('cardEmail').value;
-      const name = document.getElementById('cardName').value;
+    // Paynkolay TR Virtual POS & 3D Secure Checkout
+    async function submitPaynkolayCheckout() {
+      const email = document.getElementById('pkEmail').value;
+      const name = document.getElementById('pkCardName').value;
+      const cardNum = document.getElementById('pkCardNum').value.replace(/\s+/g, '');
+      const cardExp = document.getElementById('pkCardExp').value;
+      const cardCvc = document.getElementById('pkCardCvc').value;
+
+      if (!email || !name || !cardNum || !cardExp || !cardCvc) {
+        showToast('Lütfen kart bilgilerini eksiksiz doldurunuz!');
+        return;
+      }
+
+      const planKey = (currentPlan === 'ent') 
+        ? (currentCycle === 'annual' ? 'enterprise_annual' : 'enterprise_monthly')
+        : (currentCycle === 'annual' ? 'pro_annual' : 'pro_monthly');
+
+      const submitBtn = document.getElementById('btnPaynkolaySubmit');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>⚡ Paynkolay 3D Secure Bağlanıyor...</span>';
+
+      try {
+        const res = await fetch('/api/paynkolay-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            plan: planKey,
+            email: email,
+            name: name,
+            cardHolderName: name,
+            cardNumber: cardNum,
+            cardExp: cardExp,
+            cvc: cardCvc
+          })
+        });
+
+        const data = await res.json();
+        if (data && data.success) {
+          if (data.type === '3d_secure' && data.data) {
+            if (data.data.html) {
+              const container = document.createElement('div');
+              container.innerHTML = data.data.html;
+              document.body.appendChild(container);
+              const script = container.querySelector('script');
+              if (script) eval(script.innerText);
+              const form = container.querySelector('form');
+              if (form) form.submit();
+              return;
+            }
+          } else if (data.type === 'hosted_form' && data.fields) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = data.actionUrl;
+            Object.keys(data.fields).forEach(k => {
+              const inp = document.createElement('input');
+              inp.type = 'hidden';
+              inp.name = k;
+              inp.value = data.fields[k];
+              form.appendChild(inp);
+            });
+            document.body.appendChild(form);
+            form.submit();
+            return;
+          }
+        }
+
+        if (data.actionUrl) {
+          window.location.href = data.actionUrl;
+        } else {
+          showToast('⚠️ Banka 3D onay sayfasına yönlendiriliyorsunuz...');
+        }
+      } catch (err) {
+        console.error('Paynkolay checkout error:', err);
+        showToast('Ödeme başlatılırken bir hata oluştu.');
+      } finally {
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          renderUI();
+        }, 4000);
+      }
+    }
+
+    // Dodo Payments Global Checkout
+    async function submitDodoCheckout() {
+      const email = document.getElementById('dodoEmail').value;
+      const name = document.getElementById('dodoName').value;
 
       if (!email) {
         showToast('Please enter your email address!');
@@ -1033,26 +1225,11 @@
         ? (currentCycle === 'annual' ? 'enterprise_annual' : 'enterprise_monthly')
         : (currentCycle === 'annual' ? 'pro_annual' : 'pro_monthly');
 
-      const submitBtn = document.getElementById('btnCardSubmit');
+      const submitBtn = document.getElementById('btnDodoSubmit');
       submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span>⚡ Opening Secure Gateway...</span>';
+      submitBtn.innerHTML = '<span>⚡ Opening Dodo Gateway...</span>';
 
       try {
-        if (currentCurrency === 'TRY') {
-          // Paynkolay Turkish Lira Virtual POS flow
-          const res = await fetch('/api/paynkolay-checkout', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ plan: planKey, email: email, name: name })
-          });
-          const data = await res.json();
-          if (data && data.checkoutUrl) {
-            window.location.href = data.checkoutUrl;
-            return;
-          }
-        }
-
-        // Default: Live Dodo Payments Checkout Session
         const res = await fetch('/api/dodo-checkout', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -1068,18 +1245,16 @@
         if (data && data.success && data.checkout_url) {
           window.location.href = data.checkout_url;
         } else {
-          showToast('⚠️ Direct checkout redirecting...');
           const fallbackUrl = `https://live.dodopayments.com/checkout?product=${DODO_PRODUCTS[planKey]}&email=${encodeURIComponent(email)}`;
           window.location.href = fallbackUrl;
         }
       } catch (err) {
-        console.error('Checkout error:', err);
         const fallbackUrl = `https://live.dodopayments.com/checkout?product=${DODO_PRODUCTS[planKey]}&email=${encodeURIComponent(email)}`;
         window.location.href = fallbackUrl;
       } finally {
         setTimeout(() => {
           submitBtn.disabled = false;
-          submitBtn.innerHTML = '<span>🔒 Proceed to Secure Checkout</span> <span id="btnCardPriceLabel">($0 Due Today)</span>';
+          renderUI();
         }, 4000);
       }
     }
