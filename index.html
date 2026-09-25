@@ -1265,131 +1265,28 @@
       </div>
 
 
-      <!-- FUNNEL STEP 9: FINAL HIGH-CONVERTING CLOSING CTA & EMBEDDED CHECKOUT HUB -->
-      <div class="landing-bottom-cta" id="direct-checkout-hub" style="max-width:860px; margin:48px auto; padding:36px 24px; background:linear-gradient(145deg, rgba(16,185,129,0.06) 0%, rgba(17,24,39,0.98) 100%); border:1px solid rgba(16,185,129,0.3); border-radius:24px; box-shadow:0 25px 60px rgba(0,0,0,0.6);">
+      <!-- FUNNEL STEP 9: FINAL CALL TO ACTION (LEADS TO DEDICATED CHECKOUT) -->
+      <div class="landing-bottom-cta" style="max-width:860px; margin:48px auto; padding:44px 24px; background:linear-gradient(145deg, rgba(16,185,129,0.08) 0%, rgba(17,24,39,0.98) 100%); border:1px solid rgba(16,185,129,0.3); border-radius:24px; box-shadow:0 25px 60px rgba(0,0,0,0.6); text-align:center;">
         
-        <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px; margin-bottom:16px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:16px;">
-          <div style="text-align:left;">
-            <div style="display:inline-flex; align-items:center; gap:6px; background:rgba(0,182,122,0.15); border:1px solid rgba(0,182,122,0.3); padding:4px 12px; border-radius:99px; font-size:11px; font-weight:800; color:#00B67A; margin-bottom:6px;">
-              <span>★★★★★ TrustScore 4.9 | Official Trustpilot Verified</span>
-            </div>
-            <h2 style="font-size:24px; font-weight:800; color:#fff; margin:0 0 4px 0;">Ready to Scale Your Hospitality Business?</h2>
-            <p style="font-size:13px; color:var(--text-muted); margin:0;">Join 3,400+ superhosts worldwide. Test all Pro features free for 14 days with $0 due today.</p>
-          </div>
-          <div style="display:flex; gap:6px; background:#090D14; padding:4px; border-radius:12px; border:1px solid rgba(255,255,255,0.08);">
-            <button id="plan-sel-pro" onclick="selectClosingPlan('pro')" style="background:rgba(16,185,129,0.2); color:#10B981; border:none; padding:8px 14px; border-radius:8px; font-size:12px; font-weight:800; cursor:pointer;">⭐ Pro Plan ($14/mo)</button>
-            <button id="plan-sel-ent" onclick="selectClosingPlan('ent')" style="background:transparent; color:#94A3B8; border:none; padding:8px 14px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer;">🏢 Enterprise ($29/mo)</button>
-          </div>
+        <div style="display:inline-flex; align-items:center; gap:6px; background:rgba(0,182,122,0.15); border:1px solid rgba(0,182,122,0.3); padding:6px 16px; border-radius:99px; font-size:12px; font-weight:800; color:#00B67A; margin-bottom:14px;">
+          <span>★★★★★ TrustScore 4.9 | Official Trustpilot Verified</span>
         </div>
-
-        <!-- 4 DIRECT PAYMENT & TRIAL ACTIVATION TABS -->
-        <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:6px; background:#090D14; padding:6px; border-radius:14px; margin-bottom:20px; border:1px solid rgba(255,255,255,0.08);">
-          <button id="cta-tab-btn-card" onclick="switchCtaPayTab('card')" style="background:rgba(16,185,129,0.2); color:#10B981; border:none; border-radius:10px; padding:10px 4px; font-size:12px; font-weight:800; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:4px;">
-            <i data-lucide="credit-card" style="width:18px; height:18px;"></i>
-            <span>💳 Credit Card</span>
-            <span style="font-size:9px; opacity:0.8; font-weight:600;">14-Day Free Trial ($0)</span>
-          </button>
-          <button id="cta-tab-btn-iban" onclick="switchCtaPayTab('iban')" style="background:transparent; color:#94A3B8; border:none; border-radius:10px; padding:10px 4px; font-size:12px; font-weight:700; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:4px;">
-            <i data-lucide="building" style="width:18px; height:18px;"></i>
-            <span>🏦 Bank / Wire</span>
-            <span style="font-size:9px; opacity:0.8; font-weight:600;">Global ACH / SWIFT</span>
-          </button>
-          <button id="cta-tab-btn-crypto" onclick="switchCtaPayTab('crypto')" style="background:transparent; color:#94A3B8; border:none; border-radius:10px; padding:10px 4px; font-size:12px; font-weight:700; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:4px;">
-            <i data-lucide="qr-code" style="width:18px; height:18px;"></i>
-            <span>💎 USDT Crypto</span>
-            <span style="font-size:9px; opacity:0.8; font-weight:600;">Binance TRC-20</span>
-          </button>
-          <button id="cta-tab-btn-wa" onclick="switchCtaPayTab('wa')" style="background:transparent; color:#94A3B8; border:none; border-radius:10px; padding:10px 4px; font-size:12px; font-weight:700; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:4px;">
-            <i data-lucide="message-circle" style="width:18px; height:18px;"></i>
-            <span>💬 WhatsApp</span>
-            <span style="font-size:9px; opacity:0.8; font-weight:600;">Direct VIP Desk</span>
-          </button>
-        </div>
-
-        <!-- TAB 1 CONTENT: CREDIT CARD / 14-DAY FREE TRIAL -->
-        <div id="cta-tab-card" style="text-align:left; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); padding:20px; border-radius:16px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-            <div>
-              <strong style="color:#fff; font-size:15px;" id="cta-checkout-plan-title">⭐ Pro Host Plan — 14-Day Free Trial</strong>
-              <div style="color:#10B981; font-size:12px; font-weight:700; margin-top:2px;">Total Due Today: <span style="font-size:16px;">$0.00</span> (First 14 Days Completely Free)</div>
-            </div>
-            <span style="background:rgba(16,185,129,0.15); color:#10B981; font-size:10px; font-weight:800; padding:4px 8px; border-radius:6px;">🔒 256-Bit SSL</span>
-          </div>
-
-          <form onsubmit="event.preventDefault(); processLemonSqueezySubscribe();" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px;">
-            <div class="form-group" style="margin:0;">
-              <label style="font-size:11px; font-weight:700;">YOUR EMAIL ADDRESS</label>
-              <input type="email" id="cta-email" placeholder="host@example.com" value="host@myproperty.com" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:10px; border-radius:8px; width:100%; font-size:13px;">
-            </div>
-            <div class="form-group" style="margin:0;">
-              <label style="font-size:11px; font-weight:700;">NAME ON CARD</label>
-              <input type="text" id="cta-card-name" placeholder="John Doe" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:10px; border-radius:8px; width:100%; font-size:13px;">
-            </div>
-            <div class="form-group" style="margin:0; grid-column:1 / -1;">
-              <label style="font-size:11px; font-weight:700;">CREDIT / DEBIT CARD NUMBER</label>
-              <input type="text" id="cta-card-num" placeholder="4242 •••• •••• 4242" maxlength="19" oninput="formatCardNumber(this)" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:10px; border-radius:8px; width:100%; font-family:monospace; font-size:13px; letter-spacing:1px;">
-            </div>
-            <div class="form-group" style="margin:0;">
-              <label style="font-size:11px; font-weight:700;">EXPIRATION (MM/YY)</label>
-              <input type="text" id="cta-card-exp" placeholder="12/28" maxlength="5" oninput="formatCardExp(this)" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:10px; border-radius:8px; width:100%; text-align:center; font-family:monospace; font-size:13px;">
-            </div>
-            <div class="form-group" style="margin:0;">
-              <label style="font-size:11px; font-weight:700;">CVC / SECURITY CODE</label>
-              <input type="password" id="cta-card-cvc" placeholder="•••" maxlength="4" oninput="this.value=this.value.replace(/[^0-9]/g,'')" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:10px; border-radius:8px; width:100%; text-align:center; font-family:monospace; font-size:13px;">
-            </div>
-            <div style="grid-column:1 / -1; margin-top:4px;">
-              <button type="submit" class="btn-hero-primary" style="width:100%; padding:14px; font-weight:800; font-size:15px; border-radius:10px;">
-                <i data-lucide="shield-check"></i>
-                <span id="cta-btn-submit-text">Start 14-Day Free Trial ($0 Due Today)</span>
-              </button>
-            </div>
-          </form>
-        </div>
-
-        <!-- TAB 2 CONTENT: IBAN / FAST -->
-        <div id="cta-tab-iban" style="display:none; text-align:left; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); padding:20px; border-radius:16px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-            <div>
-              <strong style="color:#fff; font-size:15px;">🏦 Instant Bank Wire & SEPA / SWIFT Settlement</strong>
-              <div style="color:#10B981; font-size:12px; margin-top:2px;">Your account will be activated immediately upon transfer receipt.</div>
-            </div>
-            <span style="background:rgba(16,185,129,0.15); color:#10B981; font-size:10px; font-weight:800; padding:4px 8px; border-radius:6px;">Instant Wire</span>
-          </div>
-          <div style="font-size:12px; color:#94A3B8; margin-bottom:4px;">Account Beneficiary: <strong style="color:#fff;">Ali Turan Inc. (Ali Turan)</strong></div>
-          <div style="display:flex; gap:8px; margin-bottom:10px;">
-            <input type="text" id="ctaIbanInput" readonly value="TR22 0010 3000 0000 0059 1864 21" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#10B981; font-family:monospace; font-size:12px; padding:10px;">
-            <button onclick="copyHostVal('ctaIbanInput', 'IBAN Copied to Clipboard!')" style="background:#10B981; color:#090D14; border:none; border-radius:8px; padding:10px 16px; font-weight:800; font-size:12px; cursor:pointer;">Copy</button>
-          </div>
-          <div style="font-size:12px; color:#94A3B8; margin-bottom:12px;">SWIFT / BIC (International): <strong style="color:#fff;">FBABTRIS</strong></div>
-          <button onclick="showToast('✅ Wire transfer notification received! Account activating in 5 mins.'); switchView('portal');" class="btn-hero-primary" style="width:100%; padding:12px; font-weight:800; font-size:13px; border-radius:10px;">
-            ✅ I Sent Wire Transfer (Activate Account)
-          </button>
-        </div>
-
-        <!-- TAB 3 CONTENT: USDT CRYPTO -->
-        <div id="cta-tab-crypto" style="display:none; text-align:center; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); padding:20px; border-radius:16px;">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa&color=090D14&bgcolor=10B981" alt="Binance QR" style="width:110px; height:110px; border-radius:10px; margin-bottom:8px;">
-          <div style="font-size:12px; color:#10B981; font-weight:800; margin-bottom:4px;">Binance Tron (TRC-20) USDT Official Wallet (0% Fee)</div>
-          <div style="display:flex; gap:8px; max-width:480px; margin:0 auto 12px auto;">
-            <input type="text" id="ctaCryptoInput" readonly value="TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#10B981; font-family:monospace; font-size:11px; padding:10px;">
-            <button onclick="copyHostVal('ctaCryptoInput', 'USDT Wallet Address Copied!')" style="background:#10B981; color:#090D14; border:none; border-radius:8px; padding:10px 16px; font-weight:800; font-size:12px; cursor:pointer;">Copy</button>
-          </div>
-          <button onclick="showToast('✅ Crypto transfer reported! Verifying on-chain TxHash.'); switchView('portal');" class="btn-hero-primary" style="width:100%; max-width:480px; padding:12px; font-weight:800; font-size:13px; border-radius:10px; margin:0 auto;">
-            ✅ I Sent Crypto (Activate Store)
-          </button>
-        </div>
-
-        <!-- TAB 4 CONTENT: WHATSAPP -->
-        <div id="cta-tab-wa" style="display:none; text-align:center; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); padding:20px; border-radius:16px;">
-          <div style="font-size:14px; color:#fff; font-weight:700; margin-bottom:4px;">💬 Direct WhatsApp Sales & VIP Concierge Support</div>
-          <p style="color:#94A3B8; font-size:12px; max-width:480px; margin:0 auto 14px auto;">For enterprise invoicing, multiple property portfolios (10+ units), or custom payment arrangements, connect directly with our founder desk 24/7.</p>
-          <a href="https://wa.me/905437360660?text=Hello,%20I%20would%20like%20to%20subscribe%20to%20HostifyOS%20Pro%20Plan." target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; justify-content:center; gap:8px; background:linear-gradient(135deg, #25D366 0%, #128C7E 100%); color:#fff; padding:12px 28px; border-radius:10px; font-size:14px; font-weight:800; text-decoration:none;">
-            <i data-lucide="message-circle" style="width:18px; height:18px;"></i>
-            <span>Chat on WhatsApp Directly</span>
+        
+        <h2 style="font-size:32px; font-weight:800; color:#fff; margin:0 0 10px 0; letter-spacing:-0.5px;">Ready to Scale Your Hospitality Business?</h2>
+        <p style="font-size:15px; color:var(--text-muted); max-width:600px; margin:0 auto 26px auto;">Join 3,400+ superhosts worldwide. Test all Pro features free for 14 days with $0 due today.</p>
+        
+        <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
+          <a href="/checkout.html?plan=pro&cycle=annual" class="btn-hero-primary" style="padding:16px 36px; font-size:15px; font-weight:800; border-radius:12px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+            <i data-lucide="shield-check"></i>
+            <span>Start 14-Day Free Trial ($0 Today)</span>
+          </a>
+          <a href="/checkout.html?plan=ent&cycle=annual" class="btn-hero-secondary" style="padding:16px 30px; font-size:14px; font-weight:700; border-radius:12px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+            <i data-lucide="building"></i>
+            <span>Enterprise Trial</span>
           </a>
         </div>
 
-        <div style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:16px; margin-top:16px; font-size:11px; color:var(--text-muted);">
+        <div style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:16px; margin-top:24px; font-size:12px; color:var(--text-muted);">
           <span>✓ 14-Day Free Trial (No Commitments)</span>
           <span>•</span>
           <span>✓ 1-Click Instant Cancellation</span>
