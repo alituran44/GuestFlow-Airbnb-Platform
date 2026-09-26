@@ -13,7 +13,13 @@ const DODO_PRODUCT_MAP = {
 export default async function handler(req, res) {
   // CORS Headers
   res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  const allowedOrigins = ['https://www.hostifyos.com', 'https://hostifyos.com', 'http://localhost:3000'];
+  const reqOrigin = req.headers.origin || '';
+  if (allowedOrigins.includes(reqOrigin)) {
+    res.setHeader('Access-Control-Allow-Origin', reqOrigin);
+  } else {
+    res.setHeader('Access-Control-Allow-Origin', 'https://www.hostifyos.com');
+  }
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
   res.setHeader(
     'Access-Control-Allow-Headers',

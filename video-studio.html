@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HostifyOS — Video Studio & Reels Generator</title>
+  <link rel="icon" type="image/jpeg" href="brand_logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #06080F;
+      --card-bg: #0F172A;
+      --emerald: #10B981;
+      --emerald-glow: rgba(16, 185, 129, 0.35);
+      --gold: #F59E0B;
+      --text: #F8FAFC;
+      --text-muted: #94A3B8;
+      --border: rgba(255, 255, 255, 0.1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 40px;
+      overflow-x: hidden;
+    }
+
+    .studio-header {
+      width: 100%;
+      max-width: 1000px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .studio-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .studio-brand img {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .studio-brand h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .studio-brand span {
+      background: linear-gradient(135deg, #10B981, #38BDF8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .studio-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--emerald);
+      color: var(--emerald);
+    }
+
+    .studio-container {
+      width: 100%;
+      max-width: 1000px;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .studio-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .preview-wrapper {
+      background: #0B1120;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+
+    .canvas-frame {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 40px rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: #000;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* 9:16 Aspect Ratio */
+    .canvas-frame.portrait {
+      width: 337px;
+      height: 600px;
+    }
+
+    /* 16:9 Aspect Ratio */
+    .canvas-frame.landscape {
+      width: 600px;
+      height: 337px;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .timeline-container {
+      width: 100%;
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .progress-bar-wrap {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 99px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #10B981, #38BDF8);
+      border-radius: 99px;
+      transition: width 0.05s linear;
+    }
+
+    .timeline-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .control-buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn {
+      background: #1E293B;
+      color: #FFF;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn:hover {
+      background: #334155;
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--emerald);
+      color: #06080F;
+      border: none;
+      font-weight: 800;
+      box-shadow: 0 0 25px var(--emerald-glow);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.1);
+      box-shadow: 0 0 35px rgba(16, 185, 129, 0.6);
+    }
+
+    .btn-export {
+      background: linear-gradient(135deg, #F59E0B, #EA580C);
+      color: #FFF;
+      border: none;
+      font-weight: 800;
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.4);
+    }
+
+    .btn-export:hover {
+      filter: brightness(1.15);
+      transform: translateY(-2px);
+    }
+
+    /* Sidebar Settings */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .settings-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .settings-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .setting-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .setting-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .toggle-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .toggle-btn {
+      background: #1E293B;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .toggle-btn.active {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: var(--emerald);
+      color: var(--emerald);
+      font-weight: 800;
+    }
+
+    .scene-pill-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .scene-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .scene-item:hover, .scene-item.active {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: var(--emerald);
+    }
+
+    .scene-item span:first-child {
+      font-weight: 700;
+    }
+
+    .scene-item span:last-child {
+      color: var(--text-muted);
+      font-size: 11px;
+    }
+
+    .status-badge {
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      text-align: center;
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--emerald);
+      border: 1px dashed var(--emerald);
+      display: none;
+    }
+
+    .status-badge.recording {
+      display: block;
+      background: rgba(239, 68, 68, 0.15);
+      color: #EF4444;
+      border-color: #EF4444;
+      animation: pulse 1.2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.7; }
+      50% { opacity: 1; }
+      100% { opacity: 0.7; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="studio-header">
+    <div class="studio-brand">
+      <img src="brand_logo.jpg" alt="HostifyOS Logo">
+      <div>
+        <h1>Hostify<span>OS</span> Studio</h1>
+        <p style="font-size: 12px; color: var(--text-muted);">Viral Reels & TikTok Video Generator</p>
+      </div>
+    </div>
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <span class="studio-badge">⚡ 60 FPS Canvas Engine</span>
+      <a href="/" class="btn" style="text-decoration:none; font-size:12px;">← Siteye Dön</a>
+    </div>
+  </header>
+
+  <div class="studio-container">
+
+    <!-- Center Preview Screen -->
+    <div class="preview-wrapper">
+      <div class="canvas-frame portrait" id="canvasFrame">
+        <canvas id="videoCanvas" width="1080" height="1920"></canvas>
+      </div>
+
+      <div class="timeline-container">
+        <div class="progress-bar-wrap" id="progressWrap" onclick="seek(event)">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="timeline-info">
+          <span id="sceneTitleIndicator">1/5: WhatsApp Bildirimi (02:15)</span>
+          <span id="timeIndicator">00:00 / 00:30</span>
+        </div>
+      </div>
+
+      <div class="control-buttons">
+        <button class="btn btn-primary" id="playBtn" onclick="togglePlay()">
+          ▶ Oynat
+        </button>
+        <button class="btn" onclick="restartVideo()">
+          ↺ Başa Sar
+        </button>
+        <button class="btn btn-export" id="exportBtn" onclick="startExport()">
+          ⬇ Videoyu İndir (.WEBM / 60 FPS)
+        </button>
+      </div>
+    </div>
+
+    <!-- Right Sidebar Controls -->
+    <div class="sidebar">
+
+      <div class="status-badge" id="recordingBadge">
+        ● Video Kaydediliyor... Lütfen bekleyin.
+      </div>
+
+      <div class="settings-card">
+        <div class="settings-title">⚙️ Video Ayarları</div>
+
+        <div class="setting-group">
+          <label class="setting-label">Format / En-Boy Oranı</label>
+          <div class="toggle-grid">
+            <button class="toggle-btn active" id="btnPortrait" onclick="setAspectRatio('portrait')">
+              📱 9:16 Reels
+            </button>
+            <button class="toggle-btn" id="btnLandscape" onclick="setAspectRatio('landscape')">
+              🖥️ 16:9 YouTube
+            </button>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <label class="setting-label">Seslendirme Dili</label>
+          <div class="toggle-grid">
+            <button class="toggle-btn active" id="btnLangTR" onclick="setLanguage('tr')">
+              🇹🇷 Türkçe
+            </button>
+            <button class="toggle-btn" id="btnLangEN" onclick="setLanguage('en')">
+              🇬🇧 English
+            </button>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <label class="setting-label">Ses & Müzik</label>
+          <div class="toggle-grid">
+            <button class="toggle-btn active" id="btnAudioToggle" onclick="toggleAudioEngine()">
+              🔊 Ses Açık
+            </button>
+            <button class="toggle-btn" id="btnVoiceToggle" onclick="toggleVoiceover()">
+              🎙️ Voiceover: Açık
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-card">
+        <div class="settings-title">🎬 Sahne Listesi (30s)</div>
+        <div class="scene-pill-list">
+          <div class="scene-item active" onclick="jumpTo(0)">
+            <span>1. Kanca: Gece 02:15 Bildirimi</span>
+            <span>0 - 4s</span>
+          </div>
+          <div class="scene-item" onclick="jumpTo(4)">
+            <span>2. Çözüm: Akrilik QR Standı</span>
+            <span>4 - 10s</span>
+          </div>
+          <div class="scene-item" onclick="jumpTo(10)">
+            <span>3. Özellikler: Wi-Fi, PIN, 8 Dil</span>
+            <span>10 - 18s</span>
+          </div>
+          <div class="scene-item" onclick="jumpTo(18)">
+            <span>4. Ek Gelir: %0 Komisyon Upsell</span>
+            <span>18 - 25s</span>
+          </div>
+          <div class="scene-item" onclick="jumpTo(25)">
+            <span>5. Kapanış: 14 Gün Ücretsiz Başla</span>
+            <span>25 - 30s</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    // Canvas & Context Setup
+    const canvas = document.getElementById('videoCanvas');
+    const ctx = canvas.getContext('2d');
+    let width = 1080;
+    let height = 1920;
+
+    // Assets Loader
+    const images = {
+      villa: new Image(),
+      qrStand: new Image(),
+      saasBanner: new Image(),
+      logo: new Image()
+    };
+    images.villa.src = 'social-media/post1_instagram_villa_mockup.jpg';
+    images.qrStand.src = 'social-media/post3_qr_stand_lifestyle.jpg';
+    images.saasBanner.src = 'social-media/post2_saas_feature_banner.jpg';
+    images.logo.src = 'brand_logo.jpg';
+
+    // State
+    let isPlaying = false;
+    let isRecording = false;
+    let currentTime = 0;
+    const duration = 30; // 30 seconds total
+    let currentLang = 'tr';
+    let aspectRatio = 'portrait';
+    let audioEnabled = true;
+    let voiceoverEnabled = true;
+    let lastTimestamp = 0;
+    let animationFrameId = null;
+
+    // Web Audio Synthesizer Context
+    let audioCtx = null;
+    let audioDestination = null;
+    let musicInterval = null;
+
+    function initAudio() {
+      if (audioCtx) return;
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new AudioContext();
+      audioDestination = audioCtx.createMediaStreamDestination();
+    }
+
+    // Play Synth SFX
+    function playBeep(freq, type = 'sine', duration = 0.15, gainVal = 0.2) {
+      if (!audioEnabled || !audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(gainVal, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        if (audioDestination) gain.connect(audioDestination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function playCashSound() {
+      playBeep(1800, 'triangle', 0.12, 0.2);
+      setTimeout(() => playBeep(2400, 'sine', 0.25, 0.25), 100);
+    }
+
+    function playWhoosh() {
+      playBeep(300, 'sine', 0.2, 0.15);
+    }
+
+    // Voiceover via Web Speech API
+    let speechSynthUtterance = null;
+    const voiceoverScripts = {
+      tr: "Gece saat iki sıfır sıfırda Wi-Fi şifresi neydi mesajlarından sıkılmadınız mı? Eski PDF kılavuzlar öldü. Komodine tek bir akrilik QR stand koyun. Misafiriniz tek dokunuşla Wi-Fi kopyalasın, kapı şifresi sadece giriş saatinde açılsın. Üstelik sıfır komisyonla ek gelir elde edin. On dört gün ücretsiz denemek için profildeki linke tıklayın.",
+      en: "Tired of getting 2 AM messages asking for the Wi-Fi password? Paper manuals are dead. Place one sleek acrylic QR stand in the room. Guests copy Wi-Fi in one tap, see smart lock codes, and order room services with zero commission. Start your 14 day free trial today at Hostify OS dot com!"
+    };
+
+    function triggerVoiceover() {
+      if (!voiceoverEnabled || !('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const text = voiceoverScripts[currentLang];
+      speechSynthUtterance = new SpeechSynthesisUtterance(text);
+      speechSynthUtterance.lang = currentLang === 'tr' ? 'tr-TR' : 'en-US';
+      speechSynthUtterance.rate = 1.05;
+      speechSynthUtterance.pitch = 1.0;
+      window.speechSynthesis.speak(speechSynthUtterance);
+    }
+
+    function stopVoiceover() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    // MediaRecorder Video Exporter
+    let mediaRecorder = null;
+    let recordedChunks = [];
+
+    function startExport() {
+      initAudio();
+      restartVideo();
+      isRecording = true;
+      document.getElementById('recordingBadge').classList.add('recording');
+      document.getElementById('exportBtn').textContent = '⏳ Kaydediliyor...';
+      document.getElementById('exportBtn').disabled = true;
+
+      const canvasStream = canvas.captureStream(60);
+      let combinedStream = canvasStream;
+      if (audioDestination && audioDestination.stream.getAudioTracks().length > 0) {
+        combinedStream = new MediaStream([
+          ...canvasStream.getVideoTracks(),
+          ...audioDestination.stream.getAudioTracks()
+        ]);
+      }
+
+      recordedChunks = [];
+      const options = { mimeType: 'video/webm;codecs=vp9' };
+      try {
+        mediaRecorder = new MediaRecorder(combinedStream, options);
+      } catch (e) {
+        mediaRecorder = new MediaRecorder(combinedStream);
+      }
+
+      mediaRecorder.ondataavailable = (e) => {
+        if (e.data && e.data.size > 0) {
+          recordedChunks.push(e.data);
+        }
+      };
+
+      mediaRecorder.onstop = () => {
+        const blob = new Blob(recordedChunks, { type: 'video/webm' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `hostifyos_${aspectRatio}_reels_${currentLang}.webm`;
+        a.click();
+
+        isRecording = false;
+        document.getElementById('recordingBadge').classList.remove('recording');
+        document.getElementById('exportBtn').textContent = '⬇ Videoyu İndir (.WEBM / 60 FPS)';
+        document.getElementById('exportBtn').disabled = false;
+      };
+
+      mediaRecorder.start();
+      playVideo();
+    }
+
+    // Aspect Ratio & Layout
+    function setAspectRatio(ratio) {
+      aspectRatio = ratio;
+      const frame = document.getElementById('canvasFrame');
+      const btnP = document.getElementById('btnPortrait');
+      const btnL = document.getElementById('btnLandscape');
+
+      if (ratio === 'portrait') {
+        frame.className = 'canvas-frame portrait';
+        canvas.width = 1080;
+        canvas.height = 1920;
+        width = 1080;
+        height = 1920;
+        btnP.classList.add('active');
+        btnL.classList.remove('active');
+      } else {
+        frame.className = 'canvas-frame landscape';
+        canvas.width = 1920;
+        canvas.height = 1080;
+        width = 1920;
+        height = 1080;
+        btnL.classList.add('active');
+        btnP.classList.remove('active');
+      }
+      drawFrame(currentTime);
+    }
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.getElementById('btnLangTR').classList.toggle('active', lang === 'tr');
+      document.getElementById('btnLangEN').classList.toggle('active', lang === 'en');
+      drawFrame(currentTime);
+    }
+
+    function toggleAudioEngine() {
+      audioEnabled = !audioEnabled;
+      const btn = document.getElementById('btnAudioToggle');
+      btn.textContent = audioEnabled ? '🔊 Ses Açık' : '🔇 Ses Kapalı';
+      btn.classList.toggle('active', audioEnabled);
+    }
+
+    function toggleVoiceover() {
+      voiceoverEnabled = !voiceoverEnabled;
+      const btn = document.getElementById('btnVoiceToggle');
+      btn.textContent = voiceoverEnabled ? '🎙️ Voiceover: Açık' : '🎙️ Voiceover: Kapalı';
+      btn.classList.toggle('active', voiceoverEnabled);
+      if (!voiceoverEnabled) stopVoiceover();
+    }
+
+    // Playback Controls
+    function togglePlay() {
+      initAudio();
+      if (isPlaying) {
+        pauseVideo();
+      } else {
+        playVideo();
+      }
+    }
+
+    function playVideo() {
+      isPlaying = true;
+      document.getElementById('playBtn').textContent = '⏸ Duraklat';
+      lastTimestamp = performance.now();
+      if (currentTime < 0.5) triggerVoiceover();
+      loop();
+    }
+
+    function pauseVideo() {
+      isPlaying = false;
+      document.getElementById('playBtn').textContent = '▶ Oynat';
+      cancelAnimationFrame(animationFrameId);
+      stopVoiceover();
+      if (isRecording && mediaRecorder && mediaRecorder.state === 'recording') {
+        mediaRecorder.stop();
+      }
+    }
+
+    function restartVideo() {
+      currentTime = 0;
+      updateUI();
+      drawFrame(0);
+      if (isPlaying) {
+        stopVoiceover();
+        triggerVoiceover();
+      }
+    }
+
+    function seek(event) {
+      const rect = document.getElementById('progressWrap').getBoundingClientRect();
+      const clickX = event.clientX - rect.left;
+      const pct = Math.max(0, Math.min(1, clickX / rect.width));
+      currentTime = pct * duration;
+      updateUI();
+      drawFrame(currentTime);
+    }
+
+    function jumpTo(sec) {
+      currentTime = sec;
+      updateUI();
+      drawFrame(sec);
+      if (isPlaying) playVideo();
+    }
+
+    function loop(now) {
+      if (!isPlaying) return;
+      if (!now) now = performance.now();
+      const dt = (now - lastTimestamp) / 1000;
+      lastTimestamp = now;
+
+      currentTime += dt;
+      if (currentTime >= duration) {
+        currentTime = duration;
+        drawFrame(currentTime);
+        pauseVideo();
+        if (isRecording && mediaRecorder && mediaRecorder.state === 'recording') {
+          mediaRecorder.stop();
+        }
+        return;
+      }
+
+      drawFrame(currentTime);
+      updateUI();
+      animationFrameId = requestAnimationFrame(loop);
+    }
+
+    function updateUI() {
+      const pct = (currentTime / duration) * 100;
+      document.getElementById('progressFill').style.width = pct + '%';
+      const m = Math.floor(currentTime / 60);
+      const s = Math.floor(currentTime % 60);
+      document.getElementById('timeIndicator').textContent = 
+        `00:${s.toString().padStart(2, '0')} / 00:30`;
+
+      // Update active scene marker
+      let sceneName = '';
+      const items = document.querySelectorAll('.scene-item');
+      items.forEach(el => el.classList.remove('active'));
+
+      if (currentTime < 4) {
+        sceneName = '1/5: WhatsApp Bildirimi (02:15)';
+        items[0].classList.add('active');
+      } else if (currentTime < 10) {
+        sceneName = '2/5: Çözüm: Akrilik QR Standı';
+        items[1].classList.add('active');
+      } else if (currentTime < 18) {
+        sceneName = '3/5: Özellikler: Wi-Fi, PIN, 8 Dil';
+        items[2].classList.add('active');
+      } else if (currentTime < 25) {
+        sceneName = '4/5: Ek Gelir: %0 Komisyon Upsell';
+        items[3].classList.add('active');
+      } else {
+        sceneName = '5/5: Kapanış: 14 Gün Ücretsiz Başla';
+        items[4].classList.add('active');
+      }
+      document.getElementById('sceneTitleIndicator').textContent = sceneName;
+    }
+
+    // Main Canvas Render Engine
+    function drawFrame(t) {
+      ctx.clearRect(0, 0, width, height);
+
+      // Background Gradient
+      const bgGrad = ctx.createRadialGradient(width/2, height/2, 100, width/2, height/2, width);
+      bgGrad.addColorStop(0, '#0F172A');
+      bgGrad.addColorStop(1, '#05070C');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, width, height);
+
+      // SCENE 1: HOOK (0 to 4s)
+      if (t < 4) {
+        drawScene1(t);
+      }
+      // SCENE 2: THE SHIFT / QR STAND (4 to 10s)
+      else if (t < 10) {
+        drawScene2(t - 4);
+      }
+      // SCENE 3: FEATURE SHOWCASE (10 to 18s)
+      else if (t < 18) {
+        drawScene3(t - 10);
+      }
+      // SCENE 4: MONETIZATION / UPSELL (18 to 25s)
+      else if (t < 25) {
+        drawScene4(t - 18);
+      }
+      // SCENE 5: OUTRO & CTA (25 to 30s)
+      else {
+        drawScene5(t - 25);
+      }
+
+      // Watermark & Brand Accent
+      ctx.save();
+      ctx.fillStyle = 'rgba(255,255,255,0.4)';
+      ctx.font = '700 24px "Plus Jakarta Sans"';
+      ctx.textAlign = 'right';
+      ctx.fillText('hostifyos.com', width - 40, height - 40);
+      ctx.restore();
+    }
+
+    // SCENE 1: The Midnight Problem (0-4s)
+    function drawScene1(st) {
+      ctx.save();
+
+      // Subtle red alarm ambient vignette
+      const pulse = Math.sin(st * 8) * 0.15 + 0.2;
+      const vig = ctx.createRadialGradient(width/2, height/2, 200, width/2, height/2, height/1.5);
+      vig.addColorStop(0, 'rgba(0,0,0,0)');
+      vig.addColorStop(1, `rgba(239, 68, 68, ${pulse})`);
+      ctx.fillStyle = vig;
+      ctx.fillRect(0, 0, width, height);
+
+      // Warning Pill
+      const pillY = height * 0.2;
+      drawBadge(width/2, pillY, currentLang === 'tr' ? '⚠️ EV SAHİPLERİNİN %90\'I BU HATAYI YAPIYOR' : '⚠️ 90% OF AIRBNB HOSTS DO THIS', '#EF4444');
+
+      // WhatsApp Message Mockup Box
+      const boxW = Math.min(width * 0.85, 850);
+      const boxH = 260;
+      const boxX = (width - boxW) / 2;
+      const boxY = height * 0.35;
+
+      // Phone vibration shake
+      const shakeX = (Math.random() - 0.5) * (st < 2 ? 6 : 1);
+      const shakeY = (Math.random() - 0.5) * (st < 2 ? 6 : 1);
+
+      ctx.translate(shakeX, shakeY);
+
+      // Box Shadow & Background
+      ctx.shadowColor = 'rgba(0,0,0,0.8)';
+      ctx.shadowBlur = 40;
+      ctx.fillStyle = '#111827';
+      roundRect(ctx, boxX, boxY, boxW, boxH, 24, true, false);
+      ctx.shadowBlur = 0;
+
+      ctx.strokeStyle = 'rgba(239, 68, 68, 0.4)';
+      ctx.lineWidth = 2;
+      roundRect(ctx, boxX, boxY, boxW, boxH, 24, false, true);
+
+      // WhatsApp Header
+      ctx.fillStyle = '#22C55E';
+      ctx.beginPath();
+      ctx.arc(boxX + 50, boxY + 50, 22, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = '800 24px "Plus Jakarta Sans"';
+      ctx.textAlign = 'left';
+      ctx.fillText(currentLang === 'tr' ? 'WhatsApp • Misafir (Daire 4)' : 'WhatsApp • Guest (Suite 4)', boxX + 90, boxY + 55);
+
+      ctx.fillStyle = '#94A3B8';
+      ctx.font = '600 20px "Plus Jakarta Sans"';
+      ctx.fillText('02:14 AM', boxX + boxW - 120, boxY + 55);
+
+      // Message Bubble
+      const bubW = boxW - 80;
+      const bubH = 130;
+      const bubX = boxX + 40;
+      const bubY = boxY + 95;
+
+      ctx.fillStyle = '#1F2937';
+      roundRect(ctx, bubX, bubY, bubW, bubH, 16, true, false);
+
+      ctx.fillStyle = '#F8FAFC';
+      ctx.font = '700 28px "Outfit"';
+      ctx.fillText(
+        currentLang === 'tr' 
+          ? '"Selam, Wi-Fi şifresi neydi? Sıfır mı O harfi mi?"' 
+          : '"Hey, what is the Wi-Fi password again? Is it zero or O?"',
+        bubX + 24, bubY + 55
+      );
+
+      ctx.font = '600 22px "Plus Jakarta Sans"';
+      ctx.fillStyle = '#F87171';
+      ctx.fillText(
+        currentLang === 'tr' 
+          ? '❌ Kimse 20 sayfalık PDF kılavuzları okumaz.' 
+          : '❌ Nobody reads 20-page PDF welcome manuals.',
+        bubX + 24, bubY + 98
+      );
+
+      // Bottom Big Kinetic Typography
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = '900 52px "Outfit"';
+      ctx.textAlign = 'center';
+      const mainTxt = currentLang === 'tr' 
+        ? 'GECE 02:00 MESAJLARI BİTTİ' 
+        : 'NO MORE 2 AM CALLS';
+      ctx.fillText(mainTxt, width/2, height * 0.75);
+
+      ctx.fillStyle = '#94A3B8';
+      ctx.font = '600 32px "Plus Jakarta Sans"';
+      const subTxt = currentLang === 'tr'
+        ? 'Dairenizi 15 saniyede modernize edin.'
+        : 'Upgrade your rental in 15 seconds.';
+      ctx.fillText(subTxt, width/2, height * 0.81);
+
+      ctx.restore();
+    }
+
+    // SCENE 2: The Shift & Acrylic Stand (4-10s)
+    function drawScene2(st) {
+      ctx.save();
+
+      // Zoom effect on qrStand image
+      const scale = 1.0 + (st * 0.03); // Subtle Ken Burns
+      if (images.qrStand.complete) {
+        ctx.save();
+        ctx.translate(width/2, height * 0.45);
+        ctx.scale(scale, scale);
+        const imgW = Math.min(width * 0.88, 860);
+        const imgH = imgW;
+        ctx.drawImage(images.qrStand, -imgW/2, -imgH/2, imgW, imgH);
+        ctx.restore();
+      }
+
+      // Dark Overlay Gradient at Bottom for text readability
+      const grad = ctx.createLinearGradient(0, height * 0.6, 0, height);
+      grad.addColorStop(0, 'rgba(5, 7, 12, 0)');
+      grad.addColorStop(0.4, 'rgba(5, 7, 12, 0.85)');
+      grad.addColorStop(1, '#05070C');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, height * 0.6, width, height * 0.4);
+
+      // Badge
+      drawBadge(width/2, height * 0.12, currentLang === 'tr' ? '✨ LÜKS VE SÜRTÜNMESİZ ÇÖZÜM' : '✨ LUXURY ZERO-FRICTION EXPERIENCE', '#10B981');
+
+      // Title & Value Prop
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = '900 54px "Outfit"';
+      ctx.textAlign = 'center';
+      ctx.fillText(
+        currentLang === 'tr' ? 'Tek Bir Şık QR Stand' : 'One Sleek Acrylic Stand',
+        width/2, height * 0.76
+      );
+
+      ctx.fillStyle = '#F59E0B';
+      ctx.font = '800 34px "Plus Jakarta Sans"';
+      ctx.fillText(
+        currentLang === 'tr' ? 'Uygulama İndirmek Yok • Anında Açılır' : 'Zero App Downloads • Opens in 0.3s',
+        width/2, height * 0.82
+      );
+
+      ctx.fillStyle = '#94A3B8';
+      ctx.font = '600 24px "Plus Jakarta Sans"';
+      ctx.fillText(
+        currentLang === 'tr' ? 'Yatağın başında 5 yıldızlı otel konsiyerji.' : 'A 5-star concierge right on the nightstand.',
+        width/2, height * 0.87
+      );
+
+      ctx.restore();
+    }
+
+    // SCENE 3: Feature Blitz (10-18s)
+    function drawScene3(st) {
+      ctx.save();
+
+      // Villa & Phone Background
+      if (images.villa.complete) {
+        ctx.save();
+        const sc = 1.05 + Math.sin(st * 0.5) * 0.03;
+        ctx.translate(width/2, height * 0.4);
+        ctx.scale(sc, sc);
+        const wImg = Math.min(width * 0.9, 880);
+        ctx.drawImage(images.villa, -wImg/2, -wImg/2, wImg, wImg);
+        ctx.restore();
+      }
+
+      // Shaded bottom
+      const grad = ctx.createLinearGradient(0, height * 0.55, 0, height);
+      grad.addColorStop(0, 'rgba(5, 7, 12, 0)');
+      grad.addColorStop(0.3, 'rgba(5, 7, 12, 0.92)');
+      grad.addColorStop(1, '#05070C');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, height * 0.55, width, height * 0.45);
+
+      drawBadge(width/2, height * 0.1, currentLang === 'tr' ? '🚀 HOSTIFYOS OPERASYON SİSTEMİ' : '🚀 BUILT FOR SUPERHOSTS', '#38BDF8');
+
+      // 3 Floating Feature Badges
+      const features = [
+        { icon: '📶', tr: 'Tek Dokunuşla Wi-Fi Kopyalama', en: '1-Tap Wi-Fi Password Copy' },
+        { icon: '🔒', tr: 'Saat Ayarlı Kapı Şifresi (Smart PIN)', en: 'Time-Gated Door PIN Access' },
+        { icon: '🌍', tr: '8 Dilde Otomatik Çeviri Rehber', en: '8-Language Auto-Translation' }
+      ];
+
+      const startY = height * 0.65;
+      features.forEach((feat, idx) => {
+        const itemY = startY + (idx * 90);
+        const boxW = Math.min(width * 0.88, 860);
+        const boxX = (width - boxW) / 2;
+
+        ctx.fillStyle = 'rgba(17, 24, 39, 0.9)';
+        roundRect(ctx, boxX, itemY, boxW, 76, 16, true, false);
+
+        ctx.strokeStyle = idx === 0 ? '#10B981' : 'rgba(255,255,255,0.12)';
+        ctx.lineWidth = idx === 0 ? 2 : 1;
+        roundRect(ctx, boxX, itemY, boxW, 76, 16, false, true);
+
+        // Icon & Text
+        ctx.font = '32px sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText(feat.icon, boxX + 24, itemY + 50);
+
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = '800 26px "Outfit"';
+        ctx.fillText(currentLang === 'tr' ? feat.tr : feat.en, boxX + 80, itemY + 48);
+      });
+
+      ctx.restore();
+    }
+
+    // SCENE 4: Monetization / Upsell (18-25s)
+    function drawScene4(st) {
+      ctx.save();
+
+      if (images.saasBanner.complete) {
+        ctx.save();
+        ctx.translate(width/2, height * 0.38);
+        const sc = 1.02 + Math.sin(st * 0.8) * 0.02;
+        ctx.scale(sc, sc);
+        const bW = Math.min(width * 0.92, 920);
+        const bH = bW * (9/16);
+        ctx.drawImage(images.saasBanner, -bW/2, -bH/2, bW, bH);
+        ctx.restore();
+      }
+
+      // Shaded bottom
+      const grad = ctx.createLinearGradient(0, height * 0.52, 0, height);
+      grad.addColorStop(0, 'rgba(5, 7, 12, 0)');
+      grad.addColorStop(0.3, 'rgba(5, 7, 12, 0.95)');
+      grad.addColorStop(1, '#05070C');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, height * 0.52, width, height * 0.48);
+
+      drawBadge(width/2, height * 0.1, currentLang === 'tr' ? '💰 EK GELİR MOTORU (%0 KOMİSYON)' : '💰 0% COMMISSION UPSELL ENGINE', '#F59E0B');
+
+      // Live Money Counter Animation
+      const extraMoney = Math.min(420, Math.floor(st * 80));
+      ctx.fillStyle = '#10B981';
+      ctx.font = '900 68px "Outfit"';
+      ctx.textAlign = 'center';
+      ctx.fillText(`+$${extraMoney} / ${currentLang === 'tr' ? 'Ay' : 'Mo'}`, width/2, height * 0.68);
+
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = '800 36px "Outfit"';
+      ctx.fillText(
+        currentLang === 'tr' ? 'Geç Check-Out & VIP Transfer Satışı' : 'Sell Late Checkouts & Airport Shuttles',
+        width/2, height * 0.75
+      );
+
+      ctx.fillStyle = '#94A3B8';
+      ctx.font = '600 24px "Plus Jakarta Sans"';
+      ctx.fillText(
+        currentLang === 'tr' 
+          ? 'Ödemeler doğrudan kendi hesabınıza; OTA komisyonu yok!' 
+          : 'Direct to your Stripe or bank account. Zero platform cut.',
+        width/2, height * 0.81
+      );
+
+      ctx.restore();
+    }
+
+    // SCENE 5: Outro & Call to Action (25-30s)
+    function drawScene5(st) {
+      ctx.save();
+
+      // Brand Logo in Center
+      if (images.logo.complete) {
+        const logoSize = 130;
+        ctx.save();
+        ctx.shadowColor = 'rgba(16, 185, 129, 0.6)';
+        ctx.shadowBlur = 50;
+        roundImage(ctx, images.logo, (width - logoSize)/2, height * 0.22, logoSize, logoSize, 30);
+        ctx.restore();
+      }
+
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = '900 58px "Outfit"';
+      ctx.textAlign = 'center';
+      ctx.fillText('HostifyOS', width/2, height * 0.38);
+
+      ctx.fillStyle = '#F59E0B';
+      ctx.font = '32px sans-serif';
+      ctx.fillText('★★★★★ 4.9 Superhost Onaylı', width/2, height * 0.44);
+
+      // Big Glowing CTA Button
+      const btnW = Math.min(width * 0.85, 780);
+      const btnH = 110;
+      const btnX = (width - btnW) / 2;
+      const btnY = height * 0.54;
+
+      const pulse = Math.sin(st * 5) * 6;
+      ctx.shadowColor = 'rgba(16, 185, 129, 0.7)';
+      ctx.shadowBlur = 40 + pulse * 2;
+
+      ctx.fillStyle = '#10B981';
+      roundRect(ctx, btnX, btnY, btnW, btnH, 28, true, false);
+      ctx.shadowBlur = 0;
+
+      ctx.fillStyle = '#06080F';
+      ctx.font = '900 36px "Outfit"';
+      ctx.fillText(
+        currentLang === 'tr' ? '14 GÜN ÜCRETSİZ DENE ➔' : 'START 14-DAY FREE TRIAL ➔',
+        width/2, btnY + 68
+      );
+
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = '800 34px "Plus Jakarta Sans"';
+      ctx.fillText(
+        currentLang === 'tr' ? '🔗 Link Profilde!' : '🔗 Link in Bio!',
+        width/2, height * 0.72
+      );
+
+      ctx.fillStyle = '#94A3B8';
+      ctx.font = '600 24px "Plus Jakarta Sans"';
+      ctx.fillText(
+        currentLang === 'tr' 
+          ? 'İlan linkinizi yapıştırın, 15 saniyede yayında.' 
+          : 'Paste your Airbnb listing link. Live in 15 seconds.',
+        width/2, height * 0.78
+      );
+
+      ctx.restore();
+    }
+
+    // Helper: Rounded Badge
+    function drawBadge(x, y, text, color) {
+      ctx.save();
+      ctx.font = '800 20px "Plus Jakarta Sans"';
+      const textW = ctx.measureText(text).width;
+      const padX = 26;
+      const h = 46;
+      const w = textW + padX * 2;
+
+      ctx.fillStyle = 'rgba(17, 24, 39, 0.85)';
+      roundRect(ctx, x - w/2, y - h/2, w, h, 99, true, false);
+
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 1.5;
+      roundRect(ctx, x - w/2, y - h/2, w, h, 99, false, true);
+
+      ctx.fillStyle = color;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(text, x, y);
+      ctx.restore();
+    }
+
+    // Helper: Round Rectangle
+    function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+      if (fill) ctx.fill();
+      if (stroke) ctx.stroke();
+    }
+
+    // Helper: Round Image
+    function roundImage(ctx, img, x, y, w, h, radius) {
+      ctx.save();
+      roundRect(ctx, x, y, w, h, radius, false, false);
+      ctx.clip();
+      ctx.drawImage(img, x, y, w, h);
+      ctx.restore();
+    }
+
+    // Initialize when assets are ready
+    window.addEventListener('load', () => {
+      drawFrame(0);
+    });
+  </script>
+</body>
+</html>

@@ -6,7 +6,7 @@
   <title>HostifyOS — Secure Checkout & 14-Day Free Trial</title>
   <meta name="description" content="Complete your HostifyOS subscription with a 14-day free trial, zero commission, and instant activation via Credit Card, Apple Pay, Wire, or USDT.">
   <link rel="canonical" href="https://www.hostifyos.com/checkout.html">
-  <link rel="icon" type="image/jpeg" href="brand_logo.jpg">
+  <link rel="icon" type="image/jpeg" href="brand_logo.webp">
 
   <!-- Open Graph & Social Cards -->
   <meta property="og:type" content="website">
@@ -514,7 +514,7 @@
   <header class="checkout-header">
     <div class="header-inner">
       <a href="/" class="logo-area">
-        <img src="brand_logo.jpg" alt="HostifyOS Official Logo" width="34" height="34" loading="eager" fetchpriority="high">
+        <img src="brand_logo.webp" alt="HostifyOS Official Logo" width="34" height="34" loading="eager" fetchpriority="high">
         <span>HostifyOS</span>
       </a>
       <div style="display:flex; align-items:center; gap:14px;">
@@ -630,24 +630,24 @@
               <form id="paynkolayForm" onsubmit="event.preventDefault(); submitPaynkolayCheckout();">
                 <div class="form-group">
                   <label>Hesap E-Posta Adresi (Fatura & Aktivasyon)</label>
-                  <input type="email" id="pkEmail" aria-label="Email Address for Invoice & Setup" class="form-control" placeholder="host@example.com" value="host@myproperty.com" required>
+                  <input type="email" id="pkEmail" autocomplete="email" aria-label="Email Address for Invoice & Setup" class="form-control" placeholder="host@example.com" value="host@myproperty.com" required>
                 </div>
                 <div class="form-group">
                   <label>Kart Üzerindeki İsim</label>
-                  <input type="text" id="pkCardName" aria-label="Cardholder Full Name" class="form-control" placeholder="Ahmet Yılmaz" value="Ahmet Yılmaz" required>
+                  <input type="text" id="pkCardName" autocomplete="cc-name" aria-label="Cardholder Full Name" class="form-control" placeholder="Ahmet Yılmaz" value="Ahmet Yılmaz" required>
                 </div>
                 <div class="form-group">
                   <label>Kart Numarası</label>
-                  <input type="text" id="pkCardNum" aria-label="Credit or Debit Card Number" class="form-control" placeholder="4242 •••• •••• 4242" maxlength="19" oninput="formatCardNumber(this)" required style="font-family:monospace; letter-spacing:1px;">
+                  <input type="text" id="pkCardNum" autocomplete="cc-number" aria-label="Credit or Debit Card Number" class="form-control" placeholder="4242 •••• •••• 4242" maxlength="19" oninput="formatCardNumber(this)" required style="font-family:monospace; letter-spacing:1px;">
                 </div>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
                   <div class="form-group">
                     <label>Son Kullanma (AA/YY)</label>
-                    <input type="text" id="pkCardExp" aria-label="Card Expiration Date MM/YY" class="form-control" placeholder="12/28" maxlength="5" oninput="formatCardExp(this)" required style="text-align:center; font-family:monospace;">
+                    <input type="text" id="pkCardExp" autocomplete="cc-exp" aria-label="Card Expiration Date MM/YY" class="form-control" placeholder="12/28" maxlength="5" oninput="formatCardExp(this)" required style="text-align:center; font-family:monospace;">
                   </div>
                   <div class="form-group">
                     <label>CVV / CVC Kodu</label>
-                    <input type="password" id="pkCardCvc" aria-label="Card Security Code CVC" class="form-control" placeholder="•••" maxlength="4" oninput="this.value=this.value.replace(/[^0-9]/g,'')" required style="text-align:center; font-family:monospace;">
+                    <input type="password" id="pkCardCvc" autocomplete="cc-csc" aria-label="Card Security Code CVC" class="form-control" placeholder="•••" maxlength="4" oninput="this.value=this.value.replace(/[^0-9]/g,'')" required style="text-align:center; font-family:monospace;">
                   </div>
                 </div>
 
@@ -685,11 +685,11 @@
               <form id="dodoForm" onsubmit="event.preventDefault(); submitDodoCheckout();">
                 <div class="form-group">
                   <label>Account Email Address</label>
-                  <input type="email" id="dodoEmail" aria-label="Global Account Billing Email" class="form-control" placeholder="host@example.com" value="host@myproperty.com" required>
+                  <input type="email" id="dodoEmail" autocomplete="email" aria-label="Global Account Billing Email" class="form-control" placeholder="host@example.com" value="host@myproperty.com" required>
                 </div>
                 <div class="form-group">
                   <label>Full Name</label>
-                  <input type="text" id="dodoName" aria-label="Account Holder Name" class="form-control" placeholder="John Doe" value="John Doe" required>
+                  <input type="text" id="dodoName" autocomplete="name" aria-label="Account Holder Name" class="form-control" placeholder="John Doe" value="John Doe" required>
                 </div>
 
                                 <div style="margin:14px 0; padding:10px 12px; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:10px;">
@@ -740,7 +740,7 @@
 
             <div class="form-group">
               <label>Hesap E-Posta Adresiniz (Activation Email)</label>
-              <input type="email" id="bankEmail" class="form-control" aria-label="Bank Transfer Verification Email" placeholder="host@example.com">
+              <input type="email" id="bankEmail" autocomplete="email" class="form-control" aria-label="Bank Transfer Verification Email" placeholder="host@example.com">
             </div>
 
             <p style="font-size:11px; color:var(--text-muted); margin:0 0 12px 0; text-align:center;">
@@ -777,7 +777,7 @@
 
             <div class="form-group">
               <label>Account Email Address</label>
-              <input type="email" id="cryptoEmail" class="form-control" aria-label="USDT Payment Confirmation Email" placeholder="host@example.com">
+              <input type="email" id="cryptoEmail" autocomplete="email" class="form-control" aria-label="USDT Payment Confirmation Email" placeholder="host@example.com">
             </div>
 
                         <div style="margin:14px 0; padding:10px 12px; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:10px;">
