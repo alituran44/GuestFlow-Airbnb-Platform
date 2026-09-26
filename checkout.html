@@ -651,6 +651,13 @@
                   </div>
                 </div>
 
+                                <div style="margin:14px 0; padding:10px 12px; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:10px;">
+                  <label style="display:flex; align-items:flex-start; gap:8px; font-size:12px; color:var(--text-muted); cursor:pointer; line-height:1.4;">
+                    <input type="checkbox" id="pkConsent" required checked style="margin-top:2px; accent-color:var(--accent); width:15px; height:15px;" aria-label="Kullanım Şartları ve KVKK Onayı">
+                    <span><a href="/terms.html" target="_blank" rel="noopener noreferrer" style="color:var(--accent); text-decoration:underline;">Kullanım Şartları</a> ve <a href="/privacy.html" target="_blank" rel="noopener noreferrer" style="color:var(--accent); text-decoration:underline;">KVKK / GDPR Aydınlatma Metnini</a> okudum, kabul ediyorum.</span>
+                  </label>
+                </div>
+
                 <button type="submit" class="btn-submit-checkout" id="btnPaynkolaySubmit">
                   <span>🔒 Paynkolay 3D Secure ile Öde</span>
                   <span id="btnPaynkolayAmountLabel">(5.750,00 TL)</span>
@@ -683,6 +690,13 @@
                 <div class="form-group">
                   <label>Full Name</label>
                   <input type="text" id="dodoName" aria-label="Account Holder Name" class="form-control" placeholder="John Doe" value="John Doe" required>
+                </div>
+
+                                <div style="margin:14px 0; padding:10px 12px; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:10px;">
+                  <label style="display:flex; align-items:flex-start; gap:8px; font-size:12px; color:var(--text-muted); cursor:pointer; line-height:1.4;">
+                    <input type="checkbox" id="dodoConsent" required checked style="margin-top:2px; accent-color:var(--accent); width:15px; height:15px;" aria-label="I agree to Terms of Service and Privacy Policy">
+                    <span>I have read and agree to the <a href="/terms.html" target="_blank" rel="noopener noreferrer" style="color:var(--accent); text-decoration:underline;">Terms of Service</a>, <a href="/privacy.html" target="_blank" rel="noopener noreferrer" style="color:var(--accent); text-decoration:underline;">Privacy Policy</a>, and <a href="/refund.html" target="_blank" rel="noopener noreferrer" style="color:var(--accent); text-decoration:underline;">Refund Terms</a>.</span>
+                  </label>
                 </div>
 
                 <button type="submit" class="btn-submit-checkout" id="btnDodoSubmit">
@@ -733,6 +747,13 @@
               * Havale açıklamasına e-posta adresinizi veya adınızı yazınız.
             </p>
 
+                        <div style="margin:14px 0; padding:10px 12px; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:10px;">
+              <label style="display:flex; align-items:flex-start; gap:8px; font-size:12px; color:var(--text-muted); cursor:pointer; line-height:1.4;">
+                <input type="checkbox" id="bankConsent" required checked style="margin-top:2px; accent-color:var(--accent); width:15px; height:15px;" aria-label="Havale Şartları ve KVKK Onayı">
+                <span><a href="/terms.html" target="_blank" rel="noopener noreferrer" style="color:var(--accent); text-decoration:underline;">Kullanım Şartları</a> ve <a href="/privacy.html" target="_blank" rel="noopener noreferrer" style="color:var(--accent); text-decoration:underline;">KVKK Aydınlatma Metnini</a> okudum, kabul ediyorum.</span>
+              </label>
+            </div>
+
             <button type="button" class="btn-submit-checkout" onclick="submitBankNotification()">
               <span>🏦 Havale / FAST Yaptım (Hesabı Etkinleştir)</span>
             </button>
@@ -757,6 +778,13 @@
             <div class="form-group">
               <label>Account Email Address</label>
               <input type="email" id="cryptoEmail" class="form-control" aria-label="USDT Payment Confirmation Email" placeholder="host@example.com">
+            </div>
+
+                        <div style="margin:14px 0; padding:10px 12px; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:10px;">
+              <label style="display:flex; align-items:flex-start; gap:8px; font-size:12px; color:var(--text-muted); cursor:pointer; line-height:1.4;">
+                <input type="checkbox" id="cryptoConsent" required checked style="margin-top:2px; accent-color:var(--accent); width:15px; height:15px;" aria-label="Crypto Payment Terms and Privacy Policy Consent">
+                <span>I have read and agree to the <a href="/terms.html" target="_blank" rel="noopener noreferrer" style="color:var(--accent); text-decoration:underline;">Terms of Service</a> and <a href="/privacy.html" target="_blank" rel="noopener noreferrer" style="color:var(--accent); text-decoration:underline;">Privacy Policy</a>.</span>
+              </label>
             </div>
 
             <button type="button" class="btn-submit-checkout" onclick="submitCryptoNotification()">
