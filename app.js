@@ -1390,14 +1390,7 @@ function saveSessionState() {
         subscriptionStatus: hostAuth.subscriptionStatus || 'trial_active',
         trialDaysLeft: hostAuth.trialDaysLeft || 14,
         customPaymentLink: hostAuth.customPaymentLink || '',
-        commissionRate: hostAuth.commissionRate || 0.0
-      }));
-    } else if (adminAuth && adminAuth.isLoggedIn) {
-      localStorage.setItem('hostifyos_auth_session', JSON.stringify({
-        isLoggedIn: true,
-        role: 'admin',
-        name: adminAuth.name || 'Master Platform Admin',
-        email: adminAuth.email || 'hostifyos@gmail.com'
+        commissionRate: 0.0
       }));
     } else {
       localStorage.removeItem('hostifyos_auth_session');
@@ -1442,24 +1435,16 @@ function restoreSessionState() {
       try {
         const session = JSON.parse(savedSession);
         if (session && session.isLoggedIn) {
-          if (session.role === 'admin') {
-            adminAuth.isLoggedIn = true;
-            adminAuth.email = session.email || 'hostifyos@gmail.com';
-            adminAuth.name = session.name || 'Master Platform Admin';
-            currentUserRole = 'admin';
-            sessionRestored = true;
-          } else {
-            hostAuth.isLoggedIn = true;
-            hostAuth.name = session.name || 'Ev Sahibi';
-            hostAuth.email = session.email || 'evsahibi@gmail.com';
-            hostAuth.plan = session.plan || 'Pro Host Plan (14-Day Free Trial)';
-            hostAuth.subscriptionStatus = session.subscriptionStatus || 'trial_active';
-            hostAuth.trialDaysLeft = session.trialDaysLeft || 14;
-            hostAuth.customPaymentLink = session.customPaymentLink || '';
-            hostAuth.commissionRate = session.commissionRate || 0.0;
-            currentUserRole = 'host';
-            sessionRestored = true;
-          }
+          hostAuth.isLoggedIn = true;
+          hostAuth.name = session.name || 'Ev Sahibi';
+          hostAuth.email = session.email || 'evsahibi@gmail.com';
+          hostAuth.plan = session.plan || 'Pro Host Plan (14-Day Free Trial)';
+          hostAuth.subscriptionStatus = session.subscriptionStatus || 'trial_active';
+          hostAuth.trialDaysLeft = session.trialDaysLeft || 14;
+          hostAuth.customPaymentLink = session.customPaymentLink || '';
+          hostAuth.commissionRate = 0.0;
+          currentUserRole = 'host';
+          sessionRestored = true;
         }
       } catch(e){}
     }
@@ -1467,12 +1452,10 @@ function restoreSessionState() {
     // 4. Restore Active View
     const savedView = localStorage.getItem('hostifyos_active_view');
     if (sessionRestored) {
-      if (savedView && document.getElementById(`view-${savedView}`)) {
+      if (savedView && savedView !== 'admin' && document.getElementById(`view-${savedView}`)) {
         switchView(savedView);
-      } else if (currentUserRole === 'host') {
+      } else {
         switchView('host');
-      } else if (currentUserRole === 'admin') {
-        switchView('admin');
       }
     } else {
       if (savedView === 'guest') {
@@ -1494,8 +1477,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderTunnelsGrid();
   renderHostOrdersTable();
   renderCommissionAggregator();
-  renderAdminHostsTable();
-  renderAdminAuditLogsTable();
   renderHostInvoicesTable();
   updateTrialStatusUI();
   renderCrmLeadsTable();
@@ -1687,6 +1668,8 @@ function toggleHostDeviceMode(mode) {
 
 // ROLE-BASED VIEW ROUTER (FAIL-SAFE & SLEEK NAV)
 function switchView(viewName) {
+  if (viewName === 'admin') viewName = 'host';
+
   document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
   document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active'));
 
@@ -1708,8 +1691,6 @@ function switchView(viewName) {
 
   if (viewName === 'host') {
     checkHostAuthStatus();
-  } else if (viewName === 'admin') {
-    checkAdminAuthStatus();
   }
 
   try {
@@ -1725,11 +1706,9 @@ function switchView(viewName) {
 function updateTopNavAuthUI() {
   const container = document.getElementById('user-nav-status');
   const btnHost = document.getElementById('btn-view-host');
-  const btnAdmin = document.getElementById('btn-view-admin');
 
   if (currentUserRole === 'host' && hostAuth.isLoggedIn) {
     if (btnHost) btnHost.style.display = 'inline-flex';
-    if (btnAdmin) btnAdmin.style.display = 'none';
 
     if (container) {
       container.innerHTML = `
@@ -1741,24 +1720,9 @@ function updateTopNavAuthUI() {
         </div>
       `;
     }
-  } else if (currentUserRole === 'admin' && adminAuth.isLoggedIn) {
-    if (btnHost) btnHost.style.display = 'none';
-    if (btnAdmin) btnAdmin.style.display = 'inline-flex';
-
-    if (container) {
-      container.innerHTML = `
-        <div style="display:flex; align-items:center; gap:8px;">
-          <span class="user-pill-badge admin"><i data-lucide="shield"></i> Super Admin</span>
-          <button class="btn-secondary-sm" onclick="logoutUser()">
-            <i data-lucide="log-out"></i> Logout
-          </button>
-        </div>
-      `;
-    }
   } else {
     // Visitor / Not Logged In
     if (btnHost) btnHost.style.display = 'none';
-    if (btnAdmin) btnAdmin.style.display = 'none';
 
     if (container) {
       container.innerHTML = `
@@ -1785,51 +1749,31 @@ function checkRateLimit() {
   return true;
 }
 
-// HANDLE USER LOGIN & AUTOMATIC PAGE ROUTING WITH 2FA & RATE LIMITING
+// HANDLE USER LOGIN & AUTOMATIC PAGE ROUTING WITH RATE LIMITING
 function handleUserLogin(role) {
   if (!checkRateLimit()) return;
 
-  if (role === 'admin') {
-    const email = document.getElementById('input-admin-email').value;
-    const pass = document.getElementById('input-admin-pass') ? document.getElementById('input-admin-pass').value : '';
-
-    if (pass && pass !== 'admin2026!') {
-      loginAttempts.count += 1;
-      if (loginAttempts.count >= 5) {
-        loginAttempts.lockedUntil = Date.now() + 15 * 60 * 1000;
-        showToast("⛔ Brute-force protection: 5 failed attempts reached! Account locked for 15 minutes.");
-        return;
-      }
-      showToast(`⚠️ Incorrect Admin Password! (${5 - loginAttempts.count} attempts remaining)`);
-      return;
-    }
-
-    // Trigger 2FA TOTP Authenticator Modal for Super Admin
-    document.getElementById('modal-admin-2fa').classList.add('active');
-    showToast("🔒 Enter 6-digit TOTP code from your Authenticator app.");
-  } else {
-    const emailInput = document.getElementById('input-host-email');
-    const email = emailInput && emailInput.value ? emailInput.value.trim() : 'evsahibi@gmail.com';
-    const nameInput = document.getElementById('input-host-name');
-    let name = (nameInput && nameInput.value) ? nameInput.value.trim() : '';
-    if (!name && email) {
-      name = email.split('@')[0];
-      name = name.charAt(0).toUpperCase() + name.slice(1);
-    }
-
-    hostAuth.name = name || 'Ev Sahibi';
-    hostAuth.email = email || 'evsahibi@gmail.com';
-    hostAuth.isLoggedIn = true;
-    hostAuth.subscriptionStatus = 'trial_active';
-    currentUserRole = 'host';
-
-    saveSessionState();
-    resetSessionInactivityTimer();
-    updateTopNavAuthUI();
-    checkHostAuthStatus();
-    switchView('host');
-    showToast(`🎉 Hoş geldiniz ${hostAuth.name}! (${hostAuth.email}) 14 Günlük Ücretsiz Pro Deneme Aktif.`);
+  const emailInput = document.getElementById('input-host-email');
+  const email = emailInput && emailInput.value ? emailInput.value.trim() : 'evsahibi@gmail.com';
+  const nameInput = document.getElementById('input-host-name');
+  let name = (nameInput && nameInput.value) ? nameInput.value.trim() : '';
+  if (!name && email) {
+    name = email.split('@')[0];
+    name = name.charAt(0).toUpperCase() + name.slice(1);
   }
+
+  hostAuth.name = name || 'Ev Sahibi';
+  hostAuth.email = email || 'evsahibi@gmail.com';
+  hostAuth.isLoggedIn = true;
+  hostAuth.subscriptionStatus = 'trial_active';
+  currentUserRole = 'host';
+
+  saveSessionState();
+  resetSessionInactivityTimer();
+  updateTopNavAuthUI();
+  checkHostAuthStatus();
+  switchView('host');
+  showToast(`🎉 Hoş geldiniz ${hostAuth.name}! (${hostAuth.email}) 14 Günlük Ücretsiz Pro Deneme Aktif.`);
 }
 
 function switchHostAuthTab(mode) {
@@ -2091,7 +2035,6 @@ function logoutNow() {
 function logoutUser() {
   currentUserRole = 'visitor';
   hostAuth.isLoggedIn = false;
-  adminAuth.isLoggedIn = false;
 
   try {
     localStorage.removeItem('hostifyos_auth_session');
@@ -2101,28 +2044,16 @@ function logoutUser() {
 
   updateTopNavAuthUI();
   checkHostAuthStatus();
-  checkAdminAuthStatus();
   switchView('landing'); // AUTO-RETURN TO HOME LANDING PAGE
   showToast("Logged out successfully. Returned to Home Page.");
 }
 
 function switchAuthRole(role) {
-  document.querySelectorAll('.auth-role-btn').forEach(b => b.classList.remove('active'));
-  if (event && event.currentTarget) event.currentTarget.classList.add('active');
-
-  if (role === 'admin') {
-    switchView('admin');
-  } else {
-    switchView('host');
-  }
+  switchView('host');
 }
 
 function openLoginModal(role) {
-  if (role === 'admin') {
-    switchView('admin');
-  } else {
-    switchView('host');
-  }
+  switchView('host');
 }
 
 function checkHostAuthStatus() {
@@ -2482,35 +2413,23 @@ function switchGuestTab(tabName, btnElement) {
 }
 
 
-// PLATFORM COMMISSION AGGREGATOR ENGINE
+// HOST REVENUE & DIRECT PAYOUT ENGINE (0% PLATFORM COMMISSION)
 function calculateCommissionSummary() {
   let grossSales = 0;
-  let totalPlatformFees = 0;
   let totalHostPayouts = 0;
 
   hostOrders.forEach(o => {
-    if (o.status !== 'Cancelled') {
+    if (o.status !== 'Cancelled' && o.status !== 'Refunded') {
       grossSales += o.priceUSD;
-      totalPlatformFees += o.platformFeeUSD;
-      totalHostPayouts += o.hostPayoutUSD;
+      totalHostPayouts += (o.hostPayoutUSD || o.priceUSD);
     }
   });
 
-  return { grossSales, totalPlatformFees, totalHostPayouts };
+  return { grossSales, totalPlatformFees: 0, totalHostPayouts: grossSales };
 }
 
 function renderCommissionAggregator() {
   const summary = calculateCommissionSummary();
-
-  const grossEl = document.getElementById('comm-gross-sales');
-  const feeEl = document.getElementById('comm-platform-fees');
-  const netEl = document.getElementById('comm-net-payout');
-  const rateEl = document.getElementById('comm-current-rate');
-
-  if (grossEl) grossEl.textContent = formatPrice(summary.grossSales);
-  if (feeEl) feeEl.textContent = formatPrice(summary.totalPlatformFees);
-  if (netEl) netEl.textContent = formatPrice(summary.totalHostPayouts);
-  if (rateEl) rateEl.textContent = `${(hostAuth.commissionRate * 100).toFixed(1)}%`;
 
   // Synchronize Top Metrics Grid Cards & Top Header Badge
   const metricRev = document.getElementById('metric-revenue');
@@ -2519,65 +2438,29 @@ function renderCommissionAggregator() {
   const subTierDisplay = document.getElementById('host-sub-tier-display');
 
   if (metricRev) metricRev.textContent = formatPrice(summary.grossSales);
-  if (metricFees) metricFees.textContent = formatPrice(summary.totalPlatformFees);
+  if (metricFees) metricFees.textContent = '%0 Komisyon';
 
-  const isPro = hostAuth.commissionRate === 0 || (hostAuth.plan && (hostAuth.plan.includes('Pro') || hostAuth.plan.includes('Enterprise')));
   if (headerBadge) {
-    headerBadge.textContent = isPro ? 'PRO HOST ACTIVE (0% COMM)' : 'STARTER TIER (5% COMM)';
-    headerBadge.style.background = isPro ? 'rgba(99,102,241,0.15)' : 'rgba(245,158,11,0.15)';
-    headerBadge.style.color = isPro ? 'var(--accent-indigo)' : 'var(--accent-amber)';
+    headerBadge.textContent = 'PRO HOST AKTİF (%0 KOMİSYON)';
+    headerBadge.style.background = 'rgba(16,185,129,0.15)';
+    headerBadge.style.color = 'var(--accent-emerald)';
   }
 
   if (subTierDisplay) {
-    subTierDisplay.textContent = isPro ? 'Pro Host Tier (0% Comm)' : 'Starter Tier (5% Comm)';
-  }
-
-  // METHOD 2: RENDER PRO UPGRADE NUDGE BANNER FOR STARTER HOSTS
-  const nudgeContainer = document.getElementById('starter-nudge-container');
-  if (nudgeContainer) {
-    if (!isPro) {
-      nudgeContainer.style.display = 'block';
-      nudgeContainer.innerHTML = `
-        <div style="background:linear-gradient(135deg, rgba(16,185,129,0.12), rgba(99,102,241,0.12)); border:1px solid rgba(16,185,129,0.3); border-radius:12px; padding:16px; margin-bottom:20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
-          <div style="display:flex; align-items:center; gap:12px;">
-            <div style="width:40px; height:40px; border-radius:10px; background:rgba(16,185,129,0.2); display:flex; align-items:center; justify-content:center; color:#10B981;">
-              <i data-lucide="zap" style="width:20px; height:20px;"></i>
-            </div>
-            <div>
-              <h4 style="margin:0; font-size:14px; color:#F8FAFC;">Starter Plan 5% Commission Active (${formatPrice(summary.totalPlatformFees)} Accrued)</h4>
-              <p style="margin:2px 0 0; font-size:12px; color:#94A3B8;">Upgrade to Pro Host ($19/mo) now to unlock 0% commission & keep 100% of your guest upsell revenue!</p>
-            </div>
-          </div>
-          <div style="display:flex; gap:8px;">
-            <button class="btn-primary-sm" style="background:#10B981; color:#fff;" onclick="openLemonSqueezyCheckout('Pro Host Plan ($19/mo - 0% Comm)', '$19.00 / mo')">
-              <i data-lucide="shield-check"></i> Upgrade to Pro ($19/mo)
-            </button>
-            <button class="btn-secondary-sm" onclick="generateMonthlyCommissionInvoice()">
-              <i data-lucide="receipt"></i> Pay Accrued $${summary.totalPlatformFees.toFixed(2)} Fee
-            </button>
-          </div>
-        </div>
-      `;
-    } else {
-      nudgeContainer.style.display = 'none';
-    }
+    subTierDisplay.textContent = 'Pro Host Planı (%0 Komisyon)';
   }
 }
 
 function generateMonthlyCommissionInvoice() {
-  const summary = calculateCommissionSummary();
-  const feeAmount = summary.totalPlatformFees > 0 ? summary.totalPlatformFees : 12.50;
-  showToast(`⚡ Generated Monthly Commission Settlement Invoice ($${feeAmount.toFixed(2)}) via Merchant Gateway!`);
+  showToast("🎉 HostifyOS %0 komisyon modelindedir. Tüm misafir gelirleri %100 doğrudan ev sahibine aktarılır.");
 }
 
 function triggerInstantFeeSweep() {
-  const summary = calculateCommissionSummary();
-  showToast(`Auto-Swept ${formatPrice(summary.totalPlatformFees)} in platform commissions directly to HostifyOS Master Account!`);
-
+  showToast("🎉 %0 Komisyon Aktif: Tüm ödemeler kesintisiz hesabınızdadır.");
 }
 
 function downloadCommissionStatement() {
-  showToast("Downloading Monthly Commission Statement (PDF / CSV) for Host Accounting...");
+  showToast("🎉 Gelir Raporu Hazırlanıyor...");
 }
 
 // OFFICIAL DODO PAYMENTS & GLOBAL MERCHANT CHECKOUT CONFIGURATION

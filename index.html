@@ -278,10 +278,6 @@
     <i data-lucide="layout-dashboard"></i>
     <span>Host Portal</span>
     </button>
-    <button id="btn-view-admin" class="nav-link" onclick="switchView('admin')" style="display:none;">
-    <i data-lucide="shield"></i>
-    <span>Super Admin</span>
-    </button>
   </nav>
   <div class="nav-right">
     <div class="property-nav-selector" id="nav-property-container" style="display:none;">
@@ -1294,10 +1290,6 @@
   <div id="host-login-view" style="display:none;">
     <div class="auth-card-container">
     <div class="auth-card">
-      <div class="auth-role-switcher">
-      <button class="auth-role-btn active" onclick="switchAuthRole('host')"><i data-lucide="user"></i> Host Login</button>
-      <button class="auth-role-btn" onclick="switchAuthRole('admin')"><i data-lucide="shield"></i> Super Admin</button>
-      </div>
       <div class="auth-icon-box">
       <i data-lucide="home" class="icon-lg text-emerald"></i>
       </div>
@@ -1680,11 +1672,11 @@
       </div>
     </div>
     <div class="metric-card">
-      <div class="m-icon icon-amber"><i data-lucide="percent"></i></div>
+      <div class="m-icon icon-emerald"><i data-lucide="wallet"></i></div>
       <div class="m-data">
-      <span class="m-label">Platform Fees Collected</span>
-      <span class="m-val style-amber" id="metric-platform-fees">$24.00</span>
-      <span class="m-sub">Auto platform commission</span>
+      <span class="m-label">Net Host Payouts</span>
+      <span class="m-val text-emerald" id="metric-platform-fees">%0 Komisyon</span>
+      <span class="m-sub">100% Doğrudan Gelir</span>
       </div>
     </div>
     <div class="metric-card">
@@ -1709,7 +1701,7 @@
     <button class="h-tab" onclick="switchHostTab('tunnels', this)"><i data-lucide="zap"></i> Automated Guest Tunnels</button>
     <button class="h-tab" onclick="switchHostTab('properties', this)"><i data-lucide="building"></i> My Properties Portfolio</button>
     <button class="h-tab" onclick="switchHostTab('services', this)"><i data-lucide="layers"></i> Active Property Services</button>
-    <button class="h-tab" onclick="switchHostTab('payouts', this)"><i data-lucide="globe"></i> Payment Gateways & Take-Rate</button>
+    <button class="h-tab" onclick="switchHostTab('payouts', this)"><i data-lucide="wallet"></i> Ödeme & Cüzdan Ayarları</button>
     <button class="h-tab" onclick="switchHostTab('qr', this)"><i data-lucide="printer"></i> Printable Stand QR Generator</button>
     </div>
     <div id="h-tab-orders" class="h-tab-content active" style="display:block;">
@@ -1717,9 +1709,9 @@
       <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center;">
       <div>
       <h3>Real-Time Guest Orders & Upsell Purchases</h3>
-      <p>Track instant payments, custom host payout splits, and platform take-rate fees.</p>
+      <p>Track instant payments, guest room service requests, and 100% direct payouts.</p>
       </div>
-      <span class="badge-tag">Auto Payout Split</span>
+      <span class="badge-tag">100% Direct Payout</span>
       </div>
       <div class="table-responsive">
       <table class="data-table">
@@ -1819,41 +1811,7 @@
     </div>
     </div>
     <div id="h-tab-payouts" class="h-tab-content" style="display:none;">
-    <div class="panel-card">
-      <div class="commission-aggregator-card">
-      <div class="comm-header">
-      <div>
-      <h3><i data-lucide="pie-chart" class="text-emerald"></i> Platform Commission & Payout Aggregator</h3>
-      <p>Real-time breakdown of gross guest sales, net host payouts, and auto-swept platform fees.</p>
-      </div>
-      <div class="comm-header-actions">
-      <button class="btn-primary-sm" onclick="triggerInstantFeeSweep()">
-      <i data-lucide="refresh-cw"></i> Auto-Sweep Platform Fees
-      </button>
-      <button class="btn-secondary-sm" onclick="downloadCommissionStatement()">
-      <i data-lucide="file-text"></i> Commission Statement
-      </button>
-      </div>
-      </div>
-      <div class="comm-metrics-grid">
-      <div class="c-metric-card">
-      <span>Total Gross Guest Sales</span>
-      <strong id="comm-gross-sales">$480.00</strong>
-      <span class="c-sub">Total Upsell Transactions</span>
-      </div>
-      <div class="c-metric-card highlight-emerald">
-      <span>Net Host Payout Deposited</span>
-      <strong id="comm-net-payout" class="text-emerald">$456.00</strong>
-      <span class="c-sub">Direct Bank Deposit</span>
-      </div>
-      <div class="c-metric-card highlight-amber">
-      <span>HostifyOS Platform Commission</span>
-      <strong id="comm-platform-fees" class="style-amber">$24.00</strong>
-      <span class="c-sub">Auto Deducted (Rate: <span id="comm-current-rate">5.0%</span>)</span>
-      </div>
-      </div>
-      </div>
-      <div class="panel-card" style="margin-top:20px; border:1px solid rgba(16,185,129,0.3); background:rgba(17,24,39,0.85);">
+      <div class="panel-card" style="border:1px solid rgba(16,185,129,0.3); background:rgba(17,24,39,0.85);">
       <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:12px; margin-bottom:16px;">
       <div>
       <h3 style="color:#fff; font-size:18px; margin:0;"><i data-lucide="wallet" class="text-emerald"></i> Ev Sahibi Canlı Ödeme Kanalları & Cüzdan Yönetimi</h3>
@@ -2104,397 +2062,6 @@
     </div>
   </div>
   </section>
-  <section id="view-admin" class="view-section">
-  <div id="admin-login-view" style="display:none;">
-    <div class="auth-card-container">
-    <div class="auth-card">
-      <div class="auth-role-switcher">
-      <button class="auth-role-btn" onclick="switchAuthRole('host')"><i data-lucide="user"></i> Host Login</button>
-      <button class="auth-role-btn active" onclick="switchAuthRole('admin')"><i data-lucide="shield"></i> Super Admin</button>
-      </div>
-      <div class="auth-icon-box" style="background:rgba(245,158,11,0.15); border-color:rgba(245,158,11,0.3);">
-      <i data-lucide="shield-alert" class="icon-lg style-amber"></i>
-      </div>
-      <h2>Platform Super Admin Login</h2>
-      <p>Master administration console for managing host accounts, platform commissions & global SaaS MRR.</p>
-      <form onsubmit="event.preventDefault(); handleUserLogin('admin');" data-bot-protection="enabled" data-spam-shield="active">
-<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
-      <div class="form-group">
-      <label>Super Admin Email</label>
-      <input type="email" id="input-admin-email" autocomplete="email" aria-label="Master Admin Email Address" value="admin@hostifyos.com" required>
-      </div>
-      <div class="form-group">
-      <label>Admin Security Key</label>
-      <input type="password" aria-label="Super Admin Password" value="admin-secret-2026" required>
-      </div>
-      <button type="submit" class="btn-primary-lg" style="background:linear-gradient(135deg, var(--accent-amber), #D97706);">
-      <i data-lucide="key-round"></i> Authenticate as Super Admin
-      </button>
-      </form>
-    </div>
-    </div>
-  </div>
-  <div id="admin-dashboard-content" class="host-container" style="display:block;">
-    <div class="host-header">
-    <div>
-      <div style="display:flex; align-items:center; gap:12px; margin-bottom:4px;">
-      <h2 class="host-title"><i data-lucide="shield-check" class="text-accent"></i> Platform Master Admin Console</h2>
-      <span class="badge-tag" style="background:rgba(245,158,11,0.15); color:var(--accent-amber);">Super Admin Active</span>
-      </div>
-      <p class="host-sub">Global governance of all host accounts, platform commission sweeps, SaaS MRR, and system auto-locks.</p>
-    </div>
-    <div class="host-header-actions">
-      <button class="btn-primary-sm" onclick="triggerGlobalFeeSweep()">
-      <i data-lucide="refresh-cw"></i> Sweep All Platform Fees
-      </button>
-      <button class="btn-secondary-sm" onclick="downloadAdminMasterReport()">
-      <i data-lucide="download"></i> Export Global Report (CSV)
-      </button>
-    </div>
-    </div>
-    <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
-    <span class="badge-tag" style="background:rgba(234,179,8,0.15); color:#EAB308; border:1px solid rgba(234,179,8,0.3); font-size:10px; padding:3px 8px;">
-      <i data-lucide="info" style="width:12px; height:12px; vertical-align:middle;"></i> Demo Analytics & Simulation Mode Data
-    </span>
-    </div>
-    <div class="metrics-grid">
-    <div class="metric-card">
-      <div class="m-icon icon-emerald"><i data-lucide="trending-up"></i></div>
-      <div class="m-data">
-      <span class="m-label">Global Monthly SaaS MRR</span>
-      <span class="m-val text-emerald">$19,880.00</span>
-      <span class="m-sub">Demo Simulation Figures</span>
-      </div>
-    </div>
-    <div class="metric-card">
-      <div class="m-icon icon-amber"><i data-lucide="pie-chart"></i></div>
-      <div class="m-data">
-      <span class="m-label">Total Platform Commissions</span>
-      <span class="m-val style-amber" id="admin-metric-comm">$4,820.00</span>
-      <span class="m-sub">5% Auto Take-Rate Swept</span>
-      </div>
-    </div>
-    <div class="metric-card">
-      <div class="m-icon icon-indigo"><i data-lucide="building"></i></div>
-      <div class="m-data">
-      <span class="m-label">Total Properties Managed</span>
-      <span class="m-val text-indigo">3,892 Units</span>
-      <span class="m-sub">Airbnb, Vrbo & Direct Hotels</span>
-      </div>
-    </div>
-    <div class="metric-card">
-      <div class="m-icon icon-blue"><i data-lucide="activity"></i></div>
-      <div class="m-data">
-      <span class="m-label">Platform Health & API Uptime</span>
-      <span class="m-val text-emerald">99.98%</span>
-      <span class="m-sub">All Systems Operational</span>
-      </div>
-    </div>
-    </div>
-    <div class="panel-card" style="margin-top:24px;">
-    <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center;">
-      <div>
-      <h3>All Registered Host Accounts & SaaS Subscriptions</h3>
-      <p>Monitor host trial periods, SaaS billing tiers, commission rates, and access controls.</p>
-      </div>
-      <span class="badge-tag">Master Control</span>
-    </div>
-    <div class="table-responsive">
-      <table class="data-table">
-      <thead>
-      <tr>
-      <th>Host Email & Name</th>
-      <th>Properties</th>
-      <th>SaaS Plan Tier</th>
-      <th>Renewal / Trial Days Left</th>
-      <th>Auto-Charge Card Info</th>
-      <th>Commission Rate</th>
-      <th>Actions</th>
-      </tr>
-      </thead>
-      <tbody id="admin-hosts-table">
-      </tbody>
-      </table>
-    </div>
-    </div>
-    <div class="panel-card" style="margin-top:24px;">
-    <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center;">
-      <div>
-      <h3><i data-lucide="credit-card" class="text-emerald"></i> Dodo Payments & Global Merchant of Record Gateway</h3>
-      <p>Merchant Entity: <strong>Ali Turan Inc. (hostifyos@gmail.com)</strong> • Status: <strong>Live MoR Gateway</strong></p>
-      </div>
-      <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">● Dodo Gateway Active</span>
-    </div>
-    <div class="metrics-grid" style="margin-top:16px;">
-      <div class="metric-card">
-      <div class="m-icon icon-emerald"><i data-lucide="shield-check"></i></div>
-      <div class="m-data">
-      <span class="m-label">Starter Plan ($0/mo)</span>
-      <span class="m-val">420 Hosts</span>
-      <span class="m-sub">5% Auto Take-Rate</span>
-      </div>
-      </div>
-      <div class="metric-card">
-      <div class="m-icon icon-indigo"><i data-lucide="zap"></i></div>
-      <div class="m-data">
-      <span class="m-label">Pro Host Tier ($14 - $19/mo)</span>
-      <span class="m-val text-indigo">186 Hosts</span>
-      <span class="m-sub">0% Commission • Unlimited</span>
-      </div>
-      </div>
-      <div class="metric-card">
-      <div class="m-icon icon-amber"><i data-lucide="crown"></i></div>
-      <div class="m-data">
-      <span class="m-label">Enterprise & Hotel ($29 - $39/mo)</span>
-      <span class="m-val style-amber">62 Hotel Chains</span>
-      <span class="m-sub">Multi-User & Custom Domain</span>
-      </div>
-      </div>
-    </div>
-    <div style="margin-top:16px; background:var(--bg-obsidian); border:1px solid var(--border-subtle); padding:14px; border-radius:12px;">
-      <h4 style="font-size:13px; font-weight:700; color:#fff; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
-      <i data-lucide="external-link" style="color:var(--accent-emerald);"></i> Live Dodo Payments Product Identifiers (PCI-DSS Level 1)
-      </h4>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:12px;">
-      <div>
-      <span style="color:var(--text-muted);">Pro Host Monthly ($19/mo):</span><br>
-      <code style="color:var(--accent-emerald); font-family:monospace;">pdt_0NoB0aoePAJvzwbeqpT3B</code>
-      </div>
-      <div>
-      <span style="color:var(--text-muted);">Pro Host Annual ($168/yr - Save 26%):</span><br>
-      <code style="color:var(--accent-emerald); font-family:monospace;">pdt_0NoB0bbRJD7ZDhFlYwVYL</code>
-      </div>
-      <div>
-      <span style="color:var(--text-muted);">Enterprise Monthly ($39/mo):</span><br>
-      <code style="color:var(--accent-indigo); font-family:monospace;">pdt_0NoB0a45lMIAStRQ38iiA</code>
-      </div>
-      <div>
-      <span style="color:var(--text-muted);">Enterprise Annual ($348/yr - Save 26%):</span><br>
-      <code style="color:var(--accent-indigo); font-family:monospace;">pdt_0NoB0Yusos1T6J53b2SjT</code>
-      </div>
-      </div>
-    </div>
-    </div>
-    <div class="panel-card" style="margin-top:24px;">
-    <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center;">
-      <div>
-      <h3><i data-lucide="book-open" class="text-indigo"></i> Global Guest Guidebooks & PWA Registry</h3>
-      <p>Inspect active digital guest guidebooks across all properties, monitor Wi-Fi views, and verify QR code stands.</p>
-      </div>
-      <span class="badge-tag" style="background:rgba(99,102,241,0.15); color:var(--accent-indigo);">Global Registry</span>
-    </div>
-    <div class="table-responsive" style="margin-top:12px;">
-      <table class="data-table">
-      <thead>
-      <tr>
-      <th>Property & Guidebook Title</th>
-      <th>Type / Tier</th>
-      <th>Direct PWA Guidebook Route</th>
-      <th>Wi-Fi Networks</th>
-      <th>Guidebook Views</th>
-      <th>Actions</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-      <td>
-      <strong>Malibu Beachfront Villa & Suite</strong>
-      <p style="font-size:11px; color:var(--text-muted); margin:2px 0 0;">24840 Pacific Coast Hwy, Malibu, CA</p>
-      </td>
-      <td><span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">Pro Host Listing</span></td>
-      <td><a href="https://www.hostifyos.com/g/malibu-villa" target="_blank" rel="noopener noreferrer" style="color:var(--accent-emerald); font-family:monospace; font-weight:700;">/g/malibu-villa</a></td>
-      <td><strong>2 Networks</strong> <span style="font-size:10px; color:var(--text-muted); display:block;">Main 5G, Beach Pool</span></td>
-      <td><strong>1,420 Views</strong></td>
-      <td>
-      <a href="https://www.hostifyos.com/g/malibu-villa" target="_blank" rel="noopener noreferrer" class="btn-primary-sm" style="padding:4px 10px; font-size:10px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
-      <i data-lucide="external-link"></i> Inspect PWA
-      </a>
-      </td>
-      </tr>
-      <tr>
-      <td>
-      <strong>Grand Horizon Boutique Hotel & Spa</strong>
-      <p style="font-size:11px; color:var(--text-muted); margin:2px 0 0;">88 Cliffside Resort Way, Santorini, Greece</p>
-      </td>
-      <td><span class="badge-tag" style="background:rgba(99,102,241,0.15); color:var(--accent-indigo);">Enterprise Hotel</span></td>
-      <td><a href="https://www.hostifyos.com/g/grand-horizon-hotel" target="_blank" rel="noopener noreferrer" style="color:var(--accent-indigo); font-family:monospace; font-weight:700;">/g/grand-horizon-hotel</a></td>
-      <td><strong>3 Networks</strong> <span style="font-size:10px; color:var(--text-muted); display:block;">Lobby, Pool Bar, Spa</span></td>
-      <td><strong>3,890 Views</strong></td>
-      <td>
-      <a href="https://www.hostifyos.com/g/grand-horizon-hotel" target="_blank" rel="noopener noreferrer" class="btn-primary-sm" style="padding:4px 10px; font-size:10px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
-      <i data-lucide="external-link"></i> Inspect PWA
-      </a>
-      </td>
-      </tr>
-      </tbody>
-      </table>
-    </div>
-    </div>
-    <div class="panel-card" style="margin-top:24px;">
-    <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center;">
-      <div>
-      <h3><i data-lucide="mail" class="text-emerald"></i> Official Email Center & Broadcast Dispatcher</h3>
-      <p>Dispatch emails from official merchant address <strong>hostifyos@gmail.com</strong> (Ali Turan Inc.).</p>
-      </div>
-      <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">Official Sender: hostifyos@gmail.com</span>
-    </div>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:16px;">
-      <div style="background:var(--bg-dark); border:1px solid var(--border-color); padding:16px; border-radius:12px;">
-      <h4 style="margin:0 0 12px; font-size:14px; color:var(--accent-emerald); display:flex; align-items:center; gap:6px;">
-      <i data-lucide="send"></i> Dispatch Email Broadcast
-      </h4>
-      <form onsubmit="event.preventDefault(); sendAdminEmailBroadcast();" data-bot-protection="enabled" data-spam-shield="active">
-<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
-      <div class="form-group">
-      <label>Recipient Target Group</label>
-      <select id="email-broadcast-target" aria-label="Email Broadcast Recipient Filter">
-      <option value="all">All Registered Hosts (1,420 Hosts)</option>
-      <option value="trial">Active 14-Day Trial Hosts Only</option>
-      <option value="pro">Paid Pro Hosts ($19/mo)</option>
-      <option value="custom">Custom Email Address</option>
-      </select>
-      </div>
-      <div class="form-group" id="group-custom-email" style="display:none;">
-      <label>Custom Target Email</label>
-      <input type="email" id="email-custom-target" aria-label="Custom Recipient Email Address" placeholder="host@example.com">
-      </div>
-      <div class="form-group">
-      <label>Email Subject Line</label>
-      <input type="text" id="email-broadcast-subject" aria-label="Email Broadcast Subject Line" placeholder="Welcome to HostifyOS — Your 14-Day Free Trial is Active!" required>
-      </div>
-      <div class="form-group">
-      <label>Email Template Preset</label>
-      <select id="email-template-selector" aria-label="Select Email Template Preset" onchange="loadEmailTemplatePreset(this.value)">
-      <option value="welcome">📩 Welcome & 14-Day Trial Activation</option>
-      <option value="receipt">💳 Subscription Receipt & Payment Confirmation</option>
-      <option value="expiry">⏰ Trial Expiry Reminder (Day 12)</option>
-      <option value="invoice">🧾 Monthly Commission Settlement Invoice</option>
-      <option value="security">🔒 Account Security & 2FA Alert</option>
-      </select>
-      </div>
-      <div class="form-group">
-      <label>Email Body Content (HTML Supported)</label>
-      <textarea id="email-broadcast-body" aria-label="Email Broadcast HTML Body Content" rows="6" style="font-family:monospace; font-size:12px;" required></textarea>
-      </div>
-      <button type="submit" class="btn-primary-lg" style="background:#10B981;">
-      <i data-lucide="send"></i> Dispatch Email from hostifyos@gmail.com
-      </button>
-      </form>
-      </div>
-      <div style="background:var(--bg-dark); border:1px solid var(--border-color); padding:16px; border-radius:12px;">
-      <h4 style="margin:0 0 12px; font-size:14px; color:var(--accent-indigo); display:flex; align-items:center; gap:6px;">
-      <i data-lucide="file-text"></i> Email Template Preview & Sender Log
-      </h4>
-      <div id="email-template-preview-box" style="background:var(--bg-obsidian); border:1px solid var(--border-subtle); padding:14px; border-radius:8px; font-size:12px; color:var(--text-secondary); min-height:220px; line-height:1.6;">
-      </div>
-      <div style="margin-top:12px; padding:10px; background:rgba(99,102,241,0.08); border-radius:8px; border:1px solid rgba(99,102,241,0.2); font-size:11px; color:var(--accent-indigo);">
-      <i data-lucide="check-circle" style="width:12px; height:12px; vertical-align:middle;"></i> All emails sent via official merchant server: <strong>hostifyos@gmail.com</strong> (Ali Turan Inc.).
-      </div>
-      </div>
-    </div>
-    </div>
-    <div class="panel-card" style="margin-top:24px;">
-    <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center;">
-      <div>
-      <h3><i data-lucide="message-square" class="text-amber"></i> Floating WhatsApp & AI Assistant Controls</h3>
-      <p>Manage the bottom-right WhatsApp button, phone number, AI bot greetings, and widget display rules.</p>
-      </div>
-      <span class="badge-tag" style="background:rgba(245,158,11,0.15); color:var(--accent-amber);">Widget Active</span>
-    </div>
-    <form onsubmit="event.preventDefault(); saveWidgetSettings();" style="margin-top:16px;" data-bot-protection="enabled" data-spam-shield="active">
-<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-      <div class="form-group">
-      <label>WhatsApp Host Number (International Format)</label>
-      <input type="text" id="widget-whatsapp-num" aria-label="Automated WhatsApp Integration Phone Number" value="+905451234567" placeholder="+905451234567" required>
-      </div>
-      <div class="form-group">
-      <label>WhatsApp Floating Button Status</label>
-      <select id="widget-whatsapp-enabled" aria-label="Enable WhatsApp Concierge Widget">
-      <option value="true">Enabled (Visible on Website)</option>
-      <option value="false">Disabled (Hidden)</option>
-      </select>
-      </div>
-      <div class="form-group">
-      <label>AI Guest Welcome Assistant Status</label>
-      <select id="widget-ai-enabled" aria-label="Enable AI Autonomous Concierge Support">
-      <option value="true">Enabled (AI Chat Interactive)</option>
-      <option value="false">Disabled</option>
-      </select>
-      </div>
-      <div class="form-group">
-      <label>AI Assistant Greeting Text</label>
-      <input type="text" id="widget-ai-greeting" aria-label="AI Concierge Initial Greeting Message" value="Hello! Welcome to HostifyOS. How can I assist your stay or hosting today?" required>
-      </div>
-      </div>
-      <button type="submit" class="btn-primary-sm" style="background:var(--accent-amber); color:#000; font-weight:700;">
-      <i data-lucide="save"></i> Save Widget Settings
-      </button>
-    </form>
-    </div>
-    <div class="payment-settings-grid" style="margin-top:20px;">
-      <div class="settings-card">
-      <h4><i data-lucide="shield-check"></i> White-Label Merchant Checkout Status</h4>
-      <p class="text-muted">Instant SaaS tier subscription checkout with tax compliance & invoicing engine.</p>
-      <div class="info-row">
-      <span>Gateway Status:</span>
-      <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">● 256-Bit SSL Encrypted (Active)</span>
-      </div>
-      <div class="info-row">
-      <span>Auto Tax & VAT Invoicing:</span>
-      <strong>Multi-Currency & International Merchant Invoicing Enabled</strong>
-      </div>
-      </div>
-      <div class="settings-card">
-      <h4><i data-lucide="shopping-bag"></i> Quick Package Checkout Actions</h4>
-      <p class="text-muted">Directly launch package checkout or upgrade custom SaaS tier for host accounts.</p>
-      <div style="display:flex; gap:10px; margin-top:14px; flex-wrap:wrap;">
-      <button class="btn-primary-sm" onclick="openLemonSqueezyCheckout('Pro Host Plan', '$19.00 / mo')">
-      <i data-lucide="credit-card"></i> Upgrade Pro Host Plan ($19/mo)
-      </button>
-      <button class="btn-secondary-sm" onclick="openLemonSqueezyCheckout('Enterprise Plan', '$39.00 / mo')">
-      <i data-lucide="crown"></i> Upgrade Enterprise Plan ($39/mo)
-      </button>
-      </div>
-      </div>
-    </div>
-    </div>
-    <div class="payment-settings-grid" style="margin-top:24px;">
-    <div class="settings-card">
-      <h4><i data-lucide="sliders" class="text-accent"></i> Global Default Platform Commission Rate</h4>
-      <p class="text-muted">Adjust the default take-rate auto-deducted from host guest upsell transactions.</p>
-      <div class="form-group" style="margin-top:14px;">
-      <label>Default Take-Rate Percentage (%)</label>
-      <select id="global-commission-select" aria-label="Global Platform Commission Fee Rate" onchange="changeGlobalCommissionRate(this.value)">
-      <option value="0.05" selected>5.0% (Default Starter Tier)</option>
-      <option value="0.035">3.5% (Discounted Promo)</option>
-      <option value="0.0">0.0% (Global Commission Pause)</option>
-      </select>
-      </div>
-    </div>
-    <div class="settings-card">
-      <h4><i data-lucide="shield-check" class="text-emerald"></i> Official Merchant Payout & Settlement Gateway</h4>
-      <p class="text-muted">Automated Dodo Payments payout settlement engine connected directly to official merchant account.</p>
-      <div class="info-row">
-      <span>Merchant Entity:</span>
-      <strong>Ali Turan Inc. (Ali Turan Şirketi)</strong>
-      </div>
-      <div class="info-row">
-      <span>Merchant Email:</span>
-      <strong>hostifyos@gmail.com</strong>
-      </div>
-      <div class="info-row">
-      <span>Settlement Gateway:</span>
-      <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">● Dodo Payments MoR Gateway (Active)</span>
-      </div>
-      <div class="info-row">
-      <span>Payout Schedule:</span>
-      <strong>Weekly Direct Payouts (USD / EUR / TRY)</strong>
-      </div>
-    </div>
-    </div>
-  </div>
-  </section>
 </main>
 <div id="modal-google-auth" class="modal-backdrop">
   <div class="modal-card" style="max-width:440px; text-align:center;">
@@ -2642,39 +2209,6 @@
     <i data-lucide="message-circle" style="width:16px; height:16px;"></i>
     <span>Chat with Founder on WhatsApp</span>
     </a>
-  </div>
-  </div>
-</div>
-<div id="modal-admin-2fa" class="modal-backdrop">
-  <div class="modal-card" style="max-width:480px;">
-  <button class="modal-close" onclick="closeModal('modal-admin-2fa')"><i data-lucide="x"></i></button>
-  <div style="text-align:center; margin-bottom:14px;">
-    <div style="width:44px; height:44px; border-radius:12px; background:rgba(99,102,241,0.15); display:inline-flex; align-items:center; justify-content:center; color:var(--accent-indigo); margin-bottom:6px;">
-    <i data-lucide="shield-check" style="width:22px; height:22px;"></i>
-    </div>
-    <h3 style="margin:0;">Two-Factor Authentication (2FA TOTP)</h3>
-    <p class="modal-desc-text" style="font-size:11px; margin-top:2px;">Scan the QR code with Google Authenticator, 1Password, or Authy to generate your 6-digit TOTP code.</p>
-  </div>
-  <div style="background:var(--bg-dark); border:1px solid var(--border-color); padding:14px; border-radius:12px; margin-bottom:14px; display:flex; gap:14px; align-items:center;">
-    <div style="background:#fff; padding:6px; border-radius:8px; display:inline-flex;">
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=https://hostifyos.com/auth/2fa-token-auth" alt="2FA Security Token QR Code" style="width:100px; height:100px; display:block;">
-    </div>
-    <div style="flex:1; font-size:11px; color:var(--text-secondary);">
-    <strong style="color:var(--text-main); display:block; margin-bottom:4px;">1. Scan QR Code in Authenticator App:</strong>
-    <p style="font-size:10px; color:var(--text-muted); margin:0;">Encrypted TOTP secret provisioned via server-side TLS session. Secret key is encrypted at rest and never exposed in client DOM.</p>
-    </div>
-  </div>
-  <form onsubmit="event.preventDefault(); submitAdmin2FACode();" data-bot-protection="enabled" data-spam-shield="active">
-<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
-    <div class="form-group" style="margin-bottom:12px;">
-    <label style="text-align:center; display:block; font-size:11px;">Enter 6-Digit Authenticator Code</label>
-    <input type="text" id="input-2fa-code" aria-label="Two-Factor Authentication 6-Digit Code" placeholder="123456" maxlength="6" style="text-align:center; font-size:22px; letter-spacing:6px; font-family:var(--font-mono); font-weight:700; color:var(--accent-emerald);" required>
-    </div>
-    <div style="background:rgba(99,102,241,0.1); border:1px solid rgba(99,102,241,0.2); padding:8px; border-radius:8px; margin-bottom:12px; font-size:10px; color:var(--accent-indigo); text-align:center;">
-    🔒 IP Allowlist & Device Fingerprint Security Active
-    </div>
-    <button type="submit" class="btn-primary-lg">Verify 2FA & Enter Admin Console</button>
-  </form>
   </div>
 </div>
 <div id="modal-reset-password" class="modal-backdrop">
@@ -3337,49 +2871,6 @@
   <div style="display:flex; gap:10px;">
     <button class="btn-primary-lg" onclick="saveCookiePreferences()">Save Preferences</button>
   </div>
-  </div>
-</div>
-<div id="modal-admin-double-approve" class="modal-backdrop">
-  <div class="modal-card" style="max-width:520px;">
-  <button class="modal-close" onclick="closeModal('modal-admin-double-approve')"><i data-lucide="x"></i></button>
-  <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
-    <div style="width:42px; height:42px; border-radius:10px; background:rgba(239,68,68,0.15); display:flex; align-items:center; justify-content:center; color:#EF4444;">
-    <i data-lucide="alert-triangle" style="width:22px; height:22px;"></i>
-    </div>
-    <div>
-    <h3 style="margin:0;">High-Impact Financial Double Approval</h3>
-    <span class="badge-tag" style="background:rgba(239,68,68,0.15); color:#EF4444; font-size:9px;">Maker-Checker 4-Eyes Principle</span>
-    </div>
-  </div>
-  <p class="modal-desc-text" style="font-size:12px;">This critical financial action impacts platform revenue and host accounts. Dual authorization required.</p>
-  <div style="background:var(--bg-dark); border:1px solid var(--border-color); padding:14px; border-radius:10px; margin-bottom:14px; font-size:12px; line-height:1.6; color:var(--text-secondary);">
-    <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
-    <span>Action Title:</span>
-    <strong id="approve-action-title" style="color:var(--text-main);">Master Fee Sweep / Rate Change</strong>
-    </div>
-    <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
-    <span>Affected Host Portfolio:</span>
-    <strong id="approve-action-impact" class="text-accent">1,420 Host Accounts ($4,820.00 Total)</strong>
-    </div>
-    <div style="display:flex; justify-content:space-between;">
-    <span>Initiator Admin:</span>
-    <strong id="approve-action-admin">admin@hostifyos.com</strong>
-    </div>
-  </div>
-  <form onsubmit="event.preventDefault(); executeDoubleApprovedAction();" data-bot-protection="enabled" data-spam-shield="active">
-<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
-    <div class="form-group" style="margin-bottom:10px;">
-    <label>Secondary Checker Admin Email (Self-Approval Prohibited):</label>
-    <input type="email" id="checker-admin-email" aria-label="Checker Super Admin Email Address" placeholder="checker.admin@hostifyos.com" required style="font-size:12px;">
-    </div>
-    <div class="form-group" style="margin-bottom:12px;">
-    <label>Secondary Checker Authorization Key:</label>
-    <input type="password" id="approve-security-key" aria-label="Checker Authorization Security Key" placeholder="Enter Checker Authorization Security Key" required style="font-family:var(--font-mono); font-size:12px;">
-    </div>
-    <button type="submit" class="btn-primary-lg" style="background:#EF4444; border-color:#EF4444;">
-    <i data-lucide="shield-alert"></i> Authorize & Append to Immutable Audit Log
-    </button>
-  </form>
   </div>
 </div>
 <div id="modal-email-verify" class="modal-backdrop">
