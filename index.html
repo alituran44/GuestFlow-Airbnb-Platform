@@ -6,7 +6,7 @@
   <title>HostifyOS | The Modern Hosting OS for Airbnb, Vrbo & Boutique Hotels</title>
   
   <!-- Primary SEO Meta Tags -->
-  <meta name="description" content="HostifyOS automates short-term rental & hotel guest experiences with 1-tap digital PWA guidebooks, 1-tap Wi-Fi copy, time-gated door lockbox PIN codes, automated WhatsApp upsells, and 0% commission payment links. Turn every stay into +$420/mo extra income per property.">
+  <meta name="description" content="HostifyOS automates short-term rental & hotel guest experiences with 1-tap digital PWA guidebooks, smart lock PINs, Wi-Fi sharing, and 0% commission in-room upsells.">
   <meta name="keywords" content="digital guest guidebook, airbnb house manual app, vacation rental software, short term rental guest app, pwa guest guidebook, boutique hotel guest app, 0 commission airbnb upsell app, increase airbnb revenue without raising rates, in room concierge monetization, automated whatsapp checkin message, time gated lockbox pin code, 1 tap wifi copy for airbnb, printable A5 room stand pdf, dijital konuk rehberi, airbnb dijital ev rehberi, butik otel qr oda servisi otomasyonu, HostifyOS">
   <meta name="author" content="Ali Turan Inc. (Ali Turan Şirketi)">
   <meta name="publisher" content="Ali Turan Inc.">
@@ -16,7 +16,10 @@
   <!-- TrustBox script -->
   <script type="text/javascript" src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
   <!-- End TrustBox script -->
-  <link rel="canonical" href="https://www.hostifyos.com/">
+    <link rel="canonical" href="https://www.hostifyos.com/">
+
+  <!-- LCP & Critical Resource Performance Preloads -->
+  <link rel="preload" as="image" href="brand_logo.jpg" fetchpriority="high">
 
   <!-- Hreflang Multi-Language & International SEO -->
   <link rel="alternate" hreflang="x-default" href="https://www.hostifyos.com/" />
@@ -322,7 +325,7 @@
         <!-- Active Property Selector Dropdown (visible in host portal) -->
         <div class="property-nav-selector" id="nav-property-container" style="display:none;">
           <i data-lucide="home"></i>
-          <select id="property-select-nav" onchange="changeActiveProperty(this.value)">
+          <select id="property-select-nav" aria-label="Select Demo Property" onchange="changeActiveProperty(this.value)">
             <!-- Populated by JS -->
           </select>
         </div>
@@ -686,7 +689,7 @@
                   <i data-lucide="link"></i>
                   <span>Paste Airbnb, Vrbo, or Booking.com Listing URL</span>
                 </label>
-                <input type="url" id="lm-airbnb-url" placeholder="e.g. https://www.airbnb.com/rooms/1149283748293" style="width:100%; padding:14px; border-radius:12px; background:#0B0F17; border:1px solid rgba(16,185,129,0.3); color:#fff; font-size:14px; box-sizing:border-box;">
+                <input type="url" id="lm-airbnb-url" aria-label="Airbnb Listing URL" placeholder="e.g. https://www.airbnb.com/rooms/1149283748293" style="width:100%; padding:14px; border-radius:12px; background:#0B0F17; border:1px solid rgba(16,185,129,0.3); color:#fff; font-size:14px; box-sizing:border-box;">
               </div>
             </div>
 
@@ -697,7 +700,7 @@
                   <i data-lucide="calendar"></i>
                   <span>Paste Airbnb / Booking iCal (.ics) Calendar Feed URL</span>
                 </label>
-                <input type="url" id="lm-ical-url" placeholder="e.g. https://www.airbnb.com/calendar/ical/12345.ics?s=abcdef..." style="width:100%; padding:14px; border-radius:12px; background:#0B0F17; border:1px solid rgba(59,130,246,0.4); color:#fff; font-size:14px; box-sizing:border-box;">
+                <input type="url" id="lm-ical-url" aria-label="iCal Calendar Export URL" placeholder="e.g. https://www.airbnb.com/calendar/ical/12345.ics?s=abcdef..." style="width:100%; padding:14px; border-radius:12px; background:#0B0F17; border:1px solid rgba(59,130,246,0.4); color:#fff; font-size:14px; box-sizing:border-box;">
                 <div style="font-size:11px; color:var(--text-muted); margin-top:6px;">
                   💡 Found in Airbnb Host Portal → Listing → Pricing & Availability → Sync Calendar.
                 </div>
@@ -713,11 +716,11 @@
               <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
                 <div>
                   <label style="font-size:11px; font-weight:700; color:var(--text-secondary); display:block; margin-bottom:4px;">Wi-Fi Password</label>
-                  <input type="text" id="lm-wifi-pass" placeholder="e.g. SunsetBodrum2026" style="width:100%; padding:10px; border-radius:8px; background:#0B0F17; border:1px solid var(--border-subtle); color:#fff; font-size:13px; box-sizing:border-box;">
+                  <input type="text" id="lm-wifi-pass" aria-label="Wi-Fi Password" placeholder="e.g. SunsetBodrum2026" style="width:100%; padding:10px; border-radius:8px; background:#0B0F17; border:1px solid var(--border-subtle); color:#fff; font-size:13px; box-sizing:border-box;">
                 </div>
                 <div>
                   <label style="font-size:11px; font-weight:700; color:var(--text-secondary); display:block; margin-bottom:4px;">Door Smart Lock PIN</label>
-                  <input type="text" id="lm-door-pin" placeholder="e.g. 8492#" style="width:100%; padding:10px; border-radius:8px; background:#0B0F17; border:1px solid var(--border-subtle); color:#fff; font-size:13px; box-sizing:border-box;">
+                  <input type="text" id="lm-door-pin" aria-label="Keyless Door Lock PIN" placeholder="e.g. 8492#" style="width:100%; padding:10px; border-radius:8px; background:#0B0F17; border:1px solid var(--border-subtle); color:#fff; font-size:13px; box-sizing:border-box;">
                 </div>
               </div>
             </div>
@@ -848,7 +851,7 @@
                 <div class="s-panel-preview">
                   <div class="video-card" style="width:100%;">
                     <div class="thumb-container">
-                      <img src="https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?auto=format&fit=crop&w=600&q=80" alt="Guide">
+                      <img src="https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?auto=format&fit=crop&w=600&q=80" alt="HostifyOS Digital Guest Guidebook Mobile App Preview" width="600" height="400" loading="lazy">
                       <div class="play-overlay"><i data-lucide="play-circle"></i></div>
                     </div>
                     <div class="v-info">
@@ -1058,7 +1061,7 @@
               <span data-i18n="roiLabelCount">Properties Portfolio Size:</span>
               <strong id="calc-prop-count">3 Properties</strong>
             </div>
-            <input type="range" min="1" max="25" value="3" class="roi-slider" oninput="updateRoiCalculator(this.value)">
+            <input type="range" min="1" max="25" value="3" class="roi-slider" aria-label="Properties Portfolio Size Slider" oninput="updateRoiCalculator(this.value)">
           </div>
 
           <div class="calc-results-grid">
@@ -1339,7 +1342,7 @@
                 <span class="welcome-pill" data-i18n="welcomePill">Welcome to your stay</span>
                 <span class="badge-tag" id="prop-platform-badge">Airbnb</span>
               </div>
-              <h1 id="prop-title">Malibu Beachfront Villa & Suite</h1>
+              <h2 id="prop-title" style="font-size:22px; font-weight:800; color:#fff; margin:0 0 4px 0;">Malibu Beachfront Villa & Suite</h2>
               <p id="prop-address"><i data-lucide="map-pin"></i> 22804 Pacific Coast Hwy, Malibu, CA</p>
 
               <div class="stay-meta-bar">
@@ -1544,15 +1547,15 @@
             <form onsubmit="event.preventDefault(); handleUserLogin('host');">
               <div id="auth-name-group" class="form-group" style="display:none;">
                 <label>Full Name / Property Brand</label>
-                <input type="text" id="input-host-name" placeholder="Sarah Jenkins" value="Sarah Jenkins">
+                <input type="text" id="input-host-name" aria-label="Host Full Name" placeholder="Sarah Jenkins" value="Sarah Jenkins">
               </div>
               <div class="form-group">
                 <label>Host Email Address</label>
-                <input type="email" id="input-host-email" placeholder="sarah@malibuvillas.com" value="sarah@malibuvillas.com" required>
+                <input type="email" id="input-host-email" aria-label="Host Email Address" placeholder="sarah@malibuvillas.com" value="sarah@malibuvillas.com" required>
               </div>
               <div class="form-group">
                 <label>Password</label>
-                <input type="password" id="input-host-pass" placeholder="••••••••" value="password123" required>
+                <input type="password" id="input-host-pass" aria-label="Host Password" placeholder="••••••••" value="password123" required>
               </div>
 
               <button type="submit" id="btn-auth-submit" class="btn-primary-lg">Log In to Host Portal</button>
@@ -1651,7 +1654,7 @@
             <!-- Mobile App Top Header -->
             <div class="h-mob-header">
               <div class="h-mob-user">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Host Avatar">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Sarah Jenkins Host Profile" width="100" height="100" loading="lazy">
                 <div>
                   <h4>Sarah Miller</h4>
                   <span class="badge-tag">Pro Host Active</span>
@@ -1802,7 +1805,7 @@
                     <span class="welcome-pill" data-i18n="welcomePill">WELCOME TO YOUR STAY</span>
                     <span class="badge-tag" style="background:rgba(59,130,246,0.3); color:#60A5FA;">AIRBNB</span>
                   </div>
-                  <h1 style="font-size:17px; margin-bottom:2px;">Malibu Beachfront Villa & Suite</h1>
+                  <h2 style="font-size:17px; margin-bottom:2px; font-weight:700; color:#fff;">Malibu Beachfront Villa & Suite</h2>
                   <p style="font-size:11px; margin-bottom:8px;"><i data-lucide="map-pin"></i> 22804 Pacific Coast Hwy, Malibu, CA</p>
                   <div class="stay-meta-bar" style="padding:4px 8px; font-size:10px;">
                     <div class="meta-item"><i data-lucide="calendar"></i> <span data-i18n="guestCheckInLabel">Check-in: 3:00 PM</span></div>
@@ -1850,7 +1853,7 @@
                 </h4>
                 <div style="background:var(--bg-obsidian); border:1px solid var(--border-subtle); border-radius:8px; overflow:hidden; display:flex; gap:10px; padding:8px; cursor:pointer;" onclick="openVideoModal('Nest AC & Thermostat', 'https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?auto=format&fit=crop&w=600&q=80')">
                   <div style="position:relative; width:60px; height:45px; border-radius:6px; overflow:hidden; flex-shrink:0;">
-                    <img src="https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?auto=format&fit=crop&w=600&q=80" style="width:100%; height:100%; object-fit:cover;">
+                    <img src="https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?auto=format&fit=crop&w=600&q=80" alt="Malibu Beachfront Villa Luxury Suite Preview" width="600" height="400" loading="lazy" style="width:100%; height:100%; object-fit:cover;">
                     <i data-lucide="play-circle" style="position:absolute; inset:0; margin:auto; width:20px; height:20px; color:var(--accent-emerald);"></i>
                   </div>
                   <div>
@@ -1905,7 +1908,7 @@
         <div class="host-header" id="host-desktop-header">
           <div>
             <div style="display:flex; align-items:center; gap:12px; margin-bottom:4px;">
-              <h1 class="host-title">Host Operating Dashboard</h1>
+              <h2 class="host-title">Host Operating Dashboard</h2>
               <span class="badge-tag" id="host-header-badge">Pro Host Active (0% Comm)</span>
             </div>
             <p class="host-sub">Manage your properties, custom payment links, automated guest tunnels & commission payouts.</p>
@@ -2191,27 +2194,27 @@
               <form onsubmit="event.preventDefault(); saveHostPaymentSettings();" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
                 <div class="form-group" style="margin:0;">
                   <label style="font-size:12px; font-weight:700; color:#10B981;"><i data-lucide="building"></i> Fibabanka / Banka IBAN (7/24 FAST)</label>
-                  <input type="text" id="cfg-host-iban" value="TR22 0010 3000 0000 0059 1864 21" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
+                  <input type="text" id="cfg-host-iban" aria-label="Host Bank IBAN" value="TR22 0010 3000 0000 0059 1864 21" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
                 </div>
 
                 <div class="form-group" style="margin:0;">
                   <label style="font-size:12px; font-weight:700; color:#94A3B8;"><i data-lucide="globe"></i> SWIFT / BIC Kodu (Yurt Dışı Transfer)</label>
-                  <input type="text" id="cfg-host-swift" value="FBABTRIS" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
+                  <input type="text" id="cfg-host-swift" aria-label="Host Bank SWIFT Code" value="FBABTRIS" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
                 </div>
 
                 <div class="form-group" style="margin:0;">
                   <label style="font-size:12px; font-weight:700; color:#10B981;"><i data-lucide="qr-code"></i> Binance USDT (TRC-20) Cüzdan Adresi</label>
-                  <input type="text" id="cfg-host-crypto" value="TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
+                  <input type="text" id="cfg-host-crypto" aria-label="Host USDT TRC-20 Wallet Address" value="TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
                 </div>
 
                 <div class="form-group" style="margin:0;">
                   <label style="font-size:12px; font-weight:700; color:#25D366;"><i data-lucide="message-circle"></i> WhatsApp Sipariş & İletişim Numarası</label>
-                  <input type="text" id="cfg-host-whatsapp" value="+90 543 736 06 60" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
+                  <input type="text" id="cfg-host-whatsapp" aria-label="Host WhatsApp Number" value="+90 543 736 06 60" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
                 </div>
 
                 <div class="form-group" style="margin:0; grid-column:1 / -1;">
                   <label style="font-size:12px; font-weight:700; color:#60A5FA;"><i data-lucide="credit-card"></i> Kredi Kartı / Shopier / Stripe Özel Ödeme Linki (İsteğe Bağlı)</label>
-                  <input type="text" id="cfg-host-cardlink" value="https://www.hostifyos.com/pricing.html" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
+                  <input type="text" id="cfg-host-cardlink" aria-label="Host Custom Credit Card Payment Link" value="https://www.hostifyos.com/pricing.html" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
                 </div>
 
                 <div style="grid-column:1 / -1; display:flex; justify-content:flex-end;">
@@ -2234,31 +2237,31 @@
               <form onsubmit="event.preventDefault(); saveHostGuideContent();" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
                 <div class="form-group" style="margin:0;">
                   <label style="font-size:12px; font-weight:700; color:#fff;">Wi-Fi Ağı Adı</label>
-                  <input type="text" id="cfg-guide-wifi-name" value="VillaSunset_5G" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
+                  <input type="text" id="cfg-guide-wifi-name" aria-label="Property Wi-Fi Network Name (SSID)" value="VillaSunset_5G" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
                 </div>
                 <div class="form-group" style="margin:0;">
                   <label style="font-size:12px; font-weight:700; color:#fff;">Wi-Fi Şifresi</label>
-                  <input type="text" id="cfg-guide-wifi-pass" value="SunsetBodrum2026!" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
+                  <input type="text" id="cfg-guide-wifi-pass" aria-label="Property Wi-Fi Password" value="SunsetBodrum2026!" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
                 </div>
                 <div class="form-group" style="margin:0;">
                   <label style="font-size:12px; font-weight:700; color:#fff;">Kapı Smart Lock PIN Kodu</label>
-                  <input type="text" id="cfg-guide-pin" value="8492" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
+                  <input type="text" id="cfg-guide-pin" aria-label="Property Smart Door Lock PIN" value="8492" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
                 </div>
                 <div class="form-group" style="margin:0;">
                   <label style="font-size:12px; font-weight:700; color:#fff;">Check-in / Check-out Saatleri</label>
-                  <input type="text" id="cfg-guide-hours" value="Giriş: 14:00 • Çıkış: 11:00" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
+                  <input type="text" id="cfg-guide-hours" aria-label="Property Quiet Hours Rule" value="Giriş: 14:00 • Çıkış: 11:00" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
                 </div>
                 <div class="form-group" style="margin:0; grid-column:1 / -1;">
                   <label style="font-size:12px; font-weight:700; color:#EAB308;"><i data-lucide="car"></i> Bölgesel En Yakın Taksi Durağı & Telefon Numarası (Google Taksi Entegrasyonu)</label>
                   <div style="display:flex; gap:10px;">
-                    <input type="text" id="cfg-guide-taxi-name" value="Yalıkavak Marina Taksi Durağı" placeholder="Taksi Durağı Adı" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
-                    <input type="text" id="cfg-guide-taxi-phone" value="+90 252 385 40 00" placeholder="Telefon Numarası" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
+                    <input type="text" id="cfg-guide-taxi-name" aria-label="Recommended Local Taxi Station Name" value="Yalıkavak Marina Taksi Durağı" placeholder="Taksi Durağı Adı" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
+                    <input type="text" id="cfg-guide-taxi-phone" aria-label="Recommended Local Taxi Phone Number" value="+90 252 385 40 00" placeholder="Telefon Numarası" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
                   </div>
                 </div>
 
                 <div class="form-group" style="margin:0; grid-column:1 / -1;">
                   <label style="font-size:12px; font-weight:700; color:#fff;">Klima & Ev Cihazları Talimatı</label>
-                  <input type="text" id="cfg-guide-ac" value="Kumandayı COOL modunda ve 22°C'de tutmanız önerilir. Evden çıkarken lütfen kapatınız." style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
+                  <input type="text" id="cfg-guide-ac" aria-label="Air Conditioning Guidance Instructions" value="Kumandayı COOL modunda ve 22°C'de tutmanız önerilir. Evden çıkarken lütfen kapatınız." style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
                 </div>
 
                 <div style="grid-column:1 / -1; display:flex; justify-content:flex-end;">
@@ -2322,10 +2325,10 @@
                 <div class="stand-card">
                   <div class="stand-header">
                     <h2>Welcome to</h2>
-                    <h1 id="stand-prop-title">Malibu Beachfront Villa</h1>
+                    <h2 id="stand-prop-title">Malibu Beachfront Villa</h2>
                   </div>
                   <div class="stand-qr-frame">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://hostifyos.com/g/malibu-villa" alt="QR Code">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://hostifyos.com/g/malibu-villa" alt="HostifyOS Digital Guidebook Acrylic Tabletop Stand QR Code" width="200" height="200" loading="lazy">
                   </div>
                   <p class="stand-instruction">Scan with your smartphone camera for instant Wi-Fi, house manual & concierge services.</p>
                   <div class="stand-footer">
@@ -2340,12 +2343,12 @@
                 
                 <div class="form-group">
                   <label>Display Name</label>
-                  <input type="text" id="input-stand-title" value="Malibu Beachfront Villa" oninput="updateStandTitle(this.value)">
+                  <input type="text" id="input-stand-title" aria-label="Printable Stand Property Title" value="Malibu Beachfront Villa" oninput="updateStandTitle(this.value)">
                 </div>
 
                 <div class="form-group">
                   <label>Stand Theme Style</label>
-                  <select onchange="updateStandTheme(this.value)">
+                  <select aria-label="Printable Stand Theme Preset" onchange="updateStandTheme(this.value)">
                     <option value="obsidian">Modern Obsidian Dark</option>
                     <option value="light">Luxury Minimalist Light</option>
                     <option value="gold">Resort Gold Accent</option>
@@ -2387,11 +2390,11 @@
             <form onsubmit="event.preventDefault(); handleUserLogin('admin');">
               <div class="form-group">
                 <label>Super Admin Email</label>
-                <input type="email" id="input-admin-email" value="admin@hostifyos.com" required>
+                <input type="email" id="input-admin-email" aria-label="Master Admin Email Address" value="admin@hostifyos.com" required>
               </div>
               <div class="form-group">
                 <label>Admin Security Key</label>
-                <input type="password" value="admin-secret-2026" required>
+                <input type="password" aria-label="Super Admin Password" value="admin-secret-2026" required>
               </div>
 
               <button type="submit" class="btn-primary-lg" style="background:linear-gradient(135deg, var(--accent-amber), #D97706);">
@@ -2408,7 +2411,7 @@
         <div class="host-header">
           <div>
             <div style="display:flex; align-items:center; gap:12px; margin-bottom:4px;">
-              <h1 class="host-title"><i data-lucide="shield-check" class="text-accent"></i> Platform Master Admin Console</h1>
+              <h2 class="host-title"><i data-lucide="shield-check" class="text-accent"></i> Platform Master Admin Console</h2>
               <span class="badge-tag" style="background:rgba(245,158,11,0.15); color:var(--accent-amber);">Super Admin Active</span>
             </div>
             <p class="host-sub">Global governance of all host accounts, platform commission sweeps, SaaS MRR, and system auto-locks.</p>
@@ -2637,7 +2640,7 @@
               <form onsubmit="event.preventDefault(); sendAdminEmailBroadcast();">
                 <div class="form-group">
                   <label>Recipient Target Group</label>
-                  <select id="email-broadcast-target">
+                  <select id="email-broadcast-target" aria-label="Email Broadcast Recipient Filter">
                     <option value="all">All Registered Hosts (1,420 Hosts)</option>
                     <option value="trial">Active 14-Day Trial Hosts Only</option>
                     <option value="pro">Paid Pro Hosts ($19/mo)</option>
@@ -2646,15 +2649,15 @@
                 </div>
                 <div class="form-group" id="group-custom-email" style="display:none;">
                   <label>Custom Target Email</label>
-                  <input type="email" id="email-custom-target" placeholder="host@example.com">
+                  <input type="email" id="email-custom-target" aria-label="Custom Recipient Email Address" placeholder="host@example.com">
                 </div>
                 <div class="form-group">
                   <label>Email Subject Line</label>
-                  <input type="text" id="email-broadcast-subject" placeholder="Welcome to HostifyOS — Your 14-Day Free Trial is Active!" required>
+                  <input type="text" id="email-broadcast-subject" aria-label="Email Broadcast Subject Line" placeholder="Welcome to HostifyOS — Your 14-Day Free Trial is Active!" required>
                 </div>
                 <div class="form-group">
                   <label>Email Template Preset</label>
-                  <select id="email-template-selector" onchange="loadEmailTemplatePreset(this.value)">
+                  <select id="email-template-selector" aria-label="Select Email Template Preset" onchange="loadEmailTemplatePreset(this.value)">
                     <option value="welcome">📩 Welcome & 14-Day Trial Activation</option>
                     <option value="receipt">💳 Subscription Receipt & Payment Confirmation</option>
                     <option value="expiry">⏰ Trial Expiry Reminder (Day 12)</option>
@@ -2664,7 +2667,7 @@
                 </div>
                 <div class="form-group">
                   <label>Email Body Content (HTML Supported)</label>
-                  <textarea id="email-broadcast-body" rows="6" style="font-family:monospace; font-size:12px;" required></textarea>
+                  <textarea id="email-broadcast-body" aria-label="Email Broadcast HTML Body Content" rows="6" style="font-family:monospace; font-size:12px;" required></textarea>
                 </div>
                 <button type="submit" class="btn-primary-lg" style="background:#10B981;">
                   <i data-lucide="send"></i> Dispatch Email from hostifyos@gmail.com
@@ -2703,25 +2706,25 @@
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
               <div class="form-group">
                 <label>WhatsApp Host Number (International Format)</label>
-                <input type="text" id="widget-whatsapp-num" value="+905451234567" placeholder="+905451234567" required>
+                <input type="text" id="widget-whatsapp-num" aria-label="Automated WhatsApp Integration Phone Number" value="+905451234567" placeholder="+905451234567" required>
               </div>
               <div class="form-group">
                 <label>WhatsApp Floating Button Status</label>
-                <select id="widget-whatsapp-enabled">
+                <select id="widget-whatsapp-enabled" aria-label="Enable WhatsApp Concierge Widget">
                   <option value="true">Enabled (Visible on Website)</option>
                   <option value="false">Disabled (Hidden)</option>
                 </select>
               </div>
               <div class="form-group">
                 <label>AI Guest Welcome Assistant Status</label>
-                <select id="widget-ai-enabled">
+                <select id="widget-ai-enabled" aria-label="Enable AI Autonomous Concierge Support">
                   <option value="true">Enabled (AI Chat Interactive)</option>
                   <option value="false">Disabled</option>
                 </select>
               </div>
               <div class="form-group">
                 <label>AI Assistant Greeting Text</label>
-                <input type="text" id="widget-ai-greeting" value="Hello! Welcome to HostifyOS. How can I assist your stay or hosting today?" required>
+                <input type="text" id="widget-ai-greeting" aria-label="AI Concierge Initial Greeting Message" value="Hello! Welcome to HostifyOS. How can I assist your stay or hosting today?" required>
               </div>
             </div>
             <button type="submit" class="btn-primary-sm" style="background:var(--accent-amber); color:#000; font-weight:700;">
@@ -2767,7 +2770,7 @@
             <p class="text-muted">Adjust the default take-rate auto-deducted from host guest upsell transactions.</p>
             <div class="form-group" style="margin-top:14px;">
               <label>Default Take-Rate Percentage (%)</label>
-              <select id="global-commission-select" onchange="changeGlobalCommissionRate(this.value)">
+              <select id="global-commission-select" aria-label="Global Platform Commission Fee Rate" onchange="changeGlobalCommissionRate(this.value)">
                 <option value="0.05" selected>5.0% (Default Starter Tier)</option>
                 <option value="0.035">3.5% (Discounted Promo)</option>
                 <option value="0.0">0.0% (Global Commission Pause)</option>
@@ -2855,12 +2858,12 @@
         <form onsubmit="event.preventDefault(); processLemonSqueezySubscribe();">
           <div class="form-group" style="margin-bottom:10px;">
             <label style="font-size:12px;">Your Email Address</label>
-            <input type="email" id="lemon-email" placeholder="host@example.com" value="host@myproperty.com" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:8px 12px; border-radius:8px; width:100%; font-size:13px;">
+            <input type="email" id="lemon-email" aria-label="Account Billing Email Address" placeholder="host@example.com" value="host@myproperty.com" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:8px 12px; border-radius:8px; width:100%; font-size:13px;">
           </div>
 
           <div class="form-group" style="margin-bottom:10px;">
             <label style="font-size:12px;">Name on Card</label>
-            <input type="text" id="card-name" placeholder="John Doe" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:8px 12px; border-radius:8px; width:100%; font-size:13px;">
+            <input type="text" id="card-name" aria-label="Cardholder Full Name" placeholder="John Doe" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:8px 12px; border-radius:8px; width:100%; font-size:13px;">
           </div>
 
           <div class="form-group" style="margin-bottom:10px;">
@@ -2869,7 +2872,7 @@
               <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:#10B981; font-size:9px;">🔒 256-Bit SSL</span>
             </div>
             <div style="position:relative;">
-              <input type="text" id="card-number" placeholder="4242 •••• •••• 4242" maxlength="19" oninput="formatCardNumber(this)" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:8px 12px 8px 36px; border-radius:8px; width:100%; font-family:monospace; font-size:13px;">
+              <input type="text" id="card-number" aria-label="Credit or Debit Card Number" placeholder="4242 •••• •••• 4242" maxlength="19" oninput="formatCardNumber(this)" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:8px 12px 8px 36px; border-radius:8px; width:100%; font-family:monospace; font-size:13px;">
               <span style="position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:14px;">💳</span>
             </div>
           </div>
@@ -2877,11 +2880,11 @@
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
             <div class="form-group" style="margin:0;">
               <label style="font-size:12px;">Expiration (MM/YY)</label>
-              <input type="text" id="card-exp" placeholder="12/28" maxlength="5" oninput="formatCardExp(this)" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:8px 12px; border-radius:8px; width:100%; text-align:center; font-family:monospace; font-size:13px;">
+              <input type="text" id="card-exp" aria-label="Card Expiration Date MM/YY" placeholder="12/28" maxlength="5" oninput="formatCardExp(this)" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:8px 12px; border-radius:8px; width:100%; text-align:center; font-family:monospace; font-size:13px;">
             </div>
             <div class="form-group" style="margin:0;">
               <label style="font-size:12px;">CVC / CVV</label>
-              <input type="password" id="card-cvc" placeholder="•••" maxlength="4" oninput="this.value=this.value.replace(/[^0-9]/g,'')" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:8px 12px; border-radius:8px; width:100%; text-align:center; font-family:monospace; font-size:13px;">
+              <input type="password" id="card-cvc" aria-label="Card Security CVC / CVV" placeholder="•••" maxlength="4" oninput="this.value=this.value.replace(/[^0-9]/g,'')" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:8px 12px; border-radius:8px; width:100%; text-align:center; font-family:monospace; font-size:13px;">
             </div>
           </div>
 
@@ -2900,7 +2903,7 @@
         </div>
         <div style="font-size:11px; color:#94A3B8; margin-bottom:4px;">Beneficiary: <strong style="color:#fff;">Ali Turan Inc. (Ali Turan)</strong></div>
         <div style="display:flex; gap:6px; margin-bottom:10px;">
-          <input type="text" id="hostCheckoutIban" readonly value="TR22 0010 3000 0000 0059 1864 21" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#10B981; font-family:monospace; font-size:11px; padding:8px;">
+          <input type="text" id="hostCheckoutIban" aria-label="HostifyOS Bank Transfer IBAN" readonly value="TR22 0010 3000 0000 0059 1864 21" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#10B981; font-family:monospace; font-size:11px; padding:8px;">
           <button onclick="copyHostVal('hostCheckoutIban', 'IBAN Copied!')" style="background:#10B981; color:#090D14; border:none; border-radius:8px; padding:8px 12px; font-weight:800; font-size:11px; cursor:pointer;">Copy</button>
         </div>
         <div style="font-size:11px; color:#94A3B8; margin-bottom:8px;">SWIFT / BIC (International): <strong style="color:#fff;">FBABTRIS</strong></div>
@@ -2911,10 +2914,10 @@
 
       <!-- TAB 3: USDT CRYPTO -->
       <div id="h-tab-crypto" style="display:none; text-align:center; background:#090D14; padding:14px; border-radius:12px; border:1px solid rgba(255,255,255,0.06);">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa&color=090D14&bgcolor=10B981" style="width:100px; height:100px; border-radius:8px; margin-bottom:8px;">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa&color=090D14&bgcolor=10B981" alt="HostifyOS USDT TRC-20 Crypto Payment QR Code" width="100" height="100" loading="lazy" style="width:100px; height:100px; border-radius:8px; margin-bottom:8px;">
         <div style="font-size:11px; color:#10B981; font-weight:700; margin-bottom:4px;">Binance Tron (TRC-20) USDT Official Wallet</div>
         <div style="display:flex; gap:6px; margin-bottom:10px;">
-          <input type="text" id="hostCheckoutCrypto" readonly value="TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#10B981; font-family:monospace; font-size:10px; padding:8px;">
+          <input type="text" id="hostCheckoutCrypto" aria-label="HostifyOS USDT TRC-20 Wallet Address" readonly value="TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#10B981; font-family:monospace; font-size:10px; padding:8px;">
           <button onclick="copyHostVal('hostCheckoutCrypto', 'USDT Address Copied!')" style="background:#10B981; color:#090D14; border:none; border-radius:8px; padding:8px 12px; font-weight:800; font-size:11px; cursor:pointer;">Copy</button>
         </div>
         <button onclick="showToast('✅ Crypto transfer reported! Verifying TxHash on-chain.'); closeModal('modal-lemon-checkout');" class="btn-primary-sm" style="width:100%; padding:10px; font-weight:800; font-size:12px;">
@@ -2960,7 +2963,7 @@
       <form onsubmit="event.preventDefault(); submitAdmin2FACode();">
         <div class="form-group" style="margin-bottom:12px;">
           <label style="text-align:center; display:block; font-size:11px;">Enter 6-Digit Authenticator Code</label>
-          <input type="text" id="input-2fa-code" placeholder="123456" maxlength="6" style="text-align:center; font-size:22px; letter-spacing:6px; font-family:var(--font-mono); font-weight:700; color:var(--accent-emerald);" required>
+          <input type="text" id="input-2fa-code" aria-label="Two-Factor Authentication 6-Digit Code" placeholder="123456" maxlength="6" style="text-align:center; font-size:22px; letter-spacing:6px; font-family:var(--font-mono); font-weight:700; color:var(--accent-emerald);" required>
         </div>
         <div style="background:rgba(99,102,241,0.1); border:1px solid rgba(99,102,241,0.2); padding:8px; border-radius:8px; margin-bottom:12px; font-size:10px; color:var(--accent-indigo); text-align:center;">
           🔒 IP Allowlist & Device Fingerprint Security Active
@@ -2980,7 +2983,7 @@
       <form onsubmit="event.preventDefault(); submitPasswordReset();">
         <div class="form-group">
           <label>Registered Host Email</label>
-          <input type="email" id="reset-email-input" placeholder="sarah@malibuvillas.com" required>
+          <input type="email" id="reset-email-input" aria-label="Password Reset Email Address" placeholder="sarah@malibuvillas.com" required>
         </div>
         <button type="submit" class="btn-primary-lg">Send Magic Link Token</button>
       </form>
@@ -3044,7 +3047,7 @@
       <form onsubmit="event.preventDefault(); submitUpdateHostCard();">
         <div class="form-group">
           <label>Host Email</label>
-          <input type="email" id="update-card-email" value="sarah@malibuvillas.com" required readonly>
+          <input type="email" id="update-card-email" aria-label="Billing Profile Update Email Address" value="sarah@malibuvillas.com" required readonly>
         </div>
 
         <div class="form-group">
@@ -3136,7 +3139,7 @@
       <form onsubmit="event.preventDefault(); submitCustomPayLink();">
         <div class="form-group">
           <label>Custom Payment Link URL</label>
-          <input type="url" id="custom-pay-url-input" placeholder="https://buy.stripe.com/your-custom-link" required>
+          <input type="url" id="custom-pay-url-input" aria-label="Custom Payment Gateway URL" placeholder="https://buy.stripe.com/your-custom-link" required>
         </div>
         <button type="submit" class="btn-primary-lg">Save Custom Payment Link</button>
       </form>
@@ -3152,11 +3155,11 @@
       <form onsubmit="event.preventDefault(); submitEditWifi();">
         <div class="form-group">
           <label>Wi-Fi Network SSID (Name)</label>
-          <input type="text" id="edit-wifi-ssid" placeholder="MalibuVilla_5G" required>
+          <input type="text" id="edit-wifi-ssid" aria-label="Property Wi-Fi Network Name" placeholder="MalibuVilla_5G" required>
         </div>
         <div class="form-group">
           <label>Wi-Fi Password</label>
-          <input type="text" id="edit-wifi-pass" placeholder="MalibuPass2026!" required>
+          <input type="text" id="edit-wifi-pass" aria-label="Property Wi-Fi Network Password" placeholder="MalibuPass2026!" required>
         </div>
         <button type="submit" class="btn-primary-lg">Save & Update Wi-Fi Credentials</button>
       </form>
@@ -3172,7 +3175,7 @@
       <form onsubmit="event.preventDefault(); submitEditPin();">
         <div class="form-group">
           <label>Door Lockbox Access Code</label>
-          <input type="text" id="edit-door-pin" placeholder="4821" required>
+          <input type="text" id="edit-door-pin" aria-label="Property Keyless Door Lock PIN Code" placeholder="4821" required>
         </div>
         <button type="submit" class="btn-primary-lg">Save & Update Access Code</button>
       </form>
@@ -3188,7 +3191,7 @@
       <form onsubmit="event.preventDefault(); submitEditBank();">
         <div class="form-group">
           <label>Bank Name & Account Info</label>
-          <input type="text" id="edit-bank-name" placeholder="Demo Merchant Bank (****4821 - USD)" required>
+          <input type="text" id="edit-bank-name" aria-label="Host Merchant Payout Account Details" placeholder="Demo Merchant Bank (****4821 - USD)" required>
         </div>
         <button type="submit" class="btn-primary-lg">Save & Update Payout Bank</button>
       </form>
@@ -3205,11 +3208,11 @@
       <form onsubmit="event.preventDefault(); submitNewVideoGuide();">
         <div class="form-group">
           <label>Appliance / Feature Name</label>
-          <input type="text" id="new-v-title" placeholder="e.g. Pool Heating & Jet Controls" required>
+          <input type="text" id="new-v-title" aria-label="Appliance Video Guide Title" placeholder="e.g. Pool Heating & Jet Controls" required>
         </div>
         <div class="form-group">
           <label>Video Instructions / Description</label>
-          <input type="text" id="new-v-desc" placeholder="How to switch on the pool heater and massage jets." required>
+          <input type="text" id="new-v-desc" aria-label="Appliance Video Guide Description" placeholder="How to switch on the pool heater and massage jets." required>
         </div>
 
         <button type="submit" class="btn-primary-lg">Save Video Guide to Guidebook</button>
@@ -3227,12 +3230,12 @@
       <form onsubmit="event.preventDefault(); submitNewTunnel();">
         <div class="form-group">
           <label>Tunnel Name</label>
-          <input type="text" id="new-t-name" placeholder="e.g. Mid-Stay Deep Clean Tunnel" required>
+          <input type="text" id="new-t-name" aria-label="Automated Guest Tunnel Campaign Name" placeholder="e.g. Mid-Stay Deep Clean Tunnel" required>
         </div>
         
         <div class="form-group">
           <label>Trigger Event Timing</label>
-          <select id="new-t-trigger">
+          <select id="new-t-trigger" aria-label="Guest Tunnel Trigger Timing Event">
             <option value="48 Hours Before Check-in">48 Hours Before Check-in (Pre-Arrival)</option>
             <option value="Check-in Day at 2:00 PM">Check-in Day (Welcome PIN & Wi-Fi)</option>
             <option value="Day 3 of Stay at 10:00 AM">Day 3 of Stay (Mid-Stay Refresh)</option>
@@ -3243,7 +3246,7 @@
 
         <div class="form-group">
           <label>Automated Messaging Channel</label>
-          <select id="new-t-channel">
+          <select id="new-t-channel" aria-label="Guest Tunnel Delivery Channel">
             <option value="WhatsApp & SMS">WhatsApp & SMS (Recommended)</option>
             <option value="PWA Push Notification">PWA Web Push Notification</option>
             <option value="Airbnb / Channel Inbox">Airbnb / Vrbo Inbox API</option>
@@ -3253,7 +3256,7 @@
 
         <div class="form-group">
           <label>Target Upsell Service</label>
-          <select id="new-t-offer">
+          <select id="new-t-offer" aria-label="Guest Tunnel Attached Upsell Offer">
             <option value="VIP Airport Shuttle ($75.00)">VIP Airport Shuttle ($75.00)</option>
             <option value="Late Check-out 2:00 PM ($45.00)">Late Check-out 2:00 PM ($45.00)</option>
             <option value="Mid-Stay Deep Clean ($65.00)">Mid-Stay Deep Clean ($65.00)</option>
@@ -3276,7 +3279,7 @@
       
       <div class="form-group">
         <label>Listing Platform Channel</label>
-        <select id="ai-platform-select">
+        <select id="ai-platform-select" aria-label="Target Booking Channel for AI Import">
           <option value="Airbnb">Airbnb</option>
           <option value="Vrbo">Vrbo</option>
           <option value="Booking.com">Booking.com</option>
@@ -3286,7 +3289,7 @@
 
       <div class="form-group">
         <label>Property Listing URL</label>
-        <input type="url" id="ai-url-input" placeholder="https://www.airbnb.com/rooms/12345678" value="https://www.airbnb.com/rooms/8942104">
+        <input type="url" id="ai-url-input" aria-label="Public Listing Web Link URL for AI Extraction" placeholder="https://www.airbnb.com/rooms/12345678" value="https://www.airbnb.com/rooms/8942104">
       </div>
 
       <button class="btn-primary-lg" id="btn-run-ai-scrape" onclick="runAiScrapeSimulator()">
@@ -3305,11 +3308,11 @@
       <form onsubmit="event.preventDefault(); submitNewProperty();">
         <div class="form-group">
           <label>Property Title</label>
-          <input type="text" id="new-p-title" placeholder="e.g. Miami Sunset Penthouse" required>
+          <input type="text" id="new-p-title" aria-label="New Property Listing Title" placeholder="e.g. Miami Sunset Penthouse" required>
         </div>
         <div class="form-group">
           <label>Channel Platform</label>
-          <select id="new-p-platform">
+          <select id="new-p-platform" aria-label="Booking Platform Source Channel">
             <option value="Airbnb">Airbnb</option>
             <option value="Vrbo">Vrbo</option>
             <option value="Booking.com">Booking.com</option>
@@ -3318,22 +3321,22 @@
         </div>
         <div class="form-group">
           <label>Full Address</label>
-          <input type="text" id="new-p-address" placeholder="e.g. 1100 Biscayne Blvd, Miami, FL" required>
+          <input type="text" id="new-p-address" aria-label="Property Physical Street Address" placeholder="e.g. 1100 Biscayne Blvd, Miami, FL" required>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label>Wi-Fi Network Name</label>
-            <input type="text" id="new-p-wifi" placeholder="MiamiPenthouse_5G">
+            <input type="text" id="new-p-wifi" aria-label="Property Wi-Fi Network Name" placeholder="MiamiPenthouse_5G">
           </div>
           <div class="form-group">
             <label>Door Access PIN (Non-Sequential)</label>
-            <input type="text" id="new-p-pin" placeholder="7789">
+            <input type="text" id="new-p-pin" aria-label="Property Smart Door Lock Access PIN" placeholder="7789">
           </div>
         </div>
 
         <div class="form-group">
           <label>Property IANA Timezone (Physical PIN & Check-in Schedule)</label>
-          <select id="new-p-tz">
+          <select id="new-p-tz" aria-label="Property Local Timezone">
             <option value="America/Los_Angeles" selected>America/Los_Angeles (Malibu / PST)</option>
             <option value="America/New_York">America/New_York (Miami / EST)</option>
             <option value="Europe/Istanbul">Europe/Istanbul (Turkey / TRT)</option>
@@ -3355,7 +3358,7 @@
       <button class="modal-close" onclick="closeModal('modal-video')"><i data-lucide="x"></i></button>
       <h3 id="v-modal-title">Appliance Guide</h3>
       <div class="video-preview-wrapper">
-        <img id="v-modal-img" src="" alt="Guide Preview">
+        <img id="v-modal-img" src="" alt="HostifyOS Luxury Guidebook Feature Preview" width="600" height="400" loading="lazy">
         <div class="simulated-play-bar">
           <i data-lucide="pause-circle"></i>
           <div class="progress-line"><div class="progress-fill" style="width: 45%;"></div></div>
@@ -3413,7 +3416,7 @@
           <form onsubmit="event.preventDefault(); processStripePayment('Credit Card');" class="stripe-card-form">
             <div class="form-group">
               <label>Guest Cardholder Name</label>
-              <input type="text" id="guest-card-name" placeholder="John Doe" value="John Doe" required>
+              <input type="text" id="guest-card-name" aria-label="Guest Cardholder Name for Room Service" placeholder="John Doe" value="John Doe" required>
             </div>
             
             <div class="form-group">
@@ -3454,11 +3457,11 @@
       <form onsubmit="event.preventDefault(); submitNewService();">
         <div class="form-group">
           <label>Service Name</label>
-          <input type="text" id="new-s-name" placeholder="e.g. VIP Airport Transfer" required>
+          <input type="text" id="new-s-name" aria-label="New Upsell Service Name" placeholder="e.g. VIP Airport Transfer" required>
         </div>
         <div class="form-group">
           <label>Category</label>
-          <select id="new-s-cat">
+          <select id="new-s-cat" aria-label="New Upsell Service Category">
             <option value="transport">Transportation</option>
             <option value="stay">Check-in / Check-out</option>
             <option value="cleaning">Housekeeping</option>
@@ -3467,11 +3470,11 @@
         </div>
         <div class="form-group">
           <label>Price (USD)</label>
-          <input type="number" id="new-s-price" placeholder="45.00" step="0.01" required>
+          <input type="number" id="new-s-price" aria-label="New Upsell Service Price" placeholder="45.00" step="0.01" required>
         </div>
         <div class="form-group">
           <label>Description</label>
-          <input type="text" id="new-s-desc" placeholder="Private driver directly from airport arrival hall." required>
+          <input type="text" id="new-s-desc" aria-label="New Upsell Service Description" placeholder="Private driver directly from airport arrival hall." required>
         </div>
 
         <button type="submit" class="btn-primary-lg">Save & Publish to Guidebook</button>
@@ -3629,7 +3632,7 @@
             <strong style="font-size:12px; color:var(--text-main);">Performance & Analytics Cookies</strong>
             <p style="font-size:11px; color:var(--text-muted); margin:2px 0 0;">Help us monitor uptime performance & guidebook open rates.</p>
           </div>
-          <input type="checkbox" id="cookie-opt-analytics" checked style="width:18px; height:18px; accent-color:var(--accent-indigo);">
+          <input type="checkbox" id="cookie-opt-analytics" aria-label="Accept Performance and Analytics Cookies" checked style="width:18px; height:18px; accent-color:var(--accent-indigo);">
         </div>
       </div>
 
@@ -3672,11 +3675,11 @@
       <form onsubmit="event.preventDefault(); executeDoubleApprovedAction();">
         <div class="form-group" style="margin-bottom:10px;">
           <label>Secondary Checker Admin Email (Self-Approval Prohibited):</label>
-          <input type="email" id="checker-admin-email" placeholder="checker.admin@hostifyos.com" required style="font-size:12px;">
+          <input type="email" id="checker-admin-email" aria-label="Checker Super Admin Email Address" placeholder="checker.admin@hostifyos.com" required style="font-size:12px;">
         </div>
         <div class="form-group" style="margin-bottom:12px;">
           <label>Secondary Checker Authorization Key:</label>
-          <input type="password" id="approve-security-key" placeholder="Enter Checker Authorization Security Key" required style="font-family:var(--font-mono); font-size:12px;">
+          <input type="password" id="approve-security-key" aria-label="Checker Authorization Security Key" placeholder="Enter Checker Authorization Security Key" required style="font-family:var(--font-mono); font-size:12px;">
         </div>
         <button type="submit" class="btn-primary-lg" style="background:#EF4444; border-color:#EF4444;">
           <i data-lucide="shield-alert"></i> Authorize & Append to Immutable Audit Log
@@ -3697,7 +3700,7 @@
 
       <form onsubmit="event.preventDefault(); submitEmailOTPVerification();" style="margin-top:14px;">
         <div class="form-group" style="margin-bottom:14px;">
-          <input type="text" id="input-email-otp" placeholder="Enter 6-digit OTP" maxlength="6" style="text-align:center; font-size:22px; letter-spacing:6px; font-family:var(--font-mono); font-weight:700; color:var(--accent-emerald);" required>
+          <input type="text" id="input-email-otp" aria-label="Two-Factor Email Verification OTP Code" placeholder="Enter 6-digit OTP" maxlength="6" style="text-align:center; font-size:22px; letter-spacing:6px; font-family:var(--font-mono); font-weight:700; color:var(--accent-emerald);" required>
         </div>
         <button type="submit" class="btn-primary-lg">Confirm Email & Unlock Account</button>
       </form>
@@ -3730,7 +3733,7 @@
       </div>
 
       <div style="padding:10px; background:#131924; border-top:1px solid rgba(255,255,255,0.08); display:flex; gap:8px;">
-        <input type="text" id="ai-chat-input" placeholder="Ask AI about Wi-Fi, PINs, or Pricing..." style="flex:1; background:#090D14; border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff; padding:8px 12px; font-size:12px;" onkeypress="if(event.key==='Enter') sendAiChatMessage()">
+        <input type="text" id="ai-chat-input" aria-label="Ask AI Assistant Question" placeholder="Ask AI about Wi-Fi, PINs, or Pricing..." style="flex:1; background:#090D14; border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff; padding:8px 12px; font-size:12px;" onkeypress="if(event.key==='Enter') sendAiChatMessage()">
         <button onclick="sendAiChatMessage()" style="background:#10B981; border:none; color:#fff; border-radius:8px; width:36px; height:36px; display:flex; align-items:center; justify-content:center; cursor:pointer;">
           <i data-lucide="send" style="width:16px; height:16px;"></i>
         </button>

@@ -524,7 +524,7 @@
   <!-- HEADER -->
   <header class="header">
     <a href="/" class="logo">
-      <img src="brand_logo.jpg" alt="HostifyOS Logo">
+      <img src="brand_logo.jpg" alt="HostifyOS Official Logo" width="34" height="34">
       <span>HostifyOS</span>
     </a>
     <nav class="nav-links">
@@ -561,7 +561,7 @@
       <div class="toggle-container">
         <span class="toggle-label active" id="label-monthly">Monthly Billing</span>
         <label class="switch">
-          <input type="checkbox" id="billing-toggle" onchange="toggleBillingCycle()">
+          <input type="checkbox" id="billing-toggle" aria-label="Toggle Annual and Monthly Billing Cycle" onchange="toggleBillingCycle()">
           <span class="slider"></span>
         </label>
         <span class="toggle-label" id="label-annual">Annual Billing</span>
@@ -648,11 +648,11 @@
           <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa&color=090D14&bgcolor=10B981" alt="Binance QR" style="width:140px; height:140px; border-radius:10px; margin-bottom:8px;">
           <div style="color:#10B981; font-size:11px; font-weight:700; margin-bottom:6px;">Network: Tron (TRC-20) • Zero Fees</div>
           <div class="copy-row">
-            <input type="text" id="cryptoAddr" class="copy-input" readonly value="TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa">
+            <input type="text" id="cryptoAddr" aria-label="HostifyOS USDT TRC-20 Wallet Address" class="copy-input" readonly value="TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa">
             <button class="btn-copy" onclick="copyValue('cryptoAddr', 'Binance USDT Address Copied!')">Copy</button>
           </div>
         </div>
-        <input type="email" id="cryptoEmail" placeholder="Account Email (for instant activation)" style="width:100%; box-sizing:border-box; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px 12px; margin-bottom:10px;">
+        <input type="email" id="cryptoEmail" aria-label="Account Email for Crypto Payment Activation" placeholder="Account Email (for instant activation)" style="width:100%; box-sizing:border-box; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px 12px; margin-bottom:10px;">
         <button class="btn-plan" style="margin:0;" onclick="submitCryptoPay()">
           ✅ I Have Sent USDT (Instant Activation)
         </button>
@@ -686,19 +686,19 @@
           <!-- IBAN -->
           <div style="font-size:11px; color:#10B981; font-weight:700; margin-bottom:2px;">IBAN (TL / USD / EUR):</div>
           <div class="copy-row" style="margin-bottom:12px;">
-            <input type="text" id="ibanVal" class="copy-input" readonly value="TR22 0010 3000 0000 0059 1864 21">
+            <input type="text" id="ibanVal" aria-label="HostifyOS Fibabanka IBAN" class="copy-input" readonly value="TR22 0010 3000 0000 0059 1864 21">
             <button class="btn-copy" onclick="copyValue('ibanVal', 'Fibabanka IBAN Copied to Clipboard!')">Copy</button>
           </div>
 
           <!-- SWIFT / BIC -->
           <div style="font-size:11px; color:#94A3B8; font-weight:700; margin-bottom:2px;">SWIFT / BIC Code (International Wire):</div>
           <div class="copy-row">
-            <input type="text" id="swiftVal" class="copy-input" readonly value="FBABTRIS">
+            <input type="text" id="swiftVal" aria-label="HostifyOS Bank SWIFT Code" class="copy-input" readonly value="FBABTRIS">
             <button class="btn-copy" onclick="copyValue('swiftVal', 'Fibabanka SWIFT Code Copied!')">Copy</button>
           </div>
         </div>
         
-        <input type="email" id="bankUserEmail" placeholder="Your Account Email (for activation)" style="width:100%; box-sizing:border-box; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px 12px; margin-bottom:10px;">
+        <input type="email" id="bankUserEmail" aria-label="Your Account Email for Bank Wire Activation" placeholder="Your Account Email (for activation)" style="width:100%; box-sizing:border-box; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px 12px; margin-bottom:10px;">
         
         <p style="font-size:11px; color:#94A3B8; margin:0 0 10px 0; text-align:center;">* Açıklama kısmına e-posta adresinizi yazınız.</p>
         <button class="btn-plan" style="margin:0;" onclick="notifyBankTransfer()">

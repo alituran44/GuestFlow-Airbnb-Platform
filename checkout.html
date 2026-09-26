@@ -8,12 +8,41 @@
   <link rel="canonical" href="https://www.hostifyos.com/checkout.html">
   <link rel="icon" type="image/jpeg" href="brand_logo.jpg">
 
+  <!-- Open Graph & Social Cards -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="HostifyOS">
+  <meta property="og:title" content="HostifyOS — Secure Checkout & 14-Day Free Trial">
+  <meta property="og:description" content="Complete your HostifyOS subscription. 14-day free trial, zero commission, instant activation via Credit Card, Apple Pay, Bank Wire, USDT Crypto or WhatsApp.">
+  <meta property="og:image" content="https://www.hostifyos.com/brand_logo.jpg">
+  <meta property="og:url" content="https://www.hostifyos.com/checkout.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HostifyOS — Secure Checkout & 14-Day Free Trial">
+  <meta name="twitter:description" content="Complete your HostifyOS subscription. 14-day free trial, zero commission, instant activation.">
+  <meta name="twitter:image" content="https://www.hostifyos.com/brand_logo.jpg">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
+    .visually-hidden {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent, #10B981) !important;
+      outline-offset: 2px !important;
+    }
+
     :root {
       --bg-dark: #090D14;
       --card-bg: #111827;
@@ -485,7 +514,7 @@
   <header class="checkout-header">
     <div class="header-inner">
       <a href="/" class="logo-area">
-        <img src="brand_logo.jpg" alt="HostifyOS Logo">
+        <img src="brand_logo.jpg" alt="HostifyOS Official Logo" width="34" height="34" loading="eager" fetchpriority="high">
         <span>HostifyOS</span>
       </a>
       <div style="display:flex; align-items:center; gap:14px;">
@@ -497,6 +526,7 @@
 
   <!-- MAIN CHECKOUT -->
   <main class="checkout-container">
+    <h1 class="visually-hidden">HostifyOS Secure Checkout & Subscription Setup</h1>
     <div class="checkout-grid">
       
       <!-- LEFT COLUMN: PLAN & PAYMENT CONFIG -->
@@ -600,24 +630,24 @@
               <form id="paynkolayForm" onsubmit="event.preventDefault(); submitPaynkolayCheckout();">
                 <div class="form-group">
                   <label>Hesap E-Posta Adresi (Fatura & Aktivasyon)</label>
-                  <input type="email" id="pkEmail" class="form-control" placeholder="host@example.com" value="host@myproperty.com" required>
+                  <input type="email" id="pkEmail" aria-label="Email Address for Invoice & Setup" class="form-control" placeholder="host@example.com" value="host@myproperty.com" required>
                 </div>
                 <div class="form-group">
                   <label>Kart Üzerindeki İsim</label>
-                  <input type="text" id="pkCardName" class="form-control" placeholder="Ahmet Yılmaz" value="Ahmet Yılmaz" required>
+                  <input type="text" id="pkCardName" aria-label="Cardholder Full Name" class="form-control" placeholder="Ahmet Yılmaz" value="Ahmet Yılmaz" required>
                 </div>
                 <div class="form-group">
                   <label>Kart Numarası</label>
-                  <input type="text" id="pkCardNum" class="form-control" placeholder="4242 •••• •••• 4242" maxlength="19" oninput="formatCardNumber(this)" required style="font-family:monospace; letter-spacing:1px;">
+                  <input type="text" id="pkCardNum" aria-label="Credit or Debit Card Number" class="form-control" placeholder="4242 •••• •••• 4242" maxlength="19" oninput="formatCardNumber(this)" required style="font-family:monospace; letter-spacing:1px;">
                 </div>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
                   <div class="form-group">
                     <label>Son Kullanma (AA/YY)</label>
-                    <input type="text" id="pkCardExp" class="form-control" placeholder="12/28" maxlength="5" oninput="formatCardExp(this)" required style="text-align:center; font-family:monospace;">
+                    <input type="text" id="pkCardExp" aria-label="Card Expiration Date MM/YY" class="form-control" placeholder="12/28" maxlength="5" oninput="formatCardExp(this)" required style="text-align:center; font-family:monospace;">
                   </div>
                   <div class="form-group">
                     <label>CVV / CVC Kodu</label>
-                    <input type="password" id="pkCardCvc" class="form-control" placeholder="•••" maxlength="4" oninput="this.value=this.value.replace(/[^0-9]/g,'')" required style="text-align:center; font-family:monospace;">
+                    <input type="password" id="pkCardCvc" aria-label="Card Security Code CVC" class="form-control" placeholder="•••" maxlength="4" oninput="this.value=this.value.replace(/[^0-9]/g,'')" required style="text-align:center; font-family:monospace;">
                   </div>
                 </div>
 
@@ -648,11 +678,11 @@
               <form id="dodoForm" onsubmit="event.preventDefault(); submitDodoCheckout();">
                 <div class="form-group">
                   <label>Account Email Address</label>
-                  <input type="email" id="dodoEmail" class="form-control" placeholder="host@example.com" value="host@myproperty.com" required>
+                  <input type="email" id="dodoEmail" aria-label="Global Account Billing Email" class="form-control" placeholder="host@example.com" value="host@myproperty.com" required>
                 </div>
                 <div class="form-group">
                   <label>Full Name</label>
-                  <input type="text" id="dodoName" class="form-control" placeholder="John Doe" value="John Doe" required>
+                  <input type="text" id="dodoName" aria-label="Account Holder Name" class="form-control" placeholder="John Doe" value="John Doe" required>
                 </div>
 
                 <button type="submit" class="btn-submit-checkout" id="btnDodoSubmit">
@@ -678,14 +708,14 @@
               <!-- IBAN -->
               <div style="font-size:11px; color:var(--accent); font-weight:700; margin-bottom:2px;">IBAN (TL / USD / EUR):</div>
               <div class="copy-row" style="margin-bottom:12px;">
-                <input type="text" id="bankIbanVal" class="copy-input" readonly value="TR22 0010 3000 0000 0059 1864 21">
+                <input type="text" id="bankIbanVal" class="copy-input" aria-label="Fibabanka IBAN Number" readonly value="TR22 0010 3000 0000 0059 1864 21">
                 <button type="button" class="btn-copy" onclick="copyValue('bankIbanVal', 'Fibabanka IBAN Copied!')">Copy</button>
               </div>
 
               <!-- SWIFT / BIC -->
               <div style="font-size:11px; color:var(--text-muted); font-weight:700; margin-bottom:2px;">SWIFT / BIC Code (International Wire):</div>
               <div class="copy-row">
-                <input type="text" id="bankSwiftVal" class="copy-input" readonly value="FBABTRIS">
+                <input type="text" id="bankSwiftVal" class="copy-input" aria-label="Bank SWIFT BIC Code" readonly value="FBABTRIS">
                 <button type="button" class="btn-copy" onclick="copyValue('bankSwiftVal', 'SWIFT Code Copied!')">Copy</button>
               </div>
 
@@ -696,7 +726,7 @@
 
             <div class="form-group">
               <label>Hesap E-Posta Adresiniz (Activation Email)</label>
-              <input type="email" id="bankEmail" class="form-control" placeholder="host@example.com">
+              <input type="email" id="bankEmail" class="form-control" aria-label="Bank Transfer Verification Email" placeholder="host@example.com">
             </div>
 
             <p style="font-size:11px; color:var(--text-muted); margin:0 0 12px 0; text-align:center;">
@@ -711,11 +741,11 @@
           <!-- METHOD 3: USDT CRYPTO (BINANCE TRC-20) -->
           <div id="method-content-crypto" style="display:none;">
             <div class="info-box" style="text-align:center;">
-              <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa&color=090D14&bgcolor=10B981" alt="Binance QR" style="width:130px; height:130px; border-radius:10px; margin-bottom:8px;">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa&color=090D14&bgcolor=10B981" alt="HostifyOS USDT TRC-20 Binance Deposit QR Code" width="130" height="130" loading="lazy" style="width:130px; height:130px; border-radius:10px; margin-bottom:8px;">
               <div style="color:var(--accent); font-size:12px; font-weight:800; margin-bottom:6px;">Network: Tron (TRC-20) • 0% Platform Fee</div>
               
               <div class="copy-row" style="max-width:440px; margin:0 auto 10px auto;">
-                <input type="text" id="cryptoAddrVal" class="copy-input" readonly value="TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa">
+                <input type="text" id="cryptoAddrVal" class="copy-input" aria-label="USDT TRC-20 Wallet Address" readonly value="TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa">
                 <button type="button" class="btn-copy" onclick="copyValue('cryptoAddrVal', 'USDT Address Copied!')">Copy</button>
               </div>
 
@@ -726,7 +756,7 @@
 
             <div class="form-group">
               <label>Account Email Address</label>
-              <input type="email" id="cryptoEmail" class="form-control" placeholder="host@example.com">
+              <input type="email" id="cryptoEmail" class="form-control" aria-label="USDT Payment Confirmation Email" placeholder="host@example.com">
             </div>
 
             <button type="button" class="btn-submit-checkout" onclick="submitCryptoNotification()">

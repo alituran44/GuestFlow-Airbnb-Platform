@@ -457,8 +457,8 @@
         </div>
       </div>
       <div style="display:flex; gap:8px; align-items:center;">
-        <input type="number" id="cur-amount" value="50" style="width:70px; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:8px; color:#fff; padding:8px 10px; font-size:13px; font-weight:700;" oninput="calcLiveCurrency()">
-        <select id="cur-from" style="background:#111827; border:1px solid var(--border); border-radius:8px; color:#fff; padding:8px; font-size:12px; font-weight:700;" onchange="calcLiveCurrency()">
+        <input type="number" id="cur-amount" aria-label="Currency Converter Input Amount" value="50" style="width:70px; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:8px; color:#fff; padding:8px 10px; font-size:13px; font-weight:700;" oninput="calcLiveCurrency()">
+        <select id="cur-from" aria-label="Source Currency Code" style="background:#111827; border:1px solid var(--border); border-radius:8px; color:#fff; padding:8px; font-size:12px; font-weight:700;" onchange="calcLiveCurrency()">
           <option value="USD">USD ($)</option>
           <option value="EUR">EUR (€)</option>
           <option value="GBP">GBP (£)</option>
@@ -629,7 +629,7 @@
         <span style="font-size:10px; background:rgba(147,51,234,0.15); color:#C084FC; padding:2px 8px; border-radius:99px; font-weight:700;">● Milas-Bodrum (BJV)</span>
       </div>
       <div style="display:flex; gap:8px; margin-bottom:10px;">
-        <input type="text" id="flight-code-input" placeholder="Uçuş Kodu (Örn: TK2520, PC2242)" value="TK2520" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:8px; color:#fff; padding:8px 12px; font-size:13px; font-weight:700;">
+        <input type="text" id="flight-code-input" aria-label="Flight Number Tracker Input" placeholder="Uçuş Kodu (Örn: TK2520, PC2242)" value="TK2520" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:8px; color:#fff; padding:8px 12px; font-size:13px; font-weight:700;">
         <button onclick="trackFlightStatus()" class="btn-action" style="width:auto; margin:0; padding:8px 16px; font-size:12px;">Sorgula</button>
       </div>
       <div id="flight-result-box" style="background:rgba(255,255,255,0.03); border:1px solid var(--border); padding:12px; border-radius:10px; font-size:12px;">
@@ -783,11 +783,11 @@
           <span style="background:rgba(59,130,246,0.15); color:#60A5FA; font-size:10px; font-weight:700; padding:2px 8px; border-radius:99px;">🔒 3D Secure / SSL</span>
         </div>
         <div style="display:flex; flex-direction:column; gap:8px;">
-          <input type="text" id="guestCardHolder" placeholder="Kart Üzerindeki İsim" value="Misafir Adı" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff; font-size:12px; padding:8px 10px;">
-          <input type="text" id="guestCardNum" placeholder="•••• •••• •••• •••• (Kart Numarası)" value="•••• •••• •••• 4242" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff; font-size:12px; padding:8px 10px;">
+          <input type="text" id="guestCardHolder" aria-label="Cardholder Full Name" placeholder="Kart Üzerindeki İsim" value="Misafir Adı" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff; font-size:12px; padding:8px 10px;">
+          <input type="text" id="guestCardNum" aria-label="Credit Card Number" placeholder="•••• •••• •••• •••• (Kart Numarası)" value="•••• •••• •••• 4242" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff; font-size:12px; padding:8px 10px;">
           <div style="display:flex; gap:8px;">
-            <input type="text" placeholder="AA/YY" value="12/28" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff; font-size:12px; padding:8px 10px;">
-            <input type="password" placeholder="CVC" value="123" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff; font-size:12px; padding:8px 10px;">
+            <input type="text" placeholder="AA/YY" aria-label="Card Expiration Date" value="12/28" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff; font-size:12px; padding:8px 10px;">
+            <input type="password" placeholder="CVC" aria-label="Card Security CVC" value="123" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff; font-size:12px; padding:8px 10px;">
           </div>
         </div>
       </div>
@@ -797,17 +797,17 @@
         <div style="font-size:11px; color:#94A3B8;">Ev Sahibi: <strong style="color:#fff;">Ali Turan (Fibabanka A.Ş.)</strong></div>
         <div style="font-size:11px; color:#10B981; font-weight:700; margin-top:6px;">IBAN (7/24 FAST):</div>
         <div style="display:flex; gap:6px; margin-top:4px;">
-          <input type="text" id="hostIbanInput" readonly value="TR22 0010 3000 0000 0059 1864 21" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#10B981; font-family:monospace; font-size:11px; padding:8px;">
+          <input type="text" id="hostIbanInput" aria-label="Host Bank IBAN" readonly value="TR22 0010 3000 0000 0059 1864 21" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#10B981; font-family:monospace; font-size:11px; padding:8px;">
           <button onclick="copyHostVal('hostIbanInput', 'Ev Sahibi Fibabanka IBAN Kopyalandı!')" style="background:#10B981; color:#090D14; border:none; border-radius:8px; padding:8px 12px; font-weight:800; font-size:11px; cursor:pointer;">Kopyala</button>
         </div>
       </div>
 
       <!-- TAB 3: CRYPTO -->
       <div id="s-tab-crypto" style="display:none; text-align:center; background:#090D14; padding:14px; border-radius:14px; border:1px solid rgba(255,255,255,0.06); margin-bottom:14px;">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa&color=090D14&bgcolor=10B981" style="width:100px; height:100px; border-radius:8px; margin-bottom:6px;">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa&color=090D14&bgcolor=10B981" alt="HostifyOS USDT TRC-20 Crypto Payment QR Code" width="100" height="100" loading="lazy" style="width:100px; height:100px; border-radius:8px; margin-bottom:6px;">
         <div style="font-size:11px; color:#10B981; font-weight:700; margin-bottom:4px;">Tron (TRC-20) USDT Cüzdanı</div>
         <div style="display:flex; gap:6px;">
-          <input type="text" id="hostCryptoInput" readonly value="TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#10B981; font-family:monospace; font-size:10px; padding:8px;">
+          <input type="text" id="hostCryptoInput" aria-label="Host Crypto Wallet Address" readonly value="TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#10B981; font-family:monospace; font-size:10px; padding:8px;">
           <button onclick="copyHostVal('hostCryptoInput', 'Cüzdan Adresi Kopyalandı!')" style="background:#10B981; color:#090D14; border:none; border-radius:8px; padding:8px 12px; font-weight:800; font-size:11px; cursor:pointer;">Kopyala</button>
         </div>
       </div>
