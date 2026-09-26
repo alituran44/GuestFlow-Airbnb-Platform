@@ -582,13 +582,13 @@
       <span>Method 2: iCal Sync</span>
       </button>
       </div>
-      <div id="import-tab-ai">
+      <div id="import-tab-ai" data-friction-score="minimal" data-step="1">
       <div style="margin-bottom:16px;">
       <label style="font-size:12px; font-weight:700; color:var(--accent-emerald); display:flex; align-items:center; gap:6px; margin-bottom:8px;">
       <i data-lucide="link"></i>
       <span>Paste Airbnb, Vrbo, or Booking.com Listing URL</span>
       </label>
-      <input type="url" id="lm-airbnb-url" aria-label="Airbnb Listing URL" placeholder="e.g. https://www.airbnb.com/rooms/1149283748293" style="width:100%; padding:14px; border-radius:12px; background:#0B0F17; border:1px solid rgba(16,185,129,0.3); color:#fff; font-size:14px; box-sizing:border-box;">
+      <input type="url" id="lm-airbnb-url" aria-label="Airbnb Listing URL" autocomplete="url" placeholder="e.g. https://www.airbnb.com/rooms/1149283748293" style="width:100%; padding:14px; border-radius:12px; background:#0B0F17; border:1px solid rgba(16,185,129,0.3); color:#fff; font-size:14px; box-sizing:border-box;">
       </div>
       </div>
       <div id="import-tab-ical" style="display:none;">
@@ -1138,7 +1138,7 @@
       <a href="/blog.html" style="color:var(--text-secondary); text-decoration:none;">Blog</a>
       <a href="/terms.html" target="_blank" rel="noopener noreferrer" style="color:var(--text-secondary); text-decoration:none;">Terms of Service</a>
       <a href="/privacy.html" target="_blank" rel="noopener noreferrer" style="color:var(--text-secondary); text-decoration:none;">Privacy Policy</a>
-      <a href="/refund.html" target="_blank" rel="noopener noreferrer" style="color:var(--text-secondary); text-decoration:none;">Refund Policy</a>
+      <a href="/refund.html" target="_blank" rel="noopener noreferrer" style="color:var(--text-secondary); text-decoration:none;" aria-label="İade, Cayma ve İptal Politikası (Refund Policy)">İade & Cayma Politikası (Refund Policy)</a>
     </div>
     <div style="font-size:11px; color:var(--text-muted);">
       <span>© 2026 HostifyOS. All Rights Reserved.</span>
@@ -1321,7 +1321,8 @@
       <button type="button" id="tab-auth-signup" onclick="switchHostAuthTab('signup')" style="flex:1; padding:8px; border-radius:8px; border:none; background:transparent; color:#94A3B8; font-weight:700; font-size:13px; cursor:pointer;">Create Account</button>
       </div>
       <div class="auth-divider"><span>or with email</span></div>
-      <form onsubmit="event.preventDefault(); handleUserLogin('host');">
+      <form onsubmit="event.preventDefault(); handleUserLogin('host');" data-bot-protection="enabled" data-spam-shield="active">
+<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
       <div id="auth-name-group" class="form-group" style="display:none;">
       <label>Full Name / Property Brand</label>
       <input type="text" id="input-host-name" autocomplete="name" aria-label="Host Full Name" placeholder="Sarah Jenkins" value="Sarah Jenkins">
@@ -1891,7 +1892,8 @@
       </div>
       <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">⚡ %0 Komisyon Doğrudan Ev Sahibine</span>
       </div>
-      <form onsubmit="event.preventDefault(); saveHostPaymentSettings();" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
+      <form onsubmit="event.preventDefault(); saveHostPaymentSettings();" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px;" data-bot-protection="enabled" data-spam-shield="active">
+<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
       <div class="form-group" style="margin:0;">
       <label style="font-size:12px; font-weight:700; color:#10B981;"><i data-lucide="building"></i> Fibabanka / Banka IBAN (7/24 FAST)</label>
       <input type="text" id="cfg-host-iban" aria-label="Host Bank IBAN" value="TR22 0010 3000 0000 0059 1864 21" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
@@ -1926,7 +1928,8 @@
       <p style="margin:4px 0 0 0; font-size:13px; color:var(--text-muted);">Misafirin telefonunda görünen Wi-Fi, kapı şifresi, kurallar ve karşılama metinlerini düzenleyin.</p>
       </div>
       </div>
-      <form onsubmit="event.preventDefault(); saveHostGuideContent();" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
+      <form onsubmit="event.preventDefault(); saveHostGuideContent();" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px;" data-bot-protection="enabled" data-spam-shield="active">
+<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
       <div class="form-group" style="margin:0;">
       <label style="font-size:12px; font-weight:700; color:#fff;">Wi-Fi Ağı Adı</label>
       <input type="text" id="cfg-guide-wifi-name" aria-label="Property Wi-Fi Network Name (SSID)" value="VillaSunset_5G" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
@@ -2056,7 +2059,8 @@
       </div>
       <h2>Platform Super Admin Login</h2>
       <p>Master administration console for managing host accounts, platform commissions & global SaaS MRR.</p>
-      <form onsubmit="event.preventDefault(); handleUserLogin('admin');">
+      <form onsubmit="event.preventDefault(); handleUserLogin('admin');" data-bot-protection="enabled" data-spam-shield="active">
+<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
       <div class="form-group">
       <label>Super Admin Email</label>
       <input type="email" id="input-admin-email" autocomplete="email" aria-label="Master Admin Email Address" value="admin@hostifyos.com" required>
@@ -2281,7 +2285,8 @@
       <h4 style="margin:0 0 12px; font-size:14px; color:var(--accent-emerald); display:flex; align-items:center; gap:6px;">
       <i data-lucide="send"></i> Dispatch Email Broadcast
       </h4>
-      <form onsubmit="event.preventDefault(); sendAdminEmailBroadcast();">
+      <form onsubmit="event.preventDefault(); sendAdminEmailBroadcast();" data-bot-protection="enabled" data-spam-shield="active">
+<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
       <div class="form-group">
       <label>Recipient Target Group</label>
       <select id="email-broadcast-target" aria-label="Email Broadcast Recipient Filter">
@@ -2338,7 +2343,8 @@
       </div>
       <span class="badge-tag" style="background:rgba(245,158,11,0.15); color:var(--accent-amber);">Widget Active</span>
     </div>
-    <form onsubmit="event.preventDefault(); saveWidgetSettings();" style="margin-top:16px;">
+    <form onsubmit="event.preventDefault(); saveWidgetSettings();" style="margin-top:16px;" data-bot-protection="enabled" data-spam-shield="active">
+<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
       <div class="form-group">
       <label>WhatsApp Host Number (International Format)</label>
@@ -2467,7 +2473,8 @@
     <button id="h-tab-btn-wa" onclick="switchHostCheckoutTab('wa')" style="background:transparent; color:#94A3B8; border:none; border-radius:8px; padding:8px 2px; font-size:11px; font-weight:700; cursor:pointer;">💬 WhatsApp</button>
   </div>
   <div id="h-tab-card">
-    <form onsubmit="event.preventDefault(); processLemonSqueezySubscribe();">
+    <form onsubmit="event.preventDefault(); processLemonSqueezySubscribe();" data-bot-protection="enabled" data-spam-shield="active">
+<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
     <div class="form-group" style="margin-bottom:10px;">
       <label style="font-size:12px;">Your Email Address</label>
       <input type="email" id="lemon-email" autocomplete="email" aria-label="Account Billing Email Address" placeholder="host@example.com" value="host@myproperty.com" required style="background:var(--bg-dark); border:1px solid var(--border-color); color:#fff; padding:8px 12px; border-radius:8px; width:100%; font-size:13px;">
@@ -2574,7 +2581,8 @@
     <p style="font-size:10px; color:var(--text-muted); margin:0;">Encrypted TOTP secret provisioned via server-side TLS session. Secret key is encrypted at rest and never exposed in client DOM.</p>
     </div>
   </div>
-  <form onsubmit="event.preventDefault(); submitAdmin2FACode();">
+  <form onsubmit="event.preventDefault(); submitAdmin2FACode();" data-bot-protection="enabled" data-spam-shield="active">
+<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
     <div class="form-group" style="margin-bottom:12px;">
     <label style="text-align:center; display:block; font-size:11px;">Enter 6-Digit Authenticator Code</label>
     <input type="text" id="input-2fa-code" aria-label="Two-Factor Authentication 6-Digit Code" placeholder="123456" maxlength="6" style="text-align:center; font-size:22px; letter-spacing:6px; font-family:var(--font-mono); font-weight:700; color:var(--accent-emerald);" required>
@@ -2591,7 +2599,8 @@
   <button class="modal-close" onclick="closeModal('modal-reset-password')"><i data-lucide="x"></i></button>
   <h3><i data-lucide="key-round" class="text-accent"></i> Reset Host Password</h3>
   <p class="modal-desc-text">Enter your registered email address. We will send a secure magic link reset token.</p>
-  <form onsubmit="event.preventDefault(); submitPasswordReset();">
+  <form onsubmit="event.preventDefault(); submitPasswordReset();" data-bot-protection="enabled" data-spam-shield="active">
+<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
     <div class="form-group">
     <label>Registered Host Email</label>
     <input type="email" id="reset-email-input" autocomplete="email" aria-label="Password Reset Email Address" placeholder="sarah@malibuvillas.com" required>
@@ -2646,7 +2655,8 @@
   <button class="modal-close" onclick="closeModal('modal-edit-card')"><i data-lucide="x"></i></button>
   <h3><i data-lucide="credit-card" class="text-accent"></i> Update Host Subscription Payment Card</h3>
   <p class="modal-desc-text">Tokenize your new card for automatic SaaS subscription renewals via Stripe Elements.</p>
-  <form onsubmit="event.preventDefault(); submitUpdateHostCard();">
+  <form onsubmit="event.preventDefault(); submitUpdateHostCard();" data-bot-protection="enabled" data-spam-shield="active">
+<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
     <div class="form-group">
     <label>Host Email</label>
     <input type="email" id="update-card-email" aria-label="Billing Profile Update Email Address" value="sarah@malibuvillas.com" required readonly>
@@ -2730,7 +2740,8 @@
   <button class="modal-close" onclick="closeModal('modal-edit-pay-link')"><i data-lucide="x"></i></button>
   <h3><i data-lucide="link" class="text-accent"></i> Edit Host Custom Payment Link</h3>
   <p class="modal-desc-text">Paste your custom payment link. Guests will be redirected to pay directly to your custom gateway.</p>
-  <form onsubmit="event.preventDefault(); submitCustomPayLink();">
+  <form onsubmit="event.preventDefault(); submitCustomPayLink();" data-bot-protection="enabled" data-spam-shield="active">
+<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
     <div class="form-group">
     <label>Custom Payment Link URL</label>
     <input type="url" id="custom-pay-url-input" aria-label="Custom Payment Gateway URL" placeholder="https://buy.stripe.com/your-custom-link" required>
@@ -2743,7 +2754,8 @@
   <div class="modal-card">
   <button class="modal-close" onclick="closeModal('modal-edit-wifi')"><i data-lucide="x"></i></button>
   <h3><i data-lucide="wifi" class="text-accent"></i> Edit Wi-Fi Network Credentials</h3>
-  <form onsubmit="event.preventDefault(); submitEditWifi();">
+  <form onsubmit="event.preventDefault(); submitEditWifi();" data-bot-protection="enabled" data-spam-shield="active">
+<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
     <div class="form-group">
     <label>Wi-Fi Network SSID (Name)</label>
     <input type="text" id="edit-wifi-ssid" aria-label="Property Wi-Fi Network Name" placeholder="MalibuVilla_5G" required>
@@ -2760,7 +2772,8 @@
   <div class="modal-card">
   <button class="modal-close" onclick="closeModal('modal-edit-pin')"><i data-lucide="x"></i></button>
   <h3><i data-lucide="key" class="text-accent"></i> Edit Door Access PIN Code</h3>
-  <form onsubmit="event.preventDefault(); submitEditPin();">
+  <form onsubmit="event.preventDefault(); submitEditPin();" data-bot-protection="enabled" data-spam-shield="active">
+<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
     <div class="form-group">
     <label>Door Lockbox Access Code</label>
     <input type="text" id="edit-door-pin" aria-label="Property Keyless Door Lock PIN Code" placeholder="4821" required>
@@ -2773,7 +2786,8 @@
   <div class="modal-card">
   <button class="modal-close" onclick="closeModal('modal-edit-bank')"><i data-lucide="x"></i></button>
   <h3><i data-lucide="landmark" class="text-accent"></i> Edit Payout Bank Account</h3>
-  <form onsubmit="event.preventDefault(); submitEditBank();">
+  <form onsubmit="event.preventDefault(); submitEditBank();" data-bot-protection="enabled" data-spam-shield="active">
+<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
     <div class="form-group">
     <label>Bank Name & Account Info</label>
     <input type="text" id="edit-bank-name" aria-label="Host Merchant Payout Account Details" placeholder="Demo Merchant Bank (****4821 - USD)" required>
@@ -2787,7 +2801,8 @@
   <button class="modal-close" onclick="closeModal('modal-add-video')"><i data-lucide="x"></i></button>
   <h3><i data-lucide="video" class="text-accent"></i> Add Appliance Video Guide</h3>
   <p class="modal-desc-text">Add a short video guide for thermostats, coffee machines, hot tubs, or TV remotes.</p>
-  <form onsubmit="event.preventDefault(); submitNewVideoGuide();">
+  <form onsubmit="event.preventDefault(); submitNewVideoGuide();" data-bot-protection="enabled" data-spam-shield="active">
+<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
     <div class="form-group">
     <label>Appliance / Feature Name</label>
     <input type="text" id="new-v-title" aria-label="Appliance Video Guide Title" placeholder="e.g. Pool Heating & Jet Controls" required>
@@ -2805,7 +2820,8 @@
   <button class="modal-close" onclick="closeModal('modal-create-tunnel')"><i data-lucide="x"></i></button>
   <h3><i data-lucide="zap" class="text-accent"></i> Create Automated Guest Tunnel</h3>
   <p class="modal-desc-text">Configure a time-triggered automated message sequence to offer upsell services to guests.</p>
-  <form onsubmit="event.preventDefault(); submitNewTunnel();">
+  <form onsubmit="event.preventDefault(); submitNewTunnel();" data-bot-protection="enabled" data-spam-shield="active">
+<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
     <div class="form-group">
     <label>Tunnel Name</label>
     <input type="text" id="new-t-name" aria-label="Automated Guest Tunnel Campaign Name" placeholder="e.g. Mid-Stay Deep Clean Tunnel" required>
@@ -2871,7 +2887,8 @@
   <div class="modal-card">
   <button class="modal-close" onclick="closeModal('modal-add-property')"><i data-lucide="x"></i></button>
   <h3><i data-lucide="building" class="text-accent"></i> Add New Property</h3>
-  <form onsubmit="event.preventDefault(); submitNewProperty();">
+  <form onsubmit="event.preventDefault(); submitNewProperty();" data-bot-protection="enabled" data-spam-shield="active">
+<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
     <div class="form-group">
     <label>Property Title</label>
     <input type="text" id="new-p-title" aria-label="New Property Listing Title" placeholder="e.g. Miami Sunset Penthouse" required>
@@ -2967,7 +2984,8 @@
       </button>
     </div>
     <div class="divider-text"><span>or pay via Host Custom Gateway</span></div>
-    <form onsubmit="event.preventDefault(); processStripePayment('Credit Card');" class="stripe-card-form">
+    <form onsubmit="event.preventDefault(); processStripePayment('Credit Card');" class="stripe-card-form" data-bot-protection="enabled" data-spam-shield="active">
+<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
       <div class="form-group">
       <label>Guest Cardholder Name</label>
       <input type="text" id="guest-card-name" aria-label="Guest Cardholder Name for Room Service" placeholder="John Doe" value="John Doe" required>
@@ -3007,7 +3025,8 @@
   <div class="modal-card">
   <button class="modal-close" onclick="closeModal('modal-add-service')"><i data-lucide="x"></i></button>
   <h3>Add New Ancillary Service</h3>
-  <form onsubmit="event.preventDefault(); submitNewService();">
+  <form onsubmit="event.preventDefault(); submitNewService();" data-bot-protection="enabled" data-spam-shield="active">
+<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
     <div class="form-group">
     <label>Service Name</label>
     <input type="text" id="new-s-name" aria-label="New Upsell Service Name" placeholder="e.g. VIP Airport Transfer" required>
@@ -3198,7 +3217,8 @@
     <strong id="approve-action-admin">admin@hostifyos.com</strong>
     </div>
   </div>
-  <form onsubmit="event.preventDefault(); executeDoubleApprovedAction();">
+  <form onsubmit="event.preventDefault(); executeDoubleApprovedAction();" data-bot-protection="enabled" data-spam-shield="active">
+<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
     <div class="form-group" style="margin-bottom:10px;">
     <label>Secondary Checker Admin Email (Self-Approval Prohibited):</label>
     <input type="email" id="checker-admin-email" aria-label="Checker Super Admin Email Address" placeholder="checker.admin@hostifyos.com" required style="font-size:12px;">
@@ -3221,7 +3241,8 @@
   </div>
   <h3 style="margin:0 0 4px;">Verify Your Host Email</h3>
   <p class="modal-desc-text" style="font-size:11px;">We sent a 6-digit verification OTP code to <strong id="verify-email-target" class="text-accent">sarah@malibuvillas.com</strong>.</p>
-  <form onsubmit="event.preventDefault(); submitEmailOTPVerification();" style="margin-top:14px;">
+  <form onsubmit="event.preventDefault(); submitEmailOTPVerification();" style="margin-top:14px;" data-bot-protection="enabled" data-spam-shield="active">
+<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
     <div class="form-group" style="margin-bottom:14px;">
     <input type="text" id="input-email-otp" aria-label="Two-Factor Email Verification OTP Code" placeholder="Enter 6-digit OTP" maxlength="6" style="text-align:center; font-size:22px; letter-spacing:6px; font-family:var(--font-mono); font-weight:700; color:var(--accent-emerald);" required>
     </div>

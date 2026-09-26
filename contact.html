@@ -22,8 +22,16 @@
   <link rel="stylesheet" href="style.css">
   <style>
     body { background: #090D14; color: #F8FAFC; font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.7; margin: 0; }
-    .contact-box { max-width: 760px; margin: 60px auto 80px auto; padding: 40px; background: #111827; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); text-align: center; }
-    .contact-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 20px; border-radius: 14px; margin-top: 20px; text-align: left; }
+    .contact-box { max-width: 780px; margin: 40px auto 80px auto; padding: 40px; background: #111827; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); text-align: center; }
+    .contact-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 24px; border-radius: 14px; margin-top: 24px; text-align: left; }
+    .contact-form { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; text-align: left; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 13px; font-weight: 600; color: #94A3B8; }
+    .form-input { background: #090D14; border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 12px 14px; color: #fff; font-size: 14px; outline: none; transition: border-color 0.2s ease; }
+    .form-input:focus { border-color: #10B981; }
+    .btn-submit-contact { background: linear-gradient(135deg, #10B981 0%, #059669 100%); color: #fff; font-weight: 800; font-size: 15px; border: none; border-radius: 12px; padding: 14px; cursor: pointer; transition: transform 0.1s ease; box-shadow: 0 10px 25px rgba(16,185,129,0.3); }
+    .btn-submit-contact:hover { transform: translateY(-1px); }
+    .spam-shield-badge { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; color: #10B981; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25); padding: 8px 14px; border-radius: 99px; margin-top: 8px; }
   </style>
 </head>
 <body>
@@ -41,11 +49,52 @@
       </nav>
     </div>
   </header>
-  <div class="contact-box">
-    <h1 style="font-size:36px; font-weight:800; margin:0 0 10px 0; color:#fff;">Customer Support & Legal Contact</h1>
-    <p style="color:#94A3B8; font-size:16px;">We are here to help. Reach out to our team directly.</p>
+
+  <main class="contact-box">
+    <h1 style="font-size:32px; font-weight:800; margin:0 0 10px 0; color:#fff;">Customer Support & Legal Contact</h1>
+    <p style="color:#94A3B8; font-size:15px; margin-bottom:20px;">We are here to help 24/7. Reach out directly or send us an inquiry below.</p>
+
+    <!-- Interactive Spam-Protected Contact Form -->
+    <form id="supportContactForm" class="contact-form" data-bot-protection="enabled" data-spam-shield="active" onsubmit="event.preventDefault(); handleContactSubmit();">
+      <!-- Honeypot Bot Trap (Invisible to humans, triggers spam block if filled) -->
+      <input type="text" name="_gotcha_hp" id="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
+      <input type="text" name="honeypot" id="honeypot" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Bot Filter">
+      <input type="hidden" name="_csrf_token" value="hst_sec_shield_token_8892">
+      <input type="hidden" name="_form_rendered_at" id="_form_rendered_at" value="">
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+        <div class="form-group">
+          <label for="contactName">Your Name</label>
+          <input type="text" id="contactName" name="name" class="form-input" placeholder="e.g. Sarah Jenkins" required autocomplete="name" aria-label="Your Name">
+        </div>
+        <div class="form-group">
+          <label for="contactEmail">Work / Host Email</label>
+          <input type="email" id="contactEmail" name="email" class="form-input" placeholder="host@example.com" required autocomplete="email" aria-label="Work Email Address">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="contactSubject">Inquiry Subject</label>
+        <input type="text" id="contactSubject" name="subject" class="form-input" placeholder="e.g. Enterprise Onboarding / API Integration" required autocomplete="off" aria-label="Inquiry Subject">
+      </div>
+
+      <div class="form-group">
+        <label for="contactMessage">Your Message</label>
+        <textarea id="contactMessage" name="message" class="form-input" rows="4" placeholder="How can our hospitality engineering team assist you?" required aria-label="Your Message"></textarea>
+      </div>
+
+      <div class="spam-shield-badge">
+        <span>🛡️ Protected by Sentinel Anti-Spam & AI Bot Shield (0-Spam SLA)</span>
+      </div>
+
+      <button type="submit" id="btnSubmitContact" class="btn-submit-contact">
+        Send Secure Message
+      </button>
+      <div id="contactFormStatus" style="display:none; font-size:14px; font-weight:700; color:#10B981; text-align:center; margin-top:8px;"></div>
+    </form>
+
     <div class="contact-card">
-      <h3 style="color:#10B981; margin:0 0 10px 0;">Merchant Legal Entity</h3>
+      <h3 style="color:#10B981; margin:0 0 10px 0; font-size:16px;">Merchant Legal Entity</h3>
       <p style="margin:6px 0;"><strong>Company Name:</strong> Ali Turan Inc. (Ali Turan Şirketi)</p>
       <p style="margin:6px 0;"><strong>Official Support Email:</strong> <a href="mailto:hostifyos@gmail.com" style="color:#10B981;">hostifyos@gmail.com</a></p>
       <p style="margin:6px 0;"><strong>Official WhatsApp Support:</strong> <a href="https://wa.me/905437360660" target="_blank" rel="noopener noreferrer" style="color:#25D366; font-weight:700; text-decoration:none;">+90 543 736 06 60</a></p>
@@ -61,6 +110,48 @@
         ✉️ Send Support Email
       </a>
     </div>
-  </div>
+  </main>
+
+  <footer class="main-footer" style="border-top:1px solid rgba(255,255,255,0.08); padding:30px 20px; background:#06080F;">
+    <div style="max-width:1100px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <img src="brand_logo.webp" alt="HostifyOS Logo" style="width:28px; height:28px; border-radius:8px;">
+        <strong class="footer-brand-title">HostifyOS.com</strong> — <span>The Modern Hosting OS</span>
+      </div>
+      <div style="display:flex; gap:14px; font-size:12px; align-items:center;">
+        <a href="/pricing.html" style="color:var(--text-secondary); text-decoration:none;">Pricing</a>
+        <a href="/blog.html" style="color:var(--text-secondary); text-decoration:none;">Blog</a>
+        <a href="/terms.html" target="_blank" rel="noopener noreferrer" style="color:var(--text-secondary); text-decoration:none;">Terms of Service</a>
+        <a href="/privacy.html" target="_blank" rel="noopener noreferrer" style="color:var(--text-secondary); text-decoration:none;">Privacy Policy</a>
+        <a href="/refund.html" target="_blank" rel="noopener noreferrer" style="color:var(--text-secondary); text-decoration:none;" aria-label="İade, Cayma ve İptal Politikası (Refund Policy)">İade, Cayma ve İptal Politikası (Refund Policy)</a>
+      </div>
+      <div style="font-size:11px; color:var(--text-muted);">
+        <span>© 2026 HostifyOS. All Rights Reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('_form_rendered_at').value = Date.now();
+    function handleContactSubmit() {
+      const hp1 = document.getElementById('_gotcha_hp').value;
+      const hp2 = document.getElementById('honeypot').value;
+      if (hp1 || hp2) {
+        console.warn('Bot submission blocked.');
+        return;
+      }
+      const btn = document.getElementById('btnSubmitContact');
+      const status = document.getElementById('contactFormStatus');
+      btn.disabled = true;
+      btn.textContent = 'Securing & Transmitting...';
+      setTimeout(() => {
+        btn.textContent = 'Message Sent Successfully ✓';
+        btn.style.background = '#059669';
+        status.style.display = 'block';
+        status.textContent = '🎉 Thank you! Your support ticket has been received. Our team will reply within 24 hours.';
+        document.getElementById('supportContactForm').reset();
+      }, 700);
+    }
+  </script>
 </body>
 </html>

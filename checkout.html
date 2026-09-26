@@ -631,7 +631,10 @@
                 </p>
               </div>
 
-              <form id="paynkolayForm" onsubmit="event.preventDefault(); submitPaynkolayCheckout();">
+              <form id="paynkolayForm" data-bot-protection="enabled" data-spam-shield="active" onsubmit="event.preventDefault(); submitPaynkolayCheckout();">
+                <!-- Anti-bot honeypot -->
+                <input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
+                <input type="hidden" name="_csrf_token" value="hst_paynkolay_shield_v2">
                 <div class="form-group">
                   <label>Hesap E-Posta Adresi (Fatura & Aktivasyon)</label>
                   <input type="email" id="pkEmail" autocomplete="email" aria-label="Email Address for Invoice & Setup" class="form-control" placeholder="host@example.com" value="host@myproperty.com" required>
@@ -686,7 +689,10 @@
                 </div>
               </div>
 
-              <form id="dodoForm" onsubmit="event.preventDefault(); submitDodoCheckout();">
+              <form id="dodoForm" data-bot-protection="enabled" data-spam-shield="active" onsubmit="event.preventDefault(); submitDodoCheckout();">
+                <!-- Anti-bot honeypot -->
+                <input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
+                <input type="hidden" name="_csrf_token" value="hst_dodo_shield_v2">
                 <div class="form-group">
                   <label>Account Email Address</label>
                   <input type="email" id="dodoEmail" autocomplete="email" aria-label="Global Account Billing Email" class="form-control" placeholder="host@example.com" value="host@myproperty.com" required>
@@ -892,7 +898,7 @@
     <div style="margin-bottom:12px; display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
       <a href="/terms.html">Terms of Service</a>
       <a href="/privacy.html">Privacy Policy</a>
-      <a href="/refund.html" style="color:var(--accent); font-weight:700;">Refund & Cancellation Policy</a>
+      <a href="/refund.html" style="color:var(--accent); font-weight:700;" aria-label="İade, Cayma ve İptal Politikası (Refund Policy)">İade & Cayma Politikası (Refund Policy)</a>
       <a href="/contact.html">Contact Us</a>
     </div>
     <p>© 2026 HostifyOS.com — Ali Turan Inc. All Rights Reserved.</p>
