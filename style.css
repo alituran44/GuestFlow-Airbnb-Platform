@@ -52,8 +52,31 @@
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent-emerald, #10B981) !important;
-  outline-offset: 2px !important;
+  outline: 3px solid #10B981 !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.45) !important;
+}
+
+/* Mobile Touch Target Standards (WCAG 2.1 AA - Min 44px x 44px) */
+@media (max-width: 768px) {
+  button, 
+  .btn-primary, 
+  .btn-secondary, 
+  .btn-hero-primary, 
+  .btn-hero-secondary, 
+  .nav-link, 
+  .action-btn, 
+  .pay-tab, 
+  .cycle-btn, 
+  .form-control, 
+  input[type="text"], 
+  input[type="email"], 
+  input[type="password"], 
+  input[type="url"],
+  input[type="number"],
+  select {
+    min-height: 44px !important;
+  }
 }
 
 /* Lucide SVG Icons Base Sizing & Alignment */
@@ -2024,23 +2047,25 @@ body.theme-light .meta-item span {
 }
 
 .btn-hero-primary {
-  background: linear-gradient(135deg, var(--accent-emerald), #059669);
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
   color: #090D14;
   font-weight: 800;
-  font-size: 15px;
-  padding: 14px 28px;
+  font-size: 16px;
+  min-height: 52px;
+  padding: 14px 32px;
   border-radius: var(--radius-md);
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 10px;
-  box-shadow: var(--shadow-glow);
-  transition: transform 0.15s ease;
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .btn-hero-primary:hover {
   transform: translateY(-2px);
+  box-shadow: 0 0 35px rgba(16, 185, 129, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.6);
 }
 
 .btn-hero-secondary {
