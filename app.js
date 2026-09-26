@@ -1377,8 +1377,118 @@ function getActiveProperty() {
   return properties.find(p => p.id === activePropertyId) || properties[0] || DEFAULT_EMPTY_PROPERTY;
 }
 
+// PERSISTENT CLIENT-SIDE SESSION ENGINE
+function saveSessionState() {
+  try {
+    if (hostAuth && hostAuth.isLoggedIn) {
+      localStorage.setItem('hostifyos_auth_session', JSON.stringify({
+        isLoggedIn: true,
+        role: 'host',
+        name: hostAuth.name || 'Ev Sahibi',
+        email: hostAuth.email || 'evsahibi@gmail.com',
+        plan: hostAuth.plan || 'Pro Host Plan (14-Day Free Trial)',
+        subscriptionStatus: hostAuth.subscriptionStatus || 'trial_active',
+        trialDaysLeft: hostAuth.trialDaysLeft || 14,
+        customPaymentLink: hostAuth.customPaymentLink || '',
+        commissionRate: hostAuth.commissionRate || 0.0
+      }));
+    } else if (adminAuth && adminAuth.isLoggedIn) {
+      localStorage.setItem('hostifyos_auth_session', JSON.stringify({
+        isLoggedIn: true,
+        role: 'admin',
+        name: adminAuth.name || 'Master Platform Admin',
+        email: adminAuth.email || 'hostifyos@gmail.com'
+      }));
+    } else {
+      localStorage.removeItem('hostifyos_auth_session');
+    }
+
+    if (activePropertyId) {
+      localStorage.setItem('hostifyos_active_prop', activePropertyId);
+    }
+    if (properties && properties.length > 0) {
+      localStorage.setItem('hostifyos_user_props', JSON.stringify(properties));
+    }
+  } catch(e) {
+    console.warn("Session storage error:", e);
+  }
+}
+
+function restoreSessionState() {
+  try {
+    // 1. Restore User Properties from storage
+    const savedProps = localStorage.getItem('hostifyos_user_props');
+    if (savedProps) {
+      try {
+        const parsed = JSON.parse(savedProps);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          properties = parsed;
+        }
+      } catch(e){}
+    }
+
+    // 2. Restore active property ID
+    const savedPropId = localStorage.getItem('hostifyos_active_prop');
+    if (savedPropId && properties.some(p => p.id === savedPropId)) {
+      activePropertyId = savedPropId;
+    } else if (properties.length > 0) {
+      activePropertyId = properties[0].id;
+    }
+
+    // 3. Restore Auth Session
+    const savedSession = localStorage.getItem('hostifyos_auth_session');
+    let sessionRestored = false;
+    if (savedSession) {
+      try {
+        const session = JSON.parse(savedSession);
+        if (session && session.isLoggedIn) {
+          if (session.role === 'admin') {
+            adminAuth.isLoggedIn = true;
+            adminAuth.email = session.email || 'hostifyos@gmail.com';
+            adminAuth.name = session.name || 'Master Platform Admin';
+            currentUserRole = 'admin';
+            sessionRestored = true;
+          } else {
+            hostAuth.isLoggedIn = true;
+            hostAuth.name = session.name || 'Ev Sahibi';
+            hostAuth.email = session.email || 'evsahibi@gmail.com';
+            hostAuth.plan = session.plan || 'Pro Host Plan (14-Day Free Trial)';
+            hostAuth.subscriptionStatus = session.subscriptionStatus || 'trial_active';
+            hostAuth.trialDaysLeft = session.trialDaysLeft || 14;
+            hostAuth.customPaymentLink = session.customPaymentLink || '';
+            hostAuth.commissionRate = session.commissionRate || 0.0;
+            currentUserRole = 'host';
+            sessionRestored = true;
+          }
+        }
+      } catch(e){}
+    }
+
+    // 4. Restore Active View
+    const savedView = localStorage.getItem('hostifyos_active_view');
+    if (sessionRestored) {
+      if (savedView && document.getElementById(`view-${savedView}`)) {
+        switchView(savedView);
+      } else if (currentUserRole === 'host') {
+        switchView('host');
+      } else if (currentUserRole === 'admin') {
+        switchView('admin');
+      }
+    } else {
+      if (savedView === 'guest') {
+        switchView('guest');
+      } else {
+        switchView('landing');
+      }
+    }
+  } catch(e) {
+    console.warn("Session restore error:", e);
+  }
+}
+
 // App Initialization
 document.addEventListener('DOMContentLoaded', () => {
+  restoreSessionState();
   renderPropertySelector();
   loadActivePropertyData();
   renderTunnelsGrid();
@@ -1412,8 +1522,6 @@ document.addEventListener('DOMContentLoaded', () => {
       .catch(err => console.log('SW Registration failed', err));
   }
   
-  // Start on Landing Page for unauthenticated visitors
-  switchView('landing');
   lucide.createIcons();
 });
 
@@ -1604,6 +1712,10 @@ function switchView(viewName) {
     checkAdminAuthStatus();
   }
 
+  try {
+    localStorage.setItem('hostifyos_active_view', viewName);
+  } catch(e) {}
+
   window.scrollTo({ top: 0, behavior: 'smooth' });
   lucide.createIcons();
 }
@@ -1711,6 +1823,7 @@ function handleUserLogin(role) {
     hostAuth.subscriptionStatus = 'trial_active';
     currentUserRole = 'host';
 
+    saveSessionState();
     resetSessionInactivityTimer();
     updateTopNavAuthUI();
     checkHostAuthStatus();
@@ -1764,6 +1877,7 @@ function loginHostWithGoogle(name, email, avatar) {
   hostAuth.subscriptionStatus = 'trial_active';
   currentUserRole = 'host';
 
+  saveSessionState();
   resetSessionInactivityTimer();
   updateTopNavAuthUI();
   checkHostAuthStatus();
@@ -1929,10 +2043,12 @@ function submitAdmin2FACode() {
   }
 
   adminAuth.isLoggedIn = true;
-  adminAuth.email = document.getElementById('input-admin-email').value || 'admin@hostifyos.com';
+  adminAuth.email = document.getElementById('input-admin-email').value || 'hostifyos@gmail.com';
+  adminAuth.name = 'Master Platform Admin';
   currentUserRole = 'admin';
   loginAttempts.count = 0;
 
+  saveSessionState();
   closeModal('modal-admin-2fa');
   resetSessionInactivityTimer();
   updateTopNavAuthUI();
@@ -1977,7 +2093,15 @@ function logoutUser() {
   hostAuth.isLoggedIn = false;
   adminAuth.isLoggedIn = false;
 
+  try {
+    localStorage.removeItem('hostifyos_auth_session');
+    localStorage.removeItem('hostifyos_active_view');
+  } catch(e) {}
+  saveSessionState();
+
   updateTopNavAuthUI();
+  checkHostAuthStatus();
+  checkAdminAuthStatus();
   switchView('landing'); // AUTO-RETURN TO HOME LANDING PAGE
   showToast("Logged out successfully. Returned to Home Page.");
 }
@@ -2865,6 +2989,7 @@ function submitCustomPayLink() {
   prop.customPayUrl = url;
   hostAuth.customPaymentLink = url;
 
+  saveSessionState();
   document.getElementById('host-custom-link-display').textContent = url;
   closeModal('modal-edit-pay-link');
   showToast("Updated Host Custom Payment Link! Guests can now pay directly to your custom gateway.");
@@ -3110,6 +3235,7 @@ function submitEditWifi() {
   const prop = getActiveProperty();
   prop.wifiName = name;
   prop.wifiPass = pass;
+  saveSessionState();
   loadActivePropertyData();
   closeModal('modal-edit-wifi');
   showToast("Updated Wi-Fi credentials for " + prop.title);
@@ -3127,6 +3253,7 @@ function submitEditPin() {
 
   const prop = getActiveProperty();
   prop.doorPin = pin;
+  saveSessionState();
   loadActivePropertyData();
   closeModal('modal-edit-pin');
   showToast("Updated door access PIN code for " + prop.title);
@@ -3170,6 +3297,7 @@ function submitEditBank() {
 
   const prop = getActiveProperty();
   prop.payoutBank = bank;
+  saveSessionState();
   document.getElementById('host-bank-display').textContent = bank;
   closeModal('modal-edit-bank');
   showToast("Updated payout bank account details!");
@@ -3193,6 +3321,7 @@ function submitNewVideoGuide() {
     desc: desc || 'Video instructions for operating appliance.'
   });
 
+  saveSessionState();
   loadActivePropertyData();
   closeModal('modal-add-video');
   showToast(`Added video manual "${title}" to ${prop.title}`);
@@ -3399,6 +3528,7 @@ function renderPropertySelector() {
 
 function changeActiveProperty(propId) {
   activePropertyId = propId;
+  saveSessionState();
   renderPropertySelector();
   loadActivePropertyData();
   showToast(`Active property: "${getActiveProperty().title}"`);
@@ -3743,6 +3873,7 @@ function savePropertyChannels() {
     prop.directBookingUrl = direct;
   }
 
+  saveSessionState();
   renderPropertiesListTable();
   closeModal('modal-edit-channels');
   showToast(`🎉 "${prop.title}" için OTA ve İlan linkleri başarıyla senkronize edildi!`);
@@ -3811,6 +3942,7 @@ function submitNewProperty() {
 
   properties.push(newProp);
   activePropertyId = newProp.id;
+  saveSessionState();
   renderPropertySelector();
   loadActivePropertyData();
   closeModal('modal-add-property');
@@ -4113,6 +4245,7 @@ function renderHostServicesTable() {
 function deleteService(id) {
   const prop = getActiveProperty();
   prop.services = prop.services.filter(s => s.id !== id);
+  saveSessionState();
   renderHostServicesTable();
   renderGuestServices();
   showToast("Service removed from guidebook.");
@@ -4141,6 +4274,7 @@ function submitNewService() {
   };
 
   prop.services.push(newObj);
+  saveSessionState();
   renderHostServicesTable();
   renderGuestServices();
   closeModal('modal-add-service');
@@ -4163,6 +4297,7 @@ function saveHostPaymentSettings() {
     prop.customPayUrl = cardLink;
   }
 
+  saveSessionState();
   showToast("🎉 Ev sahibi ödeme bilgileri (IBAN, Kripto, WhatsApp) başarıyla kaydedildi!");
 }
 
@@ -4181,6 +4316,8 @@ function saveHostGuideContent() {
     if (taxiName) prop.taxiName = taxiName;
     if (taxiPhone) prop.taxiPhone = taxiPhone;
   }
+
+  saveSessionState();
 
   // Update live guest elements if present
   const wifiEl = document.getElementById('guest-wifi-pass');
