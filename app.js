@@ -1821,6 +1821,10 @@ function loginHostWithGoogle(name, email, avatar) {
   hostAuth.subscriptionStatus = 'trial_active';
   currentUserRole = 'host';
 
+  closeModal('modal-google-auth');
+  const modalEl = document.getElementById('modal-google-auth');
+  if (modalEl) modalEl.classList.remove('active');
+
   saveSessionState();
   resetSessionInactivityTimer();
   updateTopNavAuthUI();
@@ -1833,6 +1837,7 @@ function handleGoogleCredentialResponse(response) {
   if (response && response.credential) {
     const payload = parseJwt(response.credential);
     if (payload) {
+      closeModal('modal-google-auth');
       loginHostWithGoogle(payload.name, payload.email, payload.picture);
       return;
     }
@@ -1924,20 +1929,24 @@ function handleSocialLogin(provider) {
                 return;
               } catch (e) {
                 console.warn("Google userinfo fetch fallback:", e);
+                closeModal('modal-google-auth');
+                loginHostWithGoogle('Google Ev Sahibi', 'evsahibi@gmail.com');
               }
             }
           },
           error_callback: (err) => {
             console.warn("Google OAuth2 popup info:", err);
+            openModal('modal-google-auth');
           }
         });
         client.requestAccessToken({ prompt: 'select_account' });
+        return; // Important: prevent fallback modal from opening at the same time
       } catch (err) {
         console.warn("OAuth2 init error:", err);
       }
     }
 
-    // 2. Open interactive Google Auth modal so user is never stuck
+    // 2. Open interactive Google Auth modal only if popup API is unavailable
     const modalEl = document.getElementById('modal-google-auth');
     if (modalEl) {
       const input = document.getElementById('input-google-quick-email');
@@ -1971,34 +1980,6 @@ function submitGoogleQuickAuth() {
 function submitGoogle1ClickDemo() {
   closeModal('modal-google-auth');
   loginHostWithGoogle('Google Ev Sahibi', 'evsahibi@gmail.com');
-}
-
-function autofillDemo2FA() {
-  const input = document.getElementById('input-2fa-code');
-  if (input) input.value = '123456';
-  showToast("⚡ Demo 2FA TOTP Code (123456) filled automatically!");
-}
-
-function submitAdmin2FACode() {
-  const code = document.getElementById('input-2fa-code').value;
-  if (!code || code.length !== 6) {
-    showToast("⚠️ Invalid 2FA Code! Must be 6 digits.");
-    return;
-  }
-
-  adminAuth.isLoggedIn = true;
-  adminAuth.email = document.getElementById('input-admin-email').value || 'hostifyos@gmail.com';
-  adminAuth.name = 'Master Platform Admin';
-  currentUserRole = 'admin';
-  loginAttempts.count = 0;
-
-  saveSessionState();
-  closeModal('modal-admin-2fa');
-  resetSessionInactivityTimer();
-  updateTopNavAuthUI();
-  checkAdminAuthStatus();
-  switchView('admin');
-  showToast("✅ 2FA TOTP Verified! Master Super Admin Console Opened.");
 }
 
 function submitPasswordReset() {
