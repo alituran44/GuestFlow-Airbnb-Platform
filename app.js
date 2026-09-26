@@ -1297,16 +1297,17 @@ let billingCycle = 'annual';
 let currentUserRole = 'visitor';
 
 // HOST AUTH & SUBSCRIPTION STATE
+// HOST AUTH & SUBSCRIPTION STATE
 let hostAuth = {
   isLoggedIn: false,
-  email: 'sarah@malibuvillas.com',
-  name: 'Sarah Miller',
+  email: '',
+  name: '',
   plan: 'Pro Host Plan (14-Day Free Trial)',
   trialDaysLeft: 14,
   subscriptionStatus: 'trial_active',
-  cardOnFile: '•••• •••• •••• 4242 (Visa)',
-  autoChargeDate: 'Aug 30, 2026',
-  customPaymentLink: 'https://buy.stripe.com/malibu_villa_direct',
+  cardOnFile: '',
+  autoChargeDate: '',
+  customPaymentLink: '',
   commissionRate: 0.0
 };
 
@@ -1318,215 +1319,62 @@ let adminAuth = {
   role: 'Super Admin'
 };
 
-// SUPER ADMIN GOVERNANCE - ALL REGISTERED HOSTS MOCK DATA
-let allHostAccounts = [
-  {
-    id: 'host-1',
-    name: 'Sarah Miller',
-    email: 'sarah@malibuvillas.com',
-    propertiesCount: 3,
-    plan: 'Pro Host Plan ($14/mo Annual)',
-    status: 'trial_active',
-    trialDays: 14,
-    nextBillingDate: 'Aug 30, 2026',
-    cardOnFile: 'Visa (•••• 4242)',
-    commissionRate: '0.0%',
-    upsellsTotalUSD: 1480.0
-  },
-  {
-    id: 'host-2',
-    name: 'Marcus Vance',
-    email: 'marcus@vancehospitality.com',
-    propertiesCount: 1,
-    plan: 'Pro Host Plan ($19/mo)',
-    status: 'trial_active',
-    trialDays: 11,
-    nextBillingDate: 'Aug 27, 2026',
-    cardOnFile: 'Mastercard (•••• 8821)',
-    commissionRate: '0.0%',
-    upsellsTotalUSD: 420.0
-  },
-  {
-    id: 'host-3',
-    name: 'Elena Rostova',
-    email: 'elena@santorini-suites.gr',
-    propertiesCount: 18,
-    plan: 'Enterprise Plan ($39/mo)',
-    status: 'subscribed',
-    trialDays: 0,
-    nextBillingDate: 'Sep 15, 2026',
-    cardOnFile: 'Amex (•••• 1009)',
-    commissionRate: '0.0%',
-    upsellsTotalUSD: 9450.0
-  },
-  {
-    id: 'host-4',
-    name: 'David Chen',
-    email: 'david@bayareastays.com',
-    propertiesCount: 2,
-    plan: 'Pro Host Plan ($19/mo)',
-    status: 'subscribed',
-    trialDays: 0,
-    nextBillingDate: 'Sep 02, 2026',
-    cardOnFile: 'Visa (•••• 9931)',
-    commissionRate: '0.0%',
-    upsellsTotalUSD: 1120.0
-  }
-];
+// SUPER ADMIN GOVERNANCE - ALL REGISTERED HOSTS
+let allHostAccounts = [];
 
 // AUTOMATED GUEST TUNNELS DATA MODEL
-let guestTunnels = [
-  {
-    id: 'tun-1',
-    name: 'Pre-Arrival Airport Transfer Tunnel',
-    trigger: '48 Hours Before Check-in',
-    channel: 'WhatsApp & SMS',
-    offer: 'VIP Airport Shuttle ($75.00)',
-    status: 'Active',
-    sent: 142,
-    converted: 48,
-    conversionRate: '33.8%',
-    revenueUSD: 3600.0,
-    icon: 'plane-takeoff'
-  },
-  {
-    id: 'tun-2',
-    name: 'Late Check-out Upsell Tunnel',
-    trigger: 'Night Before Check-out (6:00 PM)',
-    channel: 'PWA Push & SMS',
-    offer: 'Late Check-out 2:00 PM ($45.00)',
-    status: 'Active',
-    sent: 198,
-    converted: 62,
-    conversionRate: '31.3%',
-    revenueUSD: 2790.0,
-    icon: 'clock'
-  }
-];
+let guestTunnels = [];
 
 // INCOMING GUEST ORDERS DATA MODEL
-let hostOrders = [
-  { 
-    id: 'ORD-9821', 
-    guest: 'Alexander Wright', 
-    property: 'Malibu Beachfront Villa & Suite', 
-    service: 'VIP Airport Shuttle', 
-    date: 'Aug 17, 2026', 
-    priceUSD: 75.0, 
-    hostPayoutUSD: 71.25,
-    platformFeeUSD: 3.75,
-    commissionRateAtPurchase: 0.05,
-    status: 'Confirmed', 
-    payMethod: 'Card Checkout' 
-  },
-  { 
-    id: 'ORD-9822', 
-    guest: 'Sophia Martinez', 
-    property: 'Malibu Beachfront Villa & Suite', 
-    service: 'Late Check-out (2:00 PM)', 
-    date: 'Aug 16, 2026', 
-    priceUSD: 45.0, 
-    hostPayoutUSD: 42.75,
-    platformFeeUSD: 2.25,
-    commissionRateAtPurchase: 0.05,
-    status: 'Completed', 
-    payMethod: 'Custom Host Link' 
-  }
-];
+let hostOrders = [];
 
 // IMMUTABLE APPEND-ONLY AUDIT LOG DATA MODEL
-let adminAuditLogs = [
-  {
-    id: 'AUD-9901',
-    timestamp: 'Aug 17, 2026 14:22 UTC',
-    admin: 'hostifyos@gmail.com',
-    action: 'Stripe Connect Express KYC Verification',
-    details: 'Verified Merchant Account for Sarah Miller (Malibu Beachfront Villa)',
-    status: 'AUTHENTICATED'
-  },
-  {
-    id: 'AUD-9902',
-    timestamp: 'Aug 17, 2026 16:45 UTC',
-    admin: 'hostifyos@gmail.com',
-    action: 'SaaS Plan Upgrade (Pro Host)',
-    details: 'Upgraded Sarah Miller to Pro Host Plan ($14/mo - 0% Commission)',
-    status: 'AUTHENTICATED'
-  }
-];
+let adminAuditLogs = [];
 
-// MULTI-PROPERTY DATA MODEL
-let properties = [
-  {
-    id: 'prop-malibu',
-    platform: 'Airbnb',
-    title: 'Malibu Beachfront Villa & Suite',
-    address: '22804 Pacific Coast Hwy, Malibu, CA',
-    wifiName: 'MalibuVilla_5G',
-    wifiPass: 'MalibuPass2026!',
-    doorPin: '4821',
-    payoutBank: 'Demo Merchant Bank (****4821 - USD)',
-    customPayUrl: 'https://buy.stripe.com/malibu_villa_direct',
-    heroImg: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
-    checkIn: '3:00 PM',
-    checkOut: '11:00 AM',
-    whatsapp: '13105550199',
-    revenueUSD: 1480.0,
-    platformFeesTotalUSD: 74.0,
-    views: 342,
-    completedOrders: 28,
-    slug: 'malibu-villa',
-    services: [
-      { id: 101, name: 'VIP Airport Shuttle (One Way)', category: 'transport', priceUSD: 75.0, desc: 'Private luxury sedan pickup directly from LAX terminal.', status: 'Active' },
-      { id: 102, name: 'Late Check-out (Until 2:00 PM)', category: 'stay', priceUSD: 45.0, desc: 'Relax longer on your departure day.', status: 'Active' }
-    ],
-    videos: [
-      { title: 'Nest AC & Thermostat', time: '0:45 min', img: 'https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?auto=format&fit=crop&w=600&q=80', desc: 'Learn how to switch between cooling and heating modes.' }
-    ],
-    localSpots: [
-      { id: 1, name: 'Malibu Farm Restaurant', type: 'food', rating: '4.8 ★', dist: '0.4 miles', img: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=400&q=80', desc: 'AI Recommends: Fresh organic farm-to-table dining right on Malibu Pier.' }
-    ]
-  },
-  {
-    id: 'prop-hotel',
+// SAFE DEFAULT PROPERTY SCHEMA FOR EMPTY STATE
+const DEFAULT_EMPTY_PROPERTY = {
+  id: 'prop-empty',
+  platform: 'Direct',
+  title: 'Dijital Mülk Rehberi',
+  address: 'Henüz Mülk Adresi Eklenmedi',
+  wifiName: 'Wi-Fi Adı Belirtilmedi',
+  wifiPass: '••••••••',
+  doorPin: '0000',
+  payoutBank: 'Banka Hesabı (IBAN / FAST)',
+  customPayUrl: '',
+  airbnbUrl: '',
+  bookingUrl: '',
+  vrboUrl: '',
+  icalUrl: '',
+  directBookingUrl: '',
+  fibabankaIban: 'TR22 0010 3000 0000 0059 1864 21',
+  swiftBic: 'FBABTRIS',
+  cryptoUsdt: 'TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa',
+  taxiName: 'Bölgesel Taksi Durağı',
+  taxiPhone: '+90 555 000 00 00',
+  heroImg: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
+  checkIn: '15:00',
+  checkOut: '11:00',
+  whatsapp: '905437360660',
+  revenueUSD: 0.0,
+  platformFeesTotalUSD: 0.0,
+  views: 0,
+  completedOrders: 0,
+  slug: 'rehber',
+  services: [],
+  videos: [],
+  localSpots: []
+};
 
-    platform: 'Enterprise Hotel',
-    title: 'Grand Horizon Boutique Hotel & Spa',
-    address: '88 Cliffside Resort Way, Santorini, Greece',
-    wifiName: 'GrandHorizon_VIP',
-    wifiPass: 'HorizonSpa2026',
-    doorPin: '9982',
-    payoutBank: 'Bank of Greece (****9982 - EUR)',
-    customPayUrl: 'https://buy.stripe.com/grand_horizon_hotel_direct',
-    heroImg: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
-    checkIn: '2:00 PM',
-    checkOut: '12:00 PM',
-    whatsapp: '302286055500',
-    revenueUSD: 3890.0,
-    platformFeesTotalUSD: 0.0,
-    views: 1240,
-    completedOrders: 94,
-    slug: 'grand-horizon-hotel',
-    services: [
-      { id: 201, name: 'In-Room Gourmet Breakfast & Champagne', category: 'food', priceUSD: 65.0, desc: 'Served directly to your private sea-view terrace.', status: 'Active' },
-      { id: 202, name: 'Couples Sunset Massage & Spa Session', category: 'spa', priceUSD: 180.0, desc: '90-minute volcanic stone aromatherapy massage.', status: 'Active' },
-      { id: 203, name: 'Private Catamaran Island Cruise', category: 'tours', priceUSD: 240.0, desc: 'Half-day private yacht charter with open bar.', status: 'Active' }
-    ],
-    videos: [
-      { title: 'Terrace Private Jacuzzi Controls', time: '1:10 min', img: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80', desc: 'Temperature & hydro-massage jet instructions.' }
-    ],
-    localSpots: [
-      { id: 2, name: 'Santo Wines Winery', type: 'food', rating: '4.9 ★', dist: '1.2 miles', img: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=400&q=80', desc: 'Famous wine tasting with panoramic caldera sunset views.' }
-    ]
-  }
-];
+// MULTI-PROPERTY DATA MODEL (CLEAN / EMPTY)
+let properties = [];
 
-
-let activePropertyId = 'prop-malibu';
+let activePropertyId = '';
 let cart = [];
 let isPinRevealed = false;
 
 function getActiveProperty() {
-  return properties.find(p => p.id === activePropertyId) || properties[0];
+  return properties.find(p => p.id === activePropertyId) || properties[0] || DEFAULT_EMPTY_PROPERTY;
 }
 
 // App Initialization
@@ -1848,13 +1696,18 @@ function handleUserLogin(role) {
     document.getElementById('modal-admin-2fa').classList.add('active');
     showToast("🔒 Enter 6-digit TOTP code from your Authenticator app.");
   } else {
-    const email = document.getElementById('input-host-email').value;
+    const emailInput = document.getElementById('input-host-email');
+    const email = emailInput && emailInput.value ? emailInput.value.trim() : 'evsahibi@gmail.com';
     const nameInput = document.getElementById('input-host-name');
-    if (nameInput && nameInput.value) {
-      hostAuth.name = nameInput.value;
+    let name = (nameInput && nameInput.value) ? nameInput.value.trim() : '';
+    if (!name && email) {
+      name = email.split('@')[0];
+      name = name.charAt(0).toUpperCase() + name.slice(1);
     }
+
+    hostAuth.name = name || 'Ev Sahibi';
+    hostAuth.email = email || 'evsahibi@gmail.com';
     hostAuth.isLoggedIn = true;
-    hostAuth.email = email || 'sarah@malibuvillas.com';
     hostAuth.subscriptionStatus = 'trial_active';
     currentUserRole = 'host';
 
@@ -1862,7 +1715,7 @@ function handleUserLogin(role) {
     updateTopNavAuthUI();
     checkHostAuthStatus();
     switchView('host');
-    showToast(`🎉 Welcome ${hostAuth.name}! 14-Day Free Pro Host Trial Activated.`);
+    showToast(`🎉 Hoş geldiniz ${hostAuth.name}! (${hostAuth.email}) 14 Günlük Ücretsiz Pro Deneme Aktif.`);
   }
 }
 
@@ -1903,22 +1756,26 @@ function parseJwt(token) {
   }
 }
 
+function loginHostWithGoogle(name, email, avatar) {
+  hostAuth.isLoggedIn = true;
+  hostAuth.name = name || 'Google Ev Sahibi';
+  hostAuth.email = email || 'evsahibi@gmail.com';
+  if (avatar) hostAuth.avatar = avatar;
+  hostAuth.subscriptionStatus = 'trial_active';
+  currentUserRole = 'host';
+
+  resetSessionInactivityTimer();
+  updateTopNavAuthUI();
+  checkHostAuthStatus();
+  switchView('host');
+  showToast(`🎉 Hoş geldiniz ${hostAuth.name}! Google ile giriş yapıldı (${hostAuth.email}). 14 Günlük Pro Deneme Aktif.`);
+}
+
 function handleGoogleCredentialResponse(response) {
   if (response && response.credential) {
     const payload = parseJwt(response.credential);
     if (payload) {
-      hostAuth.isLoggedIn = true;
-      hostAuth.name = payload.name || 'Google Host';
-      hostAuth.email = payload.email || 'host@gmail.com';
-      if (payload.picture) hostAuth.avatar = payload.picture;
-      hostAuth.subscriptionStatus = 'trial_active';
-      currentUserRole = 'host';
-
-      resetSessionInactivityTimer();
-      updateTopNavAuthUI();
-      checkHostAuthStatus();
-      switchView('host');
-      showToast(`🎉 Welcome ${hostAuth.name}! Signed in with Google (${payload.email}). 14-Day Pro Trial Active.`);
+      loginHostWithGoogle(payload.name, payload.email, payload.picture);
       return;
     }
   }
@@ -1961,17 +1818,7 @@ async function handleAppleLogin() {
         const userName = user.name ? `${user.name.firstName || ''} ${user.name.lastName || ''}`.trim() : 'Apple Host';
         const userEmail = user.email || 'host@privaterelay.appleid.com';
 
-        hostAuth.isLoggedIn = true;
-        hostAuth.name = userName || 'Apple Host';
-        hostAuth.email = userEmail;
-        hostAuth.subscriptionStatus = 'trial_active';
-        currentUserRole = 'host';
-
-        resetSessionInactivityTimer();
-        updateTopNavAuthUI();
-        checkHostAuthStatus();
-        switchView('host');
-        showToast(`🎉 Welcome ${hostAuth.name}! Signed in with Apple ID.`);
+        loginHostWithGoogle(userName, userEmail);
         return;
       }
     } catch (err) {
@@ -1981,17 +1828,7 @@ async function handleAppleLogin() {
 
   // Smooth fallback
   setTimeout(() => {
-    hostAuth.isLoggedIn = true;
-    hostAuth.name = 'Apple Host (Face ID)';
-    hostAuth.email = 'sarah@privaterelay.appleid.com';
-    hostAuth.subscriptionStatus = 'trial_active';
-    currentUserRole = 'host';
-
-    resetSessionInactivityTimer();
-    updateTopNavAuthUI();
-    checkHostAuthStatus();
-    switchView('host');
-    showToast(`🎉 Success! Signed in with Apple ID (Face ID). 14-Day Pro Trial Active.`);
+    loginHostWithGoogle('Apple Host (Face ID)', 'host@privaterelay.appleid.com');
   }, 700);
 }
 
@@ -2011,48 +1848,71 @@ function handleSocialLogin(provider) {
   }
 
   if (provider === 'Google') {
-    if (window.google && window.google.accounts && window.google.accounts.id) {
+    // 1. If Google OAuth2 Token Client (Popup) is supported
+    if (window.google && window.google.accounts && window.google.accounts.oauth2) {
       try {
-        google.accounts.id.initialize({
+        const client = google.accounts.oauth2.initTokenClient({
           client_id: GOOGLE_AUTH_CONFIG.clientId,
-          callback: handleGoogleCredentialResponse
-        });
-        google.accounts.id.prompt((notification) => {
-          if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-            // If One Tap is closed or suppressed by browser popup blockers, smooth fallback
-            hostAuth.isLoggedIn = true;
-            hostAuth.name = 'Google Host';
-            hostAuth.email = 'sarah@malibuvillas.com';
-            hostAuth.subscriptionStatus = 'trial_active';
-            currentUserRole = 'host';
-            resetSessionInactivityTimer();
-            updateTopNavAuthUI();
-            checkHostAuthStatus();
-            switchView('host');
-            showToast(`🎉 Welcome Google Host! 14-Day Pro Trial Active.`);
+          scope: 'email profile openid',
+          callback: async (tokenResponse) => {
+            if (tokenResponse && tokenResponse.access_token) {
+              try {
+                const res = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+                  headers: { Authorization: `Bearer ${tokenResponse.access_token}` }
+                });
+                const profile = await res.json();
+                closeModal('modal-google-auth');
+                loginHostWithGoogle(profile.name, profile.email, profile.picture);
+                return;
+              } catch (e) {
+                console.warn("Google userinfo fetch fallback:", e);
+              }
+            }
+          },
+          error_callback: (err) => {
+            console.warn("Google OAuth2 popup info:", err);
           }
         });
-        return;
-      } catch (e) {
-        console.warn("Google Prompt error:", e);
+        client.requestAccessToken({ prompt: 'select_account' });
+      } catch (err) {
+        console.warn("OAuth2 init error:", err);
       }
     }
+
+    // 2. Open interactive Google Auth modal so user is never stuck
+    const modalEl = document.getElementById('modal-google-auth');
+    if (modalEl) {
+      const input = document.getElementById('input-google-quick-email');
+      const hostEmailInput = document.getElementById('input-host-email');
+      if (input && hostEmailInput && hostEmailInput.value && hostEmailInput.value.includes('@')) {
+        input.value = hostEmailInput.value;
+      }
+      openModal('modal-google-auth');
+    } else {
+      loginHostWithGoogle('Google Ev Sahibi', 'evsahibi@gmail.com');
+    }
+    return;
   }
 
   showToast(`⚡ Connecting with ${provider}...`);
   setTimeout(() => {
-    hostAuth.isLoggedIn = true;
-    hostAuth.name = provider + ' Host';
-    hostAuth.email = 'host@' + provider.toLowerCase() + '.com';
-    hostAuth.subscriptionStatus = 'trial_active';
-    currentUserRole = 'host';
-
-    resetSessionInactivityTimer();
-    updateTopNavAuthUI();
-    checkHostAuthStatus();
-    switchView('host');
-    showToast(`🎉 Success! Signed in with ${provider}. 14-Day Pro Trial Active.`);
+    loginHostWithGoogle(provider + ' Host', 'host@' + provider.toLowerCase() + '.com');
   }, 700);
+}
+
+function submitGoogleQuickAuth() {
+  const emailInput = document.getElementById('input-google-quick-email');
+  const email = emailInput && emailInput.value ? emailInput.value.trim() : 'evsahibi@gmail.com';
+  let name = email.split('@')[0];
+  name = name.charAt(0).toUpperCase() + name.slice(1) + ' (Google)';
+  
+  closeModal('modal-google-auth');
+  loginHostWithGoogle(name, email);
+}
+
+function submitGoogle1ClickDemo() {
+  closeModal('modal-google-auth');
+  loginHostWithGoogle('Google Ev Sahibi', 'evsahibi@gmail.com');
 }
 
 function autofillDemo2FA() {
@@ -2180,38 +2040,51 @@ function renderAdminHostsTable() {
   const tbody = document.getElementById('admin-hosts-table');
   if (!tbody) return;
 
+  if (allHostAccounts.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="7" style="text-align:center; padding:36px; color:var(--text-muted);">
+          <i data-lucide="users" style="width:28px; height:28px; display:block; margin:0 auto 10px; opacity:0.4;"></i>
+          Henüz kayıtlı ev sahibi hesabı bulunmuyor.
+        </td>
+      </tr>
+    `;
+    lucide.createIcons();
+    return;
+  }
+
   tbody.innerHTML = allHostAccounts.map(h => `
     <tr>
       <td>
-        <strong>${h.name}</strong>
-        <p style="font-size:11px; color:var(--text-muted); margin:2px 0 0;">${h.email}</p>
+        <strong>${escapeHtml(h.name)}</strong>
+        <p style="font-size:11px; color:var(--text-muted); margin:2px 0 0;">${escapeHtml(h.email)}</p>
       </td>
       <td><strong>${h.propertiesCount} Units</strong></td>
-      <td><span class="badge-tag">${h.plan}</span></td>
+      <td><span class="badge-tag">${escapeHtml(h.plan)}</span></td>
       <td>
         <div style="display:flex; flex-direction:column; gap:2px;">
           <span class="badge-tag" style="${h.status === 'subscribed' ? 'background:rgba(16,185,129,0.15); color:var(--accent-emerald);' : 'background:rgba(245,158,11,0.15); color:var(--accent-amber);'}">
             ⏳ ${h.status === 'subscribed' ? 'Subscribed & Active' : `${h.trialDays} Days Remaining`}
           </span>
-          <span style="font-size:10px; color:var(--text-muted);">Renewal: ${h.nextBillingDate}</span>
+          <span style="font-size:10px; color:var(--text-muted);">Renewal: ${escapeHtml(h.nextBillingDate)}</span>
         </div>
       </td>
       <td>
         <div style="font-size:11px;">
-          <strong style="color:var(--text-main);">💳 ${h.cardOnFile}</strong>
-          <span style="display:block; font-size:10px; color:var(--accent-emerald);">Auto-charge ${h.plan.includes('Pro') ? '$19.00' : h.plan.includes('Enterprise') ? '$39.00' : '$0.00'}</span>
+          <strong style="color:var(--text-main);">💳 ${escapeHtml(h.cardOnFile)}</strong>
+          <span style="display:block; font-size:10px; color:var(--accent-emerald);">Auto-charge ${h.plan && h.plan.includes('Pro') ? '$19.00' : h.plan && h.plan.includes('Enterprise') ? '$39.00' : '$0.00'}</span>
         </div>
       </td>
-      <td><strong>${h.commissionRate}</strong></td>
+      <td><strong>${escapeHtml(h.commissionRate)}</strong></td>
       <td>
         <div style="display:flex; gap:6px; flex-wrap:wrap;">
-          <button class="btn-primary-sm" style="padding:4px 8px; font-size:10px;" onclick="prepareEmailToLead('${h.email}')">
+          <button class="btn-primary-sm" style="padding:4px 8px; font-size:10px;" onclick="prepareEmailToLead('${escapeHtml(h.email)}')">
             <i data-lucide="mail"></i> Email
           </button>
-          <button class="btn-secondary-sm" style="padding:4px 8px; font-size:10px;" onclick="adminExtendHostTrial('${h.id}')">
+          <button class="btn-secondary-sm" style="padding:4px 8px; font-size:10px;" onclick="adminExtendHostTrial('${escapeHtml(h.id)}')">
             +7 Days
           </button>
-          <button class="btn-secondary-sm" style="padding:4px 8px; font-size:10px;" onclick="adminActionLockHost('${h.id}')">
+          <button class="btn-secondary-sm" style="padding:4px 8px; font-size:10px;" onclick="adminActionLockHost('${escapeHtml(h.id)}')">
             ${h.status === 'expired_locked' ? 'Unlock' : 'Lock'}
           </button>
         </div>
@@ -2231,7 +2104,6 @@ function adminExtendHostTrial(hostId) {
     showToast(`⚡ Extended trial for ${host.email} by +7 days! (${host.trialDays} days remaining)`);
   }
 }
-
 
 function adminActionLockHost(hostId) {
   const host = allHostAccounts.find(h => h.id === hostId);
@@ -2259,16 +2131,29 @@ function renderAdminAuditLogsTable() {
   const tbody = document.getElementById('admin-audit-logs-table-body');
   if (!tbody) return;
 
+  if (adminAuditLogs.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="6" style="text-align:center; padding:36px; color:var(--text-muted);">
+          <i data-lucide="shield" style="width:28px; height:28px; display:block; margin:0 auto 10px; opacity:0.4;"></i>
+          Henüz güvenlik denetim kaydı bulunmuyor.
+        </td>
+      </tr>
+    `;
+    lucide.createIcons();
+    return;
+  }
+
   tbody.innerHTML = adminAuditLogs.map(log => `
     <tr>
-      <td><strong>#${log.id}</strong></td>
-      <td>${log.timestamp}</td>
-      <td><span class="badge-tag" style="background:rgba(245,158,11,0.15); color:var(--accent-amber);">${log.admin}</span></td>
-      <td><strong>${log.action}</strong></td>
-      <td><span style="font-size:11px; color:var(--text-muted);">${log.details}</span></td>
+      <td><strong>#${escapeHtml(log.id)}</strong></td>
+      <td>${escapeHtml(log.timestamp)}</td>
+      <td><span class="badge-tag" style="background:rgba(245,158,11,0.15); color:var(--accent-amber);">${escapeHtml(log.admin)}</span></td>
+      <td><strong>${escapeHtml(log.action)}</strong></td>
+      <td><span style="font-size:11px; color:var(--text-muted);">${escapeHtml(log.details)}</span></td>
       <td>
         <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">
-          ● ${log.status}
+          ● ${escapeHtml(log.status)}
         </span>
       </td>
     </tr>
@@ -2835,32 +2720,24 @@ async function processLemonSqueezySubscribe() {
 
 let invoiceSequenceCounter = 8802;
 
-let hostInvoices = [
-  {
-    id: 'INV-2026-0002',
-    date: 'Aug 17, 2026',
-    issuer: 'Ali Turan Inc.',
-    plan: 'Pro Host (Annual Plan - $14/mo rate)',
-    amountStr: '$168.00 / yr',
-    status: 'Paid & Emailed',
-    card: 'Visa (•••• 4242)',
-    email: 'sarah@malibuvillas.com'
-  },
-  {
-    id: 'INV-2026-0001',
-    date: 'Jul 17, 2026',
-    issuer: 'Ali Turan Inc.',
-    plan: 'Pro Host (Monthly Plan)',
-    amountStr: '$18.00 / mo',
-    status: 'Paid & Emailed',
-    card: 'Visa (•••• 4242)',
-    email: 'sarah@malibuvillas.com'
-  }
-];
+let hostInvoices = [];
 
 function renderHostInvoicesTable() {
   const tbody = document.getElementById('host-invoices-table-body');
   if (!tbody) return;
+
+  if (hostInvoices.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="7" style="text-align:center; padding:32px; color:var(--text-muted);">
+          <i data-lucide="file-text" style="width:24px; height:24px; display:block; margin:0 auto 8px; opacity:0.4;"></i>
+          Henüz düzenlenmiş fatura bulunmamaktadır.
+        </td>
+      </tr>
+    `;
+    lucide.createIcons();
+    return;
+  }
 
   tbody.innerHTML = hostInvoices.map(inv => `
     <tr>
@@ -3106,31 +2983,45 @@ function renderHostOrdersTable() {
   const tbody = document.getElementById('host-orders-table');
   if (!tbody) return;
 
+  if (hostOrders.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="7" style="text-align:center; padding:36px; color:var(--text-muted);">
+          <i data-lucide="inbox" style="width:28px; height:28px; display:block; margin:0 auto 10px; opacity:0.4;"></i>
+          Henüz gelen misafir siparişi bulunmamaktadır.
+        </td>
+      </tr>
+    `;
+    renderCommissionAggregator();
+    lucide.createIcons();
+    return;
+  }
+
   tbody.innerHTML = hostOrders.map(o => `
     <tr>
-      <td><strong>${o.id}</strong></td>
+      <td><strong>#${escapeHtml(o.id)}</strong></td>
       <td>
-        <strong>${o.guest}</strong>
-        <p style="font-size:11px; color:var(--text-muted);">${o.property}</p>
+        <strong>${escapeHtml(o.guest)}</strong>
+        <p style="font-size:11px; color:var(--text-muted);">${escapeHtml(o.property)}</p>
       </td>
-      <td>${o.service}</td>
+      <td>${escapeHtml(o.service)}</td>
       <td>
         <strong style="color:${o.status === 'Refunded' ? '#EF4444' : 'var(--accent-emerald)'};">${formatPrice(o.priceUSD)}</strong>
         <p style="font-size:10px; color:var(--accent-amber);">Net Host: ${formatPrice(o.hostPayoutUSD)} | Platform Fee: ${formatPrice(o.platformFeeUSD)}</p>
       </td>
-      <td>${o.date}</td>
+      <td>${escapeHtml(o.date)}</td>
       <td>
         <span class="badge-tag" style="${o.status === 'Completed' ? 'background:rgba(16,185,129,0.15); color:var(--accent-emerald);' : (o.status === 'Refunded' ? 'background:rgba(239,68,68,0.15); color:#EF4444;' : 'background:rgba(99,102,241,0.15); color:var(--accent-indigo);')}">
-          ● ${o.status}
+          ● ${escapeHtml(o.status)}
         </span>
       </td>
       <td>
         <div style="display:flex; gap:6px;">
-          <button class="btn-primary-sm" onclick="toggleOrderStatus('${o.id}')" ${o.status === 'Refunded' ? 'disabled style="opacity:0.5;"' : ''}>
+          <button class="btn-primary-sm" onclick="toggleOrderStatus('${escapeHtml(o.id)}')" ${o.status === 'Refunded' ? 'disabled style="opacity:0.5;"' : ''}>
             ${o.status === 'Completed' ? 'Re-open' : 'Mark Complete'}
           </button>
           ${o.status !== 'Refunded' ? `
-            <button class="btn-secondary-sm" onclick="refundGuestOrder('${o.id}')" style="color:#EF4444; border-color:rgba(239,68,68,0.3);" title="Refund Order via Stripe">
+            <button class="btn-secondary-sm" onclick="refundGuestOrder('${escapeHtml(o.id)}')" style="color:#EF4444; border-color:rgba(239,68,68,0.3);" title="Refund Order via Stripe">
               <i data-lucide="rotate-ccw"></i> Refund
             </button>
           ` : ''}
@@ -3374,6 +3265,19 @@ function renderTunnelsGrid() {
   const container = document.getElementById('tunnels-grid-container');
   if (!container) return;
 
+  if (guestTunnels.length === 0) {
+    container.innerHTML = `
+      <div style="grid-column:1/-1; text-align:center; padding:36px 20px; background:var(--bg-card); border:1px dashed var(--border-color); border-radius:14px; color:var(--text-muted);">
+        <i data-lucide="zap" style="width:28px; height:28px; margin-bottom:8px; color:var(--text-muted);"></i>
+        <h4 style="margin:0 0 4px; color:#fff; font-size:14px;">Henüz Aktif Mesaj Tüneli Yok</h4>
+        <p style="font-size:12px; margin:0 0 14px;">Misafirlerinize otomatik WhatsApp / SMS ek satış bildirimleri göndermek için tünel başlatın.</p>
+        <button class="btn-primary-sm" onclick="openCreateTunnelModal()"><i data-lucide="plus"></i> Yeni Tünel Başlat</button>
+      </div>
+    `;
+    lucide.createIcons();
+    return;
+  }
+
   container.innerHTML = guestTunnels.map(t => `
     <div class="tunnel-card">
       <div class="tunnel-header">
@@ -3476,11 +3380,16 @@ function renderPropertySelector() {
   const selectNav = document.getElementById('property-select-nav');
   const selectHost = document.getElementById('property-select-host');
 
-  const optionsHTML = properties.map(p => `
-    <option value="${p.id}" ${p.id === activePropertyId ? 'selected' : ''}>
-      [${p.platform}] ${p.title}
-    </option>
-  `).join('');
+  let optionsHTML = '';
+  if (properties.length === 0) {
+    optionsHTML = '<option value="">(Henüz Mülk Eklenmedi)</option>';
+  } else {
+    optionsHTML = properties.map(p => `
+      <option value="${p.id}" ${p.id === activePropertyId ? 'selected' : ''}>
+        [${p.platform}] ${p.title}
+      </option>
+    `).join('');
+  }
 
   if (selectNav) selectNav.innerHTML = optionsHTML;
   if (selectHost) selectHost.innerHTML = optionsHTML;
@@ -3523,6 +3432,32 @@ function loadActivePropertyData() {
   if (hostBankDisplay) hostBankDisplay.textContent = prop.payoutBank || 'Demo Merchant Bank (****4821 - USD)';
   if (hostCustomLinkDisplay) hostCustomLinkDisplay.textContent = prop.customPayUrl || hostAuth.customPaymentLink;
 
+  // Sync Host Payment Gateways tab inputs
+  const cfgIban = document.getElementById('cfg-host-iban');
+  const cfgSwift = document.getElementById('cfg-host-swift');
+  const cfgCrypto = document.getElementById('cfg-host-crypto');
+  const cfgWa = document.getElementById('cfg-host-whatsapp');
+  const cfgCardLink = document.getElementById('cfg-host-cardlink');
+
+  if (cfgIban && prop.fibabankaIban) cfgIban.value = prop.fibabankaIban;
+  if (cfgSwift && prop.swiftBic) cfgSwift.value = prop.swiftBic;
+  if (cfgCrypto && prop.cryptoUsdt) cfgCrypto.value = prop.cryptoUsdt;
+  if (cfgWa && prop.whatsapp) cfgWa.value = prop.whatsapp.startsWith('+') ? prop.whatsapp : `+${prop.whatsapp}`;
+  if (cfgCardLink && prop.customPayUrl) cfgCardLink.value = prop.customPayUrl;
+
+  // Sync Guidebook text settings inputs
+  const cfgWifiN = document.getElementById('cfg-guide-wifi-name');
+  const cfgWifiP = document.getElementById('cfg-guide-wifi-pass');
+  const cfgPin = document.getElementById('cfg-guide-pin');
+  const cfgTaxiN = document.getElementById('cfg-guide-taxi-name');
+  const cfgTaxiP = document.getElementById('cfg-guide-taxi-phone');
+
+  if (cfgWifiN) cfgWifiN.value = prop.wifiName;
+  if (cfgWifiP) cfgWifiP.value = prop.wifiPass;
+  if (cfgPin) cfgPin.value = prop.doorPin;
+  if (cfgTaxiN) cfgTaxiN.value = prop.taxiName || 'Yalıkavak Marina Taksi Durağı';
+  if (cfgTaxiP) cfgTaxiP.value = prop.taxiPhone || '+90 252 385 40 00';
+
   if (doorPinEl) {
     isPinRevealed = false;
     doorPinEl.textContent = `••••-${prop.doorPin.slice(-2)}`;
@@ -3533,6 +3468,7 @@ function loadActivePropertyData() {
   renderGuestServices();
   renderLocalSpots('all');
   renderHostServicesTable();
+  renderPropertiesListTable();
 
   // Update Live API Widgets (Weather & Local Holidays) for active property
   let propLat = 34.0259, propLon = -118.7798, propCountry = 'US';
@@ -3549,10 +3485,22 @@ function loadActivePropertyData() {
 
   renderCommissionAggregator();
 
+  // Sync QR Stand Studio preview and inputs
+  const standTitleInput = document.getElementById('input-stand-title');
   const standTitle = document.getElementById('stand-prop-title');
-  const standQrImg = document.querySelector('#qr-stand-preview img');
+  const standQrImg = document.getElementById('stand-qr-image') || document.querySelector('#qr-stand-preview img');
+  const standPillWifi = document.getElementById('stand-pill-wifi-val');
+  const standPillPass = document.getElementById('stand-pill-pass-val');
+  const standPillPin = document.getElementById('stand-pill-pin-val');
+  const standPillWa = document.getElementById('stand-pill-wa-val');
+
+  if (standTitleInput) standTitleInput.value = prop.title;
   if (standTitle) standTitle.textContent = prop.title;
-  if (standQrImg) standQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://hostifyos.com/g/${prop.slug}`;
+  if (standQrImg) standQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://hostifyos.com/g/${prop.slug}`;
+  if (standPillWifi) standPillWifi.textContent = prop.wifiName;
+  if (standPillPass) standPillPass.textContent = `Pass: ${prop.wifiPass}`;
+  if (standPillPin) standPillPin.textContent = prop.doorPin;
+  if (standPillWa) standPillWa.textContent = prop.whatsapp ? `+${prop.whatsapp.replace(/[^0-9]/g, '')}` : '+90 543 736 06 60';
 
   cart = [];
   updateCartBadge();
@@ -3673,34 +3621,131 @@ function renderPropertiesListTable() {
   const tbody = document.getElementById('host-properties-table');
   if (!tbody) return;
 
-  tbody.innerHTML = properties.map(p => `
+  if (properties.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="6" style="text-align:center; padding:36px 20px; color:var(--text-muted);">
+          <div style="max-width:380px; margin:0 auto;">
+            <div style="width:44px; height:44px; border-radius:12px; background:rgba(255,255,255,0.05); display:inline-flex; align-items:center; justify-content:center; color:var(--text-muted); margin-bottom:12px;">
+              <i data-lucide="home" style="width:22px; height:22px;"></i>
+            </div>
+            <h4 style="margin:0 0 6px; color:#fff; font-size:14px;">Henüz Eklenmiş Bir Mülk Yok</h4>
+            <p style="font-size:12px; margin:0 0 16px;">İlk dijital rehberinizi oluşturmak için yeni mülk ekleyin veya Airbnb ilan linkinizi aktarın.</p>
+            <div style="display:flex; gap:8px; justify-content:center;">
+              <button class="btn-primary-sm" onclick="openModal('modal-add-property')"><i data-lucide="plus"></i> Yeni Mülk Ekle</button>
+              <button class="btn-secondary-sm" onclick="location.href='/import-guide.html'"><i data-lucide="download"></i> Airbnb Linki Aktar</button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    `;
+    lucide.createIcons();
+    return;
+  }
+
+  tbody.innerHTML = properties.map(p => {
+    // Generate OTA channel badges and direct links
+    const channels = [];
+    if (p.airbnbUrl) {
+      channels.push(`<a href="${escapeHtml(p.airbnbUrl)}" target="_blank" rel="noopener noreferrer" class="badge-tag" style="background:rgba(255,90,95,0.15); color:#FF5A5F; text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-size:11px;" title="Airbnb İlanı"><i data-lucide="home" style="width:11px; height:11px;"></i> Airbnb ↗</a>`);
+    }
+    if (p.bookingUrl) {
+      channels.push(`<a href="${escapeHtml(p.bookingUrl)}" target="_blank" rel="noopener noreferrer" class="badge-tag" style="background:rgba(0,53,128,0.15); color:#60A5FA; text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-size:11px;" title="Booking.com İlanı"><i data-lucide="building" style="width:11px; height:11px;"></i> Booking ↗</a>`);
+    }
+    if (p.vrboUrl) {
+      channels.push(`<a href="${escapeHtml(p.vrboUrl)}" target="_blank" rel="noopener noreferrer" class="badge-tag" style="background:rgba(28,57,187,0.15); color:#A78BFA; text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-size:11px;" title="Vrbo İlanı"><i data-lucide="compass" style="width:11px; height:11px;"></i> Vrbo ↗</a>`);
+    }
+    if (p.icalUrl) {
+      channels.push(`<span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald); font-size:11px;" title="iCal Takvim Senkronizasyonu Aktif"><i data-lucide="calendar" style="width:11px; height:11px; vertical-align:middle;"></i> iCal Feed</span>`);
+    }
+    if (channels.length === 0) {
+      channels.push(`<span class="badge-tag" style="background:rgba(255,255,255,0.05); color:var(--text-muted); font-size:11px;">${escapeHtml(p.platform || 'Direct')}</span>`);
+    }
+
+    return `
     <tr>
       <td>
         <div style="display:flex; align-items:center; gap:10px;">
-          <img src="${p.heroImg}" style="width:40px; height:40px; border-radius:6px; object-fit:cover;">
+          <img src="${escapeHtml(p.heroImg)}" style="width:44px; height:44px; border-radius:8px; object-fit:cover;" alt="${escapeHtml(p.title)}">
           <div>
-            <strong>${p.title}</strong>
-            <p style="font-size:11px; color:var(--text-muted);">${p.address}</p>
+            <strong>${escapeHtml(p.title)}</strong>
+            <p style="font-size:11px; color:var(--text-muted); margin:2px 0 0;">${escapeHtml(p.address)}</p>
           </div>
         </div>
       </td>
-      <td><span class="badge-tag">${p.platform}</span></td>
+      <td>
+        <div style="display:flex; flex-wrap:wrap; gap:4px; align-items:center; margin-bottom:4px;">
+          ${channels.join('')}
+        </div>
+        <button class="btn-secondary-sm" style="padding:3px 8px; font-size:10px; margin-top:2px;" onclick="openEditChannelsModal('${escapeHtml(p.id)}')">
+          <i data-lucide="link"></i> OTA Linkleri Düzenle
+        </button>
+      </td>
       <td><span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">${(p.localSpots || []).length} AI Spots</span></td>
       <td><strong style="color:var(--accent-emerald);">${formatPrice(p.revenueUSD)}</strong></td>
       <td>
-        <span class="link-copy" onclick="copyGuestLink('${p.slug}')">
-          <i data-lucide="link"></i> hostifyos.com/g/${p.slug}
+        <span class="link-copy" onclick="copyGuestLink('${escapeHtml(p.slug)}')">
+          <i data-lucide="link"></i> hostifyos.com/g/${escapeHtml(p.slug)}
         </span>
       </td>
       <td>
-        <button class="btn-primary-sm" onclick="changeActiveProperty('${p.id}')">
-          ${p.id === activePropertyId ? '✓ Active' : 'Switch To'}
-        </button>
+        <div style="display:flex; gap:6px;">
+          <button class="btn-primary-sm" onclick="changeActiveProperty('${escapeHtml(p.id)}')">
+            ${p.id === activePropertyId ? '✓ Aktif Ev' : 'Seç'}
+          </button>
+        </div>
       </td>
     </tr>
-  `).join('');
+  `;
+  }).join('');
 
   lucide.createIcons();
+}
+
+function openEditChannelsModal(propId) {
+  const prop = properties.find(p => p.id === propId) || getActiveProperty();
+  if (!prop) return;
+
+  const modalTitle = document.getElementById('modal-channel-prop-title');
+  if (modalTitle) modalTitle.textContent = `"${prop.title}" için Airbnb, Booking.com, Vrbo ve iCal takvim linklerini bağlayın.`;
+
+  const idInput = document.getElementById('edit-channel-prop-id');
+  const airbnbInput = document.getElementById('edit-channel-airbnb');
+  const bookingInput = document.getElementById('edit-channel-booking');
+  const vrboInput = document.getElementById('edit-channel-vrbo');
+  const icalInput = document.getElementById('edit-channel-ical');
+  const directInput = document.getElementById('edit-channel-direct');
+
+  if (idInput) idInput.value = prop.id;
+  if (airbnbInput) airbnbInput.value = prop.airbnbUrl || '';
+  if (bookingInput) bookingInput.value = prop.bookingUrl || '';
+  if (vrboInput) vrboInput.value = prop.vrboUrl || '';
+  if (icalInput) icalInput.value = prop.icalUrl || '';
+  if (directInput) directInput.value = prop.directBookingUrl || '';
+
+  openModal('modal-edit-channels');
+}
+
+function savePropertyChannels() {
+  const propId = document.getElementById('edit-channel-prop-id')?.value;
+  const airbnb = document.getElementById('edit-channel-airbnb')?.value || '';
+  const booking = document.getElementById('edit-channel-booking')?.value || '';
+  const vrbo = document.getElementById('edit-channel-vrbo')?.value || '';
+  const ical = document.getElementById('edit-channel-ical')?.value || '';
+  const direct = document.getElementById('edit-channel-direct')?.value || '';
+
+  const prop = properties.find(p => p.id === propId) || getActiveProperty();
+  if (prop) {
+    prop.airbnbUrl = airbnb;
+    prop.bookingUrl = booking;
+    prop.vrboUrl = vrbo;
+    prop.icalUrl = ical;
+    prop.directBookingUrl = direct;
+  }
+
+  renderPropertiesListTable();
+  closeModal('modal-edit-channels');
+  showToast(`🎉 "${prop.title}" için OTA ve İlan linkleri başarıyla senkronize edildi!`);
 }
 
 function copyGuestLink(slug) {
@@ -3721,6 +3766,8 @@ function submitNewProperty() {
   const address = document.getElementById('new-p-address').value;
   const wifiName = document.getElementById('new-p-wifi').value;
   const doorPin = document.getElementById('new-p-pin').value || '8492';
+  const airbnbUrl = document.getElementById('new-p-airbnb') ? document.getElementById('new-p-airbnb').value : '';
+  const bookingUrl = document.getElementById('new-p-booking') ? document.getElementById('new-p-booking').value : '';
   const tzEl = document.getElementById('new-p-tz');
   const timezone = tzEl ? tzEl.value : 'America/Los_Angeles';
 
@@ -3738,10 +3785,20 @@ function submitNewProperty() {
     doorPin: doorPin,
     payoutBank: 'Demo Merchant Bank (****4821 - USD)',
     customPayUrl: 'https://buy.stripe.com/new_property_direct',
+    airbnbUrl: airbnbUrl || '',
+    bookingUrl: bookingUrl || '',
+    vrboUrl: '',
+    icalUrl: '',
+    directBookingUrl: '',
+    fibabankaIban: 'TR22 0010 3000 0000 0059 1864 21',
+    swiftBic: 'FBABTRIS',
+    cryptoUsdt: 'TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa',
+    taxiName: 'Yalıkavak Marina Taksi Durağı',
+    taxiPhone: '+90 252 385 40 00',
     heroImg: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
     checkIn: '3:00 PM',
     checkOut: '11:00 AM',
-    whatsapp: '13105550199',
+    whatsapp: '905437360660',
     revenueUSD: 0.0,
     platformFeesTotalUSD: 0.0,
     views: 1,
@@ -4139,18 +4196,105 @@ function updateStandTitle(val) {
   if (el) el.textContent = val || 'Your Property Title';
 }
 
+function updateStandSubtitle(val) {
+  const el = document.getElementById('stand-welcome-sub');
+  if (el) el.textContent = val || 'WELCOME TO YOUR STAY';
+}
+
 function updateStandTheme(style) {
   const box = document.getElementById('qr-stand-preview');
-  if (style === 'obsidian') {
-    box.style.background = '#090D14';
-    box.style.color = '#fff';
-  } else if (style === 'gold') {
-    box.style.background = '#FFFBEB';
-    box.style.color = '#78350F';
+  if (!box) return;
+
+  // Remove existing theme classes
+  box.classList.remove('stand-theme-obsidian', 'stand-theme-light', 'stand-theme-gold', 'stand-theme-emerald', 'stand-theme-indigo');
+  box.style.background = '';
+  box.style.color = '';
+
+  const themeClass = `stand-theme-${style || 'obsidian'}`;
+  box.classList.add(themeClass);
+}
+
+function updateStandFormat(format) {
+  const box = document.getElementById('qr-stand-preview');
+  if (!box) return;
+
+  if (format === 'a4') {
+    box.style.maxWidth = '420px';
+    box.style.minHeight = '520px';
+  } else if (format === 'a6') {
+    box.style.maxWidth = '280px';
+    box.style.minHeight = '380px';
+  } else if (format === 'square') {
+    box.style.maxWidth = '340px';
+    box.style.minHeight = '340px';
   } else {
-    box.style.background = '#FFFFFF';
-    box.style.color = '#090D14';
+    // A5 default
+    box.style.maxWidth = '360px';
+    box.style.minHeight = '480px';
   }
+  showToast(`📐 Stand ebatı ${format.toUpperCase()} formatına uyarlandı.`);
+}
+
+function updateStandDestination(dest) {
+  const prop = getActiveProperty();
+  const img = document.getElementById('stand-qr-image') || document.querySelector('#qr-stand-preview img');
+  if (!img) return;
+
+  let targetUrl = `https://hostifyos.com/g/${prop.slug}`;
+  if (dest === 'whatsapp') {
+    const wa = prop.whatsapp ? prop.whatsapp.replace(/[^0-9]/g, '') : '905437360660';
+    targetUrl = `https://wa.me/${wa}?text=Hi%20Host,%20I%20am%20staying%20at%20${encodeURIComponent(prop.title)}`;
+  } else if (dest === 'custom') {
+    targetUrl = prop.customPayUrl || prop.directBookingUrl || `https://hostifyos.com/g/${prop.slug}`;
+  }
+
+  img.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(targetUrl)}`;
+  showToast(`🔗 Kare kod yönlendirmesi güncellendi: ${targetUrl.slice(0, 35)}...`);
+}
+
+function updateStandPills() {
+  const showWifi = document.getElementById('stand-toggle-wifi')?.checked ?? true;
+  const showPin = document.getElementById('stand-toggle-pin')?.checked ?? true;
+  const showWa = document.getElementById('stand-toggle-wa')?.checked ?? true;
+
+  const pillWifi = document.getElementById('stand-pill-wifi');
+  const pillPin = document.getElementById('stand-pill-pin');
+  const pillWa = document.getElementById('stand-pill-wa');
+
+  if (pillWifi) pillWifi.style.display = showWifi ? 'flex' : 'none';
+  if (pillPin) pillPin.style.display = showPin ? 'flex' : 'none';
+  if (pillWa) pillWa.style.display = showWa ? 'flex' : 'none';
+}
+
+function copyStandLink() {
+  const prop = getActiveProperty();
+  const destSelect = document.getElementById('select-stand-dest')?.value || 'guidebook';
+  let targetUrl = `https://hostifyos.com/g/${prop.slug}`;
+  
+  if (destSelect === 'whatsapp') {
+    const wa = prop.whatsapp ? prop.whatsapp.replace(/[^0-9]/g, '') : '905437360660';
+    targetUrl = `https://wa.me/${wa}?text=Hi%20Host,%20I%20am%20staying%20at%20${encodeURIComponent(prop.title)}`;
+  } else if (destSelect === 'custom') {
+    targetUrl = prop.customPayUrl || prop.directBookingUrl || `https://hostifyos.com/g/${prop.slug}`;
+  }
+
+  navigator.clipboard.writeText(targetUrl);
+  showToast(`📋 Stand Kare Kod Linki Kopyalandı: ${targetUrl}`);
+}
+
+function downloadStandPNG() {
+  const prop = getActiveProperty();
+  const qrImg = document.getElementById('stand-qr-image') || document.querySelector('#qr-stand-preview img');
+  if (!qrImg) return;
+
+  const link = document.createElement('a');
+  link.href = qrImg.src;
+  link.download = `HostifyOS-QR-Stand-${prop.slug}.png`;
+  link.target = '_blank';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  showToast(`🖼️ "${prop.title}" için Yüksek Çözünürlüklü Kare Kod indiriliyor...`);
 }
 
 function printQrStand() {
@@ -4199,12 +4343,7 @@ function showToast(msg) {
 // ====================================================
 // SUPER ADMIN CRM & LEAD PIPELINE DATA MODEL
 // ====================================================
-let crmHostLeads = [
-  { id: 'crm-1', name: 'Sarah Miller', email: 'sarah@malibuvillas.com', properties: 3, mrr: 19.00, status: 'pro', notes: 'High-intent villa manager in Malibu, requested VIP shuttle upsell template.' },
-  { id: 'crm-2', name: 'Marcus Vance', email: 'marcus@santorini-suites.com', properties: 8, mrr: 39.00, status: 'enterprise', notes: 'Boutique hotel manager in Santorini. Interested in white-label domain.' },
-  { id: 'crm-3', name: 'Elena Rostova', email: 'elena@alpine-chalet.ch', properties: 1, mrr: 0.00, status: 'trial', notes: '14-day trial active. Needs assistance with appliance video upload.' },
-  { id: 'crm-4', name: 'David Chen', email: 'david@tokyo-apartments.jp', properties: 2, mrr: 19.00, status: 'pro', notes: 'Japanese host, activated 1-tap Wi-Fi guide for Shibuya listing.' }
-];
+let crmHostLeads = [];
 
 function renderCrmLeadsTable(filter = 'all') {
   const tbody = document.getElementById('admin-crm-table-body');
@@ -4212,22 +4351,35 @@ function renderCrmLeadsTable(filter = 'all') {
 
   const filtered = crmHostLeads.filter(l => filter === 'all' || l.status === filter);
 
+  if (filtered.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="6" style="text-align:center; padding:36px; color:var(--text-muted);">
+          <i data-lucide="user-check" style="width:28px; height:28px; display:block; margin:0 auto 10px; opacity:0.4;"></i>
+          CRM listesinde kayıtlı müşteri adayı bulunmamaktadır.
+        </td>
+      </tr>
+    `;
+    lucide.createIcons();
+    return;
+  }
+
   tbody.innerHTML = filtered.map(l => `
     <tr>
       <td>
-        <strong>${l.name}</strong>
-        <p style="font-size:11px; color:var(--text-muted); margin:2px 0 0;">${l.email}</p>
+        <strong>${escapeHtml(l.name)}</strong>
+        <p style="font-size:11px; color:var(--text-muted); margin:2px 0 0;">${escapeHtml(l.email)}</p>
       </td>
       <td><strong>${l.properties} Units</strong></td>
       <td><strong class="text-emerald">${formatPrice(l.mrr)} / mo</strong></td>
       <td>
         <span class="badge-tag" style="${l.status === 'pro' ? 'background:rgba(16,185,129,0.15); color:var(--accent-emerald);' : l.status === 'enterprise' ? 'background:rgba(99,102,241,0.15); color:var(--accent-indigo);' : 'background:rgba(245,158,11,0.15); color:var(--accent-amber);'}">
-          ● ${l.status.toUpperCase()}
+          ● ${escapeHtml(l.status.toUpperCase())}
         </span>
       </td>
-      <td><span style="font-size:11px; color:var(--text-muted);">${l.notes}</span></td>
+      <td><span style="font-size:11px; color:var(--text-muted);">${escapeHtml(l.notes)}</span></td>
       <td>
-        <button class="btn-primary-sm" style="padding:4px 8px; font-size:10px;" onclick="prepareEmailToLead('${l.email}')">
+        <button class="btn-primary-sm" style="padding:4px 8px; font-size:10px;" onclick="prepareEmailToLead('${escapeHtml(l.email)}')">
           <i data-lucide="mail"></i> Email Host
         </button>
       </td>

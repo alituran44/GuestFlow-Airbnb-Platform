@@ -1465,60 +1465,200 @@ body.theme-light .meta-item span {
   font-size: 12px;
 }
 
-/* Printable QR Stand Generator */
+/* Printable QR Stand Studio Styles */
 .qr-gen-wrapper {
   display: grid;
-  grid-template-columns: 320px 1fr;
+  grid-template-columns: 360px 1fr;
   gap: 32px;
   align-items: start;
 }
 
+@media (max-width: 990px) {
+  .qr-gen-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
 .qr-preview-box {
-  background: #fff;
-  color: #090D14;
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: var(--shadow-lg);
+  background: #090D14;
+  color: #F8FAFC;
+  padding: 28px 24px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
   text-align: center;
+  transition: all 0.3s ease;
+  position: sticky;
+  top: 90px;
 }
 
-.stand-card h2 {
-  font-size: 14px;
-  color: #64748B;
+.stand-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.stand-brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  opacity: 0.9;
+}
+
+.stand-welcome-tag {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
+  margin: 0 0 4px 0;
+  opacity: 0.75;
+  font-weight: 700;
 }
 
-.stand-card h1 {
+.stand-title {
   font-size: 20px;
-  color: #090D14;
-  margin-bottom: 16px;
+  font-weight: 800;
+  margin: 0;
+  line-height: 1.3;
 }
 
 .stand-qr-frame {
-  margin: 0 auto 16px;
-  width: 180px;
-  height: 180px;
-  border: 2px dashed #CBD5E1;
-  padding: 8px;
-  border-radius: 8px;
+  margin: 8px auto;
+  width: 170px;
+  height: 170px;
+  background: #fff;
+  padding: 10px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .stand-qr-frame img {
   width: 100%;
   height: 100%;
+  object-fit: contain;
+}
+
+.stand-pills-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin: 6px 0;
+}
+
+.stand-pill-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .stand-instruction {
-  font-size: 11px;
-  color: #475569;
-  margin-bottom: 16px;
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: 0.8;
+  margin: 4px 0 0 0;
 }
 
 .stand-footer {
-  font-size: 9px;
-  color: #94A3B8;
-  text-transform: uppercase;
+  font-size: 10px;
   font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-top: 4px;
+}
+
+/* Stand Themes */
+.stand-theme-obsidian {
+  background: #090D14 !important;
+  color: #F8FAFC !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
+
+.stand-theme-light {
+  background: #FFFFFF !important;
+  color: #0F172A !important;
+  border-color: #E2E8F0 !important;
+}
+.stand-theme-light .stand-pill-item {
+  background: #F1F5F9 !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+}
+
+.stand-theme-gold {
+  background: #1C1917 !important;
+  color: #FEF3C7 !important;
+  border-color: rgba(245, 158, 11, 0.4) !important;
+}
+.stand-theme-gold .stand-pill-item {
+  background: rgba(245, 158, 11, 0.1) !important;
+  color: #FDE68A !important;
+  border-color: rgba(245, 158, 11, 0.25) !important;
+}
+
+.stand-theme-emerald {
+  background: #062419 !important;
+  color: #ECFDF5 !important;
+  border-color: rgba(16, 185, 129, 0.5) !important;
+}
+.stand-theme-emerald .stand-pill-item {
+  background: rgba(16, 185, 129, 0.15) !important;
+  color: #A7F3D0 !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
+
+.stand-theme-indigo {
+  background: #0B132B !important;
+  color: #EEF2FF !important;
+  border-color: rgba(99, 102, 241, 0.4) !important;
+}
+.stand-theme-indigo .stand-pill-item {
+  background: rgba(99, 102, 241, 0.15) !important;
+  color: #C7D2FE !important;
+  border-color: rgba(99, 102, 241, 0.3) !important;
+}
+
+/* Print Only Rule for QR Stand */
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+  #qr-stand-preview, #qr-stand-preview * {
+    visibility: visible !important;
+  }
+  #qr-stand-preview {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 148mm !important;
+    min-height: 210mm !important;
+    margin: 0 auto !important;
+    box-shadow: none !important;
+    border: 1px solid #000 !important;
+    background: #fff !important;
+    color: #000 !important;
+    page-break-inside: avoid !important;
+  }
+  .stand-pill-item {
+    background: #f3f4f6 !important;
+    color: #000 !important;
+    border: 1px solid #ccc !important;
+  }
 }
 
 /* Modal System */
