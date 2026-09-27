@@ -1273,6 +1273,23 @@ body.theme-light .meta-item span {
 .host-header-actions {
   display: flex;
   gap: 12px;
+  position: relative;
+  z-index: 10;
+}
+
+.host-header-actions button,
+.h-overview-actions button,
+.panel-header button {
+  position: relative;
+  z-index: 11;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+.host-header-actions button *,
+.h-overview-actions button *,
+.panel-header button * {
+  pointer-events: none;
 }
 
 /* Metrics Overview Grid */
@@ -1689,33 +1706,37 @@ body.theme-light .meta-item span {
 
 /* Modal System */
 .modal-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  background: rgba(9, 13, 20, 0.85);
-  backdrop-filter: blur(8px);
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 99999 !important;
+  background: rgba(9, 13, 20, 0.88) !important;
+  backdrop-filter: blur(8px) !important;
   display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 16px !important;
 }
 
 .modal-backdrop.active {
-  display: flex;
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .modal-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  width: 100%;
-  max-width: 480px;
-  padding: 24px;
-  position: relative;
+  background: #0D131F !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: var(--radius-lg) !important;
+  width: 100% !important;
+  max-width: 500px !important;
+  padding: 24px !important;
+  position: relative !important;
+  z-index: 100000 !important;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8) !important;
 }
 
 .modal-card.modal-lg {
-  max-width: 760px;
+  max-width: 760px !important;
 }
 
 .modal-close {
@@ -1726,6 +1747,7 @@ body.theme-light .meta-item span {
   border: none;
   color: var(--text-muted);
   cursor: pointer;
+  z-index: 100001;
 }
 
 /* Checkout Grid */

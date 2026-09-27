@@ -4723,6 +4723,9 @@ function openModal(modalId) {
   if (modal) {
     modal.classList.add('active');
     modal.style.display = 'flex';
+    modal.style.visibility = 'visible';
+    modal.style.opacity = '1';
+    modal.style.zIndex = '99999';
     lucide.createIcons();
   }
 }
