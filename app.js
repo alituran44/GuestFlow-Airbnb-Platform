@@ -2392,7 +2392,13 @@ function switchHostTab(tabName, btnElement) {
     if (typeof loadActivePropertyData === 'function') loadActivePropertyData();
   }
 
-  lucide.createIcons();
+  if (tabName === 'qr' && targetContent) {
+    targetContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  if (typeof lucide !== 'undefined' && lucide.createIcons) {
+    lucide.createIcons();
+  }
 }
 
 
@@ -3811,12 +3817,36 @@ function savePropertyChannels() {
   showToast(`🎉 "${prop.title}" için OTA ve İlan linkleri başarıyla senkronize edildi!`);
 }
 
+function fallbackCopyText(text) {
+  try {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed";
+    textArea.style.left = "-999999px";
+    textArea.style.top = "-999999px";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+  } catch (err) {}
+}
+
 function copyGuestLink(slug) {
   const prop = getActiveProperty();
-  const targetSlug = slug || prop.slug;
+  const targetSlug = slug || (prop && prop.slug ? prop.slug : 'rehber');
   const url = `https://hostifyos.com/g/${targetSlug}`;
-  navigator.clipboard.writeText(url);
-  showToast(`Copied Guest Guidebook Link: ${url}`);
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(() => {
+      showToast(`📋 Misafir Rehberi Linki Kopyalandı: ${url}`);
+    }).catch(() => {
+      fallbackCopyText(url);
+      showToast(`📋 Misafir Rehberi Linki Kopyalandı: ${url}`);
+    });
+  } else {
+    fallbackCopyText(url);
+    showToast(`📋 Misafir Rehberi Linki Kopyalandı: ${url}`);
+  }
 }
 
 function openAddPropertyModal() {
@@ -4761,8 +4791,18 @@ if (typeof document !== 'undefined') {
 function copyHostVal(inputId, msg) {
   const el = document.getElementById(inputId);
   if (el) {
-    navigator.clipboard.writeText(el.value);
-    showToast(msg || "Panoya kopyalandı!");
+    const val = el.value !== undefined ? el.value : el.textContent;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(val).then(() => {
+        showToast(msg || "Panoya kopyalandı!");
+      }).catch(() => {
+        fallbackCopyText(val);
+        showToast(msg || "Panoya kopyalandı!");
+      });
+    } else {
+      fallbackCopyText(val);
+      showToast(msg || "Panoya kopyalandı!");
+    }
   }
 }
 window.copyHostVal = copyHostVal;
