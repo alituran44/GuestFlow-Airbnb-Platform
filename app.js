@@ -4401,7 +4401,309 @@ function downloadStandPNG() {
 }
 
 function printQrStand() {
-  window.print();
+  const prop = getActiveProperty();
+  const theme = document.getElementById('select-stand-theme')?.value || 'obsidian';
+  const format = document.getElementById('select-stand-format')?.value || 'a5';
+  const title = document.getElementById('input-stand-title')?.value || prop.title || 'Dijital Mülk Rehberi';
+  const subtitle = document.getElementById('input-stand-subtitle')?.value || 'WELCOME TO YOUR STAY';
+  const qrImg = document.getElementById('stand-qr-image') || document.querySelector('#qr-stand-preview img');
+  const qrSrc = qrImg ? qrImg.src : `https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=https://hostifyos.com/g/${prop.slug}`;
+  
+  const showWifi = document.getElementById('stand-toggle-wifi')?.checked ?? true;
+  const showPin = document.getElementById('stand-toggle-pin')?.checked ?? true;
+  const showWa = document.getElementById('stand-toggle-wa')?.checked ?? true;
+
+  const wifiName = prop.wifiName || 'Guest_WiFi_5G';
+  const wifiPass = prop.wifiPass || 'Welcome2026!';
+  const doorPin = prop.doorPin || '0000';
+  const wa = prop.whatsapp ? `+${prop.whatsapp.replace(/[^0-9]/g, '')}` : '+90 543 736 06 60';
+
+  // Format dimensions
+  let pageSize = '148mm 210mm'; // A5 portrait
+  let cardWidth = '132mm';
+  let cardHeight = '194mm';
+  let qrSize = '165px';
+  let titleSize = '19px';
+
+  if (format === 'a4') {
+    pageSize = '210mm 297mm';
+    cardWidth = '188mm';
+    cardHeight = '275mm';
+    qrSize = '220px';
+    titleSize = '26px';
+  } else if (format === 'a6') {
+    pageSize = '105mm 148mm';
+    cardWidth = '94mm';
+    cardHeight = '136mm';
+    qrSize = '115px';
+    titleSize = '14px';
+  } else if (format === 'square') {
+    pageSize = '150mm 150mm';
+    cardWidth = '138mm';
+    cardHeight = '138mm';
+    qrSize = '135px';
+    titleSize = '16px';
+  }
+
+  // Theme palettes
+  let themeBg = '#0B0F17';
+  let themeText = '#FFFFFF';
+  let themeSub = '#94A3B8';
+  let themeAccent = '#10B981';
+  let themeBorder = '2px solid rgba(255, 255, 255, 0.18)';
+  let pillBg = 'rgba(255, 255, 255, 0.08)';
+  let pillBorder = '1px solid rgba(255, 255, 255, 0.14)';
+  let pillText = '#F8FAFC';
+  let qrFrameBg = '#FFFFFF';
+  let qrFrameBorder = '3px solid rgba(255, 255, 255, 0.25)';
+
+  if (theme === 'light') {
+    themeBg = '#FFFFFF';
+    themeText = '#0F172A';
+    themeSub = '#64748B';
+    themeAccent = '#059669';
+    themeBorder = '2px solid #E2E8F0';
+    pillBg = '#F8FAFC';
+    pillBorder = '1px solid #E2E8F0';
+    pillText = '#0F172A';
+    qrFrameBg = '#F8FAFC';
+    qrFrameBorder = '2px solid #E2E8F0';
+  } else if (theme === 'gold') {
+    themeBg = '#FAF8F5';
+    themeText = '#1E293B';
+    themeSub = '#92400E';
+    themeAccent = '#D97706';
+    themeBorder = '3px double #D97706';
+    pillBg = '#F5EFEB';
+    pillBorder = '1px solid #E5D5C5';
+    pillText = '#1E293B';
+    qrFrameBg = '#FFFFFF';
+    qrFrameBorder = '2px solid #FCD34D';
+  } else if (theme === 'emerald') {
+    themeBg = '#062C22';
+    themeText = '#FFFFFF';
+    themeSub = '#A7F3D0';
+    themeAccent = '#34D399';
+    themeBorder = '2px solid rgba(52, 211, 153, 0.35)';
+    pillBg = 'rgba(52, 211, 153, 0.12)';
+    pillBorder = '1px solid rgba(52, 211, 153, 0.25)';
+    pillText = '#ECFDF5';
+    qrFrameBg = '#FFFFFF';
+    qrFrameBorder = '3px solid rgba(52, 211, 153, 0.4)';
+  } else if (theme === 'indigo') {
+    themeBg = '#0B132B';
+    themeText = '#FFFFFF';
+    themeSub = '#C7D2FE';
+    themeAccent = '#818CF8';
+    themeBorder = '2px solid rgba(129, 140, 248, 0.35)';
+    pillBg = 'rgba(129, 140, 248, 0.12)';
+    pillBorder = '1px solid rgba(129, 140, 248, 0.25)';
+    pillText = '#EEF2FF';
+    qrFrameBg = '#FFFFFF';
+    qrFrameBorder = '3px solid rgba(129, 140, 248, 0.4)';
+  }
+
+  const printHtml = `<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>HostifyOS Acrylic Stand - ${escapeHtml(title)}</title>
+  <style>
+    @page {
+      size: ${pageSize};
+      margin: 0;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      background: ${themeBg};
+      color: ${themeText};
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .print-frame {
+      width: ${cardWidth};
+      height: ${cardHeight};
+      background: ${themeBg};
+      border: ${themeBorder};
+      border-radius: 18px;
+      padding: 16px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+      position: relative;
+      page-break-inside: avoid;
+    }
+    .brand-tag {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: ${themeAccent};
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .welcome-sub {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: ${themeSub};
+      margin-top: 3px;
+    }
+    .prop-title {
+      font-size: ${titleSize};
+      font-weight: 800;
+      color: ${themeText};
+      margin: 3px 0 6px;
+      line-height: 1.2;
+      max-width: 95%;
+    }
+    .qr-box {
+      background: ${qrFrameBg};
+      border: ${qrFrameBorder};
+      border-radius: 14px;
+      padding: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 2px 0 6px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+    .qr-box img {
+      width: ${qrSize};
+      height: ${qrSize};
+      display: block;
+      border-radius: 4px;
+    }
+    .pills-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 6px;
+    }
+    .pill {
+      background: ${pillBg};
+      border: ${pillBorder};
+      color: ${pillText};
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 10.5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 600;
+    }
+    .pill strong {
+      color: ${themeAccent};
+      font-weight: 800;
+    }
+    .instruction-text {
+      font-size: 9px;
+      color: ${themeSub};
+      line-height: 1.3;
+      max-width: 90%;
+      margin: 0 auto;
+    }
+    .footer-signature {
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: ${themeSub};
+      opacity: 0.85;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      width: 100%;
+      padding-top: 6px;
+      margin-top: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="print-frame">
+    <div>
+      <div class="brand-tag">✦ HOSTIFYOS LUXURY STAY ✦</div>
+      <div class="welcome-sub">${escapeHtml(subtitle)}</div>
+      <h1 class="prop-title">${escapeHtml(title)}</h1>
+    </div>
+
+    <div class="qr-box">
+      <img src="${qrSrc}" alt="QR Code">
+    </div>
+
+    <div class="pills-container">
+      ${showWifi ? `
+        <div class="pill">
+          <span>📶 Wi-Fi: <strong>${escapeHtml(wifiName)}</strong></span>
+          <span style="font-size:9px; opacity:0.9;">Pass: <strong>${escapeHtml(wifiPass)}</strong></span>
+        </div>` : ''}
+      ${showPin ? `
+        <div class="pill">
+          <span>🔑 Door PIN Code:</span>
+          <strong style="letter-spacing:1px;">${escapeHtml(doorPin)}</strong>
+        </div>` : ''}
+      ${showWa ? `
+        <div class="pill">
+          <span>💬 24/7 WhatsApp Concierge:</span>
+          <strong>${escapeHtml(wa)}</strong>
+        </div>` : ''}
+    </div>
+
+    <p class="instruction-text">
+      Kameranızla kare kodu tarayarak anında hızlı Wi-Fi, ev kullanım kılavuzları ve VIP oda servisi siparişlerine ulaşın.
+    </p>
+
+    <div class="footer-signature">
+      ✦ HOSTIFYOS.COM LUXURY DIGITAL CONCIERGE ✦
+    </div>
+  </div>
+  <script>
+    window.onload = function() {
+      setTimeout(function() {
+        window.print();
+      }, 300);
+    };
+  </script>
+</body>
+</html>`;
+
+  let printIframe = document.getElementById('hostifyos-print-iframe');
+  if (!printIframe) {
+    printIframe = document.createElement('iframe');
+    printIframe.id = 'hostifyos-print-iframe';
+    printIframe.style.position = 'fixed';
+    printIframe.style.right = '0';
+    printIframe.style.bottom = '0';
+    printIframe.style.width = '0';
+    printIframe.style.height = '0';
+    printIframe.style.border = 'none';
+    printIframe.style.visibility = 'hidden';
+    document.body.appendChild(printIframe);
+  }
+
+  const iframeDoc = printIframe.contentWindow.document;
+  iframeDoc.open();
+  iframeDoc.write(printHtml);
+  iframeDoc.close();
+
+  showToast(`🖨️ "${title}" için tek sayfalık lüks stand hazırlandı, yazdırılıyor...`);
 }
 
 function openVideoModal(title, desc, imgUrl) {
