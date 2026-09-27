@@ -1815,15 +1815,51 @@
       <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:12px; margin-bottom:16px;">
       <div>
       <h3 style="color:#fff; font-size:18px; margin:0;"><i data-lucide="wallet" class="text-emerald"></i> Ev Sahibi Canlı Ödeme Kanalları & Cüzdan Yönetimi</h3>
-      <p style="margin:4px 0 0 0; font-size:13px; color:var(--text-muted);">Misafirlerin rehberinizden sipariş ettiği oda servisi ve turların ödeneceği kendi IBAN, Kripto, WhatsApp ve Özel Ödeme Linklerinizi buradan yönetin.</p>
+      <p style="margin:4px 0 0 0; font-size:13px; color:var(--text-muted);">Misafirlerinizin rehberinizden sipariş ettiği oda servisi, transfer ve turların ödeneceği Kredi Kartı, IBAN ve Kripto kanallarınızı ayarlayın.</p>
       </div>
       <div style="display:flex; gap:8px;">
         <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">⚡ %0 Komisyon Doğrudan Ev Sahibine</span>
-        <button type="button" class="btn-secondary-sm" onclick="openCheckoutModal()" title="Misafir ödeme ekranını canlı test et"><i data-lucide="play-circle"></i> Canlı Misafir Ödeme Testi</button>
+        <button type="button" class="btn-secondary-sm" onclick="openCheckoutModal(true)" title="Misafir ödeme ekranını canlı test et"><i data-lucide="play-circle"></i> Canlı Misafir Ödeme Testi</button>
       </div>
       </div>
       <form onsubmit="event.preventDefault(); saveHostPaymentSettings();" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px;" data-bot-protection="enabled" data-spam-shield="active">
 <input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
+      
+      <!-- Kredi Kartı ile Ödeme Alma Bloğu -->
+      <div style="grid-column:1 / -1; background:rgba(99,102,241,0.06); border:1px solid rgba(99,102,241,0.25); border-radius:12px; padding:16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <i data-lucide="credit-card" style="color:#818CF8; width:20px; height:20px;"></i>
+            <strong style="color:#fff; font-size:14px;">💳 Kredi Kartı ile Misafir Ödemesi Alma (Shopier / Stripe / PayTR / İyzipay / Sanal POS)</strong>
+          </div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <span class="badge-tag" style="background:rgba(99,102,241,0.15); color:#A5B4FC; font-size:10px;">Shopier</span>
+            <span class="badge-tag" style="background:rgba(99,102,241,0.15); color:#A5B4FC; font-size:10px;">Stripe</span>
+            <span class="badge-tag" style="background:rgba(99,102,241,0.15); color:#A5B4FC; font-size:10px;">PayTR</span>
+            <span class="badge-tag" style="background:rgba(99,102,241,0.15); color:#A5B4FC; font-size:10px;">İyzipay</span>
+            <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald); font-size:10px;">3D Secure / Troy / Visa / Master</span>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:12px;">
+          <div class="form-group" style="margin:0;">
+            <label style="font-size:12px; font-weight:700; color:#A5B4FC;">Tercih Edilen Kart Ödeme Yöntemi</label>
+            <select id="cfg-host-card-gateway" aria-label="Preferred Host Card Payment Method" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.15); border-radius:10px; color:#fff; font-size:13px; padding:10px; width:100%;">
+              <option value="link">Özel Mağaza / Kart Ödeme Linki (Shopier, Stripe, PayTR, İyzipay Linkiniz)</option>
+              <option value="vpos">Yerleşik 3D Secure Kart POS (Misafir Doğrudan Sitede Öder)</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin:0;">
+            <label style="font-size:12px; font-weight:700; color:#60A5FA;">Özel Kredi Kartı Ödeme Linki URL (İsteğe Bağlı)</label>
+            <input type="url" id="cfg-host-cardlink" aria-label="Host Custom Credit Card Payment Link" value="" placeholder="https://www.shopier.com/... veya https://buy.stripe.com/..." style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
+          </div>
+          <div class="form-group" style="margin:0; grid-column:1 / -1;">
+            <label style="font-size:12px; font-weight:700; color:#94A3B8;">Misafire Gösterilecek Kart Güvenlik Notu (Opsiyonel)</label>
+            <input type="text" id="cfg-host-cardnote" aria-label="Host Card Checkout Note" value="" placeholder="Örn: Siparişleriniz 256-bit SSL ve 3D Secure güvencesiyle doğrudan tahsil edilir." style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Banka ve FAST Bloğu -->
       <div class="form-group" style="margin:0;">
       <label style="font-size:12px; font-weight:700; color:#10B981;"><i data-lucide="building"></i> Banka IBAN / FAST Transfer (7/24 Anında Ödeme)</label>
       <input type="text" id="cfg-host-iban" aria-label="Host Bank IBAN" value="" placeholder="TR00 0000 0000 0000 0000 0000 00" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
@@ -1833,6 +1869,10 @@
       <input type="text" id="cfg-host-swift" aria-label="Host Bank SWIFT Code" value="" placeholder="SWIFT / BIC Kodu" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
       </div>
       <div class="form-group" style="margin:0;">
+      <label style="font-size:12px; font-weight:700; color:#10B981;"><i data-lucide="user-check"></i> Hesap Sahibi / Alıcı Adı Soyadı</label>
+      <input type="text" id="cfg-host-beneficiary" aria-label="Host Bank Account Beneficiary Name" value="" placeholder="Ad Soyad veya Şirket Ünvanı" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
+      </div>
+      <div class="form-group" style="margin:0;">
       <label style="font-size:12px; font-weight:700; color:#10B981;"><i data-lucide="qr-code"></i> Binance USDT (TRC-20) Kripto Cüzdan Adresi</label>
       <input type="text" id="cfg-host-crypto" aria-label="Host USDT TRC-20 Wallet Address" value="" placeholder="USDT TRC-20 Cüzdan Adresi" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
       </div>
@@ -1840,12 +1880,9 @@
       <label style="font-size:12px; font-weight:700; color:#25D366;"><i data-lucide="message-circle"></i> WhatsApp Sipariş Onay & İletişim Numarası</label>
       <input type="text" id="cfg-host-whatsapp" aria-label="Host WhatsApp Number" value="" placeholder="+90 5XX XXX XX XX" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
       </div>
-      <div class="form-group" style="margin:0; grid-column:1 / -1;">
-      <label style="font-size:12px; font-weight:700; color:#60A5FA;"><i data-lucide="credit-card"></i> Kredi Kartı / Shopier / Stripe / PayTR Özel Ödeme Linki (İsteğe Bağlı)</label>
-      <input type="text" id="cfg-host-cardlink" aria-label="Host Custom Credit Card Payment Link" value="" placeholder="https://pay.stripe.com/... veya Shopier / PayTR linkiniz" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#fff; font-size:13px; padding:10px;">
-      </div>
-      <div style="grid-column:1 / -1; display:flex; justify-content:flex-end;">
-      <button type="submit" class="btn-primary-sm" style="padding:10px 20px; font-weight:800;">
+      <div style="grid-column:1 / -1; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+      <span style="font-size:12px; color:var(--text-muted);"><i data-lucide="shield-check" class="text-emerald"></i> Tüm ödemeler %0 komisyon ile doğrudan sizin belirlediğiniz kanallara akar.</span>
+      <button type="submit" class="btn-primary-sm" style="padding:10px 24px; font-weight:800; font-size:13px;">
       <i data-lucide="check"></i> Ödeme Bilgilerini Canlıda Kaydet
       </button>
       </div>
@@ -1957,7 +1994,7 @@
               <h2 id="stand-prop-title" class="stand-title">Malibu Beachfront Villa</h2>
             </div>
             <div class="stand-qr-frame">
-              <img id="stand-qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://hostifyos.com/g/malibu-villa" alt="HostifyOS Digital Guidebook Acrylic Tabletop Stand QR Code" width="200" height="200" loading="lazy">
+              <img id="stand-qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://hostifyos.com/g/rehber" onerror="this.onerror=null; this.src='https://quickchart.io/qr?text=' + encodeURIComponent('https://hostifyos.com/g/rehber') + '&size=250';" alt="HostifyOS Digital Guidebook Acrylic Tabletop Stand QR Code" width="200" height="200" loading="lazy">
             </div>
             <div class="stand-pills-container" id="stand-pills-list">
               <div class="stand-pill-item" id="stand-pill-wifi">
@@ -2658,6 +2695,18 @@
       <span class="stripe-badge"><i data-lucide="lock"></i> 256-bit Encrypted SSL</span>
       <h3>Secure Guest Checkout</h3>
     </div>
+    
+    <!-- Ev Sahibi Özel Ödeme Linki Yönlendirmesi (Shopier / Stripe) -->
+    <div id="checkout-custom-link-banner" style="display:none; margin-bottom:14px; background:rgba(99,102,241,0.1); border:1px solid rgba(99,102,241,0.3); border-radius:10px; padding:12px;">
+      <div style="font-size:12px; font-weight:700; color:#818CF8; margin-bottom:4px; display:flex; align-items:center; gap:6px;">
+        <i data-lucide="external-link" style="width:14px; height:14px;"></i> Ev Sahibi Özel Ödeme Kanalı Aktif
+      </div>
+      <p id="checkout-custom-link-note" style="font-size:11px; color:var(--text-muted); margin:0 0 10px;">Ödemenizi ev sahibinin doğrudan Shopier / Stripe ödeme sayfası üzerinden 3D Secure güvencesiyle tamamlayabilirsiniz.</p>
+      <a id="checkout-custom-link-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary-lg" style="text-decoration:none; display:flex; align-items:center; justify-content:center; gap:8px; width:100%; background:linear-gradient(135deg, #6366F1, #4F46E5); padding:10px; font-weight:800; border-radius:8px; color:#fff; font-size:12px;">
+        <i data-lucide="credit-card"></i> <span>Ev Sahibinin Ödeme Sayfasında Öde (Shopier / Stripe) ↗</span>
+      </a>
+    </div>
+
     <div class="express-pay-buttons">
       <button class="btn-apple-pay" onclick="processStripePayment('Apple Pay')">
       <i data-lucide="smartphone"></i> Pay with Apple Pay
@@ -2666,7 +2715,7 @@
       Pay with Google Pay
       </button>
     </div>
-    <div class="divider-text"><span>or pay via Host Custom Gateway</span></div>
+    <div class="divider-text"><span>veya Doğrudan Kredi Kartı ile Öde</span></div>
     <form onsubmit="event.preventDefault(); processStripePayment('Credit Card');" class="stripe-card-form" data-bot-protection="enabled" data-spam-shield="active">
 <input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
       <div class="form-group">

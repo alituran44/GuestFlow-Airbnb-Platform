@@ -1341,6 +1341,9 @@ const DEFAULT_EMPTY_PROPERTY = {
   wifiPass: '••••••••',
   doorPin: '0000',
   payoutBank: '',
+  beneficiaryName: '',
+  cardGateway: 'link',
+  cardNote: '',
   customPayUrl: '',
   airbnbUrl: '',
   bookingUrl: '',
@@ -3443,15 +3446,21 @@ function loadActivePropertyData() {
   // Sync Host Payment Gateways tab inputs
   const cfgIban = document.getElementById('cfg-host-iban');
   const cfgSwift = document.getElementById('cfg-host-swift');
+  const cfgBeneficiary = document.getElementById('cfg-host-beneficiary');
   const cfgCrypto = document.getElementById('cfg-host-crypto');
   const cfgWa = document.getElementById('cfg-host-whatsapp');
+  const cfgCardGateway = document.getElementById('cfg-host-card-gateway');
   const cfgCardLink = document.getElementById('cfg-host-cardlink');
+  const cfgCardNote = document.getElementById('cfg-host-cardnote');
 
   if (cfgIban) cfgIban.value = prop.fibabankaIban || '';
   if (cfgSwift) cfgSwift.value = prop.swiftBic || '';
+  if (cfgBeneficiary) cfgBeneficiary.value = prop.beneficiaryName || '';
   if (cfgCrypto) cfgCrypto.value = prop.cryptoUsdt || '';
   if (cfgWa) cfgWa.value = prop.whatsapp ? (prop.whatsapp.startsWith('+') ? prop.whatsapp : `+${prop.whatsapp}`) : '';
+  if (cfgCardGateway) cfgCardGateway.value = prop.cardGateway || 'link';
   if (cfgCardLink) cfgCardLink.value = prop.customPayUrl || '';
+  if (cfgCardNote) cfgCardNote.value = prop.cardNote || '';
 
   // Sync Guidebook text settings inputs
   const cfgWifiN = document.getElementById('cfg-guide-wifi-name');
@@ -3507,7 +3516,14 @@ function loadActivePropertyData() {
 
   if (standTitleInput) standTitleInput.value = prop.title;
   if (standTitle) standTitle.textContent = prop.title;
-  if (standQrImg) standQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://hostifyos.com/g/${prop.slug}`;
+  if (standQrImg) {
+    const qrTarget = `https://hostifyos.com/g/${prop.slug || 'rehber'}`;
+    standQrImg.onerror = function() {
+      this.onerror = null;
+      this.src = `https://quickchart.io/qr?text=${encodeURIComponent(qrTarget)}&size=250`;
+    };
+    standQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(qrTarget)}`;
+  }
   if (standPillWifi) standPillWifi.textContent = prop.wifiName;
   if (standPillPass) standPillPass.textContent = `Pass: ${prop.wifiPass}`;
   if (standPillPin) standPillPin.textContent = prop.doorPin;
@@ -3796,6 +3812,9 @@ function submitNewProperty() {
     wifiPass: 'Welcome2026!',
     doorPin: doorPin,
     payoutBank: '',
+    beneficiaryName: '',
+    cardGateway: 'link',
+    cardNote: '',
     customPayUrl: '',
     airbnbUrl: airbnbUrl || '',
     bookingUrl: bookingUrl || '',
@@ -4023,23 +4042,44 @@ function updateCartBadge() {
   }
 }
 
-function openCheckoutModal() {
+function openCheckoutModal(isTestMode = false) {
   if (cart.length === 0) {
-    showToast("Your concierge cart is empty. Add a service first!");
-    return;
+    const prop = getActiveProperty();
+    if (prop && prop.services && prop.services.length > 0) {
+      cart = [{ name: prop.services[0].name, priceUSD: prop.services[0].priceUSD }];
+    } else {
+      cart = [{ name: 'VIP Havalimanı Karşılama & Concierge Servisi', priceUSD: 75.00 }];
+    }
+    updateCartBadge();
+    showToast("🛒 Canlı Misafir Ödeme Testi: Örnek sipariş sepeti yüklendi.");
   }
   renderCheckoutSummary();
-  document.getElementById('modal-checkout').classList.add('active');
+  openModal('modal-checkout');
 }
 
 function renderCheckoutSummary() {
   const list = document.getElementById('checkout-cart-items');
-  list.innerHTML = cart.map(item => `
-    <div class="cart-item-row">
-      <span>${item.name}</span>
-      <strong>${formatPrice(item.priceUSD)}</strong>
-    </div>
-  `).join('');
+  if (list) {
+    list.innerHTML = cart.map(item => `
+      <div class="cart-item-row">
+        <span>${item.name}</span>
+        <strong>${formatPrice(item.priceUSD)}</strong>
+      </div>
+    `).join('');
+  }
+
+  const prop = getActiveProperty();
+  const banner = document.getElementById('checkout-custom-link-banner');
+  const linkBtn = document.getElementById('checkout-custom-link-btn');
+  const noteEl = document.getElementById('checkout-custom-link-note');
+
+  if (prop && prop.customPayUrl && banner && linkBtn) {
+    banner.style.display = 'block';
+    linkBtn.href = prop.customPayUrl;
+    if (noteEl && prop.cardNote) noteEl.textContent = prop.cardNote;
+  } else if (banner) {
+    banner.style.display = 'none';
+  }
 
   updateCartTotals();
 }
@@ -4165,21 +4205,27 @@ function submitNewService() {
 function saveHostPaymentSettings() {
   const iban = document.getElementById('cfg-host-iban') ? document.getElementById('cfg-host-iban').value : '';
   const swift = document.getElementById('cfg-host-swift') ? document.getElementById('cfg-host-swift').value : '';
+  const beneficiary = document.getElementById('cfg-host-beneficiary') ? document.getElementById('cfg-host-beneficiary').value : '';
   const crypto = document.getElementById('cfg-host-crypto') ? document.getElementById('cfg-host-crypto').value : '';
   const wa = document.getElementById('cfg-host-whatsapp') ? document.getElementById('cfg-host-whatsapp').value : '';
+  const cardGateway = document.getElementById('cfg-host-card-gateway') ? document.getElementById('cfg-host-card-gateway').value : 'link';
   const cardLink = document.getElementById('cfg-host-cardlink') ? document.getElementById('cfg-host-cardlink').value : '';
+  const cardNote = document.getElementById('cfg-host-cardnote') ? document.getElementById('cfg-host-cardnote').value : '';
 
   const prop = getActiveProperty();
   if (prop) {
     prop.fibabankaIban = iban;
     prop.swiftBic = swift;
+    prop.beneficiaryName = beneficiary;
     prop.cryptoUsdt = crypto;
     if (wa) prop.whatsapp = wa.replace(/[^0-9]/g, '');
+    prop.cardGateway = cardGateway;
     prop.customPayUrl = cardLink;
+    prop.cardNote = cardNote;
   }
 
   saveSessionState();
-  showToast("🎉 Ev sahibi ödeme bilgileri (IBAN, Kripto, WhatsApp) başarıyla kaydedildi!");
+  showToast("🎉 Kredi kartı, IBAN ve cüzdan ödeme ayarlarınız başarıyla canlıda kaydedildi!");
 }
 
 function saveHostGuideContent() {
@@ -4266,6 +4312,10 @@ function updateStandDestination(dest) {
     targetUrl = prop.customPayUrl || prop.directBookingUrl || `https://hostifyos.com/g/${prop.slug}`;
   }
 
+  img.onerror = function() {
+    this.onerror = null;
+    this.src = `https://quickchart.io/qr?text=${encodeURIComponent(targetUrl)}&size=250`;
+  };
   img.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(targetUrl)}`;
   showToast(`🔗 Kare kod yönlendirmesi güncellendi: ${targetUrl.slice(0, 35)}...`);
 }
