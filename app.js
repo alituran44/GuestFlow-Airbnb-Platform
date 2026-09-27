@@ -1340,22 +1340,22 @@ const DEFAULT_EMPTY_PROPERTY = {
   wifiName: 'Wi-Fi Adı Belirtilmedi',
   wifiPass: '••••••••',
   doorPin: '0000',
-  payoutBank: 'Banka Hesabı (IBAN / FAST)',
+  payoutBank: '',
   customPayUrl: '',
   airbnbUrl: '',
   bookingUrl: '',
   vrboUrl: '',
   icalUrl: '',
   directBookingUrl: '',
-  fibabankaIban: 'TR22 0010 3000 0000 0059 1864 21',
-  swiftBic: 'FBABTRIS',
-  cryptoUsdt: 'TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa',
-  taxiName: 'Bölgesel Taksi Durağı',
-  taxiPhone: '+90 555 000 00 00',
+  fibabankaIban: '',
+  swiftBic: '',
+  cryptoUsdt: '',
+  taxiName: '',
+  taxiPhone: '',
   heroImg: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
   checkIn: '15:00',
   checkOut: '11:00',
-  whatsapp: '905437360660',
+  whatsapp: '',
   revenueUSD: 0.0,
   platformFeesTotalUSD: 0.0,
   views: 0,
@@ -2206,9 +2206,11 @@ function changeGlobalCommissionRate(newRate) {
     impact: `Affects all 1,420 Host Accounts & future guest checkout splits`
   };
 
-  document.getElementById('approve-action-title').textContent = pendingAdminAction.title;
-  document.getElementById('approve-action-impact').textContent = pendingAdminAction.impact;
-  document.getElementById('modal-admin-double-approve').classList.add('active');
+  const titleEl = document.getElementById('approve-action-title');
+  if (titleEl) titleEl.textContent = pendingAdminAction.title;
+  const impactEl = document.getElementById('approve-action-impact');
+  if (impactEl) impactEl.textContent = pendingAdminAction.impact;
+  openModal('modal-admin-double-approve');
 }
 
 function triggerGlobalFeeSweep() {
@@ -2219,14 +2221,18 @@ function triggerGlobalFeeSweep() {
     impact: '1,420 Host Accounts ($4,820.00 Total Swept)'
   };
 
-  document.getElementById('approve-action-title').textContent = pendingAdminAction.title;
-  document.getElementById('approve-action-impact').textContent = pendingAdminAction.impact;
-  document.getElementById('modal-admin-double-approve').classList.add('active');
+  const titleEl = document.getElementById('approve-action-title');
+  if (titleEl) titleEl.textContent = pendingAdminAction.title;
+  const impactEl = document.getElementById('approve-action-impact');
+  if (impactEl) impactEl.textContent = pendingAdminAction.impact;
+  openModal('modal-admin-double-approve');
 }
 
 function executeDoubleApprovedAction() {
-  const checkerEmail = document.getElementById('checker-admin-email').value;
-  const key = document.getElementById('approve-security-key').value;
+  const checkerEl = document.getElementById('checker-admin-email');
+  const keyEl = document.getElementById('approve-security-key');
+  const checkerEmail = checkerEl ? checkerEl.value : '';
+  const key = keyEl ? keyEl.value : '';
   const initiatorEmail = adminAuth.email || 'hostifyos@gmail.com';
 
   if (checkerEmail.toLowerCase() === initiatorEmail.toLowerCase()) {
@@ -2780,8 +2786,10 @@ function resendInvoiceEmail(invId, email) {
 }
 
 function processLemonSqueezySubscribe() {
-  const email = document.getElementById('lemon-email').value;
-  const card = document.getElementById('lemon-card').value;
+  const emailEl = document.getElementById('lemon-email');
+  const cardEl = document.getElementById('card-number') || document.getElementById('lemon-card');
+  const email = emailEl ? emailEl.value : '';
+  const card = cardEl ? cardEl.value : '';
 
   if (!email || !card) {
     showToast("Please enter valid card & billing details!");
@@ -2789,8 +2797,10 @@ function processLemonSqueezySubscribe() {
   }
 
   const btn = document.getElementById('btn-lemon-submit');
-  btn.innerHTML = `<i data-lucide="loader-2" class="spin"></i> Processing Checkout...`;
-  lucide.createIcons();
+  if (btn) {
+    btn.innerHTML = `<i data-lucide="loader-2" class="spin"></i> Processing Checkout...`;
+    lucide.createIcons();
+  }
 
   setTimeout(() => {
     hostAuth.isLoggedIn = true;
@@ -2823,7 +2833,7 @@ function processLemonSqueezySubscribe() {
     renderCommissionAggregator();
     renderHostInvoicesTable();
     closeModal('modal-lemon-checkout');
-    btn.innerHTML = `<i data-lucide="shield-check"></i> Complete 14-Day Free Registration`;
+    if (btn) btn.innerHTML = `<i data-lucide="shield-check"></i> Complete 14-Day Free Registration`;
     
     switchView('host');
     showToast(`🎉 Subscription Active! Charged ${amountStr}. Tax Invoice #${newInvId} by Ali Turan Inc. sent to ${email}!`);
@@ -2840,12 +2850,14 @@ function openEditCustomPayLinkModal() {
     return;
   }
 
-  document.getElementById('custom-pay-url-input').value = prop.customPayUrl || hostAuth.customPaymentLink;
-  document.getElementById('modal-edit-pay-link').classList.add('active');
+  const inputEl = document.getElementById('custom-pay-url-input');
+  if (inputEl) inputEl.value = prop.customPayUrl || hostAuth.customPaymentLink || '';
+  openModal('modal-edit-pay-link');
 }
 
 function submitCustomPayLink() {
-  const url = document.getElementById('custom-pay-url-input').value;
+  const inputEl = document.getElementById('custom-pay-url-input');
+  const url = inputEl ? inputEl.value : '';
   if (!url) return;
   if (!validatePaymentUrl(url)) return;
 
@@ -2854,14 +2866,15 @@ function submitCustomPayLink() {
   hostAuth.customPaymentLink = url;
 
   saveSessionState();
-  document.getElementById('host-custom-link-display').textContent = url;
+  const linkDisplay = document.getElementById('host-custom-link-display');
+  if (linkDisplay) linkDisplay.textContent = url;
   closeModal('modal-edit-pay-link');
   showToast("Updated Host Custom Payment Link! Guests can now pay directly to your custom gateway.");
 }
 
 // STRIPE CONNECT EXPRESS KYC ONBOARDING (KYC/AML COMPLIANCE)
 function openStripeConnectModal() {
-  document.getElementById('modal-stripe-connect').classList.add('active');
+  openModal('modal-stripe-connect');
 }
 
 function triggerStripeConnectOnboarding() {
@@ -2886,7 +2899,7 @@ function triggerStripeConnectOnboarding() {
 
 // HOST PAYMENT CARD UPDATE VIA STRIPE ELEMENTS
 function openEditCardModal() {
-  document.getElementById('modal-edit-card').classList.add('active');
+  openModal('modal-edit-card');
 }
 
 function submitUpdateHostCard() {
@@ -3162,13 +3175,14 @@ function submitEditBank() {
   const prop = getActiveProperty();
   prop.payoutBank = bank;
   saveSessionState();
-  document.getElementById('host-bank-display').textContent = bank;
+  const bankDisplay = document.getElementById('host-bank-display');
+  if (bankDisplay) bankDisplay.textContent = bank;
   closeModal('modal-edit-bank');
   showToast("Updated payout bank account details!");
 }
 
 function openAddVideoModal() {
-  document.getElementById('modal-add-video').classList.add('active');
+  openModal('modal-add-video');
 }
 
 function submitNewVideoGuide() {
@@ -3338,7 +3352,7 @@ function toggleTunnelStatus(tunnelId) {
 }
 
 function openCreateTunnelModal() {
-  document.getElementById('modal-create-tunnel').classList.add('active');
+  openModal('modal-create-tunnel');
 }
 
 function submitNewTunnel() {
@@ -3433,11 +3447,11 @@ function loadActivePropertyData() {
   const cfgWa = document.getElementById('cfg-host-whatsapp');
   const cfgCardLink = document.getElementById('cfg-host-cardlink');
 
-  if (cfgIban && prop.fibabankaIban) cfgIban.value = prop.fibabankaIban;
-  if (cfgSwift && prop.swiftBic) cfgSwift.value = prop.swiftBic;
-  if (cfgCrypto && prop.cryptoUsdt) cfgCrypto.value = prop.cryptoUsdt;
-  if (cfgWa && prop.whatsapp) cfgWa.value = prop.whatsapp.startsWith('+') ? prop.whatsapp : `+${prop.whatsapp}`;
-  if (cfgCardLink && prop.customPayUrl) cfgCardLink.value = prop.customPayUrl;
+  if (cfgIban) cfgIban.value = prop.fibabankaIban || '';
+  if (cfgSwift) cfgSwift.value = prop.swiftBic || '';
+  if (cfgCrypto) cfgCrypto.value = prop.cryptoUsdt || '';
+  if (cfgWa) cfgWa.value = prop.whatsapp ? (prop.whatsapp.startsWith('+') ? prop.whatsapp : `+${prop.whatsapp}`) : '';
+  if (cfgCardLink) cfgCardLink.value = prop.customPayUrl || '';
 
   // Sync Guidebook text settings inputs
   const cfgWifiN = document.getElementById('cfg-guide-wifi-name');
@@ -3446,15 +3460,15 @@ function loadActivePropertyData() {
   const cfgTaxiN = document.getElementById('cfg-guide-taxi-name');
   const cfgTaxiP = document.getElementById('cfg-guide-taxi-phone');
 
-  if (cfgWifiN) cfgWifiN.value = prop.wifiName;
-  if (cfgWifiP) cfgWifiP.value = prop.wifiPass;
-  if (cfgPin) cfgPin.value = prop.doorPin;
-  if (cfgTaxiN) cfgTaxiN.value = prop.taxiName || 'Yalıkavak Marina Taksi Durağı';
-  if (cfgTaxiP) cfgTaxiP.value = prop.taxiPhone || '+90 252 385 40 00';
+  if (cfgWifiN) cfgWifiN.value = prop.wifiName || '';
+  if (cfgWifiP) cfgWifiP.value = prop.wifiPass || '';
+  if (cfgPin) cfgPin.value = prop.doorPin || '';
+  if (cfgTaxiN) cfgTaxiN.value = prop.taxiName || '';
+  if (cfgTaxiP) cfgTaxiP.value = prop.taxiPhone || '';
 
   if (doorPinEl) {
     isPinRevealed = false;
-    doorPinEl.textContent = `••••-${prop.doorPin.slice(-2)}`;
+    doorPinEl.textContent = `••••-${(prop.doorPin || '00').slice(-2)}`;
     doorPinEl.style.color = 'var(--text-primary)';
   }
 
@@ -3473,9 +3487,12 @@ function loadActivePropertyData() {
   fetchLiveWeather(propLat, propLon);
   fetchLocalHolidays(propCountry);
 
-  document.getElementById('metric-revenue').textContent = formatPrice(prop.revenueUSD);
-  document.getElementById('metric-views').textContent = `${prop.views} views`;
-  document.getElementById('metric-orders').textContent = `${prop.completedOrders} orders`;
+  const metricRev = document.getElementById('metric-revenue');
+  if (metricRev) metricRev.textContent = formatPrice(prop.revenueUSD || 0);
+  const metricViews = document.getElementById('metric-views');
+  if (metricViews) metricViews.textContent = `${prop.views || 0} views`;
+  const metricOrders = document.getElementById('metric-orders');
+  if (metricOrders) metricOrders.textContent = `${prop.completedOrders || 0} orders`;
 
   renderCommissionAggregator();
 
@@ -3553,7 +3570,7 @@ function filterLocal(type) {
 }
 
 function triggerAiImportModal() {
-  document.getElementById('modal-ai-import').classList.add('active');
+  openModal('modal-ai-import');
 }
 
 function runAiScrapeSimulator() {
@@ -3752,7 +3769,7 @@ function copyGuestLink(slug) {
 }
 
 function openAddPropertyModal() {
-  document.getElementById('modal-add-property').classList.add('active');
+  openModal('modal-add-property');
 }
 
 function submitNewProperty() {
@@ -3778,22 +3795,22 @@ function submitNewProperty() {
     wifiName: wifiName || 'Guest_WiFi_5G',
     wifiPass: 'Welcome2026!',
     doorPin: doorPin,
-    payoutBank: 'Demo Merchant Bank (****4821 - USD)',
-    customPayUrl: 'https://buy.stripe.com/new_property_direct',
+    payoutBank: '',
+    customPayUrl: '',
     airbnbUrl: airbnbUrl || '',
     bookingUrl: bookingUrl || '',
     vrboUrl: '',
     icalUrl: '',
     directBookingUrl: '',
-    fibabankaIban: 'TR22 0010 3000 0000 0059 1864 21',
-    swiftBic: 'FBABTRIS',
-    cryptoUsdt: 'TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa',
-    taxiName: 'Yalıkavak Marina Taksi Durağı',
-    taxiPhone: '+90 252 385 40 00',
+    fibabankaIban: '',
+    swiftBic: '',
+    cryptoUsdt: '',
+    taxiName: '',
+    taxiPhone: '',
     heroImg: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
     checkIn: '3:00 PM',
     checkOut: '11:00 AM',
-    whatsapp: '905437360660',
+    whatsapp: '',
     revenueUSD: 0.0,
     platformFeesTotalUSD: 0.0,
     views: 1,
@@ -4116,7 +4133,7 @@ function deleteService(id) {
 }
 
 function openAddUpsellModal() {
-  document.getElementById('modal-add-service').classList.add('active');
+  openModal('modal-add-service');
 }
 
 function submitNewService() {
@@ -4330,15 +4347,33 @@ function closeModal(modalId) {
 }
 
 
+function copyHostVal(inputId, msg) {
+  const el = document.getElementById(inputId);
+  if (el) {
+    navigator.clipboard.writeText(el.value);
+    showToast(msg || "Panoya kopyalandı!");
+  }
+}
+window.copyHostVal = copyHostVal;
+
+function switchBilling(type) {
+  if (typeof toggleBillingCycle === 'function') {
+    toggleBillingCycle(type);
+  }
+}
+window.switchBilling = switchBilling;
+
 function showToast(msg) {
   const toast = document.getElementById('toast-notification');
   const msgEl = document.getElementById('toast-message');
-  msgEl.textContent = msg;
+  if (msgEl) msgEl.textContent = msg;
 
-  toast.classList.add('active');
-  setTimeout(() => {
-    toast.classList.remove('active');
-  }, 3000);
+  if (toast) {
+    toast.classList.add('active');
+    setTimeout(() => {
+      toast.classList.remove('active');
+    }, 3000);
+  }
 }
 
 // ====================================================
@@ -4493,9 +4528,13 @@ function loadEmailTemplatePreset(presetKey) {
 }
 
 function sendAdminEmailBroadcast() {
-  const subject = document.getElementById('email-broadcast-subject').value;
-  const target = document.getElementById('email-broadcast-target').value;
-  const customTarget = document.getElementById('email-custom-target') ? document.getElementById('email-custom-target').value : '';
+  const subjEl = document.getElementById('email-broadcast-subject');
+  const targetEl = document.getElementById('email-broadcast-target');
+  const customTargetEl = document.getElementById('email-custom-target');
+
+  const subject = subjEl ? subjEl.value : '';
+  const target = targetEl ? targetEl.value : '';
+  const customTarget = customTargetEl ? customTargetEl.value : '';
 
   const recipientStr = target === 'custom' ? customTarget : `${target.toUpperCase()} Group (1,420 Hosts)`;
   showToast(`⚡ Dispatched Email Broadcast from hostifyos@gmail.com to ${recipientStr}!`);
