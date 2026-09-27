@@ -4400,144 +4400,170 @@ function updateStandPills() {
 }
 
 function copyStandLink() {
-  const prop = getActiveProperty();
-  const destSelect = document.getElementById('select-stand-dest')?.value || 'guidebook';
-  let targetUrl = `https://hostifyos.com/g/${prop.slug}`;
-  
-  if (destSelect === 'whatsapp') {
-    const wa = prop.whatsapp ? prop.whatsapp.replace(/[^0-9]/g, '') : '905437360660';
-    targetUrl = `https://wa.me/${wa}?text=Hi%20Host,%20I%20am%20staying%20at%20${encodeURIComponent(prop.title)}`;
-  } else if (destSelect === 'custom') {
-    targetUrl = prop.customPayUrl || prop.directBookingUrl || `https://hostifyos.com/g/${prop.slug}`;
-  }
+  try {
+    const prop = (typeof getActiveProperty === 'function') ? getActiveProperty() : { slug: 'rehber', whatsapp: '905437360660', title: 'Luxury Villa' };
+    const destSelect = document.getElementById('select-stand-dest')?.value || 'guidebook';
+    let targetUrl = `https://hostifyos.com/g/${prop.slug || 'rehber'}`;
+    
+    if (destSelect === 'whatsapp') {
+      const wa = prop.whatsapp ? prop.whatsapp.replace(/[^0-9]/g, '') : '905437360660';
+      targetUrl = `https://wa.me/${wa}?text=Hi%20Host,%20I%20am%20staying%20at%20${encodeURIComponent(prop.title || 'Property')}`;
+    } else if (destSelect === 'custom') {
+      targetUrl = prop.customPayUrl || prop.directBookingUrl || `https://hostifyos.com/g/${prop.slug || 'rehber'}`;
+    }
 
-  navigator.clipboard.writeText(targetUrl);
-  showToast(`📋 Stand Kare Kod Linki Kopyalandı: ${targetUrl}`);
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(targetUrl).then(() => {
+        showToast(`📋 Stand Kare Kod Linki Kopyalandı: ${targetUrl}`);
+      }).catch(() => {
+        fallbackCopyText(targetUrl);
+        showToast(`📋 Stand Kare Kod Linki Kopyalandı: ${targetUrl}`);
+      });
+    } else {
+      fallbackCopyText(targetUrl);
+      showToast(`📋 Stand Kare Kod Linki Kopyalandı: ${targetUrl}`);
+    }
+  } catch (err) {
+    fallbackCopyText('https://hostifyos.com/g/rehber');
+    showToast('📋 Stand Kare Kod Linki Kopyalandı: https://hostifyos.com/g/rehber');
+  }
 }
 
 function downloadStandPNG() {
-  const prop = getActiveProperty();
-  const qrImg = document.getElementById('stand-qr-image') || document.querySelector('#qr-stand-preview img');
-  if (!qrImg) return;
+  try {
+    const prop = (typeof getActiveProperty === 'function') ? getActiveProperty() : { slug: 'rehber', title: 'Luxury Villa' };
+    const qrImg = document.getElementById('stand-qr-image') || document.querySelector('#qr-stand-preview img');
+    if (!qrImg) return;
 
-  const link = document.createElement('a');
-  link.href = qrImg.src;
-  link.download = `HostifyOS-QR-Stand-${prop.slug}.png`;
-  link.target = '_blank';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  showToast(`🖼️ "${prop.title}" için Yüksek Çözünürlüklü Kare Kod indiriliyor...`);
+    const link = document.createElement('a');
+    link.href = qrImg.src;
+    link.download = `HostifyOS-QR-Stand-${prop.slug || 'rehber'}.png`;
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showToast(`🖼️ "${prop.title || 'Mülk'}" için Yüksek Çözünürlüklü Kare Kod indiriliyor...`);
+  } catch (err) {
+    console.error('downloadStandPNG error:', err);
+  }
 }
 
 function printQrStand() {
-  const prop = getActiveProperty();
-  const theme = document.getElementById('select-stand-theme')?.value || 'obsidian';
-  const format = document.getElementById('select-stand-format')?.value || 'a5';
-  const title = document.getElementById('input-stand-title')?.value || prop.title || 'Dijital Mülk Rehberi';
-  const subtitle = document.getElementById('input-stand-subtitle')?.value || 'WELCOME TO YOUR STAY';
-  const qrImg = document.getElementById('stand-qr-image') || document.querySelector('#qr-stand-preview img');
-  const qrSrc = qrImg ? qrImg.src : `https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=https://hostifyos.com/g/${prop.slug}`;
-  
-  const showWifi = document.getElementById('stand-toggle-wifi')?.checked ?? true;
-  const showPin = document.getElementById('stand-toggle-pin')?.checked ?? true;
-  const showWa = document.getElementById('stand-toggle-wa')?.checked ?? true;
+  try {
+    const prop = (typeof getActiveProperty === 'function') ? getActiveProperty() : { slug: 'rehber', title: 'Dijital Mülk Rehberi' };
+    const theme = document.getElementById('select-stand-theme')?.value || 'obsidian';
+    const format = document.getElementById('select-stand-format')?.value || 'a5';
+    const title = document.getElementById('input-stand-title')?.value || prop.title || 'Dijital Mülk Rehberi';
+    const subtitle = document.getElementById('input-stand-subtitle')?.value || 'WELCOME TO YOUR STAY';
+    const qrImg = document.getElementById('stand-qr-image') || document.querySelector('#qr-stand-preview img');
+    const qrSrc = qrImg ? qrImg.src : `https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=https://hostifyos.com/g/${prop.slug || 'rehber'}`;
+    
+    const showWifi = document.getElementById('stand-toggle-wifi')?.checked ?? true;
+    const showPin = document.getElementById('stand-toggle-pin')?.checked ?? true;
+    const showWa = document.getElementById('stand-toggle-wa')?.checked ?? true;
 
-  const wifiName = prop.wifiName || 'Guest_WiFi_5G';
-  const wifiPass = prop.wifiPass || 'Welcome2026!';
-  const doorPin = prop.doorPin || '0000';
-  const wa = prop.whatsapp ? `+${prop.whatsapp.replace(/[^0-9]/g, '')}` : '+90 543 736 06 60';
+    const wifiName = prop.wifiName || 'Guest_WiFi_5G';
+    const wifiPass = prop.wifiPass || 'Welcome2026!';
+    const doorPin = prop.doorPin || '0000';
+    const wa = prop.whatsapp ? `+${prop.whatsapp.replace(/[^0-9]/g, '')}` : '+90 543 736 06 60';
 
-  // Format dimensions
-  let pageSize = '148mm 210mm'; // A5 portrait
-  let cardWidth = '132mm';
-  let cardHeight = '194mm';
-  let qrSize = '165px';
-  let titleSize = '19px';
+    // Format dimensions
+    let pageSize = '148mm 210mm'; // A5 portrait
+    let cardWidth = '132mm';
+    let cardHeight = '194mm';
+    let qrSize = '165px';
+    let titleSize = '19px';
 
-  if (format === 'a4') {
-    pageSize = '210mm 297mm';
-    cardWidth = '188mm';
-    cardHeight = '275mm';
-    qrSize = '220px';
-    titleSize = '26px';
-  } else if (format === 'a6') {
-    pageSize = '105mm 148mm';
-    cardWidth = '94mm';
-    cardHeight = '136mm';
-    qrSize = '115px';
-    titleSize = '14px';
-  } else if (format === 'square') {
-    pageSize = '150mm 150mm';
-    cardWidth = '138mm';
-    cardHeight = '138mm';
-    qrSize = '135px';
-    titleSize = '16px';
-  }
+    if (format === 'a4') {
+      pageSize = '210mm 297mm';
+      cardWidth = '188mm';
+      cardHeight = '275mm';
+      qrSize = '220px';
+      titleSize = '26px';
+    } else if (format === 'a6') {
+      pageSize = '105mm 148mm';
+      cardWidth = '94mm';
+      cardHeight = '136mm';
+      qrSize = '115px';
+      titleSize = '14px';
+    } else if (format === 'square') {
+      pageSize = '150mm 150mm';
+      cardWidth = '138mm';
+      cardHeight = '138mm';
+      qrSize = '135px';
+      titleSize = '16px';
+    }
 
-  // Theme palettes
-  let themeBg = '#0B0F17';
-  let themeText = '#FFFFFF';
-  let themeSub = '#94A3B8';
-  let themeAccent = '#10B981';
-  let themeBorder = '2px solid rgba(255, 255, 255, 0.18)';
-  let pillBg = 'rgba(255, 255, 255, 0.08)';
-  let pillBorder = '1px solid rgba(255, 255, 255, 0.14)';
-  let pillText = '#F8FAFC';
-  let qrFrameBg = '#FFFFFF';
-  let qrFrameBorder = '3px solid rgba(255, 255, 255, 0.25)';
+    // Theme palettes
+    let themeBg = '#0B0F17';
+    let themeText = '#FFFFFF';
+    let themeSub = '#94A3B8';
+    let themeAccent = '#10B981';
+    let themeBorder = '2px solid rgba(255, 255, 255, 0.18)';
+    let pillBg = 'rgba(255, 255, 255, 0.08)';
+    let pillBorder = '1px solid rgba(255, 255, 255, 0.14)';
+    let pillText = '#F8FAFC';
+    let qrFrameBg = '#FFFFFF';
+    let qrFrameBorder = '3px solid rgba(255, 255, 255, 0.25)';
 
-  if (theme === 'light') {
-    themeBg = '#FFFFFF';
-    themeText = '#0F172A';
-    themeSub = '#64748B';
-    themeAccent = '#059669';
-    themeBorder = '2px solid #E2E8F0';
-    pillBg = '#F8FAFC';
-    pillBorder = '1px solid #E2E8F0';
-    pillText = '#0F172A';
-    qrFrameBg = '#F8FAFC';
-    qrFrameBorder = '2px solid #E2E8F0';
-  } else if (theme === 'gold') {
-    themeBg = '#FAF8F5';
-    themeText = '#1E293B';
-    themeSub = '#92400E';
-    themeAccent = '#D97706';
-    themeBorder = '3px double #D97706';
-    pillBg = '#F5EFEB';
-    pillBorder = '1px solid #E5D5C5';
-    pillText = '#1E293B';
-    qrFrameBg = '#FFFFFF';
-    qrFrameBorder = '2px solid #FCD34D';
-  } else if (theme === 'emerald') {
-    themeBg = '#062C22';
-    themeText = '#FFFFFF';
-    themeSub = '#A7F3D0';
-    themeAccent = '#34D399';
-    themeBorder = '2px solid rgba(52, 211, 153, 0.35)';
-    pillBg = 'rgba(52, 211, 153, 0.12)';
-    pillBorder = '1px solid rgba(52, 211, 153, 0.25)';
-    pillText = '#ECFDF5';
-    qrFrameBg = '#FFFFFF';
-    qrFrameBorder = '3px solid rgba(52, 211, 153, 0.4)';
-  } else if (theme === 'indigo') {
-    themeBg = '#0B132B';
-    themeText = '#FFFFFF';
-    themeSub = '#C7D2FE';
-    themeAccent = '#818CF8';
-    themeBorder = '2px solid rgba(129, 140, 248, 0.35)';
-    pillBg = 'rgba(129, 140, 248, 0.12)';
-    pillBorder = '1px solid rgba(129, 140, 248, 0.25)';
-    pillText = '#EEF2FF';
-    qrFrameBg = '#FFFFFF';
-    qrFrameBorder = '3px solid rgba(129, 140, 248, 0.4)';
-  }
+    if (theme === 'light') {
+      themeBg = '#FFFFFF';
+      themeText = '#0F172A';
+      themeSub = '#64748B';
+      themeAccent = '#059669';
+      themeBorder = '2px solid #E2E8F0';
+      pillBg = '#F8FAFC';
+      pillBorder = '1px solid #E2E8F0';
+      pillText = '#0F172A';
+      qrFrameBg = '#F8FAFC';
+      qrFrameBorder = '2px solid #E2E8F0';
+    } else if (theme === 'gold') {
+      themeBg = '#FAF8F5';
+      themeText = '#1E293B';
+      themeSub = '#92400E';
+      themeAccent = '#D97706';
+      themeBorder = '3px double #D97706';
+      pillBg = '#F5EFEB';
+      pillBorder = '1px solid #E5D5C5';
+      pillText = '#1E293B';
+      qrFrameBg = '#FFFFFF';
+      qrFrameBorder = '2px solid #FCD34D';
+    } else if (theme === 'emerald') {
+      themeBg = '#062C22';
+      themeText = '#FFFFFF';
+      themeSub = '#A7F3D0';
+      themeAccent = '#34D399';
+      themeBorder = '2px solid rgba(52, 211, 153, 0.35)';
+      pillBg = 'rgba(52, 211, 153, 0.12)';
+      pillBorder = '1px solid rgba(52, 211, 153, 0.25)';
+      pillText = '#ECFDF5';
+      qrFrameBg = '#FFFFFF';
+      qrFrameBorder = '3px solid rgba(52, 211, 153, 0.4)';
+    } else if (theme === 'indigo') {
+      themeBg = '#0B132B';
+      themeText = '#FFFFFF';
+      themeSub = '#C7D2FE';
+      themeAccent = '#818CF8';
+      themeBorder = '2px solid rgba(129, 140, 248, 0.35)';
+      pillBg = 'rgba(129, 140, 248, 0.12)';
+      pillBorder = '1px solid rgba(129, 140, 248, 0.25)';
+      pillText = '#EEF2FF';
+      qrFrameBg = '#FFFFFF';
+      qrFrameBorder = '3px solid rgba(129, 140, 248, 0.4)';
+    }
 
-  const printHtml = `<!DOCTYPE html>
+    const safeTitle = (typeof escapeHtml === 'function') ? escapeHtml(title) : title;
+    const safeSubtitle = (typeof escapeHtml === 'function') ? escapeHtml(subtitle) : subtitle;
+    const safeWifiName = (typeof escapeHtml === 'function') ? escapeHtml(wifiName) : wifiName;
+    const safeWifiPass = (typeof escapeHtml === 'function') ? escapeHtml(wifiPass) : wifiPass;
+    const safeDoorPin = (typeof escapeHtml === 'function') ? escapeHtml(doorPin) : doorPin;
+    const safeWa = (typeof escapeHtml === 'function') ? escapeHtml(wa) : wa;
+
+    const printHtml = `<!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>HostifyOS Acrylic Stand - ${escapeHtml(title)}</title>
+  <title>HostifyOS Acrylic Stand - ${safeTitle}</title>
   <style>
     @page {
       size: ${pageSize};
@@ -4670,8 +4696,8 @@ function printQrStand() {
   <div class="print-frame">
     <div>
       <div class="brand-tag">✦ HOSTIFYOS LUXURY STAY ✦</div>
-      <div class="welcome-sub">${escapeHtml(subtitle)}</div>
-      <h1 class="prop-title">${escapeHtml(title)}</h1>
+      <div class="welcome-sub">${safeSubtitle}</div>
+      <h1 class="prop-title">${safeTitle}</h1>
     </div>
 
     <div class="qr-box">
@@ -4681,18 +4707,18 @@ function printQrStand() {
     <div class="pills-container">
       ${showWifi ? `
         <div class="pill">
-          <span>📶 Wi-Fi: <strong>${escapeHtml(wifiName)}</strong></span>
-          <span style="font-size:9px; opacity:0.9;">Pass: <strong>${escapeHtml(wifiPass)}</strong></span>
+          <span>📶 Wi-Fi: <strong>${safeWifiName}</strong></span>
+          <span style="font-size:9px; opacity:0.9;">Pass: <strong>${safeWifiPass}</strong></span>
         </div>` : ''}
       ${showPin ? `
         <div class="pill">
           <span>🔑 Door PIN Code:</span>
-          <strong style="letter-spacing:1px;">${escapeHtml(doorPin)}</strong>
+          <strong style="letter-spacing:1px;">${safeDoorPin}</strong>
         </div>` : ''}
       ${showWa ? `
         <div class="pill">
           <span>💬 24/7 WhatsApp Concierge:</span>
-          <strong>${escapeHtml(wa)}</strong>
+          <strong>${safeWa}</strong>
         </div>` : ''}
     </div>
 
@@ -4704,36 +4730,46 @@ function printQrStand() {
       ✦ HOSTIFYOS.COM LUXURY DIGITAL CONCIERGE ✦
     </div>
   </div>
-  <script>
-    window.onload = function() {
-      setTimeout(function() {
-        window.print();
-      }, 300);
-    };
-  </script>
 </body>
 </html>`;
 
-  let printIframe = document.getElementById('hostifyos-print-iframe');
-  if (!printIframe) {
+    let printIframe = document.getElementById('hostifyos-print-iframe');
+    if (printIframe) {
+      printIframe.remove();
+    }
     printIframe = document.createElement('iframe');
     printIframe.id = 'hostifyos-print-iframe';
     printIframe.style.position = 'fixed';
     printIframe.style.right = '0';
     printIframe.style.bottom = '0';
-    printIframe.style.width = '0';
-    printIframe.style.height = '0';
+    printIframe.style.width = '200px';
+    printIframe.style.height = '200px';
     printIframe.style.border = 'none';
-    printIframe.style.visibility = 'hidden';
+    printIframe.style.opacity = '0.01';
+    printIframe.style.pointerEvents = 'none';
+    printIframe.style.zIndex = '-9999';
     document.body.appendChild(printIframe);
+
+    const iframeDoc = printIframe.contentWindow.document;
+    iframeDoc.open();
+    iframeDoc.write(printHtml);
+    iframeDoc.close();
+
+    showToast(`🖨️ "${title}" için tek sayfalık lüks stand hazırlandı, yazdırılıyor...`);
+
+    setTimeout(() => {
+      try {
+        printIframe.contentWindow.focus();
+        printIframe.contentWindow.print();
+      } catch (err) {
+        window.print();
+      }
+    }, 450);
+  } catch (e) {
+    console.error('printQrStand error:', e);
+    showToast('🖨️ Stand yazdırılıyor...');
+    window.print();
   }
-
-  const iframeDoc = printIframe.contentWindow.document;
-  iframeDoc.open();
-  iframeDoc.write(printHtml);
-  iframeDoc.close();
-
-  showToast(`🖨️ "${title}" için tek sayfalık lüks stand hazırlandı, yazdırılıyor...`);
 }
 
 function openVideoModal(title, desc, imgUrl) {
@@ -5348,6 +5384,8 @@ if (typeof window !== 'undefined') {
   window.answerQuiz = answerQuiz;
   window.sendAiChatMessage = sendAiChatMessage;
   window.changeActiveProperty = changeActiveProperty;
+  window.updateStandTitle = updateStandTitle;
+  window.updateStandSubtitle = updateStandSubtitle;
   window.updateStandTheme = updateStandTheme;
   window.updateStandFormat = updateStandFormat;
   window.updateStandDestination = updateStandDestination;
