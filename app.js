@@ -4122,31 +4122,108 @@ function openCheckoutModal(isTestMode = false) {
   openModal('modal-checkout');
 }
 
+function switchGuestCheckoutTab(tabName) {
+  const tabs = ['card', 'iban', 'crypto', 'wa'];
+  tabs.forEach(t => {
+    const btn = document.getElementById(`g-tab-btn-${t}`);
+    const content = document.getElementById(`g-checkout-tab-${t}`);
+    if (btn) {
+      if (t === tabName) {
+        btn.style.background = 'rgba(16,185,129,0.15)';
+        btn.style.color = '#10B981';
+      } else {
+        btn.style.background = 'transparent';
+        btn.style.color = '#94A3B8';
+      }
+    }
+    if (content) {
+      content.style.display = (t === tabName) ? 'block' : 'none';
+    }
+  });
+  if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+}
+window.switchGuestCheckoutTab = switchGuestCheckoutTab;
+
 function renderCheckoutSummary() {
+  const prop = getActiveProperty();
   const list = document.getElementById('checkout-cart-items');
   if (list) {
-    list.innerHTML = cart.map(item => `
-      <div class="cart-item-row">
-        <span>${item.name}</span>
-        <strong>${formatPrice(item.priceUSD)}</strong>
-      </div>
-    `).join('');
-  }
-
-  const prop = getActiveProperty();
-  const banner = document.getElementById('checkout-custom-link-banner');
-  const linkBtn = document.getElementById('checkout-custom-link-btn');
-  const noteEl = document.getElementById('checkout-custom-link-note');
-
-  if (prop && prop.customPayUrl && banner && linkBtn) {
-    banner.style.display = 'block';
-    linkBtn.href = prop.customPayUrl;
-    if (noteEl && prop.cardNote) noteEl.textContent = prop.cardNote;
-  } else if (banner) {
-    banner.style.display = 'none';
+    if (cart.length === 0) {
+      list.innerHTML = `<div style="color:var(--text-muted); font-size:12px; padding:12px; text-align:center;">Sepetinizde henüz ürün bulunmuyor.</div>`;
+    } else {
+      list.innerHTML = cart.map(item => `
+        <div class="cart-item-row" style="display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.06); font-size:13px;">
+          <span style="color:#fff;">${escapeHtml(item.name)}</span>
+          <strong style="color:var(--accent-emerald);">${formatPrice(item.priceUSD)}</strong>
+        </div>
+      `).join('');
+    }
   }
 
   updateCartTotals();
+
+  // Populate Host's Payment Details into Guest Checkout Tabs
+  const cardLink = prop.customPayUrl || 'https://www.shopier.com/ShowProductNew/products.php';
+  const cardNote = prop.cardNote || 'Siparişleriniz 256-bit SSL ve 3D Secure güvencesiyle doğrudan ev sahibinin resmi ödeme altyapısı üzerinden tahsil edilir.';
+  const iban = prop.fibabankaIban || 'TR22 0010 3000 0000 0059 1864 21';
+  const swift = prop.swiftBic || 'FBABTRIS';
+  const beneficiary = prop.beneficiaryName || 'Ali Turan Inc. (Mülk Sahibi)';
+  const crypto = prop.cryptoUsdt || 'TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa';
+  const wa = prop.whatsapp ? prop.whatsapp.replace(/[^0-9]/g, '') : '905437360660';
+
+  // Card Tab
+  const cardBtn = document.getElementById('guest-card-pay-btn');
+  const cardNoteEl = document.getElementById('guest-card-note-display');
+  if (cardBtn) cardBtn.href = cardLink;
+  if (cardNoteEl) cardNoteEl.textContent = cardNote;
+
+  // IBAN Tab
+  const ibanInput = document.getElementById('guestCheckoutIban');
+  const swiftEl = document.getElementById('guestCheckoutSwift');
+  const beneficiaryEl = document.getElementById('guestCheckoutBeneficiary');
+  if (ibanInput) ibanInput.value = iban;
+  if (swiftEl) swiftEl.textContent = swift;
+  if (beneficiaryEl) beneficiaryEl.textContent = beneficiary;
+
+  // Crypto Tab
+  const cryptoInput = document.getElementById('guestCheckoutCrypto');
+  const cryptoQr = document.getElementById('guestCheckoutCryptoQr');
+  if (cryptoInput) cryptoInput.value = crypto;
+  if (cryptoQr) {
+    cryptoQr.src = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(crypto)}&color=090D14&bgcolor=10B981`;
+  }
+
+  // WhatsApp Tab & Order Message Generators
+  const totalUSD = cart.reduce((sum, item) => sum + item.priceUSD, 0);
+  const orderSummaryText = cart.map(i => `${i.name} (${formatPrice(i.priceUSD)})`).join(', ');
+  
+  const waBtn = document.getElementById('guestCheckoutWaBtn');
+  if (waBtn) {
+    const waMessage = `Merhaba, ${prop.title} mülkünüz için sipariş vermek istiyorum:%0A%0A📦 Hizmetler: ${encodeURIComponent(orderSummaryText)}%0A💰 Toplam Tutar: ${encodeURIComponent(formatPrice(totalUSD))}%0A%0ASiparişimi onaylar mısınız?`;
+    waBtn.href = `https://wa.me/${wa}?text=${waMessage}`;
+  }
+
+  const ibanWaBtn = document.getElementById('guestIbanWaConfirmBtn');
+  if (ibanWaBtn) {
+    const ibanWaMsg = `Merhaba, ${prop.title} için ${formatPrice(totalUSD)} tutarındaki siparişimin FAST/Havale ödemesini gerçekleştirdim. Dekont ektedir.%0A%0A📦 Sipariş: ${encodeURIComponent(orderSummaryText)}`;
+    ibanWaBtn.href = `https://wa.me/${wa}?text=${ibanWaMsg}`;
+  }
+
+  const cryptoWaBtn = document.getElementById('guestCryptoWaConfirmBtn');
+  if (cryptoWaBtn) {
+    const cryptoWaMsg = `Merhaba, ${prop.title} için ${formatPrice(totalUSD)} tutarındaki siparişimin USDT kripto transferini gönderdim.%0A%0A📦 Sipariş: ${encodeURIComponent(orderSummaryText)}`;
+    cryptoWaBtn.href = `https://wa.me/${wa}?text=${cryptoWaMsg}`;
+  }
+
+  const cardWaBtn = document.getElementById('guestCardWaConfirmBtn');
+  if (cardWaBtn) {
+    const cardWaMsg = `Merhaba, ${prop.title} için ${formatPrice(totalUSD)} tutarındaki siparişimi kart linkinizden ödedim.%0A%0A📦 Sipariş: ${encodeURIComponent(orderSummaryText)}`;
+    cardWaBtn.href = `https://wa.me/${wa}?text=${cardWaMsg}`;
+  }
+
+  if (typeof lucide !== 'undefined' && lucide.createIcons) {
+    lucide.createIcons();
+  }
 }
 
 function updateCartTotals() {
@@ -4156,55 +4233,6 @@ function updateCartTotals() {
 
   if (subtotalEl) subtotalEl.textContent = formatPrice(subtotalUSD);
   if (finalTotalEl) finalTotalEl.textContent = formatPrice(subtotalUSD);
-}
-
-// AUTOMATED TAKE-RATE & CUSTOM LINK CHECKOUT PROCESSOR
-function processStripePayment(method) {
-  const submitBtn = document.getElementById('btn-pay-submit');
-  if (submitBtn) {
-    submitBtn.innerHTML = `<i data-lucide="loader-2" class="spin"></i> Processing via ${method}...`;
-    lucide.createIcons();
-  }
-
-  setTimeout(() => {
-    const prop = getActiveProperty();
-    const totalUSD = cart.reduce((sum, item) => sum + item.priceUSD, 0);
-    
-    // 0% Platform Commission — 100% Direct Payout to Host
-    const platformFeeRate = 0;
-    const platformFee = 0;
-    const hostNetPayout = totalUSD;
-
-    prop.revenueUSD += totalUSD;
-    prop.platformFeesTotalUSD = 0;
-    prop.completedOrders += 1;
-
-    hostOrders.unshift({
-      id: `ORD-${Math.floor(1000 + Math.random() * 9000)}`,
-      guest: 'Current Guest',
-      property: prop.title,
-      service: cart.map(i => i.name).join(', '),
-      date: 'Just Now',
-      priceUSD: totalUSD,
-      hostPayoutUSD: hostNetPayout,
-      platformFeeUSD: 0,
-      status: 'Confirmed (0% Commission)',
-      payMethod: method
-    });
-
-    cart = [];
-    updateCartBadge();
-    updateCurrencyDisplays();
-    renderPropertiesListTable();
-    renderHostOrdersTable();
-    closeModal('modal-checkout');
-
-    if (submitBtn) {
-      submitBtn.innerHTML = `<i data-lucide="check-circle"></i> Pay & Confirm Order`;
-    }
-
-    showToast(`🎉 Sipariş Alındı! ${formatPrice(totalUSD)} tutarındaki ödeme %0 komisyonla doğrudan ev sahibinin hesabına aktarıldı.`);
-  }, 1200);
 }
 
 function renderHostServicesTable() {
@@ -4290,6 +4318,7 @@ function saveHostPaymentSettings() {
   }
 
   saveSessionState();
+  renderCheckoutSummary();
   showToast("🎉 Kredi kartı, IBAN ve cüzdan ödeme ayarlarınız başarıyla canlıda kaydedildi!");
 }
 
@@ -5340,6 +5369,7 @@ if (typeof window !== 'undefined') {
   window.toggleTheme = toggleTheme;
   window.toggleLangMenu = toggleLangMenu;
   window.selectCustomLang = selectCustomLang;
+  window.switchGuestCheckoutTab = switchGuestCheckoutTab;
   window.toggleHostDeviceMode = toggleHostDeviceMode;
   window.togglePinVisibility = togglePinVisibility;
   window.togglePinReveal = togglePinReveal;

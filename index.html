@@ -18,7 +18,7 @@
 <meta name="ai-content-declaration" content="human-authored-hospitality-platform">
 <!-- LCP & Critical Resource Performance Preloads -->
 <link rel="preload" as="image" href="brand_logo.webp" fetchpriority="high">
-<link rel="preload" as="style" href="style.css?v=20260927_v111">
+<link rel="preload" as="style" href="style.css?v=20260927_v112">
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap">
 <link rel="alternate" hreflang="x-default" href="https://www.hostifyos.com/" />
 <link rel="alternate" hreflang="en" href="https://www.hostifyos.com/?lang=EN" />
@@ -240,7 +240,7 @@
   document.addEventListener('DOMContentLoaded', initIcons);
   window.addEventListener('load', initIcons);
 </script>
-<link rel="stylesheet" href="style.css?v=20260927_v111">
+<link rel="stylesheet" href="style.css?v=20260927_v112">
 </head>
 <body class="bg-obsidian text-slate">
 <header class="top-nav">
@@ -2668,87 +2668,131 @@
   </div>
 </div>
 <div id="modal-checkout" class="modal-backdrop">
-  <div class="modal-card modal-lg">
+  <div class="modal-card modal-lg" style="max-width:860px; width:95%; max-height:92vh; overflow-y:auto; padding:24px;">
   <button class="modal-close" onclick="closeModal('modal-checkout')"><i data-lucide="x"></i></button>
-  <div class="checkout-grid">
-    <div class="checkout-summary">
-    <h3><i data-lucide="shopping-bag"></i> Guest Order Summary</h3>
-    <div class="cart-items-list" id="checkout-cart-items">
-    </div>
-    <div class="cart-total-box">
-      <div class="total-row">
-      <span>Subtotal:</span>
-      <strong id="cart-subtotal">$0.00</strong>
+  <div class="checkout-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:20px;">
+    <!-- Sol Panel: Sipariş Özeti -->
+    <div class="checkout-summary" style="background:#090D14; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:18px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:10px;">
+        <h3 style="margin:0; font-size:16px; color:#fff; display:flex; align-items:center; gap:8px;">
+          <i data-lucide="shopping-bag" class="text-emerald"></i> Misafir Sipariş Özeti
+        </h3>
+        <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald); font-size:10px;">%0 Komisyon</span>
       </div>
-      <div class="total-row">
-      <span>Taxes & Service Fee:</span>
-      <span>$0.00</span>
+      <div class="cart-items-list" id="checkout-cart-items" style="min-height:80px; max-height:220px; overflow-y:auto; margin-bottom:14px;">
       </div>
-      <div class="total-row main-total">
-      <span>Total Due Now:</span>
-      <strong id="cart-final-total" class="text-accent">$0.00</strong>
+      <div class="cart-total-box" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
+        <div class="total-row" style="display:flex; justify-content:space-between; font-size:13px; color:var(--text-muted); margin-bottom:6px;">
+          <span>Ara Toplam:</span>
+          <strong id="cart-subtotal" style="color:#fff;">$0.00</strong>
+        </div>
+        <div class="total-row" style="display:flex; justify-content:space-between; font-size:12px; color:#10B981; margin-bottom:6px;">
+          <span>HostifyOS Platform Hizmet Bedeli:</span>
+          <strong>%0 (Ücretsiz)</strong>
+        </div>
+        <div class="total-row main-total" style="display:flex; justify-content:space-between; font-size:16px; font-weight:800; border-top:1px solid rgba(255,255,255,0.1); padding-top:8px; margin-top:4px;">
+          <span style="color:#fff;">Ödenecek Toplam Tutar:</span>
+          <strong id="cart-final-total" class="text-emerald">$0.00</strong>
+        </div>
       </div>
-    </div>
-    </div>
-    <div class="checkout-payment-box">
-    <div class="stripe-header">
-      <span class="stripe-badge"><i data-lucide="lock"></i> 256-bit Encrypted SSL</span>
-      <h3>Secure Guest Checkout</h3>
-    </div>
-    
-    <!-- Ev Sahibi Özel Ödeme Linki Yönlendirmesi (Shopier / Stripe) -->
-    <div id="checkout-custom-link-banner" style="display:none; margin-bottom:14px; background:rgba(99,102,241,0.1); border:1px solid rgba(99,102,241,0.3); border-radius:10px; padding:12px;">
-      <div style="font-size:12px; font-weight:700; color:#818CF8; margin-bottom:4px; display:flex; align-items:center; gap:6px;">
-        <i data-lucide="external-link" style="width:14px; height:14px;"></i> Ev Sahibi Özel Ödeme Kanalı Aktif
+      <div style="margin-top:14px; padding:10px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.2); border-radius:8px; font-size:11px; color:#A7F3D0; line-height:1.4;">
+        <i data-lucide="shield-check" style="width:14px; height:14px; vertical-align:middle; margin-right:4px;"></i>
+        <strong>Doğrudan Ev Sahibine Ödeme:</strong> Tüm tutar aracı olmadan mülk sahibinin belirlediği resmi ödeme kanalına aktarılır.
       </div>
-      <p id="checkout-custom-link-note" style="font-size:11px; color:var(--text-muted); margin:0 0 10px;">Ödemenizi ev sahibinin doğrudan Shopier / Stripe ödeme sayfası üzerinden 3D Secure güvencesiyle tamamlayabilirsiniz.</p>
-      <a id="checkout-custom-link-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary-lg" style="text-decoration:none; display:flex; align-items:center; justify-content:center; gap:8px; width:100%; background:linear-gradient(135deg, #6366F1, #4F46E5); padding:10px; font-weight:800; border-radius:8px; color:#fff; font-size:12px;">
-        <i data-lucide="credit-card"></i> <span>Ev Sahibinin Ödeme Sayfasında Öde (Shopier / Stripe) ↗</span>
-      </a>
     </div>
 
-    <div class="express-pay-buttons">
-      <button class="btn-apple-pay" onclick="processStripePayment('Apple Pay')">
-      <i data-lucide="smartphone"></i> Pay with Apple Pay
-      </button>
-      <button class="btn-google-pay" onclick="processStripePayment('Google Pay')">
-      Pay with Google Pay
-      </button>
-    </div>
-    <div class="divider-text"><span>veya Doğrudan Kredi Kartı ile Öde</span></div>
-    <form onsubmit="event.preventDefault(); processStripePayment('Credit Card');" class="stripe-card-form" data-bot-protection="enabled" data-spam-shield="active">
-<input type="text" name="_gotcha_hp" style="display:none !important; visibility:hidden; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Anti-Spam Security Token">
-      <div class="form-group">
-      <label>Guest Cardholder Name</label>
-      <input type="text" id="guest-card-name" aria-label="Guest Cardholder Name for Room Service" placeholder="John Doe" value="John Doe" required>
+    <!-- Sağ Panel: Ev Sahibinin Canlı Ödeme Kanalları -->
+    <div class="checkout-payment-box" style="background:#090D14; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:18px;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:10px;">
+        <div>
+          <h3 style="margin:0; font-size:16px; color:#fff;">Ev Sahibi Ödeme Kanalları</h3>
+          <p style="margin:2px 0 0; font-size:11px; color:var(--text-muted);">Lütfen ödemenizi tamamlamak istediğiniz kanalı seçin.</p>
+        </div>
+        <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald); font-size:10px;">🔒 256-Bit SSL</span>
       </div>
-      <div class="form-group">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-      <label style="margin:0;">Card Details (PCI-DSS Tokenized)</label>
-      <span class="badge-tag" style="background:rgba(59,130,246,0.15); color:#60A5FA; font-size:9px;">🔒 3DS2 / SCA Ready</span>
+
+      <!-- 4'lü Ödeme Yöntemi Sekmeleri -->
+      <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:4px; background:rgba(255,255,255,0.04); padding:4px; border-radius:10px; margin-bottom:16px; border:1px solid rgba(255,255,255,0.06);">
+        <button id="g-tab-btn-card" onclick="switchGuestCheckoutTab('card')" type="button" style="background:rgba(16,185,129,0.15); color:#10B981; border:none; border-radius:8px; padding:8px 2px; font-size:11px; font-weight:700; cursor:pointer;">💳 Kredi Kartı</button>
+        <button id="g-tab-btn-iban" onclick="switchGuestCheckoutTab('iban')" type="button" style="background:transparent; color:#94A3B8; border:none; border-radius:8px; padding:8px 2px; font-size:11px; font-weight:700; cursor:pointer;">🏦 Banka FAST</button>
+        <button id="g-tab-btn-crypto" onclick="switchGuestCheckoutTab('crypto')" type="button" style="background:transparent; color:#94A3B8; border:none; border-radius:8px; padding:8px 2px; font-size:11px; font-weight:700; cursor:pointer;">💎 USDT Kripto</button>
+        <button id="g-tab-btn-wa" onclick="switchGuestCheckoutTab('wa')" type="button" style="background:transparent; color:#94A3B8; border:none; border-radius:8px; padding:8px 2px; font-size:11px; font-weight:700; cursor:pointer;">💬 WhatsApp</button>
       </div>
-      <div id="guest-stripe-element" style="background:var(--bg-dark); border:1px solid var(--border-color); padding:12px; border-radius:8px; min-height:42px;">
-      <div style="display:flex; align-items:center; justify-content:space-between; color:var(--text-muted); font-size:12px;">
-      <span>💳 4242 •••• •••• 4242 (Stripe Elements Secure iFrame)</span>
-      <span style="font-size:10px; color:var(--accent-emerald);">MM/YY CVC</span>
+
+      <!-- Tab 1: Kredi Kartı (Ev Sahibinin Shopier / Stripe / PayTR Ödeme Sayfası) -->
+      <div id="g-checkout-tab-card">
+        <div style="background:rgba(99,102,241,0.08); border:1px solid rgba(99,102,241,0.25); border-radius:10px; padding:14px; margin-bottom:12px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+            <i data-lucide="credit-card" style="color:#818CF8; width:18px; height:18px;"></i>
+            <strong style="color:#fff; font-size:13px;">Ev Sahibinin Özel Kredi Kartı Ödeme Sayfası</strong>
+          </div>
+          <p id="guest-card-note-display" style="font-size:11px; color:var(--text-muted); margin:0 0 12px; line-height:1.4;">
+            Ödemenizi mülk sahibinin resmi Shopier / Stripe / PayTR ödeme sayfası üzerinden 256-bit SSL ve 3D Secure güvencesiyle doğrudan tamamlayabilirsiniz.
+          </p>
+          <a id="guest-card-pay-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary-lg" style="text-decoration:none; display:flex; align-items:center; justify-content:center; gap:8px; width:100%; background:linear-gradient(135deg, #6366F1, #4F46E5); padding:12px; font-weight:800; border-radius:10px; color:#fff; font-size:13px; box-shadow:0 4px 14px rgba(99,102,241,0.3);">
+            <i data-lucide="external-link"></i>
+            <span>Ev Sahibinin Güvenli Ödeme Sayfasında Kartla Öde (3D Secure) ↗</span>
+          </a>
+        </div>
+        <div style="text-align:center;">
+          <a id="guestCardWaConfirmBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-secondary-sm" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:6px; width:100%; padding:10px; font-size:12px; font-weight:700;">
+            <i data-lucide="message-circle" style="color:#25D366;"></i>
+            <span>✅ Kartla Ödedim (Siparişi Ev Sahibine Bildir)</span>
+          </a>
+        </div>
       </div>
+
+      <!-- Tab 2: Banka Havalesi & 7/24 FAST -->
+      <div id="g-checkout-tab-iban" style="display:none;">
+        <div style="background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.2); border-radius:10px; padding:14px; margin-bottom:12px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:12px; font-weight:700; color:#10B981;">Banka Havale & 7/24 FAST Transfer</span>
+            <span style="font-size:10px; background:rgba(16,185,129,0.15); color:#10B981; padding:2px 8px; border-radius:4px;">Doğrudan Ev Sahibine</span>
+          </div>
+          <div style="font-size:11px; color:#94A3B8; margin-bottom:4px;">Alıcı / Hesap Sahibi: <strong style="color:#fff;" id="guestCheckoutBeneficiary">Ev Sahibi</strong></div>
+          <div style="display:flex; gap:6px; margin-bottom:8px;">
+            <input type="text" id="guestCheckoutIban" aria-label="Ev Sahibi IBAN Numarası" readonly value="" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#10B981; font-family:monospace; font-size:12px; padding:8px 10px;">
+            <button type="button" onclick="copyHostVal('guestCheckoutIban', 'IBAN Kopyalandı!')" style="background:#10B981; color:#090D14; border:none; border-radius:8px; padding:8px 14px; font-weight:800; font-size:12px; cursor:pointer;">Kopyala</button>
+          </div>
+          <div style="font-size:11px; color:#94A3B8;">SWIFT / BIC (Uluslararası): <strong style="color:#fff;" id="guestCheckoutSwift">FBABTRIS</strong></div>
+        </div>
+        <a id="guestIbanWaConfirmBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary-sm" style="text-decoration:none; display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:11px; font-weight:800; font-size:12px; background:#10B981; color:#090D14; border-radius:8px;">
+          <i data-lucide="check-circle-2"></i>
+          <span>✅ FAST / Havale Yaptım (Dekontu WhatsApp ile Gönder)</span>
+        </a>
       </div>
+
+      <!-- Tab 3: USDT Kripto -->
+      <div id="g-checkout-tab-crypto" style="display:none; text-align:center;">
+        <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:14px; margin-bottom:12px;">
+          <img id="guestCheckoutCryptoQr" src="" alt="Host USDT TRC-20 QR Code" width="110" height="110" loading="lazy" style="width:110px; height:110px; border-radius:8px; margin-bottom:8px; border:2px solid #10B981;">
+          <div style="font-size:11px; color:#10B981; font-weight:700; margin-bottom:4px;">Ev Sahibinin TRC-20 USDT Cüzdanı</div>
+          <div style="display:flex; gap:6px; margin-bottom:6px;">
+            <input type="text" id="guestCheckoutCrypto" aria-label="Ev Sahibi USDT Cüzdan Adresi" readonly value="" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#10B981; font-family:monospace; font-size:10px; padding:8px;">
+            <button type="button" onclick="copyHostVal('guestCheckoutCrypto', 'USDT Adresi Kopyalandı!')" style="background:#10B981; color:#090D14; border:none; border-radius:8px; padding:8px 12px; font-weight:800; font-size:11px; cursor:pointer;">Kopyala</button>
+          </div>
+        </div>
+        <a id="guestCryptoWaConfirmBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary-sm" style="text-decoration:none; display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:11px; font-weight:800; font-size:12px;">
+          <i data-lucide="check-circle-2"></i>
+          <span>✅ Kripto Gönderdim (TxHash WhatsApp ile Bildir)</span>
+        </a>
       </div>
-      <div style="display:flex; align-items:center; justify-content:space-between; margin:10px 0; font-size:10px; color:var(--text-muted);">
-      <span>Accepted Cards: Visa, Mastercard, Amex, Discover</span>
-      <span style="color:#6366F1; font-weight:600;"><i data-lucide="shield-check" style="width:12px; height:12px; vertical-align:middle;"></i> Powered by Stripe</span>
+
+      <!-- Tab 4: 7/24 WhatsApp Doğrudan Sipariş -->
+      <div id="g-checkout-tab-wa" style="display:none; text-align:center;">
+        <div style="background:rgba(37,211,102,0.06); border:1px solid rgba(37,211,102,0.2); border-radius:10px; padding:16px; margin-bottom:12px;">
+          <i data-lucide="message-circle" style="width:36px; height:36px; color:#25D366; margin-bottom:6px;"></i>
+          <h4 style="margin:0 0 6px; font-size:14px; color:#fff;">WhatsApp ile Hızlı Sipariş ve Onay</h4>
+          <p style="color:#94A3B8; font-size:12px; margin:0 0 12px; line-height:1.4;">
+            Sepetinizdeki ürünlerin siparişi otomatik olarak formatlanıp mülk sahibinin WhatsApp hattına iletilir.
+          </p>
+          <a id="guestCheckoutWaBtn" href="#" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:12px; border-radius:10px; background:linear-gradient(135deg, #25D366 0%, #128C7E 100%); color:#fff; border:none; font-weight:800; font-size:13px; text-decoration:none; box-shadow:0 4px 14px rgba(37,211,102,0.3);">
+            <i data-lucide="send" style="width:16px; height:16px;"></i>
+            <span>Siparişi WhatsApp ile Ev Sahibine Gönder</span>
+          </a>
+        </div>
       </div>
-      <div class="form-group" style="margin:10px 0; padding:8px 10px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:8px;">
-        <label style="display:flex; align-items:flex-start; gap:8px; font-size:11px; color:var(--text-muted); cursor:pointer; line-height:1.4;">
-          <input type="checkbox" required checked style="margin-top:2px; accent-color:var(--accent-emerald);" aria-label="Kullanım Şartları ve KVKK Aydınlatma Metnini okudum, kabul ediyorum">
-          <span><a href="/terms.html" target="_blank" rel="noopener noreferrer" style="color:var(--accent-emerald); text-decoration:underline;">Kullanım Şartları</a> ve <a href="/privacy.html" target="_blank" rel="noopener noreferrer" style="color:var(--accent-emerald); text-decoration:underline;">KVKK Aydınlatma Metnini</a> okudum, kabul ediyorum.</span>
-        </label>
-      </div>
-      <button type="submit" class="btn-pay-now" id="btn-pay-submit">
-      <i data-lucide="check-circle"></i>
-      <span>Pay & Confirm Order</span>
-      </button>
-    </form>
+
     </div>
   </div>
   </div>
@@ -2979,7 +3023,7 @@
   <i data-lucide="check-circle" id="toast-icon"></i>
   <span id="toast-message">Copied to clipboard!</span>
 </div>
-<script src="blog_articles.js?v=20260927_v111"></script>
-<script src="app.js?v=20260927_v111"></script>
+<script src="blog_articles.js?v=20260927_v112"></script>
+<script src="app.js?v=20260927_v112"></script>
 </body>
 </html>
