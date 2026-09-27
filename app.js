@@ -1452,7 +1452,18 @@ function restoreSessionState() {
       } catch(e){}
     }
 
-    // 4. Restore Active View
+    // 4. Restore Guest Tunnels
+    const savedTunnels = localStorage.getItem('hostifyos_guest_tunnels');
+    if (savedTunnels) {
+      try {
+        const parsedTunnels = JSON.parse(savedTunnels);
+        if (Array.isArray(parsedTunnels) && parsedTunnels.length > 0) {
+          guestTunnels = parsedTunnels;
+        }
+      } catch(e){}
+    }
+
+    // 5. Restore Active View
     const savedView = localStorage.getItem('hostifyos_active_view');
     if (sessionRestored) {
       if (savedView && savedView !== 'admin' && document.getElementById(`view-${savedView}`)) {
@@ -1478,6 +1489,8 @@ document.addEventListener('DOMContentLoaded', () => {
   renderPropertySelector();
   loadActivePropertyData();
   renderTunnelsGrid();
+  renderPropertiesListTable();
+  renderHostServicesTable();
   renderHostOrdersTable();
   renderCommissionAggregator();
   renderHostInvoicesTable();
@@ -2365,7 +2378,20 @@ function switchHostTab(tabName, btnElement) {
     });
   }
 
-  showToast(`Host Tab: ${tabName.toUpperCase()}`);
+  // Trigger dedicated tab data renderers
+  if (tabName === 'orders') {
+    if (typeof renderHostOrdersTable === 'function') renderHostOrdersTable();
+    if (typeof renderCommissionAggregator === 'function') renderCommissionAggregator();
+  } else if (tabName === 'tunnels') {
+    if (typeof renderTunnelsGrid === 'function') renderTunnelsGrid();
+  } else if (tabName === 'properties') {
+    if (typeof renderPropertiesListTable === 'function') renderPropertiesListTable();
+  } else if (tabName === 'services') {
+    if (typeof renderHostServicesTable === 'function') renderHostServicesTable();
+  } else if (tabName === 'payouts' || tabName === 'qr') {
+    if (typeof loadActivePropertyData === 'function') loadActivePropertyData();
+  }
+
   lucide.createIcons();
 }
 
@@ -3349,6 +3375,9 @@ function toggleTunnelStatus(tunnelId) {
   const t = guestTunnels.find(tun => tun.id === tunnelId);
   if (t) {
     t.status = t.status === 'Active' ? 'Paused' : 'Active';
+    try {
+      localStorage.setItem('hostifyos_guest_tunnels', JSON.stringify(guestTunnels));
+    } catch(e){}
     renderTunnelsGrid();
     showToast(`Tunnel "${t.name}" is now ${t.status}`);
   }
@@ -3359,16 +3388,19 @@ function openCreateTunnelModal() {
 }
 
 function submitNewTunnel() {
-  const name = document.getElementById('new-t-name').value;
-  const trigger = document.getElementById('new-t-trigger').value;
-  const channel = document.getElementById('new-t-channel').value;
-  const offer = document.getElementById('new-t-offer').value;
+  const name = document.getElementById('new-t-name')?.value;
+  const trigger = document.getElementById('new-t-trigger')?.value || '48 Hours Before Check-in';
+  const channel = document.getElementById('new-t-channel')?.value || 'WhatsApp & SMS';
+  const offer = document.getElementById('new-t-offer')?.value || 'VIP Airport Shuttle ($75.00)';
 
-  if (!name) return;
+  if (!name || !name.trim()) {
+    showToast("Lütfen tünel adını giriniz.");
+    return;
+  }
 
   const newTunnel = {
     id: `tun-${Date.now()}`,
-    name: name,
+    name: name.trim(),
     trigger: trigger,
     channel: channel,
     offer: offer,
@@ -3381,9 +3413,12 @@ function submitNewTunnel() {
   };
 
   guestTunnels.push(newTunnel);
+  try {
+    localStorage.setItem('hostifyos_guest_tunnels', JSON.stringify(guestTunnels));
+  } catch(e){}
   renderTunnelsGrid();
   closeModal('modal-create-tunnel');
-  showToast(`Automated Tunnel "${name}" launched successfully!`);
+  showToast(`🎉 Automated Tunnel "${name}" launched successfully!`);
 }
 
 function renderPropertySelector() {
@@ -4385,6 +4420,7 @@ function openModal(modalId) {
   const modal = document.getElementById(modalId);
   if (modal) {
     modal.classList.add('active');
+    modal.style.display = 'flex';
     lucide.createIcons();
   }
 }
@@ -4393,7 +4429,27 @@ function closeModal(modalId) {
   const modal = document.getElementById(modalId);
   if (modal) {
     modal.classList.remove('active');
+    modal.style.display = 'none';
   }
+}
+
+// Global Modal Backdrop Click & Escape Key Dismissal
+if (typeof document !== 'undefined') {
+  document.addEventListener('click', (e) => {
+    if (e.target && e.target.classList && e.target.classList.contains('modal-backdrop')) {
+      e.target.classList.remove('active');
+      e.target.style.display = 'none';
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-backdrop.active').forEach(m => {
+        m.classList.remove('active');
+        m.style.display = 'none';
+      });
+    }
+  });
 }
 
 
@@ -4870,4 +4926,97 @@ if (typeof document !== 'undefined') {
     if (typeof updateClosingPlanUI === 'function') updateClosingPlanUI();
   }
 }
+
+// ====================================================
+// EXPLICIT GLOBAL WINDOW EXPORTS (100% INLINE ONCLICK COMPATIBILITY)
+// ====================================================
+if (typeof window !== 'undefined') {
+  window.openModal = openModal;
+  window.closeModal = closeModal;
+  window.openCreateTunnelModal = openCreateTunnelModal;
+  window.openAddPropertyModal = openAddPropertyModal;
+  window.triggerAiImportModal = triggerAiImportModal;
+  window.openAddVideoModal = openAddVideoModal;
+  window.openAddUpsellModal = openAddUpsellModal;
+  window.openCheckoutModal = openCheckoutModal;
+  window.openEditWifiModal = openEditWifiModal;
+  window.openEditPinModal = openEditPinModal;
+  window.openEditChannelsModal = openEditChannelsModal;
+  window.openLoginModal = openLoginModal;
+  window.openLemonSqueezyCheckout = openLemonSqueezyCheckout;
+  window.openVideoModal = openVideoModal;
+  window.switchView = switchView;
+  window.switchHostTab = switchHostTab;
+  window.switchGuestTab = switchGuestTab;
+  window.switchMobileTab = switchMobileTab;
+  window.switchShowcaseTab = switchShowcaseTab;
+  window.switchPhoneDemoTab = switchPhoneDemoTab;
+  window.switchImportTab = switchImportTab;
+  window.switchHostAuthTab = switchHostAuthTab;
+  window.switchHostCheckoutTab = switchHostCheckoutTab;
+  window.switchBilling = switchBilling;
+  window.selectPricingTier = selectPricingTier;
+  window.toggleTheme = toggleTheme;
+  window.toggleLangMenu = toggleLangMenu;
+  window.selectCustomLang = selectCustomLang;
+  window.toggleHostDeviceMode = toggleHostDeviceMode;
+  window.togglePinVisibility = togglePinVisibility;
+  window.togglePinReveal = togglePinReveal;
+  window.toggleTunnelStatus = toggleTunnelStatus;
+  window.toggleOrderStatus = toggleOrderStatus;
+  window.toggleAiChatWidget = toggleAiChatWidget;
+  window.toggleFaq = toggleFaq;
+  window.copyGuestLink = copyGuestLink;
+  window.copyStandLink = copyStandLink;
+  window.copyHostVal = copyHostVal;
+  window.copyWifi = copyWifi;
+  window.showToast = showToast;
+  window.submitNewTunnel = submitNewTunnel;
+  window.submitNewProperty = submitNewProperty;
+  window.submitNewVideoManual = submitNewVideoManual;
+  window.submitNewService = submitNewService;
+  window.submitGoogle1ClickDemo = submitGoogle1ClickDemo;
+  window.simulateAiImport = simulateAiImport;
+  window.saveHostPaymentSettings = saveHostPaymentSettings;
+  window.saveHostGuideContent = saveHostGuideContent;
+  window.saveStandTexts = saveHostGuideContent;
+  window.saveCookiePreferences = saveCookiePreferences;
+  window.acceptCookieChoice = acceptCookieChoice;
+  window.contactHostWhatsApp = contactHostWhatsApp;
+  window.handleSocialLogin = handleSocialLogin;
+  window.logoutNow = logoutNow;
+  window.logoutUser = logoutNow;
+  window.unlockSystemNow = unlockSystemNow;
+  window.lockSystemNow = lockSystemNow;
+  window.cancelSubscription = cancelSubscription;
+  window.simulateTrialExpiry = simulateTrialExpiry;
+  window.processStripePayment = processStripePayment;
+  window.triggerStripeConnectOnboarding = triggerStripeConnectOnboarding;
+  window.triggerNativePwaInstall = triggerNativePwaInstall;
+  window.downloadPortfolioCSV = downloadPortfolioCSV;
+  window.printQrStand = printQrStand;
+  window.downloadStandPNG = downloadStandPNG;
+  window.printInvoicePDF = printInvoicePDF;
+  window.downloadHostInvoicePDF = downloadHostInvoicePDF;
+  window.resendInvoiceEmail = resendInvoiceEmail;
+  window.filterLocal = filterLocal;
+  window.answerQuiz = answerQuiz;
+  window.sendAiChatMessage = sendAiChatMessage;
+  window.changeActiveProperty = changeActiveProperty;
+  window.updateStandTheme = updateStandTheme;
+  window.updateStandFormat = updateStandFormat;
+  window.updateStandDestination = updateStandDestination;
+  window.updateStandPills = updateStandPills;
+  window.deleteService = deleteService;
+  window.addToCart = addToCart;
+  window.extendSession = extendSession;
+  window.generateInstantFreeGuidebook = generateInstantFreeGuidebook;
+  window.runAiScrapeSimulator = runAiScrapeSimulator;
+  window.scrollToFunnelSection = scrollToFunnelSection;
+  window.renderPropertiesListTable = renderPropertiesListTable;
+  window.renderHostServicesTable = renderHostServicesTable;
+  window.renderHostOrdersTable = renderHostOrdersTable;
+  window.renderTunnelsGrid = renderTunnelsGrid;
+}
+
 
