@@ -1338,7 +1338,7 @@
       const isAnnual = (currentCycle === 'annual');
       const totalStr = isAnnual ? pInfo.annualTry : pInfo.monthlyTry;
 
-      alert(`🎉 Havale / FAST Bildiriminiz Alındı!\n\nPlan: ${pInfo.name} (${isAnnual ? 'Yıllık' : 'Aylık'})\nTutar: ${totalStr}\nHesap E-Posta: ${email}\n\nÖdemeniz onaylandığında lisans aktivasyon bağlantınız ${email} adresinize iletilecektir.`);
+      alert(`🎉 Bank Wire / Transfer Notification Received!\n\nPlan: ${pInfo.name} (${isAnnual ? 'Annual' : 'Monthly'})\nAmount: ${totalStr}\nAccount Email: ${email}\n\nOnce verified, your license activation link will be sent to ${email}.`);
       window.location.href = '/?status=bank_pending';
     }
 

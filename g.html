@@ -802,23 +802,23 @@
         <div style="font-size:11px; color:#10B981; font-weight:700; margin-top:6px;">IBAN (7/24 FAST):</div>
         <div style="display:flex; gap:6px; margin-top:4px;">
           <input type="text" id="hostIbanInput" aria-label="Host Bank IBAN" readonly value="TR22 0010 3000 0000 0059 1864 21" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#10B981; font-family:monospace; font-size:11px; padding:8px;">
-          <button onclick="copyHostVal('hostIbanInput', 'Ev Sahibi Fibabanka IBAN Kopyalandı!')" style="background:#10B981; color:#090D14; border:none; border-radius:8px; padding:8px 12px; font-weight:800; font-size:11px; cursor:pointer;">Kopyala</button>
+          <button onclick="copyHostVal('hostIbanInput', 'Host Bank IBAN Copied to Clipboard!')" style="background:#10B981; color:#090D14; border:none; border-radius:8px; padding:8px 12px; font-weight:800; font-size:11px; cursor:pointer;">Copy</button>
         </div>
       </div>
 
       <!-- TAB 3: CRYPTO -->
       <div id="s-tab-crypto" style="display:none; text-align:center; background:#090D14; padding:14px; border-radius:14px; border:1px solid rgba(255,255,255,0.06); margin-bottom:14px;">
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa&color=090D14&bgcolor=10B981" alt="HostifyOS USDT TRC-20 Crypto Payment QR Code" width="100" height="100" loading="lazy" style="width:100px; height:100px; border-radius:8px; margin-bottom:6px;">
-        <div style="font-size:11px; color:#10B981; font-weight:700; margin-bottom:4px;">Tron (TRC-20) USDT Cüzdanı</div>
+        <div style="font-size:11px; color:#10B981; font-weight:700; margin-bottom:4px;">Tron (TRC-20) USDT Wallet</div>
         <div style="display:flex; gap:6px;">
           <input type="text" id="hostCryptoInput" aria-label="Host Crypto Wallet Address" readonly value="TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa" style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#10B981; font-family:monospace; font-size:10px; padding:8px;">
-          <button onclick="copyHostVal('hostCryptoInput', 'Cüzdan Adresi Kopyalandı!')" style="background:#10B981; color:#090D14; border:none; border-radius:8px; padding:8px 12px; font-weight:800; font-size:11px; cursor:pointer;">Kopyala</button>
+          <button onclick="copyHostVal('hostCryptoInput', 'USDT Wallet Address Copied!')" style="background:#10B981; color:#090D14; border:none; border-radius:8px; padding:8px 12px; font-weight:800; font-size:11px; cursor:pointer;">Copy</button>
         </div>
       </div>
 
       <!-- TAB 4: WHATSAPP -->
       <div id="s-tab-wa" style="display:none; text-align:center; background:#090D14; padding:14px; border-radius:14px; border:1px solid rgba(255,255,255,0.06); margin-bottom:14px;">
-        <p style="color:#94A3B8; font-size:12px; margin:0 0 10px 0;">Siparişi doğrudan ev sahibine WhatsApp üzerinden iletebilirsiniz.</p>
+        <p style="color:#94A3B8; font-size:12px; margin:0 0 10px 0;">You can forward your order directly to the host via WhatsApp.</p>
         <button onclick="sendOrderViaWhatsApp()" style="width:100%; padding:10px; border-radius:10px; background:linear-gradient(135deg, #25D366 0%, #128C7E 100%); color:#fff; border:none; font-weight:800; font-size:13px; cursor:pointer;">
           💬 WhatsApp ile Ev Sahibine Gönder
         </button>
@@ -826,13 +826,13 @@
 
             <div style="margin:12px 0; padding:10px; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:8px;">
         <label style="display:flex; align-items:flex-start; gap:8px; font-size:11px; color:var(--text-muted); cursor:pointer; line-height:1.4;">
-          <input type="checkbox" required checked style="margin-top:2px; accent-color:var(--accent);" aria-label="Misafir Sipariş ve Gizlilik Onayı">
-          <span><a href="/terms.html" target="_blank" rel="noopener noreferrer" style="color:var(--accent); text-decoration:underline;">Sipariş Şartları</a> ve <a href="/privacy.html" target="_blank" rel="noopener noreferrer" style="color:var(--accent); text-decoration:underline;">Gizlilik / KVKK Metnini</a> onaylıyorum.</span>
+          <input type="checkbox" required checked style="margin-top:2px; accent-color:var(--accent);" aria-label="Guest Order Terms and Privacy Policy Consent">
+          <span>I agree to the <a href="/terms.html" target="_blank" rel="noopener noreferrer" style="color:var(--accent); text-decoration:underline;">Terms of Service</a> and <a href="/privacy.html" target="_blank" rel="noopener noreferrer" style="color:var(--accent); text-decoration:underline;">Privacy Policy</a>.</span>
         </label>
       </div>
 
       <button onclick="confirmHostPayment()" class="btn-action" style="width:100%; margin:0; padding:12px; font-weight:800; font-size:14px; background:linear-gradient(135deg, #10B981 0%, #059669 100%); color:#fff;">
-        ✅ Ödemeyi Gönderdim (Siparişi Tamamla)
+        ✅ I Completed Payment (Confirm Order)
       </button>
     </div>
   </div>
@@ -845,9 +845,9 @@
       <div style="width:48px; height:48px; border-radius:14px; background:rgba(234,179,8,0.15); color:#EAB308; display:flex; align-items:center; justify-content:center; margin:0 auto 12px auto;">
         <i data-lucide="car" style="width:26px; height:26px;"></i>
       </div>
-      <span style="background:rgba(234,179,8,0.15); color:#EAB308; padding:3px 10px; border-radius:99px; font-size:11px; font-weight:800; text-transform:uppercase;">📍 Konuma Göre En Yakın Taksi</span>
-      <h3 style="color:#fff; margin:10px 0 4px 0; font-size:18px; font-weight:800;" id="taxi-station-name">Yalıkavak Marina Taksi Durağı</h3>
-      <p style="color:var(--text-muted); font-size:12px; margin:0 0 16px 0;" id="taxi-station-dist">Villanıza en yakın resmi taksi durağı (250m • 3 dk)</p>
+      <span style="background:rgba(234,179,8,0.15); color:#EAB308; padding:3px 10px; border-radius:99px; font-size:11px; font-weight:800; text-transform:uppercase;">📍 Nearest Licensed Taxi by Location</span>
+      <h3 style="color:#fff; margin:10px 0 4px 0; font-size:18px; font-weight:800;" id="taxi-station-name">Yalikavak Marina Taxi Stand</h3>
+      <p style="color:var(--text-muted); font-size:12px; margin:0 0 16px 0;" id="taxi-station-dist">Closest official licensed taxi stand to your property (250m • 3 min)</p>
 
       <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
         <!-- Button 1: Call Taxi Direct -->
@@ -865,12 +865,12 @@
         <!-- Button 3: WhatsApp Share Location to Taxi / Host Concierge -->
         <button onclick="requestTaxiViaWhatsApp()" style="background:rgba(37,211,102,0.1); border:1px solid rgba(37,211,102,0.3); color:#25D366; padding:10px; border-radius:12px; font-size:12px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;">
           <i data-lucide="message-circle" style="width:16px; height:16px;"></i>
-          <span>WhatsApp ile Konum Göndererek Taksi İste</span>
+          <span>Request Taxi via WhatsApp with Live Location</span>
         </button>
       </div>
 
       <div style="font-size:11px; color:var(--text-muted); border-top:1px solid rgba(255,255,255,0.08); padding-top:10px;">
-        💡 <strong>İpucu:</strong> Taksiye bindiğinizde taksimetre açılmasını talep edebilirsiniz.
+        💡 <strong>Tip:</strong> You can request the driver to turn on the official taximeter.
       </div>
     </div>
   </div>
@@ -1584,7 +1584,7 @@
             <strong style="color:#fff;">${safeCode} • Istanbul (IST) ➔ Bodrum (BJV)</strong>
             <span style="color:#10B981; font-weight:800;">● On Time</span>
           </div>
-          <div style="color:var(--text-muted);">Estimated Arrival: <strong style="color:#fff;">14:45</strong> • Kapı: <strong style="color:#fff;">204B</strong> • Durum: <strong style="color:#10B981;">Uçuşta (En Route)</strong></div>
+          <div style="color:var(--text-muted);">Estimated Arrival: <strong style="color:#fff;">14:45</strong> • Gate: <strong style="color:#fff;">204B</strong> • Status: <strong style="color:#10B981;">En Route</strong></div>
         `;
       }
       showToast(`✈️ Flight ${code} status updated!`);
@@ -1592,11 +1592,11 @@
 
     // 🚕 REGIONAL DYNAMIC TAXI DATABASE & GOOGLE MAPS RESOLVER
     const REGIONAL_TAXIS = {
-      'BODRUM': { name: 'Yalıkavak Marina Taksi Durağı', phone: '+902523854000', displayPhone: '0252 385 40 00', dist: 'Villanıza en yakın resmi taksi durağı (250m • 3 dk)', gmapsQuery: 'Yalikavak+Marina+Taksi+Bodrum' },
-      'KAS': { name: 'Kaş Merkez Meydan Taksi', phone: '+902428361400', displayPhone: '0242 836 14 00', dist: 'Kaş Çarşı & Marina Taksi Noktası (400m)', gmapsQuery: 'Kas+Meydan+Taksi+Antalya' },
-      'CESME': { name: 'Alaçatı Ilıca Taksi Durağı', phone: '+902327168000', displayPhone: '0232 716 80 00', dist: 'Alaçatı Köyiçi Girişi (350m • 4 dk)', gmapsQuery: 'Alacati+Taksi+Cesme' },
-      'ISTANBUL': { name: 'İstanbul 7/24 Bölge Taksi Çağrı Merkezi', phone: '+908507555555', displayPhone: '0850 755 55 55', dist: 'Sarı Taksi & Turkuaz VIP Taksi (Hemen Kapıda)', gmapsQuery: 'taxi+near+me+Istanbul' },
-      'DEFAULT': { name: 'En Yakın Resmi Taksi Durağı', phone: '+902523854000', displayPhone: '0252 385 40 00', dist: 'Villanıza en yakın lisanslı taksi istasyonu', gmapsQuery: 'taxi+near+me' }
+      'BODRUM': { name: 'Yalikavak Marina Taxi Stand', phone: '+902523854000', displayPhone: '0252 385 40 00', dist: 'Closest official licensed taxi stand to your property (250m • 3 min)', gmapsQuery: 'Yalikavak+Marina+Taksi+Bodrum' },
+      'KAS': { name: 'Kaş Merkez Meydan Taksi', phone: '+902428361400', displayPhone: '0242 836 14 00', dist: 'Kas Downtown & Marina Taxi (400m)', gmapsQuery: 'Kas+Meydan+Taksi+Antalya' },
+      'CESME': { name: 'Alaçatı Ilıca Taksi Durağı', phone: '+902327168000', displayPhone: '0232 716 80 00', dist: 'Alacati Village Center Taxi (350m • 4 min)', gmapsQuery: 'Alacati+Taksi+Cesme' },
+      'ISTANBUL': { name: 'İstanbul 7/24 Bölge Taksi Çağrı Merkezi', phone: '+908507555555', displayPhone: '0850 755 55 55', dist: 'Yellow & Turquoise VIP Taxi (Instant dispatch)', gmapsQuery: 'taxi+near+me+Istanbul' },
+      'DEFAULT': { name: 'En Yakın Resmi Taksi Durağı', phone: '+902523854000', displayPhone: '0252 385 40 00', dist: 'Closest licensed official taxi station', gmapsQuery: 'taxi+near+me' }
     };
 
     function openTaxiModal() {

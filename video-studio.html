@@ -666,14 +666,14 @@
     function toggleAudioEngine() {
       audioEnabled = !audioEnabled;
       const btn = document.getElementById('btnAudioToggle');
-      btn.textContent = audioEnabled ? '🔊 Audio On' : '🔇 Ses Kapalı';
+      btn.textContent = audioEnabled ? '🔊 Audio On' : '🔇 Audio Muted';
       btn.classList.toggle('active', audioEnabled);
     }
 
     function toggleVoiceover() {
       voiceoverEnabled = !voiceoverEnabled;
       const btn = document.getElementById('btnVoiceToggle');
-      btn.textContent = voiceoverEnabled ? '🎙️ Voiceover: On' : '🎙️ Voiceover: Kapalı';
+      btn.textContent = voiceoverEnabled ? '🎙️ Voiceover: On' : '🎙️ Voiceover: Off';
       btn.classList.toggle('active', voiceoverEnabled);
       if (!voiceoverEnabled) stopVoiceover();
     }
@@ -771,16 +771,16 @@
         sceneName = '1/5: WhatsApp Bildirimi (02:15)';
         items[0].classList.add('active');
       } else if (currentTime < 10) {
-        sceneName = '2/5: Çözüm: Akrilik QR Standı';
+        sceneName = '2/5: Solution: Acrylic QR Stand';
         items[1].classList.add('active');
       } else if (currentTime < 18) {
-        sceneName = '3/5: Özellikler: Wi-Fi, PIN, 8 Dil';
+        sceneName = '3/5: Features: Wi-Fi, PIN, 8 Langs';
         items[2].classList.add('active');
       } else if (currentTime < 25) {
-        sceneName = '4/5: Ek Gelir: %0 Komisyon Upsell';
+        sceneName = '4/5: Upsell Revenue: 0% Commission';
         items[3].classList.add('active');
       } else {
-        sceneName = '5/5: Kapanış: 14 Gün Ücretsiz Başla';
+        sceneName = '5/5: Outro: Start 14-Day Free';
         items[4].classList.add('active');
       }
       document.getElementById('sceneTitleIndicator').textContent = sceneName;
