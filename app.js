@@ -1335,9 +1335,9 @@ let adminAuditLogs = [];
 const DEFAULT_EMPTY_PROPERTY = {
   id: 'prop-empty',
   platform: 'Direct',
-  title: 'Dijital Mülk Rehberi',
-  address: 'Henüz Mülk Adresi Eklenmedi',
-  wifiName: 'Wi-Fi Adı Belirtilmedi',
+  title: 'Digital Property Guidebook',
+  address: 'No property address specified yet',
+  wifiName: 'No Wi-Fi specified',
   wifiPass: '••••••••',
   doorPin: '0000',
   payoutBank: '',
@@ -1387,8 +1387,8 @@ function saveSessionState() {
       localStorage.setItem('hostifyos_auth_session', JSON.stringify({
         isLoggedIn: true,
         role: 'host',
-        name: hostAuth.name || 'Ev Sahibi',
-        email: hostAuth.email || 'evsahibi@gmail.com',
+        name: hostAuth.name || 'Host',
+        email: hostAuth.email || 'host@gmail.com',
         plan: hostAuth.plan || 'Pro Host Plan (14-Day Free Trial)',
         subscriptionStatus: hostAuth.subscriptionStatus || 'trial_active',
         trialDaysLeft: hostAuth.trialDaysLeft || 14,
@@ -1439,8 +1439,8 @@ function restoreSessionState() {
         const session = JSON.parse(savedSession);
         if (session && session.isLoggedIn) {
           hostAuth.isLoggedIn = true;
-          hostAuth.name = session.name || 'Ev Sahibi';
-          hostAuth.email = session.email || 'evsahibi@gmail.com';
+          hostAuth.name = session.name || 'Host';
+          hostAuth.email = session.email || 'host@gmail.com';
           hostAuth.plan = session.plan || 'Pro Host Plan (14-Day Free Trial)';
           hostAuth.subscriptionStatus = session.subscriptionStatus || 'trial_active';
           hostAuth.trialDaysLeft = session.trialDaysLeft || 14;
@@ -1552,7 +1552,7 @@ function triggerNativePwaInstall() {
 }
 
 
-// LIGHT / DARK MODE THEME SWITCHER ("AÇIK EKRAN")
+// LIGHT / DARK MODE THEME SWITCHER
 let isLightTheme = false;
 
 function toggleTheme() {
@@ -1563,7 +1563,7 @@ function toggleTheme() {
   if (isLightTheme) {
     body.classList.add('theme-light');
     if (icon) icon.setAttribute('data-lucide', 'moon');
-    showToast("Switched to Light Mode (Açık Ekran)!");
+    showToast("Switched to Light Mode!");
   } else {
     body.classList.remove('theme-light');
     if (icon) icon.setAttribute('data-lucide', 'sun');
@@ -1778,8 +1778,8 @@ function handleUserLogin(role) {
     name = name.charAt(0).toUpperCase() + name.slice(1);
   }
 
-  hostAuth.name = name || 'Ev Sahibi';
-  hostAuth.email = email || 'evsahibi@gmail.com';
+  hostAuth.name = name || 'Host';
+  hostAuth.email = email || 'host@gmail.com';
   hostAuth.isLoggedIn = true;
   hostAuth.subscriptionStatus = 'trial_active';
   currentUserRole = 'host';
@@ -1789,7 +1789,7 @@ function handleUserLogin(role) {
   updateTopNavAuthUI();
   checkHostAuthStatus();
   switchView('host');
-  showToast(`🎉 Hoş geldiniz ${hostAuth.name}! (${hostAuth.email}) 14 Günlük Ücretsiz Pro Deneme Aktif.`);
+  showToast(`🎉 Welcome ${hostAuth.name}! (${hostAuth.email}) 14-Day Free Pro Trial Activated.`);
 }
 
 function switchHostAuthTab(mode) {
@@ -1831,8 +1831,8 @@ function parseJwt(token) {
 
 function loginHostWithGoogle(name, email, avatar) {
   hostAuth.isLoggedIn = true;
-  hostAuth.name = name || 'Google Ev Sahibi';
-  hostAuth.email = email || 'evsahibi@gmail.com';
+  hostAuth.name = name || 'Google Host';
+  hostAuth.email = email || 'host@gmail.com';
   if (avatar) hostAuth.avatar = avatar;
   hostAuth.subscriptionStatus = 'trial_active';
   currentUserRole = 'host';
@@ -1846,7 +1846,7 @@ function loginHostWithGoogle(name, email, avatar) {
   updateTopNavAuthUI();
   checkHostAuthStatus();
   switchView('host');
-  showToast(`🎉 Hoş geldiniz ${hostAuth.name}! Google ile giriş yapıldı (${hostAuth.email}). 14 Günlük Pro Deneme Aktif.`);
+  showToast(`🎉 Welcome ${hostAuth.name}! Logged in with Google (${hostAuth.email}). 14-Day Free Pro Trial Activated.`);
 }
 
 function handleGoogleCredentialResponse(response) {
@@ -1913,7 +1913,7 @@ async function handleAppleLogin() {
 
 function handleSocialLogin(provider) {
   if (provider === 'Airbnb') {
-    showToast(`⚡ Airbnb Direct Sync API Yakında! Şu an 1-Tıkla İlan Linki Aktarıcımızı kullanabilirsiniz.`);
+    showToast(`⚡ Airbnb Direct Sync API Coming Soon! You can currently use our 1-Tap Listing Importer.`);
     setTimeout(() => {
       location.href = '/import-guide.html';
     }, 1200);
@@ -1921,7 +1921,7 @@ function handleSocialLogin(provider) {
   }
 
   if (provider === 'Apple') {
-    showToast(`⚡ Apple ID ile Giriş Yakında! Şu an Google veya E-posta ile 14 gün ücretsiz başlayabilirsiniz.`);
+    showToast(`⚡ Apple ID Sign-In Coming Soon! You can currently start your 14-day free trial with Google or Email.`);
     switchHostAuthTab('signup');
     return;
   }
@@ -2097,7 +2097,7 @@ function renderAdminHostsTable() {
       <tr>
         <td colspan="7" style="text-align:center; padding:36px; color:var(--text-muted);">
           <i data-lucide="users" style="width:28px; height:28px; display:block; margin:0 auto 10px; opacity:0.4;"></i>
-          Henüz kayıtlı ev sahibi hesabı bulunmuyor.
+          No registered host accounts found yet.
         </td>
       </tr>
     `;
@@ -2188,7 +2188,7 @@ function renderAdminAuditLogsTable() {
       <tr>
         <td colspan="6" style="text-align:center; padding:36px; color:var(--text-muted);">
           <i data-lucide="shield" style="width:28px; height:28px; display:block; margin:0 auto 10px; opacity:0.4;"></i>
-          Henüz güvenlik denetim kaydı bulunmuyor.
+          No security audit records found yet.
         </td>
       </tr>
     `;
@@ -2460,29 +2460,29 @@ function renderCommissionAggregator() {
   const subTierDisplay = document.getElementById('host-sub-tier-display');
 
   if (metricRev) metricRev.textContent = formatPrice(summary.grossSales);
-  if (metricFees) metricFees.textContent = '%0 Komisyon';
+  if (metricFees) metricFees.textContent = '0% Commission';
 
   if (headerBadge) {
-    headerBadge.textContent = 'PRO HOST AKTİF (%0 KOMİSYON)';
+    headerBadge.textContent = 'PRO HOST ACTIVE (0% COMMISSION)';
     headerBadge.style.background = 'rgba(16,185,129,0.15)';
     headerBadge.style.color = 'var(--accent-emerald)';
   }
 
   if (subTierDisplay) {
-    subTierDisplay.textContent = 'Pro Host Planı (%0 Komisyon)';
+    subTierDisplay.textContent = 'Pro Host Plan (0% Commission)';
   }
 }
 
 function generateMonthlyCommissionInvoice() {
-  showToast("🎉 HostifyOS %0 komisyon modelindedir. Tüm misafir gelirleri %100 doğrudan ev sahibine aktarılır.");
+  showToast("🎉 HostifyOS features 0% commission. 100% of guest revenue flows directly to the host.");
 }
 
 function triggerInstantFeeSweep() {
-  showToast("🎉 %0 Komisyon Aktif: Tüm ödemeler kesintisiz hesabınızdadır.");
+  showToast("🎉 0% Commission Active: All payments go directly to your account.");
 }
 
 function downloadCommissionStatement() {
-  showToast("🎉 Gelir Raporu Hazırlanıyor...");
+  showToast("🎉 Generating Revenue Report...");
 }
 
 // OFFICIAL DODO PAYMENTS & GLOBAL MERCHANT CHECKOUT CONFIGURATION
@@ -2611,27 +2611,23 @@ function updateClosingPlanUI() {
     proBtn.style.color = (currentClosingPlan === 'pro') ? '#10B981' : '#94A3B8';
   }
   if (entBtn) {
-    entBtn.textContent = isAnnual ? (isTr ? '🏢 Enterprise ($29/ay)' : '🏢 Enterprise ($29/mo)') : (isTr ? '🏢 Enterprise ($39/ay)' : '🏢 Enterprise ($39/mo)');
+    entBtn.textContent = isAnnual ? '🏢 Enterprise ($29/mo)' : '🏢 Enterprise ($39/mo)';
     entBtn.style.background = (currentClosingPlan === 'ent') ? 'rgba(16,185,129,0.2)' : 'transparent';
     entBtn.style.color = (currentClosingPlan === 'ent') ? '#10B981' : '#94A3B8';
   }
 
   if (currentClosingPlan === 'pro') {
-    const priceLabel = isAnnual ? (isTr ? '$14/ay ($168/yıl)' : '$14/mo ($168/yr)') : (isTr ? '$19/ay' : '$19/mo');
+    const priceLabel = isAnnual ? '$14/mo ($168/yr)' : '$19/mo';
     if (titleEl) titleEl.innerHTML = isTr 
-      ? `⭐ Pro Host Plan (${priceLabel}) — <span style="color:#10B981;">14 Günlük Ücretsiz Deneme</span>`
-      : `⭐ Pro Host Plan (${priceLabel}) — <span style="color:#10B981;">14-Day Free Trial</span>`;
+      `⭐ Pro Host Plan (${priceLabel}) — <span style="color:#10B981;">14-Day Free Trial</span>`;
     if (submitBtn) submitBtn.textContent = isTr
-      ? '14 Günlük Ücretsiz Denemeyi Başlat ($0 Bugün)'
-      : 'Start 14-Day Free Trial ($0 Due Today)';
+      'Start 14-Day Free Trial ($0 Due Today)';
   } else if (currentClosingPlan === 'ent') {
-    const priceLabel = isAnnual ? (isTr ? '$29/ay ($348/yıl)' : '$29/mo ($348/yr)') : (isTr ? '$39/ay' : '$39/mo');
+    const priceLabel = isAnnual ? '$29/mo ($348/yr)' : '$39/mo';
     if (titleEl) titleEl.innerHTML = isTr
-      ? `🏢 Enterprise Plan (${priceLabel}) — <span style="color:#10B981;">14 Günlük VIP Deneme</span>`
-      : `🏢 Enterprise Plan (${priceLabel}) — <span style="color:#10B981;">14-Day VIP Trial</span>`;
+      `🏢 Enterprise Plan (${priceLabel}) — <span style="color:#10B981;">14-Day VIP Trial</span>`;
     if (submitBtn) submitBtn.textContent = isTr
-      ? 'Enterprise VIP Denemeyi Başlat ($0 Bugün)'
-      : 'Start Enterprise VIP Trial ($0 Due Today)';
+      'Start Enterprise VIP Trial ($0 Due Today)';
   }
 }
 window.updateClosingPlanUI = updateClosingPlanUI;
@@ -2669,7 +2665,7 @@ async function processLemonSqueezySubscribe() {
   }
 
   const isTr = (typeof currentLanguage !== 'undefined' && currentLanguage === 'TR');
-  showToast(isTr ? "⚡ Paynkolay 3D Güvenli Ödeme Başlatılıyor..." : "⚡ Processing Secure Checkout (Paynkolay / Dodo)...");
+  showToast("⚡ Processing Secure Checkout (Paynkolay / Dodo)...");
 
   // 1. Try Paynkolay Virtual POS & 3D Secure Gateway
   try {
@@ -2760,7 +2756,7 @@ function renderHostInvoicesTable() {
       <tr>
         <td colspan="7" style="text-align:center; padding:32px; color:var(--text-muted);">
           <i data-lucide="file-text" style="width:24px; height:24px; display:block; margin:0 auto 8px; opacity:0.4;"></i>
-          Henüz düzenlenmiş fatura bulunmamaktadır.
+          No invoices issued yet.
         </td>
       </tr>
     `;
@@ -2880,7 +2876,7 @@ function processLemonSqueezySubscribe() {
 function openEditCustomPayLinkModal() {
   const prop = getActiveProperty();
   if (hostAuth.plan && hostAuth.plan.includes('Starter Tier')) {
-    showToast("⚠️ Starter Tier (%5 Komisyonlu) yerleşik Native Stripe Checkout kullanır. Özel ödeme linki eklemek ve %0 komisyondan yararlanmak için Pro Host ($14/ay) planına geçin!");
+    showToast("⚠️ Starter Tier (5% Comm) uses native checkout. Custom payment links are enabled on Pro & Enterprise plans (0% commission)!");
     openLemonSqueezyCheckout('Pro Host Plan ($14/mo - 0% Commission)', '$14.00 / mo');
     return;
   }
@@ -3025,7 +3021,7 @@ function renderHostOrdersTable() {
       <tr>
         <td colspan="7" style="text-align:center; padding:36px; color:var(--text-muted);">
           <i data-lucide="inbox" style="width:28px; height:28px; display:block; margin:0 auto 10px; opacity:0.4;"></i>
-          Henüz gelen misafir siparişi bulunmamaktadır.
+          No incoming guest orders yet.
         </td>
       </tr>
     `;
@@ -3311,9 +3307,9 @@ function renderTunnelsGrid() {
     container.innerHTML = `
       <div style="grid-column:1/-1; text-align:center; padding:36px 20px; background:var(--bg-card); border:1px dashed var(--border-color); border-radius:14px; color:var(--text-muted);">
         <i data-lucide="zap" style="width:28px; height:28px; margin-bottom:8px; color:var(--text-muted);"></i>
-        <h4 style="margin:0 0 4px; color:#fff; font-size:14px;">Henüz Aktif Mesaj Tüneli Yok</h4>
-        <p style="font-size:12px; margin:0 0 14px;">Misafirlerinize otomatik WhatsApp / SMS ek satış bildirimleri göndermek için tünel başlatın.</p>
-        <button class="btn-primary-sm" onclick="openCreateTunnelModal()"><i data-lucide="plus"></i> Yeni Tünel Başlat</button>
+        <h4 style="margin:0 0 4px; color:#fff; font-size:14px;">No Active Message Tunnels Yet</h4>
+        <p style="font-size:12px; margin:0 0 14px;">Launch an automated tunnel to send WhatsApp / SMS upsell notifications to your guests.</p>
+        <button class="btn-primary-sm" onclick="openCreateTunnelModal()"><i data-lucide="plus"></i> Create New Tunnel</button>
       </div>
     `;
     lucide.createIcons();
@@ -3400,7 +3396,7 @@ function submitNewTunnel() {
   const offer = document.getElementById('new-t-offer')?.value || 'VIP Airport Shuttle ($75.00)';
 
   if (!name || !name.trim()) {
-    showToast("Lütfen tünel adını giriniz.");
+    showToast("Please enter a tunnel name.");
     return;
   }
 
@@ -3433,7 +3429,7 @@ function renderPropertySelector() {
 
   let optionsHTML = '';
   if (properties.length === 0) {
-    optionsHTML = '<option value="">(Henüz Mülk Eklenmedi)</option>';
+    optionsHTML = '<option value="">(No Properties Added Yet)</option>';
   } else {
     optionsHTML = properties.map(p => `
       <option value="${p.id}" ${p.id === activePropertyId ? 'selected' : ''}>
@@ -3697,11 +3693,11 @@ function renderPropertiesListTable() {
             <div style="width:44px; height:44px; border-radius:12px; background:rgba(255,255,255,0.05); display:inline-flex; align-items:center; justify-content:center; color:var(--text-muted); margin-bottom:12px;">
               <i data-lucide="home" style="width:22px; height:22px;"></i>
             </div>
-            <h4 style="margin:0 0 6px; color:#fff; font-size:14px;">Henüz Eklenmiş Bir Mülk Yok</h4>
-            <p style="font-size:12px; margin:0 0 16px;">İlk dijital rehberinizi oluşturmak için yeni mülk ekleyin veya Airbnb ilan linkinizi aktarın.</p>
+            <h4 style="margin:0 0 6px; color:#fff; font-size:14px;">No Properties Added Yet</h4>
+            <p style="font-size:12px; margin:0 0 16px;">Add a new property or import your Airbnb listing link to generate your first digital guidebook.</p>
             <div style="display:flex; gap:8px; justify-content:center;">
-              <button class="btn-primary-sm" onclick="openModal('modal-add-property')"><i data-lucide="plus"></i> Yeni Mülk Ekle</button>
-              <button class="btn-secondary-sm" onclick="location.href='/import-guide.html'"><i data-lucide="download"></i> Airbnb Linki Aktar</button>
+              <button class="btn-primary-sm" onclick="openModal('modal-add-property')"><i data-lucide="plus"></i> Add New Property</button>
+              <button class="btn-secondary-sm" onclick="location.href='/import-guide.html'"><i data-lucide="download"></i> Import Airbnb Link</button>
             </div>
           </div>
         </td>
@@ -3715,16 +3711,16 @@ function renderPropertiesListTable() {
     // Generate OTA channel badges and direct links
     const channels = [];
     if (p.airbnbUrl) {
-      channels.push(`<a href="${escapeHtml(p.airbnbUrl)}" target="_blank" rel="noopener noreferrer" class="badge-tag" style="background:rgba(255,90,95,0.15); color:#FF5A5F; text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-size:11px;" title="Airbnb İlanı"><i data-lucide="home" style="width:11px; height:11px;"></i> Airbnb ↗</a>`);
+      channels.push(`<a href="${escapeHtml(p.airbnbUrl)}" target="_blank" rel="noopener noreferrer" class="badge-tag" style="background:rgba(255,90,95,0.15); color:#FF5A5F; text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-size:11px;" title="Airbnb Listing"><i data-lucide="home" style="width:11px; height:11px;"></i> Airbnb ↗</a>`);
     }
     if (p.bookingUrl) {
-      channels.push(`<a href="${escapeHtml(p.bookingUrl)}" target="_blank" rel="noopener noreferrer" class="badge-tag" style="background:rgba(0,53,128,0.15); color:#60A5FA; text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-size:11px;" title="Booking.com İlanı"><i data-lucide="building" style="width:11px; height:11px;"></i> Booking ↗</a>`);
+      channels.push(`<a href="${escapeHtml(p.bookingUrl)}" target="_blank" rel="noopener noreferrer" class="badge-tag" style="background:rgba(0,53,128,0.15); color:#60A5FA; text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-size:11px;" title="Booking.com Listing"><i data-lucide="building" style="width:11px; height:11px;"></i> Booking ↗</a>`);
     }
     if (p.vrboUrl) {
-      channels.push(`<a href="${escapeHtml(p.vrboUrl)}" target="_blank" rel="noopener noreferrer" class="badge-tag" style="background:rgba(28,57,187,0.15); color:#A78BFA; text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-size:11px;" title="Vrbo İlanı"><i data-lucide="compass" style="width:11px; height:11px;"></i> Vrbo ↗</a>`);
+      channels.push(`<a href="${escapeHtml(p.vrboUrl)}" target="_blank" rel="noopener noreferrer" class="badge-tag" style="background:rgba(28,57,187,0.15); color:#A78BFA; text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-size:11px;" title="Vrbo Listing"><i data-lucide="compass" style="width:11px; height:11px;"></i> Vrbo ↗</a>`);
     }
     if (p.icalUrl) {
-      channels.push(`<span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald); font-size:11px;" title="iCal Takvim Senkronizasyonu Aktif"><i data-lucide="calendar" style="width:11px; height:11px; vertical-align:middle;"></i> iCal Feed</span>`);
+      channels.push(`<span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald); font-size:11px;" title="iCal Calendar Sync Active"><i data-lucide="calendar" style="width:11px; height:11px; vertical-align:middle;"></i> iCal Feed</span>`);
     }
     if (channels.length === 0) {
       channels.push(`<span class="badge-tag" style="background:rgba(255,255,255,0.05); color:var(--text-muted); font-size:11px;">${escapeHtml(p.platform || 'Direct')}</span>`);
@@ -3746,7 +3742,7 @@ function renderPropertiesListTable() {
           ${channels.join('')}
         </div>
         <button class="btn-secondary-sm" style="padding:3px 8px; font-size:10px; margin-top:2px;" onclick="openEditChannelsModal('${escapeHtml(p.id)}')">
-          <i data-lucide="link"></i> OTA Linkleri Düzenle
+          <i data-lucide="link"></i> Edit OTA Links
         </button>
       </td>
       <td><span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald);">${(p.localSpots || []).length} AI Spots</span></td>
@@ -3759,7 +3755,7 @@ function renderPropertiesListTable() {
       <td>
         <div style="display:flex; gap:6px;">
           <button class="btn-primary-sm" onclick="changeActiveProperty('${escapeHtml(p.id)}')">
-            ${p.id === activePropertyId ? '✓ Aktif Ev' : 'Seç'}
+            ${p.id === activePropertyId ? '✓ Active Listing' : 'Select'}
           </button>
         </div>
       </td>
@@ -3775,7 +3771,7 @@ function openEditChannelsModal(propId) {
   if (!prop) return;
 
   const modalTitle = document.getElementById('modal-channel-prop-title');
-  if (modalTitle) modalTitle.textContent = `"${prop.title}" için Airbnb, Booking.com, Vrbo ve iCal takvim linklerini bağlayın.`;
+  if (modalTitle) modalTitle.textContent = `Connect your Airbnb, Booking.com, Vrbo and iCal calendar links for "${prop.title}".`;
 
   const idInput = document.getElementById('edit-channel-prop-id');
   const airbnbInput = document.getElementById('edit-channel-airbnb');
@@ -3814,7 +3810,7 @@ function savePropertyChannels() {
   saveSessionState();
   renderPropertiesListTable();
   closeModal('modal-edit-channels');
-  showToast(`🎉 "${prop.title}" için OTA ve İlan linkleri başarıyla senkronize edildi!`);
+  showToast(`🎉 OTA and listing links successfully synchronized for "${prop.title}"!`);
 }
 
 function fallbackCopyText(text) {
@@ -3838,14 +3834,14 @@ function copyGuestLink(slug) {
   const url = `https://hostifyos.com/g/${targetSlug}`;
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(url).then(() => {
-      showToast(`📋 Misafir Rehberi Linki Kopyalandı: ${url}`);
+      showToast(`📋 Guest Guidebook Link Copied: ${url}`);
     }).catch(() => {
       fallbackCopyText(url);
-      showToast(`📋 Misafir Rehberi Linki Kopyalandı: ${url}`);
+      showToast(`📋 Guest Guidebook Link Copied: ${url}`);
     });
   } else {
     fallbackCopyText(url);
-    showToast(`📋 Misafir Rehberi Linki Kopyalandı: ${url}`);
+    showToast(`📋 Guest Guidebook Link Copied: ${url}`);
   }
 }
 
@@ -4113,10 +4109,10 @@ function openCheckoutModal(isTestMode = false) {
     if (prop && prop.services && prop.services.length > 0) {
       cart = [{ name: prop.services[0].name, priceUSD: prop.services[0].priceUSD }];
     } else {
-      cart = [{ name: 'VIP Havalimanı Karşılama & Concierge Servisi', priceUSD: 75.00 }];
+      cart = [{ name: 'VIP Airport Transfer & Concierge Service', priceUSD: 75.00 }];
     }
     updateCartBadge();
-    showToast("🛒 Canlı Misafir Ödeme Testi: Örnek sipariş sepeti yüklendi.");
+    showToast("🛒 Live Guest Checkout Preview: Sample test order loaded.");
   }
   renderCheckoutSummary();
   openModal('modal-checkout');
@@ -4149,7 +4145,7 @@ function renderCheckoutSummary() {
   const list = document.getElementById('checkout-cart-items');
   if (list) {
     if (cart.length === 0) {
-      list.innerHTML = `<div style="color:var(--text-muted); font-size:12px; padding:12px; text-align:center;">Sepetinizde henüz ürün bulunmuyor.</div>`;
+      list.innerHTML = `<div style="color:var(--text-muted); font-size:12px; padding:12px; text-align:center;">Your cart is currently empty.</div>`;
     } else {
       list.innerHTML = cart.map(item => `
         <div class="cart-item-row" style="display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.06); font-size:13px;">
@@ -4164,10 +4160,10 @@ function renderCheckoutSummary() {
 
   // Populate Host's Payment Details into Guest Checkout Tabs
   const cardLink = prop.customPayUrl || 'https://www.shopier.com/ShowProductNew/products.php';
-  const cardNote = prop.cardNote || 'Siparişleriniz 256-bit SSL ve 3D Secure güvencesiyle doğrudan ev sahibinin resmi ödeme altyapısı üzerinden tahsil edilir.';
+  const cardNote = prop.cardNote || 'Your order is processed securely with 256-bit SSL & 3D Secure directly to the host payment gateway.';
   const iban = prop.fibabankaIban || 'TR22 0010 3000 0000 0059 1864 21';
   const swift = prop.swiftBic || 'FBABTRIS';
-  const beneficiary = prop.beneficiaryName || 'Ali Turan Inc. (Mülk Sahibi)';
+  const beneficiary = prop.beneficiaryName || 'Ali Turan Inc. (Property Host)';
   const crypto = prop.cryptoUsdt || 'TSHfTnC3SYZxJNURyoMpXQnagKQ6bH1HPa';
   const wa = prop.whatsapp ? prop.whatsapp.replace(/[^0-9]/g, '') : '905437360660';
 
@@ -4199,25 +4195,25 @@ function renderCheckoutSummary() {
   
   const waBtn = document.getElementById('guestCheckoutWaBtn');
   if (waBtn) {
-    const waMessage = `Merhaba, ${prop.title} mülkünüz için sipariş vermek istiyorum:%0A%0A📦 Hizmetler: ${encodeURIComponent(orderSummaryText)}%0A💰 Toplam Tutar: ${encodeURIComponent(formatPrice(totalUSD))}%0A%0ASiparişimi onaylar mısınız?`;
+    const waMessage = `Hello, I would like to place an order for your property ${encodeURIComponent(prop.title)}:%0A%0A📦 Services: ${encodeURIComponent(orderSummaryText)}%0A💰 Total Amount: ${encodeURIComponent(formatPrice(totalUSD))}%0A%0ACould you please confirm my order?`;
     waBtn.href = `https://wa.me/${wa}?text=${waMessage}`;
   }
 
   const ibanWaBtn = document.getElementById('guestIbanWaConfirmBtn');
   if (ibanWaBtn) {
-    const ibanWaMsg = `Merhaba, ${prop.title} için ${formatPrice(totalUSD)} tutarındaki siparişimin FAST/Havale ödemesini gerçekleştirdim. Dekont ektedir.%0A%0A📦 Sipariş: ${encodeURIComponent(orderSummaryText)}`;
+    const ibanWaMsg = `Hello, I have completed the Bank Wire / Transfer of ${encodeURIComponent(formatPrice(totalUSD))} for my order at ${encodeURIComponent(prop.title)}. Payment receipt is attached.%0A%0A📦 Order: ${encodeURIComponent(orderSummaryText)}`;
     ibanWaBtn.href = `https://wa.me/${wa}?text=${ibanWaMsg}`;
   }
 
   const cryptoWaBtn = document.getElementById('guestCryptoWaConfirmBtn');
   if (cryptoWaBtn) {
-    const cryptoWaMsg = `Merhaba, ${prop.title} için ${formatPrice(totalUSD)} tutarındaki siparişimin USDT kripto transferini gönderdim.%0A%0A📦 Sipariş: ${encodeURIComponent(orderSummaryText)}`;
+    const cryptoWaMsg = `Hello, I have sent ${encodeURIComponent(formatPrice(totalUSD))} via USDT crypto transfer for my order at ${encodeURIComponent(prop.title)}.%0A%0A📦 Order: ${encodeURIComponent(orderSummaryText)}`;
     cryptoWaBtn.href = `https://wa.me/${wa}?text=${cryptoWaMsg}`;
   }
 
   const cardWaBtn = document.getElementById('guestCardWaConfirmBtn');
   if (cardWaBtn) {
-    const cardWaMsg = `Merhaba, ${prop.title} için ${formatPrice(totalUSD)} tutarındaki siparişimi kart linkinizden ödedim.%0A%0A📦 Sipariş: ${encodeURIComponent(orderSummaryText)}`;
+    const cardWaMsg = `Hello, I have completed the payment of ${encodeURIComponent(formatPrice(totalUSD))} via card for my order at ${encodeURIComponent(prop.title)}.%0A%0A📦 Order: ${encodeURIComponent(orderSummaryText)}`;
     cardWaBtn.href = `https://wa.me/${wa}?text=${cardWaMsg}`;
   }
 
@@ -4319,7 +4315,7 @@ function saveHostPaymentSettings() {
 
   saveSessionState();
   renderCheckoutSummary();
-  showToast("🎉 Kredi kartı, IBAN ve cüzdan ödeme ayarlarınız başarıyla canlıda kaydedildi!");
+  showToast("🎉 Credit card, IBAN, and crypto payout settings saved live!");
 }
 
 function saveHostGuideContent() {
@@ -4346,7 +4342,7 @@ function saveHostGuideContent() {
   const pinEl = document.getElementById('door-pin-display');
   if (pinEl && pin) pinEl.textContent = `••••-${pin.slice(-2)}`;
 
-  showToast("🎉 Dijital rehber metinleri, Wi-Fi/PIN ve Bölgesel Taksi bilgileri canlıda güncellendi!");
+  showToast("🎉 Digital guidebook content, Wi-Fi/PIN, and local taxi info updated live!");
 }
 
 function updateStandTitle(val) {
@@ -4390,7 +4386,7 @@ function updateStandFormat(format) {
     box.style.maxWidth = '360px';
     box.style.minHeight = '480px';
   }
-  showToast(`📐 Stand ebatı ${format.toUpperCase()} formatına uyarlandı.`);
+  showToast(`📐 Stand format adjusted to ${format.toUpperCase()}.`);
 }
 
 function updateStandDestination(dest) {
@@ -4411,7 +4407,7 @@ function updateStandDestination(dest) {
     this.src = `https://quickchart.io/qr?text=${encodeURIComponent(targetUrl)}&size=250`;
   };
   img.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(targetUrl)}`;
-  showToast(`🔗 Kare kod yönlendirmesi güncellendi: ${targetUrl.slice(0, 35)}...`);
+  showToast(`🔗 QR code destination updated: ${targetUrl.slice(0, 35)}...`);
 }
 
 function updateStandPills() {
@@ -4443,18 +4439,18 @@ function copyStandLink() {
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(targetUrl).then(() => {
-        showToast(`📋 Stand Kare Kod Linki Kopyalandı: ${targetUrl}`);
+        showToast(`📋 Stand QR Code Link Copied: ${targetUrl}`);
       }).catch(() => {
         fallbackCopyText(targetUrl);
-        showToast(`📋 Stand Kare Kod Linki Kopyalandı: ${targetUrl}`);
+        showToast(`📋 Stand QR Code Link Copied: ${targetUrl}`);
       });
     } else {
       fallbackCopyText(targetUrl);
-      showToast(`📋 Stand Kare Kod Linki Kopyalandı: ${targetUrl}`);
+      showToast(`📋 Stand QR Code Link Copied: ${targetUrl}`);
     }
   } catch (err) {
     fallbackCopyText('https://hostifyos.com/g/rehber');
-    showToast('📋 Stand Kare Kod Linki Kopyalandı: https://hostifyos.com/g/rehber');
+    showToast('📋 Stand QR Code Link Copied: https://hostifyos.com/g/rehber');
   }
 }
 
@@ -4471,7 +4467,7 @@ function downloadStandPNG() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    showToast(`🖼️ "${prop.title || 'Mülk'}" için Yüksek Çözünürlüklü Kare Kod indiriliyor...`);
+    showToast(`🖼️ Downloading high-resolution QR code for "${prop.title || 'Property'}"...`);
   } catch (err) {
     console.error('downloadStandPNG error:', err);
   }
@@ -4479,10 +4475,10 @@ function downloadStandPNG() {
 
 function printQrStand() {
   try {
-    const prop = (typeof getActiveProperty === 'function') ? getActiveProperty() : { slug: 'rehber', title: 'Dijital Mülk Rehberi' };
+    const prop = (typeof getActiveProperty === 'function') ? getActiveProperty() : { slug: 'rehber', title: 'Digital Property Guidebook' };
     const theme = document.getElementById('select-stand-theme')?.value || 'obsidian';
     const format = document.getElementById('select-stand-format')?.value || 'a5';
-    const title = document.getElementById('input-stand-title')?.value || prop.title || 'Dijital Mülk Rehberi';
+    const title = document.getElementById('input-stand-title')?.value || prop.title || 'Digital Property Guidebook';
     const subtitle = document.getElementById('input-stand-subtitle')?.value || 'WELCOME TO YOUR STAY';
     const qrImg = document.getElementById('stand-qr-image') || document.querySelector('#qr-stand-preview img');
     const qrSrc = qrImg ? qrImg.src : `https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=https://hostifyos.com/g/${prop.slug || 'rehber'}`;
@@ -4752,7 +4748,7 @@ function printQrStand() {
     </div>
 
     <p class="instruction-text">
-      Kameranızla kare kodu tarayarak anında hızlı Wi-Fi, ev kullanım kılavuzları ve VIP oda servisi siparişlerine ulaşın.
+      Scan the QR code with your phone camera for instant Wi-Fi, house guides, and VIP room service orders.
     </p>
 
     <div class="footer-signature">
@@ -4784,7 +4780,7 @@ function printQrStand() {
     iframeDoc.write(printHtml);
     iframeDoc.close();
 
-    showToast(`🖨️ "${title}" için tek sayfalık lüks stand hazırlandı, yazdırılıyor...`);
+    showToast(`🖨️ Single-page luxury stand prepared for "${title}", opening print dialog...`);
 
     setTimeout(() => {
       try {
@@ -4796,7 +4792,7 @@ function printQrStand() {
     }, 450);
   } catch (e) {
     console.error('printQrStand error:', e);
-    showToast('🖨️ Stand yazdırılıyor...');
+    showToast('🖨️ Printing acrylic room stand...');
     window.print();
   }
 }
@@ -4859,14 +4855,14 @@ function copyHostVal(inputId, msg) {
     const val = el.value !== undefined ? el.value : el.textContent;
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(val).then(() => {
-        showToast(msg || "Panoya kopyalandı!");
+        showToast(msg || "Copied to clipboard!");
       }).catch(() => {
         fallbackCopyText(val);
-        showToast(msg || "Panoya kopyalandı!");
+        showToast(msg || "Copied to clipboard!");
       });
     } else {
       fallbackCopyText(val);
-      showToast(msg || "Panoya kopyalandı!");
+      showToast(msg || "Copied to clipboard!");
     }
   }
 }
@@ -4908,7 +4904,7 @@ function renderCrmLeadsTable(filter = 'all') {
       <tr>
         <td colspan="6" style="text-align:center; padding:36px; color:var(--text-muted);">
           <i data-lucide="user-check" style="width:28px; height:28px; display:block; margin:0 auto 10px; opacity:0.4;"></i>
-          CRM listesinde kayıtlı müşteri adayı bulunmamaktadır.
+          No CRM guest leads recorded yet.
         </td>
       </tr>
     `;
@@ -4979,7 +4975,7 @@ HostifyOS Team`
 Thank you for subscribing to HostifyOS Pro Host Plan ($19.00 / month).
 
 Transaction Details:
-- Issuer: Ali Turan Inc. (Ali Turan Şirketi)
+- Issuer: Ali Turan Inc.
 - Official Merchant Email: hostifyos@gmail.com
 - Amount Paid: $19.00 USD
 - Status: Paid & Active

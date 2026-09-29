@@ -313,7 +313,7 @@ const HOSTIFYOS_BLOG_ARTICLES = [
     excerpt: "An inside look at how AI, automated messaging, and smart IoT lock hardware are merging into a unified hosting operating system.",
     content: `
       <h2>The Connected Smart Property</h2>
-      <p>The modern vacation rental operates seamlessly with connected lock APIs, automated messaging tünels, and digital guest guidebooks working in unison.</p>
+      <p>The modern vacation rental operates seamlessly with connected lock APIs, automated messaging tunnels, and digital guest guidebooks working in unison.</p>
     `
   },
   {

@@ -368,7 +368,7 @@
     </div>
     <div style="display: flex; gap: 10px; align-items: center;">
       <span class="studio-badge">⚡ 60 FPS Canvas Engine</span>
-      <a href="/" class="btn" style="text-decoration:none; font-size:12px;">← Siteye Dön</a>
+      <a href="/" class="btn" style="text-decoration:none; font-size:12px;">← Back to Website</a>
     </div>
   </header>
 
@@ -392,13 +392,13 @@
 
       <div class="control-buttons">
         <button class="btn btn-primary" id="playBtn" onclick="togglePlay()">
-          ▶ Oynat
+          ▶ Play
         </button>
         <button class="btn" onclick="restartVideo()">
-          ↺ Başa Sar
+          ↺ Restart
         </button>
         <button class="btn btn-export" id="exportBtn" onclick="startExport()">
-          ⬇ Videoyu İndir (.WEBM / 60 FPS)
+          ⬇ Download Video (.WEBM / 60 FPS)
         </button>
       </div>
     </div>
@@ -407,14 +407,14 @@
     <div class="sidebar">
 
       <div class="status-badge" id="recordingBadge">
-        ● Video Kaydediliyor... Lütfen bekleyin.
+        ● Recording Video... Please wait.
       </div>
 
       <div class="settings-card">
-        <div class="settings-title">⚙️ Video Ayarları</div>
+        <div class="settings-title">⚙️ Video Settings</div>
 
         <div class="setting-group">
-          <label class="setting-label">Format / En-Boy Oranı</label>
+          <label class="setting-label">Format / Aspect Ratio</label>
           <div class="toggle-grid">
             <button class="toggle-btn active" id="btnPortrait" onclick="setAspectRatio('portrait')">
               📱 9:16 Reels
@@ -438,39 +438,39 @@
         </div>
 
         <div class="setting-group">
-          <label class="setting-label">Ses & Müzik</label>
+          <label class="setting-label">Audio & Music</label>
           <div class="toggle-grid">
             <button class="toggle-btn active" id="btnAudioToggle" onclick="toggleAudioEngine()">
-              🔊 Ses Açık
+              🔊 Audio On
             </button>
             <button class="toggle-btn" id="btnVoiceToggle" onclick="toggleVoiceover()">
-              🎙️ Voiceover: Açık
+              🎙️ Voiceover: On
             </button>
           </div>
         </div>
       </div>
 
       <div class="settings-card">
-        <div class="settings-title">🎬 Sahne Listesi (30s)</div>
+        <div class="settings-title">🎬 Scene List (30s)</div>
         <div class="scene-pill-list">
           <div class="scene-item active" onclick="jumpTo(0)">
-            <span>1. Kanca: Gece 02:15 Bildirimi</span>
+            <span>1. Hook: 02:15 AM Message</span>
             <span>0 - 4s</span>
           </div>
           <div class="scene-item" onclick="jumpTo(4)">
-            <span>2. Çözüm: Akrilik QR Standı</span>
+            <span>2. Solution: Acrylic QR Stand</span>
             <span>4 - 10s</span>
           </div>
           <div class="scene-item" onclick="jumpTo(10)">
-            <span>3. Özellikler: Wi-Fi, PIN, 8 Dil</span>
+            <span>3. Features: Wi-Fi, PIN, 8 Langs</span>
             <span>10 - 18s</span>
           </div>
           <div class="scene-item" onclick="jumpTo(18)">
-            <span>4. Ek Gelir: %0 Komisyon Upsell</span>
+            <span>4. Revenue: 0% Comm Upsell</span>
             <span>18 - 25s</span>
           </div>
           <div class="scene-item" onclick="jumpTo(25)">
-            <span>5. Kapanış: 14 Gün Ücretsiz Başla</span>
+            <span>5. Outro: Start 14-Day Free</span>
             <span>25 - 30s</span>
           </div>
         </div>
@@ -621,7 +621,7 @@
 
         isRecording = false;
         document.getElementById('recordingBadge').classList.remove('recording');
-        document.getElementById('exportBtn').textContent = '⬇ Videoyu İndir (.WEBM / 60 FPS)';
+        document.getElementById('exportBtn').textContent = '⬇ Download Video (.WEBM / 60 FPS)';
         document.getElementById('exportBtn').disabled = false;
       };
 
@@ -666,14 +666,14 @@
     function toggleAudioEngine() {
       audioEnabled = !audioEnabled;
       const btn = document.getElementById('btnAudioToggle');
-      btn.textContent = audioEnabled ? '🔊 Ses Açık' : '🔇 Ses Kapalı';
+      btn.textContent = audioEnabled ? '🔊 Audio On' : '🔇 Ses Kapalı';
       btn.classList.toggle('active', audioEnabled);
     }
 
     function toggleVoiceover() {
       voiceoverEnabled = !voiceoverEnabled;
       const btn = document.getElementById('btnVoiceToggle');
-      btn.textContent = voiceoverEnabled ? '🎙️ Voiceover: Açık' : '🎙️ Voiceover: Kapalı';
+      btn.textContent = voiceoverEnabled ? '🎙️ Voiceover: On' : '🎙️ Voiceover: Kapalı';
       btn.classList.toggle('active', voiceoverEnabled);
       if (!voiceoverEnabled) stopVoiceover();
     }
@@ -698,7 +698,7 @@
 
     function pauseVideo() {
       isPlaying = false;
-      document.getElementById('playBtn').textContent = '▶ Oynat';
+      document.getElementById('playBtn').textContent = '▶ Play';
       cancelAnimationFrame(animationFrameId);
       stopVoiceover();
       if (isRecording && mediaRecorder && mediaRecorder.state === 'recording') {
